@@ -1,0 +1,32 @@
+- title: Home
+  url: /
+
+- title: Beginner Concepts
+  url: /0-Beginner-Concepts
+
+- title: Accounts Preparation
+  url: /1-Accounts-Preparation
+
+- title: Stremio Initialization
+  url: /2-Stremio-Initialization
+
+- title: AIOStreams Setup
+  url: /3-AIOStreams-Setup
+
+- title: AIOMetadata Setup
+  url: /4-AIOMetadata-Setup
+
+- title: Cinebye Cleanup
+  url: /5-Cinebye-Cleanup
+
+- title: Personalized Lists
+  url: /6-Personalized-Lists
+
+- title: Additional Stuff
+  url: /7-Additional-Stuff
+
+- title: Configuration Q&A
+  url: /8-Configuration-QA
+
+- title: Updates
+  url: /Updates
