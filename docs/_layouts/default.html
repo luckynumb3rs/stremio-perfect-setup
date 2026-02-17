@@ -10,7 +10,9 @@
   </head>
 
   <body>
+    <!-- widen wrapper so content does not look cramped on large screens -->
     <div class="wrapper" style="width:95%; max-width:1400px;">
+      <!-- header: force readable title (Leap Day can apply low-contrast/shadows) -->
       <header style="text-align:center;">
         <h1 style="margin-bottom:6px;">
           <a href="{{ '/' | relative_url }}"
@@ -23,12 +25,24 @@
         </p>
       </header>
 
-      <section style="display:flex; gap:28px; align-items:flex-start; width:100%;">
-        <aside style="flex:0 0 260px; max-width:260px;">
-          {% include sidebar.html %}
-        </aside>
+      <!-- content area: sidebar + main column (prevents overlap with theme defaults) -->
+      <section style="width:100%;">
+        <div style="display:flex; gap:28px; align-items:flex-start;">
+          <aside style="flex:0 0 260px; width:260px;">
+            <div style="float:none; width:100%;">
+              {% include sidebar.html %}
+            </div>
+          </aside>
 
-        <main style="flex:1 1 auto; min-width:0;">
-          {{ content }}
-        </main>
+          <div style="flex:1; min-width:0;">
+            <div style="width:100%; overflow-wrap:anywhere;">
+              {{ content }}
+            </div>
+          </div>
+        </div>
       </section>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>
