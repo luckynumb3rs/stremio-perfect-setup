@@ -10,10 +10,8 @@
   </head>
 
   <body>
-    <!-- add a tiny left padding so header stays nice,
-         but allow sidebar to “hug” the left edge inside the wrapper -->
-    <div class="wrapper" style="width:95%; max-width:1400px; padding-left:0;">
-      <header style="text-align:center; padding-left:14px; padding-right:14px;">
+    <div class="wrapper" style="width:95%; max-width:1400px;">
+      <header style="text-align:center;">
         <h1 style="margin-bottom:6px;">
           <a href="{{ '/' | relative_url }}"
              style="color:#fff; text-shadow:none; text-decoration:none;">
@@ -25,9 +23,10 @@
         </p>
       </header>
 
-      <!-- shift sidebar left by reducing left padding and optionally using a small negative margin -->
-      <section style="display:flex; gap:28px; align-items:flex-start; width:100%; padding-left:0;">
-        <aside style="flex:0 0 260px; max-width:260px; margin-left:-14px;">
+      <!-- move sidebar left WITHOUT negative margins (avoids overlap) -->
+      <!-- reduce the gap, and add a small right padding to the sidebar instead -->
+      <section style="display:flex; gap:18px; align-items:flex-start; width:100%;">
+        <aside style="flex:0 0 260px; max-width:260px; padding-right:6px;">
           {% include sidebar.html %}
         </aside>
 
