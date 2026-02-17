@@ -9,33 +9,38 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
     <style>
-      /* widen wrapper */
-      .wrapper { width: 95% !important; max-width: 1400px !important; }
+      /* IMPORTANT: do NOT use the theme's .wrapper layout rules */
+      .pw-wrapper {
+        width: 95%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
 
-      /* header readability */
+      /* Header readability */
       header h1, header h1 a, header p { text-shadow: none !important; }
       header h1 a { color: #fff !important; text-decoration: none !important; }
       header p { color: rgba(255,255,255,0.9) !important; }
 
-      /* absolute sidebar layout: cannot overlap */
-      .pw-shell { position: relative; width: 100%; }
+      /* 2-column layout */
+      .pw-layout {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+      }
+
       .pw-sidebar {
-        position: absolute;
-        left: 0;
-        top: 0;
+        flex: 0 0 260px;
         width: 260px;
       }
+
       .pw-main {
-        margin-left: 288px; /* 260 sidebar + 28 gap */
+        flex: 1 1 auto;
         min-width: 0;
         overflow-wrap: anywhere;
         word-break: break-word;
       }
 
-      /* optional: keep sidebar visible while scrolling */
-      .pw-sidebar-inner { position: sticky; top: 20px; }
-
-      /* neutralize any theme floats inside our main content */
+      /* Prevent theme floats inside content from breaking layout */
       .pw-main * { float: none !important; }
       .pw-main article,
       .pw-main section,
@@ -48,12 +53,13 @@
         max-width: none !important;
         margin: 0 !important;
         box-sizing: border-box !important;
+        position: static !important;
       }
     </style>
   </head>
 
   <body>
-    <div class="wrapper">
+    <div class="pw-wrapper">
       <header style="text-align:center;">
         <h1 style="margin-bottom:6px;">
           <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
@@ -61,16 +67,16 @@
         <p style="margin-top:0;">{{ site.description }}</p>
       </header>
 
-      <section class="pw-shell">
-        <aside class="pw-sidebar">
-          <div class="pw-sidebar-inner">
+      <section style="width:100%;">
+        <div class="pw-layout">
+          <aside class="pw-sidebar">
             {% include sidebar.html %}
-          </div>
-        </aside>
+          </aside>
 
-        <main class="pw-main">
-          {{ content }}
-        </main>
+          <main class="pw-main">
+            {{ content }}
+          </main>
+        </div>
       </section>
 
       <footer></footer>
