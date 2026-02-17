@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+
+  <body>
+    <div class="wrapper" style="width:95%; max-width:1400px;">
+      <header style="text-align:center;">
+        <h1 style="margin-bottom:6px;">
+          <a href="{{ '/' | relative_url }}"
+             style="color:#fff; text-shadow:none; text-decoration:none;">
+            {{ site.title }}
+          </a>
+        </h1>
+        <p style="margin-top:0; color:rgba(255,255,255,0.9); text-shadow:none;">
+          {{ site.description }}
+        </p>
+      </header>
+
+      <section style="display:flex; gap:28px; align-items:flex-start; width:100%;">
+        <aside style="flex:0 0 260px; max-width:260px;">
+          {% include sidebar.html %}
+        </aside>
+
+        <main style="flex:1 1 auto; min-width:0;">
+          {{ content }}
+        </main>
+      </section>
