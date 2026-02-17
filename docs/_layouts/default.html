@@ -7,32 +7,6 @@
 
     <title>{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-    <style>
-      /* Prevent anything inside MAIN from visually spilling under the sidebar */
-      .pw-content {
-        max-width: 860px;              /* tune: 760-980 */
-        width: 100%;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-      }
-
-      /* Some themes add margins/width rules on headings and blocks */
-      .pw-content h1,
-      .pw-content h2,
-      .pw-content h3,
-      .pw-content p,
-      .pw-content blockquote,
-      .pw-content ul,
-      .pw-content ol,
-      .pw-content pre,
-      .pw-content table {
-        max-width: 100%;
-      }
-
-      /* If theme uses weird positioning on headings */
-      .pw-content h1 { position: static !important; }
-    </style>
   </head>
 
   <body>
@@ -50,14 +24,12 @@
       </header>
 
       <section style="display:flex; gap:28px; align-items:flex-start; width:100%;">
-        <aside style="flex:0 0 260px; max-width:260px;">
+        <aside style="flex:0 0 320px; max-width:320px;">
           {% include sidebar.html %}
         </aside>
 
         <main style="flex:1 1 auto; min-width:0;">
-          <div class="pw-content">
-            {{ content }}
-          </div>
+          {{ content }}
         </main>
       </section>
 
