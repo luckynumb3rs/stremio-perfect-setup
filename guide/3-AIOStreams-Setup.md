@@ -5,7 +5,7 @@ Go to [**this**](https://aiostreamsfortheweebsstable.midnightignite.me/) or alte
 * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
 
 1. Select "**Advanced**" on the welcome screen if it shows up.
-2. Copy [**this**](./templates/AIOStreams.json) link (right-click and "*Copy link address*").
+2. Copy [**this**](../templates/AIOStreams.json) link (right-click and "*Copy link address*").
 3. Go to the "**Save & Install**" tab on AIOStreams (sidebar menu on the left), click "**Import**", "**Import Template**", paste the link you copied and click on "**Go**".
 4. Click "**Use this Template Now**".
 5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any).
