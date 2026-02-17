@@ -7,76 +7,30 @@
 
     <title>{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-    <style>
-      /* IMPORTANT: do NOT use the theme's .wrapper layout rules */
-      .pw-wrapper {
-        width: 95%;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
-      /* Header readability */
-      header h1, header h1 a, header p { text-shadow: none !important; }
-      header h1 a { color: #fff !important; text-decoration: none !important; }
-      header p { color: rgba(255,255,255,0.9) !important; }
-
-      /* 2-column layout */
-      .pw-layout {
-        display: flex;
-        gap: 28px;
-        align-items: flex-start;
-      }
-
-      .pw-sidebar {
-        flex: 0 0 260px;
-        width: 260px;
-      }
-
-      .pw-main {
-        flex: 1 1 auto;
-        min-width: 0;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-      }
-
-      /* Prevent theme floats inside content from breaking layout */
-      .pw-main * { float: none !important; }
-      .pw-main article,
-      .pw-main section,
-      .pw-main .post,
-      .pw-main .page,
-      .pw-main .entry,
-      .pw-main #content,
-      .pw-main .main-content {
-        width: 100% !important;
-        max-width: none !important;
-        margin: 0 !important;
-        box-sizing: border-box !important;
-        position: static !important;
-      }
-    </style>
   </head>
 
   <body>
-    <div class="pw-wrapper">
+    <div class="wrapper" style="width:80%; max-width:1400px;">
       <header style="text-align:center;">
         <h1 style="margin-bottom:6px;">
-          <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+          <a href="{{ '/' | relative_url }}"
+             style="color:#fff; text-shadow:none; text-decoration:none;">
+            {{ site.title }}
+          </a>
         </h1>
-        <p style="margin-top:0;">{{ site.description }}</p>
+        <p style="margin-top:0; color:rgba(255,255,255,0.9); text-shadow:none;">
+          {{ site.description }}
+        </p>
       </header>
 
-      <section style="width:100%;">
-        <div class="pw-layout">
-          <aside class="pw-sidebar">
-            {% include sidebar.html %}
-          </aside>
+      <section style="display:flex; gap:28px; align-items:flex-start; width:100%;">
+        <aside style="flex:0 0 260px; max-width:260px;">
+          {% include sidebar.html %}
+        </aside>
 
-          <main class="pw-main">
-            {{ content }}
-          </main>
-        </div>
+        <main style="flex:1 1 auto; min-width:0;">
+          {{ content }}
+        </main>
       </section>
 
       <footer></footer>
