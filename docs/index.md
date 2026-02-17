@@ -4,7 +4,7 @@
 > 
 > Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read at the end of the post.
 > 
-> See [Updates](docs/Updates.md) for detailed instructions.
+> See [Updates](Updates,md) for detailed instructions.
 
 ----------------------------------
 
@@ -30,18 +30,18 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 ## 📖 Chapters
 
-* [**Beginner Concepts**](docs/0-Beginner-Concepts.md)
+* [**Beginner Concepts**](0-Beginner-Concepts.md)
 
-1. [Accounts Preparation](docs/1-Accounts-Preparation.md)
-2. [Stremio Account Initialization](docs/2-Stremio-Initialization.md)
-3. [AIOStreams Setup](docs/3-AIOStreams-Setup.md)
-4. [AIOMetadata Setup](docs/4-AIOMetadata-Setup.md)
-5. [Cinebye Cleanup](docs/5-Cinebye-Cleanup.md)
-6. [Personalized Lists](docs/6-Personalized-Lists.md)
+1. [Accounts Preparation](1-Accounts-Preparation.md)
+2. [Stremio Account Initialization](2-Stremio-Initialization.md)
+3. [AIOStreams Setup](3-AIOStreams-Setup.md)
+4. [AIOMetadata Setup](4-AIOMetadata-Setup.md)
+5. [Cinebye Cleanup](5-Cinebye-Cleanup.md)
+6. [Personalized Lists](6-Personalized-Lists.md)
 
-* [**Additional Stuff**](docs/7-Additional-Stuff.md)
+* [**Additional Stuff**](7-Additional-Stuff.md)
 
-* [**Configuration Q&A**](docs/8-Configuration-QA.md)
+* [**Configuration Q&A**](8-Configuration-QA.md)
 
 ## 🙏 Thanks
 
