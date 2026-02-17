@@ -9,40 +9,46 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
     <style>
-      /* widen layout */
+      /* widen wrapper */
       .wrapper { width: 95% !important; max-width: 1400px !important; }
-
-      /* ensure our 2-column layout always wins */
-      .pw-layout { display: flex !important; gap: 28px !important; align-items: flex-start !important; }
-      .pw-sidebar { flex: 0 0 260px !important; width: 260px !important; }
-      .pw-content { flex: 1 1 auto !important; min-width: 0 !important; width: auto !important; }
-
-      /* kill theme floats/width constraints that cause overlap */
-      .pw-content * { float: none !important; }
-      .pw-content article,
-      .pw-content section,
-      .pw-content .post,
-      .pw-content .page,
-      .pw-content .entry,
-      .pw-content .content,
-      .pw-content #content,
-      .pw-content .main-content {
-        width: 100% !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        float: none !important;
-        position: static !important;
-        box-sizing: border-box !important;
-      }
-
-      /* prevent long URLs from forcing weird widths */
-      .pw-content { overflow-wrap: anywhere; word-break: break-word; }
 
       /* header readability */
       header h1, header h1 a, header p { text-shadow: none !important; }
       header h1 a { color: #fff !important; text-decoration: none !important; }
       header p { color: rgba(255,255,255,0.9) !important; }
+
+      /* absolute sidebar layout: cannot overlap */
+      .pw-shell { position: relative; width: 100%; }
+      .pw-sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 260px;
+      }
+      .pw-main {
+        margin-left: 288px; /* 260 sidebar + 28 gap */
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      /* optional: keep sidebar visible while scrolling */
+      .pw-sidebar-inner { position: sticky; top: 20px; }
+
+      /* neutralize any theme floats inside our main content */
+      .pw-main * { float: none !important; }
+      .pw-main article,
+      .pw-main section,
+      .pw-main .post,
+      .pw-main .page,
+      .pw-main .entry,
+      .pw-main #content,
+      .pw-main .main-content {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+      }
     </style>
   </head>
 
@@ -55,16 +61,16 @@
         <p style="margin-top:0;">{{ site.description }}</p>
       </header>
 
-      <section style="width:100%;">
-        <div class="pw-layout">
-          <aside class="pw-sidebar">
+      <section class="pw-shell">
+        <aside class="pw-sidebar">
+          <div class="pw-sidebar-inner">
             {% include sidebar.html %}
-          </aside>
+          </div>
+        </aside>
 
-          <main class="pw-content">
-            {{ content }}
-          </main>
-        </div>
+        <main class="pw-main">
+          {{ content }}
+        </main>
       </section>
 
       <footer></footer>
