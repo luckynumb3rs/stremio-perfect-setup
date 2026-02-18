@@ -21,6 +21,12 @@ I am including this section for anyone who has any additional questions or is en
    * *When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.*
    * *When torrenting, prefer links with a higher peer count (shown next to the* ***P2P*** *label).*
 
+* **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
+   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) to read the descriptions for each icon.*
+
+* **The icons of the stream information view are too plain, I would like more colors to differentiate.**
+   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) on the extended guide to get an alternative colorful template you can use instead.*
+
 * **I want Trakt progress syncing, but I do not want extra Trakt addons.**
    * *In* [***stremio.com***](https://www.stremio.com/) *go to* ***Settings*** *and enable* ***Trakt Scrobbling*** *by connecting your Trakt account.*
    * *Then uninstall the* ***Trakt Integration*** *addon from Stremio addons.*
@@ -38,6 +44,9 @@ I am including this section for anyone who has any additional questions or is en
 
 * **I want subtitles in specific languages.**
    * *In* ***AIOStreams***\*: go to\* ***Addons → Installed Addons***\*, edit\* ***SubHero***\*, and set your subtitle language preferences there.\*
+
+* **I don't understand how the streams shown to me are being sorted.**
+   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) to see the configured sort order.*
 
 * **I need non-English results to appear first in the results list.**
    * *In* ***AIOStreams***\*: go to\* ***Filters → Language***\*.\*

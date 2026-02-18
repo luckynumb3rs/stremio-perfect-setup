@@ -1,6 +1,6 @@
 >🔔 **BIG UPDATES FOR EXISTING GUIDE USERS**: Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read at the end of the post.
 
-\----------------------------------
+---
 
 # 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/)
 
@@ -25,6 +25,8 @@ In case you are wondering whether it's worth the effort, or you already have a T
 * **Cleaner Source Selection UI**: a *minimal, modern stream list view* with the info you actually need to choose fast.
 * **Netflix-like Automation**: Trakt-driven *personal lists, watch tracking, and progress syncing* and a *full-blown suggestions engine with dynamic catalogs* based on what you watch and like, for a more “recommended and organized” experience.
 * **Richer Browsing**: AIOMetadata gives *better catalogs + metadata integrations* (ratings, descriptions, artwork) and lets you *remove/replace Cinemeta clutter*.
+
+---
 
 So, now that you know, it's up to you, but if you're up for it, let's do it:
 
@@ -69,6 +71,8 @@ First, let's start by creating the accounts (those who already have them can ski
    4. Click on the clickable link on the "**Key**" column, and copy the "**API Key**".
    * *If no key is created automatically, just create one by clicking "Create API Key" on the top right.*
 
+---
+
 # ⚙️ 2. Stremio Account Initialization
 
 Second, let's prepare the Stremio account properly:
@@ -81,6 +85,8 @@ Second, let's prepare the Stremio account properly:
 3. Go to "**Addons**" and uninstall all addons.
    * *Also remove the* ***Trakt Integration*** *addon, it is separate from* ***Trakt Scrobbling*** *(which you need), and you don't need it because we will use something else for this.*
    * *Cinemeta and Local Files cannot be removed. Leave them, we will take care of this later.*
+
+---
 
 # 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
 
@@ -114,6 +120,8 @@ Go to [**this**](https://aiostreamsfortheweebsstable.midnightignite.me/) or alte
    * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to* ***Addons***, *scroll down to* ***Addon Fetching Strategy***. *and select* ***Dynamic***. *There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select* ***Default*** *instead.*
    * *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to* ***Filters***, *then* ***Matching***, *and switch off the* ***Enable*** *toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
 
+---
+
 # 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
 
 Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this**](https://aiometadata.viren070.me/) **AIOMetadata** instance and:
@@ -138,6 +146,8 @@ Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this
 * ***NOTE FOR LATER:***
    * *Keep in mind that if you want to change catalogs after you have installed AIOMetadata on Stremio, you need to refresh the installation, otherwise the catalogs with not show. You do that with Cinebye below.*
 
+---
+
 # 🧹 5. Cinebye [Clean-Up]
 
 Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
@@ -158,6 +168,8 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 5. Scroll back up to "**3 - Sync Addons**" and click on "**Sync to Stremio**".
 
 * ***Note:*** *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then come back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***"Manage Addons"*** *section.*
+
+---
 
 # 🤖 6. Personalized & Automated Lists
 
@@ -193,6 +205,8 @@ So you can decide which you want to use (or both!) and here are the steps for ea
 
 And now you're really done! Check out the Q&A further down if you want to tweak it further.
 
+---
+
 # 🙏 Thanks
 
 **Since a few of you have asked about tipping me for helping**: I prepared the guide because I did it so many times and I realized there are a lot of people that are not doing it just because they need to learn a lot of things in order to get a good working setup. I'm really happy that my guide has been so useful, I really wasn't expecting it to gain so much traction. So I created [**this**](https://ko-fi.com/luckynumb3rs) link where you can tip if you feel like doing so, but I'm very happy you can enjoy Stremio either way!
@@ -200,6 +214,8 @@ And now you're really done! Check out the Q&A further down if you want to tweak 
 I hope you like my configuration, but of course you can modify it any way you want. I had to set it up for a few friends lately, so I got my process streamlined now and I though I would share it to maybe help anyone struggling with the many options for configuring the best stream platform in the world: **STREMIO**.
 
 **A special thanks** to the Stremio developers, and all the add-on developers that allow us to enjoy these, it's amazing how this solution exists among all the fragmentation among subscription services which has become very annoying even if you have all the money in the world.
+
+---
 
 # ❓ Configuration Q&A
 
@@ -216,6 +232,10 @@ I am including this section for anyone who has any additional questions or is en
    * *You can still get anime results via the other scrapers, but they will be more limited.* ***SeaDex*** *and* ***AnimeTosho*** *usually increase the chances of finding better anime sources.*
    * *When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.*
    * *When torrenting, prefer links with a higher peer count (shown next to the* ***P2P*** *label).*
+* **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
+   * *Go to [***Additional Stuff***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide to read the descriptions for each icon.*
+* **The icons of the stream information view are too plain, I would like more colors to differentiate.**
+   * *Go to [***Additional Stuff***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide to get an alternative colorful template you can use instead.*
 * **I want Trakt progress syncing, but I do not want extra Trakt addons.**
    * *In* [***stremio.com***](https://www.stremio.com/) *go to* ***Settings*** *and enable* ***Trakt Scrobbling*** *by connecting your Trakt account.*
    * *Then uninstall the* ***Trakt Integration*** *addon from Stremio addons.*
@@ -224,6 +244,8 @@ I am including this section for anyone who has any additional questions or is en
    * *In* ***AIOMetadata***\*: go to\* ***Search*** *and enable both* ***Anime Search Engine*** *switches.*
 * **I want subtitles in specific languages.**
    * *In* ***AIOStreams***\*: go to\* ***Addons → Installed Addons***\*, edit\* ***SubHero***\*, and set your subtitle language preferences there.\*
+* **I don't understand how the streams shown to me are being sorted.**
+   * *Go to [***Additional Stuff***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide to see the configured sort order.*
 * **I need non-English results to appear first in the results list.**
    * *In* ***AIOStreams***\*: go to\* ***Filters → Language***\*.\*
    * *Add your language to* ***Preferred Languages***\*.\*
@@ -278,19 +300,7 @@ I am including this section for anyone who has any additional questions or is en
    * ***AIOStreams:*** *always save from* ***Save & Install → Save***\*.\*
    * ***AIOMetadata:*** *always save from* ***Configuration → Save Configuration***\*.\*
 
-# 🛠️ Additional Stuff
-
-Most of the tips to address some issues are already included in-between the steps of the guide, but I am adding this section in case there are any additional tweaks or alternative configurations.
-
-If you want a more colorful version of the stream information view than the one included, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
-
-    {stream.encode::exists["🎞️  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}{stream.edition::exists["🎬  {stream.edition} "||""]}
-    {stream.audioTags::exists["🎵  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["🎧  {stream.audioChannels::join(' · ')} "||""]}
-    {stream.size::>0::and::stream.seasonPack::istrue["📦  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
-    {stream.proxied::istrue["🛠️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
-    {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
-
-\----------------------------------
+---
 
 🔔 **BIG UPDATES:**
 
