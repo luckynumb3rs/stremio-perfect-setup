@@ -4,7 +4,7 @@
     {% for item in site.data.nav %}
       <li>
         <a href="{{ item.url | relative_url }}"
-           {% if page.url == item.url or page.url == item.url | append:'/' %}style="font-weight:700"{% endif %}>
+           {% if page.url == item.url | append:'/' %}style="font-weight:700"{% endif %}>
           {{ item.title }}
         </a>
       </li>
