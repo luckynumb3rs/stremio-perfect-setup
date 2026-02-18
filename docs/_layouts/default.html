@@ -7,6 +7,39 @@
 
     <title>{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <style>
+      /* Default: two columns */
+      .pw-layout {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .pw-sidebar {
+        flex: 0 0 320px;      /* prevent overlap on wide screens */
+        max-width: 320px;
+      }
+      .pw-main {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      /* Small screens: stack, and make content full width */
+      @media (max-width: 900px) {
+        .pw-layout {
+          flex-wrap: wrap;    /* allow stacking */
+        }
+        .pw-sidebar {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+        .pw-main {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -23,12 +56,12 @@
         </p>
       </header>
 
-      <section style="display:flex; gap:28px; align-items:flex-start; width:100%;">
-        <aside style="flex:0 0 320px; max-width:320px;">
+      <section class="pw-layout">
+        <aside class="pw-sidebar">
           {% include sidebar.html %}
         </aside>
 
-        <main style="flex:1 1 auto; min-width:0;">
+        <main class="pw-main">
           {{ content }}
         </main>
       </section>
