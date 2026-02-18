@@ -38,4 +38,6 @@ First, let's start by creating the accounts (those who already have them can ski
    4. Click on the clickable link on the "**Key**" column, and copy the "**API Key**".
    * *If no key is created automatically, just create one by clicking "Create API Key" on the top right.*
 
+----------------------------------
+
 [← Previous [Beginner Concepts]](0-Beginner-Concepts.md)  |  [Next [Stremio Account Initialization] →](2-Stremio-Initialization.md)

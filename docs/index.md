@@ -8,7 +8,7 @@
 
 ----------------------------------
 
-![Homescreen (left) & Stream source selection (right)](images/main.jpg)
+![Homescreen (left) & Stream source selection (right)](images/home.jpg)
 
 After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 

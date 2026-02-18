@@ -18,6 +18,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    8. The lists created by CouchMoney should show up here.
    9. Add them to your Catalog and order them as you wish.
    * ***Note:*** *As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***Manage Addons*** *section.*
+
 * **Watchly**:
    1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
    2. Click on "**Get Started**".
@@ -30,5 +31,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    * ***Note:*** *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
 
 And now you're really done! Check out the Q&A if you want to tweak it further.
+
+----------------------------------
 
 [← Previous [Cinebye Cleanup]](5-Cinebye-Cleanup.md)  |  [Optional [Additional Stuff] →](7-Additional-Stuff.md)

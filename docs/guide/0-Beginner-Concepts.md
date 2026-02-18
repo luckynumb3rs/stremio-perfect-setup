@@ -137,4 +137,6 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
    * *A Gemini API key authorizes requests to Google's Gemini models.*
    * *In this ecosystem, it is typically relevant when a tool/addon has AI-assisted features (specifically for AI-powered search through AIOMetadata).*
 
+----------------------------------
+
 [Start [Accounts Preparation] →](1-Accounts-Preparation.md)
