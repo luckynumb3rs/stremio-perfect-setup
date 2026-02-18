@@ -5,14 +5,15 @@
 
 The sort order in the template is configured in the following order: 
 
-* Cached/Uncached (if applicable)
-* SeaDex (only for Anime)
-* Resolution → Quality
-* Stream Expressions
-* Stream Expressions Score
-* Seeders (if Uncached)
-* Language
-* Bitrate
+* *Cached/Uncached (if applicable)*
+* *SeaDex (only for Anime)*
+* *Resolution*
+* *Quality*
+* *Stream Expressions*
+* *Stream Expressions Score*
+* *Seeders (if Uncached)*
+* *Language*
+* *Bitrate*
 
 If you want to change the sort order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
