@@ -93,18 +93,35 @@
     /* --- Your Two-Column Flexbook Logic (Inside white box) --- */
     .pw-layout-inner {
       display: flex;
-      gap: 28px;
+      gap: 35px;
       align-items: flex-start;
       width: 100%;
+      justify-content: center;
+      /* Keeps sidebar and main closer if they don't stretch */
     }
 
     .pw-sidebar {
-      flex: 0 0 320px;
-      max-width: 320px;
+      flex: 0 0 auto !important;
+      /* DYNAMIC WIDTH: scales to content */
+      min-width: 250px;
+      /* prevent too tiny */
+      max-width: 450px;
+      /* prevent too huge */
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Prevent Sidebar Title/Link Wrapping */
+    .pw-sidebar ul,
+    .pw-sidebar li,
+    .pw-sidebar a {
+      white-space: nowrap !important;
     }
 
     .pw-main {
-      flex: 1 1 auto;
+      flex: 1 1 0;
+      /* Grow responsibly */
       min-width: 0;
     }
 
@@ -114,8 +131,15 @@
       }
 
       .pw-sidebar {
-        flex: 1 0 100%;
-        max-width: 100%;
+        flex: 1 0 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        /* allow wrap on mobile */
+      }
+
+      .pw-sidebar a,
+      .pw-sidebar li {
+        white-space: normal !important;
       }
 
       .pw-main {
