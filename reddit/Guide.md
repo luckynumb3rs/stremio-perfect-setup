@@ -13,8 +13,8 @@ After a few iterations trying out what works and what doesn't for me, and testin
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
 
 **NOTES**:
-* *If you are a total beginner and are curious to understand more how Stremio ecosystem works and the concepts around it, open the extended guide linked above and go to **Beginner Concepts**.*
-* *If you already followed this guide and are encountering issues or have configuration questions, open the extended guide linked above and go to **Configuration Q&A**, or scroll further down for the Q&A without screenshots. If you're just starting, remember this for later in case you need it.*
+* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
+* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide, or scroll further down here for the Q&A without screenshots. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
 
