@@ -1,4 +1,4 @@
-# 🔧 2. Stremio Account Initialization
+# ⚙️ 2. Stremio Account Initialization
 ----------------------------------
 
 Second, let's prepare the Stremio account properly:

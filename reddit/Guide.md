@@ -6,11 +6,11 @@
 
 ![img](xd3jbgpapmig1 "Homescreen (left) & Stream source selection (right)")
 
+**✨ NEW: Check out the extended guide with screenshots [**HERE**](https://luckynumb3rs.github.io/stremio-perfect-setup/).**
+
 After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
-
-**For an extended and structured multi-page version that includes screenshots, this guide is also available [**HERE**](https://luckynumb3rs.github.io/stremio-perfect-setup/).**
 
 **NOTES**:
 * *If you are a total beginner and are curious to understand more how Stremio ecosystem works and the concepts around it, open the extended guide linked above and go to **Beginner Concepts**.*
@@ -69,7 +69,7 @@ First, let's start by creating the accounts (those who already have them can ski
    4. Click on the clickable link on the "**Key**" column, and copy the "**API Key**".
    * *If no key is created automatically, just create one by clicking "Create API Key" on the top right.*
 
-# 🔧 2. Stremio Account Initialization
+# ⚙️ 2. Stremio Account Initialization
 
 Second, let's prepare the Stremio account properly:
 
@@ -82,7 +82,7 @@ Second, let's prepare the Stremio account properly:
    * *Also remove the* ***Trakt Integration*** *addon, it is separate from* ***Trakt Scrobbling*** *(which you need), and you don't need it because we will use something else for this.*
    * *Cinemeta and Local Files cannot be removed. Leave them, we will take care of this later.*
 
-# 🔎 3. AIOStreams [Find Stream Sources for Movies/Shows]
+# 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
 
 Go to [**this**](https://aiostreamsfortheweebsstable.midnightignite.me/) or alternatively [**this**](https://aiostreams.fortheweak.cloud/) **AIOStreams** instance and:
 
@@ -114,7 +114,7 @@ Go to [**this**](https://aiostreamsfortheweebsstable.midnightignite.me/) or alte
    * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to* ***Addons***, *scroll down to* ***Addon Fetching Strategy***. *and select* ***Dynamic***. *There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select* ***Default*** *instead.*
    * *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to* ***Filters***, *then* ***Matching***, *and switch off the* ***Enable*** *toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
 
-# 📚 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
+# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
 
 Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this**](https://aiometadata.viren070.me/) **AIOMetadata** instance and:
 

@@ -1,4 +1,4 @@
-# 📚 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
+# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
 ----------------------------------
 
 Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this**](https://aiometadata.viren070.me/) **AIOMetadata** instance and:
