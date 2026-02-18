@@ -8,6 +8,19 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 
 So you can decide which you want to use (or both!) and here are the steps for each:
 
+* **Watchly**:
+   1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
+   2. Click on "**Get Started**".
+   3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
+   4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
+   5. In the "**Poster Rating Provider**" section, select RPDB, and enter "*t0-free-rpdb*" in the API key field.
+   6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
+   7. Click on "**Next: Install**" and click on "**Save & Install**".
+   8. Click "**Install on Web**" and install the add-on on Stremio.
+   * ***Note:*** *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
+
+![Watchly](../images/6.1.png)
+
 * **CouchMoney**:
    1. Go to [**CouchMoney**](https://couchmoney.tv/) and click "**Login with Trakt**".
    2. Follow the steps to connect your Trakt account.
@@ -20,16 +33,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    9. Add them to your Catalog and order them as you wish.
    * ***Note:*** *As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***Manage Addons*** *section.*
 
-* **Watchly**:
-   1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
-   2. Click on "**Get Started**".
-   3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
-   4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
-   5. In the "**Poster Rating Provider**" section, select RPDB, and enter "*t0-free-rpdb*" in the API key field.
-   6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
-   7. Click on "**Next: Install**" and click on "**Save & Install**".
-   8. Click "**Install on Web**" and install the add-on on Stremio.
-   * ***Note:*** *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
+![CouchMoney](../images/6.2.png)
 
 And now you're really done! Check out the Q&A if you want to tweak it further.
 
