@@ -46,6 +46,8 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 * [**Configuration Q&A**](docs/guide/8-Configuration-QA.md)
 
+----------------------------------
+
 ## 🙏 Thanks
 
 [![Ko-Fi Tipping](docs/images/kofi.png)](https://ko-fi.com/luckynumb3rs)
