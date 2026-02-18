@@ -10,37 +10,88 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
   <style>
-    /* --- Robust Overrides for Leap Day Theme --- */
-    .wrapper {
-      margin: 0 auto !important;
-      padding-left: 0 !important;
-      /* Reset theme's sidebar space */
-      padding-right: 0 !important;
-      padding-top: 0 !important;
-      /* Removes white gap above header */
-      box-sizing: border-box !important;
+    /* --- Surgical Overrides for Leap Day Theme --- */
+
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #f4f1e1 !important;
+      /* Theme beige */
     }
 
+    /* 1. FLEXBOX CENTERING HAMMER */
+    .wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      /* Forces container to horizontal center */
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      float: none !important;
+      background: transparent !important;
+    }
+
+    /* 2. Full-Width Title Banner */
     header {
       width: 100% !important;
-      float: none !important;
-      position: static !important;
+      background: #5d74af !important;
+      /* Your blue color */
+      color: #fff !important;
+      margin: 0 !important;
+      padding: 50px 0 !important;
       text-align: center;
       box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 30px 20px !important;
-    }
-
-    section {
-      width: 100% !important;
       float: none !important;
-      padding: 20px !important;
-      box-sizing: border-box !important;
+      position: static !important;
     }
 
-    /* Default: two columns for your content */
+    header h1,
+    header p {
+      max-width: 1400px;
+      margin: 0 auto !important;
+      /* Centers text inside blue banner */
+      padding: 0 20px;
+      margin-top: 0 !important;
+      color: #fff !important;
+    }
 
-    .pw-layout {
+    header h1 a {
+      color: #fff !important;
+      text-shadow: none !important;
+      text-decoration: none !important;
+    }
+
+    /* 3. Centered Content Container */
+    section.pw-layout {
+      width: 95% !important;
+      max-width: 1400px !important;
+      margin: 30px 0 !important;
+      /* Center handled by parent flexbox */
+      padding: 30px !important;
+      box-sizing: border-box !important;
+      background-color: white !important;
+      float: none !important;
+      clear: both;
+      display: block !important;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 4. DEEP INTERNAL RESET (The Symmetry Fix) */
+    section.pw-layout aside,
+    section.pw-layout main {
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      float: none !important;
+    }
+
+    /* --- Your Two-Column Flexbook Logic (Inside white box) --- */
+    .pw-layout-inner {
       display: flex;
       gap: 28px;
       align-items: flex-start;
@@ -49,7 +100,6 @@
 
     .pw-sidebar {
       flex: 0 0 320px;
-      /* prevent overlap on wide screens */
       max-width: 320px;
     }
 
@@ -58,24 +108,19 @@
       min-width: 0;
     }
 
-    /* Small screens: stack, and make content full width */
     @media (max-width: 1000px) {
-      .pw-layout {
+      .pw-layout-inner {
         flex-wrap: wrap;
-        /* allow stacking */
       }
 
       .pw-sidebar {
-        flex: 0 0 100%;
+        flex: 1 0 100%;
         max-width: 100%;
       }
 
       .pw-main {
-        flex: 0 0 100%;
+        flex: 1 0 100%;
         max-width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;
-        box-sizing: border-box;
       }
     }
   </style>
@@ -83,26 +128,28 @@
 </head>
 
 <body>
-  <div class="wrapper" style="width:95%; max-width:1400px;">
-    <header style="text-align:center;">
-      <h1 style="margin-bottom:6px;">
-        <a href="{{ '/' | relative_url }}" style="color:#fff; text-shadow:none; text-decoration:none;">
+  <div class="wrapper">
+    <header>
+      <h1>
+        <a href="{{ '/' | relative_url }}">
           {{ site.title }}
         </a>
       </h1>
-      <p style="margin-top:0; color:rgba(255,255,255,0.9); text-shadow:none;">
+      <p>
         {{ site.description }}
       </p>
     </header>
 
     <section class="pw-layout">
-      <aside class="pw-sidebar">
-        {% include sidebar.html %}
-      </aside>
+      <div class="pw-layout-inner">
+        <aside class="pw-sidebar">
+          {% include sidebar.html %}
+        </aside>
 
-      <main class="pw-main">
-        {{ content }}
-      </main>
+        <main class="pw-main">
+          {{ content }}
+        </main>
+      </div>
     </section>
 
     <footer></footer>
