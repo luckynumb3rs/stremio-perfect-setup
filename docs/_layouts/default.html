@@ -37,8 +37,9 @@
         .pw-main {
           flex: 0 0 100%;
           max-width: 100%;
-          padding-left: 5px;
-          padding-right: 5px;
+        }
+        .pw-content-pad{ 
+          padding: 0 10px;
           box-sizing: border-box;
         }
       }
@@ -65,7 +66,9 @@
         </aside>
 
         <main class="pw-main">
-          {{ content }}
+          <div class="pw-content-pad">
+            {{ content }}
+          </div>
         </main>
       </section>
 
