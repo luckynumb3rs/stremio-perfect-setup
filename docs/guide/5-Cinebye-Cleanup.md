@@ -7,7 +7,7 @@ Go to this [**Cinebye**](https://cinebye.elfhosted.com/) instance and:
    2. Login to [**Stremio Web**](https://web.stremio.com/) using your credentials in your browser.
    3. Open the developer console (F12 on Chrome) and paste this code snippet: `JSON.parse(localStorage.getItem("profile")).auth.key`
    4. Take the output value and paste it in Cinebye where it says "*Paste Stremio AuthKey here...*".
-   5. Press **Enter**.
+   5. Press **Enter** or click **Login**.
 2. Once authenticated and the options become available, in section "**2 - Options**" you can download a backup first just to be safe.
 3. Enable all three patches: "**Remove Cinemeta Search**", "**Remove Cinemeta Catalogs**", and "**Remove Cinemeta Metadata**".
 4. Scroll down to "**Manage Addons**" and change the order of the add-ons to this:
