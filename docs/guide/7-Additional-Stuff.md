@@ -1,8 +1,6 @@
 # 🛠️ Additional Stuff
 ----------------------------------
 
-Most of the tips to address some issues are already included in-between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations.
-
 ## Alternative Color Stream Information
 
 If you want a more colorful version of the stream information view than the one included, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
@@ -15,6 +13,8 @@ If you want a more colorful version of the stream information view than the one 
 {stream.proxied::istrue["🛠️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
 {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
 ```
+
+----------------------------------
 
 ## Understanding Stream Information View
 
@@ -53,6 +53,8 @@ The formatting templates are designed to let you evaluate a stream easily before
 
 👉 **Quick Tip:**
 Prioritize streams that are **⚡ cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality.
+
+----------------------------------
 
 ## Sort Order
 
