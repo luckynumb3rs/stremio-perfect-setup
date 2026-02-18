@@ -1,7 +1,7 @@
 # 🧹 5. Cinebye [Clean-Up]
 ----------------------------------
 
-Go to this [**Cinebye**](https://cinebye.elfhosted.com/) instance and:
+Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
 1. Sign in with your Stremio account details.
    1. OR if you don't want to use your credentials directly, there is a more complicated approach:
