@@ -8,6 +8,8 @@
 
 ----------------------------------
 
+![Homescreen (left) & Stream source selection (right)](docs/assets/main.jpg)
+
 After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
