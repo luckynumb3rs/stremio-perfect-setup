@@ -48,6 +48,8 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 ## 🙏 Thanks
 
+[![Ko-Fi Tipping](images/kofi.png)](https://ko-fi.com/luckynumb3rs)
+
 **Since a few of you have asked about tipping me for helping**: I prepared the guide because I did it so so many times and I realized there are a lot of people that are not doing it just because they need to learn a lot of things in order to get a good working setup. I'm really happy that my guide has been so useful, I really wasn't expecting it to gain so much traction. So I created [**this**](https://ko-fi.com/luckynumb3rs) link where you can tip if you feel like doing so, but I'm very happy you can enjoy Stremio either way!
 
 I hope you like my configuration, but of course you can modify it any way you want. I had to set it up for a few friends lately, so I got my process streamlined now and I though I would share it to maybe help anyone struggling with the many options for configuring the best stream platform in the world: **STREMIO**.
