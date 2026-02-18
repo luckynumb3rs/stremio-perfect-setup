@@ -20,6 +20,7 @@ I am including this section for anyone who has any additional questions or is en
    * *You can still get anime results via the other scrapers, but they will be more limited.* ***SeaDex*** *and* ***AnimeTosho*** *usually increase the chances of finding better anime sources.*
    * *When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.*
    * *When torrenting, prefer links with a higher peer count (shown next to the* ***P2P*** *label).*
+
 * **I want Trakt progress syncing, but I do not want extra Trakt addons.**
    * *In* [***stremio.com***](https://www.stremio.com/) *go to* ***Settings*** *and enable* ***Trakt Scrobbling*** *by connecting your Trakt account.*
    * *Then uninstall the* ***Trakt Integration*** *addon from Stremio addons.*
@@ -37,6 +38,7 @@ I am including this section for anyone who has any additional questions or is en
 
 * **I want subtitles in specific languages.**
    * *In* ***AIOStreams***\*: go to\* ***Addons → Installed Addons***\*, edit\* ***SubHero***\*, and set your subtitle language preferences there.\*
+
 * **I need non-English results to appear first in the results list.**
    * *In* ***AIOStreams***\*: go to\* ***Filters → Language***\*.\*
    * *Add your language to* ***Preferred Languages***\*.\*
@@ -75,12 +77,23 @@ I am including this section for anyone who has any additional questions or is en
 * **I cannot save because it says "Jackettio/SeaDex/AnimeTosho requires a debrid service…".**
    * *If you are not using debrid: disable* ***Jackettio***\*,\* ***SeaDex***\*, and\* ***AnimeTosho*** *in* ***Addons → Installed Addons***\*, then save again.\*
    * *If you want SeaDex/AnimeTosho, you will need a debrid service.*
+
 * **I do not have an RPDB subscription. What key should I use?**
    * *Use the free RPDB key:* `t0-free-rpdb` *(works for both AIOStreams and AIOMetadata integrations as described in the guide).*
+
 * **Titles and descriptions in Stremio are in English. Can I change the metadata language?**
    * *In* ***AIOMetadata***\*: go to\* ***General*** *and change* ***Display Language***\*.\*
 
 ![Display Language](../images/4.4.2.png)
+
+* **I cannot save the AIOStreams configuration and see “Failed to fetch manifest...”.**
+   * *This usually means one or more addons are temporarily offline.*
+   * *Go to **Addons → Installed Addons**, disable the problematic addon, and save the configuration so you can continue the guide.*
+   * *Later, return to AIOStreams, enable the addon again, and try to save it if it's back online.*
+
+* **Some catalogs show “Failed to fetch” or appear empty in Stremio.**
+   * *This is often caused by Trakt being temporarily down or rate limiting requests.
+   * *Just wait it out, it will work later. No reconfiguration is needed in most cases*.
 
 * **I added or changed AIOMetadata catalogs, but they do not show in Stremio.**
    * *Go to* ***Cinebye***\*, authenticate, and then in\* ***Manage Addons*** *click the* ***Refresh*** *icon next to* ***AIOMetadata***\*.\*
@@ -90,6 +103,7 @@ I am including this section for anyone who has any additional questions or is en
 * **I get an error installing AIOMetadata: "AddonsPushedToAPI Max descriptor size reached".**
    * *You likely have too many catalogs enabled.*
    * *Disable some catalogs in AIOMetadata,* ***Save Configuration***\*, then try\* ***Install*** *again.*
+
 * **I want Watchly recommendations to show near the top of Stremio.**
    * *Go to* ***Cinebye***\*, authenticate, and then in\* ***Manage Addons*** *reorder addons so* ***Watchly*** *is* ***second*** *(after Cinemeta, before AIOMetadata), then click* ***Sync to Stremio***\*.\*
 
@@ -97,13 +111,17 @@ I am including this section for anyone who has any additional questions or is en
 
 * **I want more ready-made Trakt lists inside AIOMetadata.**
    * *In* ***AIOMetadata → Catalogs***\*, click the\* ***Trakt*** *button and search for lists from user* ***snoak*** *to import more lists.*
+
 * **CouchMoney only created two lists for me. Is that normal?**
    * *Yes, the guide notes Trakt free users are limited (CouchMoney will create two lists). If you want more extensive recommendations inside Stremio, use* ***Watchly***\*.\*
+
 * **I want a more "colorful" stream info layout (not the existing monochrome one).**
    * *In* ***AIOStreams → Formatter***\*, replace the\* ***Description Template*** *with the alternative template provided in the guide's "Additional Stuff" section, then save the configuration.*
+
 * **I used the old "ForTheWeak" (fortheweak.nhyira.dev) AIOStreams/AIOMetadata domains. What do I need to do after the domain migration?**
    * ***AIOStreams:*** *redo Step 3 on one of the new instance links and use the updated template.*
    * ***AIOMetadata:*** *uninstall AIOMetadata from* ***Addons*** *in* [***web.stremio.com***](https://web.stremio.com/)*, open the new AIOMetadata instance, sign in with your existing UUID/Password (accounts were migrated automatically),* ***Save Configuration***\*,\* ***Install***\*, then go to Cinebye and reorder addons again and\* ***Sync***\*.\*
+
 * **I forgot where to save changes in AIOStreams or AIOMetadata. What is the one rule?**
    * ***AIOStreams:*** *always save from* ***Save & Install → Save***\*.\*
    * ***AIOMetadata:*** *always save from* ***Configuration → Save Configuration***\*.\*
