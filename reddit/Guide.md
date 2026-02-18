@@ -26,9 +26,9 @@ In case you are wondering whether it's worth the effort, or you already have a T
 * **Netflix-like Automation**: Trakt-driven *personal lists, watch tracking, and progress syncing* and a *full-blown suggestions engine with dynamic catalogs* based on what you watch and like, for a more “recommended and organized” experience.
 * **Richer Browsing**: AIOMetadata gives *better catalogs + metadata integrations* (ratings, descriptions, artwork) and lets you *remove/replace Cinemeta clutter*.
 
----
-
 So, now that you know, it's up to you, but if you're up for it, let's do it:
+
+---
 
 # 📝 1. Accounts Preparation
 

@@ -40,8 +40,8 @@ The formatting templates are designed to let you evaluate a stream easily before
 **Main Line**
 * ⚡ / ⏳ → [Debrid] Cached (instant playback) / Not Cached (may take longer)
 * 🧲 / 🌐 / 📺 → Torrent (P2P) / Direct HTTP / Live Stream
-* UHD ⁴ᴷ / QHD ²ᴷ / FHD / 720P → Resolution
-* ⌜QUALITY⌟ → Source Quality (Remux, WEB, BluRay, etc.)
+* **UHD ⁴ᴷ / QHD ²ᴷ / FHD / 720P** → Resolution
+* ⌜**QUALITY**⌟ → Source Quality (Remux, WEB, BluRay, etc.)
 * ◆◆⬖◇◇ → Release Quality Score (based on [**Vidhin's Ranked Regexes**](https://github.com/Vidhin05/Releases-Regex), sorted after *Quality & Resolution*)
 
 **Technical Details**
