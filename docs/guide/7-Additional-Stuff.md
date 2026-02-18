@@ -1,6 +1,23 @@
 # 🛠️ Additional Stuff
 ----------------------------------
 
+## Sorting Order
+
+The sort order in the template is configured in the following order: 
+
+* Cached/Uncached (if applicable)
+* SeaDex (only for Anime)
+* Resolution → Quality
+* Stream Expressions
+* Stream Expressions Score
+* Seeders (if Uncached)
+* Language
+* Bitrate
+
+If you want to change the sort order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
+
+----------------------------------
+
 ## Alternative Color Stream Information
 
 If you want a more colorful version of the stream information view than the one included, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
@@ -53,23 +70,6 @@ The formatting templates are designed to let you evaluate a stream easily before
 
 👉 **Quick Tip:**
 Prioritize streams that are **⚡ cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality.
-
-----------------------------------
-
-## Sort Order
-
-The sort order in the template is configured in the following order: 
-
-* Cached/Uncached (if applicable)
-* SeaDex (only for Anime)
-* Resolution → Quality
-* Stream Expressions
-* Stream Expressions Score
-* Seeders (if Uncached)
-* Language
-* Bitrate
-
-If you want to change the sort order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
 ----------------------------------
 
