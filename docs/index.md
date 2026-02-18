@@ -4,11 +4,11 @@
 > 
 > Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read at the end of the post.
 > 
-> See [Updates](Updates,md) for detailed instructions.
+> See [Updates](guide/Updates.md) for detailed instructions.
 
 ----------------------------------
 
-![Homescreen (left) & Stream source selection (right)](assets/main.jpg)
+![Homescreen (left) & Stream source selection (right)](images/main.jpg)
 
 After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 
@@ -32,18 +32,18 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 ## 📖 Chapters
 
-* [**Beginner Concepts**](0-Beginner-Concepts.md)
+* [**Beginner Concepts**](guide/0-Beginner-Concepts.md)
 
-1. [Accounts Preparation](1-Accounts-Preparation.md)
-2. [Stremio Account Initialization](2-Stremio-Initialization.md)
-3. [AIOStreams Setup](3-AIOStreams-Setup.md)
-4. [AIOMetadata Setup](4-AIOMetadata-Setup.md)
-5. [Cinebye Cleanup](5-Cinebye-Cleanup.md)
-6. [Personalized Lists](6-Personalized-Lists.md)
+1. [Accounts Preparation](guide/1-Accounts-Preparation.md)
+2. [Stremio Account Initialization](guide/2-Stremio-Initialization.md)
+3. [AIOStreams Setup](guide/3-AIOStreams-Setup.md)
+4. [AIOMetadata Setup](guide/4-AIOMetadata-Setup.md)
+5. [Cinebye Cleanup](guide/5-Cinebye-Cleanup.md)
+6. [Personalized Lists](guide/6-Personalized-Lists.md)
 
-* [**Additional Stuff**](7-Additional-Stuff.md)
+* [**Additional Stuff**](guide/7-Additional-Stuff.md)
 
-* [**Configuration Q&A**](8-Configuration-QA.md)
+* [**Configuration Q&A**](guide/8-Configuration-QA.md)
 
 ## 🙏 Thanks
 
