@@ -1,4 +1,5 @@
 # ❓ Configuration Q&A
+----------------------------------
 
 I am including this section for anyone who has any additional questions or is encountering any common issues. Most of this is already in the guide, but a lot of you skip them :), so I have extracted them so that you can check this part out for any solutions to your questions:
 

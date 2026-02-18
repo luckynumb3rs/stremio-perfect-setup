@@ -1,4 +1,5 @@
 # 🔔 Updates
+----------------------------------
 
 1. The new AIOStreams release has many new features, which I'm not going to go into detail here, but I have updated my AIOStreams template that you can download from [./templates/AIOStreams.json](./templates/AIOStreams.json) to make use of these new goodies. In order to update your own configuration, you can create a new clean AIOStreams configuration this way:
    1. Log in to [www.stremio.com](https://www.stremio.com).

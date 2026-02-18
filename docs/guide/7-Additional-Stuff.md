@@ -1,4 +1,5 @@
 # 🛠️ Additional Stuff
+----------------------------------
 
 Most of the tips to address some issues are already included in-between the steps of the guide, but I am adding this section in case there are any additional tweaks or alternative configurations.
 

@@ -1,4 +1,5 @@
-# 🧾 1. Accounts Preparation
+# 📝 1. Accounts Preparation
+----------------------------------
 
 First, let's start by creating the accounts (those who already have them can skip these steps):
 

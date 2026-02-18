@@ -1,4 +1,5 @@
 # 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE
+----------------------------------
 
 > 🔔 **BIG UPDATES FOR EXISTING GUIDE USERS**
 > 

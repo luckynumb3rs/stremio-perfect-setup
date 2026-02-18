@@ -1,4 +1,5 @@
 # 🤖 6. Personalized & Automated Lists
+----------------------------------
 
 At this point you are done, YAY!, so you can start enjoying it already OR you can do one more step if you want proper custom lists that are specifically made for you (like Netflix suggestions). There are two approaches for this:
 
