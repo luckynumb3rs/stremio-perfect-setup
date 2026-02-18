@@ -5,7 +5,7 @@ Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this
 
 * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
 
-1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (right-click and "*Save As*").
+1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (right-click, "*Save As*", and save it as `.json`, not `.txt`).
 2. Go to the "**Configuration**" tab, click on "**Import Configuration**", and load my configuration file.
 
 ![Import Configuration](../images/4.2.png)
