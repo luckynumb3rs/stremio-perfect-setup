@@ -2,10 +2,11 @@
   <h3>Chapters</h3>
   <ul>
     {% for item in site.data.nav %}
+      {% assign active1 = item.url | append:'/' %}
       <li>
         <a href="{{ item.url | relative_url }}"
-           {% if page.url == item.url or page.url == item.url | append:'/' %}style="font-weight:700"{% endif %}>
-          {{ item.title }}
+           {% if page.url == item.url or page.url == active1 %}style="font-weight:700"{% endif %}>
+          {{ item.label }}
         </a>
       </li>
     {% endfor %}
