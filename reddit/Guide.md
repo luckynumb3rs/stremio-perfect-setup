@@ -285,6 +285,10 @@ I am including this section for anyone who has any additional questions or is en
 * **I get an error installing AIOMetadata: “AddonsPushedToAPI Max descriptor size reached”.**
    * *You likely have too many catalogs enabled.*
    * *Disable some catalogs in AIOMetadata,* ***Save Configuration***\*, then try\* ***Install*** *again.*
+* **I'm getting an error "No addons were requested for this meta!" when opening content on Stremio.**
+   * *This means AIOMetadata is not installed or configured correctly.*
+   * *Check if you installed it while logged in with your account on web.stremio.com. It should also be showing on Cinebye. Otherwise you installed it without being logged in so log in to web.stremio.com and install it again.*
+   * *Make sure **Catalog Mode Only** in AIOMetadata **Configuration** tab is disabled.*
 * **I want Watchly recommendations to show near the top of Stremio.**
    * *Go to* ***Cinebye***\*, authenticate, and then in\* ***Manage Addons*** *reorder addons so* ***Watchly*** *is* ***second*** *(after Cinemeta, before AIOMetadata), then click* ***Sync to Stremio***\*.\*
 * **I want more ready-made Trakt lists inside AIOMetadata.**
