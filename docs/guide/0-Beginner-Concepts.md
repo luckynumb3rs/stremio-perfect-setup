@@ -87,18 +87,19 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 * In other words: instead of you relying on random peers, you rely on the debrid provider's servers. That usually improves consistency significantly.
 
 ## **Real-Debrid: what is it, and why would you pick it?**
-* **Real-Debrid** is one of the most widely used Debrid services and is known for having a very large **cache** (files already on their servers and ready to watch immediately).
+* [**Real-Debrid**](http://real-debrid.com/?id=8801126) is one of the most widely used Debrid services and is known for having a very large **cache** (files already on their servers and ready to watch immediately).
 * That "*large cache*" part matters because it often means you will find more sources that start instantly without waiting for anything to download first.
 * Important limitation: Real-Debrid allows **one connection at a time**. That means you cannot watch simultaneously on two or more devices using the same Real-Debrid key. If you do, you can get warnings and risk a ban if it keeps happening.
 * So Real-Debrid is good if you are a **single user** or you know you will not stream in parallel.
 
 ## **TorBox: what is it, and why would you pick it?**
-* **TorBox** is also a Debrid-style service, but it is very practical for **multiple simultaneous streams**.
+* [**TorBox**](https://torbox.app/subscription?referral=6e80077e-c232-4b71-8914-5b87202b9577) is also a Debrid-style service, but it is very practical for **multiple simultaneous streams**.
 * Even the basic paid tier supports **multiple parallel connections** (up to **3** in the Essential tier, and Pro tier up to **10** parallel streams).
 * That matters if you want to use the same API key across **family members**, **friends**, or even **multiple Stremio accounts** streaming at the same time.
 * **Tradeoff**: TorBox may not always have as large an "immediately cached" library as Real-Debrid. If something is not cached yet, you might see sources that require TorBox to fetch it first. In the stream list this shows up as an **hourglass icon**.
 * That does not mean it will not work. It means it may need time to download the file first, and the speed depends on available **seeders**, though it is often reasonably fast. If there's enough seeders, it's a matter of seconds or minutes.
 * In most cases, TorBox still has plenty of cached options. You only need one good cached source per title.
+* Make sure to use my referral code when ordering:* ***6e80077e-c232-4b71-8914-5b87202b9577*** *to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. You can enter it when choosing the Plan, scroll down to the bottom and there you'll see it.
 
 ## **TorBox vs Real-Debrid: how to choose without overthinking it**
 * If you are streaming mostly alone and you want the highest chance of "instant play" from a large cache: **Real-Debrid** is often a strong choice.
