@@ -165,8 +165,9 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Order Addons](../images/5.4.png)
 
-## **I want more ready-made Trakt lists inside AIOMetadata.**
+## **I want more ready-made catalogs inside AIOMetadata.**
 * In **AIOMetadata → Catalogs**, click the **Trakt** button and search for lists from user **snoak** to import more lists.
+* For even more curated catalogs, you can integrate **MDBList** and get lists from there. Check out how in [**🛠️ Additional Stuff**](7-Additional-Stuff.md).
 
 ## **CouchMoney only created two lists for me. Is that normal?**
 * Yes, the guide notes Trakt free users are limited (CouchMoney will create two lists). If you want more extensive recommendations inside Stremio, use **Watchly**.
