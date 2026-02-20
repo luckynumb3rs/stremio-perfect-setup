@@ -1,6 +1,8 @@
 # 🛠️ Additional Stuff
 ----------------------------------
 
+Most of the tips to address some issues are already included in-between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations:
+
 ## Quick Navigation
 
 - [Sorting Order](#sorting-order)
