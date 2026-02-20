@@ -1,7 +1,7 @@
 # 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
 ----------------------------------
 
-Go to [**this**](https://aiometadata.fortheweak.cloud/) or alternatively [**this**](https://aiometadata.viren070.me/) **AIOMetadata** instance and:
+Go to [**this**](https://aiometadata.viren070.me/) **AIOMetadata** instance and:
 
 * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
 
