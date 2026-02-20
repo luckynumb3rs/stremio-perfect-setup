@@ -1,4 +1,4 @@
-# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE (1.0)
+# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE (v1.0)
 ----------------------------------
 
 ![Homescreen (left) & Stream source selection (right)](images/home.jpg)
@@ -11,7 +11,7 @@ After a few iterations trying out what works and what doesn't for me, and testin
 
 >**NOTES**:
 >* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**🔰 Beginner Concepts**](guide/0-Beginner-Concepts.md).*
->* *If you already followed this guide and would like to update to the latest template (check out the version number on the title), go to [**🔔 Updates**](guide/Updates).*
+>* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](guide/Updates).*
 >* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](guide/8-Configuration-QA.md). If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:

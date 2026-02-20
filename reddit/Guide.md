@@ -1,4 +1,4 @@
-# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/) (1.0)
+# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/) (v1.0)
 
 ![img](xd3jbgpapmig1 "Homescreen (left) & Stream source selection (right)")
 
@@ -11,7 +11,7 @@ After a few iterations trying out what works and what doesn't for me, and testin
 **If this guide helps you, please upvote this post so others can find it and also benefit from it. 😊**
 
 >**NOTES**:
->* *If you already followed this guide and would like to update to the latest template (check out the version number on the title), go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide.*
+>* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide.*
 >* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
