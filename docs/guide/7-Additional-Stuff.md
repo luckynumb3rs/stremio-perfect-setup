@@ -5,28 +5,38 @@ Most of the tips to address some issues are already included in-between the step
 
 ## Quick Navigation
 
-- [Sorting Order](#sorting-order)
+- [Smart Stream Selection & Sorting](#smart-stream-selection--sorting)
 - [Alternative Color Stream Information](#alternative-color-stream-information)
 - [Understanding Stream Information View](#understanding-stream-information-view)
 - [Enriching Your Catalogs (Trakt Alternatives)](#enriching-your-catalogs-trakt-alternatives)
 
 ----------------------------------
 
-## Sorting Order
+## Smart Stream Selection & Sorting
 
-The sort order in the template is configured in the following order: 
+The **AIOStreams** template you used from this guide includes multiple optimizations highly recommended by the Stremio community to intelligently filter, score, and prioritize streams for a cleaner, easier, and more reliable viewing experience.
 
-* *Cached/Uncached (if applicable)*
-* *SeaDex (only for Anime)*
-* *Resolution*
-* *Quality*
-* *Stream Expressions*
-* *Stream Expressions Score*
-* *Seeders (if Uncached)*
-* *Language*
-* *Bitrate*
+* The template includes a best practice filtering system called [**TamTaro's SELs**](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting). This system intelligently scores available streams based on multiple quality factors such as resolution, reliability, cache status, release details, and more. It does not just sort the list, it actively filters out weaker results and surfaces only the strongest candidates. The result is a cleaner, more curated selection of streams, helping you avoid decision fatigue and quickly choose a high quality option with confidence.
 
-If you want to change the sort order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
+* The template also integrates trusted pattern rules like [**Vidhin's Regexes**](https://github.com/Vidhin05/Releases-Regex), which analyze stream titles and detect important indicators such as reputable release groups, quality tags, and encoding formats. By accurately identifying these details, the system can better label, prioritize, or exclude certain streams. In simple terms, regex helps the system understand what each stream actually is before any scoring takes place.
+
+* **Together**, these two systems work hand in hand. Regex identifies meaningful quality signals inside stream names, and SEL uses those signals, along with other factors, to score, filter, and rank the results. The combination creates a smarter, cleaner, and more reliable stream selection experience.
+
+* **However**, if you are not satisfied with the results because you want more to choose from, or you feel they are malfunctioning somehow, you can remove them all by going to **Filters** in **AIOStreams**, then both in **Stream Expression** and **Regex** respectively, and delete all entries configured there (with the red *trash can* button to the right).
+
+* Finally, the **Sorting** in the template is configured to show the streams in the following order:
+
+   * *Cached/Uncached (if applicable)*
+   * *SeaDex (only for Anime)*
+   * *Resolution*
+   * *Quality*
+   * *Stream Expressions*
+   * *Stream Expressions Score*
+   * *Seeders (if Uncached)*
+   * *Language*
+   * *Bitrate*
+
+* **However**, if you want to change the **Sorting** order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
 ----------------------------------
 

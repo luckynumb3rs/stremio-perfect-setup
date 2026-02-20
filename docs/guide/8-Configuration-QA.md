@@ -18,7 +18,7 @@ I am including this section for anyone who has any additional questions or is en
 - [Language Before Quality](#i-want-my-language-to-be-prioritized-even-before-qualityresolution)
 - [Non-English Results Not Enough](#i-am-not-happy-with-non-english-matching-it-feels-like-good-results-are-being-filtered-out)
 - [Speeding Up Results](#results-are-coming-in-too-slowly-how-can-i-speed-it-up)
-- [Increasing Good Results](#i-feel-like-i-am-getting-too-few-good-results-what-should-i-change)
+- [Getting More Results](#i-feel-like-i-am-getting-too-few-good-results-what-should-i-change)
 - [Can't Save AIOStreams Without Debrid](#i-cannot-save-because-it-says-jackettioseadexanimetosho-requires-a-debrid-service)
 - [RPDB Key](#i-do-not-have-an-rpdb-subscription-what-key-should-i-use)
 - [Metadata Language](#titles-and-descriptions-in-stremio-are-in-english-can-i-change-the-metadata-language)
@@ -113,6 +113,7 @@ I am including this section for anyone who has any additional questions or is en
 ## **I feel like I am getting too few good results. What should I change?**
 * If you set fetching to **Dynamic** (**AIOStreams → Addons → Addon Fetching Strategy**), try switching back to **Default**.
 * Make sure you enabled enough scrapers (Torrentio, StremThru, Comet, MediaFusion, Jackettio are mentioned in the guide as the core scrapers).
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
 
 ![Change Fetching](../images/3.11.1.png)
 
