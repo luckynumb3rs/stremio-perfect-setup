@@ -1,6 +1,15 @@
 # 🛠️ Additional Stuff
 ----------------------------------
 
+## Quick Navigation
+
+- [Sorting Order](#sorting-order)
+- [Alternative Color Stream Information](#alternative-color-stream-information)
+- [Understanding Stream Information View](#understanding-stream-information-view)
+- [Enriching Your Catalogs (Trakt Alternatives)](#enriching-your-catalogs-trakt-alternatives)
+
+----------------------------------
+
 ## Sorting Order
 
 The sort order in the template is configured in the following order: 
