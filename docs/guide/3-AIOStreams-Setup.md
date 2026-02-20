@@ -1,9 +1,15 @@
 # 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
 ----------------------------------
 
-Go to [**this**](https://aiostreamsfortheweebsstable.midnightignite.me/) or alternatively [**this**](https://aiostreams.fortheweak.cloud/) **AIOStreams** instance and:
+Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
-* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
+* ***WARNING**:*
+   * *If you want to understand more what an instance means, go to [***Beginner Concepts***](0-Beginner-Concepts.md).*
+   * [***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.
+   * *Do not choose an instance that says **Nightly**, since they may not be stable.*
+   * *Do not choose the **ElfHosted** instance because Torrentio doesn't work there.*
+   * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
+   * *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
 
 1. Select "**Advanced**" on the welcome screen if it shows up.
 2. Copy [**this**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json) link (right-click and "*Copy link address*").

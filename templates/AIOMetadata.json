@@ -1,6 +1,6 @@
 {
-  "version": "1.26.0",
-  "exportedAt": "2026-02-06T11:21:19.372Z",
+  "version": "1.30.0",
+  "exportedAt": "2026-02-20T09:42:56.538Z",
   "config": {
     "mal": {
       "skipRecap": false,
@@ -50,7 +50,11 @@
       "fanart": "",
       "rpdb": "",
       "topPoster": "",
-      "mdblist": ""
+      "mdblist": "",
+      "traktTokenId": "",
+      "simklTokenId": "",
+      "anilistTokenId": "",
+      "customDescriptionBlurb": ""
     },
     "catalogs": [
       {
@@ -1080,7 +1084,8 @@
     "hideUnreleasedDigital": false,
     "hideUnreleasedDigitalSearch": false,
     "showMetaProviderAttribution": false,
-    "enableRatingPostersForLibrary": true
+    "enableRatingPostersForLibrary": true,
+    "catalogSetupComplete": true
   },
   "metadata": {
     "apiKeysExcluded": true,
