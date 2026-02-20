@@ -74,4 +74,37 @@ Prioritize streams that are **⚡ cached**, high resolution, strong score (◆),
 
 ----------------------------------
 
+## Enriching Your Catalogs (Trakt Alternatives)
+
+This guide uses **Trakt** as the default content tracker, mainly because it's also natively supported by Stremio. Through **Trakt Scrobbling** enabled in Stremio settings, Stremio sends watch history and progress to Trakt, which you then can use to create your own lists or as a personal library manager for your preferences. However, since Trakt recently has been enforcing strict rate limits, and also limiting free accounts more and more, there are alternatives that might allow you more flexibility, and also avoid any issues with Trakt errors that have been happening increasingly often.
+This is totally optional, but if you're looking for Trakt alternatives, or simply looking for more choices that you can use alongside Trakt, and more curated lists to choose from, there are two other trackers that are becoming increasingly more preferred and AIOMetadata wonderfully supports: **MDBList** (especially good if you want curated catalogs from other users) and **Simkl** (similar to Trakt). Although in this case Stremio itself doesn't sync with them, AIOMetadata does. Once enabled there, when you open a stream, AIOMetadata marks it in these platforms using their *check-in* feature (meaning it marks them as started watching), and when the stream is finished, it marks it as watched. This way you get the same watch history as with Trakt (except for the specific progress inside the stream, that's not tracked). So if you want to go this route (you don't have to do both), here are the instructions:
+
+* **MDBList**:
+   1. Create an account on [**MDBList**](https://mdblist.com/) (*You can sign up with your existing Trakt account if you have one, this will allow MDBList to sync with your Trakt account too and continuously update it*).
+   2. Click on your profile name on the top right, and select "**Connected Accounts**".
+   3. On the **Preferences** page that will show, click on the "**API Access**" button from the menu list, and copy the **API Key** provided.
+   4. Sign in to **AIOMetadata** with your **UUID** and **Password** and go to **Integrations** tab.
+   5. Enter the **API Key** in the **MDBList API Key** field.
+   6. In **General** tab, make sure the "**MDBList Watch Tracking**" toggle is enabled.
+   7. Go to the **Catalogs** tab and click on the **MDBList** icon next to the Trakt icon.
+   8. Enter the **API Key** there again.
+   9. Optional, but recommended: If you want to add popular and curated catalogs from **MDBList**, you can scroll further down on this page to the "**Popular Lists from Featured Curators**" section, click on one of the users showing there (e.g. *Snoak* or *Dan Pyjama*), and their lists will load. Select the lists you are interested in, and click on "**Import Selected Lists**". *Some lists are similar to the Trakt lists already provided in the AIOMetadata configuration downloaded from this guide, specifically the **snoak** user lists (named "Latest..."), so if you add them from MDBList, disable the provided Trakt lists to avoid duplicates.*
+   10. Click "**Save & Close**", arrange the newly added catalogs however you like, and don't forget to **Save** the changes by going to the **Configuration** tab.
+
+![MDBList](../images/7.1.png)
+
+* **Simkl**:
+   1. Create an account on [**Simkl**](https://simkl.com/).
+   2. You can import your **Trakt** history when asked if you want.
+   3. Once your account is ready, sign in to **AIOMetadata** with your **UUID** and **Password**.
+   4. In **General** tab, make sure the "**Simkl Checkin**" toggle is enabled.
+   5. Go to the **Catalogs** tab and click on the **Simkl** icon next to the Trakt icon.
+   6. Follow the instructions to connect your Simkl account.
+   7. You can add any catalogs you want while still on the page once connected, and then click on "**Close**".
+   8. Arrange the newly added catalogs however you like, and don't forget to **Save** the changes by going to the **Configuration** tab.
+
+![Simkl](../images/7.2.png)
+
+----------------------------------
+
 [[❓ Configuration Q&A] Other →](8-Configuration-QA.md)

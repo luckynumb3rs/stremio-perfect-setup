@@ -6,9 +6,9 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](0-Beginner-Concepts.md).*
    * *[***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
-   * *If you go with **Yeb's**, do not use the old [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) link, but [*aiostreams.fortheweak.cloud*](https://aiostreams.fortheweak.cloud/), as linked right above.*
-   * *Do not choose an instance that says **Nightly**, since they may not be stable.*
-   * *Do not choose the **ElfHosted** instance because Torrentio doesn't work there.*
+   * *If you go with **Yeb's**, **DON'T** use the old [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) link, but [*aiostreams.fortheweak.cloud*](https://aiostreams.fortheweak.cloud/), as linked right above.*
+   * ***DON'T** choose an instance that says **Nightly**, since they may not be stable.*
+   * ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
    * *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
 

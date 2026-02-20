@@ -109,6 +109,7 @@ I am including this section for anyone who has any additional questions or is en
    * *If it says "Instance owner has not yet set up the Trakt integration." when you click the Trakt button, then it means Trakt integration has been disabled by the instance provider. If you still need Trakt, you're going to need to do the AIOMetadata configuration with another instance.*
    * *If it's giving errors while integrating, you can try at a later point and hope it works, or do the AIOMetadata setup with another instance.*
    * *Alternatively, you can leave Trakt integration disabled, and hide the Trakt catalogs on the list (marked with a red **Trakt** tag on the right) by clicking the green eye icon for each. I know it's not ideal since you created a Trakt account already, but there's nothing we can do about it. You can still add other catalogs from the other sources there, but it's outside the scope of this guide.*
+   * *There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out in [***🛠️ Additional Stuff***](7-Additional-Stuff.md).*
 
 ![Trakt Disable](../images/4.4.1.png)
 
