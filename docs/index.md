@@ -7,7 +7,7 @@ After a few iterations trying out what works and what doesn't for me, and testin
 
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
 
-**If this guide helps you, please upvote the [Reddit post](https://www.reddit.com/r/StremioAddons/comments/1qvn9rk/my_stremio_perfect_setup_for_me_at_least_sharing/) so others can find it and also benefit from it. 😊**
+**If this guide helps you, please upvote the [Reddit post](https://www.reddit.com/r/StremioAddons/comments/1qvn9rk/my_stremio_perfect_setup_for_me_at_least_sharing/) so it remains relevant for others to find it and also benefit from it. 😊**
 
 >**NOTES**:
 >* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**🔰 Beginner Concepts**](guide/0-Beginner-Concepts.md).*
