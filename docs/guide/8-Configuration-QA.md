@@ -22,10 +22,10 @@ I am including this section for anyone who has any additional questions or is en
    * *When torrenting, prefer links with a higher peer count (shown next to the* ***P2P*** *label).*
 
 * **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
-   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) to read the descriptions for each icon.*
+   * *Go to [***🛠️ Additional Stuff***](7-Additional-Stuff.md) to read the descriptions for each icon.*
 
 * **The icons of the stream information view are too plain, I would like more colors to differentiate.**
-   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) on the extended guide to get an alternative colorful template you can use instead.*
+   * *Go to [***🛠️ Additional Stuff***](7-Additional-Stuff.md) on the extended guide to get an alternative colorful template you can use instead.*
 
 * **I want Trakt progress syncing, but I do not want extra Trakt addons.**
    * *In* [***stremio.com***](https://www.stremio.com/) *go to* ***Settings*** *and enable* ***Trakt Scrobbling*** *by connecting your Trakt account.*
@@ -46,7 +46,7 @@ I am including this section for anyone who has any additional questions or is en
    * *In* ***AIOStreams***\*: go to\* ***Addons → Installed Addons***\*, edit\* ***SubHero***\*, and set your subtitle language preferences there.\*
 
 * **I don't understand how the streams shown to me are being sorted.**
-   * *Go to [***Additional Stuff***](7-Additional-Stuff.md) to see the configured sort order.*
+   * *Go to [***🛠️ Additional Stuff***](7-Additional-Stuff.md) to see the configured sort order.*
 
 * **I need non-English results to appear first in the results list.**
    * *In* ***AIOStreams***\*: go to\* ***Filters → Language***\*.\*
@@ -138,7 +138,7 @@ I am including this section for anyone who has any additional questions or is en
    * *Yes, the guide notes Trakt free users are limited (CouchMoney will create two lists). If you want more extensive recommendations inside Stremio, use* ***Watchly***\*.\*
 
 * **I want a more "colorful" stream info layout (not the existing monochrome one).**
-   * *In* ***AIOStreams → Formatter***\*, replace the\* ***Description Template*** *with the alternative template provided in the guide's "Additional Stuff" section, then save the configuration.*
+   * *In* ***AIOStreams → Formatter***\*, replace the\* ***Description Template*** *with the alternative template provided in the guide's [***🛠️ Additional Stuff***](7-Additional-Stuff.md) section, then save the configuration.*
 
 * **I used the old "ForTheWeak" (fortheweak.nhyira.dev) AIOStreams/AIOMetadata domains. What do I need to do after the domain migration?**
    * ***AIOStreams:*** *redo Step 3 on one of the new instance links and use the updated template.*
@@ -150,4 +150,4 @@ I am including this section for anyone who has any additional questions or is en
 
 ----------------------------------
 
-[← Other [Additional Stuff]](7-Additional-Stuff.md)
+[← Optional [🛠️ Additional Stuff]](7-Additional-Stuff.md)

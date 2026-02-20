@@ -22,4 +22,4 @@ Second, let's prepare the Stremio account properly:
 
 ----------------------------------
 
-[← Previous [Accounts Preparation]](1-Accounts-Preparation.md)  |  [Next [AIOStreams Setup] →](3-AIOStreams-Setup.md)
+[← Previous [📝 Accounts Preparation]](1-Accounts-Preparation.md)  |  [[📚 AIOStreams Setup] Next →](3-AIOStreams-Setup.md)

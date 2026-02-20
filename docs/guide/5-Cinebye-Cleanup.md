@@ -35,4 +35,4 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
 ----------------------------------
 
-[← Previous [AIOMetadata Setup]](4-AIOMetadata-Setup.md)  |  [Next [Personalized Lists] →](6-Personalized-Lists.md)
+[← Previous [🔎 AIOMetadata Setup]](4-AIOMetadata-Setup.md)  |  [[🤖 Personalized Lists] Next →](6-Personalized-Lists.md)

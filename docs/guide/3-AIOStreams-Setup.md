@@ -4,8 +4,9 @@
 Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [***Beginner Concepts***](0-Beginner-Concepts.md).*
-   * [***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.
+   * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](0-Beginner-Concepts.md).*
+   * *[***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *If you go with **Yeb's**, do not use the old [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) link, but [*aiostreams.fortheweak.cloud*](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * *Do not choose an instance that says **Nightly**, since they may not be stable.*
    * *Do not choose the **ElfHosted** instance because Torrentio doesn't work there.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
@@ -72,4 +73,4 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 ----------------------------------
 
-[← Previous [Stremio Account Initialization]](2-Stremio-Initialization.md)  |  [Next [AIOMetadata Setup] →](4-AIOMetadata-Setup.md)
+[← Previous [⚙️ Stremio Account Initialization]](2-Stremio-Initialization.md)  |  [[🔎 AIOMetadata Setup] Next →](4-AIOMetadata-Setup.md)

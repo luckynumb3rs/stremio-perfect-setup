@@ -39,4 +39,4 @@ And now you're really done! Check out the Q&A if you want to tweak it further.
 
 ----------------------------------
 
-[← Previous [Cinebye Cleanup]](5-Cinebye-Cleanup.md)  |  [Optional [Additional Stuff] →](7-Additional-Stuff.md)
+[← Previous [🧹 Cinebye Cleanup]](5-Cinebye-Cleanup.md)  |  [[🛠️ Additional Stuff] Optional →](7-Additional-Stuff.md)

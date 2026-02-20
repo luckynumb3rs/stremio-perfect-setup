@@ -1,8 +1,4 @@
->🔔 **BIG UPDATES FOR EXISTING GUIDE USERS**: Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read at the end of the post.
-
----
-
-# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/)
+# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/) (1.0)
 
 ![img](xd3jbgpapmig1 "Homescreen (left) & Stream source selection (right)")
 
@@ -12,9 +8,11 @@ After a few iterations trying out what works and what doesn't for me, and testin
 
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
 
-**NOTES**:
-* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
-* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
+**If this guide helps you, please upvote this post so others can find it and also benefit from it. 😊**
+
+>**NOTES**:
+>* *If you already followed this guide and would like to update to the latest template (check out the version number on the title), go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide.*
+>* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
 
@@ -27,6 +25,12 @@ In case you are wondering whether it's worth the effort, or you already have a T
 * **Richer Browsing**: AIOMetadata gives *better catalogs + metadata integrations* (ratings, descriptions, artwork) and lets you *remove/replace Cinemeta clutter*.
 
 So, now that you know, it's up to you, but if you're up for it, let's do it:
+
+---
+
+# 🔰 Beginner Concepts
+
+If you are a total beginner and are curious to understand the concepts around Stremio and how it works, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.
 
 ---
 
@@ -93,8 +97,9 @@ Second, let's prepare the Stremio account properly:
 Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [***Beginner Concepts***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
-   * [***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.
+   * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
+   * *[***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *If you go with **Yeb's**, do not use the old [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) link, but [*aiostreams.fortheweak.cloud*](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * *Do not choose an instance that says **Nightly**, since they may not be stable.*
    * *Do not choose the **ElfHosted** instance because Torrentio doesn't work there.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
@@ -133,7 +138,7 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [***Beginner Concepts***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
+   * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
    * *[***Viren's***](https://aiometadata.viren070.me/) or [***Midnight's***](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
    * ***Yeb's** and **Kuu's** are not working with Trakt currently because Trakt has imposed strict rate limits lately, so don't use these instances for now.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to configure it again because it's not automatically transferred.*
@@ -229,15 +234,24 @@ I hope you like my configuration, but of course you can modify it any way you wa
 
 ---
 
-# ❓ Configuration Q&A
+# 🛠️ Additional Stuff
 
-If you followed this guide and are encountering issues or have configuration questions, go to [**Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
+If you want to understand how the streams are sorted in the configuration donwloaded here, or want to understand what all the icons on the stream information view mean, or want more colorful icons in there, go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
 
 ---
 
-🔔 **BIG UPDATES:**
+# ❓ Configuration Q&A
 
-1. The new AIOStreams release has many new features, which I'm not going to go into detail here, but I have updated my AIOStreams template that you can download from the same link above as before to make use of these new goodies. In order to update your own configuration, you can create a new clean AIOStreams configuration this way:
+If you followed this guide and are encountering issues or have configuration questions, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
+
+---
+
+# 🔔 Updates
+
+> 1. Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. 
+> 2. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read below.
+
+1. The new AIOStreams release has many new features, which I'm not going to go into detail here, but I have updated my AIOStreams template that you can download from [here](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json) to make use of these new goodies. In order to update your own configuration, you can create a new clean AIOStreams configuration this way:
    1. Log in to [www.stremio.com](https://www.stremio.com).
    2. Go to "**Addons**" tab and uninstall the "**AIOStreams**" addon.
    3. Repeat "**Step 3**" from the guide to configure AIOStreams again from scratch (if you used aiostreamsfortheweak.nhyira.dev for it, also see point 2 below) with the new template (already updated in same the link in the guide). Do not sign in to your existing AIOStreams configuration with your UUID and Password. Import the template as in the guide, enter your API keys again (Debrid, TMDB, TVDB, RPDB), and save with a password again. You will get a new UUID that will be used from now on (forget the old one), and then you can install the new AIOStreams in Stremio again. Basically the entire Step 3 in the guide from scratch. The rest remains as is, no need to do anything else.

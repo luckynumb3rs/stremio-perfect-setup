@@ -53,4 +53,4 @@ First, let's start by creating the accounts (those who already have them can ski
 
 ----------------------------------
 
-[← Previous [Beginner Concepts]](0-Beginner-Concepts.md)  |  [Next [Stremio Account Initialization] →](2-Stremio-Initialization.md)
+[← Previous [🔰 Beginner Concepts]](0-Beginner-Concepts.md)  |  [[⚙️ Stremio Account Initialization] Next →](2-Stremio-Initialization.md)

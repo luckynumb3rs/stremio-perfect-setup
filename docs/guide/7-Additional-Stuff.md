@@ -74,4 +74,4 @@ Prioritize streams that are **⚡ cached**, high resolution, strong score (◆),
 
 ----------------------------------
 
-[Other [Configuration Q&A] →](8-Configuration-QA.md)
+[[❓ Configuration Q&A] Other →](8-Configuration-QA.md)

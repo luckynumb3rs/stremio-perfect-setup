@@ -140,4 +140,4 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 
 ----------------------------------
 
-[Start [Accounts Preparation] →](1-Accounts-Preparation.md)
+[[📝 Accounts Preparation] Start →](1-Accounts-Preparation.md)
