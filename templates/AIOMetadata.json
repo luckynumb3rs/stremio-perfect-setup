@@ -1085,7 +1085,8 @@
     "hideUnreleasedDigitalSearch": false,
     "showMetaProviderAttribution": false,
     "enableRatingPostersForLibrary": true,
-    "catalogSetupComplete": true
+    "catalogSetupComplete": true,
+    "simklWatchTracking": true
   },
   "metadata": {
     "apiKeysExcluded": true,
