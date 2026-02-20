@@ -17,7 +17,9 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
    7. Click on "**Next: Install**" and click on "**Save & Install**".
    8. Click "**Install on Web**" and install the add-on on Stremio.
-   * ***Note:*** *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
+   * ***Notes:***
+      * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
+      * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
 
 ![Watchly](../images/6.1.png)
 

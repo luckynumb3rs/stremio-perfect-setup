@@ -1,6 +1,20 @@
 # 🔔 Updates
 ----------------------------------
 
+To do a regular update when a new version of the template for AIOStreams is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup, but here's a short summary again:
+1. Sign in to your **AIOStreams** instance with your **UUID** and **Password**.
+2. Go to the **Save & Install** tab, click "**Import**", "**Import Template**", paste the link you copied and click on "**Go**".
+3. Click "**Use this Template Now**".
+5. On the "**Select Services**" page that is shown, enable the Debrid services you are already using (or click "*Skip*" if you don't use any), and click "**Next**".
+6. On the "**Enter Credentials**" page, since you're loading the template over your existing configuration, all API keys needed should already be filled. Otherwise, enter any missing ones.
+7. Click on "**Load Template**" and the template is loaded.
+8. **IMPORTANT**: If you made any changes to the configuration after you loaded it initially, you may need to do them again (e.g. language changes such as subtitles and language preferences, any addon modifications, etc.).
+9. Click on "**Save**" on the "**Save & Install**". No need to install the addon on Stremio again.
+
+----------------------------------
+
+## SPECIFIC UPDATES
+
 > 1. Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. 
 > 2. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read below.
 

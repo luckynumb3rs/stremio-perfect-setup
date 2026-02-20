@@ -22,7 +22,7 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 ![Use Template](../images/3.4.png)
 
-5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any).
+5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any), and click "**Next**".
 
 ![Select Services](../images/3.5.png)
 
