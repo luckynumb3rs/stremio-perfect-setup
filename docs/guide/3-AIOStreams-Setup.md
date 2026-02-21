@@ -10,9 +10,9 @@ AIOStreams is the stream aggregation engine in this setup. It combines multiple 
 Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](0-Beginner-Concepts.md).*
-   * *[***Midnight's***](https://aiostreamsfortheweebsstable.midnightignite.me/) or [***Yeb's***](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
-   * *If you go with **Yeb's**, **DON'T** use the old [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) link, but [*aiostreams.fortheweak.cloud*](https://aiostreams.fortheweak.cloud/), as linked right above.*
+   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](0-Beginner-Concepts.md).*
+   * *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *If you go with **Yeb's**, **DON'T** use the old [aiostreamsfortheweak.nhyira.dev](https://aiostreamsfortheweak.nhyira.dev/) link, but [aiostreams.fortheweak.cloud](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * ***DON'T** choose an instance that says **Nightly**, since they may not be stable.*
    * ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to do it again because it's not automatically transferred*
@@ -46,7 +46,7 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 ![Addon Configuration](../images/3.8.3.png)
 
-   * *If you want to have a language other than English to show first on the results list, go to* ***Filters*** *tab, then* ***Language***, *and add your language to the* ***Preferred Languages*** *list, and put it first in the* ***Preference Order*** *list (shown in the picture with German language as an example). You can also add the language in the ***Required Languages*** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.*
+   * *If you want to have a language other than English to show first on the results list, go to* ***Filters*** *tab, then* ***Language***, *and add your language to the* ***Preferred Languages*** *list, and put it first in the* ***Preference Order*** *list (shown in the picture with German language as an example). You can also add the language in the **Required Languages** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.*
 
 ![Preferred Language](../images/3.8.4.png)
 
