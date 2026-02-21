@@ -1,35 +1,11 @@
+---
+layout: guide
+title: "🔰 Beginner Concepts"
+---
+
 # 🔰 Beginner Concepts
-----------------------------------
 
 This guide assumes you are aiming for a Stremio setup that is **clean**, **reliable**, and **consistent across devices**. The concepts below explain what each component is doing, why it matters, and why the combination used in this guide tends to work better than a basic "single addon" setup.
-
-## Quick Navigation
-
-- [What is Stremio?](#what-is-stremio)
-- [What platforms does Stremio support?](#what-platforms-does-stremio-support)
-- [How does Stremio work, conceptually?](#how-does-stremio-work-conceptually)
-- [What does "synced everywhere" mean in Stremio?](#what-does-synced-everywhere-mean-in-stremio)
-- [What is the addon ecosystem? What do addons actually provide?](#what-is-the-addon-ecosystem-what-do-addons-actually-provide)
-- [What does "an addon instance" mean?](#what-does-an-addon-instance-mean)
-- [Which addon instance should I choose?](#which-addon-instance-should-i-choose)
-- [What is torrenting (P2P), and how does Stremio support it?](#what-is-torrenting-p2p-and-how-does-stremio-support-it)
-- [What is a Debrid service, and why do people use it with Stremio?](#what-is-a-debrid-service-and-why-do-people-use-it-with-stremio)
-- [Real-Debrid: what is it, and why would you pick it?](#real-debrid-what-is-it-and-why-would-you-pick-it)
-- [TorBox: what is it, and why would you pick it?](#torbox-what-is-it-and-why-would-you-pick-it)
-- [TorBox vs Real-Debrid: how to choose without overthinking it](#torbox-vs-real-debrid-how-to-choose-without-overthinking-it)
-- [Why use both TorBox and Real-Debrid together?](#why-use-both-torbox-and-real-debrid-together)
-- [How do you actually use both in this setup?](#how-do-you-actually-use-both-in-this-setup)
-- [What is Trakt, and why do people connect it to Stremio?](#what-is-trakt-and-why-do-people-connect-it-to-stremio)
-- [What are scrapers, and why do you need multiple?](#what-are-scrapers-and-why-do-you-need-multiple)
-- [What does AIOStreams do, and why is it the center of this setup?](#what-does-aiostreams-do-and-why-is-it-the-center-of-this-setup)
-- [What does AIOMetadata do, and why include it?](#what-does-aiometadata-do-and-why-include-it)
-- [What is Cinemeta, and why do people say AIOMetadata can replace it?](#what-is-cinemeta-and-why-do-people-say-aiometadata-can-replace-it)
-- [What does Watchly do, and why is it good in this setup?](#what-does-watchly-do-and-why-is-it-good-in-this-setup)
-- [What are TMDB, TVDB, and RPDB, and why do they matter here?](#what-are-tmdb-tvdb-and-rpdb-and-why-do-they-matter-here)
-- [What is an API key, in plain English?](#what-is-an-api-key-in-plain-english)
-- [What is a Gemini API key, what does it do, and why might it appear in Stremio-related setups?](#what-is-a-gemini-api-key-what-does-it-do-and-why-might-it-appear-in-stremio-related-setups)
-
-----------------------------------
 
 ## **What is Stremio?**
 * Stremio is a media center that unifies **discovery** and **playback** under one interface. You search for a title once, and Stremio can show you the title page (metadata, seasons, episodes) and the available sources (streams) through addons.
@@ -167,6 +143,4 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 * A **Gemini** API key authorizes requests to Google's Gemini models.
 * In this ecosystem, it is typically relevant when a tool/addon has AI-assisted features (specifically for AI-powered search through AIOMetadata).
 
-----------------------------------
 
-[[📝 Accounts Preparation] Start →](1-Accounts-Preparation.md)

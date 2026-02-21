@@ -1,5 +1,11 @@
+---
+layout: guide
+title: "🔔 Updates"
+---
+
 # 🔔 Updates
-----------------------------------
+
+## Regular Updates
 
 To do a regular update when a new version of the template for AIOStreams is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup, but here's a short summary again:
 1. Sign in to your **AIOStreams** instance with your **UUID** and **Password**.
@@ -12,7 +18,6 @@ To do a regular update when a new version of the template for AIOStreams is anno
 8. **IMPORTANT**: If you made any changes to the configuration after you loaded it initially, you may need to do them again (e.g. language changes such as subtitles and language preferences, any addon modifications, etc.).
 9. Click on "**Save**" on the "**Save & Install**". No need to install the addon on Stremio again.
 
-----------------------------------
 
 ## SPECIFIC UPDATES
 

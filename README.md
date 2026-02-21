@@ -1,5 +1,4 @@
 # 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE (v1.1)
-----------------------------------
 
 ![Homescreen (left) & Stream source selection (right)](docs/images/home.jpg)
 
@@ -11,7 +10,7 @@ After a few iterations trying out what works and what doesn't for me, and testin
 
 >**NOTES**:
 >* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**🔰 Beginner Concepts**](docs/guide/0-Beginner-Concepts.md).*
->* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](docs/guide/Updates).*
+>* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](docs/guide/Updates.md).*
 >* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](docs/guide/8-Configuration-QA.md). If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
@@ -26,25 +25,18 @@ In case you are wondering whether it's worth the effort, or you already have a T
 
 So, now that you know, it's up to you, but if you're up for it, let's do it:
 
-
 ## 📖 Chapters
 
-
-* 🔰 [**Beginner Concepts**](docs/guide/0-Beginner-Concepts.md)
-
-1. 📝 [Accounts Preparation](docs/guide/1-Accounts-Preparation.md)
-2. ⚙️ [Stremio Account Initialization](docs/guide/2-Stremio-Initialization.md)
-3. 📚 [AIOStreams Setup](docs/guide/3-AIOStreams-Setup.md)
-4. 🔎 [AIOMetadata Setup](docs/guide/4-AIOMetadata-Setup.md)
-5. 🧹 [Cinebye Cleanup](docs/guide/5-Cinebye-Cleanup.md)
-6. 🤖 [Personalized Lists](docs/guide/6-Personalized-Lists.md)
-
-* 🛠️ [**Additional Stuff**](docs/guide/7-Additional-Stuff.md)
-
-* ❓ [**Configuration Q&A**](docs/guide/8-Configuration-QA.md)
-
-
-----------------------------------
+- [🔰 Beginner Concepts](docs/guide/0-Beginner-Concepts.md)
+- [📝 1. Accounts Preparation](docs/guide/1-Accounts-Preparation.md)
+- [⚙️ 2. Stremio Account Initialization](docs/guide/2-Stremio-Initialization.md)
+- [📚 3. AIOStreams [Find Streams]](docs/guide/3-AIOStreams-Setup.md)
+- [🔎 4. AIOMetadata [Metadata & Catalogs]](docs/guide/4-AIOMetadata-Setup.md)
+- [🧹 5. Cinebye [Clean-Up]](docs/guide/5-Cinebye-Cleanup.md)
+- [🤖 6. Personalized & Automated Lists](docs/guide/6-Personalized-Lists.md)
+- [🛠️ Additional Stuff](docs/guide/7-Additional-Stuff.md)
+- [❓ Configuration Q&A](docs/guide/8-Configuration-QA.md)
+- [🔔 Updates](docs/guide/Updates.md)
 
 ## 🙏 Thanks
 
@@ -52,6 +44,6 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 **Since a few of you have asked about tipping me for helping**: I prepared the guide because I did it so so many times and I realized there are a lot of people that are not doing it just because they need to learn a lot of things in order to get a good working setup. I'm really happy that my guide has been so useful, I really wasn't expecting it to gain so much traction. So I created [**this**](https://ko-fi.com/luckynumb3rs) link where you can tip if you feel like doing so, but I'm very happy you can enjoy Stremio either way!
 
-I hope you like my configuration, but of course you can modify it any way you want. I had to set it up for a few friends lately, so I got my process streamlined now and I though I would share it to maybe help anyone struggling with the many options for configuring the best stream platform in the world: **STREMIO**.
+I hope you like my configuration, but of course you can modify it any way you want. I had to set it up for a few friends lately, so I got my process streamlined now and I thought I would share it to maybe help anyone struggling with the many options for configuring the best stream platform in the world: **STREMIO**.
 
 **A special thanks** to the Stremio developers, and all the add-on developers that allow us to enjoy these, it's amazing how this solution exists among all the fragmentation among subscription services which has become very annoying even if you have all the money in the world.

@@ -1,5 +1,11 @@
+---
+layout: guide
+title: "📚 3. AIOStreams [Find Streams]"
+---
+
 # 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
-----------------------------------
+
+AIOStreams is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
 Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
@@ -42,7 +48,7 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
    * *If you want to have a language other than English to show first on the results list, go to* ***Filters*** *tab, then* ***Language***, *and add your language to the* ***Preferred Languages*** *list, and put it first in the* ***Preference Order*** *list (shown in the picture with German language as an example). You can also add the language in the ***Required Languages*** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.*
 
-![Prefered Language](../images/3.8.4.png)
+![Preferred Language](../images/3.8.4.png)
 
    * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the* ***Sorting*** *tab, select* ***Cached*** *on the* ***Sort Order Type*** *dropdown menu, and on the* ***Order*** *section, move* ***Language*** *to the top or wherever you want to have it. Do this also for the* ***Uncached*** *sort order type.*
 
@@ -70,7 +76,3 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 ![Disable Matching](../images/3.11.2.png)
 
-
-----------------------------------
-
-[← Previous [⚙️ Stremio Account Initialization]](2-Stremio-Initialization.md)  |  [[🔎 AIOMetadata Setup] Next →](4-AIOMetadata-Setup.md)

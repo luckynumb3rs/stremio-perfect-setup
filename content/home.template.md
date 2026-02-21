@@ -1,11 +1,6 @@
----
-layout: default
-title: Home
----
-
 # 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE (v1.1)
 
-![Homescreen (left) & Stream source selection (right)](images/home.jpg)
+![Homescreen (left) & Stream source selection (right)]({{IMAGE_PATH}}/home.jpg)
 
 After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 
@@ -14,9 +9,9 @@ After a few iterations trying out what works and what doesn't for me, and testin
 **If this guide helps you, please upvote the [Reddit post](https://www.reddit.com/r/StremioAddons/comments/1qvn9rk/my_stremio_perfect_setup_for_me_at_least_sharing/) so it remains relevant for others to find it and also benefit from it. 😊**
 
 >**NOTES**:
->* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**🔰 Beginner Concepts**](guide/0-Beginner-Concepts.md).*
->* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](guide/Updates.md).*
->* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](guide/8-Configuration-QA.md). If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
+>* ***If you are a total beginner and are curious to understand the concepts around Stremio** and how it works, go to [**🔰 Beginner Concepts**]({{GUIDE_PATH}}/0-Beginner-Concepts.md).*
+>* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**]({{GUIDE_PATH}}/Updates.md).*
+>* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**]({{GUIDE_PATH}}/8-Configuration-QA.md). If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
 
@@ -32,20 +27,11 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 
 ## 📖 Chapters
 
-- [🔰 Beginner Concepts](guide/0-Beginner-Concepts.md)
-- [📝 1. Accounts Preparation](guide/1-Accounts-Preparation.md)
-- [⚙️ 2. Stremio Account Initialization](guide/2-Stremio-Initialization.md)
-- [📚 3. AIOStreams [Find Streams]](guide/3-AIOStreams-Setup.md)
-- [🔎 4. AIOMetadata [Metadata & Catalogs]](guide/4-AIOMetadata-Setup.md)
-- [🧹 5. Cinebye [Clean-Up]](guide/5-Cinebye-Cleanup.md)
-- [🤖 6. Personalized & Automated Lists](guide/6-Personalized-Lists.md)
-- [🛠️ Additional Stuff](guide/7-Additional-Stuff.md)
-- [❓ Configuration Q&A](guide/8-Configuration-QA.md)
-- [🔔 Updates](guide/Updates.md)
+{{CHAPTERS_LIST}}
 
 ## 🙏 Thanks
 
-[![Ko-Fi Tipping](images/kofi.png)](https://ko-fi.com/luckynumb3rs)
+[![Ko-Fi Tipping]({{IMAGE_PATH}}/kofi.png)](https://ko-fi.com/luckynumb3rs)
 
 **Since a few of you have asked about tipping me for helping**: I prepared the guide because I did it so so many times and I realized there are a lot of people that are not doing it just because they need to learn a lot of things in order to get a good working setup. I'm really happy that my guide has been so useful, I really wasn't expecting it to gain so much traction. So I created [**this**](https://ko-fi.com/luckynumb3rs) link where you can tip if you feel like doing so, but I'm very happy you can enjoy Stremio either way!
 

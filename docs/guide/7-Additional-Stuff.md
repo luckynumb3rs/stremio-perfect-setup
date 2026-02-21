@@ -1,16 +1,11 @@
+---
+layout: guide
+title: "🛠️ Additional Stuff"
+---
+
 # 🛠️ Additional Stuff
-----------------------------------
 
-Most of the tips to address some issues are already included in-between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations:
-
-## Quick Navigation
-
-- [Smart Stream Selection & Sorting](#smart-stream-selection--sorting)
-- [Alternative Color Stream Information](#alternative-color-stream-information)
-- [Understanding Stream Information View](#understanding-stream-information-view)
-- [Enriching Your Catalogs (Trakt Alternatives)](#enriching-your-catalogs-trakt-alternatives)
-
-----------------------------------
+Most of the tips to address some issues are already included between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations:
 
 ## Smart Stream Selection & Sorting
 
@@ -38,7 +33,6 @@ The **AIOStreams** template you used from this guide includes multiple optimizat
 
 * **However**, if you want to change the **Sorting** order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
-----------------------------------
 
 ## Alternative Color Stream Information
 
@@ -53,7 +47,6 @@ If you want a more colorful version of the stream information view than the one 
 {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
 ```
 
-----------------------------------
 
 ## Understanding Stream Information View
 
@@ -93,7 +86,6 @@ The formatting templates are designed to let you evaluate a stream easily before
 👉 **Quick Tip:**
 Prioritize streams that are **⚡ cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality.
 
-----------------------------------
 
 ## Enriching Your Catalogs (Trakt Alternatives)
 
@@ -127,6 +119,4 @@ This is totally optional, but if you're looking for Trakt alternatives, or simpl
 
 ![Simkl](../images/7.2.png)
 
-----------------------------------
 
-[[❓ Configuration Q&A] Other →](8-Configuration-QA.md)

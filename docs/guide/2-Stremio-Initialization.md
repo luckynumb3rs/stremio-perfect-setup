@@ -1,5 +1,9 @@
+---
+layout: guide
+title: "⚙️ 2. Stremio Account Initialization"
+---
+
 # ⚙️ 2. Stremio Account Initialization
-----------------------------------
 
 Second, let's prepare the Stremio account properly:
 
@@ -20,6 +24,4 @@ Second, let's prepare the Stremio account properly:
 
 ![Remove Addons](../images/2.3.png)
 
-----------------------------------
 
-[← Previous [📝 Accounts Preparation]](1-Accounts-Preparation.md)  |  [[📚 AIOStreams Setup] Next →](3-AIOStreams-Setup.md)

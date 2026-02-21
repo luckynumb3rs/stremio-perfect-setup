@@ -1,41 +1,11 @@
+---
+layout: guide
+title: "❓ Configuration Q&A"
+---
+
 # ❓ Configuration Q&A
-----------------------------------
 
 I am including this section for anyone who has any additional questions or is encountering any common issues. Most of this is already in the guide, but a lot of you skip them :), so I have extracted them here for you to find answers quickly:
-
-## Quick Navigation
-
-- [Addons Not Installed](#i-installed-or-removed-addons-but-nothing-changes-in-stremio-am-i-in-the-wrong-place)
-- [Reset Account Cleanly](#i-still-see-old-addons-and-clutter-how-do-i-reset-the-account-cleanly)
-- [No Addons Requested for Streams](#im-getting-an-error-no-addons-were-requested-for-streams-when-opening-content-on-stremio)
-- [P2P Streaming Without Debrid](#i-am-not-using-a-debrid-service-and-i-want-to-stream-via-p2p-torrents-directly-what-should-i-change-and-what-should-i-expect)
-- [Understanding Stream Icons](#i-dont-understand-what-the-icons-on-the-stream-information-view-mean-how-do-i-read-them)
-- [Colorful Stream Icons](#the-icons-of-the-stream-information-view-are-too-plain-i-would-like-more-colors-to-differentiate)
-- [Trakt Progress Syncing](#i-want-trakt-progress-syncing-but-i-do-not-want-extra-trakt-addons)
-- [Enabling Anime Sources](#i-want-anime-sources-but-i-am-not-seeing-them)
-- [Subtitle Languages](#i-want-subtitles-in-specific-languages)
-- [Stream Sorting](#i-dont-understand-how-the-streams-shown-to-me-are-being-sorted)
-- [Prioritizing Non-English Results](#i-need-non-english-results-to-appear-first-in-the-results-list)
-- [Language Before Quality](#i-want-my-language-to-be-prioritized-even-before-qualityresolution)
-- [Non-English Results Not Enough](#i-am-not-happy-with-non-english-matching-it-feels-like-good-results-are-being-filtered-out)
-- [Speeding Up Results](#results-are-coming-in-too-slowly-how-can-i-speed-it-up)
-- [Getting More Results](#i-feel-like-i-am-getting-too-few-good-results-what-should-i-change)
-- [Can't Save AIOStreams Without Debrid](#i-cannot-save-because-it-says-jackettioseadexanimetosho-requires-a-debrid-service)
-- [RPDB Key](#i-do-not-have-an-rpdb-subscription-what-key-should-i-use)
-- [Metadata Language](#titles-and-descriptions-in-stremio-are-in-english-can-i-change-the-metadata-language)
-- [Failed to Fetch Manifest](#i-cannot-save-the-aiostreams-configuration-and-see-failed-to-fetch-manifest)
-- [Failed to Fetch Catalogs](#some-catalogs-show-failed-to-fetch-or-appear-empty-in-stremio)
-- [Trakt Integration Issues](#i-cannot-complete-the-trakt-integration-step-on-aiometadata)
-- [AIOMetadata Catalogs Not Showing](#i-added-or-changed-aiometadata-catalogs-but-they-do-not-show-in-stremio)
-- [Max Descriptor Size Error](#i-get-an-error-installing-aiometadata-addonspushedtoapi-max-descriptor-size-reached)
-- [No Addons Requested For This Meta Error](#im-getting-an-error-no-addons-were-requested-for-this-meta-when-opening-content-on-stremio)
-- [Watchly Recommendations Order](#i-want-watchly-recommendations-to-show-near-the-top-of-stremio)
-- [More Trakt Lists](#i-want-more-ready-made-trakt-lists-inside-aiometadata)
-- [CouchMoney Lists Limit](#couchmoney-only-created-two-lists-for-me-is-that-normal)
-- [ForTheWeak Domain Migration](#i-used-the-old-fortheweak-forteweaknhyiradev-aiostreamsaiometadata-domains-what-do-i-need-to-do-after-the-domain-migration)
-- [Saving Changes](#i-forgot-where-to-save-changes-in-aiostreams-or-aiometadata-what-is-the-one-rule)
-
-----------------------------------
 
 ## **I installed or removed addons, but nothing changes in Stremio. Am I in the wrong place?**
 * Make sure you are signed into [**web.stremio.com**](https://web.stremio.com/) when installing or removing addons. Being logged into [**www.stremio.com**](https://www.stremio.com/) (account site) does not automatically log you into web.stremio.com.
@@ -93,7 +63,7 @@ I am including this section for anyone who has any additional questions or is en
 * Put it first in **Preference Order**.
 * You can also add the language in the **Required Languages** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.
 
-![Prefered Language](../images/3.8.4.png)
+![Preferred Language](../images/3.8.4.png)
 
 ## **I want my language to be prioritized even before Quality/Resolution.**
 * In **AIOStreams**: go to **Sorting**.
@@ -187,6 +157,4 @@ I am including this section for anyone who has any additional questions or is en
 * **AIOStreams:** ALWAYS save in **Save & Install → Save**.
 * **AIOMetadata:** ALWAYS save in **Configuration → Save Configuration**.
 
-----------------------------------
 
-[← Optional [🛠️ Additional Stuff]](7-Additional-Stuff.md)

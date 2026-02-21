@@ -1,158 +1,81 @@
 <!doctype html>
-<html lang="{{ site.lang | default: " en-US" }}">
-
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>{{ site.title }}</title>
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+  <link rel="icon" href="{{ '/assets/images/stremio-logo.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="shortcut icon" href="{{ '/assets/images/stremio-logo.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/images/stremio-logo.svg' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-  <style>
-    /* --- Surgical Overrides for Leap Day Theme --- */
-
-    html,
-    body {
-      margin: 0 !important;
-      padding: 0 !important;
-      background-color: #f4f1e1 !important;
-      /* Theme beige (for Stremio Green: #D6F576) */
-    }
-
-    /* 1. FLEXBOX CENTERING HAMMER */
-    .wrapper {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      /* Forces container to horizontal center */
-      width: 100% !important;
-      max-width: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      float: none !important;
-      background: transparent !important;
-    }
-
-    /* 2. Full-Width Title Banner */
-    header {
-      width: 100% !important;
-      background: #5d74af !important;
-      color: #fff !important;
-      margin: 0 !important;
-      padding: 50px 0 !important;
-      text-align: center;
-      box-sizing: border-box !important;
-      float: none !important;
-      position: static !important;
-    }
-
-    header h1,
-    header p {
-      max-width: 1400px;
-      margin: 0 auto !important;
-      /* Centers text inside blue banner */
-      padding: 0 20px;
-      margin-top: 0 !important;
-      color: #fff !important;
-    }
-
-    header h1 a {
-      color: #fff !important;
-      text-shadow: none !important;
-      text-decoration: none !important;
-    }
-
-    /* 3. Centered Content Container */
-    section.pw-layout {
-      width: 95% !important;
-      max-width: 1400px !important;
-      margin: 30px 0 !important;
-      /* Center handled by parent flexbox */
-      padding: 30px !important;
-      box-sizing: border-box !important;
-      background-color: white !important;
-      float: none !important;
-      clear: both;
-      display: block !important;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 4. DEEP INTERNAL RESET (The Symmetry Fix) */
-    section.pw-layout aside,
-    section.pw-layout main {
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      float: none !important;
-    }
-
-    /* --- Your Two-Column Flexbook Logic (Inside white box) --- */
-    .pw-layout-inner {
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      width: 100%;
-    }
-
-    .pw-sidebar {
-      flex: 0 0 320px;
-      max-width: 320px;
-    }
-
-    .pw-main {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    @media (max-width: 1200px) {
-      .pw-layout-inner {
-        flex-wrap: wrap;
-      }
-
-      .pw-sidebar {
-        display: none !important;
-        /* HIDE SIDEBAR BELOW 1200PX */
-      }
-
-      .pw-main {
-        flex: 1 0 100%;
-        max-width: 100%;
-      }
-    }
-  </style>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   {% include ga.html %}
 </head>
-
 <body>
-  <div class="wrapper">
-    <header>
-      <h1>
-        <a href="{{ '/' | relative_url }}">
-          {{ site.title }}
+  <header class="topbar">
+    <button class="icon-btn" id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+    <a class="topbar-brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/images/stremio-logo.svg' | relative_url }}" alt="Stremio logo" class="topbar-logo">
+      <span class="topbar-brand-text">
+        <span class="topbar-title">Stremio Perfect Setup</span>
+        <span class="topbar-subtitle">Full and Easy Total Beginner's Guide</span>
+      </span>
+    </a>
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">◐</button>
+  </header>
+
+  <button class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></button>
+
+  <aside class="sidebar" id="sidebar" aria-label="Guide navigation">
+    <div class="sidebar__inner">
+      <nav id="sidebar-nav"></nav>
+      <div class="sidebar-footer">
+        <a href="https://ko-fi.com/luckynumb3rs" target="_blank" rel="noopener noreferrer" aria-label="Support on Ko-fi">
+          <img src="{{ '/images/kofi.png' | relative_url }}" alt="Ko-fi tipping button">
         </a>
-      </h1>
-      <p>
-        {{ site.description }}
-      </p>
-    </header>
-
-    <section class="pw-layout">
-      <div class="pw-layout-inner">
-        <aside class="pw-sidebar">
-          {% include sidebar.html %}
-        </aside>
-
-        <main class="pw-main">
-          {{ content }}
-        </main>
       </div>
-    </section>
+    </div>
+  </aside>
 
-    <footer></footer>
+  <div class="layout">
+    <main class="content" id="main-content">
+      <article class="doc-card fade-in">
+        {{ content }}
+        <section class="quick-nav" id="quick-nav" hidden>
+          <details id="quick-nav-details">
+            <summary>Quick Navigation</summary>
+            <ul id="quick-nav-list"></ul>
+          </details>
+        </section>
+        <nav class="pager" id="pager" aria-label="Page navigation" hidden></nav>
+      </article>
+    </main>
   </div>
-</body>
 
+  <script>
+    window.HOME_URL = {{ '/' | relative_url | jsonify }};
+    window.DOCS_PAGES = [
+      {% assign all_pages = site.pages | sort: 'path' %}
+      {% assign first_guide = true %}
+      {% for p in all_pages %}
+      {% if p.path contains 'guide/' and p.path contains '.md' %}
+      {% unless first_guide %},{% endunless %}
+      {
+        "path": {{ p.path | jsonify }},
+        "url": {{ p.url | relative_url | jsonify }},
+        "title": {{ p.title | default: p.name | replace: '.md', '' | jsonify }}
+      }
+      {% assign first_guide = false %}
+      {% endif %}
+      {% endfor %}
+    ];
+    window.CURRENT_PATH = {{ page.path | jsonify }};
+  </script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
 </html>

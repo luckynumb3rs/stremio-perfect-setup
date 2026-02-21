@@ -1,6 +1,20 @@
 title: Stremio Perfect Setup
-description: Full & Easy Total Beginner's Guide
+description: Full and Easy Total Beginner's Guide
 google_analytics: G-PWNJZLBKC0
-remote_theme: pages-themes/leap-day@v0.2.0
-plugins:
-- jekyll-remote-theme
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: pretty
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: guide
+      type: pages
+    values:
+      layout: guide

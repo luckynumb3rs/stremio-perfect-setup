@@ -1,7 +1,13 @@
-# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
-----------------------------------
+---
+layout: guide
+title: "🔎 4. AIOMetadata [Metadata & Catalogs]"
+---
 
-Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
+# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
+
+AIOMetadata is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
+
+Select an **AIOMetadata** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [***🔰 Beginner Concepts***](0-Beginner-Concepts.md).*
@@ -50,10 +56,7 @@ Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/sta
 ![Install Addon](../images/4.7.png)
 
 * ***NOTE FOR LATER:***
-   * *Keep in mind that if you want to change catalogs after you have installed AIOMetadata on Stremio, you need to refresh the installation, otherwise the catalogs with not show. You do that with Cinebye below.*
+   * *Keep in mind that if you want to change catalogs after you have installed AIOMetadata on Stremio, you need to refresh the installation, otherwise the catalogs will not show. You do that with Cinebye below.*
 
 ![Refresh Addons](../images/5.6.png)
 
-----------------------------------
-
-[← Previous [📚 AIOStreams Setup]](3-AIOStreams-Setup.md)  |  [[🧹 Cinebye Cleanup] Next →](5-Cinebye-Cleanup.md)

@@ -1,5 +1,9 @@
+---
+layout: guide
+title: "🤖 6. Personalized & Automated Lists"
+---
+
 # 🤖 6. Personalized & Automated Lists
-----------------------------------
 
 At this point you are done, YAY!, so you can start enjoying it already OR you can do one more step if you want proper custom lists that are specifically made for you (like Netflix suggestions). There are two approaches for this:
 
@@ -39,6 +43,4 @@ So you can decide which you want to use (or both!) and here are the steps for ea
 
 And now you're really done! Check out the Q&A if you want to tweak it further.
 
-----------------------------------
 
-[← Previous [🧹 Cinebye Cleanup]](5-Cinebye-Cleanup.md)  |  [[🛠️ Additional Stuff] Optional →](7-Additional-Stuff.md)

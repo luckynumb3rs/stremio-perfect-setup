@@ -1,0 +1,19 @@
+name: Home Sync Check
+
+on:
+  pull_request:
+
+jobs:
+  verify-home-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync homepage files
+        run: bash scripts/sync-home.sh
+      - name: Verify no diff
+        run: |
+          if ! git diff --quiet -- README.md docs/index.md; then
+            echo "README.md and docs/index.md are out of sync. Run: bash scripts/sync-home.sh"
+            git --no-pager diff -- README.md docs/index.md
+            exit 1
+          fi

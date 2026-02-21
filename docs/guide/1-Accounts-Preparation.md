@@ -1,5 +1,9 @@
+---
+layout: guide
+title: "📝 1. Accounts Preparation"
+---
+
 # 📝 1. Accounts Preparation
-----------------------------------
 
 First, let's start by creating the accounts (those who already have them can skip these steps):
 
@@ -11,7 +15,7 @@ First, let's start by creating the accounts (those who already have them can ski
    * *For* ***TorBox***, *please make sure to use my referral code when ordering:* ***6e80077e-c232-4b71-8914-5b87202b9577*** *to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. You can enter it when choosing the Plan, scroll down to the bottom and there you'll see it.*
    * *To help you choose between Real-Debrid and TorBox:*
       * ***Real-Debrid*** *is one of the most widely used service, and has probably the largest cache (files already available on their servers and ready to watch) of shows and movies. However, they only allow one connection at a time, meaning that you can't watch on two or more devices simultaneously (you can log in to your Stremio account on as many devices you want, that's unrelated). So if you want to use it with friends or family or on multiple Stremio accounts to watch simultaneously, you can't: you'll get a warning and may risk getting banned if repeated.*
-      * ***TorBox*** *allows in it's most basic paid option up to 3 parallel connections, and has tiers with up to 10 parallel streams, which means that you can use the same API key for e.g. your entire family or friends, or multiple Stremio accounts. However, it may not have the large cache of readily available shows like Real-Debrid has, so it might happen that you cannot watch a show immediately because it needs to download it first (you see that in the source links marked with an hourglass icon. This may take time depending on the seeders available, but it's also usually fast). It usually has more than enough options cached for each show though, and you only need one :).*
+      * ***TorBox*** *allows in its most basic paid option up to 3 parallel connections, and has tiers with up to 10 parallel streams, which means that you can use the same API key for e.g. your entire family or friends, or multiple Stremio accounts. However, it may not have the large cache of readily available shows like Real-Debrid has, so it might happen that you cannot watch a show immediately because it needs to download it first (you see that in the source links marked with an hourglass icon. This may take time depending on the seeders available, but it's also usually fast). It usually has more than enough options cached for each show though, and you only need one :).*
       * *The choice is yours. TorBox would be very practical and cheaper for multiple screens or families, but Real-Debrid would MAYBE provide more immediately available options. I myself use both (you can enable both in AIOStreams, and considering the prices for both, it's still cheap): I use TorBox as my main, because my family can safely use it simultaneously, and I also keep a backup Real-Debrid, in case it may happen that Real-Debrid has a result that TorBox doesn't immediately have (always keeping in mind though that Real-Debrid only allows 1 connection, hence as a backup only).*
    * *ONLY AFTER you registered to one or both services from the links above, you can get the ***API key*** while logged in to your account directly on [***this***](https://real-debrid.com/apitoken) link for Real-Debrid or [***here***](https://torbox.app/settings?section=account) for TorBox.*
 
@@ -51,6 +55,4 @@ First, let's start by creating the accounts (those who already have them can ski
 
 ![Gemini API Key](../images/1.6.png)
 
-----------------------------------
 
-[← Previous [🔰 Beginner Concepts]](0-Beginner-Concepts.md)  |  [[⚙️ Stremio Account Initialization] Next →](2-Stremio-Initialization.md)

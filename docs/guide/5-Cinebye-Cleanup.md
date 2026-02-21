@@ -1,5 +1,11 @@
+---
+layout: guide
+title: "🧹 5. Cinebye [Clean-Up]"
+---
+
 # 🧹 5. Cinebye [Clean-Up]
-----------------------------------
+
+Cinebye is the addon order and patch management layer for Stremio. It lets you apply cleanup patches and control addon priority so AIOMetadata and AIOStreams are used in the right order.
 
 Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
@@ -33,6 +39,3 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
 ![Refresh Addons](../images/5.6.png)
 
-----------------------------------
-
-[← Previous [🔎 AIOMetadata Setup]](4-AIOMetadata-Setup.md)  |  [[🤖 Personalized Lists] Next →](6-Personalized-Lists.md)
