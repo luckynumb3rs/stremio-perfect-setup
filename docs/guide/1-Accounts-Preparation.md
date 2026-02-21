@@ -55,4 +55,10 @@ First, let's start by creating the accounts (those who already have them can ski
 
 ![Gemini API Key](../images/1.6.png)
 
+7. (**Optional**) Totally optional and not a must at all, but if Trakt feels limiting with its rate limits or you want more curated lists, check out these friendly alternatives that work great with AIOMetadata:
+   * **MDBList**: Perfect for discovering user-curated catalogs and tracking your watched content seamlessly.
+   * **Simkl**: A Trakt-like experience with check-ins and watch history, plus extra flexibility.
+   * You can use them alongside Trakt or as a replacement for a smoother, more personalized setup.
+   * Head to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#enriching-your-catalogs-trakt-alternatives) for easy setup steps.
+
 

@@ -253,16 +253,22 @@ If you followed this guide and are encountering issues or have configuration que
 
 # 🔔 Updates
 
-To do a regular update when a new version of the template for AIOStreams is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup, but here's a short summary again:
+To do a regular update when a new version of the template for **AIOStreams** is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup, but here's a short summary again:
 1. Sign in to your **AIOStreams** instance with your **UUID** and **Password**.
    * *Just to make sure in case you have an old template, go to **Filters** tab, then both in **Stream Expression** and **Regex** respectively, delete all entries configured there (with the red "trash can" button to the right).*
-2. Go to the **Save & Install** tab, click "**Import**", "**Import Template**", paste the link you copied and click on "**Go**".
+2. Go to the **Save & Install** tab, click "**Import**", "**Import Template**", paste the [**template link**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json) and click on "**Go**".
 3. Click "**Use this Template Now**".
 5. On the "**Select Services**" page that is shown, enable the Debrid services you are already using (or click "*Skip*" if you don't use any), and click "**Next**".
 6. On the "**Enter Credentials**" page, since you're loading the template over your existing configuration, all API keys needed should already be filled. Otherwise, enter any missing ones.
 7. Click on "**Load Template**" and the template is loaded.
-8. **IMPORTANT**: If you made any changes to the configuration after you loaded it initially, you may need to do them again (e.g. language changes such as subtitles and language preferences, any addon modifications, etc.).
+8. **IMPORTANT**: If you made any changes to the configuration after you loaded it when you did the setup for the first time, you may need to do them again (e.g. language changes such as subtitles and language preferences, any addon modifications, etc.).
 9. Click on "**Save**" on the "**Save & Install**". No need to install the addon on Stremio again.
+
+As for **AIOMetadata**, there's normally not as many changes as AIOStreams so you shouldn't need to perform any updates unless explicitly required, so here are the steps if needed:
+1. Sign in to your **AIOMetadata** instance with your **UUID** and **Password**.
+2. Go to the "**Configuration**" tab, click "**Import Configuration**", and load the downloaded [**configuration file**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json).
+3. **IMPORTANT**: If you made any changes to the configuration after you loaded it when you did the setup for the first time, you may need to do them again (e.g. enabled/disabled/added/removed catalogs, changed any anime settings, etc.).
+4. On the same "**Configration**" tab, click "**Save Configuration**".
 
 >**SPECIFIC UPDATES** 
 >1. Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. 
