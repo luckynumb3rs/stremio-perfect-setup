@@ -3,7 +3,7 @@ layout: guide
 title: "🔎 4. AIOMetadata [Metadata & Catalogs]"
 ---
 
-# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
+# 🔎 4. AIOMetadata [Metadata & Catalogs]
 
 AIOMetadata is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
 

@@ -92,7 +92,7 @@ Second, let's prepare the Stremio account properly:
 
 ---
 
-# 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
+# 📚 3. AIOStreams [Find Streams]
 
 Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 
@@ -133,7 +133,7 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 ---
 
-# 🔎 4. AIOMetadata [Explore, Browse, and Search Movies/Shows]
+# 🔎 4. AIOMetadata [Metadata & Catalogs]
 
 Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
 

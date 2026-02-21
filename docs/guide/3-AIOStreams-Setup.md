@@ -3,7 +3,7 @@ layout: guide
 title: "📚 3. AIOStreams [Find Streams]"
 ---
 
-# 📚 3. AIOStreams [Find Stream Sources for Movies/Shows]
+# 📚 3. AIOStreams [Find Streams]
 
 AIOStreams is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
