@@ -74,6 +74,11 @@ First, let's start by creating the accounts (those who already have them can ski
    3. An API key should normally get created automatically on the list, called "**Default Gemini API Key**".
    4. Click on the clickable link on the "**Key**" column, and copy the "**API Key**".
    * *If no key is created automatically, just create one by clicking "Create API Key" on the top right.*
+7. (**Optional**) Totally optional and not a must at all, but if Trakt feels limiting with its rate limits or you want more curated lists, check out these friendly alternatives that work great with AIOMetadata:
+   * **MDBList**: Perfect for discovering user-curated catalogs and tracking your watched content seamlessly.
+   * **Simkl**: A Trakt-like experience with check-ins and watch history, plus extra flexibility.
+   * You can use them alongside Trakt or as a replacement for a smoother, more personalized setup.
+   * Head to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/) on the extended guide for easy setup steps.
 
 ---
 
