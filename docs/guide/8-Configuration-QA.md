@@ -7,6 +7,7 @@ I am including this section for anyone who has any additional questions or is en
 
 - [Addons Not Installed](#i-installed-or-removed-addons-but-nothing-changes-in-stremio-am-i-in-the-wrong-place)
 - [Reset Account Cleanly](#i-still-see-old-addons-and-clutter-how-do-i-reset-the-account-cleanly)
+- [No Addons Requested for Streams](#im-getting-an-error-no-addons-were-requested-for-streams-when-opening-content-on-stremio)
 - [P2P Streaming Without Debrid](#i-am-not-using-a-debrid-service-and-i-want-to-stream-via-p2p-torrents-directly-what-should-i-change-and-what-should-i-expect)
 - [Understanding Stream Icons](#i-dont-understand-what-the-icons-on-the-stream-information-view-mean-how-do-i-read-them)
 - [Colorful Stream Icons](#the-icons-of-the-stream-information-view-are-too-plain-i-would-like-more-colors-to-differentiate)
@@ -27,7 +28,7 @@ I am including this section for anyone who has any additional questions or is en
 - [Trakt Integration Issues](#i-cannot-complete-the-trakt-integration-step-on-aiometadata)
 - [AIOMetadata Catalogs Not Showing](#i-added-or-changed-aiometadata-catalogs-but-they-do-not-show-in-stremio)
 - [Max Descriptor Size Error](#i-get-an-error-installing-aiometadata-addonspushedtoapi-max-descriptor-size-reached)
-- [No Addons Requested Error](#im-getting-an-error-no-addons-were-requested-for-this-meta-when-opening-content-on-stremio)
+- [No Addons Requested For This Meta Error](#im-getting-an-error-no-addons-were-requested-for-this-meta-when-opening-content-on-stremio)
 - [Watchly Recommendations Order](#i-want-watchly-recommendations-to-show-near-the-top-of-stremio)
 - [More Trakt Lists](#i-want-more-ready-made-trakt-lists-inside-aiometadata)
 - [CouchMoney Lists Limit](#couchmoney-only-created-two-lists-for-me-is-that-normal)
@@ -37,9 +38,14 @@ I am including this section for anyone who has any additional questions or is en
 ----------------------------------
 
 ## **I installed or removed addons, but nothing changes in Stremio. Am I in the wrong place?**
-* Make sure you are signed into [**Stremio Web**](https://web.stremio.com/) when installing or removing addons. Being logged into [**www.stremio.com**](https://www.stremio.com/) (account site) does not automatically log you into Stremio Web.
+* Make sure you are signed into [**web.stremio.com**](https://web.stremio.com/) when installing or removing addons. Being logged into [**www.stremio.com**](https://www.stremio.com/) (account site) does not automatically log you into web.stremio.com.
 
 ![Sign In](../images/2.1.png)
+
+## **I'm getting an error "No addons were requested for streams" when opening content on Stremio.**
+* This means **AIOStreams** is not installed or configured correctly.
+* Check if you installed it while logged in with your account on web.stremio.com. It should also be showing on Cinebye. Otherwise you installed it without being logged in so log in to web.stremio.com and install it again.
+* In **AIOStreams** go to **Addons** and check if there are any addons (Torrentio, StremThru, etc.), and they are enabled. If there's no addons, then you didn't load the template provided in the guide. Please follow the AIOStreams setup again.
 
 ## **I still see old addons and clutter. How do I "reset" the account cleanly?**
 * In [**Stremio Web**](https://web.stremio.com/): go to **Addons** and uninstall everything you can.
@@ -157,7 +163,7 @@ I am including this section for anyone who has any additional questions or is en
 * Disable some catalogs in AIOMetadata, **Save Configuration**, then try **Install** again.
 
 ## **I'm getting an error "No addons were requested for this meta!" when opening content on Stremio.**
-* This means AIOMetadata is not installed or configured correctly.
+* This means **AIOMetadata** is not installed or configured correctly.
 * Check if you installed it while logged in with your account on web.stremio.com. It should also be showing on Cinebye. Otherwise you installed it without being logged in so log in to web.stremio.com and install it again.
 * Make sure **Catalog Mode Only** in AIOMetadata **Configuration** tab is disabled.
 
