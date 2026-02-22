@@ -43,10 +43,10 @@ First, let's start by creating the accounts (those who already have them can ski
    * *This is optional, but HIGHLY recommended.*
    * *For those who don't know, this is the only thing you will be paying for (about 32€ for Real-Debrid or $33 for TorBox for 12 months). It's used as an intermediary to serve the files to you from their servers, instead of relying on torrent which may be slow and inefficient. This means faster loading, almost no buffering, and more high-quality stream options. I would definitely recommend getting this.*
    * *I use mainly* [***TorBox***](https://torbox.app/subscription?referral=6e80077e-c232-4b71-8914-5b87202b9577), as a backup I use [***Real-Debrid***](http://real-debrid.com/?id=8801126) *(these are referral links since we're at it :), two of the best platforms, with the best prices and very stable.*
-   * *For* ***TorBox***, *please make sure to use my referral code when ordering:* ***6e80077e-c232-4b71-8914-5b87202b9577*** *to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. You can enter it when choosing the Plan, scroll down to the bottom and there you'll see it.*
+   * *For **TorBox**, please make sure to use my referral code when ordering: **6e80077e-c232-4b71-8914-5b87202b9577** to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. You can enter it when choosing the Plan, scroll down to the bottom and there you'll see it.*
    * *To help you choose between Real-Debrid and TorBox:*
-      * ***Real-Debrid*** *is one of the most widely used service, and has probably the largest cache (files already available on their servers and ready to watch) of shows and movies. However, they only allow one connection at a time, meaning that you can't watch on two or more devices simultaneously (you can log in to your Stremio account on as many devices you want, that's unrelated). So if you want to use it with friends or family or on multiple Stremio accounts to watch simultaneously, you can't: you'll get a warning and may risk getting banned if repeated.*
-      * ***TorBox*** *allows in it's most basic paid option up to 3 parallel connections, and has tiers with up to 10 parallel streams, which means that you can use the same API key for e.g. your entire family or friends, or multiple Stremio accounts. However, it may not have the large cache of readily available shows like Real-Debrid has, so it might happen that you cannot watch a show immediately because it needs to download it first (you see that in the source links marked with an hourglass icon. This may take time depending on the seeders available, but it's also usually fast). It usually has more than enough options cached for each show though, and you only need one :).*
+      * ***Real-Debrid** is one of the most widely used service, and has probably the largest cache (files already available on their servers and ready to watch) of shows and movies. However, they only allow one connection at a time, meaning that you can't watch on two or more devices simultaneously (you can log in to your Stremio account on as many devices you want, that's unrelated). So if you want to use it with friends or family or on multiple Stremio accounts to watch simultaneously, you can't: you'll get a warning and may risk getting banned if repeated.*
+      * ***TorBox** allows in it's most basic paid option up to 3 parallel connections, and has tiers with up to 10 parallel streams, which means that you can use the same API key for e.g. your entire family or friends, or multiple Stremio accounts. However, it may not have the large cache of readily available shows like Real-Debrid has, so it might happen that you cannot watch a show immediately because it needs to download it first (you see that in the source links marked with an hourglass icon. This may take time depending on the seeders available, but it's also usually fast). It usually has more than enough options cached for each show though, and you only need one :).*
       * *The choice is yours. TorBox would be very practical and cheaper for multiple screens or families, but Real-Debrid would MAYBE provide more immediately available options. I myself use both (you can enable both in AIOStreams, and considering the prices for both, it's still cheap): I use TorBox as my main, because my family can safely use it simultaneously, and I also keep a backup Real-Debrid, in case it may happen that Real-Debrid has a result that TorBox doesn't immediately have (always keeping in mind though that Real-Debrid only allows 1 connection, hence as a backup only).*
    * *ONLY AFTER you registered to one or both services from the links above, you can get the **API key** while logged in to your account directly on [**this**](https://real-debrid.com/apitoken) link for Real-Debrid or [**here**](https://torbox.app/settings?section=account) for TorBox.*
 3. Create a free [**Trakt**](http://www.trakt.tv) account.
@@ -87,12 +87,12 @@ First, let's start by creating the accounts (those who already have them can ski
 Second, let's prepare the Stremio account properly:
 
 1. Open [**Stremio Web**](https://web.stremio.com) and **MAKE SURE** you're signed in with your account.
-   * **IMPORTANT**: *Do not confuse* [*www.stremio.com*](https://www.stremio.com)*, which is for account management, with* [*web.stremio.com*](https://web.stremio.com)*, which you* ***MUST*** *be signed in to for removing/installing the addons. Being signed in to* [*www.stremio.com*](https://www.stremio.com) *does not automatically sign you in to* [*web.stremio.com*](https://web.stremio.com)*, and your addons will not install on your account.*
-   * *Obviously you need a browser to configure everything on this guide, including using the* ***Web*** *version of Stremio to remove and install addons. Don't worry though, after you set everything up* ***ONCE***, *you can use your setup everywhere you use Stremio (Smart TV, Android, iOS, Windows, everywhere).*
+   * **IMPORTANT**: *Do not confuse* [*www.stremio.com*](https://www.stremio.com)*, which is for account management, with* [*web.stremio.com*](https://web.stremio.com)*, which you **MUST** be signed in to for removing/installing the addons. Being signed in to* [*www.stremio.com*](https://www.stremio.com) *does not automatically sign you in to* [*web.stremio.com*](https://web.stremio.com)*, and your addons will not install on your account.*
+   * *Obviously you need a browser to configure everything on this guide, including using the **Web** version of Stremio to remove and install addons. Don't worry though, after you set everything up **ONCE**, you can use your setup everywhere you use Stremio (Smart TV, Android, iOS, Windows, everywhere).*
 2. Go to "**Settings**" in [**Stremio Account**](https://www.stremio.com) and enable **Trakt Scrobbling** by connecting it to your Trakt account.
    * *This will allow Stremio to sync show progress and history with Trakt.*
 3. Go to "**Addons**" and uninstall all addons.
-   * *Also remove the* ***Trakt Integration*** *addon, it is separate from* ***Trakt Scrobbling*** *(which you need), and you don't need it because we will use something else for this.*
+   * *Also remove the **Trakt Integration** addon, it is separate from **Trakt Scrobbling** (which you need), and you don't need it because we will use something else for this.*
    * *Cinemeta and Local Files cannot be removed. Leave them, we will take care of this later.*
 
 ---
@@ -125,18 +125,18 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
    1. **Torrentio, StremThru, Comet, MediaFusion, Jackettio** are the scrapers finding the sources.
    2. **SeaDex and AnimeTosho** are for Anime and initially disabled. **If you want Anime results** you need to enable these.
    3. **SubHero** is for the subtitles, you can edit the languages and any other subtitle preferences here.
-   * *If you want to have a language other than English to show first on the results list, go to* ***Filters*** *tab, then* ***Language***, *and add your language to the* ***Preferred Languages*** *list, and put it first in the* ***Preference Order*** *list. You can also add the language in the **Required Languages** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.*
-   * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the* ***Sorting*** *tab, select* ***Cached*** *on the* ***Sort Order Type*** *dropdown menu, and on the* ***Order*** *section, move* ***Language*** *to the top or wherever you want to have it. Do this also for the* ***Uncached*** *sort order type.*
+   * *If you want to have a language other than English to show first on the results list, go to **Filters** tab, then **Language**, and add your language to the **Preferred Languages** list, and put it first in the **Preference Order** list. You can also add the language in the **Required Languages** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.*
+   * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the **Sorting** tab, select **Cached** on the **Sort Order Type** dropdown menu, and on the **Order** section, move **Language** to the top or wherever you want to have it. Do this also for the **Uncached** sort order type.*
 9. Go to the "**Save & Install**" tab, enter a password on the "**Create Configuration**" section, and click "**Create**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
-   * *Copy and store the* ***UUID*** *that is shown and the* ***Password*** *you set for later to access the configuration again. This is basically your AIOStreams account.*
+   * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOStreams account.*
    * *If you can't save the configuration with the error "Jackettio requires a debrid service", which happens in case you are not using any debrids, then just uninstall Jackettio from the "Installed Addons" tab.*
    * *If you can't save the configuration with errors like "Jackettio/SeaDex/AnimeTosho requires a debrid service...", which happens in case you are not using any debrids, then just disable Jackettio, SeaDex, and AnimeTosho from the "Installed Addons" tab. If you watch Anime, the other scrapers might still find results, but SeaDex and AnimeTosho increase the chances. You do need a debrid service to use them though.*
 10. Click "**Install**" and install the add-on on Stremio.
 
 * ***NOTE FOR LATER:***
-   * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to* ***Addons***, *scroll down to* ***Addon Fetching Strategy***. *and select* ***Dynamic***. *There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select* ***Default*** *instead.*
-   * *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to* ***Filters***, *then* ***Matching***, *and switch off the* ***Enable*** *toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
+   * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
+   * *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
 
 ---
 
@@ -168,7 +168,7 @@ Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/sta
 5. **Optional**: At this point AIOMetadata is ready, but you can keep configuring it however you like, but otherwise the configuration I provided is ready to be used. On the "**Catalogs**" tab you can add, remove, enable, disable catalogs depending on your preferences.
 6. Go to the "**Configuration**" tab again and click on "**Save Configuration**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
-   * *Copy and store the* ***UUID*** *that is shown and the* ***Password*** *you set for later to access the configuration again. This is basically your AIOMetadata account.*
+   * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOMetadata account.*
 7. Click "**Install**" and install the add-on on Stremio.
    * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
 
@@ -196,7 +196,8 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
    4. *Local Files*
 5. Scroll back up to "**3 - Sync Addons**" and click on "**Sync to Stremio**".
 
-* ***Note:*** *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then come back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***"Manage Addons"*** *section.*
+* ***NOTE FOR LATER:***
+   * *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then come back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
 ---
 
@@ -232,7 +233,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    7. Search for your Trakt username (which you can set/check in your Trakt account settings).
    8. The lists created by CouchMoney should show up here.
    9. Add them to your Catalog and order them as you wish.
-   * ***Note:*** *As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***"Manage Addons"*** *section.*
+   * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
 And now you're really done! Check out the Q&A further down if you want to tweak it further.
 

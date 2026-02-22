@@ -37,7 +37,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    7. Search for your Trakt username (which you can set/check in your Trakt account settings).
    8. The lists created by CouchMoney should show up here.
    9. Add them to your Catalog and order them as you wish.
-   * ***Note:*** *As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the* ***Refresh*** *icon to the right of AIOMetadata in the* ***Manage Addons*** *section.*
+   * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
 ![CouchMoney](../images/6.2.png)
 
