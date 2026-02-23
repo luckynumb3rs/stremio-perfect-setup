@@ -84,6 +84,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 * **[BEST]** → Highest-ranked Release
 * **[ALT BEST]** → Strong Alternative (if the best fails)
 
+**Additional**
 * 🛈 / ℹ️ **MESSAGE** → Additional Informational Messages
 
 👉 **Quick Tip:**
