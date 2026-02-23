@@ -1,4 +1,4 @@
-# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE (v1.1)
+# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE [v1.1]
 
 ![Homescreen (left) & Stream source selection (right)](docs/images/home.jpg)
 
@@ -25,6 +25,7 @@ In case you are wondering whether it's worth the effort, or you already have a T
 
 So, now that you know, it's up to you, but if you're up for it, let's do it:
 
+
 ## 📖 Chapters
 
 - [🔰 Beginner Concepts](docs/guide/0-Beginner-Concepts.md)
@@ -37,6 +38,7 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 - [🛠️ Additional Stuff](docs/guide/7-Additional-Stuff.md)
 - [❓ Configuration Q&A](docs/guide/8-Configuration-QA.md)
 - [🔔 Updates](docs/guide/Updates.md)
+
 
 ## 🙏 Thanks
 
