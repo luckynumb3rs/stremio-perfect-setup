@@ -1,4 +1,4 @@
-# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/) (v1.1)
+# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/) [v1.1]
 
 ![img](xd3jbgpapmig1 "Homescreen (left) & Stream source selection (right)")
 
