@@ -45,6 +45,7 @@ If you want a more colorful version of the stream information view than the one 
 {stream.size::>0::and::stream.seasonPack::istrue["📦  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
 {stream.proxied::istrue["🛠️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
 {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
+{stream.message::exists["ℹ️ {stream.message::smallcaps}"||""]}
 ```
 
 
@@ -62,7 +63,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 **Technical Details**
 * ▶︎ / 🎬 → Edition (Director’s Cut, Extended, IMAX…)
 * ▣ / 🎞️ → Video Encoding (x264, x265, HEVC…)
-* ✧ / 🎥 → Visual Features (HDR, Dolby Vision, 10-bit…)
+* ✦ / 🎥 → Visual Features (HDR, Dolby Vision, 10-bit…)
 * ♬ / 🎵 → Audio Format (DTS, Atmos, TrueHD…)
 * ☊ / 🎧 → Audio Channels (5.1, 7.1…)
 
@@ -80,8 +81,10 @@ The formatting templates are designed to let you evaluate a stream easily before
 
 **Anime Curated Releases** (if applicable)
 * » → SeaDex Indexed Release
-* **[BEST]** → Highest-ranked release
+* **[BEST]** → Highest-ranked Release
 * **[ALT BEST]** → Strong Alternative (if the best fails)
+
+* 🛈 / ℹ️ **MESSAGE** → Additional Informational Messages
 
 👉 **Quick Tip:**
 Prioritize streams that are **⚡ cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality.
