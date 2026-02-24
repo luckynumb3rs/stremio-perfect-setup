@@ -5,9 +5,9 @@ title: "📚 3. AIOStreams [Find Streams]"
 
 # 📚 3. AIOStreams [Find Streams]
 
-AIOStreams is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
+**AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
+Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](0-Beginner-Concepts.md).*

@@ -99,9 +99,9 @@ Second, let's prepare the Stremio account properly:
 
 # 📚 3. AIOStreams [Find Streams]
 
-AIOStreams is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
+**AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
+Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
@@ -142,9 +142,9 @@ Select an **AIOStreams** instance from [**this**](https://status.dinsden.top/sta
 
 # 🔎 4. AIOMetadata [Metadata & Catalogs]
 
-AIOMetadata is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
+**AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
 
-Select an **AIOMetdata** instance from [**this**](https://status.dinsden.top/status/stremio-addons) or [**this**](https://status.stremio-status.com/) link (they both show the same instances and their online status, it's just two different sources) and:
+Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
@@ -258,6 +258,12 @@ If you want to understand how the streams are sorted in the configuration donwlo
 # ❓ Configuration Q&A
 
 If you followed this guide and are encountering issues or have configuration questions, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
+
+---
+
+# 🎛️ AIOManager [Power Users]
+
+**AIOManager** is fully optional and intended for power users who want to push their setup further by creating redundant, resilient configurations. If you are looking to increase reliability, add fallback layers, or manage multiple Stremio accounts in a structured way, this chapter is for you. Go to [**🎛️ AIOManager [Power Users]**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/AIOManager-Setup) on the extended guide to learn more and how to set it up.
 
 ---
 

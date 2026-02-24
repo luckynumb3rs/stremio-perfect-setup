@@ -37,6 +37,7 @@ So, now that you know, it's up to you, but if you're up for it, let's do it:
 - [🤖 6. Personalized & Automated Lists](docs/guide/6-Personalized-Lists.md)
 - [🛠️ Additional Stuff](docs/guide/7-Additional-Stuff.md)
 - [❓ Configuration Q&A](docs/guide/8-Configuration-QA.md)
+- [🎛️ AIOManager [Power Users]](docs/guide/AIOManager-Setup.md)
 - [🔔 Updates](docs/guide/Updates.md)
 
 
