@@ -39,6 +39,7 @@ And now let's start by going to either [**this**](https://aiomanagerfortheweebs.
 ## Addon Management
 
 AIOManager has a lot of options to manage addons: install, configure, order, remove, copy, update, and more. I'm not going to describe everything here because it would be too much, but feel free to explore the options:
+* ***Note**: Everything you do on AIOManager is saved immediately & automatically, so you don't need to take any additional steps for saving.*
 * For each addon, you can press:
    * **Configure** to go to the addon's own configuration page.
    * **Customize** to set a different name for it, which is also how it will show on Stremio.
@@ -54,6 +55,8 @@ AIOManager has a lot of options to manage addons: install, configure, order, rem
 * While inside an account, if you click on "**Select**" and select one or more addons, you will also see options for them, including a **Save** option to save them to the library.
 * If you go back to the **Accounts** tab where you see your Stremio accounts, you can click "**Select**", select an account, and then click on "**Bulk Actions**".
    * Here you will see many options that you can do between accounts, including **Mirror from Account**, which can copy the entire account setup (addons and order) into another account.
+
+Here's a screenshot of how an account with installed addons looks like (*see Autopilot below for the double addons*):
 
 ![Addon Management](../images/9.2.png)
 
