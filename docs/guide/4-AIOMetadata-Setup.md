@@ -22,7 +22,7 @@ Select an **AIOMetadata** instance from [**this**](https://status.stremio-status
 ![Import Configuration](../images/4.2.png)
 
 3. Go to the "**Integrations**" tab, and enter the API keys for Gemini, TMDB, TheTVDB, RPDB.
-   * For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "*t0-free-rpdb*" directly.
+   * *For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "t0-free-rpdb" directly.*
 
 ![API Keys](../images/4.3.png)
 
@@ -52,6 +52,7 @@ Select an **AIOMetadata** instance from [**this**](https://status.stremio-status
    * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOMetadata account.*
 7. Click "**Install**" and install the add-on on Stremio.
    * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
+   * *If you didn't want to get an API key for Gemini, go to the **Search** tab and disable **AI-Powered Search** to be able to save.*
 
 ![Install Addon](../images/4.7.png)
 

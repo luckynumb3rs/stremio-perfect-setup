@@ -100,6 +100,9 @@ I am including this section for anyone who has any additional questions or is en
 ## **I do not have an RPDB subscription. What key should I use?**
 * Use the free RPDB key: `t0-free-rpdb` (works for both AIOStreams and AIOMetadata integrations as described in the guide).
 
+## **I don't want to get a Gemini key since it's optional, but AIOMetadata seems to require it.**
+* in **AIOMetadata** go to the **Search** tab and disable **AI-Powered Search**, then you will be able to save the configuration.
+
 ## **Titles and descriptions in Stremio are in English. Can I change the metadata language?**
 * In **AIOMetadata**: go to **General** and change **Display Language**.
 
