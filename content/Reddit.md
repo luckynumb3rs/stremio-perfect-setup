@@ -78,7 +78,7 @@ First, let's start by creating the accounts (those who already have them can ski
    * **MDBList**: Perfect for discovering user-curated catalogs and tracking your watched content seamlessly.
    * **Simkl**: A Trakt-like experience with check-ins and watch history, plus extra flexibility.
    * You can use them alongside Trakt or as a replacement for a smoother, more personalized setup.
-   * Head to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/) on the extended guide for easy setup steps.
+   * Head to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) on the extended guide for easy setup steps.
 
 ---
 
@@ -104,7 +104,7 @@ Second, let's prepare the Stremio account properly:
 Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
+   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
    * *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
    * *If you go with **Yeb's**, **DON'T** use the old [aiostreamsfortheweak.nhyira.dev](https://aiostreamsfortheweak.nhyira.dev/) link, but [aiostreams.fortheweak.cloud](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * ***DON'T** choose an instance that says **Nightly**, since they may not be stable.*
@@ -147,7 +147,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.*
+   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
    * *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
    * ***Yeb's** and **Kuu's** are not working with Trakt currently because Trakt has imposed strict rate limits lately, so **DON'T** use these instances for now.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to configure it again because it's not automatically transferred.*
@@ -161,7 +161,7 @@ Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.
    * ***NOTES***: 
       * *If you encounter any issues with Trakt integration on AIOMetadata, it's probably because Trakt is rate limiting the instance you're using, or the instance provider has disabled it (if it says "Instance owner has not yet set up the Trakt integration."). In that case, try to do the AIOMetadata setup with another instance.*
       * *Alternatively, you can leave Trakt integration disabled, and hide the Trakt catalogs on the list (marked with a red **Trakt** tag on the right) by clicking the green eye icon for each. I know it's not ideal since you created a Trakt account already, but there's nothing we can do about it. You can still add other catalogs from the other sources there.*
-      * *There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out in [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.*
+      * *There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out in [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) on the extended guide.*
    * *If you want some ready-to-use and well-maintained lists, while on the Trakt tab, search for the lists from user "snoak", and you will be able to import a lot of interesting lists. I have already included some of them in the catalog, but you can add more.*
    * **For Anime users**: *If you want to enable search for Anime, make sure to go to to the "Search" tab and enable both "Anime Search Engine" switches.*
    * **For other languages**: *If you want the metadata (descriptions, titles, etc.) to show in a different language than English, go to the "General" tab and change the "Display Language".*
@@ -236,7 +236,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    9. Add them to your Catalog and order them as you wish.
    * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
-And now you're really done! Check out the Q&A further down if you want to tweak it further.
+And now you're really done! Check out the [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) and [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff.md) if you want to tweak it further.
 
 ---
 

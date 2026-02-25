@@ -41,6 +41,6 @@ So you can decide which you want to use (or both!) and here are the steps for ea
 
 ![CouchMoney](../images/6.2.png)
 
-And now you're really done! Check out the Q&A if you want to tweak it further.
+And now you're really done! Check out the [**❓ Configuration Q&A**](8-Configuration-QA.md) and [**🛠️ Additional Stuff**](7-Additional-Stuff.md) if you want to tweak it further.
 
 

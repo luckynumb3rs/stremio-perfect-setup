@@ -37,10 +37,10 @@ I am including this section for anyone who has any additional questions or is en
 * The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
 
 ## **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
-* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) to read the descriptions for each icon.
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#understanding-stream-information-view) to read the descriptions for each icon.
 
 ## **The icons of the stream information view are too plain, I would like more colors to differentiate.**
-* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) on the extended guide to get an alternative colorful template you can use instead.
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#alternative-color-stream-information) on the extended guide to get an alternative colorful template you can use instead.
 
 ## **I want Trakt progress syncing, but I do not want extra Trakt addons.**
 * In [web.stremio.com](https://web.stremio.com/), sign in, and go to **Settings** and enable **Trakt Scrobbling** by connecting your Trakt account.
@@ -61,7 +61,7 @@ I am including this section for anyone who has any additional questions or is en
 * In **AIOStreams**: go to **Addons → Installed Addons**, edit **SubHero**, and set your subtitle language preferences there.
 
 ## **I don't understand how the streams shown to me are being sorted.**
-* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) to see the configured sort order.
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the configured sort order.
 
 ## **I need non-English results to appear first in the results list.**
 * In **AIOStreams**: go to **Filters → Language**.
@@ -95,7 +95,7 @@ I am including this section for anyone who has any additional questions or is en
 ## **I feel like I am getting too few good results. What should I change?**
 * If you set fetching to **Dynamic** (**AIOStreams → Addons → Addon Fetching Strategy**), try switching back to **Default**.
 * Make sure you enabled enough scrapers (Torrentio, StremThru, Comet, MediaFusion, Jackettio are mentioned in the guide as the core scrapers).
-* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
 
 ![Change Fetching](../images/3.11.1.png)
 
@@ -128,7 +128,7 @@ I am including this section for anyone who has any additional questions or is en
 * If it says "Instance owner has not yet set up the Trakt integration." when you click the Trakt button, then it means Trakt integration has been disabled by the instance provider. If you still need Trakt, you're going to need to do the AIOMetadata configuration with another instance.
 * If it's giving errors while integrating, you can try at a later point and hope it works, or do the AIOMetadata setup with another instance.
 * Alternatively, you can leave Trakt integration disabled, and hide the Trakt catalogs on the list (marked with a red **Trakt** tag on the right) by clicking the green eye icon for each. I know it's not ideal since you created a Trakt account already, but there's nothing we can do about it. You can still add other catalogs from the other sources there, but it's outside the scope of this guide.
-* There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out on [**🛠️ Additional Stuff**](7-Additional-Stuff.md).
+* There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out on [**🛠️ Additional Stuff**](7-Additional-Stuff.md#enriching-your-catalogs-trakt-alternatives).
 
 ![Trakt Disable](../images/4.4.1.png)
 
@@ -153,7 +153,7 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I want more ready-made catalogs inside AIOMetadata.**
 * In **AIOMetadata → Catalogs**, click the **Trakt** button and search for lists from user **snoak** to import more lists.
-* For even more curated catalogs, you can integrate **MDBList** and get lists from there. Check out how in [**🛠️ Additional Stuff**](7-Additional-Stuff.md).
+* For even more curated catalogs, you can integrate **MDBList** and get lists from there. Check out how in [**🛠️ Additional Stuff**](7-Additional-Stuff.md#enriching-your-catalogs-trakt-alternatives).
 
 ## **CouchMoney only created two lists for me. Is that normal?**
 * Yes, the guide notes Trakt free users are limited (CouchMoney will create two lists). If you want more extensive recommendations inside Stremio, use **Watchly**.

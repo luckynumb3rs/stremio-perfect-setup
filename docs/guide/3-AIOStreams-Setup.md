@@ -10,7 +10,7 @@ title: "📚 3. AIOStreams [Find Streams]"
 Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 * ***WARNING**:*
-   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](0-Beginner-Concepts.md).*
+   * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](0-Beginner-Concepts.md#what-does-an-addon-instance-mean).*
    * *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
    * *If you go with **Yeb's**, **DON'T** use the old [aiostreamsfortheweak.nhyira.dev](https://aiostreamsfortheweak.nhyira.dev/) link, but [aiostreams.fortheweak.cloud](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * ***DON'T** choose an instance that says **Nightly**, since they may not be stable.*
