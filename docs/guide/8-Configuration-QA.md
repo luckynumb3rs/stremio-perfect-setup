@@ -29,6 +29,12 @@ I am including this section for anyone who has any additional questions or is en
 * You can still get anime results via the other scrapers, but they will be more limited. **SeaDex** and **AnimeTosho** usually increase the chances of finding better anime sources.
 * When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.
 * When torrenting, prefer links with a higher peer count (shown next to the **P2P** label).
+* See also the next question below to enable HTTP streams in addition to torrenting.
+
+## **I can't pay for a debrid service, but I also can't use P2P torrenting because it seems to be very slow, or for other reasons.**
+* The only remaining option would be direct HTTP streams, which are free, no debrid, no torrent.
+* To be able to find HTTP streams in Stremio, you can go to the **Addons** tab in **AIOStreams** and enable the **Nuvio Streams** and **WebStreamr** addons. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select additional specialty language providers.
+* The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
 
 ## **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md) to read the descriptions for each icon.

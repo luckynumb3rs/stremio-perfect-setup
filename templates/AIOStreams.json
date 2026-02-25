@@ -191,6 +191,43 @@
         }
       },
       {
+        "enabled": false,
+        "instanceId": "563",
+        "options": {
+          "mediaTypes": [],
+          "name": "Nuvio Streams",
+          "providers": [],
+          "resources": [
+            "stream"
+          ],
+          "scraperApiKey": "",
+          "showBoxCookie": "",
+          "showBoxRegion": "USA7",
+          "timeout": 7000,
+          "url": ""
+        },
+        "type": "nuvio-streams"
+      },
+      {
+        "enabled": false,
+        "instanceId": "3d2",
+        "options": {
+          "includeExternalUrls": false,
+          "mediaTypes": [],
+          "name": "WebStreamr",
+          "providers": [
+            "multi",
+            "en"
+          ],
+          "resources": [
+            "stream"
+          ],
+          "showErrors": false,
+          "timeout": 7000
+        },
+        "type": "webstreamr"
+      },
+      {
         "type": "subhero",
         "instanceId": "42e",
         "enabled": true,
