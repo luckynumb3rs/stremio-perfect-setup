@@ -287,7 +287,7 @@ As for **AIOMetadata**, there's normally not as many changes as AIOStreams so yo
 1. Sign in to your **AIOMetadata** instance with your **UUID** and **Password**.
 2. Go to the "**Configuration**" tab, click "**Import Configuration**", and load the downloaded [**configuration file**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json).
 3. **IMPORTANT**: If you made any changes to the configuration after you loaded it when you did the setup for the first time, you may need to do them again (e.g. enabled/disabled/added/removed catalogs, changed any anime settings, etc.).
-4. On the same "**Configration**" tab, click "**Save Configuration**".
+4. On the same "**Configuration**" tab, click "**Save Configuration**".
 
 >**SPECIFIC UPDATES** 
 >1. Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. 
