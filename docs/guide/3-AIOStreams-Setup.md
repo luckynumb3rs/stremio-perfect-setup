@@ -40,9 +40,9 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 8. **Optional**: At this point AIOStreams is ready, but you can keep configuring it however you like. For example, if you want to further configure the scrapers or subtitle languages, you can go to the "**Installed Addons**" tab, where you will see:
    * *You can configure each of them with the Pencil button on the right if needed.*
-   1. **Torrentio, StremThru, Comet, MediaFusion, Jackettio** are the scrapers finding the sources.
-   2. **SeaDex and AnimeTosho** are for Anime and initially disabled. **If you want Anime results** you need to enable these.
-   3. **Nuvio Streams** and **WebStreamr** are HTTP scrapers that provide direct web streams, initially disabled. you can use these if you don't/can't use debrid and/or torrents. They may be more limited in quality and availability, but are a good alternative.
+   1. **SeaDex and AnimeTosho** are for Anime and initially disabled. **If you want Anime results** you need to enable these.
+   2. **Nuvio Streams** and **WebStreamr** are HTTP scrapers that provide direct web streams, initially disabled. You can use these if you don't/can't use debrid and/or torrents. They may be more limited in quality and availability, but are a good alternative.
+   3. **Torrentio, StremThru, Comet, MediaFusion, Jackettio** are the main scrapers finding the sources.
    4. **SubHero** is for the subtitles, you can edit the languages and any other subtitle preferences here.
    * ***SeaDex**, **AnimeTosho**, and **Jackettio** need a debrid service, so if not using one, you need to disable them.*
 

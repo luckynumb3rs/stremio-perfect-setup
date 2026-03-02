@@ -102,6 +102,73 @@
         }
       },
       {
+        "type": "animetosho",
+        "instanceId": "db4",
+        "enabled": false,
+        "options": {
+          "name": "AnimeTosho",
+          "timeout": 5000,
+          "mediaTypes": [
+            "anime"
+          ],
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "type": "nuvio-streams",
+        "instanceId": "807",
+        "enabled": false,
+        "options": {
+          "name": "Nuvio Streams",
+          "timeout": 7000,
+          "resources": [
+            "stream"
+          ],
+          "url": "",
+          "showBoxRegion": "USA7",
+          "providers": [],
+          "mediaTypes": []
+        }
+      },
+      {
+        "type": "webstreamr",
+        "instanceId": "572",
+        "enabled": false,
+        "options": {
+          "name": "WebStreamr",
+          "timeout": 7000,
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": [],
+          "providers": [
+            "multi",
+            "en",
+            "de",
+            "it",
+            "mx",
+            "hi",
+            "fr",
+            "es"
+          ],
+          "includeExternalUrls": false,
+          "showErrors": false
+        }
+      },
+      {
+        "type": "torbox",
+        "instanceId": "b62",
+        "enabled": false,
+        "options": {
+          "name": "TorBox",
+          "timeout": 5000,
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": []
+        }
+      },
+      {
         "type": "torrentio",
         "instanceId": "5bc",
         "enabled": true,
@@ -175,19 +242,6 @@
             "stream"
           ],
           "mediaTypes": []
-        }
-      },
-      {
-        "type": "animetosho",
-        "instanceId": "db4",
-        "enabled": false,
-        "options": {
-          "name": "AnimeTosho",
-          "timeout": 5000,
-          "mediaTypes": [
-            "anime"
-          ],
-          "useMultipleInstances": false
         }
       },
       {

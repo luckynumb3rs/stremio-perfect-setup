@@ -33,7 +33,7 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I can't pay for a debrid service, but I also can't use P2P torrenting because it seems to be very slow, or for other reasons.**
 * The only remaining option would be direct HTTP streams, which are free, no debrid, no torrent.
-* To be able to find HTTP streams in Stremio, you can go to the **Addons** tab in **AIOStreams** and enable the **Nuvio Streams** and **WebStreamr** addons. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select additional specialty language providers.
+* To be able to find HTTP streams in Stremio, you can go to the **Addons** tab in **AIOStreams** and enable the **Nuvio Streams** and **WebStreamr** addons. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select specialty language providers.
 * The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
 
 ## **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
