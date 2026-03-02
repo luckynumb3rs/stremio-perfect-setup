@@ -120,7 +120,7 @@
         "enabled": false,
         "options": {
           "name": "Nuvio Streams",
-          "timeout": 7000,
+          "timeout": 10000,
           "resources": [
             "stream"
           ],
@@ -136,7 +136,7 @@
         "enabled": false,
         "options": {
           "name": "WebStreamr",
-          "timeout": 7000,
+          "timeout": 10000,
           "resources": [
             "stream"
           ],
