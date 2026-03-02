@@ -7,6 +7,27 @@ title: "🛠️ Additional Stuff"
 
 Most of the tips to address some issues are already included between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations:
 
+
+## Stream Types Explained
+
+This section briefly explains the three different ways content can be streamed in this setup and which addons are relevant in each case. Depending on whether you use torrents directly, HTTP streams, or a debrid service, you can go to the **Addons** tab in **AIOStreams** to enable or disable specific scrapers to avoid unnecessary errors and keep your results clean:
+
+* **⚡ Debrid (Recommended)** works by letting a debrid service download torrents to its servers and streams them to you as fast direct links. It's not normally free, but it provides the best balance of speed, stability, and quality.
+   * Enable: TorBox (only if you use *TorBox* as a debrid service), Torrentio, StremThru, Comet, MediaFusion, Jackettio
+   * Optional (for Anime): SeaDex, AnimeTosho 
+   * Disable: Nuvio Streams, WebStreamr (not needed when using Debrid)
+
+* **🧲 Torrent (P2P)** works by streaming directly from other users (seeders) via BitTorrent. It’s free and widely available, but can buffer if seeders are low and may require a VPN depending on your country.
+   * Enable: Torrentio, StremThru, Comet, MediaFusion
+   * Disable: SeaDex, AnimeTosho, Nuvio Streams, WebStreamr, TorBox, Jackettio
+
+* **🌐 HTTP (Direct Web Streams)** works by streaming directly from web hosts, without torrents or Debrid. It doesn’t rely on seeders, but quality and availability are usually more limited because they are publicly available links.
+   * Enable: Nuvio Streams, WebStreamr
+   * Disable: Jackettio, SeaDex, AnimeTosho
+   * Optional: You may keep torrent scrapers (Torrentio, StremThru, Comet, MediaFusion) enabled if you want mixed results.
+
+
+
 ## Smart Stream Selection & Sorting
 
 The **AIOStreams** template you used from this guide includes multiple optimizations highly recommended by the Stremio community to intelligently filter, score, and prioritize streams for a cleaner, easier, and more reliable viewing experience.
