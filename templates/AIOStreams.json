@@ -905,6 +905,9 @@
         "usenet"
       ]
     },
+    "nzbFailover": {
+      "enabled": true
+    },
     "statistics": {
       "statsToShow": [
         "addon",
