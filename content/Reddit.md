@@ -105,7 +105,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
-   * *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
    * *If you go with **Yeb's**, **DON'T** use the old [aiostreamsfortheweak.nhyira.dev](https://aiostreamsfortheweak.nhyira.dev/) link, but [aiostreams.fortheweak.cloud](https://aiostreams.fortheweak.cloud/), as linked right above.*
    * ***DON'T** choose an instance that says **Nightly**, since they may not be stable.*
    * ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
@@ -121,9 +121,9 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
    * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **Formatter Style**: Here you can choose the formatting of the stream information view.
-      ***Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
-      ***Colorful Icons*** contains a colored version with more graphical icons.
-      ***None*** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).
+      * ***Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
+      * ***Colorful Icons*** contains a colored version with more graphical icons.
+      * ***None*** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).
    * **Anime Addons** (not available in P2P): If enabled, anime-specific addons (SeaDex, AnimeTosho) will be added to the addon list.
    * **Debridio** (not available in P2P): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings.
    * **HTTP Addons**: If enabled, addons for HTTP streams will included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents. HTTP Addons are auto-included in the P2P setup (if you didn't enable a debrid service).
@@ -162,7 +162,7 @@ Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
-   * *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
    * ***Yeb's** and **Kuu's** are not working with Trakt currently because Trakt has imposed strict rate limits lately, so **DON'T** use these instances for now.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to configure it again because it's not automatically transferred.*
    * *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*

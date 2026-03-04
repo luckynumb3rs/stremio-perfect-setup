@@ -11,7 +11,7 @@ Select an **AIOMetadata** instance from [**this**](https://status.stremio-status
 
 * ***WARNING**:*
    * *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](0-Beginner-Concepts.md#what-does-an-addon-instance-mean).*
-   * *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can use these links directly, but almost all are viable options.*
+   * *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
    * ***Yeb's** and **Kuu's** are not working with Trakt currently because Trakt has imposed strict rate limits lately, so **DON'T** use these instances for now.*
    * *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to configure it again because it's not automatically transferred.*
    * *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
