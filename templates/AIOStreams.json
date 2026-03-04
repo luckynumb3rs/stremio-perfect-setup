@@ -232,16 +232,14 @@
         }
       },
       {
-        "type": "jackettio",
-        "instanceId": "471",
+        "type": "knaben",
+        "instanceId": "eff",
         "enabled": true,
         "options": {
-          "name": "Jackettio",
+          "name": "Knaben",
           "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "mediaTypes": []
+          "mediaTypes": [],
+          "useMultipleInstances": false
         }
       },
       {
