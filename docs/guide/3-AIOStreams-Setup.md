@@ -43,7 +43,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    * *Depending on whether you use a debrid service, P2P (torrents) directly, or can't use either, go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#stream-types-explained) to learn which of the addons are relevant for you. Here's a summary anyway:*
       1. **SeaDex and AnimeTosho** are for Anime and initially disabled. ***If you want Anime results*** you need to enable these.
       2. **Nuvio Streams** and **WebStreamr** are HTTP scrapers that provide direct web streams, initially disabled. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. Leave them disabled if you use a debrid, you don't need them.
-      3. **Torrentio, StremThru, Comet, MediaFusion, Knaben** are the ***main scrapers*** finding the sources.
+      3. **Torrentio, StremThru, Comet, MediaFusion, Knaben, Meteor** are the ***main scrapers*** finding the sources.
       4. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
       * ***SeaDex**, **AnimeTosho**, and **Knaben** need a debrid service, so if not using one, you need to disable them.*
 

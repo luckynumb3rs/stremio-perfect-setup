@@ -243,6 +243,22 @@
         }
       },
       {
+        "type": "meteor",
+        "instanceId": "fb6",
+        "enabled": true,
+        "options": {
+          "name": "Meteor",
+          "timeout": 5000,
+          "resources": [
+            "stream"
+          ],
+          "includeP2P": false,
+          "removeTrash": false,
+          "useMultipleInstances": false,
+          "mediaTypes": []
+        }
+      },
+      {
         "type": "subhero",
         "instanceId": "42e",
         "enabled": true,
