@@ -43,9 +43,9 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    * *Depending on whether you use a debrid service, P2P (torrents) directly, or can't use either, go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#stream-types-explained) to learn which of the addons are relevant for you. Here's a summary anyway:*
       1. **SeaDex and AnimeTosho** are for Anime and initially disabled. ***If you want Anime results*** you need to enable these.
       2. **Nuvio Streams** and **WebStreamr** are HTTP scrapers that provide direct web streams, initially disabled. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. Leave them disabled if you use a debrid, you don't need them.
-      3. **Torrentio, StremThru, Comet, MediaFusion, Jackettio** are the ***main scrapers*** finding the sources.
+      3. **Torrentio, StremThru, Comet, MediaFusion, Knaben** are the ***main scrapers*** finding the sources.
       4. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
-      * ***SeaDex**, **AnimeTosho**, and **Jackettio** need a debrid service, so if not using one, you need to disable them.*
+      * ***SeaDex**, **AnimeTosho**, and **Knaben** need a debrid service, so if not using one, you need to disable them.*
 
 ![Addon Configuration](../images/3.8.3.png)
 
@@ -60,8 +60,8 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 9. Go to the "**Save & Install**" tab, enter a password on the "**Create Configuration**" section, and click "**Create**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
    * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOStreams account.*
-   * *If you can't save the configuration with the error "Jackettio requires a debrid service", which happens in case you are not using any debrids, then just uninstall Jackettio from the "Installed Addons" tab.*
-   * *If you can't save the configuration with errors like "Jackettio/SeaDex/AnimeTosho requires a debrid service...", which happens in case you are not using any debrids, then just disable Jackettio, SeaDex, and AnimeTosho from the "Installed Addons" tab. If you watch Anime, the other scrapers might still find results, but SeaDex and AnimeTosho increase the chances. You do need a debrid service to use them though.*
+   * *If you can't save the configuration with the error "Knaben requires a debrid service", which happens in case you are not using any debrids, then just uninstall Knaben from the "Installed Addons" tab.*
+   * *If you can't save the configuration with errors like "Knaben/SeaDex/AnimeTosho requires a debrid service...", which happens in case you are not using any debrids, then just disable Knaben, SeaDex, and AnimeTosho from the "Installed Addons" tab. If you watch Anime, the other scrapers might still find results, but SeaDex and AnimeTosho increase the chances. You do need a debrid service to use them though.*
 
 ![Save Configuration](../images/3.9.png)
 

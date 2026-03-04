@@ -25,7 +25,7 @@ I am including this section for anyone who has any additional questions or is en
 ![Remove Addons](../images/2.3.png)
 
 ## **I am not using a debrid service and I want to stream via P2P torrents directly. What should I change, and what should I expect?**
-* In **AIOStreams → Addons → Installed Addons**, disable **AnimeTosho**, **SeaDex**, and **Jackettio** because they do not work without a debrid service.
+* In **AIOStreams → Addons → Installed Addons**, disable **AnimeTosho**, **SeaDex**, and **Knaben** because they do not work without a debrid service.
 * You can still get anime results via the other scrapers, but they will be more limited. **SeaDex** and **AnimeTosho** usually increase the chances of finding better anime sources.
 * When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.
 * When torrenting, prefer links with a higher peer count (shown next to the **P2P** label).
@@ -94,13 +94,13 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I feel like I am getting too few good results. What should I change?**
 * If you set fetching to **Dynamic** (**AIOStreams → Addons → Addon Fetching Strategy**), try switching back to **Default**.
-* Make sure you enabled enough scrapers (Torrentio, StremThru, Comet, MediaFusion, Jackettio are mentioned in the guide as the core scrapers).
+* Make sure you enabled enough scrapers (Torrentio, StremThru, Comet, MediaFusion, Knaben are mentioned in the guide as the core scrapers).
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
 
 ![Change Fetching](../images/3.11.1.png)
 
-## **I cannot save because it says "Jackettio/SeaDex/AnimeTosho requires a debrid service…".**
-* If you are not using debrid: disable **Jackettio**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
+## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a debrid service…".**
+* If you are not using debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
 * If you want SeaDex/AnimeTosho, you will need a debrid service.
 
 ## **I do not have an RPDB subscription. What key should I use?**
