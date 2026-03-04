@@ -1,284 +1,716 @@
 {
   "metadata": {
-    "id": "easy-full-setup-2026-02-09.23-21-59-en6kpsr",
+    "id": "stremio.perfect.setup",
     "name": "Stremio Perfect Setup",
-    "description": "This template is built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering.",
+    "description": "This template is best combined with [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. It includes options for **Debrid**, **P2P** (torrents), and **HTTP** alternatives, and it's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering. A lot of credit goes to **Tamtaro** for the template base, recommended filters, sort orders, and SELs as described on [this](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting) GitHub repo.",
     "source": "external",
     "author": "Lucky Numb3rs",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "category": "Full",
     "serviceRequired": false,
-    "setToSaveInstallMenu": true
+    "inputs": [
+      {
+        "__if": "!services",
+        "id": "header.p2p",
+        "name": "",
+        "description": "🧲 No services selected, proceeding with **P2P** setup.",
+        "type": "alert",
+        "intent": "warning"
+      },
+      {
+        "id": "languages",
+        "name": "🔊 Preferred Languages",
+        "description": "Select your preferred stream languages. These are placed first in the language ranking. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections. Fine-tune the full order in **Filters → Language** after import if you want. The included formatter will display only your preferred languages.",
+        "type": "multi-select",
+        "required": false,
+        "default": [
+          "English"
+        ],
+        "options": [
+          { "value": "Arabic", "label": "🇸🇦 Arabic" },
+          { "value": "Bengali", "label": "🇧🇩 Bengali" },
+          { "value": "Bulgarian", "label": "🇧🇬 Bulgarian" },
+          { "value": "Chinese", "label": "🇨🇳 Chinese" },
+          { "value": "Croatian", "label": "🇭🇷 Croatian" },
+          { "value": "Czech", "label": "🇨🇿 Czech" },
+          { "value": "Danish", "label": "🇩🇰 Danish" },
+          { "value": "Dutch", "label": "🇳🇱 Dutch" },
+          { "value": "English", "label": "🇬🇧 English" },
+          { "value": "Estonian", "label": "🇪🇪 Estonian" },
+          { "value": "Finnish", "label": "🇫🇮 Finnish" },
+          { "value": "French", "label": "🇫🇷 French" },
+          { "value": "German", "label": "🇩🇪 German" },
+          { "value": "Greek", "label": "🇬🇷 Greek" },
+          { "value": "Gujarati", "label": "🇮🇳 Gujarati" },
+          { "value": "Hebrew", "label": "🇮🇱 Hebrew" },
+          { "value": "Hindi", "label": "🇮🇳 Hindi" },
+          { "value": "Hungarian", "label": "🇭🇺 Hungarian" },
+          { "value": "Indonesian", "label": "🇮🇩 Indonesian" },
+          { "value": "Italian", "label": "🇮🇹 Italian" },
+          { "value": "Japanese", "label": "🇯🇵 Japanese" },
+          { "value": "Kannada", "label": "🇮🇳 Kannada" },
+          { "value": "Korean", "label": "🇰🇷 Korean" },
+          { "value": "Latino", "label": "🇲🇽 Latino" },
+          { "value": "Latvian", "label": "🇱🇻 Latvian" },
+          { "value": "Lithuanian", "label": "🇱🇹 Lithuanian" },
+          { "value": "Malayalam", "label": "🇮🇳 Malayalam" },
+          { "value": "Malay", "label": "🇲🇾 Malay" },
+          { "value": "Marathi", "label": "🇮🇳 Marathi" },
+          { "value": "Norwegian", "label": "🇳🇴 Norwegian" },
+          { "value": "Persian", "label": "🇮🇷 Persian" },
+          { "value": "Polish", "label": "🇵🇱 Polish" },
+          { "value": "Portuguese", "label": "🇵🇹 Portuguese" },
+          { "value": "Punjabi", "label": "🇮🇳 Punjabi" },
+          { "value": "Romanian", "label": "🇷🇴 Romanian" },
+          { "value": "Russian", "label": "🇷🇺 Russian" },
+          { "value": "Serbian", "label": "🇷🇸 Serbian" },
+          { "value": "Slovak", "label": "🇸🇰 Slovak" },
+          { "value": "Slovenian", "label": "🇸🇮 Slovenian" },
+          { "value": "Spanish", "label": "🇪🇸 Spanish" },
+          { "value": "Swedish", "label": "🇸🇪 Swedish" },
+          { "value": "Tamil", "label": "🇮🇳 Tamil" },
+          { "value": "Telugu", "label": "🇮🇳 Telugu" },
+          { "value": "Thai", "label": "🇹🇭 Thai" },
+          { "value": "Turkish", "label": "🇹🇷 Turkish" },
+          { "value": "Ukrainian", "label": "🇺🇦 Ukrainian" },
+          { "value": "Vietnamese", "label": "🇻🇳 Vietnamese" }
+        ]
+      },
+      {
+        "id": "subtitles",
+        "name": "💬 Preferred Subtitles",
+        "description": "Select the subtitles to be loaded when opening a stream. Change them in **Addons → SubHero** after import if you want.",
+        "type": "multi-select",
+        "required": false,
+        "default": [
+          "en"
+        ],
+        "options": [
+          { "value": "sq", "label": "🇦🇱 Albanian" },
+          { "value": "ar", "label": "🇸🇦 Arabic" },
+          { "value": "hy", "label": "🇦🇲 Armenian" },
+          { "value": "af", "label": "🇿🇦 Afrikaans" },
+          { "value": "az", "label": "🇦🇿 Azerbaijani" },
+          { "value": "be", "label": "🇧🇾 Belarusian" },
+          { "value": "bn", "label": "🇧🇩 Bengali" },
+          { "value": "bs", "label": "🇧🇦 Bosnian" },
+          { "value": "bg", "label": "🇧🇬 Bulgarian" },
+          { "value": "ca", "label": "🇪🇸 Catalan" },
+          { "value": "zh", "label": "🇨🇳 Chinese" },
+          { "value": "ze", "label": "🇨🇳 Chinese (Bilingual)" },
+          { "value": "zt", "label": "🇹🇼 Chinese (Traditional)" },
+          { "value": "hr", "label": "🇭🇷 Croatian" },
+          { "value": "cs", "label": "🇨🇿 Czech" },
+          { "value": "da", "label": "🇩🇰 Danish" },
+          { "value": "nl", "label": "🇳🇱 Dutch" },
+          { "value": "en", "label": "🇬🇧 English" },
+          { "value": "et", "label": "🇪🇪 Estonian" },
+          { "value": "fi", "label": "🇫🇮 Finnish" },
+          { "value": "fr", "label": "🇫🇷 French" },
+          { "value": "ka", "label": "🇬🇪 Georgian" },
+          { "value": "de", "label": "🇩🇪 German" },
+          { "value": "el", "label": "🇬🇷 Greek" },
+          { "value": "he", "label": "🇮🇱 Hebrew" },
+          { "value": "hi", "label": "🇮🇳 Hindi" },
+          { "value": "hu", "label": "🇭🇺 Hungarian" },
+          { "value": "is", "label": "🇮🇸 Icelandic" },
+          { "value": "id", "label": "🇮🇩 Indonesian" },
+          { "value": "it", "label": "🇮🇹 Italian" },
+          { "value": "ja", "label": "🇯🇵 Japanese" },
+          { "value": "kk", "label": "🇰🇿 Kazakh" },
+          { "value": "ko", "label": "🇰🇷 Korean" },
+          { "value": "lv", "label": "🇱🇻 Latvian" },
+          { "value": "lt", "label": "🇱🇹 Lithuanian" },
+          { "value": "mk", "label": "🇲🇰 Macedonian" },
+          { "value": "ms", "label": "🇲🇾 Malay" },
+          { "value": "mn", "label": "🇲🇳 Mongolian" },
+          { "value": "nb", "label": "🇳🇴 Norwegian (Bokmål)" },
+          { "value": "nn", "label": "🇳🇴 Norwegian (Nynorsk)" },
+          { "value": "no", "label": "🇳🇴 Norwegian" },
+          { "value": "fa", "label": "🇮🇷 Persian" },
+          { "value": "pl", "label": "🇵🇱 Polish" },
+          { "value": "pt", "label": "🇵🇹 Portuguese" },
+          { "value": "pb", "label": "🇧🇷 Portuguese (Brazil)" },
+          { "value": "ro", "label": "🇷🇴 Romanian" },
+          { "value": "ru", "label": "🇷🇺 Russian" },
+          { "value": "sr", "label": "🇷🇸 Serbian" },
+          { "value": "sk", "label": "🇸🇰 Slovak" },
+          { "value": "sl", "label": "🇸🇮 Slovenian" },
+          { "value": "es", "label": "🇪🇸 Spanish" },
+          { "value": "sv", "label": "🇸🇪 Swedish" },
+          { "value": "th", "label": "🇹🇭 Thai" },
+          { "value": "tr", "label": "🇹🇷 Turkish" },
+          { "value": "uk", "label": "🇺🇦 Ukrainian" },
+          { "value": "vi", "label": "🇻🇳 Vietnamese" }
+        ]
+      },
+      {
+        "id": "formatterChoice",
+        "name": "🖋️ Formatter Style",
+        "description": "Choose the formatter. **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. **Colorful Icons** contains a colored version with more graphical icons. **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
+        "type": "select",
+        "required": false,
+        "default": "flat",
+        "options": [
+          {
+            "value": "flat",
+            "label": "▶︎ Flat Monochrome Icons (Default)"
+          },
+          {
+            "value": "color",
+            "label": "🎬 Colorful Icons"
+          },
+          {
+            "value": "retain",
+            "label": "None (Use Your Current)"
+          }
+        ]
+      },
+      {
+        "__if": "services",
+        "id": "anime",
+        "name": "🗡️ Anime Addons",
+        "description": "If selected, anime-specific addons (SeaDex, AnimeTosho) will be added to the addon list.",
+        "type": "boolean",
+        "required": false,
+        "default": false
+      },
+      {
+        "__if": "services",
+        "id": "debridio",
+        "name": "🧊 Debridio",
+        "description": "If selected, [Debridio Scraper](https://debridio.com) will be added. You will need your Debridio API key from your account settings.",
+        "type": "boolean",
+        "required": false,
+        "default": false
+      },
+      {
+        "id": "httpAddons",
+        "name": "🌐 HTTP Addons",
+        "description": "If selected, addons for HTTP streams will included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents. HTTP Addons are auto-included in the P2P setup (if you didn't enable a debrid service).",
+        "type": "boolean",
+        "required": false,
+        "default": false
+      },
+      {
+        "id": "timeout",
+        "name": "⏱️ Global Timeout",
+        "description": "Enter the time in ms you're willing to wait for results before your add-ons timeout. You can set it higher if you have issues getting enough results.",
+        "type": "number",
+        "required": false,
+        "default": 5000
+      },
+      {
+        "id": "credits",
+        "name": "Credits",
+        "description": "",
+        "type": "socials",
+        "socials": [
+          {
+            "id": "github",
+            "url": "https://github.com/luckynumb3rs/stremio-perfect-setup"
+          },
+          {
+            "id": "ko-fi",
+            "url": "https://ko-fi.com/luckynumb3rs"
+          }
+        ]
+      }
+	  ]
   },
   "config": {
-    "services": [
-      {
-        "id": "realdebrid",
-        "enabled": false,
-        "credentials": {}
+    "addonName": "AIOStreams",
+    "presets": {
+      "__switch": "services",
+      "cases": {
+        "": [
+          {
+            "type": "torrentio",
+            "instanceId": "4ef",
+            "enabled": true,
+            "options": {
+              "name": "Torrentio",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "providers": [],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "type": "meteor",
+            "instanceId": "064",
+            "enabled": true,
+            "options": {
+              "name": "Meteor",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": true,
+              "removeTrash": false,
+              "useMultipleInstances": false,
+              "mediaTypes": []
+            }
+          },
+          {
+            "type": "comet",
+            "instanceId": "b0f",
+            "enabled": true,
+            "options": {
+              "name": "Comet",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": true,
+              "removeTrash": false,
+              "mediaTypes": [],
+              "url": ""
+            }
+          },
+          {
+            "type": "stremthruTorz",
+            "instanceId": "1f9",
+            "enabled": true,
+            "options": {
+              "name": "StremThru Torz",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": true,
+              "useMultipleInstances": false,
+              "mediaTypes": []
+            }
+          },
+          {
+            "type": "mediafusion",
+            "instanceId": "276",
+            "enabled": true,
+            "options": {
+              "name": "MediaFusion",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream",
+                "meta"
+              ],
+              "useCachedResultsOnly": true,
+              "enableWatchlistCatalogs": false,
+              "downloadViaBrowser": false,
+              "contributorStreams": false,
+              "certificationLevelsFilter": [],
+              "nudityFilter": [],
+              "mediaTypes": [],
+              "url": ""
+            }
+          },
+          {
+            "type": "torrents-db",
+            "instanceId": "a15",
+            "enabled": true,
+            "options": {
+              "name": "TorrentsDB",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": [],
+              "providers": [],
+              "includeP2P": true,
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "type": "peerflix",
+            "instanceId": "8b6",
+            "enabled": true,
+            "options": {
+              "name": "Peerflix",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": [],
+              "useMultipleInstances": false,
+              "showTorrentLinks": true
+            }
+          },
+          {
+            "type": "sootio",
+            "instanceId": "9d3",
+            "enabled": true,
+            "options": {
+              "name": "Sootio",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "httpProviders": [
+                "http4khdhub",
+                "httpHDHub4u",
+                "httpUHDMovies",
+                "httpMoviesDrive",
+                "httpMKVCinemas",
+                "httpMkvDrama",
+                "httpMalluMv",
+                "httpCineDoze",
+                "httpNetflixMirror",
+                "httpVixSrc"
+              ],
+              "mediaTypes": [],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "type": "nuvio-streams",
+            "instanceId": "0f6",
+            "enabled": true,
+            "options": {
+              "name": "Nuvio Streams",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "showBoxRegion": "USA7",
+              "providers": [],
+              "mediaTypes": []
+            }
+          },
+          {
+            "type": "webstreamr",
+            "instanceId": "645",
+            "enabled": true,
+            "options": {
+              "name": "WebStreamr",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": [],
+              "providers": [
+                "multi",
+                "en",
+                "de",
+                "es",
+                "fr",
+                "hi",
+                "it",
+                "mx"
+              ],
+              "includeExternalUrls": false,
+              "showErrors": false
+            }
+          },
+          {
+            "type": "subhero",
+            "instanceId": "42e",
+            "enabled": true,
+            "options": {
+              "name": "SubHero",
+              "timeout": 15000,
+              "resources": [
+                "subtitles"
+              ],
+              "languages": [
+                "{{inputs.subtitles}}"
+              ]
+            }
+          }
+        ]
       },
-      {
-        "id": "alldebrid",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "premiumize",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "debridlink",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "torbox",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "offcloud",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "putio",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "easynews",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "easydebrid",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "pikpak",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "seedr",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "stremio_nntp",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "nzbdav",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "altmount",
-        "enabled": false,
-        "credentials": {}
-      },
-      {
-        "id": "debrider",
-        "enabled": false,
-        "credentials": {}
-      }
-    ],
-    "presets": [
-      {
-        "type": "seadex",
-        "instanceId": "83e",
-        "enabled": false,
-        "options": {
-          "name": "SeaDex",
-          "timeout": 5000,
-          "mediaTypes": [
-            "anime"
-          ]
-        }
-      },
-      {
-        "type": "animetosho",
-        "instanceId": "db4",
-        "enabled": false,
-        "options": {
-          "name": "AnimeTosho",
-          "timeout": 5000,
-          "mediaTypes": [
-            "anime"
-          ],
-          "useMultipleInstances": false
-        }
-      },
-      {
-        "type": "nuvio-streams",
-        "instanceId": "807",
-        "enabled": false,
-        "options": {
-          "name": "Nuvio Streams",
-          "timeout": 10000,
-          "resources": [
-            "stream"
-          ],
-          "url": "",
-          "showBoxRegion": "USA7",
-          "providers": [],
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "webstreamr",
-        "instanceId": "572",
-        "enabled": false,
-        "options": {
-          "name": "WebStreamr",
-          "timeout": 10000,
-          "resources": [
-            "stream"
-          ],
-          "mediaTypes": [],
-          "providers": [
-            "multi",
-            "en",
-            "de",
-            "it",
-            "mx",
-            "hi",
-            "fr",
-            "es"
-          ],
-          "includeExternalUrls": false,
-          "showErrors": false
-        }
-      },
-      {
-        "type": "torbox",
-        "instanceId": "b62",
-        "enabled": false,
-        "options": {
-          "name": "TorBox",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "torrentio",
-        "instanceId": "5bc",
-        "enabled": true,
-        "options": {
-          "name": "Torrentio",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "providers": [],
-          "useMultipleInstances": false
-        }
-      },
-      {
-        "type": "stremthruTorz",
-        "instanceId": "1f9",
-        "enabled": true,
-        "options": {
-          "name": "StremThru Torz",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "includeP2P": false,
-          "useMultipleInstances": false,
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "comet",
-        "instanceId": "250",
-        "enabled": true,
-        "options": {
-          "name": "Comet",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "includeP2P": false,
-          "removeTrash": true,
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "mediafusion",
-        "instanceId": "2f4",
-        "enabled": true,
-        "options": {
-          "name": "MediaFusion",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "useCachedResultsOnly": true,
-          "enableWatchlistCatalogs": false,
-          "downloadViaBrowser": false,
-          "contributorStreams": false,
-          "certificationLevelsFilter": [],
-          "nudityFilter": [],
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "knaben",
-        "instanceId": "eff",
-        "enabled": true,
-        "options": {
-          "name": "Knaben",
-          "timeout": 5000,
-          "mediaTypes": [],
-          "useMultipleInstances": false
-        }
-      },
-      {
-        "type": "meteor",
-        "instanceId": "fb6",
-        "enabled": true,
-        "options": {
-          "name": "Meteor",
-          "timeout": 5000,
-          "resources": [
-            "stream"
-          ],
-          "includeP2P": false,
-          "removeTrash": false,
-          "useMultipleInstances": false,
-          "mediaTypes": []
-        }
-      },
-      {
-        "type": "subhero",
-        "instanceId": "42e",
-        "enabled": true,
-        "options": {
-          "name": "SubHero",
-          "timeout": 15000,
-          "resources": [
-            "subtitles"
-          ],
-          "languages": [
-            "en"
-          ]
-        }
-      }
-    ],
+      "default": [
+          {
+            "__if": "inputs.anime",
+            "type": "seadex",
+            "instanceId": "326",
+            "enabled": true,
+            "options": {
+              "name": "SeaDex",
+              "timeout": "{{inputs.timeout}}",
+              "mediaTypes": [
+                "anime"
+              ]
+            }
+          },
+          {
+            "type": "library",
+            "instanceId": "ae7",
+            "enabled": true,
+            "options": {
+              "name": "Library",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": [],
+              "showRefreshActions": [
+                "catalog"
+              ],
+              "skipProcessing": false,
+              "hideStreams": false,
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "__if": "services.torbox",
+            "type": "torbox",
+            "instanceId": "b62",
+            "enabled": true,
+            "options": {
+              "name": "TorBox",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": []
+            }
+          },
+          {
+            "__if": "inputs.debridio",
+            "type": "debridio",
+            "instanceId": "911",
+            "enabled": true,
+            "options": {
+              "name": "Debridio",
+              "timeout": "{{inputs.timeout}}",
+              "debridioApiKey": "<template_placeholder>"
+            }
+          },
+          {
+            "type": "torrentio",
+            "instanceId": "4ef",
+            "enabled": true,
+            "options": {
+              "name": "Torrentio",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "providers": [],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "type": "meteor",
+            "instanceId": "ddd",
+            "enabled": true,
+            "options": {
+              "name": "Meteor",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": false,
+              "removeTrash": false,
+              "useMultipleInstances": false,
+              "mediaTypes": []
+            }
+          },
+          {
+            "type": "comet",
+            "instanceId": "b0f",
+            "enabled": true,
+            "options": {
+              "name": "Comet",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": false,
+              "removeTrash": false,
+              "mediaTypes": [],
+              "url": ""
+            }
+          },
+          {
+            "type": "stremthruTorz",
+            "instanceId": "1f9",
+            "enabled": true,
+            "options": {
+              "name": "StremThru Torz",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "includeP2P": false,
+              "useMultipleInstances": false,
+              "mediaTypes": []
+            }
+          },
+          {
+            "type": "mediafusion",
+            "instanceId": "276",
+            "enabled": true,
+            "options": {
+              "name": "MediaFusion",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "useCachedResultsOnly": true,
+              "enableWatchlistCatalogs": false,
+              "downloadViaBrowser": false,
+              "contributorStreams": false,
+              "certificationLevelsFilter": [],
+              "nudityFilter": [],
+              "mediaTypes": [],
+              "url": ""
+            }
+          },
+          {
+            "type": "knaben",
+            "instanceId": "dc9",
+            "enabled": true,
+            "options": {
+              "name": "Knaben",
+              "timeout": "{{inputs.timeout}}",
+              "mediaTypes": [],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "__if": "inputs.anime",
+            "type": "animetosho",
+            "instanceId": "d1c",
+            "enabled": true,
+            "options": {
+              "name": "AnimeTosho",
+              "timeout": "{{inputs.timeout}}",
+              "mediaTypes": [
+                "anime"
+              ],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "type": "sootio",
+            "instanceId": "30b",
+            "enabled": true,
+            "options": {
+              "name": "Sootio",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "httpProviders": [
+                {
+                  "__if": "inputs.httpAddons",
+                  "__value": [
+                    "http4khdhub",
+                    "httpHDHub4u",
+                    "httpUHDMovies",
+                    "httpMoviesDrive",
+                    "httpMKVCinemas",
+                    "httpMkvDrama",
+                    "httpMalluMv",
+                    "httpCineDoze",
+                    "httpNetflixMirror",
+                    "httpVixSrc"
+                  ]
+                }
+              ],
+              "mediaTypes": [],
+              "useMultipleInstances": false
+            }
+          },
+          {
+            "__if": "inputs.httpAddons and inputs.debridio",
+            "type": "debridio-watchtower",
+            "instanceId": "79c",
+            "enabled": true,
+            "options": {
+              "name": "Watchtower",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "url": "",
+              "debridioApiKey": "<template_placeholder>",
+              "mediaTypes": []
+            }
+          },
+          {
+            "__if": "inputs.httpAddons",
+            "type": "nuvio-streams",
+            "instanceId": "807",
+            "enabled": true,
+            "options": {
+              "name": "Nuvio Streams",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "url": "",
+              "showBoxRegion": "USA7",
+              "providers": [],
+              "mediaTypes": []
+            }
+          },
+          {
+            "__if": "inputs.httpAddons",
+            "type": "webstreamr",
+            "instanceId": "4a6",
+            "enabled": true,
+            "options": {
+              "name": "WebStreamr",
+              "timeout": "{{inputs.timeout}}",
+              "resources": [
+                "stream"
+              ],
+              "mediaTypes": [],
+              "providers": [
+                "multi",
+                "en",
+                "de",
+                "es",
+                "fr",
+                "hi",
+                "it",
+                "mx"
+              ],
+              "includeExternalUrls": false,
+              "showErrors": false
+            }
+          },
+          {
+            "type": "subhero",
+            "instanceId": "42e",
+            "enabled": true,
+            "options": {
+              "name": "SubHero",
+              "timeout": 15000,
+              "resources": [
+                "subtitles"
+              ],
+              "languages": [
+                "{{inputs.subtitles}}"
+              ]
+            }
+          }
+        ]
+    },
     "formatter": {
-      "id": "custom",
-      "definition": {
-        "name": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD ⁴ᴷ')::replace('1440p','QHD ²ᴷ')::replace('1080p','FHD    ')::replace('p','P')}   \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::smallcaps}⌟    \"||\"\"]}\n{stream.nSeScore::>=10[\"{stream.nSeScore::pstar::replace('★','◆')::replace('⯪','⬖')::replace('☆','◇')} \"||\"\"]}",
-        "description": "{stream.edition::exists[\"▶︎  {stream.edition} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ ʙᴇsᴛ] \"||\"\"]}\n{stream.message::exists[\"🛈 {stream.message::smallcaps}\"||\"\"]}"
+      "__switch": "inputs.formatterChoice",
+      "cases": {
+        "flat": {
+          "id": "custom",
+          "definition": {
+            "name": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD ⁴ᴷ')::replace('1440p','QHD ²ᴷ')::replace('1080p','FHD    ')::replace('p','P')}   \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::smallcaps}⌟    \"||\"\"]}\n{stream.nSeScore::>=10[\"{stream.nSeScore::pstar::replace('★','◆')::replace('⯪','⬖')::replace('☆','◇')} \"||\"\"]}",
+            "description": "{stream.edition::exists[\"▶︎  {stream.edition} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ ʙᴇsᴛ] \"||\"\"]}\n{stream.message::exists[\"🛈 {stream.message::smallcaps}\"||\"\"]}"
+          }
+        },
+        "color": {
+          "id": "custom",
+          "definition": {
+            "name": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD ⁴ᴷ')::replace('1440p','QHD ²ᴷ')::replace('1080p','FHD    ')::replace('p','P')}   \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::smallcaps}⌟    \"||\"\"]}\n{stream.nSeScore::>=10[\"{stream.nSeScore::pstar::replace('★','◆')::replace('⯪','⬖')::replace('☆','◇')} \"||\"\"]}",
+            "description": "{stream.edition::exists[\"🎬  {stream.edition} \"||\"\"]}\n{stream.encode::exists[\"🎞️  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"🎥  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"🎵  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"🎧  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"📦  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"📦  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"🕒 {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"🛠️ \"||\"🛠️ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}🌱  \"||\"\"]}\n{stream.languages::exists[\"🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ ʙᴇsᴛ] \"||\"\"]}\n{stream.message::exists[\"ℹ️ {stream.message::smallcaps}\"||\"\"]}"
+          }
+        },
+        "retain": {
+          "__remove": true
+        }
       }
     },
     "preferredQualities": [
@@ -412,7 +844,7 @@
     "includedLanguages": [],
     "requiredLanguages": [],
     "preferredLanguages": [
-      "English",
+      "{{inputs.languages}}",
       "Original",
       "Dual Audio",
       "Multi",
@@ -449,26 +881,6 @@
     "excludeUncachedFromAddons": [],
     "excludeUncachedFromServices": [],
     "excludeUncachedFromStreamTypes": [],
-    "groups": {
-      "enabled": false,
-      "groupings": [
-        {
-          "addons": [
-            "1f9",
-            "5bc"
-          ],
-          "condition": "true"
-        },
-        {
-          "addons": [
-            "2f4",
-            "250"
-          ],
-          "condition": " count(cached(resolution(previousStreams,'2160p','1080p'))) == 0"
-        }
-      ],
-      "behaviour": "parallel"
-    },
     "rpdbApiKey": "<template_placeholder>",
     "hideErrorsForResources": [],
     "tmdbAccessToken": "<template_placeholder>",
@@ -567,7 +979,6 @@
       "enabled": false,
       "condition": "((count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'Multi','Dual Audio'),'2160p')))>=2 or count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'Unknown'),'2160p')))>=3 or count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'English'),'2160p')))>=3) and (count(regexMatched(resolution(cached(totalStreams),'2160p')))>=5 or count(regexMatched(resolution(cached(totalStreams),'1080p')))>=5)) or (count(cached(totalStreams))>=3 and totalTimeTaken>5000) or totalTimeTaken>7000"
     },
-    "addonName": "AIOStreams",
     "precacheSelector": "count(cached(streams)) == 0 ? uncached(streams) : []",
     "syncedExcludedStreamExpressionUrls": [
       "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json"

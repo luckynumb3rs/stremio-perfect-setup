@@ -33,14 +33,15 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I can't pay for a debrid service, but I also can't use P2P torrenting because it seems to be very slow, or for other reasons.**
 * The only remaining option would be direct HTTP streams, which are free, no debrid, no torrent.
-* To be able to find HTTP streams in Stremio, you can go to the **Addons** tab in **AIOStreams** and enable the **Nuvio Streams** and **WebStreamr** addons. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select specialty language providers.
+* When you load the template provided in this guide on **AIOStreams**, you can skip the "**Select Services**" step, and on the "**Template Options**" step, you need to enable the "**HTTP Addons**" toggle. This will install **Sootio**, **Nuvio Streams** and **WebStreamr** addons, which provide direct HTTP streaming links. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select specialty language providers.
+* The HTTP streams will show with the 🌐 icon on the stream information view.
 * The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
 
 ## **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#understanding-stream-information-view) to read the descriptions for each icon.
 
-## **The icons of the stream information view are too plain, I would like more colors to differentiate.**
-* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#alternative-color-stream-information) on the extended guide to get an alternative colorful template you can use instead.
+## **The icons of the stream information view are too plain/colorful, I would like more/less colors to differentiate.**
+* Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#alternative-stream-information-icons) on the extended guide to get an alternative template you can use instead.
 
 ## **I want Trakt progress syncing, but I do not want extra Trakt addons.**
 * In [web.stremio.com](https://web.stremio.com/), sign in, and go to **Settings** and enable **Trakt Scrobbling** by connecting your Trakt account.
@@ -49,7 +50,7 @@ I am including this section for anyone who has any additional questions or is en
 ![Trakt Scrobbling](../images/2.2.png)
 
 ## **I want Anime sources, but I am not seeing them.**
-* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (they are disabled by default).
+* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (installed only if you enabled a debrid service when you loaded the template).
 
 ![Addon Configuration](../images/3.8.3.png)
 
@@ -67,7 +68,7 @@ I am including this section for anyone who has any additional questions or is en
 * In **AIOStreams**: go to **Filters → Language**.
 * Add your language to **Preferred Languages**.
 * Put it first in **Preference Order**.
-* You can also add the language in the **Required Languages** to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will not be shown.
+* You can also add the language in the **Required Languages** if you want to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will be filtered out.
 
 ![Preferred Language](../images/3.8.4.png)
 
@@ -101,7 +102,7 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a debrid service…".**
 * If you are not using debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
-* If you want SeaDex/AnimeTosho, you will need a debrid service.
+* If you want Knaben/SeaDex/AnimeTosho, you will need a debrid service.
 
 ## **I do not have an RPDB subscription. What key should I use?**
 * Use the free RPDB key: `t0-free-rpdb` (works for both AIOStreams and AIOMetadata integrations as described in the guide).

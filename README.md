@@ -1,4 +1,4 @@
-# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE [v1.1]
+# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE [v1.2]
 
 ![Homescreen (left) & Stream source selection (right)](docs/images/home.jpg)
 

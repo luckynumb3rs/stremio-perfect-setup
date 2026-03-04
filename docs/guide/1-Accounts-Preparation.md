@@ -14,7 +14,7 @@ First, let's start by creating the accounts (those who already have them can ski
    * *I use mainly* [***TorBox***](https://torbox.app/subscription?referral=a7aecfd0-57c8-48fa-9e49-2904f09d57d2), as a backup I use [***Real-Debrid***](http://real-debrid.com/?id=8801126) *(these are referral links since we're at it :), two of the best platforms, with the best prices and very stable.*
    * *For **TorBox**, please make sure to use my referral code when ordering: **a7aecfd0-57c8-48fa-9e49-2904f09d57d2** to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. **IMPORTANT**: When you're on the subscription plans page, scroll down to the bottom and you'll see a field (not the "Coupon Code" field just below the plans, but to the very bottom of the page) where you can enter my code (not to be confused with the "Your referral code is:" part above it) and click **Submit** (see screenshot below, marked in red). Then you can proceed with buying your chosen plan.*
 
-   ![TorBox Referral](../images/1.1.png)
+   ![TorBox Referral](../images/1.2.1.png)
 
    * *To help you choose between Real-Debrid and TorBox:*
       * ***Real-Debrid** is one of the most widely used service, and has probably the largest cache (files already available on their servers and ready to watch) of shows and movies. However, they only allow one connection at a time, meaning that you can't watch on two or more devices simultaneously (you can log in to your Stremio account on as many devices you want, that's unrelated). So if you want to use it with friends or family or on multiple Stremio accounts to watch simultaneously, you can't: you'll get a warning and may risk getting banned if repeated.*
@@ -22,7 +22,7 @@ First, let's start by creating the accounts (those who already have them can ski
       * *The choice is yours. TorBox would be very practical and cheaper for multiple screens or families, but Real-Debrid would MAYBE provide more immediately available options. I myself use **both** (you can enable both in AIOStreams, and considering the prices for both, it's still cheap): I use TorBox as my main, because my family can safely use it simultaneously, and I also keep a backup Real-Debrid, in case it may happen that Real-Debrid has a result that TorBox doesn't immediately have (always keeping in mind though that Real-Debrid only allows 1 connection, hence as a backup only).*
    * *ONLY AFTER you registered to one or both services from the links above and subscribed to a plan (and paid for it), you can get the **API key** while logged in to your account directly on [**this**](https://real-debrid.com/apitoken) link for Real-Debrid or [**here**](https://torbox.app/settings?section=account) for TorBox.*
 
-![TorBox & Real-Debrid API Key](../images/1.2.png)
+![TorBox & Real-Debrid API Key](../images/1.2.2.png)
 
 3. Create a free [**Trakt**](http://www.trakt.tv) account.
    * *This is recommended for tracking what you watch, and getting some custom lists. Makes the Stremio experience more like Netflix. If your account is new, rate or mark as watched at least 10 movies and 10 shows, it will be good for creating custom lists later below, otherwise they won't work.*

@@ -8,26 +8,6 @@ title: "🛠️ Additional Stuff"
 Most of the tips to address some issues are already included between the steps of the guide, but I am adding this section for any additional tweaks, explanations, or alternative configurations:
 
 
-## Stream Types Explained
-
-This section briefly explains the three different ways content can be streamed in this setup and which addons are relevant in each case. Depending on whether you use torrents directly, HTTP streams, or a debrid service, you can go to the **Addons** tab in **AIOStreams** to enable or disable specific scrapers to avoid unnecessary errors and keep your results clean:
-
-* **⚡ Debrid (Recommended)** works by letting a debrid service download torrents to its servers and streams them to you as fast direct links. It's not normally free, but it provides the best balance of speed, stability, and quality.
-   * **Enable**: TorBox (only if you use *TorBox* as a debrid service), Torrentio, StremThru, Comet, MediaFusion, Knaben, Meteor
-   * **Optional** (for Anime): SeaDex, AnimeTosho 
-   * **Disable**: Nuvio Streams, WebStreamr (not needed when using Debrid)
-
-* **🧲 Torrent (P2P)** works by streaming directly from other users (seeders) via BitTorrent. It’s free and widely available, but can buffer if seeders are low and may require a VPN depending on your country.
-   * **Enable**: Torrentio, StremThru, Comet, MediaFusion, Meteor
-   * **Disable**: SeaDex, AnimeTosho, Nuvio Streams, WebStreamr, TorBox, Knaben
-
-* **🌐 HTTP (Direct Web Streams)** works by streaming directly from web hosts, without torrents or Debrid. It doesn’t rely on seeders, but quality and availability are usually more limited because they are publicly available links.
-   * **Enable**: Nuvio Streams, WebStreamr
-   * **Disable**: Knaben, SeaDex, AnimeTosho
-   * **Optional**: You may keep torrent scrapers (Torrentio, StremThru, Comet, MediaFusion, Meteor) enabled if you want mixed results.
-
-
-
 ## Smart Stream Selection & Sorting
 
 The **AIOStreams** template you used from this guide includes multiple optimizations highly recommended by the Stremio community to intelligently filter, score, and prioritize streams for a cleaner, easier, and more reliable viewing experience.
@@ -55,9 +35,9 @@ The **AIOStreams** template you used from this guide includes multiple optimizat
 * **However**, if you want to change the **Sorting** order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
 
-## Alternative Color Stream Information
+## Alternative Stream Information Icons
 
-If you want a more colorful version of the stream information view than the one included, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
+If you went with the ***Flat Monochrome Icons*** for the formatter and want instead more ***Colorful Icons*** on the stream information view, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
 
 ```
 {stream.edition::exists["🎬  {stream.edition} "||""]}
@@ -69,6 +49,18 @@ If you want a more colorful version of the stream information view than the one 
 {stream.message::exists["ℹ️ {stream.message::smallcaps}"||""]}
 ```
 
+Alternatively, if you went for the ***Colorful Icons*** version and would prefer the ***Flat Monochrome Icons*** instead, replace the text in the **Description Template** with this:
+
+```
+{stream.edition::exists["▶︎  {stream.edition} "||""]}
+{stream.encode::exists["▣  {stream.encode}  "||""]}{stream.visualTags::exists["✦  {stream.visualTags::join(' · ')}  "||""]}
+{stream.audioTags::exists["♬  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["☊  {stream.audioChannels::join(' · ')} "||""]}
+{stream.size::>0::and::stream.seasonPack::istrue["⧉  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["◧  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["⟳ {stream.age}"||""]}
+{stream.proxied::istrue["⛊ "||"⛉ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}𖧧  "||""]}
+{stream.languages::exists["⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
+{stream.message::exists["🛈 {stream.message::smallcaps}"||""]}
+```
+
 
 ## Understanding Stream Information View
 
@@ -77,6 +69,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 **Main Line**
 * ⚡ / ⏳ → [Debrid] Cached (instant playback) / Not Cached (may take longer)
 * 🧲 / 🌐 / 📺 → Torrent (P2P) / Direct HTTP / Live Stream
+* ▶️ / 🗄️ / ↗️ / 📊 / ℹ️ / ⛔ → YouTube / Archive / External / Statistics / Information / Error
 * **UHD ⁴ᴷ / QHD ²ᴷ / FHD / 720P** → Resolution
 * ⌜**QUALITY**⌟ → Source Quality (Remux, WEB, BluRay, etc.)
 * ◆◆⬖◇◇ → Release Quality Score (based on [**Vidhin's Ranked Regexes**](https://github.com/Vidhin05/Releases-Regex), sorted after *Quality & Resolution*)
@@ -109,7 +102,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 * 🛈 / ℹ️ **MESSAGE** → Additional Informational Messages
 
 👉 **Quick Tip:**
-Prioritize streams that are **⚡ cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality.
+Prioritize streams that are ⚡ **cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality. If on P2P configuration, prioritize streams with high number of seeders.
 
 
 ## Enriching Your Catalogs (Trakt Alternatives)
