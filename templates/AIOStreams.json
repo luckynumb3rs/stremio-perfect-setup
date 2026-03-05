@@ -193,7 +193,7 @@
         "__if": "services",
         "id": "debridio",
         "name": "🧊 Debridio",
-        "description": "If enabled, [Debridio Scraper](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings.",
+        "description": "If enabled, [Debridio Scraper](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.",
         "type": "boolean",
         "required": false,
         "default": false
