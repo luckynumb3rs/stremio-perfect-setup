@@ -55,13 +55,12 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 9. **Optional**: At this point AIOStreams is ready, but you can keep configuring it however you like. For example, if you want to further configure the scrapers or subtitle languages, you can go to the "**Installed Addons**" tab.
    * *You can configure each of them with the Pencil button on the right if needed.*
    * Depending on what you selected during the template options (whether you used a debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
-      1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, Sootio** are the ***main scrapers*** finding the sources.
-      2. **TorrentsDB** and **Peerflix** are ***additional scrapers*** installed when using the *P2P-only* setup.
-      3. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a debrid service.
-      4. **Nuvio Streams**, **WebStreamr**, and **Sootio** (again) are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a debrid, you don't normally need them.
-      5. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
-      6. **Library** is an addon that can search through your own debrid library (if you e.g. download something manually in debrid).
-      7. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
+      1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, PeerFlix** are the ***main scrapers*** finding the sources.
+      2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a debrid service.
+      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a debrid, you don't normally need them.
+      4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
+      5. **Library** is an addon that can search through your own debrid library (if you e.g. download something manually in debrid).
+      6. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
 
 ![Addon Configuration](../images/3.9.1.png)
 
@@ -76,6 +75,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 10. Go to the "**Save & Install**" tab, enter a password on the "**Create Configuration**" section, and click "**Create**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
    * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOStreams account.*
+   * *If you get an error when saving that says "Failed to fetch manifest..." and/or "502 - Bad Gateway", it means the addons mentioned there are temporarily offline. Go to **Addons → Installed Addons**, disable the problematic addons mentioned, and proceed with saving. Go back at a later time to re-enable the addons and save again.*
 
 ![Save Configuration](../images/3.10.png)
 

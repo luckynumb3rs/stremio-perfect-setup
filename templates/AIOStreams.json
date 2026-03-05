@@ -187,7 +187,7 @@
       {
         "id": "httpAddons",
         "name": "🌐 HTTP Addons",
-        "description": "If enabled, addons for **HTTP** streams will be included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents. HTTP Addons are auto-included in the P2P setup (if you didn't enable a debrid service).",
+        "description": "If enabled, addons for **HTTP** streams will be included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents, but you can enable this even if you do use them for some extra results. These addons rely on hoster scrapers and generally have less reliable sources, so they are disabled by default to avoid cluttering the stream list with low-quality sources for users who prefer debrid and/or P2P options.",
         "type": "boolean",
         "required": false,
         "default": false
@@ -220,477 +220,303 @@
   },
   "config": {
     "addonName": "AIOStreams",
-    "presets": {
-      "__switch": "services",
-      "cases": {
-        "": [
-          {
-            "type": "torrentio",
-            "instanceId": "4ef",
-            "enabled": true,
-            "options": {
-              "name": "Torrentio",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "providers": [],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "type": "meteor",
-            "instanceId": "064",
-            "enabled": true,
-            "options": {
-              "name": "Meteor",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": true,
-              "removeTrash": false,
-              "useMultipleInstances": false,
-              "mediaTypes": []
-            }
-          },
-          {
-            "type": "comet",
-            "instanceId": "b0f",
-            "enabled": true,
-            "options": {
-              "name": "Comet",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": true,
-              "removeTrash": false,
-              "mediaTypes": [],
-              "url": ""
-            }
-          },
-          {
-            "type": "stremthruTorz",
-            "instanceId": "1f9",
-            "enabled": true,
-            "options": {
-              "name": "StremThru Torz",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": true,
-              "useMultipleInstances": false,
-              "mediaTypes": []
-            }
-          },
-          {
-            "type": "mediafusion",
-            "instanceId": "276",
-            "enabled": true,
-            "options": {
-              "name": "MediaFusion",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream",
-                "meta"
-              ],
-              "useCachedResultsOnly": true,
-              "enableWatchlistCatalogs": false,
-              "downloadViaBrowser": false,
-              "contributorStreams": false,
-              "certificationLevelsFilter": [],
-              "nudityFilter": [],
-              "mediaTypes": [],
-              "url": ""
-            }
-          },
-          {
-            "type": "torrents-db",
-            "instanceId": "a15",
-            "enabled": true,
-            "options": {
-              "name": "TorrentsDB",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": [],
-              "providers": [],
-              "includeP2P": true,
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "type": "peerflix",
-            "instanceId": "8b6",
-            "enabled": true,
-            "options": {
-              "name": "Peerflix",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": [],
-              "useMultipleInstances": false,
-              "showTorrentLinks": true
-            }
-          },
-          {
-            "type": "sootio",
-            "instanceId": "9d3",
-            "enabled": true,
-            "options": {
-              "name": "Sootio",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "httpProviders": [
-                "http4khdhub",
-                "httpHDHub4u",
-                "httpUHDMovies",
-                "httpMoviesDrive",
-                "httpMKVCinemas",
-                "httpMkvDrama",
-                "httpMalluMv",
-                "httpCineDoze",
-                "httpNetflixMirror",
-                "httpVixSrc"
-              ],
-              "mediaTypes": [],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "type": "nuvio-streams",
-            "instanceId": "0f6",
-            "enabled": true,
-            "options": {
-              "name": "Nuvio Streams",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "showBoxRegion": "USA7",
-              "providers": [],
-              "mediaTypes": []
-            }
-          },
-          {
-            "type": "webstreamr",
-            "instanceId": "645",
-            "enabled": true,
-            "options": {
-              "name": "WebStreamr",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": [],
-              "providers": [
-                "multi",
-                "en",
-                "de",
-                "es",
-                "fr",
-                "hi",
-                "it",
-                "mx"
-              ],
-              "includeExternalUrls": false,
-              "showErrors": false
-            }
-          },
-          {
-            "type": "subhero",
-            "instanceId": "42e",
-            "enabled": true,
-            "options": {
-              "name": "SubHero",
-              "timeout": 15000,
-              "resources": [
-                "subtitles"
-              ],
-              "languages": [
-                "{{inputs.subtitles}}"
-              ]
-            }
-          }
-        ]
+    "presets": [
+      {
+        "__if": "services and inputs.anime",
+        "type": "seadex",
+        "instanceId": "sdx",
+        "enabled": true,
+        "options": {
+          "name": "SeaDex",
+          "timeout": "{{inputs.timeout}}",
+          "mediaTypes": [
+            "anime"
+          ]
+        }
       },
-      "default": [
-          {
-            "__if": "inputs.anime",
-            "type": "seadex",
-            "instanceId": "326",
-            "enabled": true,
-            "options": {
-              "name": "SeaDex",
-              "timeout": "{{inputs.timeout}}",
-              "mediaTypes": [
-                "anime"
-              ]
-            }
+      {
+        "__if": "services",
+        "type": "library",
+        "instanceId": "lib",
+        "enabled": true,
+        "options": {
+          "name": "Library",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": [],
+          "showRefreshActions": [
+            "catalog"
+          ],
+          "skipProcessing": false,
+          "hideStreams": false,
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "__if": "services.torbox",
+        "type": "torbox",
+        "instanceId": "tbx",
+        "enabled": true,
+        "options": {
+          "name": "TorBox",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": []
+        }
+      },
+      {
+        "__if": "services and inputs.debridio",
+        "type": "debridio",
+        "instanceId": "deb",
+        "enabled": true,
+        "options": {
+          "name": "Debridio",
+          "timeout": "{{inputs.timeout}}",
+          "debridioApiKey": "<template_placeholder>"
+        }
+      },
+      {
+        "type": "torrentio",
+        "instanceId": "tio",
+        "enabled": true,
+        "options": {
+          "name": "Torrentio",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "providers": [],
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "type": "meteor",
+        "instanceId": "met",
+        "enabled": true,
+        "options": {
+          "name": "Meteor",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "includeP2P": {
+            "__switch": "services",
+            "cases": {
+              "": true
+            },
+            "default": false
           },
-          {
-            "type": "library",
-            "instanceId": "ae7",
-            "enabled": true,
-            "options": {
-              "name": "Library",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": [],
-              "showRefreshActions": [
-                "catalog"
-              ],
-              "skipProcessing": false,
-              "hideStreams": false,
-              "useMultipleInstances": false
-            }
+          "removeTrash": false,
+          "useMultipleInstances": false,
+          "mediaTypes": []
+        }
+      },
+      {
+        "type": "comet",
+        "instanceId": "com",
+        "enabled": true,
+        "options": {
+          "name": "Comet",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "includeP2P": {
+            "__switch": "services",
+            "cases": {
+              "": true
+            },
+            "default": false
           },
-          {
-            "__if": "services.torbox",
-            "type": "torbox",
-            "instanceId": "b62",
-            "enabled": true,
-            "options": {
-              "name": "TorBox",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": []
-            }
+          "removeTrash": false,
+          "mediaTypes": []
+        }
+      },
+      {
+        "type": "stremthruTorz",
+        "instanceId": "stz",
+        "enabled": true,
+        "options": {
+          "name": "StremThru Torz",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "includeP2P": {
+            "__switch": "services",
+            "cases": {
+              "": true
+            },
+            "default": false
           },
-          {
-            "__if": "inputs.debridio",
-            "type": "debridio",
-            "instanceId": "911",
-            "enabled": true,
-            "options": {
-              "name": "Debridio",
-              "timeout": "{{inputs.timeout}}",
-              "debridioApiKey": "<template_placeholder>"
-            }
-          },
-          {
-            "type": "torrentio",
-            "instanceId": "4ef",
-            "enabled": true,
-            "options": {
-              "name": "Torrentio",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "providers": [],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "type": "meteor",
-            "instanceId": "ddd",
-            "enabled": true,
-            "options": {
-              "name": "Meteor",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": false,
-              "removeTrash": false,
-              "useMultipleInstances": false,
-              "mediaTypes": []
-            }
-          },
-          {
-            "type": "comet",
-            "instanceId": "b0f",
-            "enabled": true,
-            "options": {
-              "name": "Comet",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": false,
-              "removeTrash": false,
-              "mediaTypes": [],
-              "url": ""
-            }
-          },
-          {
-            "type": "stremthruTorz",
-            "instanceId": "1f9",
-            "enabled": true,
-            "options": {
-              "name": "StremThru Torz",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "includeP2P": false,
-              "useMultipleInstances": false,
-              "mediaTypes": []
-            }
-          },
-          {
-            "type": "mediafusion",
-            "instanceId": "276",
-            "enabled": true,
-            "options": {
-              "name": "MediaFusion",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "useCachedResultsOnly": true,
-              "enableWatchlistCatalogs": false,
-              "downloadViaBrowser": false,
-              "contributorStreams": false,
-              "certificationLevelsFilter": [],
-              "nudityFilter": [],
-              "mediaTypes": [],
-              "url": ""
-            }
-          },
-          {
-            "type": "knaben",
-            "instanceId": "dc9",
-            "enabled": true,
-            "options": {
-              "name": "Knaben",
-              "timeout": "{{inputs.timeout}}",
-              "mediaTypes": [],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "__if": "inputs.anime",
-            "type": "animetosho",
-            "instanceId": "d1c",
-            "enabled": true,
-            "options": {
-              "name": "AnimeTosho",
-              "timeout": "{{inputs.timeout}}",
-              "mediaTypes": [
-                "anime"
-              ],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "type": "sootio",
-            "instanceId": "30b",
-            "enabled": true,
-            "options": {
-              "name": "Sootio",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "httpProviders": [
-                {
-                  "__if": "inputs.httpAddons",
-                  "__value": [
-                    "http4khdhub",
-                    "httpHDHub4u",
-                    "httpUHDMovies",
-                    "httpMoviesDrive",
-                    "httpMKVCinemas",
-                    "httpMkvDrama",
-                    "httpMalluMv",
-                    "httpCineDoze",
-                    "httpNetflixMirror",
-                    "httpVixSrc"
-                  ]
-                }
-              ],
-              "mediaTypes": [],
-              "useMultipleInstances": false
-            }
-          },
-          {
-            "__if": "inputs.httpAddons and inputs.debridio",
-            "type": "debridio-watchtower",
-            "instanceId": "79c",
-            "enabled": true,
-            "options": {
-              "name": "Watchtower",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "url": "",
-              "debridioApiKey": "<template_placeholder>",
-              "mediaTypes": []
-            }
-          },
-          {
-            "__if": "inputs.httpAddons",
-            "type": "nuvio-streams",
-            "instanceId": "807",
-            "enabled": true,
-            "options": {
-              "name": "Nuvio Streams",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "url": "",
-              "showBoxRegion": "USA7",
-              "providers": [],
-              "mediaTypes": []
-            }
-          },
-          {
-            "__if": "inputs.httpAddons",
-            "type": "webstreamr",
-            "instanceId": "4a6",
-            "enabled": true,
-            "options": {
-              "name": "WebStreamr",
-              "timeout": "{{inputs.timeout}}",
-              "resources": [
-                "stream"
-              ],
-              "mediaTypes": [],
-              "providers": [
-                "multi",
-                "en",
-                "de",
-                "es",
-                "fr",
-                "hi",
-                "it",
-                "mx"
-              ],
-              "includeExternalUrls": false,
-              "showErrors": false
-            }
-          },
-          {
-            "type": "subhero",
-            "instanceId": "42e",
-            "enabled": true,
-            "options": {
-              "name": "SubHero",
-              "timeout": 15000,
-              "resources": [
-                "subtitles"
-              ],
-              "languages": [
-                "{{inputs.subtitles}}"
-              ]
-            }
-          }
-        ]
-    },
+          "useMultipleInstances": false,
+          "mediaTypes": []
+        }
+      },
+      {
+        "type": "mediafusion",
+        "instanceId": "mdf",
+        "enabled": true,
+        "options": {
+          "name": "MediaFusion",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "useCachedResultsOnly": true,
+          "enableWatchlistCatalogs": false,
+          "downloadViaBrowser": false,
+          "contributorStreams": false,
+          "certificationLevelsFilter": [],
+          "nudityFilter": [],
+          "mediaTypes": []
+        }
+      },
+      {
+        "__if": "services",
+        "type": "knaben",
+        "instanceId": "kna",
+        "enabled": true,
+        "options": {
+          "name": "Knaben",
+          "timeout": "{{inputs.timeout}}",
+          "mediaTypes": [],
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "type": "peerflix",
+        "instanceId": "pfl",
+        "enabled": true,
+        "options": {
+          "name": "Peerflix",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": [],
+          "useMultipleInstances": false,
+          "showTorrentLinks": true
+        }
+      },
+      {
+        "__if": "services and inputs.anime",
+        "type": "animetosho",
+        "instanceId": "ato",
+        "enabled": true,
+        "options": {
+          "name": "AnimeTosho",
+          "timeout": "{{inputs.timeout}}",
+          "mediaTypes": [
+            "anime"
+          ],
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "__if": "inputs.httpAddons",
+        "type": "sootio",
+        "instanceId": "soo",
+        "enabled": true,
+        "options": {
+          "name": "Sootio",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "httpProviders": [
+            "http4khdhub",
+            "httpHDHub4u",
+            "httpUHDMovies",
+            "httpMoviesDrive",
+            "httpMKVCinemas",
+            "httpMkvDrama",
+            "httpMalluMv",
+            "httpCineDoze",
+            "httpNetflixMirror",
+            "httpVixSrc"
+          ],
+          "mediaTypes": [],
+          "useMultipleInstances": false
+        }
+      },
+      {
+        "__if": "inputs.httpAddons and inputs.debridio",
+        "type": "debridio-watchtower",
+        "instanceId": "dew",
+        "enabled": true,
+        "options": {
+          "name": "Watchtower",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "debridioApiKey": "<template_placeholder>",
+          "mediaTypes": []
+        }
+      },
+      {
+        "__if": "inputs.httpAddons",
+        "type": "nuvio-streams",
+        "instanceId": "nuv",
+        "enabled": true,
+        "options": {
+          "name": "Nuvio Streams",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "showBoxRegion": "USA7",
+          "providers": [],
+          "mediaTypes": []
+        }
+      },
+      {
+        "__if": "inputs.httpAddons",
+        "type": "webstreamr",
+        "instanceId": "wst",
+        "enabled": true,
+        "options": {
+          "name": "WebStreamr",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": [],
+          "providers": [
+            "multi",
+            "en",
+            "de",
+            "es",
+            "fr",
+            "hi",
+            "it",
+            "mx"
+          ],
+          "includeExternalUrls": false,
+          "showErrors": false
+        }
+      },
+      {
+        "type": "subhero",
+        "instanceId": "sbh",
+        "enabled": true,
+        "options": {
+          "name": "SubHero",
+          "timeout": 15000,
+          "resources": [
+            "subtitles"
+          ],
+          "languages": [
+            "{{inputs.subtitles}}"
+          ]
+        }
+      }
+    ],
     "formatter": {
       "__switch": "inputs.formatterChoice",
       "cases": {

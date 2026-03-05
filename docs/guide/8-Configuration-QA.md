@@ -95,7 +95,7 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I feel like I am getting too few good results. What should I change?**
 * If you set fetching to **Dynamic** (**AIOStreams → Addons → Addon Fetching Strategy**), try switching back to **Default**.
-* Make sure you enabled enough scrapers (Torrentio, StremThru, Comet, MediaFusion, Knaben are mentioned in the guide as the core scrapers).
+* Make sure you have enough scrapers enabled.
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
 
 ![Change Fetching](../images/3.11.1.png)
@@ -115,10 +115,10 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Display Language](../images/4.4.2.png)
 
-## **I cannot save the AIOStreams configuration and see "Failed to fetch manifest...".**
+## **I cannot save the AIOStreams configuration and see "Failed to fetch manifest..." and/or "502 - Bad Gateway".**
 * This usually means one or more addons are temporarily offline.
-* Go to **Addons → Installed Addons**, disable the problematic addon, and save the configuration so you can continue the guide.
-* Later, return to AIOStreams, enable the addon again, and try to save it if it's back online.
+* Go to **Addons → Installed Addons**, disable the problematic addons mentioned on the error message, and save the configuration so you can continue the guide.
+* At a later time, return to AIOStreams, enable the addon again, and try to save it if it's back online.
 
 ## **Some catalogs show "Failed to fetch" or appear empty in Stremio.**
 * This is often caused by Trakt being temporarily down or rate limiting requests.
