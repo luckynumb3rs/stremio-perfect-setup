@@ -222,7 +222,7 @@
     "addonName": "AIOStreams",
     "presets": [
       {
-        "__if": "services and inputs.anime",
+        "__if": "inputs.anime",
         "type": "seadex",
         "instanceId": "sdx",
         "enabled": true,
@@ -269,7 +269,7 @@
         }
       },
       {
-        "__if": "services and inputs.debridio",
+        "__if": "inputs.debridio",
         "type": "debridio",
         "instanceId": "deb",
         "enabled": true,
@@ -404,7 +404,7 @@
         }
       },
       {
-        "__if": "services and inputs.anime",
+        "__if": "inputs.anime",
         "type": "animetosho",
         "instanceId": "ato",
         "enabled": true,
