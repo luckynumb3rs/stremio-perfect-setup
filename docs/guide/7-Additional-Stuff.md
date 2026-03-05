@@ -20,19 +20,21 @@ The **AIOStreams** template you used from this guide includes multiple optimizat
 
 * **However**, if you are not satisfied with the results because you want more to choose from, or you feel they are malfunctioning somehow, you can remove them all by going to **Filters** in **AIOStreams**, then both in **Stream Expression** and **Regex** respectively, and delete all entries configured there (with the red *trash can* button to the right).
 
-* Finally, the **Sorting** in the template is configured to show the streams in the following order:
+* Finally, the **Sorting** in the template is configured to show the streams in the following order by default:
 
    * *Cached/Uncached (if applicable)*
-   * *SeaDex (only for Anime)*
+   * *SeaDex (for Anime)*
    * *Resolution*
    * *Quality*
    * *Stream Expressions*
    * *Stream Expressions Score*
-   * *Seeders (if Uncached)*
+   * *Seeders (if Uncached/P2P)*
    * *Language*
    * *Bitrate*
 
-* **However**, if you want to change the **Sorting** order, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
+* When you load the **AIOStreams** template provided in this guide, you have the option to prioritize **Language** and **Seeders** if needed according to your preferences.
+
+* **However**, if you want to fine-tune the **Sorting** order yourself, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
 
 
 ## Alternative Stream Information Icons

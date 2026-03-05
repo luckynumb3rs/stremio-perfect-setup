@@ -18,9 +18,38 @@
         "intent": "warning"
       },
       {
+        "id": "formatterChoice",
+        "name": "🖋️ Formatter Style",
+        "description": "Choose the formatting of the stream information view. **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. **Colorful Icons** contains a colored version with more graphical icons. **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
+        "type": "select",
+        "required": false,
+        "default": "flat",
+        "options": [
+          {
+            "value": "flat",
+            "label": "▶︎ Flat Monochrome Icons (Default)"
+          },
+          {
+            "value": "color",
+            "label": "🎬 Colorful Icons"
+          },
+          {
+            "value": "retain",
+            "label": "None (Keep Your Current)"
+          }
+        ]
+      },
+      {
+        "id": "header.languages",
+        "name": "🗣️ Language Options",
+        "description": "",
+        "type": "alert",
+        "intent": "info"
+      },
+      {
         "id": "languages",
         "name": "🔊 Preferred Languages",
-        "description": "Select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections. Fine-tune the full order in **Filters → Language** after import if you want. The included formatter will display only your preferred languages.",
+        "description": "Select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections. Fine-tune the full order in **Filters → Language** after import if you want.",
         "type": "multi-select",
         "required": false,
         "default": [
@@ -145,32 +174,17 @@
         ]
       },
       {
-        "id": "formatterChoice",
-        "name": "🖋️ Formatter Style",
-        "description": "Choose the formatting of the stream information view. **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. **Colorful Icons** contains a colored version with more graphical icons. **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
-        "type": "select",
-        "required": false,
-        "default": "flat",
-        "options": [
-          {
-            "value": "flat",
-            "label": "▶︎ Flat Monochrome Icons (Default)"
-          },
-          {
-            "value": "color",
-            "label": "🎬 Colorful Icons"
-          },
-          {
-            "value": "retain",
-            "label": "None (Use Your Current)"
-          }
-        ]
+        "id": "header.addons",
+        "name": "🧩 Addon Options",
+        "description": "",
+        "type": "alert",
+        "intent": "info"
       },
       {
         "__if": "services",
         "id": "anime",
         "name": "🗡️ Anime Addons",
-        "description": "If enabled, anime-specific addons (**SeaDex, AnimeTosho**) will be added to the addon list.",
+        "description": "If enabled, additional anime-specific addons (**SeaDex, AnimeTosho**) will be installed.",
         "type": "boolean",
         "required": false,
         "default": false
@@ -187,7 +201,7 @@
       {
         "id": "httpAddons",
         "name": "🌐 HTTP Addons",
-        "description": "If enabled, addons for **HTTP** streams will be included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents, but you can enable this even if you do use them for some extra results. These addons rely on hoster scrapers and generally have less reliable sources, so they are disabled by default to avoid cluttering the stream list with low-quality sources for users who prefer debrid and/or P2P options.",
+        "description": "If enabled, addons for **HTTP** streams will be included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents, but you can enable this even if you do use them if you want extra results. These addons rely on hoster scrapers and generally have less reliable sources, so they are disabled by default to avoid cluttering the stream list with low-quality sources for users who prefer debrid and/or P2P options.",
         "type": "boolean",
         "required": false,
         "default": false
@@ -201,11 +215,74 @@
         "default": 5000
       },
       {
+        "id": "header.sorting",
+        "name": "↕️ Sorting Options",
+        "description": "",
+        "type": "alert",
+        "intent": "info"
+      },
+      {
+        "id": "header.sortingInfo",
+        "name": "",
+        "description": "Here you can modify the sort order if necessary. \n The default sort order is: \n *Cached/Uncached → SeaDex (for Anime) → Resolution → Quality → Stream Expressions → Stream Expression Score → Seeders (if Uncached/P2P) → Language → Bitrate*",
+        "type": "alert",
+        "intent": "info-basic"
+      },
+      {
+        "id": "language",
+        "name": "🚩️ Language Boost",
+        "description": "This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing this boost. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.",
+        "type": "select",
+        "required": false,
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default Sort Order"
+          },
+          {
+            "value": "medium",
+            "label": "Move Up After Resolution & Quality"
+          },
+          {
+            "value": "high",
+            "label": "Move Up First in Sort Order"
+          }
+        ]
+      },
+      {
+        "__if": "!services",
+        "id": "seeders",
+        "name": "🌱 Seeders Boost",
+        "description": "Change this if you want highest seeders to be prioritized more on the sorting order, even if they have lower Resolution/Quality/SEL Scores. In most cases, low seeders will have already been filtered out by the internal filtering (SEL).",
+        "type": "select",
+        "required": false,
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default Sort Order"
+          },
+          {
+            "value": "medium",
+            "label": "Move Up After Resolution & Quality"
+          },
+          {
+            "value": "high",
+            "label": "Move Up First in Sort Order"
+          }
+        ]
+      },
+      {
         "id": "credits",
         "name": "Credits",
         "description": "",
         "type": "socials",
         "socials": [
+          {
+            "id": "website",
+            "url": "https://luckynumb3rs.github.io/stremio-perfect-setup"
+          },
           {
             "id": "github",
             "url": "https://github.com/luckynumb3rs/stremio-perfect-setup"
@@ -584,11 +661,21 @@
           "direction": "desc"
         },
         {
+          "__if": "inputs.language == high",
+          "key": "language",
+          "direction": "desc"
+        },
+        {
           "key": "resolution",
           "direction": "desc"
         },
         {
           "key": "quality",
+          "direction": "desc"
+        },
+        {
+          "__if": "inputs.language == medium",
+          "key": "language",
           "direction": "desc"
         },
         {
@@ -600,6 +687,7 @@
           "direction": "desc"
         },
         {
+          "__if": "inputs.language == default",
           "key": "language",
           "direction": "desc"
         },
@@ -614,11 +702,31 @@
           "direction": "desc"
         },
         {
+          "__if": "inputs.seeders == high",
+          "key": "seeders",
+          "direction": "desc"
+        },
+        {
+          "__if": "inputs.language == high",
+          "key": "language",
+          "direction": "desc"
+        },
+        {
           "key": "resolution",
           "direction": "desc"
         },
         {
           "key": "quality",
+          "direction": "desc"
+        },
+        {
+          "__if": "inputs.seeders == medium",
+          "key": "seeders",
+          "direction": "desc"
+        },
+        {
+          "__if": "inputs.language == medium",
+          "key": "language",
           "direction": "desc"
         },
         {
@@ -630,10 +738,12 @@
           "direction": "desc"
         },
         {
+          "__if": "inputs.seeders == default",
           "key": "seeders",
           "direction": "desc"
         },
         {
+          "__if": "inputs.language == default",
           "key": "language",
           "direction": "desc"
         },

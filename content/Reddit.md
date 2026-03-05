@@ -117,16 +117,21 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 4. Click "**Use this Template Now**".
 5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any), and click "**Next**".
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
-   * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
-   * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **Formatter Style**: Here you can choose the formatting of the stream information view.
       * ***Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
       * ***Colorful Icons*** contains a colored version with more graphical icons.
-      * ***None*** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).
-   * **Anime Addons** (not available in P2P): If enabled, anime-specific addons (SeaDex, AnimeTosho) will be added to the addon list.
-   * **Debridio** (not available in P2P): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings.
-   * **HTTP Addons**: If enabled, addons for HTTP streams will included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents. HTTP Addons are auto-included in the P2P setup (if you didn't enable a debrid service).
-   * **Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
+      * ***None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+   * **Language Options**:
+      * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
+      * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
+   * **Addon Options**:
+      * **Anime Addons** (*not available in P2P*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
+      * **Debridio** (*not available in P2P*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings.
+      * **HTTP Addons**: If enabled, addons for HTTP streams will included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents, but you can enable this even if you do use them if you want extra results. These addons rely on hoster scrapers and generally have less reliable sources, so they are disabled by default to avoid cluttering the stream list with low-quality sources for users who prefer debrid and/or P2P options.
+      * **Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
+   * **Sorting Options**:
+      * **Language Boost**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing this boost. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
+      * **Seeders Boost** (*only for P2P*): Change this if you want highest seeders to be prioritized more on the sorting order, even if they have lower Resolution/Quality/SEL Scores. In most cases, low seeders will have already been filtered out by the internal filtering (SEL).
 7. On the "**Enter Credentials**" page, enter all API keys you prepared earlier.
    * For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "*t0-free-rpdb*" directly.
 8. Click on "**Load Template**".
