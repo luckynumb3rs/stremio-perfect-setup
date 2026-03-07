@@ -297,6 +297,13 @@
   },
   "config": {
     "addonName": "AIOStreams",
+    "services": [
+      {
+        "id": "torbox",
+        "enabled": false,
+        "credentials": {}
+      }
+    ],
     "presets": [
       {
         "__if": "inputs.anime",
