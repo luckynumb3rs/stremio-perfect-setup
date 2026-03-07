@@ -72,7 +72,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 ![Preferred Language](../images/3.9.2.png)
 
-   * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the **Sorting** tab, select **Cached** on the **Sort Order Type** dropdown menu, and on the **Order** section, move **Language** to the top or wherever you want to have it. Do this also for the **Uncached** sort order type.*
+   * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the **Sorting** tab, make sure you're in the **Global** tab, and on the **Split by Cache** section, move **Language** to the top or wherever you want to have it for both the **Cached Streams** and **Uncached Streams** lists.*
 
 ![Sorting Language](../images/3.9.3.png)
 

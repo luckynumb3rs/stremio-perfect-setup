@@ -74,8 +74,8 @@ I am including this section for anyone who has any additional questions or is en
 
 ## **I want my language to be prioritized even before Quality/Resolution.**
 * In **AIOStreams**: go to **Sorting**.
-* For **Sort Order Type: Cached**, move **Language** to the top (or where you want it).
-* Repeat for **Sort Order Type: Uncached**.
+* For the **Split by Cache: Cached Streams** list in the **Global** tab, move **Language** to the top (or wherever you want it).
+* Repeat for the **Split by Cache: Uncached Streams** list.
 
 ![Sorting Language](../images/3.8.5.png)
 

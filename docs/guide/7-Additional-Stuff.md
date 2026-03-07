@@ -34,7 +34,7 @@ The **AIOStreams** template you used from this guide includes multiple optimizat
 
 * When you load the **AIOStreams** template provided in this guide, you have the option to prioritize **Language** and **Seeders** if needed according to your preferences.
 
-* **However**, if you want to fine-tune the **Sorting** order yourself, in **AIOStreams** go to **Sorting**, select **Cached** or **Uncached** from **Sort Order Type** and change the order.
+* **However**, if you want to fine-tune the **Sorting** order yourself, in **AIOStreams** go to **Sorting**, make sure you're on the **Global** tab, then in the **Split by Cache** section, arrange the order for the **Cached Streams** and **Uncached Streams** lists.
 
 
 ## Alternative Stream Information Icons
@@ -46,7 +46,7 @@ If you went with the ***Flat Monochrome Icons*** for the formatter and want inst
 {stream.encode::exists["🎞️  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}
 {stream.audioTags::exists["🎵  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["🎧  {stream.audioChannels::join(' · ')} "||""]}
 {stream.size::>0::and::stream.seasonPack::istrue["🗃️  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
-{stream.proxied::istrue["🛡️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
+{stream.proxied::istrue["🛡️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
 {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
 {stream.message::exists["ℹ️ {stream.message::smallcaps}"||""]}
 ```
@@ -58,7 +58,7 @@ Alternatively, if you went for the ***Colorful Icons*** version and would prefer
 {stream.encode::exists["▣  {stream.encode}  "||""]}{stream.visualTags::exists["✦  {stream.visualTags::join(' · ')}  "||""]}
 {stream.audioTags::exists["♬  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["☊  {stream.audioChannels::join(' · ')} "||""]}
 {stream.size::>0::and::stream.seasonPack::istrue["⧉  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["◧  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["⟳ {stream.age}"||""]}
-{stream.proxied::istrue["⛊ "||"⛉ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}𖧧  "||""]}
+{stream.proxied::istrue["⛊ "||"⛉ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}𖧧  "||""]}
 {stream.languages::exists["⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
 {stream.message::exists["🛈 {stream.message::smallcaps}"||""]}
 ```
@@ -90,6 +90,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 
 **Provider & Delivery**
 * ⛊ / ⛉ or 🛡️ / 🛠️ **[Provider] Addon** → Debrid Service (if applicable) & Scraper (proxied or unproxied)
+* **TYPE** → Stream Type (P2P/HTTP/LIVE/USENET/NNTP/YOUTUBE/ARCHIVE/EXTERNAL/STATISTIC/INFO/ERROR)
 * ⇋ **Seeders** 𖧧 / 🌱 → Number of seeders for torrents (higher = more reliable)
 
 **Languages**
