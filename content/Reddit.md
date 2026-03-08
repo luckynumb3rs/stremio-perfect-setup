@@ -234,7 +234,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    2. Click on "**Get Started**".
    3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
    4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
-   5. In the "**Poster Rating Provider**" section, select RPDB, and enter "*t0-free-rpdb*" in the API key field.
+   5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
    6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
    7. Click on "**Next: Install**" and click on "**Save & Install**".
    8. Click "**Install on Web**" and install the add-on on Stremio.
