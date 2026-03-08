@@ -106,6 +106,14 @@
         ]
       },
       {
+        "id": "languagesRequired",
+        "name": "🔒 Show Only Preferred Languages",
+        "description": "If enabled (recommended), only streams in the selected languages above will be shown (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.",
+        "type": "boolean",
+        "required": false,
+        "default": true
+      },
+      {
         "id": "subtitles",
         "name": "💬 Preferred Subtitles",
         "description": "Select the subtitles that should be loaded when opening a stream. Change them in **Addons → SubHero** after import if you want.",
@@ -785,7 +793,17 @@
     "requiredQualities": [],
     "excludedLanguages": [],
     "includedLanguages": [],
-    "requiredLanguages": [],
+    "requiredLanguages": {
+      "__if": "inputs.languagesRequired",
+      "__value": [
+        "{{inputs.languages}}",
+        "Original",
+        "Dual Audio",
+        "Multi",
+        "Dubbed",
+        "Unknown"
+      ]
+    },
     "preferredLanguages": [
       "{{inputs.languages}}",
       "Original",

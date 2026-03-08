@@ -123,6 +123,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       * ***None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
    * **Language Options**:
       * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
+      * **Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
       * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **Addon Options**:
       * **Anime Addons** (*not available in P2P*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
@@ -269,7 +270,15 @@ I hope you like my configuration, but of course you can modify it any way you wa
 
 # 🛠️ Additional Stuff
 
-If you want to understand how the streams are sorted or further optimizations provided in the template here, want to be able to read what all the icons on the stream information view mean, want more colorful icons in there, some Trakt alternatives, or have heard about Usenet and want to explore that as an option too, go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
+If you want to:
+
+* [understand how the streams are sorted, selected, and filtered out](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#smart-stream-selection--sorting),
+* [be able to read what all the icons on the stream information view mean](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view),
+* [have more colorful icons in the stream information view](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#alternative-stream-information-icons),
+* [check out some Trakt alternatives](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives),
+* [eplore Usenet because you've heard about it and want to explore it](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#usenet),
+
+then click the links directly or go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
 
 ---
 

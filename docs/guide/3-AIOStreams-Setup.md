@@ -38,6 +38,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       * ***None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
    * **Language Options**:
       * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
+      * **Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
       * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **Addon Options**:
       * **Anime Addons** (*not available in P2P*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
