@@ -84,7 +84,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 ![Save Configuration](../images/3.10.png)
 
-11. Click "**Install**" and install the add-on on Stremio.
+11. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
 
 ![Install Addon](../images/3.11.png)
 

@@ -151,7 +151,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
    * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOStreams account.*
    * *If you get an error when saving that says "Failed to fetch manifest..." and/or "502 - Bad Gateway", it means the addons mentioned there are temporarily offline. Go to **Addons → Installed Addons**, disable the problematic addons mentioned, and proceed with saving. Go back at a later time to re-enable the addons and save again.*
-11. Click "**Install**" and install the add-on on Stremio.
+11. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
 
 * ***NOTE FOR LATER:***
    * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
@@ -187,7 +187,7 @@ Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.
 6. Go to the "**Configuration**" tab again and click on "**Save Configuration**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
    * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOMetadata account.*
-7. Click "**Install**" and install the add-on on Stremio.
+7. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
    * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
    * *If you didn't want to get an API key for Gemini, go to the **Search** tab and disable **AI-Powered Search** to be able to save.*
 
