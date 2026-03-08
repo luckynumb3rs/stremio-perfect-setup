@@ -269,7 +269,7 @@ I hope you like my configuration, but of course you can modify it any way you wa
 
 # 🛠️ Additional Stuff
 
-If you want to understand how the streams are sorted in the configuration donwloaded here, or want to understand what all the icons on the stream information view mean, or want more colorful icons in there, go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
+If you want to understand how the streams are sorted or further optimizations provided in the template here, want to be able to read what all the icons on the stream information view mean, want more colorful icons in there, some Trakt alternatives, or have heard about Usenet and want to explore that as an option too, go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
 
 ---
 
