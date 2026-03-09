@@ -884,7 +884,7 @@
       "usenet"
     ],
     "digitalReleaseFilter": {
-      "enabled": true,
+      "enabled": false,
       "requestTypes": [
         "movie",
         "series",
