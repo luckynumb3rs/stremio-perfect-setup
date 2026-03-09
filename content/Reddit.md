@@ -4,7 +4,7 @@
 
 **✨ NEW: Check out the extended guide with screenshots [**HERE**](https://luckynumb3rs.github.io/stremio-perfect-setup/).**
 
-After a few iterations trying out what works and what doesn't for me, and testing various add-ons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
+After a few iterations trying out what works and what doesn't for me, and testing various addons, I think I have reached the optimal Stremio setup. Of course it's a matter of taste and everyone has different preferences, but I will share my guide here for anyone interested, or at least get started easily and then modify in reverse whatever changes they want. So here it is completely from scratch:
 
 **Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.**
 
@@ -155,6 +155,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 11. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
 
 * ***NOTE FOR LATER:***
+   * *If you use a debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a debrid configured, but just making sure you know.*
    * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
    * *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
    * ***AIOStreams** is a very powerful tool offering a lot of options. Although the template provided here for it should be more than enough for all kinds of normal usage, if you are interested in tinkering with it and customizing each detail, you can check out [**this**](https://docs.aiostreams.viren070.me/) guide directly from the developer, Viren, which is also very comprehensive and documents all configuration options for AIOStreams.*
@@ -210,7 +211,7 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
    5. Press **Enter** or click **Login**.
 2. Once authenticated and the options become available, in section "**2 - Options**" you can download a backup first just to be safe.
 3. Enable all three patches: "**Remove Cinemeta Search**", "**Remove Cinemeta Catalogs**", and "**Remove Cinemeta Metadata**".
-4. Scroll down to "**Manage Addons**" and change the order of the add-ons to this:
+4. Scroll down to "**Manage Addons**" and change the order of the addons to this:
    1. *Cinemeta*
    2. *AIOMetadata*
    3. *AIOStreams*
@@ -239,7 +240,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
    6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
    7. Click on "**Next: Install**" and click on "**Save & Install**".
-   8. Click "**Install on Web**" and install the add-on on Stremio.
+   8. Click "**Install on Web**" and install the addon on Stremio.
    * ***Notes:***
       * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
       * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
@@ -255,6 +256,15 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    8. The lists created by CouchMoney should show up here.
    9. Add them to your Catalog and order them as you wish.
    * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
+
+* [*Honorable Mention*] **Watch Next**:
+   * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
+   * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
+   * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
+      1. Go directly to [**Addons in Stremio Web**](https://web.stremio.com/#/addons) or open your Stremio app and go to **Addons**.
+      2. Click on "**Add Addon**" and paste [**this**](https://099757617587-watch-next.baby-beamup.club/manifest.json) link on the field.
+      3. Click "**Add**" and that's it!
+   * Now, every time you open a show, beside the **AIOStreams** tab which will show the available streams for it, there will also be a "**Watch Next**" tab showing similar/related content that you might like.
 
 And now you're really done! Check out the [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) and [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff.md) if you want to tweak it further.
 

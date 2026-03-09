@@ -23,7 +23,7 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
 ![Enable Patches](../images/5.3.png)
 
-4. Scroll down to "**Manage Addons**" and change the order of the add-ons to this:
+4. Scroll down to "**Manage Addons**" and change the order of the addons to this:
    1. *Cinemeta*
    2. *AIOMetadata*
    3. *AIOStreams*

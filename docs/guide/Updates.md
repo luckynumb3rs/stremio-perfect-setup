@@ -42,5 +42,5 @@ As for **AIOMetadata**, there's normally not as many changes as AIOStreams so yo
       3. Go to the [**new**](https://aiometadata.fortheweak.cloud/) instance.
       4. Sign in with the existing **UUID** and **Password** you got when you set up AIOMetadata in the old instance (the accounts are migrated to the new domain, so you don't have to configure it again here).
       5. Go to the "**Configuration**" tab again and click on "**Save Configuration**".
-      6. Click "**Install**" which will appear and install the add-on on Stremio.
+      6. Click "**Install**" which will appear and install the addon on Stremio.
       7. Go to the [**Cinebye**](https://cinebye.elfhosted.com/) instance, log in there with your Stremio account or with the AuthKey and reorder the addons again as described on the guide. You don't need to reapply the patches in section "**2 - Options**", just reorder the addons in the "**Manage Addons**" section, and "**Sync**".

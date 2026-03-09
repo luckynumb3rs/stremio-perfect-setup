@@ -90,6 +90,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 
 * ***NOTE FOR LATER:***
+   * *If you use a debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a debrid configured, but just making sure you know.*
    * *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
 
 ![Change Fetching](../images/3.12.1.png)

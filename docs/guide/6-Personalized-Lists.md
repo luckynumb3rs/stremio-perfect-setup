@@ -20,7 +20,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
    6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
    7. Click on "**Next: Install**" and click on "**Save & Install**".
-   8. Click "**Install on Web**" and install the add-on on Stremio.
+   8. Click "**Install on Web**" and install the addon on Stremio.
    * ***Notes:***
       * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
       * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
@@ -40,6 +40,17 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
 ![CouchMoney](../images/6.2.png)
+
+* [*Honorable Mention*] **Watch Next**:
+   * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
+   * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
+   * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
+      1. Go directly to [**Addons in Stremio Web**](https://web.stremio.com/#/addons) or open your Stremio app and go to **Addons**.
+      2. Click on "**Add Addon**" and paste [**this**](https://099757617587-watch-next.baby-beamup.club/manifest.json) link on the field.
+      3. Click "**Add**" and that's it!
+   * Now, every time you open a show, beside the **AIOStreams** tab which will show the available streams for it, there will also be a "**Watch Next**" tab showing similar/related content that you might like.
+
+![Watch Next](../images/6.3.png)
 
 And now you're really done! Check out the [**❓ Configuration Q&A**](8-Configuration-QA.md) and [**🛠️ Additional Stuff**](7-Additional-Stuff.md) if you want to tweak it further.
 
