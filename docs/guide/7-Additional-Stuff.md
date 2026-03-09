@@ -86,7 +86,7 @@ Prioritize streams that are ⚡ **cached**, high resolution, strong score (◆),
 If you went with the ***Flat Monochrome Icons*** for the formatter and want instead more ***Colorful Icons*** on the stream information view, you can go to the **Formatter** tab in **AIOStreams**, and replace the text in the **Description Template** with this:
 
 ```
-{stream.edition::exists["🎬  {stream.edition} "||""]}
+{stream.editions::exists["🎬  {stream.editions} "||""]}
 {stream.encode::exists["🎞️  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}
 {stream.audioTags::exists["🎵  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["🎧  {stream.audioChannels::join(' · ')} "||""]}
 {stream.size::>0::and::stream.seasonPack::istrue["🗃️  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
@@ -98,7 +98,7 @@ If you went with the ***Flat Monochrome Icons*** for the formatter and want inst
 Alternatively, if you went for the ***Colorful Icons*** version and would prefer the ***Flat Monochrome Icons*** instead, replace the text in the **Description Template** with this:
 
 ```
-{stream.edition::exists["▶︎  {stream.edition} "||""]}
+{stream.editions::exists["▶︎  {stream.editions} "||""]}
 {stream.encode::exists["▣  {stream.encode}  "||""]}{stream.visualTags::exists["✦  {stream.visualTags::join(' · ')}  "||""]}
 {stream.audioTags::exists["♬  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["☊  {stream.audioChannels::join(' · ')} "||""]}
 {stream.size::>0::and::stream.seasonPack::istrue["⧉  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["◧  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["⟳ {stream.age}"||""]}
