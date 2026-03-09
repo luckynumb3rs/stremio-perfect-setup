@@ -492,7 +492,13 @@
           ],
           "mediaTypes": [],
           "useMultipleInstances": false,
-          "showTorrentLinks": true
+          "showTorrentLinks": {
+            "__switch": "services",
+            "cases": {
+              "": true
+            },
+            "default": false
+          }
         }
       },
       {
