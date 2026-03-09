@@ -41,7 +41,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
 
 ![CouchMoney](../images/6.2.png)
 
-* [*Honorable Mention*] **Watch Next**:
+* **Watch Next** [*Honorable Mention*]:
    * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
    * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
    * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:

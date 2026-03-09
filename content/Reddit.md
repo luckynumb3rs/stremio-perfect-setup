@@ -257,7 +257,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    9. Add them to your Catalog and order them as you wish.
    * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
-* [*Honorable Mention*] **Watch Next**:
+* **Watch Next** [*Honorable Mention*]:
    * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
    * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
    * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
@@ -298,24 +298,8 @@ If you followed this guide and are encountering issues or have configuration que
 
 # 🔔 Updates
 
-To do a regular update when a new version of the template for **AIOStreams** is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup, but here's a short summary again:
-1. Sign in to your **AIOStreams** instance with your **UUID** and **Password**.
-   * *Just to make sure in case you have an old template, go to **Filters** tab, then both in **Stream Expression** and **Regex** respectively, delete all entries configured there (with the red "trash can" button to the right).*
-2. Go to the **Save & Install** tab, click "**Import**", "**Import Template**", paste the [**template link**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json) and click on "**Go**".
-3. Click "**Use this Template Now**".
-5. On the "**Select Services**" page that is shown, enable the Debrid services you are already using (or click "*Skip*" if you don't use any), and click "**Next**".
-6. On the "**Enter Credentials**" page, since you're loading the template over your existing configuration, all API keys needed should already be filled. Otherwise, enter any missing ones.
-7. Click on "**Load Template**" and the template is loaded.
-8. **IMPORTANT**: If you made any changes to the configuration after you loaded it when you did the setup for the first time, you may need to do them again (e.g. language changes such as subtitles and language preferences, any addon modifications, etc.).
-9. Click on "**Save**" on the "**Save & Install**". No need to install the addon on Stremio again.
+To do a regular update when a new version of the template for **AIOStreams** is announced/released on this guide (*you can check the version number on the title of the guide*), unless described otherwise in specific updates listed further down, you can simply load the template again by following the same steps on the AIOStreams setup section.
 
-As for **AIOMetadata**, there's normally not as many changes as AIOStreams so you shouldn't need to perform any updates unless explicitly required, so here are the steps if needed:
-1. Sign in to your **AIOMetadata** instance with your **UUID** and **Password**.
-2. Go to the "**Configuration**" tab, click "**Import Configuration**", and load the downloaded [**configuration file**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json).
-3. **IMPORTANT**: If you made any changes to the configuration after you loaded it when you did the setup for the first time, you may need to do them again (e.g. enabled/disabled/added/removed catalogs, changed any anime settings, etc.).
-4. On the same "**Configuration**" tab, click "**Save Configuration**".
+As for **AIOMetadata**, there's normally not as many changes as AIOStreams so you shouldn't need to perform any updates unless explicitly mentioned, but you can also load the configuration again when necessary.
 
->**SPECIFIC UPDATES** 
->1. Since the new version of AIOStreams was just released, with a few new features, I have updated and of course improved my ready-to-use AIOStreams template used in this guide. If you already set up AIOStreams through this guide before this announcement, I would definitely recommend to update to the new template. Instructions are at the end of this post. 
->2. Also, **VERY IMPORTANT**, for those of you that configured **AIOStreams** and/or **AIOMetadata** on the *ForTheWeak* instances (compare your links with these: [*aiostreamsfortheweak.nhyira.dev*](https://aiostreamsfortheweak.nhyira.dev/) and [*aiometadatafortheweak.nhyira.dev*](https://aiometadatafortheweak.nhyira.dev/)), coincidentally it was also announced [here](https://www.reddit.com/r/StremioAddons/comments/1r0jgzm/fortheweak_domain_migration/) that those instances are being migrated to a new domain, so you're going to have to migrate your AIOStreams & AIOMetadata configurations on the new instances since the ones you used will be closed after a transitory phase. Not to worry though, it's easy. Read below.
->* Go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide for more information.
+Go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide to learn more.
