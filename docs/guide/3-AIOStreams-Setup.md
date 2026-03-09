@@ -98,3 +98,4 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 ![Disable Matching](../images/3.12.2.png)
 
+   * ***AIOStreams** is a very powerful tool offering a lot of options. Although the template provided here for it should be more than enough for all kinds of normal usage, if you are interested in tinkering with it and customizing each detail, you can check out [**this**](https://docs.aiostreams.viren070.me/) guide directly from the developer, Viren, which is also very comprehensive and documents all configuration options for AIOStreams.*
