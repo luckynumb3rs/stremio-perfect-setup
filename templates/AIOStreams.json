@@ -901,6 +901,8 @@
     "mergedCatalogs": [],
     "titleMatching": {
       "enabled": true,
+      "mode": "contains",
+      "similarityThreshold": 0.75,
       "requestTypes": [
         "movie",
         "series",
@@ -910,6 +912,7 @@
     },
     "yearMatching": {
       "enabled": true,
+      "strict": false,
       "requestTypes": [
         "movie",
         "series",
@@ -919,7 +922,7 @@
     },
     "seasonEpisodeMatching": {
       "enabled": true,
-      "strict": true,
+      "strict": false,
       "requestTypes": [
         "movie",
         "series",
