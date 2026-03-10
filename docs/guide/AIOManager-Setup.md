@@ -47,7 +47,7 @@ AIOManager has a lot of options to manage addons: install, configure, order, rem
 * **Bulk Actions**:
    * **Force Reinstall All**: Refresh the addon installations (*good when making changes to AIOMetadata catalogs, just like refreshing with Cinebye*).
    * **Save All to Library**: Save addons in the personal addons library (**Saved Addons** tab) so that you can reuse them in another account or keep them for later.
-   * **Protect All**: Lock all addons from being deleted inadvertently.
+   * **Protect/Unprotect All**: Lock or unlock all addons from being deleted inadvertently.
    * **Enable/Disable All**: Enable or disable all addons in your Stremio account.
 * **Install**: Install a new addon in the account through the manifest URL.
 * For each addon, you can press:
@@ -57,7 +57,10 @@ AIOManager has a lot of options to manage addons: install, configure, order, rem
    * **Reinstall** to refresh the installation if needed.
    * **Remove** to uninstall the addon.
    * **Enable/Disable** the addon through the toggle (which will actually install/remove it on the Stremio account every time you toggle).
-   * **Protect**: Lock the addon from being deleted inadvertently.
+   * **Three Dots Menu**:
+      * **Protect/Unprotect** the addon from being deleted inadvertently.
+      * **Clone** to copy the addon into another account.
+      * **Deploy to all** to copy the addon into all other accounts directly.
 * While inside an account, if you click on "**Select**" and select one or more addons, you will also see options for them, including a **Save** option to save them to the library.
 * If you go back to the **Accounts** tab where you see your Stremio accounts, you can click "**Select**", select an account, and then click on "**Bulk Actions**".
    * Here you will see many options that you can do between accounts, including **Mirror from Account**, which can copy the entire account setup (addons and order) into another account.
@@ -69,8 +72,9 @@ Here's a screenshot of how an account with installed addons looks like (*see Aut
 * The **Saved Addons** tab contains your personal addon library.
    * Here you can add the URLs of any addon manifest/configuration you want and keep it stored regardless of a Stremio account.
    * You can use *Profiles* and *Tags* to organize them, which makes it easier to install or remove them from accounts in bulk.
+   * **Tip**: Click **Edit** from the three dots on the right of an addon you added here, and enable "**Keep in sync with installed versions**" to keep the addon synced everywhere, for example to update automatically if you change the name or the manifest URL.
 * The **Activity** and **Metrics** tabs show the watch activity and some fun analytics of the accounts you have added.
-* The **Replay** tab is a very cool feature inspired by Apple Music Replay / Spotify Wrapped, where you can see a lot of visually beautiful statistics and exciting information about the watching behavior of all your accounts.
+* The **Replay** tab is a very cool feature inspired by Apple Music Replay / Spotify Wrapped, where you can see a lot of visually beautiful statistics and exciting information about the watching behavior of all your accounts. You can have an aggregated view for all accounts, or select which account and/or which year or month you want to view. If you scroll to the bottom, you can also get a *shareable link* so others can view directly without an AIOManager account.
 
 ## Autopilot (Automatic Failover)
 
