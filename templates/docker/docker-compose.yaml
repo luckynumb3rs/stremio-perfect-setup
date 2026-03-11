@@ -1,0 +1,30 @@
+services:
+  aiostreams:
+    image: ghcr.io/viren070/aiostreams:latest
+    restart: unless-stopped
+    ports:
+      - "${PORT}:3000"
+    environment:
+      PORT
+      BASE_URL
+      ADDON_PASSWORD
+      SECRET_KEY
+      DATABASE_URI
+      AIOSTREAMS_AUTH
+      ANIME_DB_LEVEL_OF_DETAIL
+      ADDON_PROXY
+      ADDON_PROXY_CONFIG
+      WHITELISTED_SEL_URLS
+      WHITELISTED_REGEX_PATTERNS_URLS
+      TEMPLATE_URLS
+      COMET_URL
+      MEDIAFUSION_URL
+      JACKETTIO_URL
+      STREMTHRU_STORE_URL
+      METEOR_URL
+    depends_on:
+      - warproxy
+
+  warproxy:
+    image: ghcr.io/kingcc/warproxy:latest
+    restart: unless-stopped
