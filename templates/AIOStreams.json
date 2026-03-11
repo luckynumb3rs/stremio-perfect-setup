@@ -305,6 +305,12 @@
   },
   "config": {
     "addonName": "AIOStreams",
+    "serviceWrap": {
+      "__if": "services",
+      "__value": {
+        "enabled": true
+      }
+    },
     "services": [
       {
         "id": "torbox",
