@@ -1,3 +1,0 @@
-FROM koyeb/docker-compose
-COPY . /app
-RUN cp /app/templates/docker/docker-compose.yaml /app/docker-compose.yaml
