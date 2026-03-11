@@ -97,9 +97,9 @@ The best use of this feature would be for the **AIOStreams** and **AIOMetadata**
 
 ![Order Addons](../images/9.3.png)
 
-7. Go to "**Failover Rules**" (*below the name of the opened account*).
-8. In the "**Create New Autopilot Rule**" section, select the *main* addon on the first dropdown marked "*1*" and the *backup* addon on the second dropdown marked "*2*".
-   * *If the addons have the same name, remember the order you set them earlier, they will show in that order here.*
+7. Go to "**Failover Rules**" (*below the name of the opened account*), then "**Autopilot Rules**", then click on "**+ New Rule**".
+8. In the "**Create New Autopilot Rule**" page, select the *main* addon on the first dropdown marked "**Tier 1**" and the *backup* addon on the second dropdown marked "**Tier 2**".
+   * *To tell them apart if the addons have the same name, remember the order you set them earlier, they will show in that order here.*
 9. Click "**Enable Autopilot**".
 10. The rule will be stored and shown further down. Make sure it shows as **Enabled** on the toggle.
    * *You can delete the rule you created if you don't want it anymore later by pressing the trash can button.*
