@@ -22,7 +22,7 @@ First, let's start by creating the accounts (those who already have them can ski
       * *The choice is yours. TorBox would be very practical and cheaper for multiple screens or families, but Real-Debrid would MAYBE provide more immediately available options. I myself use **both** (you can enable both in AIOStreams, and considering the prices for both, it's still cheap): I use TorBox as my main, because my family can safely use it simultaneously, and I also keep a backup Real-Debrid, in case it may happen that Real-Debrid has a result that TorBox doesn't immediately have (always keeping in mind though that Real-Debrid only allows 1 connection, hence as a backup only).*
    * *ONLY AFTER you registered to one or both services from the links above and subscribed to a plan (and paid for it), you can get the **API key** while logged in to your account directly on [**this**](https://real-debrid.com/apitoken) link for Real-Debrid or [**here**](https://torbox.app/settings?section=account) for TorBox.*
 
-![TorBox & Real-Debrid API Key](../images/1.2.2.png)
+   ![TorBox & Real-Debrid API Key](../images/1.2.2.png)
 
 3. Create a free [**Trakt**](http://www.trakt.tv) account.
    * *This is recommended for tracking what you watch, and getting some custom lists. Makes the Stremio experience more like Netflix. If your account is new, rate or mark as watched at least 10 movies and 10 shows, it will be good for creating custom lists later below, otherwise they won't work.*
@@ -36,7 +36,7 @@ First, let's start by creating the accounts (those who already have them can ski
    6. When successful, you will get taken to a page that reads "*You are currently on the Free Developer plan.*", and click on "**Access your API key details here**".
    7. Copy the "**API Read Access Token**" and the "**API Key**".
 
-![TMDB API Key](../images/1.4.png)
+   ![TMDB API Key](../images/1.4.png)
 
 5. Create a [**TVDB**](https://www.thetvdb.com/) account and get a free API key:
    * *TVDB is used for the metadata (descriptions, cast, etc.) of Series.*
@@ -46,7 +46,7 @@ First, let's start by creating the accounts (those who already have them can ski
    4. Make sure "**Less than $50k per year**" is selected in "*Company / Project Revenue*", fill the rest with whatever info (doesn't have to be correct), and click "**Submit**".
    5. Copy the API key that is shown on the "*API Signup Success*" page.
 
-![TVDB API Key](../images/1.5.png)
+   ![TVDB API Key](../images/1.5.png)
 
 6. Create a **Google/Gmail** account if you don't have one, and get a free **Gemini** API key:
    * *Optional, but recommended for AI searches, to search not only for movie or show names, but also e.g. "movies like Batman" or more complex searches.*
@@ -56,7 +56,7 @@ First, let's start by creating the accounts (those who already have them can ski
    4. Click on the clickable link on the "**Key**" column, and copy the "**API Key**".
    * *If no key is created automatically, just create one by clicking "Create API Key" on the top right.*
 
-![Gemini API Key](../images/1.6.png)
+   ![Gemini API Key](../images/1.6.png)
 
 7. (**Optional**) Totally optional and not a must at all, but if Trakt feels limiting with its rate limits or you want more curated lists, check out these friendly alternatives that work great with AIOMetadata:
    * **MDBList**: Perfect for discovering user-curated catalogs and tracking your watched content seamlessly.

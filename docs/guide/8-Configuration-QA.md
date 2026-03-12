@@ -50,9 +50,9 @@ I am including this section for anyone who has any additional questions or is en
 ![Trakt Scrobbling](../images/2.2.png)
 
 ## **I want Anime sources, but I am not seeing them.**
-* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (installed only if you enabled a debrid service when you loaded the template).
+* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (installed only if you enabled a debrid service and activated the Anime addons when you loaded the template).
 
-![Addon Configuration](../images/3.8.3.png)
+![Addon Configuration](../images/3.9.1.png)
 
 * In **AIOMetadata**: go to **Search** and enable both **Anime Search Engine** switches.
 
@@ -70,35 +70,35 @@ I am including this section for anyone who has any additional questions or is en
 * Put it first in **Preference Order**.
 * You can also add the language in the **Required Languages** if you want to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will be filtered out.
 
-![Preferred Language](../images/3.8.4.png)
+![Preferred Language](../images/3.9.2.png)
 
 ## **I want my language to be prioritized even before Quality/Resolution.**
 * In **AIOStreams**: go to **Sorting**.
 * For the **Split by Cache: Cached Streams** list in the **Global** tab, move **Language** to the top (or wherever you want it).
 * Repeat for the **Split by Cache: Uncached Streams** list.
 
-![Sorting Language](../images/3.8.5.png)
+![Sorting Language](../images/3.9.3.png)
 
-## **I am not happy with non-English matching. It feels like good results are being filtered out.**
+## **I am not happy with non-English results. It feels like good results are being filtered out.**
 * In **AIOStreams**: go to **Filters → Matching** and disable matching by turning off the **Enable** toggle in all three sections:
    * *Title Matching*
    * *Year Matching*
    * *Season/Episode Matching*
 
-![Disable Matching](../images/3.11.2.png)
+![Disable Matching](../images/3.12.2.png)
 
 ## **Results are coming in too slowly. How can I speed it up?**
 * In **AIOStreams**: go to **Addons → Addon Fetching Strategy** and try **Dynamic**, leave the **Exit Condition** as is, then save your config.
 * If you notice it misses good links, switch back to **Default**.
 
-![Change Fetching](../images/3.11.1.png)
+![Change Fetching](../images/3.12.1.png)
 
 ## **I feel like I am getting too few good results. What should I change?**
 * If you set fetching to **Dynamic** (**AIOStreams → Addons → Addon Fetching Strategy**), try switching back to **Default**.
 * Make sure you have enough scrapers enabled.
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the optimizations configured in the **AIOStreams** template provided in this guide and how to make changes to them.
 
-![Change Fetching](../images/3.11.1.png)
+![Change Fetching](../images/3.12.1.png)
 
 ## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a debrid service…".**
 * If you are not using debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
@@ -113,7 +113,7 @@ I am including this section for anyone who has any additional questions or is en
 ## **Titles and descriptions in Stremio are in English. Can I change the metadata language?**
 * In **AIOMetadata**: go to **General** and change **Display Language**.
 
-![Display Language](../images/4.4.2.png)
+![Display Language](../images/4.4.3.png)
 
 ## **I cannot save the AIOStreams configuration and see "Failed to fetch manifest..." and/or "502 - Bad Gateway".**
 * This usually means one or more addons are temporarily offline.
