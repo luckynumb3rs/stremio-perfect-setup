@@ -95,7 +95,7 @@ The best use of this feature would be for the **AIOStreams** and **AIOMetadata**
    * *The main and backup addon always need to be in pairs in the order, always next to each other, no other addons in-between.*
 6. Disable the *backup* addon through the toggle near the title.
 
-![Order Addons](../images/9.3.png)
+   ![Order Addons](../images/9.3.png)
 
 7. Go to "**Failover Rules**" (*below the name of the opened account*), then "**Autopilot Rules**", then click on "**+ New Rule**".
 8. In the "**Create New Autopilot Rule**" page, select the *main* addon on the first dropdown marked "**Tier 1**" and the *backup* addon on the second dropdown marked "**Tier 2**".
@@ -104,7 +104,7 @@ The best use of this feature would be for the **AIOStreams** and **AIOMetadata**
 10. The rule will be stored and shown further down. Make sure it shows as **Enabled** on the toggle.
    * *You can delete the rule you created if you don't want it anymore later by pressing the trash can button.*
 
-![Autopilot](../images/9.4.png)
+   ![Autopilot](../images/9.4.png)
 
 
 That's it! Now you have a robust Stremio setup with backup addons that automatically take over in case the primaries fail, ensuring a continuous stable and smooth experience. **Enjoy!**

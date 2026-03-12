@@ -25,7 +25,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
       * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
       * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
 
-![Watchly](../images/6.1.png)
+   ![Watchly](../images/6.1.png)
 
 * **CouchMoney**:
    1. Go to [**CouchMoney**](https://couchmoney.tv/) and click "**Login with Trakt**".
@@ -39,7 +39,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
    9. Add them to your Catalog and order them as you wish.
    * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 
-![CouchMoney](../images/6.2.png)
+   ![CouchMoney](../images/6.2.png)
 
 * **Watch Next** [*Honorable Mention*]:
    * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
@@ -50,7 +50,7 @@ So you can decide which you want to use (or both!) and here are the steps for ea
       3. Click "**Add**" and that's it!
    * Now, every time you open a show, beside the **AIOStreams** tab which will show the available streams for it, there will also be a "**Watch Next**" tab showing similar/related content that you might like.
 
-![Watch Next](../images/6.3.png)
+   ![Watch Next](../images/6.3.png)
 
 And now you're really done! Check out the [**❓ Configuration Q&A**](8-Configuration-QA.md) and [**🛠️ Additional Stuff**](7-Additional-Stuff.md) if you want to tweak it further.
 

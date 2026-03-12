@@ -126,7 +126,7 @@ This is totally optional, but if you're looking for Trakt alternatives, or simpl
    9. Optional, but recommended: If you want to add popular and curated catalogs from **MDBList**, you can scroll further down on this page to the "**Popular Lists from Featured Curators**" section, click on one of the users showing there (e.g. *Snoak* or *Dan Pyjama*), and their lists will load. Select the lists you are interested in, and click on "**Import Selected Lists**". *Some lists are similar to the Trakt lists already provided in the AIOMetadata configuration downloaded from this guide, specifically the **snoak** user lists (named "Latest..."), so if you add them from MDBList, disable the provided Trakt lists to avoid duplicates.*
    10. Click "**Save & Close**", arrange the newly added catalogs however you like, and don't forget to **Save** the changes by going to the **Configuration** tab.
 
-![MDBList](../images/7.1.png)
+   ![MDBList](../images/7.1.png)
 
 * **Simkl**:
    1. Create an account on [**Simkl**](https://simkl.com/).
@@ -138,7 +138,7 @@ This is totally optional, but if you're looking for Trakt alternatives, or simpl
    7. You can add any catalogs you want while still on the page once connected, and then click on "**Close**".
    8. Arrange the newly added catalogs however you like, and don't forget to **Save** the changes by going to the **Configuration** tab.
 
-![Simkl](../images/7.2.png)
+   ![Simkl](../images/7.2.png)
 
 
 ## Usenet
