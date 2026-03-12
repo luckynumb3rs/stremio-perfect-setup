@@ -75,7 +75,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
    * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the **Sorting** tab, make sure you're in the **Global** tab, and on the **Split by Cache** section, move **Language** to the top or wherever you want to have it for both the **Cached Streams** and **Uncached Streams** lists.*
 
-   ![Sorting Language](../images/3.9.3.png)
+      ![Sorting Language](../images/3.9.3.png)
 
 10. Go to the "**Save & Install**" tab, enter a password on the "**Create Configuration**" section, and click "**Create**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
