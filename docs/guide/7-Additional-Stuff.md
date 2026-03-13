@@ -107,6 +107,14 @@ Alternatively, if you went for the ***Colorful Icons*** version and would prefer
 {stream.message::exists["🛈 {stream.message::smallcaps}"||""]}
 ```
 
+The **Name Template** is the same for both, but just for reference in case you might need it, here it is again:
+
+```
+{service.cached::istrue["⚡ "||""]}{service.cached::isfalse["⏳ "||""]}{stream.type::=p2p["🧲 "||""]}{stream.type::=http["🌐 "||""]}{stream.type::=live["📺 "||""]}{stream.type::=youtube["▶️ "||""]}{stream.type::=archive["🗄️ "||""]}{stream.type::=external["↗️ "||""]}{stream.type::=statistic["📊 "||""]}{stream.type::=info["ℹ️ "||""]}{stream.type::=error["⛔ "||""]}{stream.resolution::exists["{stream.resolution::replace('2160p','UHD ⁴ᴷ')::replace('1440p','QHD ²ᴷ')::replace('1080p','FHD    ')::replace('p','P')}   "||""]}
+{stream.quality::exists["⌜{stream.quality::title::replace('Bluray Remux','Remux')::smallcaps}⌟    "||""]}
+{stream.nSeScore::>=10["{stream.nSeScore::pstar::replace('★','◆')::replace('⯪','⬖')::replace('☆','◇')} "||""]}
+```
+
 
 ## Enriching Your Catalogs (Trakt Alternatives)
 
