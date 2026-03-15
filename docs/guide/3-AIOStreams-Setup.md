@@ -32,23 +32,23 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    ![Select Services](../images/3.5.png)
 
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
-   * **Formatter Style**: Here you can choose the formatting of the stream information view.
+   * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
       * ***Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
       * ***Colorful Icons*** contains a colored version with more graphical icons.
       * ***None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
-   * **Language Options**:
-      * **Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
-      * **Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
-      * **Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
-   * **Addon Options**:
-      * **Anime Addons** (*not available without debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
-      * **Debridio** (*not available without debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
-      * **HTTP Addons**: If enabled, addons for **HTTP** streams will be included. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can enable this even if you do use them if you want extra results.
-      * **HTTP Addons Only**: If enabled, **only** addons for **HTTP** streams will be included, and **no debrid and P2P** options, so you can watch safely in countries where P2P is an issue, and can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results.
-      * **Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
-   * **Sorting Options**:
-      * **Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
-      * **Seeders Priority** (*only for P2P*): Change this if you want highest seeders to be prioritized more on the sorting order, even if they have lower Resolution/Quality/SEL Scores. In most cases, low seeders will have already been filtered out by the internal filtering (SEL).
+   * **🗣️ Language Options**:
+      * **🔊 Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
+      * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
+      * **💬 Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
+   * **🧩 Addon Options**:
+      * **🗡️ Anime Addons** (*not available without debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
+      * **🧊 Debridio** (*not available without debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
+      * **🌐 HTTP Addons**: If enabled, addons for **HTTP** streams will be included. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can enable this even if you do use them if you want extra results.
+      * **🔒 HTTP Addons Only**: If enabled, **only** addons for **HTTP** streams will be included, and **no debrid and P2P** options, so you can watch safely in countries where P2P is an issue, and can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results.
+      * **⏱️ Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
+   * **↕️ Sorting Options**:
+      * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
+      * **🌱 Seeders Priority** (*only for P2P*): Change this if you want highest seeders to be prioritized more on the sorting order, even if they have lower Resolution/Quality/SEL Scores. In most cases, low seeders will have already been filtered out by the internal filtering (SEL).
 
    ![Template Options](../images/3.6.png)
 
