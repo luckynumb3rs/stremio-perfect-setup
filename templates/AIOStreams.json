@@ -5,7 +5,7 @@
     "description": "This template is best combined with [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. It includes options for **Debrid**, **P2P** (torrents), and **HTTP** alternatives, and it's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering. A lot of credit goes to **Tamtaro** for the template base, recommended filters, sort orders, and SELs as described on [this](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting) GitHub repo.",
     "source": "external",
     "author": "Lucky Numb3rs",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -13,7 +13,7 @@
         "__if": "!services",
         "id": "header.p2p",
         "name": "",
-        "description": "🧲 No services selected, proceeding with **P2P** setup.",
+        "description": "No services selected, only **🧲 P2P / 🌐 HTTP** setup.",
         "type": "alert",
         "intent": "warning"
       },
@@ -209,7 +209,15 @@
       {
         "id": "httpAddons",
         "name": "🌐 HTTP Addons",
-        "description": "If enabled, addons for **HTTP** streams will be included. Good backup options for niche/older titles, or if you don't/can't use debrid and/or torrents, but you can enable this even if you do use them if you want extra results. These addons rely on hoster scrapers and generally have less reliable sources, so they are disabled by default to avoid cluttering the stream list with low-quality sources for users who prefer debrid and/or P2P options.",
+        "description": "If enabled, addons for **HTTP** streams will be included. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can enable this even if you do use them if you want extra results.",
+        "type": "boolean",
+        "required": false,
+        "default": false
+      },
+      {
+        "id": "httpAddonsOnly",
+        "name": "🔒 HTTP Addons Only",
+        "description": "If enabled, **only** addons for **HTTP** streams will be included, and **no debrid and P2P** options, so you can watch safely in countries where P2P is an issue, and can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results.",
         "type": "boolean",
         "required": false,
         "default": false
@@ -378,6 +386,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "torrentio",
         "instanceId": "tio",
         "enabled": true,
@@ -392,6 +401,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "meteor",
         "instanceId": "met",
         "enabled": true,
@@ -414,6 +424,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "comet",
         "instanceId": "com",
         "enabled": true,
@@ -435,6 +446,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "stremthruTorz",
         "instanceId": "stz",
         "enabled": true,
@@ -456,6 +468,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "mediafusion",
         "instanceId": "mdf",
         "enabled": true,
@@ -487,6 +500,7 @@
         }
       },
       {
+        "__if": "!inputs.httpAddonsOnly",
         "type": "peerflix",
         "instanceId": "pfl",
         "enabled": true,
