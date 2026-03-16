@@ -33,9 +33,9 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
    * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
-      * ***Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
-      * ***Colorful Icons*** contains a colored version with more graphical icons.
-      * ***None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+      * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
+      * **🎬 *Colorful Icons*** contains a colored version with more graphical icons.
+      * **🚫 *None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
    * **🗣️ Language Options**:
       * **🔊 Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
       * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
@@ -44,9 +44,9 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       * **🗡️ Anime Addons** (*not available without debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
       * **🧊 Debridio** (*not available without debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
       * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can select:
-         * **None** to not include any HTTP addons at all.
-         * **Install Additional HTTP Addons** to install them in addition to the debrid/P2P addons for extra results.
-         * **Install Only HTTP Addons** to not include any debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a debrid.*
+         * **🚫 None** to not include any HTTP addons at all.
+         * **➕ Install Additional HTTP Addons** to install them in addition to the debrid/P2P addons for extra results.
+         * **🔒 Install Only HTTP Addons** to not include any debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a debrid.*
       * **⏱️ Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
    * **↕️ Sorting Options**:
       * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.

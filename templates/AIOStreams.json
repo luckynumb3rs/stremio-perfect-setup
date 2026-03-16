@@ -35,7 +35,7 @@
           },
           {
             "value": "retain",
-            "label": "None (Keep Your Current)"
+            "label": "🚫 None (Keep Your Current)"
           }
         ]
       },
@@ -216,15 +216,15 @@
         "options": [
           {
             "value": "none",
-            "label": "No HTTP Addons"
+            "label": "🚫 No HTTP Addons"
           },
           {
             "value": "install",
-            "label": "Install Additional HTTP Addons"
+            "label": "➕ Install Additional HTTP Addons"
           },
           {
             "value": "only",
-            "label": "Install Only HTTP Addons"
+            "label": "🔒 Install Only HTTP Addons (Don't select with Debrid)"
           }
         ]
       },
