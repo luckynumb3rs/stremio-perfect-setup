@@ -976,7 +976,7 @@
     ],
     "dynamicAddonFetching": {
       "enabled": false,
-      "condition": "((count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'Multi','Dual Audio'),'2160p')))>=2 or count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'Unknown'),'2160p')))>=3 or count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'English'),'2160p')))>=3) and (count(regexMatched(resolution(cached(totalStreams),'2160p')))>=5 or count(regexMatched(resolution(cached(totalStreams),'1080p')))>=5)) or (count(cached(totalStreams))>=3 and totalTimeTaken>5000) or totalTimeTaken>7000"
+      "condition": "((count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'{{inputs.languages}}'),'2160p')))>=3 or count(regexMatched(resolution(language(quality(cached(totalStreams),'Bluray REMUX','Bluray','WEB-DL'),'Original','Dual Audio','Multi','Dubbed','Unknown'),'2160p')))>=5) and (count(regexMatched(resolution(cached(totalStreams),'2160p')))>=5 or count(regexMatched(resolution(cached(totalStreams),'1080p')))>=5)) or (count(cached(totalStreams))>=5 and totalTimeTaken>{{inputs.timeout}}) or (totalTimeTaken>{{inputs.timeout}}+3000)"
     },
     "groups": {
       "enabled": false,
