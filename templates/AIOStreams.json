@@ -27,7 +27,7 @@
         "options": [
           {
             "value": "flat",
-            "label": "▶︎ Flat Monochrome Icons (Default)"
+            "label": "▶︎ Flat Monochrome Icons"
           },
           {
             "value": "color",
