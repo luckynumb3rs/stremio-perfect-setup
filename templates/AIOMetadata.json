@@ -1,6 +1,5 @@
 {
-  "version": "1.30.0",
-  "exportedAt": "2026-02-20T09:42:56.538Z",
+  "version": "1.35.2",
   "config": {
     "mal": {
       "skipRecap": false,
@@ -41,6 +40,11 @@
         "tvdb.collections.search": false,
         "kitsu.search.series": false,
         "kitsu.search.movie": false
+      },
+      "engineRatingPosters": {
+        "movie": true,
+        "series": true,
+        "gemini.search": true
       }
     },
     "apiKeys": {
