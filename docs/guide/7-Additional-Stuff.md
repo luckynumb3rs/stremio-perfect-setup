@@ -75,7 +75,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 * **[ALT BEST]** → Strong Alternative (if the best fails)
 
 **Additional**
-* 🛈 / ℹ️ **MESSAGE** → Additional Informational Messages
+* ⓘ / ℹ️ **MESSAGE** → Additional Informational Messages
 
 👉 **Quick Tip:**
 Prioritize streams that are ⚡ **cached**, high resolution, strong score (◆), and reasonably sized. This usually gives the fastest start and best quality. If on P2P configuration, prioritize streams with high number of seeders.
@@ -104,7 +104,7 @@ Alternatively, if you went for the ***Colorful Icons*** version and would prefer
 {stream.size::>0::and::stream.seasonPack::istrue["⧉  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["◧  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["⟳ {stream.age}"||""]}
 {stream.proxied::istrue["⛊ "||"⛉ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}𖧧  "||""]}
 {stream.languages::exists["⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ ʙᴇsᴛ] "||""]}
-{stream.message::exists["🛈 {stream.message::smallcaps}"||""]}
+{stream.message::exists["ⓘ {stream.message::smallcaps}"||""]}
 ```
 
 The **Name Template** is the same for both, but just for reference in case you might need it, here it is again:

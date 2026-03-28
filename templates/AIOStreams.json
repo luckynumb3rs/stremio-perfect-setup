@@ -4,8 +4,9 @@
     "name": "Stremio Perfect Setup",
     "description": "This template is best combined with [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. It includes options for **Debrid**, **P2P** (torrents), and **HTTP** alternatives, and it's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering. A lot of credit goes to **Tamtaro** for the template base, recommended filters, sort orders, and SELs as described on [this](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting) GitHub repo.",
     "source": "external",
+    "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "author": "Lucky Numb3rs",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -332,9 +333,16 @@
         "credentials": {}
       }
     ],
+    "addonCategoryColors": {
+      "Anime": "orange",
+      "HTTP": "blue",
+      "Streams": "emerald",
+      "Subtitles": "purple"
+    },
     "presets": [
       {
         "__if": "inputs.anime",
+        "category": "Anime",
         "type": "seadex",
         "instanceId": "sdx",
         "enabled": true,
@@ -348,6 +356,7 @@
       },
       {
         "__if": "services and inputs.httpAddons != only",
+        "category": "Streams",
         "type": "library",
         "instanceId": "lib",
         "enabled": true,
@@ -368,6 +377,7 @@
       },
       {
         "__if": "services.torbox and inputs.httpAddons != only",
+        "category": "Streams",
         "type": "torbox",
         "instanceId": "tbx",
         "enabled": true,
@@ -382,6 +392,7 @@
       },
       {
         "__if": "inputs.debridio and inputs.httpAddons != only",
+        "category": "Streams",
         "type": "debridio",
         "instanceId": "deb",
         "enabled": true,
@@ -393,6 +404,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "torrentio",
         "instanceId": "tio",
         "enabled": true,
@@ -408,6 +420,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "meteor",
         "instanceId": "met",
         "enabled": true,
@@ -431,6 +444,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "comet",
         "instanceId": "com",
         "enabled": true,
@@ -453,6 +467,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "stremthruTorz",
         "instanceId": "stz",
         "enabled": true,
@@ -475,6 +490,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "mediafusion",
         "instanceId": "mdf",
         "enabled": true,
@@ -495,6 +511,7 @@
       },
       {
         "__if": "services and inputs.httpAddons != only",
+        "category": "Streams",
         "type": "knaben",
         "instanceId": "kna",
         "enabled": true,
@@ -507,6 +524,7 @@
       },
       {
         "__if": "inputs.httpAddons != only",
+        "category": "Streams",
         "type": "peerflix",
         "instanceId": "pfl",
         "enabled": true,
@@ -529,6 +547,7 @@
       },
       {
         "__if": "inputs.anime and inputs.httpAddons != only",
+        "category": "Anime",
         "type": "animetosho",
         "instanceId": "ato",
         "enabled": true,
@@ -543,6 +562,7 @@
       },
       {
         "__if": "inputs.httpAddons != none",
+        "category": "HTTP",
         "type": "sootio",
         "instanceId": "soo",
         "enabled": true,
@@ -570,6 +590,7 @@
       },
       {
         "__if": "inputs.httpAddons != none and inputs.debridio",
+        "category": "HTTP",
         "type": "debridio-watchtower",
         "instanceId": "dew",
         "enabled": true,
@@ -585,6 +606,7 @@
       },
       {
         "__if": "inputs.httpAddons != none",
+        "category": "HTTP",
         "type": "nuvio-streams",
         "instanceId": "nuv",
         "enabled": true,
@@ -601,6 +623,7 @@
       },
       {
         "__if": "inputs.httpAddons != none",
+        "category": "HTTP",
         "type": "webstreamr",
         "instanceId": "wst",
         "enabled": true,
@@ -626,6 +649,7 @@
         }
       },
       {
+        "category": "Subtitles",
         "type": "subhero",
         "instanceId": "sbh",
         "enabled": true,
@@ -648,7 +672,7 @@
           "id": "custom",
           "definition": {
             "name": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD ⁴ᴷ')::replace('1440p','QHD ²ᴷ')::replace('1080p','FHD    ')::replace('p','P')}   \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::smallcaps}⌟    \"||\"\"]}\n{stream.nSeScore::>=10[\"{stream.nSeScore::pstar::replace('★','◆')::replace('⯪','⬖')::replace('☆','◇')} \"||\"\"]}",
-            "description": "{stream.editions::exists[\"▶︎  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ ʙᴇsᴛ] \"||\"\"]}\n{stream.message::exists[\"🛈 {stream.message::smallcaps}\"||\"\"]}"
+            "description": "{stream.editions::exists[\"▶︎  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ ʙᴇsᴛ] \"||\"\"]}\n{stream.message::exists[\"ⓘ {stream.message::smallcaps}\"||\"\"]}"
           }
         },
         "color": {
