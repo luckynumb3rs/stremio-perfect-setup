@@ -5,6 +5,7 @@
     "description": "This template is best combined with [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. It includes options for **Debrid**, **P2P** (torrents), and **HTTP** alternatives, and it's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering. A lot of credit goes to **Tamtaro** for the template base, recommended filters, sort orders, and SELs as described on [this](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting) GitHub repo.",
     "source": "external",
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
+    "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
     "version": "1.2.6",
     "category": "Full",
