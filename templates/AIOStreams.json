@@ -7,7 +7,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "1.2.6",
+    "version": "1.3.0",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
