@@ -11,8 +11,7 @@
   --border: #dbd1f4;
   --shadow: 0 10px 24px rgba(57, 35, 116, 0.1);
   --radius: 14px;
-  --pill-bg: #f6f3ff;
-  --pill-border: #cfc6ef;
+  --pill-bg: rgba(109, 58, 242, 0.12);
   --pill-text: #4f4a8f;
 }
 
@@ -26,8 +25,7 @@ html[data-theme="dark"] {
   --accent-2: #b49dff;
   --border: #3a2d5b;
   --shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
-  --pill-bg: #2c2447;
-  --pill-border: #524176;
+  --pill-bg: rgba(180, 157, 255, 0.16);
   --pill-text: #efe9ff;
 }
 
@@ -220,17 +218,16 @@ a:hover { color: var(--accent-2); }
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.26rem 0.84rem;
+  padding: 0.14rem 0.5rem;
   margin: 0 0.08rem 0.12rem 0;
   border-radius: 10px;
-  border: 1px solid var(--pill-border);
   background: var(--pill-bg);
   color: var(--pill-text);
   text-decoration: none;
   font-weight: 600;
   line-height: 1.35;
-  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.06);
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease, background 160ms ease;
+  box-shadow: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, color 160ms ease, background 160ms ease;
 }
 
 .doc-card p a:hover,
@@ -239,9 +236,8 @@ a:hover { color: var(--accent-2); }
 .doc-card td a:hover,
 .quick-nav a:hover {
   color: var(--text);
-  border-color: var(--accent);
-  background: var(--pill-bg);
-  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.09);
+  background: color-mix(in srgb, var(--pill-bg) 88%, transparent 12%);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 
