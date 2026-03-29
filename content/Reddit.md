@@ -13,8 +13,8 @@ After a few iterations trying out what works and what doesn't for me, and testin
 **If this guide helps you, please upvote this post so it remains relevant for others to find it and also benefit from it.** 😊
 
 >**NOTES**:
->* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide.*
->* ***If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
+>* *If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to* [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) *on the extended guide.*
+>* ***If you followed this guide and are encountering issues or have configuration questions**, go to* [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) *on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.*
 >* **🙏 A very explicit special THANKS** to the **Stremio** developers which goes without saying, and all the community collaborators without which we wouldn't be able to enjoy any of it: [**TamTaro**](https://ko-fi.com/tamtaro) for the template base and SEL filters, [**Vidhin**](https://ko-fi.com/vidhin) for the Regexes, and the addon developers [**Viren**](https://ko-fi.com/Viren070) for AIOStreams, [**Cedya**](https://buymeacoffee.com/cedya) for AIOMetadata, [**Sanopandit**](https://ko-fi.com/timilsinabimal) for Watchly, [**Sonic**](https://ko-fi.com/sonicx161) for AIOManager, the public addon instance hosters which make everything so much simpler for most, and anyone else I may have failed to mention. All of these people continue to develop and improve them actively together with the Stremio community, so shout out to all of them for their wonderful work, and consider buying them a coffee if you agree with me! Since a few of you have also asked about tipping me for helping, even though I did it for fun and an very happy if my guide helped you, [**here**](https://ko-fi.com/luckynumb3rs) is my coffee link :)
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
@@ -107,7 +107,7 @@ Second, let's prepare the Stremio account properly:
 Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 >**WARNING:**
->* *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
+>* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
 >* *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
 >* *You can choose an instance that says **Nightly**, and they work great, but they are instances that update very frequently and thus the steps described in this guide may not be up to date to match them. If you're a total beginner, you're probably better off with an instance that doesn't say **Nightly**.*
 >* ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
@@ -174,7 +174,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
 
 >**WARNING:**
->* *If you want to understand more what an instance means, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) on the extended guide.*
+>* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
 >* *[**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
 >* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to transfer your configuration because it's not automatically transferred.*
 >* *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
