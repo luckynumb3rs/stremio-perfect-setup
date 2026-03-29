@@ -13,6 +13,9 @@
   --radius: 14px;
   --pill-bg: rgba(109, 58, 242, 0.12);
   --pill-text: #4f4a8f;
+  --quote-bg: color-mix(in srgb, var(--accent) 7%, white 93%);
+  --quote-border: color-mix(in srgb, var(--accent) 34%, var(--border) 66%);
+  --quote-text: color-mix(in srgb, var(--text) 88%, var(--accent) 12%);
 }
 
 html[data-theme="dark"] {
@@ -27,6 +30,9 @@ html[data-theme="dark"] {
   --shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
   --pill-bg: rgba(180, 157, 255, 0.16);
   --pill-text: #efe9ff;
+  --quote-bg: color-mix(in srgb, var(--accent) 12%, var(--panel) 88%);
+  --quote-border: color-mix(in srgb, var(--accent) 42%, var(--border) 58%);
+  --quote-text: color-mix(in srgb, var(--text) 92%, var(--accent) 8%);
 }
 
 * { box-sizing: border-box; }
@@ -209,6 +215,19 @@ h2 { margin-top: 1.4rem; padding-top: 0.25rem; border-top: 1px solid var(--borde
 
 a { color: var(--accent); }
 a:hover { color: var(--accent-2); }
+
+.doc-card blockquote {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--quote-border);
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(135deg, var(--quote-bg), transparent 140%);
+  color: var(--quote-text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--quote-border) 18%, transparent 82%);
+}
+
+.doc-card blockquote > :first-child { margin-top: 0; }
+.doc-card blockquote > :last-child { margin-bottom: 0; }
 
 .doc-card p a,
 .doc-card li a,
