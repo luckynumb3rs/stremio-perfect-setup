@@ -27,7 +27,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
    ![Use Template](../images/3.4.png)
 
-5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any), and click "**Next**".
+5. On the "**Select Services**" page that is shown, enable the services you want to use and click "**Next**". If you're not using any services and want to proceed with the **P2P/HTTP** setup, click "**Skip**".
 
    ![Select Services](../images/3.5.png)
 
@@ -41,12 +41,12 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
       * **💬 Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **🧩 Addon Options**:
-      * **🗡️ Anime Addons** (*not available without debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
-      * **🧊 Debridio** (*not available without debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
-      * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can select:
+      * **🗡️ Anime Addons** (*not available without Debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
+      * **🧊 Debridio** (*not available without Debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
+      * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select:
          * **🚫 *None*** to not include any HTTP addons at all.
-         * **➕ *Install Additional HTTP Addons*** to install them in addition to the debrid/P2P addons for extra results.
-         * **🔒 *Install Only HTTP Addons*** to not include any debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a debrid.*
+         * **➕ *Install Additional HTTP Addons*** to install them in addition to the Debrid/P2P addons for extra results.
+         * **🔒 *Install Only HTTP Addons*** to not include any Debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use Debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a Debrid.*
       * **⏱️ Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
    * **↕️ Sorting Options**:
       * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
@@ -62,12 +62,12 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 9. **Optional**: At this point AIOStreams is ready, but you can keep configuring it however you like. For example, if you want to further configure the scrapers or subtitle languages, you can go to the "**Installed Addons**" tab.
    * *You can configure each of them with the Pencil button on the right if needed.*
-   * Depending on what you selected during the template options (whether you used a debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
+   * Depending on what you selected during the template options (whether you used a Debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
       1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, PeerFlix** are the ***main scrapers*** finding the sources.
-      2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a debrid service.
-      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a debrid, you don't normally need them.
+      2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a Debrid service.
+      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
       4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
-      5. **Library** is an addon that can search through your own debrid library (if you e.g. download something manually in debrid).
+      5. **Library** is an addon that can search through your own Debrid library (if you e.g. download something manually in Debrid).
       6. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
 
    ![Addon Configuration](../images/3.9.1.png)
@@ -91,7 +91,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 
 >**NOTES FOR LATER:**
->* *If you use a debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a debrid configured, but just making sure you know.*
+>* *If you use a Debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a Debrid configured, but just making sure you know.*
 >* *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
 >![Change Fetching](../images/3.12.1.png)
 >* *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*

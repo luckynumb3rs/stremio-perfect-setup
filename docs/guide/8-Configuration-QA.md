@@ -24,15 +24,15 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Remove Addons](../images/2.3.png)
 
-## **I am not using a debrid service and I want to stream via P2P torrents directly. What should I change, and what should I expect?**
-* In **AIOStreams → Addons → Installed Addons**, disable **AnimeTosho**, **SeaDex**, and **Knaben** because they do not work without a debrid service.
+## **I am not using a Debrid service and I want to stream via P2P torrents directly. What should I change, and what should I expect?**
+* In **AIOStreams → Addons → Installed Addons**, disable **AnimeTosho**, **SeaDex**, and **Knaben** because they do not work without a Debrid service.
 * You can still get anime results via the other scrapers, but they will be more limited. **SeaDex** and **AnimeTosho** usually increase the chances of finding better anime sources.
 * When streaming via torrents, keep in mind speeds can be slow, and some links can be unwatchable if there are not enough peers.
 * When torrenting, prefer links with a higher peer count (shown next to the **P2P** label).
 * See also the next question below to enable HTTP streams in addition to torrenting.
 
-## **I can't pay for a debrid service, but I also can't use P2P torrenting because it seems to be very slow, or for other reasons.**
-* The only remaining option would be direct HTTP streams, which are free, no debrid, no torrent.
+## **I can't pay for a Debrid service, but I also can't use P2P torrenting because it seems to be very slow, or for other reasons.**
+* The only remaining option would be direct HTTP streams, which are free, no Debrid, no torrent.
 * When you load the template provided in this guide on **AIOStreams**, you can skip the "**Select Services**" step, and on the "**Template Options**" step, you need to enable the "**HTTP Addons**" toggle. This will install **Sootio**, **Nuvio Streams** and **WebStreamr** addons, which provide direct HTTP streaming links. If you want you can additionally configure them with the pencil button to the right, e.g. for *WebStreamr* you can select specialty language providers.
 * The HTTP streams will show with the 🌐 icon on the stream information view.
 * The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
@@ -50,7 +50,7 @@ I am including this section for anyone who has any additional questions or is en
 ![Trakt Scrobbling](../images/2.2.png)
 
 ## **I want Anime sources, but I am not seeing them.**
-* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (installed only if you enabled a debrid service and activated the Anime addons when you loaded the template).
+* In **AIOStreams**: go to **Addons → Installed Addons** and enable **SeaDex** and **AnimeTosho** (installed only if you enabled a Debrid service and activated the Anime addons when you loaded the template).
 
 ![Addon Configuration](../images/3.9.1.png)
 
@@ -100,9 +100,9 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Change Fetching](../images/3.12.1.png)
 
-## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a debrid service…".**
-* If you are not using debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
-* If you want Knaben/SeaDex/AnimeTosho, you will need a debrid service.
+## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a Debrid service…".**
+* If you are not using Debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
+* If you want Knaben/SeaDex/AnimeTosho, you will need a Debrid service.
 
 ## **I do not have an RPDB subscription. What key should I use?**
 * Use the free RPDB key: `t0-free-rpdb` (works for both AIOStreams and AIOMetadata integrations as described in the guide).

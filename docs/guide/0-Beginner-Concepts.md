@@ -55,12 +55,12 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 * Torrenting is **peer-to-peer distribution**. A file is shared by a swarm of peers, and your client downloads pieces from multiple peers in parallel.
 * In Stremio, torrent-based stream addons can return torrent sources. When you select one, playback depends on the availability and health of that swarm.
 * The key tradeoff is reliability. Torrent playback quality is determined by peers. If a torrent has weak or unstable swarm health, buffering and failures are expected.
-* This is why many setups prioritize cached sources (via debrid) and treat direct P2P as fallback.
+* This is why many setups prioritize cached sources (via Debrid) and treat direct P2P as fallback.
 
 ## **What is a Debrid service, and why do people use it with Stremio?**
-* A debrid service acts as an intermediate layer that can fetch torrents (and often hoster links) on its own infrastructure, then serve the result to you via standard HTTPS streaming.
-* The practical benefit is caching. If a file is already cached on the debrid provider, you get fast start times and stable throughput that is not dependent on swarm health.
-* In other words: instead of you relying on random peers, you rely on the debrid provider's servers. That usually improves consistency significantly.
+* A Debrid service acts as an intermediate layer that can fetch torrents (and often hoster links) on its own infrastructure, then serve the result to you via standard HTTPS streaming.
+* The practical benefit is caching. If a file is already cached on the Debrid provider, you get fast start times and stable throughput that is not dependent on swarm health.
+* In other words: instead of you relying on random peers, you rely on the Debrid provider's servers. That usually improves consistency significantly.
 
 ## **Real-Debrid: what is it, and why would you pick it?**
 * [**Real-Debrid**](http://real-debrid.com/?id=8801126) is one of the most widely used Debrid services and is known for having a very large **cache** (files already on their servers and ready to watch immediately).

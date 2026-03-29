@@ -211,7 +211,7 @@
       {
         "id": "httpAddons",
         "name": "🌐 HTTP Addons",
-        "description": "Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can select: \n* **None** to not include any HTTP addons at all. \n* **Install Additional HTTP Addons** to install them in addition to the debrid/P2P addons. \n* **Install Only HTTP Addons** to not include any debrid/P2P addons and only use HTTP addons, if P2P is an issue for you or you can't/don't use debrid (*do not select this option if you are using a debrid*).",
+        "description": "Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select: \n* **None** to not include any HTTP addons at all. \n* **Install Additional HTTP Addons** to install them in addition to the Debrid/P2P addons. \n* **Install Only HTTP Addons** to not include any Debrid/P2P addons and only use HTTP addons, if P2P is an issue for you or you can't/don't use Debrid (*do not select this option if you are using a Debrid*).",
         "type": "select",
         "required": false,
         "default": "none",

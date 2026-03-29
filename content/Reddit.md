@@ -43,7 +43,7 @@ First, let's start by creating the accounts (those who already have them can ski
 
 1. Obviously, start by creating a new free [**Stremio**](https://www.stremio.com) account.
 2. Choose a Debrid service for caching the torrents, create an account on it, buy a subscription, and get the API key.
-   * *This is optional, but HIGHLY recommended.*
+   * *This is optional, but HIGHLY recommended. This guide also works for free **P2P** and/or **HTTP** streams only, but Debrid works much better if you can afford it.*
    * *For those who don't know, this is the only thing you will be paying for (about 32€ for Real-Debrid or $33 for TorBox for 12 months). It's used as an intermediary to serve the files to you from their servers, instead of relying on torrent which may be slow and inefficient. This means faster loading, almost no buffering, and more high-quality stream options. I would definitely recommend getting this.*
    * *I use mainly* [***TorBox***](https://torbox.app/subscription?referral=4d067ea2-fbc5-4379-85ea-1c413bf54993), as a backup I use [***Real-Debrid***](http://real-debrid.com/?id=8801126) *(these are referral links since we're at it :), two of the best platforms, with the best prices and very stable.*
    * *For **TorBox**, please make sure to use my referral code when ordering: **4d067ea2-fbc5-4379-85ea-1c413bf54993** to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. **IMPORTANT**: When you're on the subscription plans page, scroll down to the bottom and you'll see a field (not the "Coupon Code" field just below the plans, but to the very bottom of the page) where you can enter my code (not to be confused with the "Your referral code is:" part above it) and click **Submit**. Then you can proceed with buying your chosen plan. **ALSO**, if you pay with crypto, you can use coupon code **SIGMA30** in the "Coupon Code" field for a further 30% discount (only for the first purchase if you select the One-Time option).*
@@ -118,7 +118,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 2. Copy [**this**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json) link (right-click and "*Copy link address*").
 3. Go to the "**Save & Install**" tab on AIOStreams (sidebar menu on the left), click "**Import**", "**Import Template**", paste the link you copied and click on "**Go**".
 4. Click "**Use this Template Now**".
-5. On the "**Select Services**" page that is shown, enable the Debrid services you want to use (or click "*Skip*" if you don't use any), and click "**Next**".
+5. On the "**Select Services**" page that is shown, enable the services you want to use and click "**Next**". If you're not using any services and want to proceed with the **P2P/HTTP** setup, click "**Skip**".
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
    * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
       * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
@@ -129,12 +129,12 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
       * **💬 Preferred Subtitles**: Here you can select the subtitles that should be loaded when opening a stream.
    * **🧩 Addon Options**:
-      * **🗡️ Anime Addons** (*not available without debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
-      * **🧊 Debridio** (*not available without debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
-      * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use debrid and/or P2P. You can select:
+      * **🗡️ Anime Addons** (*not available without Debrid*): If enabled, additional anime-specific addons (SeaDex, AnimeTosho) will be installed.
+      * **🧊 Debridio** (*not available without Debrid*): If enabled, [Debridio](https://debridio.com) will be added. You will need your *Debridio API key* from your account settings. Leave it disabled if you don't know what this is.
+      * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select:
          * **🚫 None** to not include any HTTP addons at all.
-         * **➕ Install Additional HTTP Addons** to install them in addition to the debrid/P2P addons for extra results.
-         * **🔒 Install Only HTTP Addons** to not include any debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a debrid.*
+         * **➕ Install Additional HTTP Addons** to install them in addition to the Debrid/P2P addons for extra results.
+         * **🔒 Install Only HTTP Addons** to not include any Debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use Debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a Debrid.*
       * **⏱️ Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
    * **↕️ Sorting Options**:
       * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
@@ -144,12 +144,12 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 8. Click on "**Load Template**".
 9. **Optional**: At this point AIOStreams is ready, but you can keep configuring it however you like. For example, if you want to further configure the scrapers or subtitle languages, you can go to the "**Installed Addons**" tab.
    * *You can configure each of them with the Pencil button on the right if needed.*
-   * Depending on what you selected during the template options (whether you used a debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
+   * Depending on what you selected during the template options (whether you used a Debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
       1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, PeerFlix** are the ***main scrapers*** finding the sources.
-      2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a debrid service.
-      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a debrid, you don't normally need them.
+      2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a Debrid service.
+      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
       4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
-      5. **Library** is an addon that can search through your own debrid library (if you e.g. download something manually in debrid).
+      5. **Library** is an addon that can search through your own Debrid library (if you e.g. download something manually in Debrid).
       6. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
    * *If you want to fine-tune how languages shound show on the results list, go to **Filters** tab, then **Language**, and add/remove your languages to the **Preferred Languages** list, and arrange them in the **Preference Order** list. You can also add the languages in the **Required Languages** if you want to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will be filtered out.*
    * *If you want to take it a step further and totally prioritize your language, even before Quality and Resolution, then go to the **Sorting** tab, make sure you're in the **Global** tab, and on the **Split by Cache** section, move **Language** to the top or wherever you want to have it for both the **Cached Streams** and **Uncached Streams** lists.*
@@ -160,7 +160,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 11. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
 
 >**NOTES FOR LATER:**
->* *If you use a debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a debrid configured, but just making sure you know.*
+>* *If you use a Debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a Debrid configured, but just making sure you know.*
 >* *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
 >* *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
 >* ***AIOStreams** is a very powerful tool offering a lot of options. Although the template provided here for it should be more than enough for all kinds of normal usage, if you are interested in tinkering with it and customizing each detail, you can check out [**this**](https://docs.aiostreams.viren070.me/) guide directly from the developer, Viren, which is also very comprehensive and documents all configuration options for AIOStreams.*
