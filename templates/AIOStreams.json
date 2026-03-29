@@ -321,6 +321,7 @@
   },
   "config": {
     "addonName": "AIOStreams",
+    "addonLogo": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/docs/assets/images/sps-aiostreams.svg",
     "serviceWrap": {
       "__if": "services",
       "__value": {
