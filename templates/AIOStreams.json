@@ -336,9 +336,7 @@
     ],
     "addonCategoryColors": {
       "Anime": "orange",
-      "HTTP": "blue",
-      "Streams": "emerald",
-      "Subtitles": "purple"
+      "HTTP": "emerald"
     },
     "presets": [
       {
@@ -357,7 +355,6 @@
       },
       {
         "__if": "services and inputs.httpAddons != only",
-        "category": "Streams",
         "type": "library",
         "instanceId": "lib",
         "enabled": true,
@@ -378,7 +375,6 @@
       },
       {
         "__if": "services.torbox and inputs.httpAddons != only",
-        "category": "Streams",
         "type": "torbox",
         "instanceId": "tbx",
         "enabled": true,
@@ -393,7 +389,6 @@
       },
       {
         "__if": "inputs.debridio and inputs.httpAddons != only",
-        "category": "Streams",
         "type": "debridio",
         "instanceId": "deb",
         "enabled": true,
@@ -405,7 +400,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "torrentio",
         "instanceId": "tio",
         "enabled": true,
@@ -421,7 +415,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "meteor",
         "instanceId": "met",
         "enabled": true,
@@ -445,7 +438,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "comet",
         "instanceId": "com",
         "enabled": true,
@@ -468,7 +460,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "stremthruTorz",
         "instanceId": "stz",
         "enabled": true,
@@ -491,7 +482,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "mediafusion",
         "instanceId": "mdf",
         "enabled": true,
@@ -512,7 +502,6 @@
       },
       {
         "__if": "services and inputs.httpAddons != only",
-        "category": "Streams",
         "type": "knaben",
         "instanceId": "kna",
         "enabled": true,
@@ -525,7 +514,6 @@
       },
       {
         "__if": "inputs.httpAddons != only",
-        "category": "Streams",
         "type": "peerflix",
         "instanceId": "pfl",
         "enabled": true,
@@ -650,7 +638,6 @@
         }
       },
       {
-        "category": "Subtitles",
         "type": "subhero",
         "instanceId": "sbh",
         "enabled": true,
