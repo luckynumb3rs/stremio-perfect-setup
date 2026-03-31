@@ -1,5 +1,5 @@
 # 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/)
-**[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*v1.3*)
+**[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*v2.0*)
 
 
 ![img](xd3jbgpapmig1 "Homescreen (left) & Stream source selection (right)")

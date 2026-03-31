@@ -57,6 +57,6 @@ Select an **AIOMetadata** instance from [**this**](https://status.stremio-status
    ![Install Addon](../images/4.7.png)
 
 >**NOTES FOR LATER:**
->* *Keep in mind that if you want to change catalogs after you have installed AIOMetadata on Stremio, you need to refresh the installation, otherwise the catalogs will not show. You do that with Cinebye below.*
+>* *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then go to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 >![Refresh Addons](../images/5.6.png)
 

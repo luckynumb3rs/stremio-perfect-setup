@@ -36,6 +36,6 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
    ![Sync Addons](../images/5.5.png)
 
 >**NOTES FOR LATER:**
->* *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then come back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
+>* *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then go to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
 >![Refresh Addons](../images/5.6.png)
 
