@@ -22,7 +22,7 @@
       {
         "id": "formatterChoice",
         "name": "🖋️ Formatter Style",
-        "description": "Choose the formatting of the stream information view: \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons. \n* **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
+        "description": "Choose the formatting of the stream information view (more details [here](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view)): \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons. \n* **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
         "type": "select",
         "required": false,
         "default": "flat",
