@@ -911,7 +911,8 @@
     "statistics": {
       "statsToShow": [
         "addon",
-        "filter"
+        "filter",
+        "timing"
       ]
     },
     "usePosterServiceForMeta": true,
