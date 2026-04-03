@@ -9,6 +9,7 @@ title: "📜 Changelog"
 
 - Disabled **Service Wrap** since it may cause some issues with the stream results.
 - Fixed **Colorful Formatter** to show subtitle languages also with flags.
+- Replaced **SubHero** with **OpenSubtitles V3 Pro** because it was down very often.
 
 ## 2.0.0 (2026-03-31)
 

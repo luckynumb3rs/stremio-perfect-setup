@@ -68,7 +68,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
       3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
       4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
       5. **Library** is an addon that can search through your own Debrid library (if you e.g. download something manually in Debrid).
-      6. **SubHero** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
+      6. **OpenSubtitles V3 Pro** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
 
    ![Addon Configuration](../images/3.9.1.png)
 

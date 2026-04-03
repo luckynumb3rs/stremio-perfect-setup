@@ -59,7 +59,7 @@ I am including this section for anyone who has any additional questions or is en
 ![Anime Search](../images/4.4.1.png)
 
 ## **I want subtitles in specific languages.**
-* In **AIOStreams**: go to **Addons → Installed Addons**, edit **SubHero**, and set your subtitle language preferences there.
+* In **AIOStreams**: go to **Addons → Installed Addons**, edit **OpenSubtitles V3 Pro**, and set your subtitle language preferences there.
 
 ## **I don't understand how the streams shown to me are being sorted.**
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#smart-stream-selection--sorting) to see the configured sort order.
