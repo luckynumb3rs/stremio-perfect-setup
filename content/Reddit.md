@@ -283,7 +283,7 @@ If you want to:
 * [be able to read what all the icons on the stream information view mean](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view),
 * [have more colorful icons in the stream information view](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#alternative-stream-information-icons),
 * [check out some Trakt alternatives](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives),
-* [explore Usenet because you've heard about it and want to explore it](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#usenet),
+* [explore Usenet because you've heard about it and want to learn about it](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#usenet),
 
 then click the links directly or go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
 
