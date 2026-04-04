@@ -984,7 +984,7 @@
     "titleMatching": {
       "enabled": true,
       "mode": "contains",
-      "similarityThreshold": 0.75,
+      "similarityThreshold": 0.90,
       "requestTypes": [
         "movie",
         "series",
