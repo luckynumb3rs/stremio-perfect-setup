@@ -104,11 +104,10 @@ Second, let's prepare the Stremio account properly:
 
 **AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
+Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
->* *[**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) are some of the most popular, so you can open these links directly, but almost all are viable options.*
 >* *You can choose an instance that says **Nightly**, and they work great, but they are instances that update very frequently and thus the steps described in this guide may not be up to date to match them. If you're a total beginner, you're probably better off with an instance that doesn't say **Nightly**.*
 >* ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
 >* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to transfer your configuration because it's not automatically transferred*
@@ -147,7 +146,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
    * Depending on what you selected during the template options (whether you used a Debrid service, P2P directly, or can't use either), different addons got installed for you. Here's a summary:
       1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, PeerFlix** are the ***main scrapers*** finding the sources.
       2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a Debrid service.
-      3. **Nuvio Streams, WebStreamr, Sootio** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
+      3. **Sootio, Nuvio Streams, WebStreamr, HD Hub** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
       4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
       5. **Library** is an addon that can search through your own Debrid library (if you e.g. download something manually in Debrid).
       6. **OpenSubtitles V3 Pro** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
@@ -171,7 +170,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 **AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
 
-Select an **AIOMetdata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources) and:
+Select an **AIOMetadata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
