@@ -7,7 +7,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -972,19 +972,19 @@
       "usenet"
     ],
     "digitalReleaseFilter": {
-      "enabled": false,
+      "enabled": true,
       "requestTypes": [
         "movie",
-        "series",
-        "anime"
+        "series"
       ],
+      "tolerance": 10,
       "addons": []
     },
     "mergedCatalogs": [],
     "titleMatching": {
       "enabled": true,
-      "mode": "contains",
-      "similarityThreshold": 0.90,
+      "mode": "exact",
+      "similarityThreshold": 0.95,
       "requestTypes": [
         "movie",
         "series",
@@ -994,7 +994,7 @@
     },
     "yearMatching": {
       "enabled": true,
-      "strict": false,
+      "strict": true,
       "requestTypes": [
         "movie",
         "series",
@@ -1004,7 +1004,7 @@
     },
     "seasonEpisodeMatching": {
       "enabled": true,
-      "strict": false,
+      "strict": true,
       "requestTypes": [
         "movie",
         "series",

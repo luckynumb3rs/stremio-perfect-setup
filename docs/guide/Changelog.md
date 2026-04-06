@@ -5,6 +5,10 @@ title: "📜 Changelog"
 
 # Changelog
 
+## 2.0.2 (2026-04-06)
+
+- Enabled **Digital Release** and strict **Matching** filters again to avoid mixed results from others shows to be included.
+
 ## 2.0.1 (2026-04-03)
 
 - Disabled **Service Wrap** since it may cause some issues with the stream results.
