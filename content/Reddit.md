@@ -104,7 +104,7 @@ Second, let's prepare the Stremio account properly:
 
 **AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
+Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiostreams) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
@@ -170,7 +170,7 @@ Select an **AIOStreams** instance from [**this**](https://status.stremio-status.
 
 **AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
 
-Select an **AIOMetadata** instance from [**this**](https://status.stremio-status.com/) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
+Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiometadata) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
