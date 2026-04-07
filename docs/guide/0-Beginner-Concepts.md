@@ -93,6 +93,13 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 * In **AIOStreams**, you can add **multiple Debrid services** at the same time.
 * That means your stream list can include cached results from both providers, increasing the chance that at least one provider has a fast, stable source available right now.
 
+## **What's the difference between ⚡ DEBRID, 🧲 P2P, and 🌐 HTTP streams, and which should I choose?**
+* You will choose which stream type you prefer during the *AIOStreams* template import:
+   * **⚡ DEBRID** is paid, but fast, safest and most reliable. Activated by selecting a Debrid service when you import the template.
+   * **🧲 P2P** is free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid when you import the template.
+   * **🌐 HTTP** is free and safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option when you import the template.
+* *In case **P2P** is an issue in your country: If you use **Debrid** (paid) or **HTTP** (free) streams, you are generally safe and don't need a VPN. **Debrid** however is still the safest and most reliable solution.*
+
 ## **What is Trakt, and why do people connect it to Stremio?**
 * Trakt is a watch-state and history platform. It stores what you watched, where you stopped, and can keep progress consistent across devices and apps.
 * In Stremio setups, Trakt is mainly used for:

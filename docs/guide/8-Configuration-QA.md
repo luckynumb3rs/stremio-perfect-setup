@@ -37,6 +37,13 @@ I am including this section for anyone who has any additional questions or is en
 * The HTTP streams will show with the 🌐 icon on the stream information view.
 * The HTTP option might work very well sometimes, but it's not without its limitations. The streams you will find are more limited, the provider servers may be slow during high load times, and the quality may be lacking. But it's better than nothing I guess.
 
+## **What's the difference between ⚡ DEBRID, 🧲 P2P, and 🌐 HTTP streams, and which should I choose?**
+* You will choose which stream type you prefer during the *AIOStreams* template import.
+   * **⚡ DEBRID** is paid, but fast, safest and most reliable. Activated by selecting a Debrid service when you import the template.
+   * **🧲 P2P** is free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid when you import the template.
+   * **🌐 HTTP** is free and safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option when you import the template.
+* *In case **P2P** is an issue in your country: If you use **Debrid** (paid) or **HTTP** (free) streams, you are generally safe and don't need a VPN. **Debrid** however is still the safest and most reliable solution.*
+
 ## **I don't understand what the icons (⚡,⏳,...) on the stream information view mean. How do I read them?**
 * Go to [**🛠️ Additional Stuff**](7-Additional-Stuff.md#understanding-stream-information-view) to read the descriptions for each icon.
 

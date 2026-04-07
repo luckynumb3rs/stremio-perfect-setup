@@ -27,7 +27,13 @@ In case you are wondering whether it's worth the effort, or you already have a T
 * **Netflix-like Automation**: Trakt-driven *personal lists, watch tracking, and progress syncing* and a *full-blown suggestions engine with dynamic catalogs* based on what you watch and like, for a more “recommended and organized” experience.
 * **Richer Browsing**: AIOMetadata gives *better catalogs + metadata integrations* (ratings, descriptions, artwork) and lets you *remove/replace Cinemeta clutter*.
 
-So, now that you know, it's up to you, but if you're up for it, let's do it:
+**Before proceeding, it's also important to distinguish between the stream types this guide includes:**
+* **⚡ DEBRID** is paid, but fast, safest and most reliable. Activated by selecting a Debrid service when you import the *AIOStreams* template.
+* **🧲 P2P** is free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid when you import the *AIOStreams* template.
+* **🌐 HTTP** is free and safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option when you import the *AIOStreams* template.
+* *In case **P2P** is an issue in your country: If you use **Debrid** (paid) or **HTTP** (free) streams, you are generally safe and don't need a VPN. **Debrid** however is still the safest and most reliable solution.*
+
+So, now that you know, it's up to you, but if you're up for it, let's do it 💪:
 
 ---
 
@@ -43,7 +49,7 @@ First, let's start by creating the accounts (those who already have them can ski
 
 1. Obviously, start by creating a new free [**Stremio**](https://www.stremio.com) account.
 2. Choose a Debrid service for caching the torrents, create an account on it, buy a subscription, and get the API key.
-   * *This is optional, but HIGHLY recommended. This guide also works for free **P2P** and/or **HTTP** streams only, but Debrid works much better if you can afford it.*
+   * *This is optional, but HIGHLY recommended. This guide also works for free **P2P** and/or **HTTP** streams only, but Debrid works much better than both, if you can afford it.*
    * *For those who don't know, this is the only thing you will be paying for (about 32€ for Real-Debrid or $33 for TorBox for 12 months). It's used as an intermediary to serve the files to you from their servers, instead of relying on torrent which may be slow and inefficient. This means faster loading, almost no buffering, and more high-quality stream options. I would definitely recommend getting this.*
    * *I use mainly* [***TorBox***](https://torbox.app/subscription?referral=f7feee59-8c0d-4842-b53a-07738c37f7f1), as a backup I use [***Real-Debrid***](http://real-debrid.com/?id=12639093) *(these are referral links since we're at it :), two of the best platforms, with the best prices and very stable.*
    * *For **TorBox**, please make sure to use my referral code when ordering: **f7feee59-8c0d-4842-b53a-07738c37f7f1** to get 7 additional days for each month you buy (only for the first purchase, so I recommend you go big from the start and buy the yearly, it's a better value and you get 84 additional days for free). You can also buy the cheapest tier for a year initially to get the extra 3 months, and if you need a higher tier, you can upgrade along the way, it is possible. **IMPORTANT**: When you're on the subscription plans page, scroll down to the bottom and you'll see a field (not the "Coupon Code" field just below the plans, but to the very bottom of the page) where you can enter my code (not to be confused with the "Your referral code is:" part above it) and click **Submit**. Then you can proceed with buying your chosen plan. **ALSO**, if you pay with crypto, you can use coupon code **SIGMA30** in the "Coupon Code" field for a further 30% discount (only for the first purchase if you select the One-Time option).*
@@ -133,7 +139,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
       * **🌐 HTTP Addons**: Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select:
          * **🚫 None** to not include any HTTP addons at all.
          * **➕ Install Additional HTTP Addons** to install them in addition to the Debrid/P2P addons for extra results.
-         * **🔒 Install Only HTTP Addons** to not include any Debrid/P2P addons but only use HTTP addons, if P2P is an issue for you or you can't/don't use Debrid. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you are using a Debrid.*
+         * **🔒 Install Only HTTP Addons** to not include any Debrid/P2P addons but only use HTTP addons. **CHOOSE THIS IF P2P IS AN ISSUE IN YOUR COUNTRY AND YOU'RE NOT USING DEBRID**. If you only use these addons, it might be a good idea to increase the global timeout below, since they might sometimes take longer to return results. *Do not select this option if you ARE using a Debrid.*
       * **⏱️ Global Timeout**: Enter the time in ms that you're willing to wait for results before your scraper addons timeout. You can set it a bit higher if you have issues getting enough results or you want to make sure to get as many results as possible.
    * **↕️ Sorting Options**:
       * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
@@ -228,46 +234,33 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
 
 # 🤖 6. Personalized & Automated Lists
 
-At this point you are done, YAY!, so you can start enjoying it already OR you can do one more step if you want proper custom lists that are specifically made for you (like Netflix suggestions). There are two approaches for this:
+At this point you are done, YAY!, so you can start enjoying it already OR you can do one more step if you want proper custom lists that are specifically made for you (like Netflix suggestions):
 
-1. **Watchly** is a full-blown recommendations addon that provides real Netflix-like suggestions, and multiple dynamic catalogs depending on what you watch and like. I would recommend this more if you want extensive suggestions, but these catalogs are only on Stremio, they are not Trakt lists, so in case you need the lists for some purpose outside Stremio, you can't.
-2. **CouchMoney** creates personalized Trakt lists, which is a good basic setup, but since Trakt allows only 2 lists for free users, it might be limiting for some.
+**Watchly** is a full-blown recommendations addon that provides real Netflix-like suggestions, and multiple dynamic catalogs depending on what you watch and like. I would recommend this more if you want extensive suggestions, but these catalogs are only on Stremio, they are not Trakt lists, so in case you need the lists for some purpose outside Stremio, you can't. So here are the steps:
 
-So you can decide which you want to use (or both!) and here are the steps for each:
+1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
+2. Click on "**Get Started**".
+3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
+4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
+5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
+6. Select **Trakt** in the "**Watch History Source**" if you integrated Trakt throughout the guide, or leave it at **Stremio** if you opted out of Trakt (or select **Simkl** if you went for that).
+7. Click "**Login with Trakt**" if you selected Trakt and follow the steps.
+8. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
+9. Click on "**Next: Install**" and click on "**Save & Install**".
+10. Click "**Install on Web**" and install the addon on Stremio.
+* ***Notes:***
+   * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
+   * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
 
-* **Watchly**:
-   1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
-   2. Click on "**Get Started**".
-   3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
-   4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
-   5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
-   6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
-   7. Click on "**Next: Install**" and click on "**Save & Install**".
-   8. Click "**Install on Web**" and install the addon on Stremio.
-   * ***Notes:***
-      * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
-      * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*
+**Recommended**:
 
-* **CouchMoney**:
-   1. Go to [**CouchMoney**](https://couchmoney.tv/) and click "**Login with Trakt**".
-   2. Follow the steps to connect your Trakt account.
-   3. CouchMoney will create two lists for you based on your Trakt watch history and ratings, which you can customize further if you want on this page.
-   4. Go to your AIOMetadata account and sign in if needed (top right there's a sign in button) with your AIOMetadata credentials.
-   5. Go to the "**Catalogs**" tab and click on the Trakt icon.
-   6. You should already be connected to your Trakt account here, so scroll down to the "**Import Lists from Trakt User**" section.
-   7. Search for your Trakt username (which you can set/check in your Trakt account settings).
-   8. The lists created by CouchMoney should show up here.
-   9. Add them to your Catalog and order them as you wish.
-   * ***Note:** As mentioned above, when you change catalog structure in AIOMetadata, go back to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*
-
-* **Watch Next** [*Honorable Mention*]:
-   * **Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
-   * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
-   * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
-      1. Go directly to [**Addons in Stremio Web**](https://web.stremio.com/#/addons) or open your Stremio app and go to **Addons**.
-      2. Click on "**Add Addon**" and paste [**this**](https://099757617587-watch-next.baby-beamup.club/manifest.json) link on the field.
-      3. Click "**Add**" and that's it!
-   * Now, every time you open a show, beside the **AIOStreams** tab which will show the available streams for it, there will also be a "**Watch Next**" tab showing similar/related content that you might like.
+**Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
+* Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
+* If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
+   1. Go directly to [**Addons in Stremio Web**](https://web.stremio.com/#/addons) or open your Stremio app and go to **Addons**.
+   2. Click on "**Add Addon**" and paste [**this**](https://099757617587-watch-next.baby-beamup.club/manifest.json) link on the field.
+   3. Click "**Add**" and that's it!
+* Now, every time you open a show, beside the **AIOStreams** tab which will show the available streams for it, there will also be a "**Watch Next**" tab showing similar/related content that you might like.
 
 And now you're really done! Check out the [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) and [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff.md) if you want to tweak it further.
 

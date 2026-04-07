@@ -25,6 +25,12 @@ In case you are wondering whether it's worth the effort, or you already have a T
 * **Netflix-like Automation**: Trakt-driven *personal lists, watch tracking, and progress syncing* and a *full-blown suggestions engine with dynamic catalogs* based on what you watch and like, for a more "recommended and organized" experience.
 * **Richer Browsing**: AIOMetadata gives *better catalogs + metadata integrations* (ratings, descriptions, artwork) and lets you *remove/replace Cinemeta clutter*.
 
-So, now that you know, it's up to you, but if you're up for it, let's do it:
+**Before proceeding, it's also important to distinguish between the stream types this guide includes:**
+* **⚡ DEBRID** is paid, but fast, safest and most reliable. Activated by selecting a Debrid service when you import the *AIOStreams* template.
+* **🧲 P2P** is free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid when you import the *AIOStreams* template.
+* **🌐 HTTP** is free and safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option when you import the *AIOStreams* template.
+* *In case **P2P** is an issue in your country: If you use **Debrid** (paid) or **HTTP** (free) streams, you are generally safe and don't need a VPN. **Debrid** however is still the safest and most reliable solution.*
+
+So, now that you know, it's up to you, but if you're up for it, let's do it 💪:
 
 {{CHAPTERS_LIST}}
