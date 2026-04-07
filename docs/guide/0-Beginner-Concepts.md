@@ -63,7 +63,7 @@ This guide assumes you are aiming for a Stremio setup that is **clean**, **relia
 * In other words: instead of you relying on random peers, you rely on the Debrid provider's servers. That usually improves consistency significantly.
 
 ## **Real-Debrid: what is it, and why would you pick it?**
-* [**Real-Debrid**](http://real-debrid.com/?id=8801126) is one of the most widely used Debrid services and is known for having a very large **cache** (files already on their servers and ready to watch immediately).
+* [**Real-Debrid**](http://real-debrid.com/?id=12639093) is one of the most widely used Debrid services and is known for having a very large **cache** (files already on their servers and ready to watch immediately).
 * That "*large cache*" part matters because it often means you will find more sources that start instantly without waiting for anything to download first.
 * Important limitation: Real-Debrid allows **one connection at a time**. That means you cannot watch simultaneously on two or more devices using the same Real-Debrid key. If you do, you can get warnings and risk a ban if it keeps happening.
 * So Real-Debrid is good if you are a **single user** or you know you will not stream in parallel.
