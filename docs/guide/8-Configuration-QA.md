@@ -7,6 +7,15 @@ title: "❓ Configuration Q&A"
 
 I am including this section for anyone who has any additional questions or is encountering any common issues. Most of this is already in the guide, but a lot of you skip them :), so I have extracted them here for you to find answers quickly:
 
+## **I would like to share my setup with my friends and family. Is that possible?**
+* It would depend on the approach you chose during the guide, and what "level" of sharing you want to achieve.
+* You can install the same addons with the same configurations (same Manifest URL) onto multiple Stremio accounts. However, keep in mind:
+   * If you used a Debrid, only *TorBox* allows you to use it with multiple IPs/streams (thus multiple accounts), *Real-Debrid* allows only one IP. You can proxy the *Real-Debrid* requests, but that needs self-hosting and it's beyond the scope of this guide.
+   * As such, if you're using *TorBox*, or a *P2P/HTTP* setup, you can share the same **AIOStreams** configuration, meaning you can install the same configuration directly by switching Stremio accounts on [**web.stremio.com**](https://web.stremio.com/) and installing it on each by pressing **Install** from the **Save & Install** tab on *AIOStreams*, like you did the first time.
+   * **AIOMetadata** can also be shared, thus you can also install the same configuration directly by switching Stremio accounts on [**web.stremio.com**](https://web.stremio.com/) and installing it on each by pressing **Install** from the **Configuration** tab on *AIOMetadata*, like you did the first time. However, if you integrated your Trakt or Simkl account on *AIOMetadata*, keep in mind that these accounts will also be included. If you don't care about this, or you didn't integrate Trakt on *AIOMetadata*, then it's not a problem. This is separate from the **Trakt Scrobbling** you enabled directly on your Stremio account, which you should also do with separate Trakt accounts for each Stremio account, if you enable it at all.
+   * **Watchly** is account-specific, because it binds directly to your Stremio account, so this addon you need to configure separately for each Stremio account. It will create catalogs based on your watch history, so it wouldn't make sense to do that based on the watch history of another account.
+   * The *TMDB, TVDB, RPDB, Gemini* API keys can be shared, which allows *AIOStreams* and *AIOMetadata* to be shared as described in the first place.
+
 ## **I installed or removed addons, but nothing changes in Stremio. Am I in the wrong place?**
 * Make sure you are signed into [**web.stremio.com**](https://web.stremio.com/) when installing or removing addons. Being logged into [**www.stremio.com**](https://www.stremio.com/) (account site) does not automatically log you into web.stremio.com.
 
@@ -86,11 +95,12 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Sorting Language](../images/3.9.3.png)
 
-## **I am not happy with non-English results. It feels like good results are being filtered out.**
-* In **AIOStreams**: go to **Filters → Matching** and disable matching by turning off the **Enable** toggle in all three sections:
+## **I am not happy with the results, especially non-English. Is that all or could some have been filtered out?**
+* Depending on the filenames of the streams, especially non-English results that don't follow the standard naming, could be more difficult to be parsed. The **Matching** option in **AIOStreams** helps to avoid any streams from the wrong show to be shown, using this filename information. You can try to disable it however to see if it helps. Go to **Filters → Matching** and disable it by turning off the **Enable** toggle in all three sections:
    * *Title Matching*
    * *Year Matching*
    * *Season/Episode Matching*
+* Before disabling it entirely, you can try first to simply disable the **Strict** toggles and check, otherwise disable it entirely. Keep in mind however that sometimes wrong results might be shown.
 
 ![Disable Matching](../images/3.12.2.png)
 
