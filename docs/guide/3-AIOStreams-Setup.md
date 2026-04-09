@@ -91,6 +91,8 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
 
 >**NOTES FOR LATER:**
 >* *If you use a Debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a Debrid configured, but just making sure you know.*
+>* *If there are no streams for a show, you will see statistics instead (looking like below), so that you can find out why. Do not click them, they are only informational and will take you to GitHub if you do.*
+>![Show Statistics](../images/3.12.0.png)
 >* *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
 >![Change Fetching](../images/3.12.1.png)
 >* *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*

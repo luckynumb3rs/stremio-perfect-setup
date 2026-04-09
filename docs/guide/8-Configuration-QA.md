@@ -117,6 +117,13 @@ I am including this section for anyone who has any additional questions or is en
 
 ![Change Fetching](../images/3.12.1.png)
 
+## **There are some numbers being shown on the streams list instead of the usual details, and I am being redirected to GitHub when I click them.**
+* If you see something like the picture below, they are statistics showing information about the results returned from the scrapers, including what was filtered out, what was included, time it took for each, and more.
+* They are shown only when the scrapers did not return any results, or when irrelevant, low quality, or bad results in general have been filtered out already, leaving no results available. This way you can try to figure out why there are no results.
+* They are only informational, but they are clickable because they have to be for Stremio to show them. However DO NOT click them because you will be taken to the *AIOStreams* GitHub page, which is unnecessary.
+
+![Show Statistics](../images/3.12.0.png)
+
 ## **I cannot save because it says "Knaben/SeaDex/AnimeTosho requires a Debrid service…".**
 * If you are not using Debrid: disable **Knaben**, **SeaDex**, and **AnimeTosho** in **Addons → Installed Addons**, then save again.
 * If you want Knaben/SeaDex/AnimeTosho, you will need a Debrid service.
