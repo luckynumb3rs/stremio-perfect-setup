@@ -980,6 +980,8 @@
       "enabled": true
     },
     "statistics": {
+      "enabled": false,
+      "position": "bottom",
       "statsToShow": [
         "addon",
         "filter",
