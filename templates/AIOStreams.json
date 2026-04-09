@@ -7,7 +7,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -18,6 +18,13 @@
         "description": "No services selected, only **🧲 P2P / 🌐 HTTP** setup.",
         "type": "alert",
         "intent": "warning"
+      },
+      {
+        "id": "header.streamTypes",
+        "name": "",
+        "description": "* **⚡ DEBRID** - Paid, but fast, safest and most reliable. Activated by selecting a service on the previous step. \n* **🧲 P2P** - Free, but slower and risky depending on the laws of your country. Activated automatically if you didn't select a Debrid service previously. \n* **🌐 HTTP** - Free, safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option below.",
+        "type": "alert",
+        "intent": "info-basic"
       },
       {
         "id": "formatterChoice",
@@ -256,7 +263,7 @@
       {
         "id": "httpAddons",
         "name": "🌐 HTTP Addons",
-        "description": "Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select: \n* **None** to not include any HTTP addons at all. \n* **Install Additional HTTP Addons** to install them in addition to the Debrid/P2P addons. \n* **Install Only HTTP Addons** to not include any Debrid/P2P addons and only use HTTP addons, if P2P is an issue for you or you can't/don't use Debrid (*do not select this option if you are using a Debrid*).",
+        "description": "Select if you want addons for **HTTP** streams to be installed. These addons rely on free online hosters and generally have less reliable sources and speeds, but can be good backup options if you don't or can't use Debrid and/or P2P. You can select: \n* **None** to not include any HTTP addons at all. \n* **Install Additional HTTP Addons** to install them in addition to the Debrid/P2P addons. \n* **Install Only HTTP Addons** to not include any Debrid/P2P addons and only use HTTP addons. CHOOSE THIS IF P2P IS AN ISSUE IN YOUR COUNTRY AND YOU'RE NOT USING DEBRID (*Do not select this option if you ARE using a Debrid*).",
         "type": "select",
         "required": false,
         "default": "none",
@@ -678,6 +685,22 @@
         }
       },
       {
+        "__if": "inputs.httpAddons != none",
+        "category": "HTTP",
+        "type": "hdhub",
+        "instanceId": "hdh",
+        "enabled": true,
+        "options": {
+          "name": "HD Hub",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "mediaTypes": [],
+          "tb_only": false
+        }
+      },
+      {
         "type": "opensubtitles-v3-plus",
         "instanceId": "osb",
         "enabled": true,
@@ -1006,7 +1029,6 @@
       "enabled": true,
       "strict": true,
       "requestTypes": [
-        "movie",
         "series",
         "anime"
       ],
@@ -1020,7 +1042,12 @@
     "includedStreamExpressions": [],
     "hideErrors": true,
     "requiredStreamTypes": [],
-    "excludedStreamTypes": [],
+    "excludedStreamTypes": {
+      "__if": "services or inputs.httpAddons == only",
+      "__value": [
+        "p2p"
+      ]
+    },
     "includedStreamTypes": [],
     "requiredAudioChannels": [],
     "excludedAudioChannels": [],
@@ -1036,7 +1063,8 @@
     },
     "groups": {
       "enabled": false,
-      "behaviour": "parallel"
+      "behaviour": "parallel",
+      "addons": []
     },
     "preloadStreams": {
       "enabled": true
