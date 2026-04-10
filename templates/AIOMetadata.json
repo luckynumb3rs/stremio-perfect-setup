@@ -1090,7 +1090,9 @@
     "showMetaProviderAttribution": false,
     "enableRatingPostersForLibrary": true,
     "catalogSetupComplete": true,
-    "simklWatchTracking": true
+    "simklWatchTracking": true,
+    "hideWatchedTrakt": true,
+    "hideWatchedMdblist": true
   },
   "metadata": {
     "apiKeysExcluded": true,

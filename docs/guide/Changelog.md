@@ -10,6 +10,7 @@ title: "📜 Changelog"
 - Added **HD Hub** addon for additional HTTP streams.
 - Added automatic exclusion of **P2P** stream type if Debrid or only HTTP selected.
 - Disabled **Statistics** which were apparently active automatically if not set.
+- [AIOMetadata] Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
 
 ## 2.0.2 (2026-04-06)
 
