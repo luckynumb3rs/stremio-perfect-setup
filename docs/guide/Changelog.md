@@ -5,12 +5,17 @@ title: "📜 Changelog"
 
 # Changelog
 
+## 2.0.4 (2026-04-11)
+
+- Removed **WebStreamr** addon because it was discontinued and instance was retired.
+- [AIOMetadata] Restructured **Catalogs** by replacing *Trakt* catalogs with *TMDB Discover* catalogs that can be edited easily, and adding a lot more pre-configured catalogs to choose from.
+- [AIOMetadata] Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
+
 ## 2.0.3 (2026-04-06)
 
 - Added **HD Hub** addon for additional HTTP streams.
 - Added automatic exclusion of **P2P** stream type if Debrid or only HTTP selected.
 - Disabled **Statistics** which were apparently active automatically if not set.
-- [AIOMetadata] Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
 
 ## 2.0.2 (2026-04-06)
 

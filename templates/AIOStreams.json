@@ -7,7 +7,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -655,33 +655,6 @@
           "showBoxRegion": "USA7",
           "providers": [],
           "mediaTypes": []
-        }
-      },
-      {
-        "__if": "inputs.httpAddons != none",
-        "category": "HTTP",
-        "type": "webstreamr",
-        "instanceId": "wst",
-        "enabled": true,
-        "options": {
-          "name": "WebStreamr",
-          "timeout": "{{inputs.timeout}}",
-          "resources": [
-            "stream"
-          ],
-          "mediaTypes": [],
-          "providers": [
-            "multi",
-            "en",
-            "de",
-            "es",
-            "fr",
-            "hi",
-            "it",
-            "mx"
-          ],
-          "includeExternalUrls": false,
-          "showErrors": false
         }
       },
       {
