@@ -421,6 +421,24 @@
         }
       },
       {
+        "__if": "services.torbox and inputs.httpAddons != only",
+        "type": "torbox-search",
+        "instanceId": "tbs",
+        "enabled": true,
+        "options": {
+          "name": "TB Search",
+          "timeout": "{{inputs.timeout}}",
+          "sources": [
+            "torrent",
+            "usenet"
+          ],
+          "mediaTypes": [],
+          "userSearchEngines": true,
+          "onlyShowUserSearchResults": false,
+          "useMultipleInstances": false
+        }
+      },
+      {
         "__if": "inputs.debridio and inputs.httpAddons != only",
         "type": "debridio",
         "instanceId": "deb",
@@ -990,8 +1008,7 @@
       "enabled": true,
       "strict": true,
       "requestTypes": [
-        "series",
-        "anime"
+        "series"
       ],
       "addons": []
     },
