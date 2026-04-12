@@ -118,7 +118,7 @@
     "catalogs": [
       {
         "id": "trakt.recommendations.movies",
-        "name": "Trakt Recommendations",
+        "name": "🎯 Trakt Recommendations",
         "type": "movie",
         "source": "trakt",
         "enabled": true,
@@ -126,7 +126,7 @@
       },
       {
         "id": "trakt.recommendations.shows",
-        "name": "Trakt Recommendations",
+        "name": "🎯 Trakt Recommendations",
         "type": "series",
         "source": "trakt",
         "enabled": true,
@@ -134,7 +134,7 @@
       },
       {
         "id": "tmdb.top",
-        "name": "Popular",
+        "name": "🏆 Popular",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -144,7 +144,7 @@
       },
       {
         "id": "tmdb.top",
-        "name": "Popular",
+        "name": "🏆 Popular",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -154,7 +154,7 @@
       },
       {
         "id": "tmdb.trending",
-        "name": "Trending",
+        "name": "🔥 Trending",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -164,7 +164,7 @@
       },
       {
         "id": "tmdb.trending",
-        "name": "Trending",
+        "name": "🔥 Trending",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -174,7 +174,7 @@
       },
       {
         "id": "tmdb.top_rated",
-        "name": "Top Rated",
+        "name": "⭐ Top Rated",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -184,7 +184,7 @@
       },
       {
         "id": "tmdb.top_rated",
-        "name": "Top Rated",
+        "name": "⭐ Top Rated",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -194,7 +194,7 @@
       },
       {
         "id": "tmdb.airing_today",
-        "name": "Airing Today",
+        "name": "📅 Airing Today",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -204,7 +204,7 @@
       },
       {
         "id": "tmdb.year",
-        "name": "By Year",
+        "name": "⌚ By Year",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -214,7 +214,7 @@
       },
       {
         "id": "tmdb.year",
-        "name": "By Year",
+        "name": "⌚ By Year",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -224,7 +224,7 @@
       },
       {
         "id": "tmdb.language",
-        "name": "By Language",
+        "name": "🌐 By Language",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -234,7 +234,7 @@
       },
       {
         "id": "tmdb.language",
-        "name": "By Language",
+        "name": "🌐 By Language",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -244,7 +244,7 @@
       },
       {
         "id": "tvmaze.schedule",
-        "name": "TVmaze Daily Schedule",
+        "name": "📅 TVmaze Daily Schedule",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -254,7 +254,7 @@
       },
       {
         "id": "tvdb.trending",
-        "name": "TVDB - Trending",
+        "name": "📚 TVDB - Trending",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -264,7 +264,7 @@
       },
       {
         "id": "tvdb.trending",
-        "name": "TVDB - Trending",
+        "name": "📚 TVDB - Trending",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -274,7 +274,7 @@
       },
       {
         "id": "tvdb.genres",
-        "name": "TVDB - Genres",
+        "name": "📚 TVDB - Genres",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -284,7 +284,7 @@
       },
       {
         "id": "tvdb.genres",
-        "name": "TVDB - Genres",
+        "name": "📚 TVDB - Genres",
         "sort": "default",
         "type": "series",
         "order": "asc",
@@ -294,7 +294,7 @@
       },
       {
         "id": "tvdb.collections",
-        "name": "TVDB - Collections",
+        "name": "📚 TVDB - Collections",
         "sort": "default",
         "type": "movie",
         "order": "asc",
@@ -305,7 +305,7 @@
       {
         "id": "tmdb.discover.movie.streaming.netflix",
         "type": "movie",
-        "name": "Streaming - Netflix",
+        "name": "🎬 Netflix",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -323,7 +323,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Netflix",
+              "catalogName": "🎬 Netflix",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -353,7 +353,7 @@
       {
         "id": "tmdb.discover.series.streaming.netflix",
         "type": "series",
-        "name": "Streaming - Netflix",
+        "name": "🎬 Netflix",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -371,7 +371,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Netflix",
+              "catalogName": "🎬 Netflix",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -401,7 +401,7 @@
       {
         "id": "tmdb.discover.movie.streaming.disney-plus",
         "type": "movie",
-        "name": "Streaming - Disney+",
+        "name": "🎬 Disney+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -419,7 +419,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Disney+",
+              "catalogName": "🎬 Disney+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -441,7 +441,7 @@
       {
         "id": "tmdb.discover.series.streaming.disney-plus",
         "type": "series",
-        "name": "Streaming - Disney+",
+        "name": "🎬 Disney+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -459,7 +459,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Disney+",
+              "catalogName": "🎬 Disney+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -481,7 +481,7 @@
       {
         "id": "tmdb.discover.movie.streaming.amazon-prime-video",
         "type": "movie",
-        "name": "Streaming - Prime Video",
+        "name": "🎬 Prime Video",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -499,7 +499,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Prime Video",
+              "catalogName": "🎬 Prime Video",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -529,7 +529,7 @@
       {
         "id": "tmdb.discover.series.streaming.amazon-prime-video",
         "type": "series",
-        "name": "Streaming - Prime Video",
+        "name": "🎬 Prime Video",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -547,7 +547,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Prime Video",
+              "catalogName": "🎬 Prime Video",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -577,7 +577,7 @@
       {
         "id": "tmdb.discover.movie.streaming.apple-tv-plus",
         "type": "movie",
-        "name": "Streaming - Apple TV",
+        "name": "🎬 Apple TV",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -595,7 +595,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Apple TV",
+              "catalogName": "🎬 Apple TV",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -617,7 +617,7 @@
       {
         "id": "tmdb.discover.series.streaming.apple-tv-plus",
         "type": "series",
-        "name": "Streaming - Apple TV",
+        "name": "🎬 Apple TV",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -635,7 +635,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Apple TV",
+              "catalogName": "🎬 Apple TV",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -657,7 +657,7 @@
       {
         "id": "tmdb.discover.movie.streaming.hbo",
         "type": "movie",
-        "name": "Streaming - HBO Max",
+        "name": "🎬 HBO Max",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -675,7 +675,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - HBO Max",
+              "catalogName": "🎬 HBO Max",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -701,7 +701,7 @@
       {
         "id": "tmdb.discover.series.streaming.hbo",
         "type": "series",
-        "name": "Streaming - HBO Max",
+        "name": "🎬 HBO Max",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -719,7 +719,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - HBO Max",
+              "catalogName": "🎬 HBO Max",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -745,7 +745,7 @@
       {
         "id": "tmdb.discover.movie.streaming.hulu",
         "type": "movie",
-        "name": "Streaming - Hulu",
+        "name": "🎬 Hulu",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -763,7 +763,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Hulu",
+              "catalogName": "🎬 Hulu",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -785,7 +785,7 @@
       {
         "id": "tmdb.discover.series.streaming.hulu",
         "type": "series",
-        "name": "Streaming - Hulu",
+        "name": "🎬 Hulu",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -803,7 +803,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Hulu",
+              "catalogName": "🎬 Hulu",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -825,7 +825,7 @@
       {
         "id": "tmdb.discover.movie.streaming.paramount-plus",
         "type": "movie",
-        "name": "Streaming - Paramount+",
+        "name": "🎬 Paramount+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -843,7 +843,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Paramount+",
+              "catalogName": "🎬 Paramount+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -877,7 +877,7 @@
       {
         "id": "tmdb.discover.series.streaming.paramount-plus",
         "type": "series",
-        "name": "Streaming - Paramount+",
+        "name": "🎬 Paramount+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -895,7 +895,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Paramount+",
+              "catalogName": "🎬 Paramount+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -929,7 +929,7 @@
       {
         "id": "tmdb.discover.movie.streaming.peacock",
         "type": "movie",
-        "name": "Streaming - Peacock",
+        "name": "🎬 Peacock",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -947,7 +947,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Peacock",
+              "catalogName": "🎬 Peacock",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -973,7 +973,7 @@
       {
         "id": "tmdb.discover.series.streaming.peacock",
         "type": "series",
-        "name": "Streaming - Peacock",
+        "name": "🎬 Peacock",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -991,7 +991,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Peacock",
+              "catalogName": "🎬 Peacock",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1017,7 +1017,7 @@
       {
         "id": "tmdb.discover.movie.streaming.crunchyroll",
         "type": "movie",
-        "name": "Streaming - Crunchyroll",
+        "name": "🎬 Crunchyroll",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1035,7 +1035,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Crunchyroll",
+              "catalogName": "🎬 Crunchyroll",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1057,7 +1057,7 @@
       {
         "id": "tmdb.discover.series.streaming.crunchyroll",
         "type": "series",
-        "name": "Streaming - Crunchyroll",
+        "name": "🎬 Crunchyroll",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1075,7 +1075,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Crunchyroll",
+              "catalogName": "🎬 Crunchyroll",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1097,7 +1097,7 @@
       {
         "id": "tmdb.discover.movie.streaming.discovery-plus",
         "type": "movie",
-        "name": "Streaming - Discovery+",
+        "name": "🎬 Discovery+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1115,7 +1115,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Discovery+",
+              "catalogName": "🎬 Discovery+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1141,7 +1141,7 @@
       {
         "id": "tmdb.discover.series.streaming.discovery-plus",
         "type": "series",
-        "name": "Streaming - Discovery+",
+        "name": "🎬 Discovery+",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1159,7 +1159,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Discovery+",
+              "catalogName": "🎬 Discovery+",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1185,7 +1185,7 @@
       {
         "id": "tmdb.discover.movie.streaming.curiosity-stream",
         "type": "movie",
-        "name": "Streaming - Curiosity Stream",
+        "name": "🎬 Curiosity Stream",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1203,7 +1203,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Streaming - Curiosity Stream",
+              "catalogName": "🎬 Curiosity Stream",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1225,7 +1225,7 @@
       {
         "id": "tmdb.discover.series.streaming.curiosity-stream",
         "type": "series",
-        "name": "Streaming - Curiosity Stream",
+        "name": "🎬 Curiosity Stream",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1243,7 +1243,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Streaming - Curiosity Stream",
+              "catalogName": "🎬 Curiosity Stream",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1265,7 +1265,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.action",
         "type": "movie",
-        "name": "Genres - Action",
+        "name": "🎭 Action",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1282,7 +1282,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Action",
+              "catalogName": "🎭 Action",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1302,7 +1302,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.adventure",
         "type": "movie",
-        "name": "Genres - Adventure",
+        "name": "🎭 Adventure",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1319,7 +1319,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Adventure",
+              "catalogName": "🎭 Adventure",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1339,7 +1339,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.action-adventure",
         "type": "series",
-        "name": "Genres - Action & Adventure",
+        "name": "🎭 Action & Adventure",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1356,7 +1356,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Action & Adventure",
+              "catalogName": "🎭 Action & Adventure",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1376,7 +1376,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.animation",
         "type": "movie",
-        "name": "Genres - Animation",
+        "name": "🎭 Animation",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1393,7 +1393,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Animation",
+              "catalogName": "🎭 Animation",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1413,7 +1413,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.animation",
         "type": "series",
-        "name": "Genres - Animation",
+        "name": "🎭 Animation",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1430,7 +1430,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Animation",
+              "catalogName": "🎭 Animation",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1450,7 +1450,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.comedy",
         "type": "movie",
-        "name": "Genres - Comedy",
+        "name": "🎭 Comedy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1467,7 +1467,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Comedy",
+              "catalogName": "🎭 Comedy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1487,7 +1487,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.comedy",
         "type": "series",
-        "name": "Genres - Comedy",
+        "name": "🎭 Comedy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1504,7 +1504,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Comedy",
+              "catalogName": "🎭 Comedy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1524,7 +1524,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.crime",
         "type": "movie",
-        "name": "Genres - Crime",
+        "name": "🎭 Crime",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1541,7 +1541,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Crime",
+              "catalogName": "🎭 Crime",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1561,7 +1561,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.crime",
         "type": "series",
-        "name": "Genres - Crime",
+        "name": "🎭 Crime",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1578,7 +1578,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Crime",
+              "catalogName": "🎭 Crime",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1598,7 +1598,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.documentary",
         "type": "movie",
-        "name": "Genres - Documentary",
+        "name": "🎭 Documentary",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1615,7 +1615,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Documentary",
+              "catalogName": "🎭 Documentary",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1635,7 +1635,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.documentary",
         "type": "series",
-        "name": "Genres - Documentary",
+        "name": "🎭 Documentary",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1652,7 +1652,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Documentary",
+              "catalogName": "🎭 Documentary",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1672,7 +1672,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.drama",
         "type": "movie",
-        "name": "Genres - Drama",
+        "name": "🎭 Drama",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1689,7 +1689,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Drama",
+              "catalogName": "🎭 Drama",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1709,7 +1709,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.drama",
         "type": "series",
-        "name": "Genres - Drama",
+        "name": "🎭 Drama",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1726,7 +1726,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Drama",
+              "catalogName": "🎭 Drama",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1746,7 +1746,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.family",
         "type": "movie",
-        "name": "Genres - Family",
+        "name": "🎭 Family",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1763,7 +1763,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Family",
+              "catalogName": "🎭 Family",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1783,7 +1783,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.family",
         "type": "series",
-        "name": "Genres - Family",
+        "name": "🎭 Family",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1800,7 +1800,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Family",
+              "catalogName": "🎭 Family",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1820,7 +1820,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.fantasy",
         "type": "movie",
-        "name": "Genres - Fantasy",
+        "name": "🎭 Fantasy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1837,7 +1837,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Fantasy",
+              "catalogName": "🎭 Fantasy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1857,7 +1857,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.history",
         "type": "movie",
-        "name": "Genres - History",
+        "name": "🎭 History",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1874,7 +1874,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - History",
+              "catalogName": "🎭 History",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1894,7 +1894,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.horror",
         "type": "movie",
-        "name": "Genres - Horror",
+        "name": "🎭 Horror",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1911,7 +1911,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Horror",
+              "catalogName": "🎭 Horror",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1931,7 +1931,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.kids",
         "type": "series",
-        "name": "Genres - Kids",
+        "name": "🎭 Kids",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1948,7 +1948,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Kids",
+              "catalogName": "🎭 Kids",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -1968,7 +1968,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.music",
         "type": "movie",
-        "name": "Genres - Music",
+        "name": "🎭 Music",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1985,7 +1985,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Music",
+              "catalogName": "🎭 Music",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2005,7 +2005,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.mystery",
         "type": "movie",
-        "name": "Genres - Mystery",
+        "name": "🎭 Mystery",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2022,7 +2022,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Mystery",
+              "catalogName": "🎭 Mystery",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2042,7 +2042,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.mystery",
         "type": "series",
-        "name": "Genres - Mystery",
+        "name": "🎭 Mystery",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2059,7 +2059,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Mystery",
+              "catalogName": "🎭 Mystery",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2079,7 +2079,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.news",
         "type": "series",
-        "name": "Genres - News",
+        "name": "🎭 News",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2096,7 +2096,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - News",
+              "catalogName": "🎭 News",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2116,7 +2116,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.reality",
         "type": "series",
-        "name": "Genres - Reality",
+        "name": "🎭 Reality",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2133,7 +2133,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Reality",
+              "catalogName": "🎭 Reality",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2153,7 +2153,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.romance",
         "type": "movie",
-        "name": "Genres - Romance",
+        "name": "🎭 Romance",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2170,7 +2170,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Romance",
+              "catalogName": "🎭 Romance",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2190,7 +2190,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.science-fiction",
         "type": "movie",
-        "name": "Genres - Science Fiction",
+        "name": "🎭 Science Fiction",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2207,7 +2207,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Science Fiction",
+              "catalogName": "🎭 Science Fiction",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2227,7 +2227,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.sci-fi-fantasy",
         "type": "series",
-        "name": "Genres - Sci-Fi & Fantasy",
+        "name": "🎭 Sci-Fi & Fantasy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2244,7 +2244,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Sci-Fi & Fantasy",
+              "catalogName": "🎭 Sci-Fi & Fantasy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2264,7 +2264,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.soap",
         "type": "series",
-        "name": "Genres - Soap",
+        "name": "🎭 Soap",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2281,7 +2281,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Soap",
+              "catalogName": "🎭 Soap",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2301,7 +2301,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.talk",
         "type": "series",
-        "name": "Genres - Talk",
+        "name": "🎭 Talk",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2318,7 +2318,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Talk",
+              "catalogName": "🎭 Talk",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2338,7 +2338,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.tv-movie",
         "type": "movie",
-        "name": "Genres - TV Movie",
+        "name": "🎭 TV Movie",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2355,7 +2355,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - TV Movie",
+              "catalogName": "🎭 TV Movie",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2375,7 +2375,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.thriller",
         "type": "movie",
-        "name": "Genres - Thriller",
+        "name": "🎭 Thriller",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2392,7 +2392,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Thriller",
+              "catalogName": "🎭 Thriller",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2412,7 +2412,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.war",
         "type": "movie",
-        "name": "Genres - War",
+        "name": "🎭 War",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2429,7 +2429,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - War",
+              "catalogName": "🎭 War",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2449,7 +2449,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.war-politics",
         "type": "series",
-        "name": "Genres - War & Politics",
+        "name": "🎭 War & Politics",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2466,7 +2466,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - War & Politics",
+              "catalogName": "🎭 War & Politics",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2486,7 +2486,7 @@
       {
         "id": "tmdb.discover.movie.genres.popular.western",
         "type": "movie",
-        "name": "Genres - Western",
+        "name": "🎭 Western",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2503,7 +2503,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Genres - Western",
+              "catalogName": "🎭 Western",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2523,7 +2523,7 @@
       {
         "id": "tmdb.discover.series.genres.popular.western",
         "type": "series",
-        "name": "Genres - Western",
+        "name": "🎭 Western",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2540,7 +2540,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Genres - Western",
+              "catalogName": "🎭 Western",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2559,7 +2559,7 @@
       },
       {
         "id": "mal.airing",
-        "name": "Anime - Airing Now",
+        "name": "🍥 Airing Now",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2569,7 +2569,7 @@
       },
       {
         "id": "mal.upcoming",
-        "name": "Anime - Upcoming Season",
+        "name": "🍥 Upcoming Season",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2579,7 +2579,7 @@
       },
       {
         "id": "mal.schedule",
-        "name": "Anime - Airing Schedule",
+        "name": "🍥 Airing Schedule",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2589,7 +2589,7 @@
       },
       {
         "id": "mal.seasons",
-        "name": "Anime - Seasons",
+        "name": "🍥 Seasons",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2599,7 +2599,7 @@
       },
       {
         "id": "mal.80sDecades",
-        "name": "Anime - Best of 80s",
+        "name": "🍥 Best of 80s",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2609,7 +2609,7 @@
       },
       {
         "id": "mal.90sDecades",
-        "name": "Anime - Best of 90s",
+        "name": "🍥 Best of 90s",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2619,7 +2619,7 @@
       },
       {
         "id": "mal.00sDecades",
-        "name": "Anime - Best of 2000s",
+        "name": "🍥 Best of 2000s",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2629,7 +2629,7 @@
       },
       {
         "id": "mal.10sDecades",
-        "name": "Anime - Best of 2010s",
+        "name": "🍥 Best of 2010s",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2639,7 +2639,7 @@
       },
       {
         "id": "mal.20sDecades",
-        "name": "Anime - Best of 2020s",
+        "name": "🍥 Best of 2020s",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2649,7 +2649,7 @@
       },
       {
         "id": "mal.genres",
-        "name": "Anime - Genres",
+        "name": "🍥 Genres",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2659,7 +2659,7 @@
       },
       {
         "id": "mal.studios",
-        "name": "Anime - By Studio",
+        "name": "🍥 By Studio",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2669,7 +2669,7 @@
       },
       {
         "id": "mal.top_movies",
-        "name": "Anime - Top Movies",
+        "name": "🍥 Top Movies",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2679,7 +2679,7 @@
       },
       {
         "id": "mal.top_series",
-        "name": "Anime - Top Series",
+        "name": "🍥 Top Series",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2689,7 +2689,7 @@
       },
       {
         "id": "mal.most_favorites",
-        "name": "Anime - Most Favorites",
+        "name": "🍥 Most Favorites",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2699,7 +2699,7 @@
       },
       {
         "id": "mal.most_popular",
-        "name": "Anime - Most Popular",
+        "name": "🍥 Most Popular",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2709,7 +2709,7 @@
       },
       {
         "id": "mal.top_anime",
-        "name": "Anime - Top Anime",
+        "name": "🍥 Top Anime",
         "sort": "default",
         "type": "anime",
         "order": "asc",
@@ -2720,7 +2720,7 @@
       {
         "id": "tmdb.discover.movie.theme.time-travel",
         "type": "movie",
-        "name": "Themes - Time Travel",
+        "name": "🎨 Time Travel",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2739,7 +2739,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Time Travel",
+              "catalogName": "🎨 Time Travel",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2769,7 +2769,7 @@
       {
         "id": "tmdb.discover.series.theme.time-travel",
         "type": "series",
-        "name": "Themes - Time Travel",
+        "name": "🎨 Time Travel",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2788,7 +2788,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Time Travel",
+              "catalogName": "🎨 Time Travel",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2818,7 +2818,7 @@
       {
         "id": "tmdb.discover.movie.theme.revenge",
         "type": "movie",
-        "name": "Themes - Revenge",
+        "name": "🎨 Revenge",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2837,7 +2837,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Revenge",
+              "catalogName": "🎨 Revenge",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2871,7 +2871,7 @@
       {
         "id": "tmdb.discover.series.theme.revenge",
         "type": "series",
-        "name": "Themes - Revenge",
+        "name": "🎨 Revenge",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2890,7 +2890,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Revenge",
+              "catalogName": "🎨 Revenge",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -2924,7 +2924,7 @@
       {
         "id": "tmdb.discover.movie.theme.spy",
         "type": "movie",
-        "name": "Themes - Spy",
+        "name": "🎨 Spy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2943,7 +2943,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Spy",
+              "catalogName": "🎨 Spy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -2977,7 +2977,7 @@
       {
         "id": "tmdb.discover.series.theme.spy",
         "type": "series",
-        "name": "Themes - Spy",
+        "name": "🎨 Spy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -2996,7 +2996,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Spy",
+              "catalogName": "🎨 Spy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3030,7 +3030,7 @@
       {
         "id": "tmdb.discover.movie.theme.magic",
         "type": "movie",
-        "name": "Themes - Magic",
+        "name": "🎨 Magic",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3049,7 +3049,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Magic",
+              "catalogName": "🎨 Magic",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3079,7 +3079,7 @@
       {
         "id": "tmdb.discover.series.theme.magic",
         "type": "series",
-        "name": "Themes - Magic",
+        "name": "🎨 Magic",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3098,7 +3098,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Magic",
+              "catalogName": "🎨 Magic",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3128,7 +3128,7 @@
       {
         "id": "tmdb.discover.movie.theme.treasure-hunt",
         "type": "movie",
-        "name": "Themes - Treasure Hunt",
+        "name": "🎨 Treasure Hunt",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3147,7 +3147,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Treasure Hunt",
+              "catalogName": "🎨 Treasure Hunt",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3181,7 +3181,7 @@
       {
         "id": "tmdb.discover.series.theme.treasure-hunt",
         "type": "series",
-        "name": "Themes - Treasure Hunt",
+        "name": "🎨 Treasure Hunt",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3200,7 +3200,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Treasure Hunt",
+              "catalogName": "🎨 Treasure Hunt",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3230,7 +3230,7 @@
       {
         "id": "tmdb.discover.movie.theme.romantic-comedy",
         "type": "movie",
-        "name": "Themes - Romantic Comedy",
+        "name": "🎨 Romantic Comedy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3249,7 +3249,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Romantic Comedy",
+              "catalogName": "🎨 Romantic Comedy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3283,7 +3283,7 @@
       {
         "id": "tmdb.discover.series.theme.romantic-comedy",
         "type": "series",
-        "name": "Themes - Romantic Comedy",
+        "name": "🎨 Romantic Comedy",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3302,7 +3302,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Romantic Comedy",
+              "catalogName": "🎨 Romantic Comedy",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3332,7 +3332,7 @@
       {
         "id": "tmdb.discover.movie.theme.coming-of-age",
         "type": "movie",
-        "name": "Themes - Coming of Age",
+        "name": "🎨 Coming of Age",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3351,7 +3351,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Coming of Age",
+              "catalogName": "🎨 Coming of Age",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3381,7 +3381,7 @@
       {
         "id": "tmdb.discover.series.theme.coming-of-age",
         "type": "series",
-        "name": "Themes - Coming of Age",
+        "name": "🎨 Coming of Age",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3400,7 +3400,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Coming of Age",
+              "catalogName": "🎨 Coming of Age",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3430,7 +3430,7 @@
       {
         "id": "tmdb.discover.movie.theme.superhero",
         "type": "movie",
-        "name": "Themes - Superhero",
+        "name": "🎨 Superhero",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3449,7 +3449,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Superhero",
+              "catalogName": "🎨 Superhero",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3483,7 +3483,7 @@
       {
         "id": "tmdb.discover.series.theme.superhero",
         "type": "series",
-        "name": "Themes - Superhero",
+        "name": "🎨 Superhero",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3502,7 +3502,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Superhero",
+              "catalogName": "🎨 Superhero",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3536,7 +3536,7 @@
       {
         "id": "tmdb.discover.movie.theme.space",
         "type": "movie",
-        "name": "Themes - Space",
+        "name": "🎨 Space",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3555,7 +3555,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Space",
+              "catalogName": "🎨 Space",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3589,7 +3589,7 @@
       {
         "id": "tmdb.discover.series.theme.space",
         "type": "series",
-        "name": "Themes - Space",
+        "name": "🎨 Space",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3608,7 +3608,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Space",
+              "catalogName": "🎨 Space",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3642,7 +3642,7 @@
       {
         "id": "tmdb.discover.movie.theme.martial-arts",
         "type": "movie",
-        "name": "Themes - Martial Arts",
+        "name": "🎨 Martial Arts",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3661,7 +3661,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Martial Arts",
+              "catalogName": "🎨 Martial Arts",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3695,7 +3695,7 @@
       {
         "id": "tmdb.discover.series.theme.martial-arts",
         "type": "series",
-        "name": "Themes - Martial Arts",
+        "name": "🎨 Martial Arts",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3714,7 +3714,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Martial Arts",
+              "catalogName": "🎨 Martial Arts",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3748,7 +3748,7 @@
       {
         "id": "tmdb.discover.movie.theme.vampire",
         "type": "movie",
-        "name": "Themes - Vampire",
+        "name": "🎨 Vampire",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3767,7 +3767,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Vampire",
+              "catalogName": "🎨 Vampire",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3801,7 +3801,7 @@
       {
         "id": "tmdb.discover.series.theme.vampire",
         "type": "series",
-        "name": "Themes - Vampire",
+        "name": "🎨 Vampire",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3820,7 +3820,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Vampire",
+              "catalogName": "🎨 Vampire",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3854,7 +3854,7 @@
       {
         "id": "tmdb.discover.movie.theme.satire",
         "type": "movie",
-        "name": "Themes - Satire",
+        "name": "🎨 Satire",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3873,7 +3873,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Themes - Satire",
+              "catalogName": "🎨 Satire",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3903,7 +3903,7 @@
       {
         "id": "tmdb.discover.series.theme.satire",
         "type": "series",
-        "name": "Themes - Satire",
+        "name": "🎨 Satire",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3922,7 +3922,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Themes - Satire",
+              "catalogName": "🎨 Satire",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -3952,7 +3952,7 @@
       {
         "id": "tmdb.discover.movie.Decades.2020s",
         "type": "movie",
-        "name": "Decades - 2020s",
+        "name": "🎥 2020s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -3970,7 +3970,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 2020s",
+              "catalogName": "🎥 2020s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -3986,7 +3986,7 @@
       {
         "id": "tmdb.discover.series.Decades.2020s",
         "type": "series",
-        "name": "Decades - 2020s",
+        "name": "🎥 2020s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4004,7 +4004,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 2020s",
+              "catalogName": "🎥 2020s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4020,7 +4020,7 @@
       {
         "id": "tmdb.discover.movie.Decades.2010s",
         "type": "movie",
-        "name": "Decades - 2010s",
+        "name": "🎥 2010s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4038,7 +4038,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 2010s",
+              "catalogName": "🎥 2010s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4054,7 +4054,7 @@
       {
         "id": "tmdb.discover.series.Decades.2010s",
         "type": "series",
-        "name": "Decades - 2010s",
+        "name": "🎥 2010s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4072,7 +4072,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 2010s",
+              "catalogName": "🎥 2010s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4088,7 +4088,7 @@
       {
         "id": "tmdb.discover.movie.Decades.2000s",
         "type": "movie",
-        "name": "Decades - 2000s",
+        "name": "🎥 2000s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4106,7 +4106,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 2000s",
+              "catalogName": "🎥 2000s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4122,7 +4122,7 @@
       {
         "id": "tmdb.discover.series.Decades.2000s",
         "type": "series",
-        "name": "Decades - 2000s",
+        "name": "🎥 2000s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4140,7 +4140,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 2000s",
+              "catalogName": "🎥 2000s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4156,7 +4156,7 @@
       {
         "id": "tmdb.discover.movie.Decades.1990s",
         "type": "movie",
-        "name": "Decades - 1990s",
+        "name": "🎥 1990s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4174,7 +4174,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 1990s",
+              "catalogName": "🎥 1990s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4190,7 +4190,7 @@
       {
         "id": "tmdb.discover.series.Decades.1990s",
         "type": "series",
-        "name": "Decades - 1990s",
+        "name": "🎥 1990s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4208,7 +4208,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 1990s",
+              "catalogName": "🎥 1990s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4224,7 +4224,7 @@
       {
         "id": "tmdb.discover.movie.Decades.1980s",
         "type": "movie",
-        "name": "Decades - 1980s",
+        "name": "🎥 1980s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4242,7 +4242,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 1980s",
+              "catalogName": "🎥 1980s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4258,7 +4258,7 @@
       {
         "id": "tmdb.discover.series.Decades.1980s",
         "type": "series",
-        "name": "Decades - 1980s",
+        "name": "🎥 1980s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4276,7 +4276,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 1980s",
+              "catalogName": "🎥 1980s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4292,7 +4292,7 @@
       {
         "id": "tmdb.discover.movie.Decades.1970s",
         "type": "movie",
-        "name": "Decades - 1970s",
+        "name": "🎥 1970s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4310,7 +4310,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 1970s",
+              "catalogName": "🎥 1970s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4326,7 +4326,7 @@
       {
         "id": "tmdb.discover.series.Decades.1970s",
         "type": "series",
-        "name": "Decades - 1970s",
+        "name": "🎥 1970s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4344,7 +4344,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 1970s",
+              "catalogName": "🎥 1970s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4360,7 +4360,7 @@
       {
         "id": "tmdb.discover.movie.Decades.1960s",
         "type": "movie",
-        "name": "Decades - 1960s",
+        "name": "🎥 1960s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4378,7 +4378,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 1960s",
+              "catalogName": "🎥 1960s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4394,7 +4394,7 @@
       {
         "id": "tmdb.discover.series.Decades.1960s",
         "type": "series",
-        "name": "Decades - 1960s",
+        "name": "🎥 1960s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4412,7 +4412,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 1960s",
+              "catalogName": "🎥 1960s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4428,7 +4428,7 @@
       {
         "id": "tmdb.discover.movie.Decades.1950s",
         "type": "movie",
-        "name": "Decades - 1950s",
+        "name": "🎥 1950s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4446,7 +4446,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "Decades - 1950s",
+              "catalogName": "🎥 1950s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4462,7 +4462,7 @@
       {
         "id": "tmdb.discover.series.Decades.1950s",
         "type": "series",
-        "name": "Decades - 1950s",
+        "name": "🎥 1950s",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4480,7 +4480,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "Decades - 1950s",
+              "catalogName": "🎥 1950s",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -4496,7 +4496,7 @@
       {
         "id": "tmdb.discover.movie.runtime.short",
         "type": "movie",
-        "name": "Runtime - Short (<90 min)",
+        "name": "🕒 Short (<90 min)",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4514,7 +4514,7 @@
               "vote_average.gte": 6.5
             },
             "formState": {
-              "catalogName": "Runtime - Short (<90 min)",
+              "catalogName": "🕒 Short (<90 min)",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4536,7 +4536,7 @@
       {
         "id": "tmdb.discover.movie.runtime.standard",
         "type": "movie",
-        "name": "Runtime - Standard (90-150 min)",
+        "name": "🕒 Standard (90-150 min)",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4555,7 +4555,7 @@
               "vote_average.gte": 6.5
             },
             "formState": {
-              "catalogName": "Runtime - Standard (90-150 min)",
+              "catalogName": "🕒 Standard (90-150 min)",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4577,7 +4577,7 @@
       {
         "id": "tmdb.discover.movie.runtime.long",
         "type": "movie",
-        "name": "Runtime - Long (150-180 min)",
+        "name": "🕒 Long (150-180 min)",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4596,7 +4596,7 @@
               "vote_average.gte": 6.5
             },
             "formState": {
-              "catalogName": "Runtime - Long (150-180 min)",
+              "catalogName": "🕒 Long (150-180 min)",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -4618,7 +4618,7 @@
       {
         "id": "tmdb.discover.movie.runtime.epic",
         "type": "movie",
-        "name": "Runtime - Epic (3+ hours)",
+        "name": "🕒 Epic (3+ hours)",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -4636,7 +4636,7 @@
               "vote_average.gte": 6.5
             },
             "formState": {
-              "catalogName": "Runtime - Epic (3+ hours)",
+              "catalogName": "🕒 Epic (3+ hours)",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",

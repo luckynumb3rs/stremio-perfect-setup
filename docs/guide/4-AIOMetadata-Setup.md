@@ -25,6 +25,14 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
    ![API Keys](../images/4.3.png)
 
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
+   * The included catalogs, which you can enable/disable as needed, are as follows:
+      * **Default**: 🎯 Trakt Recommendations, 🏆 Popular, 🔥 Trending, ⭐ Top Rated, 📚 TVDB, ...
+      * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
+      * **🎭 Genres**: Catalogs grouped by genre and content type.
+      * **🍥 Anime**: Anime-focused catalogs across different styles and themes.
+      * **🎨 Themes**: Collections built around moods, topics, and story patterns.
+      * **🎥 Decades**: Titles grouped by release decade and era.
+      * **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
 
    ![Trakt Integration](../images/4.4.png)
 
