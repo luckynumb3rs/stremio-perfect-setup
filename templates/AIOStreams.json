@@ -421,20 +421,6 @@
         }
       },
       {
-        "__if": "services.torbox and inputs.httpAddons != only",
-        "type": "torbox",
-        "instanceId": "tbx",
-        "enabled": true,
-        "options": {
-          "name": "TorBox",
-          "timeout": "{{inputs.timeout}}",
-          "resources": [
-            "stream"
-          ],
-          "mediaTypes": []
-        }
-      },
-      {
         "__if": "inputs.debridio and inputs.httpAddons != only",
         "type": "debridio",
         "instanceId": "deb",
@@ -1004,8 +990,7 @@
       "enabled": true,
       "strict": true,
       "requestTypes": [
-        "series",
-        "anime"
+        "series"
       ],
       "addons": []
     },

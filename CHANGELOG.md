@@ -2,7 +2,7 @@
 
 ## 2.0.4 (2026-04-11)
 
-- Removed **WebStreamr** addon because it was discontinued and instance was retired.
+- Removed **WebStreamr** and **TorBox** addons because it was discontinued and instance was retired.
 - [AIOMetadata] Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
 
 ## 2.0.3 (2026-04-06)

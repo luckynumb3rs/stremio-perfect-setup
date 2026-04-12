@@ -7,8 +7,7 @@ title: "📜 Changelog"
 
 ## 2.0.4 (2026-04-11)
 
-- Removed **WebStreamr** addon because it was discontinued and instance was retired.
-- [AIOMetadata] Restructured **Catalogs** by replacing *Trakt* catalogs with *TMDB Discover* catalogs that can be edited easily, and adding a lot more pre-configured catalogs to choose from.
+- Removed **WebStreamr** and **TorBox** addons because it was discontinued and instance was retired.
 - [AIOMetadata] Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
 
 ## 2.0.3 (2026-04-06)
