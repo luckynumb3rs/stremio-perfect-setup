@@ -14,6 +14,7 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
 4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
 5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
+   * The **RPDB** key is "*t0-free-rpdb*".
 6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
 7. Click on "**Next: Install**" and click on "**Save & Install**".
 8. Click "**Install on Web**" and install the addon on Stremio.
@@ -38,7 +39,7 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 
 **Worth Mentioning**:
 
-**CouchMoney** creates personalized Trakt lists, which is a good basic setup, but since Trakt allows only 2 lists for free users, it might be limiting for some.
+**CouchMoney** creates personalized Trakt lists, which is a good basic setup, but since Trakt allows only 2 lists for free users, it might be limiting for some. Here are the steps:
 1. Go to [**CouchMoney**](https://couchmoney.tv/) and click "**Login with Trakt**".
 2. Follow the steps to connect your Trakt account.
 3. CouchMoney will create two lists for you based on your Trakt watch history and ratings, which you can customize further if you want on this page.
@@ -53,5 +54,3 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 ![CouchMoney](../images/6.2.png)
 
 And now you're really done! Check out the [**❓ Configuration Q&A**](8-Configuration-QA.md) and [**🛠️ Additional Stuff**](7-Additional-Stuff.md) if you want to tweak it further.
-
-

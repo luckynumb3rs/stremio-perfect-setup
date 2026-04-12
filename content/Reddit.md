@@ -145,7 +145,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
       * **🚩️ Language Priority**: This option can give priority to streams in your preferred languages by moving it up the sorting order. If you struggle to see your preferred languages in the results, even after adding it to the **Preferred Languages** list, try increasing the priority here. May rank lower-quality streams higher if your preferred languages are uncommon among the results, so use with caution.
       * **🌱 Seeders Priority** (*only for P2P*): Change this if you want highest seeders to be prioritized more on the sorting order, even if they have lower Resolution/Quality/SEL Scores. In most cases, low seeders will have already been filtered out by the internal filtering (SEL).
 7. On the "**Enter Credentials**" page, enter all API keys you prepared earlier.
-   * For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "*t0-free-rpdb*" directly.
+   * The **RPDB** key is "*t0-free-rpdb*" and it's already pre-entered.
 8. Click on "**Load Template**".
 9. **Optional**: At this point AIOStreams is ready, but you can keep configuring it however you like. For example, if you want to further configure the scrapers or subtitle languages, you can go to the "**Installed Addons**" tab.
    * *You can configure each of them with the Pencil button on the right if needed.*
@@ -187,7 +187,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
 1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (right-click, "*Save As*", and save it as `.json`, not `.txt`).
 2. Go to the "**Configuration**" tab, click on "**Import Configuration**", and load my configuration file.
 3. Go to the "**Integrations**" tab, and enter the API keys for Gemini, TMDB, TheTVDB, RPDB.
-   * *For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "t0-free-rpdb" directly.*
+   * The **RPDB** key is "*t0-free-rpdb*" and it's already pre-entered.
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
    * *If you want some ready-to-use and well-maintained lists, while on the Trakt tab, search for the lists from user "snoak", and you will be able to import a lot of interesting lists. I have already included some of them in the catalog, but you can add more.*
    * **For Anime users**: *If you want to enable search for Anime, make sure to go to to the "Search" tab and enable both "Anime Search Engine" switches.*
@@ -244,6 +244,7 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
 4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
 5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
+   * The **RPDB** key is "*t0-free-rpdb*".
 6. Select **Trakt** in the "**Watch History Source**" if you integrated Trakt throughout the guide, or leave it at **Stremio** if you opted out of Trakt (or select **Simkl** if you went for that).
 7. Click "**Login with Trakt**" if you selected Trakt and follow the steps.
 8. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.

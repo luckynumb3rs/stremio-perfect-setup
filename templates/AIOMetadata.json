@@ -52,7 +52,7 @@
       "tmdb": "",
       "tvdb": "",
       "fanart": "",
-      "rpdb": "",
+      "rpdb": "t0-free-rpdb",
       "topPoster": "",
       "mdblist": "",
       "traktTokenId": "",
@@ -1095,7 +1095,7 @@
     "hideWatchedMdblist": true
   },
   "metadata": {
-    "apiKeysExcluded": true,
+    "apiKeysExcluded": false,
     "totalCatalogs": 77,
     "enabledCatalogs": 50
   }

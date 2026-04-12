@@ -54,7 +54,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
    ![Template Options](../images/3.6.png)
 
 7. On the "**Enter Credentials**" page, enter all API keys you prepared earlier.
-   * For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "*t0-free-rpdb*" directly.
+   * The **RPDB** key is "*t0-free-rpdb*" and it's already pre-entered.
 8. Click on "**Load Template**".
 
    ![Load Template](../images/3.8.png)

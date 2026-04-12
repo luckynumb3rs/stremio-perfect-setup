@@ -20,7 +20,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
    ![Import Configuration](../images/4.2.png)
 
 3. Go to the "**Integrations**" tab, and enter the API keys for Gemini, TMDB, TheTVDB, RPDB.
-   * *For **RPDB**, unless you have an account and a paid subscription with your own API key, you can also use the free standard API Key "t0-free-rpdb" directly.*
+   * The **RPDB** key is "*t0-free-rpdb*" and it's already pre-entered.
 
    ![API Keys](../images/4.3.png)
 
