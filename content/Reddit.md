@@ -191,7 +191,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
 3. Go to the "**Integrations**" tab, and enter the API keys for Gemini, TMDB, TheTVDB, RPDB.
    * For **RPDB** enter "*t0-free-rpdb*".
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
-   * The included catalogs, which you can enable/disable as needed, are as follows:
+   * The included catalogs, which you can enable/disable and modify as needed, are as follows:
       * **Default**: 🎯 Trakt Recommendations, 🏆 Popular, 🔥 Trending, ⭐ Top Rated, 📚 TVDB, ...
       * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
       * **🎭 Genres**: Catalogs grouped by genre and content type.
