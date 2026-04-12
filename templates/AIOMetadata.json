@@ -3267,8 +3267,8 @@
               ],
               "withKeywords": [
                 {
-                  "id": 33404,
-                  "label": "romantic comedy"
+                  "id": 9799,
+                  "label": "romcom"
                 }
               ],
               "voteCountMin": 25,
@@ -3316,8 +3316,8 @@
               ],
               "withKeywords": [
                 {
-                  "id": 33404,
-                  "label": "romantic comedy"
+                  "id": 9799,
+                  "label": "romcom"
                 }
               ],
               "voteCountMin": 10,
@@ -3936,8 +3936,84 @@
               ],
               "withKeywords": [
                 {
-                  "id": 10051,
+                  "id": 8201,
                   "label": "satire"
+                },
+                  {
+                  "id": 252201,
+                  "label": "media satire"
+                },
+                  {
+                  "id": 330180,
+                  "label": "public access satire"
+                },
+                  {
+                  "id": 233492,
+                  "label": "law enforcement satire"
+                },
+                  {
+                  "id": 316143,
+                  "label": "indian satire"
+                },
+                  {
+                  "id": 350981,
+                  "label": "biblical satire"
+                },
+                  {
+                  "id": 338198,
+                  "label": "satire on contemporary art"
+                },
+                  {
+                  "id": 322219,
+                  "label": "religious satire"
+                },
+                  {
+                  "id": 169086,
+                  "label": "political satire"
+                },
+                  {
+                  "id": 350455,
+                  "label": "politische satire"
+                },
+                  {
+                  "id": 11514,
+                  "label": "social satire"
+                },
+                  {
+                  "id": 233623,
+                  "label": "news satire"
+                },
+                  {
+                  "id": 336694,
+                  "label": "satire comedy"
+                },
+                  {
+                  "id": 332908,
+                  "label": "slasher satire"
+                },
+                  {
+                  "id": 314618,
+                  "label": "feminist satire"
+                },
+                  {
+                  "id": 356196,
+                  "label": "satire horror"
+                },
+                  {
+                  "id": 365613,
+                  "label": "urban satire"
+                },
+                  {
+                  "id": 361592,
+                  "label": "war satire"
+                },
+                  {
+                  "id": 351302,
+                  "label": "tabloid satire"
+                },
+                  {
+                  "id": 362329,
+                  "label": "news media satire"
                 }
               ],
               "voteCountMin": 10,
