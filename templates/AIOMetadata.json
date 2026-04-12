@@ -97,7 +97,9 @@
       "engineRatingPosters": {
         "movie": true,
         "series": true,
-        "gemini.search": true
+        "gemini.search": true,
+        "anime_series": true,
+        "anime_movie": true
       }
     },
     "apiKeys": {
