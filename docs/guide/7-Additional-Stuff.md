@@ -76,6 +76,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 * **[ALT]** → Strong Alternative (if the best fails)
 
 **Additional**
+* ✎ / ✏️ **FILENAME** → Filename
 * ⓘ / ℹ️ **MESSAGE** → Additional Informational Messages
 
 👉 **Quick Tip:**
@@ -111,7 +112,17 @@ Alternatively, if you went for the ***Colorful Icons*** version and would prefer
 ```
 
 If you also want the filename to show, add this snippet: 
-`{stream.filename::exists["✎ {stream.filename}  "||""]}`  or `{stream.filename::exists["✏️ {stream.filename}  "||""]}` 
+
+```
+{stream.filename::exists["✎ {stream.filename}  "||""]}
+```
+
+OR
+
+```
+{stream.filename::exists["✏️ {stream.filename}  "||""]}
+```
+
 (depending on the icon you prefer) at the start of the last line, just before the `{stream.message...` part.
 
 The **Name Template** is the same for both, but just for reference in case you might need it, here it is again:
