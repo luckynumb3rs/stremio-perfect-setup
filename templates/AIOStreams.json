@@ -990,7 +990,8 @@
       "enabled": true,
       "strict": true,
       "requestTypes": [
-        "series"
+        "series",
+        "anime"
       ],
       "addons": []
     },
