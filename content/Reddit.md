@@ -110,7 +110,7 @@ Second, let's prepare the Stremio account properly:
 
 **AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiostreams) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
+Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/aiostreams) or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
@@ -125,10 +125,12 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
 4. Click "**Use this Template Now**".
 5. On the "**Select Services**" page that is shown, enable the services you want to use and click "**Next**". If you're not using any services and want to proceed with the **P2P/HTTP** setup, click "**Skip**".
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
-   * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
-      * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
-      * **🎬 *Colorful Icons*** contains a colored version with more graphical icons.
-      * **🚫 *None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+   * **🎨 Formatter Options**:
+      * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
+         * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
+         * **🎬 *Colorful Icons*** contains a colored version with more graphical icons.
+         * **🚫 *None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+      * **📝 Show Filename** toggles showing the filenames on the stream information view.
    * **🗣️ Language Options**:
       * **🔊 Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
       * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.
@@ -177,7 +179,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
 
 **AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
 
-Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiometadata) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
+Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiometadata) or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
@@ -187,7 +189,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
 1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (right-click, "*Save As*", and save it as `.json`, not `.txt`).
 2. Go to the "**Configuration**" tab, click on "**Import Configuration**", and load my configuration file.
 3. Go to the "**Integrations**" tab, and enter the API keys for Gemini, TMDB, TheTVDB, RPDB.
-   * The **RPDB** key is "*t0-free-rpdb*" and it's already pre-entered.
+   * For **RPDB** enter "*t0-free-rpdb*".
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
    * *If you want some ready-to-use and well-maintained lists, while on the Trakt tab, search for the lists from user "snoak", and you will be able to import a lot of interesting lists. I have already included some of them in the catalog, but you can add more.*
    * **For Anime users**: *If you want to enable search for Anime, make sure to go to to the "Search" tab and enable both "Anime Search Engine" switches.*
@@ -245,11 +247,9 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 4. You will then land on the Watchly "**Preferences**" page. Configure according to your personal preferences here.
 5. Scroll down and enter the **RPDB**, **TMDB**, **Simkl** (Optional), and **Gemini** *API Keys* in the respective fields.
    * The **RPDB** key is "*t0-free-rpdb*".
-6. Select **Trakt** in the "**Watch History Source**" if you integrated Trakt throughout the guide, or leave it at **Stremio** if you opted out of Trakt (or select **Simkl** if you went for that).
-7. Click "**Login with Trakt**" if you selected Trakt and follow the steps.
-8. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
-9. Click on "**Next: Install**" and click on "**Save & Install**".
-10. Click "**Install on Web**" and install the addon on Stremio.
+6. Click on "**Next: Catalogs**" and configure catalogs here also according to your personal preferences.
+7. Click on "**Next: Install**" and click on "**Save & Install**".
+8. Click "**Install on Web**" and install the addon on Stremio.
 * ***Notes:***
    * *If you want these Watchly catalogs to show on top (which you'll probably want), go to Cinebye again and change the order of the addons by putting Watchly second, after Cinemeta and before AIOMetadata.*
    * *If your Stremio account is new, it will not have a watch history yet, so you may get "Failed to fetch" or similar issues on the Watchly catalogs when showing on Stremio. Don't worry, they should show up properly once it has enough information to personalize your lists.*

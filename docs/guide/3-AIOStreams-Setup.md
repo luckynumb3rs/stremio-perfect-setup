@@ -7,7 +7,7 @@ title: "📚 3. AIOStreams [Find Streams]"
 
 **AIOStreams** is the stream aggregation engine in this setup. It combines multiple scraping sources into one consistent results list, and lets you apply filtering, sorting, and formatting so the best links appear first.
 
-Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiostreams) or [**this**](https://status.dinsden.top/status/stremio-addons) link (they both show the same instances and their online status, it's just two different sources), or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
+Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/aiostreams) or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
 
 >**WARNING:**
 >* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](0-Beginner-Concepts.md#what-does-an-addon-instance-mean).
@@ -31,10 +31,12 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/#g
    ![Select Services](../images/3.5.png)
 
 6. On the "**Template Options**" page, you'll be able to personalize the configuration to match your preferences:
-   * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
-      * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
-      * **🎬 *Colorful Icons*** contains a colored version with more graphical icons.
-      * **🚫 *None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+   * **🎨 Formatter Options**:
+      * **🖋️ Formatter Style**: Here you can choose the formatting of the stream information view.
+         * **▶︎ *Flat Monochrome Icons*** has a cleaner look based on minimalistic white icons.
+         * **🎬 *Colorful Icons*** contains a colored version with more graphical icons.
+         * **🚫 *None*** retains your existing formatter (formatter will not be replaced, if you already have one configured).
+      * **📝 Show Filename** toggles showing the filenames on the stream information view.
    * **🗣️ Language Options**:
       * **🔊 Preferred Languages**: Here you can select your preferred stream languages that you want to be sorted first when the streaming options are shown. *Original, Dual Audio, Multi, Dubbed, and Unknown* are automatically appended after your selections.
       * **🔒 Show Only Preferred Languages**: You can enable this option (recommended) to show only streams in the selected languages above (including *Original, Dual Audio, Multi, Dubbed, and Unknown*). This can help reduce clutter by filtering out streams in languages you don't prefer.

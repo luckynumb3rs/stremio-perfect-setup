@@ -95,7 +95,7 @@ If you went with the ***Flat Monochrome Icons*** for the formatter and want inst
 {stream.size::>0::and::stream.seasonPack::istrue["🗃️  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
 {stream.proxied::istrue["🛡️ "||"🛠️ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
 {stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.uSubtitles::exists["💬  {stream.uSmallSubtitleCodes::join(' · ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ] "||""]}
-{stream.message::exists["ℹ️ {stream.message::smallcaps}"||""]}
+{stream.message::exists["ℹ️ {stream.message::smallcaps}  "||""]}
 ```
 
 Alternatively, if you went for the ***Colorful Icons*** version and would prefer the ***Flat Monochrome Icons*** instead, replace the text in the **Description Template** with this:
@@ -107,8 +107,12 @@ Alternatively, if you went for the ***Colorful Icons*** version and would prefer
 {stream.size::>0::and::stream.seasonPack::istrue["⧉  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["◧  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["⟳ {stream.age}"||""]}
 {stream.proxied::istrue["⛊ "||"⛉ "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}𖧧  "||""]}
 {stream.languages::exists["⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  "||""]}{stream.uSubtitles::exists["☰  {stream.uSmallSubtitleCodes::join(' · ')}  "||""]}{stream.seadex["»  "||""]}{stream.seadexBest::istrue["[ʙᴇsᴛ] "||""]}{stream.seadex::istrue::and::stream.seadexBest::isfalse["[ᴀʟᴛ] "||""]}
-{stream.message::exists["ⓘ {stream.message::smallcaps}"||""]}
+{stream.message::exists["ⓘ {stream.message::smallcaps}  "||""]}
 ```
+
+If you also want the filename to show, add this snippet: 
+`{stream.filename::exists["✎ {stream.filename}  "||""]}`  or `{stream.filename::exists["✏️ {stream.filename}  "||""]}` 
+(depending on the icon you prefer) at the start of the last line, just before the `{stream.message...` part.
 
 The **Name Template** is the same for both, but just for reference in case you might need it, here it is again:
 
