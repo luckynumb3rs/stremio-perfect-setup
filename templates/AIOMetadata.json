@@ -1117,7 +1117,7 @@
       {
         "id": "tmdb.discover.movie.streaming.discovery-plus",
         "type": "movie",
-        "name": "🎬 Discovery+",
+        "name": "🎬 Discovery Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1135,7 +1135,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "🎬 Discovery+",
+              "catalogName": "🎬 Discovery Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -1161,7 +1161,7 @@
       {
         "id": "tmdb.discover.series.streaming.discovery-plus",
         "type": "series",
-        "name": "🎬 Discovery+",
+        "name": "🎬 Discovery Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -1179,7 +1179,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "🎬 Discovery+",
+              "catalogName": "🎬 Discovery Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
