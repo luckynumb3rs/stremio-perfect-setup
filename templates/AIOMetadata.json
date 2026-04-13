@@ -401,7 +401,7 @@
       {
         "id": "tmdb.discover.movie.streaming.disney-plus",
         "type": "movie",
-        "name": "🎬 Disney+",
+        "name": "🎬 Disney Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -419,7 +419,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "🎬 Disney+",
+              "catalogName": "🎬 Disney Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -441,7 +441,7 @@
       {
         "id": "tmdb.discover.series.streaming.disney-plus",
         "type": "series",
-        "name": "🎬 Disney+",
+        "name": "🎬 Disney Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -459,7 +459,7 @@
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "🎬 Disney+",
+              "catalogName": "🎬 Disney Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -469,7 +469,7 @@
               "watchProviders": [
                 {
                   "id": 337,
-                  "label": "Disney+"
+                  "label": "Disney Plus"
                 }
               ],
               "providerJoinMode": "or",
@@ -590,7 +590,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "350",
+              "with_watch_providers": "350|2243",
               "vote_count.gte": 25,
               "with_release_type": "4|5|6"
             },
@@ -606,6 +606,10 @@
                 {
                   "id": 350,
                   "label": "Apple TV"
+                },
+                {
+                  "id": 2243,
+                  "label": "Apple TV Amazon Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -630,7 +634,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "350",
+              "with_watch_providers": "350|2243",
               "vote_count.gte": 10,
               "with_status": "0|3|4|5"
             },
@@ -646,6 +650,10 @@
                 {
                   "id": 350,
                   "label": "Apple TV"
+                },
+                {
+                  "id": 2243,
+                  "label": "Apple TV Amazon Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -825,7 +833,7 @@
       {
         "id": "tmdb.discover.movie.streaming.paramount-plus",
         "type": "movie",
-        "name": "🎬 Paramount+",
+        "name": "🎬 Paramount Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -843,7 +851,7 @@
               "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "🎬 Paramount+",
+              "catalogName": "🎬 Paramount Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -877,7 +885,7 @@
       {
         "id": "tmdb.discover.series.streaming.paramount-plus",
         "type": "series",
-        "name": "🎬 Paramount+",
+        "name": "🎬 Paramount Plus",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -890,12 +898,12 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "2303|2616|582|633",
+              "with_watch_providers": "2303|2616|582|633|1853",
               "vote_count.gte": 25,
               "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "🎬 Paramount+",
+              "catalogName": "🎬 Paramount Plus",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -918,6 +926,10 @@
                 {
                   "id": 633,
                   "label": "Paramount+ Roku Premium Channel"
+                },
+                {
+                  "id": 1853,
+                  "label": "Paramount Plus Apple TV Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -1030,7 +1042,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "283",
+              "with_watch_providers": "283|1968",
               "vote_count.gte": 25,
               "with_release_type": "4|5|6"
             },
@@ -1046,6 +1058,10 @@
                 {
                   "id": 283,
                   "label": "Crunchyroll"
+                },
+                {
+                  "id": 1968,
+                  "label": "Crunchyroll Amazon Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -1070,7 +1086,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "283",
+              "with_watch_providers": "283|1968",
               "vote_count.gte": 10,
               "with_status": "0|3|4|5"
             },
@@ -1086,6 +1102,10 @@
                 {
                   "id": 283,
                   "label": "Crunchyroll"
+                },
+                {
+                  "id": 1968,
+                  "label": "Crunchyroll Amazon Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -1198,7 +1218,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "190",
+              "with_watch_providers": "190|603|2060",
               "vote_count.gte": 0,
               "with_release_type": "4|5|6"
             },
@@ -1214,6 +1234,14 @@
                 {
                   "id": 190,
                   "label": "Curiosity Stream"
+                },
+                {
+                  "id": 603,
+                  "label": "CuriosityStream Amazon Channel"
+                },
+                {
+                  "id": 2060,
+                  "label": "CuriosityStream Apple TV Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -1238,7 +1266,7 @@
               "sort_by": "popularity.desc",
               "include_adult": false,
               "watch_region": "US",
-              "with_watch_providers": "190",
+              "with_watch_providers": "190|603|2060",
               "vote_count.gte": 0,
               "with_status": "0|3|4|5"
             },
@@ -1254,6 +1282,14 @@
                 {
                   "id": 190,
                   "label": "Curiosity Stream"
+                },
+                {
+                  "id": 603,
+                  "label": "CuriosityStream Amazon Channel"
+                },
+                {
+                  "id": 2060,
+                  "label": "CuriosityStream Apple TV Channel"
                 }
               ],
               "providerJoinMode": "or",
@@ -2093,6 +2129,7 @@
               "include_adult": false,
               "with_genres": "10763",
               "vote_count.gte": 10,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -2108,7 +2145,11 @@
                   "label": "News"
                 }
               ],
-              "voteCountMin": 10
+              "voteCountMin": 10,
+              "voteAverageRange": [
+                5,
+                10
+              ]
             }
           }
         }
@@ -2278,6 +2319,7 @@
               "include_adult": false,
               "with_genres": "10766",
               "vote_count.gte": 10,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -2293,7 +2335,11 @@
                   "label": "Soap"
                 }
               ],
-              "voteCountMin": 10
+              "voteCountMin": 10,
+              "voteAverageRange": [
+                5,
+                10
+              ]
             }
           }
         }
@@ -2315,6 +2361,7 @@
               "include_adult": false,
               "with_genres": "10767",
               "vote_count.gte": 10,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -2330,7 +2377,11 @@
                   "label": "Talk"
                 }
               ],
-              "voteCountMin": 10
+              "voteCountMin": 10,
+              "voteAverageRange": [
+                5,
+                10
+              ]
             }
           }
         }
@@ -2352,6 +2403,7 @@
               "include_adult": false,
               "with_genres": "10770",
               "vote_count.gte": 0,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -2367,7 +2419,11 @@
                   "label": "TV Movie"
                 }
               ],
-              "voteCountMin": 0
+              "voteCountMin": 0,
+              "voteAverageRange": [
+                5,
+                10
+              ]
             }
           }
         }
@@ -2732,7 +2788,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "4379",
+              "with_keywords": "4379|10854|186760",
               "with_genres": "878",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -2755,6 +2811,14 @@
                 {
                   "id": 4379,
                   "label": "time travel"
+                },
+                {
+                  "id": 10854,
+                  "label": "time loop"
+                },
+                {
+                  "id": 186760,
+                  "label": "alternate timeline"
                 }
               ],
               "voteCountMin": 25,
@@ -2781,7 +2845,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "4379",
+              "with_keywords": "4379|10854|186760",
               "with_genres": "10765",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -2804,6 +2868,14 @@
                 {
                   "id": 4379,
                   "label": "time travel"
+                },
+                {
+                  "id": 10854,
+                  "label": "time loop"
+                },
+                {
+                  "id": 186760,
+                  "label": "alternate timeline"
                 }
               ],
               "voteCountMin": 10,
@@ -2830,7 +2902,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9748",
+              "with_keywords": "9748|232766|155244",
               "with_genres": "28|53",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -2857,6 +2929,14 @@
                 {
                   "id": 9748,
                   "label": "revenge"
+                },
+                {
+                  "id": 232766,
+                  "label": "vengeance"
+                },
+                {
+                  "id": 155244,
+                  "label": "vendetta"
                 }
               ],
               "voteCountMin": 25,
@@ -2883,7 +2963,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9748",
+              "with_keywords": "9748|232766|155244",
               "with_genres": "18|80",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -2910,6 +2990,14 @@
                 {
                   "id": 9748,
                   "label": "revenge"
+                },
+                {
+                  "id": 232766,
+                  "label": "vengeance"
+                },
+                {
+                  "id": 155244,
+                  "label": "vendetta"
                 }
               ],
               "voteCountMin": 10,
@@ -2936,7 +3024,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "470",
+              "with_keywords": "470|5265|4289|4654|3637",
               "with_genres": "28|53",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -2963,6 +3051,22 @@
                 {
                   "id": 470,
                   "label": "spy"
+                },
+                {
+                  "id": 5265,
+                  "label": "espionage"
+                },
+                {
+                  "id": 4289,
+                  "label": "secret agent"
+                },
+                {
+                  "id": 4654,
+                  "label": "undercover agent"
+                },
+                {
+                  "id": 3637,
+                  "label": "double agent"
                 }
               ],
               "voteCountMin": 25,
@@ -2989,7 +3093,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "470",
+              "with_keywords": "470|5265|4289|4654|3637",
               "with_genres": "10759|80",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3016,6 +3120,22 @@
                 {
                   "id": 470,
                   "label": "spy"
+                },
+                {
+                  "id": 5265,
+                  "label": "espionage"
+                },
+                {
+                  "id": 4289,
+                  "label": "secret agent"
+                },
+                {
+                  "id": 4654,
+                  "label": "undercover agent"
+                },
+                {
+                  "id": 3637,
+                  "label": "double agent"
                 }
               ],
               "voteCountMin": 10,
@@ -3042,7 +3162,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "2343",
+              "with_keywords": "2343|177912|5147|40931|10821",
               "with_genres": "14",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3065,6 +3185,22 @@
                 {
                   "id": 2343,
                   "label": "magic"
+                },
+                {
+                  "id": 177912,
+                  "label": "wizard"
+                },
+                {
+                  "id": 5147,
+                  "label": "sorcery"
+                },
+                {
+                  "id": 40931,
+                  "label": "witchcraft"
+                },
+                {
+                  "id": 10821,
+                  "label": "sorcerer"
                 }
               ],
               "voteCountMin": 25,
@@ -3091,7 +3227,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "2343",
+              "with_keywords": "2343|177912|5147|40931|10821",
               "with_genres": "10765",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3114,6 +3250,22 @@
                 {
                   "id": 2343,
                   "label": "magic"
+                },
+                {
+                  "id": 177912,
+                  "label": "wizard"
+                },
+                {
+                  "id": 5147,
+                  "label": "sorcery"
+                },
+                {
+                  "id": 40931,
+                  "label": "witchcraft"
+                },
+                {
+                  "id": 10821,
+                  "label": "sorcerer"
                 }
               ],
               "voteCountMin": 10,
@@ -3140,7 +3292,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9663",
+              "with_keywords": "6956|208278|11088|215470|41586",
               "with_genres": "12|28",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3165,8 +3317,24 @@
               ],
               "withKeywords": [
                 {
-                  "id": 9663,
+                  "id": 6956,
                   "label": "treasure hunt"
+                },
+                {
+                  "id": 208278,
+                  "label": "hidden treasure"
+                },
+                {
+                  "id": 11088,
+                  "label": "treasure map"
+                },
+                {
+                  "id": 215470,
+                  "label": "treasure hunter"
+                },
+                {
+                  "id": 41586,
+                  "label": "archaeologist"
                 }
               ],
               "voteCountMin": 25,
@@ -3193,7 +3361,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9663",
+              "with_keywords": "6956|208278|11088|215470|41586",
               "with_genres": "10759",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3214,8 +3382,24 @@
               ],
               "withKeywords": [
                 {
-                  "id": 9663,
+                  "id": 6956,
                   "label": "treasure hunt"
+                },
+                {
+                  "id": 208278,
+                  "label": "hidden treasure"
+                },
+                {
+                  "id": 11088,
+                  "label": "treasure map"
+                },
+                {
+                  "id": 215470,
+                  "label": "treasure hunter"
+                },
+                {
+                  "id": 41586,
+                  "label": "archaeologist"
                 }
               ],
               "voteCountMin": 10,
@@ -3242,7 +3426,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "33404",
+              "with_keywords": "371534|9799|169993|165301",
               "with_genres": "35|10749",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3267,8 +3451,20 @@
               ],
               "withKeywords": [
                 {
+                  "id": 371534,
+                  "label": "romantic comedy"
+                },
+                {
                   "id": 9799,
                   "label": "romcom"
+                },
+                {
+                  "id": 169993,
+                  "label": "meet cute"
+                },
+                {
+                  "id": 165301,
+                  "label": "opposites attract"
                 }
               ],
               "voteCountMin": 25,
@@ -3295,7 +3491,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "33404",
+              "with_keywords": "371534|9799|169993|165301",
               "with_genres": "35",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3316,8 +3512,20 @@
               ],
               "withKeywords": [
                 {
+                  "id": 371534,
+                  "label": "romantic comedy"
+                },
+                {
                   "id": 9799,
                   "label": "romcom"
+                },
+                {
+                  "id": 169993,
+                  "label": "meet cute"
+                },
+                {
+                  "id": 165301,
+                  "label": "opposites attract"
                 }
               ],
               "voteCountMin": 10,
@@ -3344,7 +3552,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "10683",
+              "with_keywords": "10683|2796|704|10049",
               "with_genres": "18",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3367,6 +3575,18 @@
                 {
                   "id": 10683,
                   "label": "coming of age"
+                },
+                {
+                  "id": 2796,
+                  "label": "self-discovery"
+                },
+                {
+                  "id": 704,
+                  "label": "adolescence"
+                },
+                {
+                  "id": 10049,
+                  "label": "teen angst"
                 }
               ],
               "voteCountMin": 25,
@@ -3393,7 +3613,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "10683",
+              "with_keywords": "10683|2796|704|10049",
               "with_genres": "18",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3416,6 +3636,18 @@
                 {
                   "id": 10683,
                   "label": "coming of age"
+                },
+                {
+                  "id": 2796,
+                  "label": "self-discovery"
+                },
+                {
+                  "id": 704,
+                  "label": "adolescence"
+                },
+                {
+                  "id": 10049,
+                  "label": "teen angst"
                 }
               ],
               "voteCountMin": 10,
@@ -3442,7 +3674,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9715",
+              "with_keywords": "9715|155030|33637|158456",
               "with_genres": "28|878",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3469,6 +3701,18 @@
                 {
                   "id": 9715,
                   "label": "superhero"
+                },
+                {
+                  "id": 155030,
+                  "label": "superhero team"
+                },
+                {
+                  "id": 33637,
+                  "label": "super power"
+                },
+                {
+                  "id": 158456,
+                  "label": "masked vigilante"
                 }
               ],
               "voteCountMin": 25,
@@ -3495,7 +3739,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9715",
+              "with_keywords": "9715|155030|33637|158456",
               "with_genres": "10759|10765",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3522,6 +3766,18 @@
                 {
                   "id": 9715,
                   "label": "superhero"
+                },
+                {
+                  "id": 155030,
+                  "label": "superhero team"
+                },
+                {
+                  "id": 33637,
+                  "label": "super power"
+                },
+                {
+                  "id": 158456,
+                  "label": "masked vigilante"
                 }
               ],
               "voteCountMin": 10,
@@ -3548,7 +3804,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9882",
+              "with_keywords": "9882|3801|252937|14626|161176",
               "with_genres": "878|12",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3575,6 +3831,22 @@
                 {
                   "id": 9882,
                   "label": "space"
+                },
+                {
+                  "id": 3801,
+                  "label": "space travel"
+                },
+                {
+                  "id": 252937,
+                  "label": "spaceship"
+                },
+                {
+                  "id": 14626,
+                  "label": "astronaut"
+                },
+                {
+                  "id": 161176,
+                  "label": "space opera"
                 }
               ],
               "voteCountMin": 25,
@@ -3601,7 +3873,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "9882",
+              "with_keywords": "9882|3801|252937|14626|161176",
               "with_genres": "10765|10759",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3628,6 +3900,22 @@
                 {
                   "id": 9882,
                   "label": "space"
+                },
+                {
+                  "id": 3801,
+                  "label": "space travel"
+                },
+                {
+                  "id": 252937,
+                  "label": "spaceship"
+                },
+                {
+                  "id": 14626,
+                  "label": "astronaut"
+                },
+                {
+                  "id": 161176,
+                  "label": "space opera"
                 }
               ],
               "voteCountMin": 10,
@@ -3654,7 +3942,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "779|780",
+              "with_keywords": "779|780|3436|156159|156162|14731",
               "with_genres": "28",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3681,6 +3969,22 @@
                 {
                   "id": 780,
                   "label": "kung fu"
+                },
+                {
+                  "id": 3436,
+                  "label": "karate"
+                },
+                {
+                  "id": 156159,
+                  "label": "martial arts tournament"
+                },
+                {
+                  "id": 156162,
+                  "label": "martial arts training"
+                },
+                {
+                  "id": 14731,
+                  "label": "martial arts master"
                 }
               ],
               "voteCountMin": 25,
@@ -3707,7 +4011,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "779|780",
+              "with_keywords": "779|780|3436|156159|156162|14731",
               "with_genres": "10759",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3734,6 +4038,22 @@
                 {
                   "id": 780,
                   "label": "kung fu"
+                },
+                {
+                  "id": 3436,
+                  "label": "karate"
+                },
+                {
+                  "id": 156159,
+                  "label": "martial arts tournament"
+                },
+                {
+                  "id": 156162,
+                  "label": "martial arts training"
+                },
+                {
+                  "id": 14731,
+                  "label": "martial arts master"
                 }
               ],
               "voteCountMin": 10,
@@ -3760,7 +4080,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "3133",
+              "with_keywords": "3133|9259|342966|4978|185629",
               "with_genres": "27|14",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3787,6 +4107,22 @@
                 {
                   "id": 3133,
                   "label": "vampire"
+                },
+                {
+                  "id": 9259,
+                  "label": "vampire hunter (slayer)"
+                },
+                {
+                  "id": 342966,
+                  "label": "vampire hunter"
+                },
+                {
+                  "id": 4978,
+                  "label": "immortality"
+                },
+                {
+                  "id": 185629,
+                  "label": "bloodsucker"
                 }
               ],
               "voteCountMin": 25,
@@ -3813,7 +4149,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "3133",
+              "with_keywords": "3133|9259|342966|4978|185629",
               "with_genres": "10765|18",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -3840,6 +4176,22 @@
                 {
                   "id": 3133,
                   "label": "vampire"
+                },
+                {
+                  "id": 9259,
+                  "label": "vampire hunter (slayer)"
+                },
+                {
+                  "id": 342966,
+                  "label": "vampire hunter"
+                },
+                {
+                  "id": 4978,
+                  "label": "immortality"
+                },
+                {
+                  "id": 185629,
+                  "label": "bloodsucker"
                 }
               ],
               "voteCountMin": 10,
@@ -3866,7 +4218,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "10051",
+              "with_keywords": "8201|169086|11514|252201|362329",
               "with_genres": "35",
               "vote_count.gte": 25,
               "vote_average.gte": 6,
@@ -3887,8 +4239,24 @@
               ],
               "withKeywords": [
                 {
-                  "id": 10051,
+                  "id": 8201,
                   "label": "satire"
+                },
+                {
+                  "id": 169086,
+                  "label": "political satire"
+                },
+                {
+                  "id": 11514,
+                  "label": "social satire"
+                },
+                {
+                  "id": 252201,
+                  "label": "media satire"
+                },
+                {
+                  "id": 362329,
+                  "label": "news media satire"
                 }
               ],
               "voteCountMin": 25,
@@ -3915,7 +4283,7 @@
             "params": {
               "sort_by": "popularity.desc",
               "include_adult": false,
-              "with_keywords": "10051",
+              "with_keywords": "8201|252201|330180|233492|316143|350981|338198|322219|169086|350455|11514|233623|336694|332908|314618|356196|365613|361592|351302|362329",
               "with_genres": "35",
               "vote_count.gte": 10,
               "vote_average.gte": 6,
@@ -4247,6 +4615,7 @@
               "primary_release_date.gte": "1990-01-01",
               "primary_release_date.lte": "1999-12-31",
               "vote_count.gte": 25,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -4257,6 +4626,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 25,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "primaryReleaseFrom": "1990-01-01",
               "primaryReleaseTo": "1999-12-31"
             }
@@ -4281,6 +4654,7 @@
               "first_air_date.gte": "1990-01-01",
               "first_air_date.lte": "1999-12-31",
               "vote_count.gte": 10,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -4291,6 +4665,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 10,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "firstAirFrom": "1990-01-01",
               "firstAirTo": "1999-12-31"
             }
@@ -4315,6 +4693,7 @@
               "primary_release_date.gte": "1980-01-01",
               "primary_release_date.lte": "1989-12-31",
               "vote_count.gte": 15,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -4325,6 +4704,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 15,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "primaryReleaseFrom": "1980-01-01",
               "primaryReleaseTo": "1989-12-31"
             }
@@ -4349,6 +4732,7 @@
               "first_air_date.gte": "1980-01-01",
               "first_air_date.lte": "1989-12-31",
               "vote_count.gte": 5,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -4359,6 +4743,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 5,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "firstAirFrom": "1980-01-01",
               "firstAirTo": "1989-12-31"
             }
@@ -4383,6 +4771,7 @@
               "primary_release_date.gte": "1970-01-01",
               "primary_release_date.lte": "1979-12-31",
               "vote_count.gte": 10,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -4393,6 +4782,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 10,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "primaryReleaseFrom": "1970-01-01",
               "primaryReleaseTo": "1979-12-31"
             }
@@ -4417,6 +4810,7 @@
               "first_air_date.gte": "1970-01-01",
               "first_air_date.lte": "1979-12-31",
               "vote_count.gte": 0,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -4427,6 +4821,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 0,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "firstAirFrom": "1970-01-01",
               "firstAirTo": "1979-12-31"
             }
@@ -4451,6 +4849,7 @@
               "primary_release_date.gte": "1960-01-01",
               "primary_release_date.lte": "1969-12-31",
               "vote_count.gte": 5,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -4461,6 +4860,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 5,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "primaryReleaseFrom": "1960-01-01",
               "primaryReleaseTo": "1969-12-31"
             }
@@ -4485,6 +4888,7 @@
               "first_air_date.gte": "1960-01-01",
               "first_air_date.lte": "1969-12-31",
               "vote_count.gte": 0,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -4495,6 +4899,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 0,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "firstAirFrom": "1960-01-01",
               "firstAirTo": "1969-12-31"
             }
@@ -4519,6 +4927,7 @@
               "primary_release_date.gte": "1950-01-01",
               "primary_release_date.lte": "1959-12-31",
               "vote_count.gte": 0,
+              "vote_average.gte": 5,
               "with_release_type": "4|5|6"
             },
             "formState": {
@@ -4529,6 +4938,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 0,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "primaryReleaseFrom": "1950-01-01",
               "primaryReleaseTo": "1959-12-31"
             }
@@ -4553,6 +4966,7 @@
               "first_air_date.gte": "1950-01-01",
               "first_air_date.lte": "1959-12-31",
               "vote_count.gte": 0,
+              "vote_average.gte": 5,
               "with_status": "0|3|4|5"
             },
             "formState": {
@@ -4563,6 +4977,10 @@
               "includeAdult": false,
               "releasedOnly": true,
               "voteCountMin": 0,
+              "voteAverageRange": [
+                5,
+                10
+              ],
               "firstAirFrom": "1950-01-01",
               "firstAirTo": "1959-12-31"
             }
