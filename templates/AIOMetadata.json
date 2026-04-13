@@ -479,7 +479,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.streaming.amazon-prime-video",
+        "id": "tmdb.discover.movie.streaming.prime-video",
         "type": "movie",
         "name": "🎬 Prime Video",
         "enabled": true,
@@ -527,7 +527,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.streaming.amazon-prime-video",
+        "id": "tmdb.discover.series.streaming.prime-video",
         "type": "series",
         "name": "🎬 Prime Video",
         "enabled": true,
@@ -575,7 +575,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.streaming.apple-tv-plus",
+        "id": "tmdb.discover.movie.streaming.apple-tv",
         "type": "movie",
         "name": "🎬 Apple TV",
         "enabled": true,
@@ -619,7 +619,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.streaming.apple-tv-plus",
+        "id": "tmdb.discover.series.streaming.apple-tv",
         "type": "series",
         "name": "🎬 Apple TV",
         "enabled": true,
@@ -663,7 +663,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.streaming.hbo",
+        "id": "tmdb.discover.movie.streaming.hbo-max",
         "type": "movie",
         "name": "🎬 HBO Max",
         "enabled": true,
@@ -707,7 +707,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.streaming.hbo",
+        "id": "tmdb.discover.series.streaming.hbo-max",
         "type": "series",
         "name": "🎬 HBO Max",
         "enabled": true,
