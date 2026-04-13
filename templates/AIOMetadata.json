@@ -4394,7 +4394,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.2020s",
+        "id": "tmdb.discover.movie.decades.2020s",
         "type": "movie",
         "name": "🎥 2020s",
         "enabled": true,
@@ -4428,7 +4428,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.2020s",
+        "id": "tmdb.discover.series.decades.2020s",
         "type": "series",
         "name": "🎥 2020s",
         "enabled": true,
@@ -4462,7 +4462,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.2010s",
+        "id": "tmdb.discover.movie.decades.2010s",
         "type": "movie",
         "name": "🎥 2010s",
         "enabled": true,
@@ -4496,7 +4496,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.2010s",
+        "id": "tmdb.discover.series.decades.2010s",
         "type": "series",
         "name": "🎥 2010s",
         "enabled": true,
@@ -4530,7 +4530,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.2000s",
+        "id": "tmdb.discover.movie.decades.2000s",
         "type": "movie",
         "name": "🎥 2000s",
         "enabled": true,
@@ -4564,7 +4564,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.2000s",
+        "id": "tmdb.discover.series.decades.2000s",
         "type": "series",
         "name": "🎥 2000s",
         "enabled": true,
@@ -4598,7 +4598,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.1990s",
+        "id": "tmdb.discover.movie.decades.1990s",
         "type": "movie",
         "name": "🎥 1990s",
         "enabled": true,
@@ -4637,7 +4637,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.1990s",
+        "id": "tmdb.discover.series.decades.1990s",
         "type": "series",
         "name": "🎥 1990s",
         "enabled": true,
@@ -4676,7 +4676,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.1980s",
+        "id": "tmdb.discover.movie.decades.1980s",
         "type": "movie",
         "name": "🎥 1980s",
         "enabled": true,
@@ -4715,7 +4715,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.1980s",
+        "id": "tmdb.discover.series.decades.1980s",
         "type": "series",
         "name": "🎥 1980s",
         "enabled": true,
@@ -4754,7 +4754,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.1970s",
+        "id": "tmdb.discover.movie.decades.1970s",
         "type": "movie",
         "name": "🎥 1970s",
         "enabled": true,
@@ -4793,7 +4793,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.1970s",
+        "id": "tmdb.discover.series.decades.1970s",
         "type": "series",
         "name": "🎥 1970s",
         "enabled": true,
@@ -4832,7 +4832,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.1960s",
+        "id": "tmdb.discover.movie.decades.1960s",
         "type": "movie",
         "name": "🎥 1960s",
         "enabled": true,
@@ -4871,7 +4871,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.1960s",
+        "id": "tmdb.discover.series.decades.1960s",
         "type": "series",
         "name": "🎥 1960s",
         "enabled": true,
@@ -4910,7 +4910,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.Decades.1950s",
+        "id": "tmdb.discover.movie.decades.1950s",
         "type": "movie",
         "name": "🎥 1950s",
         "enabled": true,
@@ -4949,7 +4949,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.Decades.1950s",
+        "id": "tmdb.discover.series.decades.1950s",
         "type": "series",
         "name": "🎥 1950s",
         "enabled": true,
