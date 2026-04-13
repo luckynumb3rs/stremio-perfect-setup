@@ -8,9 +8,10 @@ title: "📜 Changelog"
 ## 2.0.5 (2026-04-12)
 
 - Removed **TorBox** addon because it was deprecated, and added **TorBox Search** addon instead.
-- Added **Filename** option in the template, to enable showing the filename on the formatter.
+- Added **Filename** toggle option in the template, to enable showing the filename on the formatter.
 - Disabled **Episode Matching** for *Anime*.
 - Changed some **Color Formatter** icons to make them more compatible with older devices.
+- Replaced **OpenSubtitles** with **SubHero** again since it's supposed to work better now.
 - [AIOMetadata] Restructured **Catalogs** by replacing *Trakt* catalogs with configurable built-in *TMDB Discover* catalogs, and added a lot more pre-configured catalogs to choose from, incl. a better categorized structure.
 
 ## 2.0.4 (2026-04-11)
