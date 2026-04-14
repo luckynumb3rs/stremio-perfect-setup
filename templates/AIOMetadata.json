@@ -5112,7 +5112,7 @@
       {
         "id": "tmdb.discover.movie.runtime.epic",
         "type": "movie",
-        "name": "🕒 Epic (3+ hours)",
+        "name": "🕒 Epic (180+ min)",
         "enabled": true,
         "showInHome": true,
         "source": "tmdb",
@@ -5130,7 +5130,7 @@
               "vote_average.gte": 6.5
             },
             "formState": {
-              "catalogName": "🕒 Epic (3+ hours)",
+              "catalogName": "🕒 Epic (180+ min)",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
