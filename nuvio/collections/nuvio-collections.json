@@ -1,7 +1,7 @@
 [
   {
     "id": "collections.discover",
-    "title": "🏆 Discover",
+    "title": "🔭 Discover",
     "showAllTab": true,
     "viewMode": "TABBED_GRID",
     "pinToTop": true,
@@ -82,7 +82,7 @@
     "folders": [
       {
         "id": "collections.streaming.netflix",
-        "title": "🎬 Netflix",
+        "title": "Netflix",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -103,7 +103,7 @@
       },
       {
         "id": "collections.streaming.disney-plus",
-        "title": "🎬 Disney Plus",
+        "title": "Disney Plus",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -124,7 +124,7 @@
       },
       {
         "id": "collections.streaming.prime-video",
-        "title": "🎬 Prime Video",
+        "title": "Prime Video",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -145,7 +145,7 @@
       },
       {
         "id": "collections.streaming.apple-tv",
-        "title": "🎬 Apple TV",
+        "title": "Apple TV",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -166,7 +166,7 @@
       },
       {
         "id": "collections.streaming.hbo-max",
-        "title": "🎬 HBO Max",
+        "title": "HBO Max",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -187,7 +187,7 @@
       },
       {
         "id": "collections.streaming.hulu",
-        "title": "🎬 Hulu",
+        "title": "Hulu",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -208,7 +208,7 @@
       },
       {
         "id": "collections.streaming.paramount-plus",
-        "title": "🎬 Paramount Plus",
+        "title": "Paramount Plus",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -229,7 +229,7 @@
       },
       {
         "id": "collections.streaming.peacock",
-        "title": "🎬 Peacock",
+        "title": "Peacock",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -250,7 +250,7 @@
       },
       {
         "id": "collections.streaming.crunchyroll",
-        "title": "🎬 Crunchyroll",
+        "title": "Crunchyroll",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -271,7 +271,7 @@
       },
       {
         "id": "collections.streaming.discovery-plus",
-        "title": "🎬 Discovery Plus",
+        "title": "Discovery Plus",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -292,7 +292,7 @@
       },
       {
         "id": "collections.streaming.curiosity-stream",
-        "title": "🎬 Curiosity Stream",
+        "title": "Curiosity Stream",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -323,7 +323,7 @@
     "folders": [
       {
         "id": "collections.genres.action",
-        "title": "🎭 Action",
+        "title": "Action",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -344,11 +344,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/action.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/action.jpg"
       },
       {
         "id": "collections.genres.animation",
-        "title": "🎭 Animation",
+        "title": "Animation",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -364,11 +364,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/animation.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/animation.jpg"
       },
       {
         "id": "collections.genres.anime",
-        "title": "🎭 Anime",
+        "title": "Anime",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -454,11 +454,11 @@
             "type": "anime"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/anime.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/anime.jpg"
       },
       {
         "id": "collections.genres.comedy",
-        "title": "🎭 Comedy",
+        "title": "Comedy",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -474,11 +474,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/comedy.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/comedy.jpg"
       },
       {
         "id": "collections.genres.crime",
-        "title": "🎭 Crime",
+        "title": "Crime",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -494,11 +494,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/crime.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/crime.jpg"
       },
       {
         "id": "collections.genres.documentary",
-        "title": "🎭 Documentary",
+        "title": "Documentary",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -514,11 +514,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/documentary.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/documentary.jpg"
       },
       {
         "id": "collections.genres.drama",
-        "title": "🎭 Drama",
+        "title": "Drama",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -534,11 +534,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/drama.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/drama.jpg"
       },
       {
         "id": "collections.genres.family",
-        "title": "🎭 Family",
+        "title": "Family",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -554,11 +554,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/family.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/family.jpg"
       },
       {
         "id": "collections.genres.fantasy",
-        "title": "🎭 Fantasy",
+        "title": "Fantasy",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -579,11 +579,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/fantasy.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/fantasy.jpg"
       },
       {
         "id": "collections.genres.history",
-        "title": "🎭 History",
+        "title": "History",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -604,11 +604,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/history.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/history.jpg"
       },
       {
         "id": "collections.genres.horror",
-        "title": "🎭 Horror",
+        "title": "Horror",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -619,11 +619,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/horror.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/horror.jpg"
       },
       {
         "id": "collections.genres.music",
-        "title": "🎭 Music",
+        "title": "Music",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -634,11 +634,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/music.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/music.jpg"
       },
       {
         "id": "collections.genres.mystery",
-        "title": "🎭 Mystery",
+        "title": "Mystery",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -654,11 +654,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/mystery.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/mystery.jpg"
       },
       {
         "id": "collections.genres.talk",
-        "title": "🎭 Talk",
+        "title": "Talk",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -674,11 +674,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/talk.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/talk.jpg"
       },
       {
         "id": "collections.genres.reality",
-        "title": "🎭 Reality",
+        "title": "Reality",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -694,11 +694,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/reality.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/reality.jpg"
       },
       {
         "id": "collections.genres.romance",
-        "title": "🎭 Romance",
+        "title": "Romance",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -709,11 +709,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/romance.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/romance.jpg"
       },
       {
         "id": "collections.genres.thriller",
-        "title": "🎭 Thriller",
+        "title": "Thriller",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -724,11 +724,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/thriller.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/thriller.jpg"
       },
       {
         "id": "collections.genres.tv",
-        "title": "🎭 TV",
+        "title": "TV",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -739,11 +739,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/tv.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/tv.jpg"
       },
       {
         "id": "collections.genres.western",
-        "title": "🎭 Western",
+        "title": "Western",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -759,7 +759,7 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/western.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/genres/western.jpg"
       }
     ]
   },
@@ -773,7 +773,7 @@
     "folders": [
       {
         "id": "collections.themes.time-travel",
-        "title": "🎨 Time Travel",
+        "title": "Time Travel",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -789,11 +789,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/time-travel.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/time-travel.jpg"
       },
       {
         "id": "collections.themes.revenge",
-        "title": "🎨 Revenge",
+        "title": "Revenge",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -809,11 +809,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/revenge.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/revenge.jpg"
       },
       {
         "id": "collections.themes.spy",
-        "title": "🎨 Spy",
+        "title": "Spy",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -829,11 +829,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/spy.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/spy.jpg"
       },
       {
         "id": "collections.themes.magic",
-        "title": "🎨 Magic",
+        "title": "Magic",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -849,11 +849,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/magic.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/magic.jpg"
       },
       {
         "id": "collections.themes.treasure-hunt",
-        "title": "🎨 Treasure Hunt",
+        "title": "Treasure Hunt",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -869,11 +869,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/treasure-hunt.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/treasure-hunt.jpg"
       },
       {
         "id": "collections.themes.romantic-comedy",
-        "title": "🎨 Romantic Comedy",
+        "title": "Romantic Comedy",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -889,11 +889,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/romantic-comedy.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/romantic-comedy.jpg"
       },
       {
         "id": "collections.themes.coming-of-age",
-        "title": "🎨 Coming of Age",
+        "title": "Coming of Age",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -909,11 +909,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/coming-of-age.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/coming-of-age.jpg"
       },
       {
         "id": "collections.themes.superhero",
-        "title": "🎨 Superhero",
+        "title": "Superhero",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -929,11 +929,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/superhero.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/superhero.jpg"
       },
       {
         "id": "collections.themes.space",
-        "title": "🎨 Space",
+        "title": "Space",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -949,11 +949,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/space.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/space.jpg"
       },
       {
         "id": "collections.themes.martial-arts",
-        "title": "🎨 Martial Arts",
+        "title": "Martial Arts",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -969,11 +969,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/martial-arts.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/martial-arts.jpg"
       },
       {
         "id": "collections.themes.vampire",
-        "title": "🎨 Vampire",
+        "title": "Vampire",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -989,11 +989,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/vampire.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/vampire.jpg"
       },
       {
         "id": "collections.themes.satire",
-        "title": "🎨 Satire",
+        "title": "Satire",
         "tileShape": "POSTER",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1009,7 +1009,7 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/satire.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/themes/satire.jpg"
       }
     ]
   },
@@ -1023,7 +1023,7 @@
     "folders": [
       {
         "id": "collections.decades.2020s",
-        "title": "🎥 2020s",
+        "title": "2020s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1039,11 +1039,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2020s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2020s.jpg"
       },
       {
         "id": "collections.decades.2010s",
-        "title": "🎥 2010s",
+        "title": "2010s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1059,11 +1059,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2010s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2010s.jpg"
       },
       {
         "id": "collections.decades.2000s",
-        "title": "🎥 2000s",
+        "title": "2000s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1079,11 +1079,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2000s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/2000s.jpg"
       },
       {
         "id": "collections.decades.1990s",
-        "title": "🎥 1990s",
+        "title": "1990s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1099,11 +1099,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1990s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1990s.jpg"
       },
       {
         "id": "collections.decades.1980s",
-        "title": "🎥 1980s",
+        "title": "1980s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1119,11 +1119,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1980s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1980s.jpg"
       },
       {
         "id": "collections.decades.1970s",
-        "title": "🎥 1970s",
+        "title": "1970s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1139,11 +1139,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1970s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1970s.jpg"
       },
       {
         "id": "collections.decades.1960s",
-        "title": "🎥 1960s",
+        "title": "1960s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1159,11 +1159,11 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1960s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1960s.jpg"
       },
       {
         "id": "collections.decades.1950s",
-        "title": "🎥 1950s",
+        "title": "1950s",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1179,7 +1179,7 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1950s.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/decades/1950s.jpg"
       }
     ]
   },
@@ -1193,7 +1193,7 @@
     "folders": [
       {
         "id": "collections.runtime.short",
-        "title": "🕒 Short (<90 min)",
+        "title": "Short (<90 min)",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1204,11 +1204,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/short.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/short.jpg"
       },
       {
         "id": "collections.runtime.standard",
-        "title": "🕒 Standard (90-150 min)",
+        "title": "Standard (90-150 min)",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1219,11 +1219,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/standard.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/standard.jpg"
       },
       {
         "id": "collections.runtime.long",
-        "title": "🕒 Long (150-180 min)",
+        "title": "Long (150-180 min)",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1234,11 +1234,11 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/long.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/long.jpg"
       },
       {
         "id": "collections.runtime.epic",
-        "title": "🕒 Epic (180+ min)",
+        "title": "Epic (180+ min)",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -1249,7 +1249,7 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/epic.gif"
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/nuvio/collections/runtime/epic.jpg"
       }
     ]
   }
