@@ -693,6 +693,34 @@
         }
       },
       {
+        "__if": "inputs.httpAddons != none",
+        "category": "HTTP",
+        "type": "webstreamr",
+        "instanceId": "wst",
+        "enabled": true,
+        "options": {
+          "name": "WebStreamr",
+          "timeout": "{{inputs.timeout}}",
+          "resources": [
+            "stream"
+          ],
+          "url": "https://87d6a6ef6b58-webstreamrmbg.baby-beamup.club/manifest.json",
+          "mediaTypes": [],
+          "providers": [
+            "multi",
+            "en",
+            "de",
+            "es",
+            "fr",
+            "hi",
+            "it",
+            "mx"
+          ],
+          "includeExternalUrls": false,
+          "showErrors": false
+        }
+      },
+      {
         "type": "opensubtitles-v3-plus",
         "instanceId": "osb",
         "enabled": true,

@@ -5,6 +5,10 @@ title: "📜 Changelog"
 
 # Changelog
 
+## 2.0.6 (2026-04-14)
+
+- Readded **WebStreamr** modified with the new forked project and its URL.
+
 ## 2.0.5 (2026-04-12)
 
 - Removed **TorBox** addon because it was deprecated, and added **TorBox Search** addon instead.
