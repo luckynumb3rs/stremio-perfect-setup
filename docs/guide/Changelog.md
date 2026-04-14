@@ -5,15 +5,12 @@ title: "📜 Changelog"
 
 # Changelog
 
-## 2.0.6 (2026-04-14)
-
-- Readded **WebStreamr** modified with the new forked project and its URL.
-
 ## 2.0.5 (2026-04-12)
 
 - Removed **TorBox** addon because it was deprecated, and added **TorBox Search** addon instead.
 - Added **Filename** toggle option in the template, to enable showing the filename on the formatter.
 - Disabled **Episode Matching** for *Anime*.
+- Readded **WebStreamr** modified with the new forked project and its URL.
 - Changed some **Color Formatter** icons to make them more compatible with older devices.
 - [AIOMetadata] **BIG UPDATE**: Restructured **Catalogs** by replacing *Trakt* catalogs with configurable built-in *TMDB Discover* catalogs, and added a lot more pre-configured catalogs to choose from, incl. a better categorized structure. Make sure to update the *AIOMetadata* configuration too.
 
