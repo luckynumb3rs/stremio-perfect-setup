@@ -1,0 +1,1299 @@
+[
+  {
+    "id": "collections.discover",
+    "title": "🔭 Discover",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.discover.popular",
+        "title": "🏆 Popular",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.top",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.top",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/popular.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/popular.gif"
+      },
+      {
+        "id": "collections.discover.trending",
+        "title": "🔥 Trending",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.trending",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.trending",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/trending.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/trending.gif"
+      },
+      {
+        "id": "collections.discover.top-rated",
+        "title": "⭐ Top Rated",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.top_rated",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.top_rated",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/top-rated.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/top-rated.gif"
+      }
+    ]
+  },
+  {
+    "id": "collections.streaming",
+    "title": "🎬 Streaming",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.streaming.netflix",
+        "title": "Netflix",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.netflix",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.netflix",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/netflix.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/netflix.gif"
+      },
+      {
+        "id": "collections.streaming.disney-plus",
+        "title": "Disney Plus",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.disney-plus",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.disney-plus",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/disney-plus.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/disney-plus.gif"
+      },
+      {
+        "id": "collections.streaming.prime-video",
+        "title": "Prime Video",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.prime-video",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.prime-video",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/prime-video.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/prime-video.gif"
+      },
+      {
+        "id": "collections.streaming.apple-tv",
+        "title": "Apple TV",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.apple-tv",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.apple-tv",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/apple-tv.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/apple-tv.gif"
+      },
+      {
+        "id": "collections.streaming.hbo-max",
+        "title": "HBO Max",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.hbo-max",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.hbo-max",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/hbo-max.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/hbo-max.gif"
+      },
+      {
+        "id": "collections.streaming.hulu",
+        "title": "Hulu",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.hulu",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.hulu",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/hulu.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/hulu.gif"
+      },
+      {
+        "id": "collections.streaming.paramount-plus",
+        "title": "Paramount Plus",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.paramount-plus",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.paramount-plus",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/paramount-plus.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/paramount-plus.gif"
+      },
+      {
+        "id": "collections.streaming.peacock",
+        "title": "Peacock",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.peacock",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.peacock",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/peacock.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/peacock.gif"
+      },
+      {
+        "id": "collections.streaming.crunchyroll",
+        "title": "Crunchyroll",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.crunchyroll",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.crunchyroll",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/crunchyroll.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/crunchyroll.gif"
+      },
+      {
+        "id": "collections.streaming.discovery-plus",
+        "title": "Discovery Plus",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.discovery-plus",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.discovery-plus",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/discovery-plus.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/discovery-plus.gif"
+      },
+      {
+        "id": "collections.streaming.curiosity-stream",
+        "title": "Curiosity Stream",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.streaming.curiosity-stream",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.streaming.curiosity-stream",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/curiosity-stream.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/curiosity-stream.gif"
+      }
+    ]
+  },
+  {
+    "id": "collections.genres",
+    "title": "🎭 Genres",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.genres.action",
+        "title": "Action",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.action",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.adventure",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.action-adventure",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/action.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/action.gif"
+      },
+      {
+        "id": "collections.genres.animation",
+        "title": "Animation",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.animation",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.animation",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/animation.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/animation.gif"
+      },
+      {
+        "id": "collections.genres.anime",
+        "title": "Anime",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.airing",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.upcoming",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.schedule",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.seasons",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.80sDecades",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.90sDecades",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.00sDecades",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.10sDecades",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.20sDecades",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.genres",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.studios",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.top_movies",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.top_series",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.most_favorites",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.most_popular",
+            "type": "anime"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "mal.top_anime",
+            "type": "anime"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/anime.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/anime.gif"
+      },
+      {
+        "id": "collections.genres.comedy",
+        "title": "Comedy",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.comedy",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.comedy",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/comedy.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/comedy.gif"
+      },
+      {
+        "id": "collections.genres.crime",
+        "title": "Crime",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.crime",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.crime",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/crime.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/crime.gif"
+      },
+      {
+        "id": "collections.genres.documentary",
+        "title": "Documentary",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.documentary",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.documentary",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/documentary.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/documentary.gif"
+      },
+      {
+        "id": "collections.genres.drama",
+        "title": "Drama",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.drama",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.drama",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/drama.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/drama.gif"
+      },
+      {
+        "id": "collections.genres.family",
+        "title": "Family",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.family",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.kids",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/family.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/family.gif"
+      },
+      {
+        "id": "collections.genres.fantasy",
+        "title": "Fantasy",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.fantasy",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.science-fiction",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.sci-fi-fantasy",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/fantasy.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/fantasy.gif"
+      },
+      {
+        "id": "collections.genres.history",
+        "title": "History",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.history",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.war",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.war-politics",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/history.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/history.gif"
+      },
+      {
+        "id": "collections.genres.horror",
+        "title": "Horror",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.horror",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/horror.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/horror.gif"
+      },
+      {
+        "id": "collections.genres.music",
+        "title": "Music",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.music",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/music.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/music.gif"
+      },
+      {
+        "id": "collections.genres.mystery",
+        "title": "Mystery",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.mystery",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.mystery",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/mystery.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/mystery.gif"
+      },
+      {
+        "id": "collections.genres.talk",
+        "title": "Talk",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.news",
+            "type": "series"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.talk",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/talk.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/talk.gif"
+      },
+      {
+        "id": "collections.genres.reality",
+        "title": "Reality",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.reality",
+            "type": "series"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.soap",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/reality.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/reality.gif"
+      },
+      {
+        "id": "collections.genres.romance",
+        "title": "Romance",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.romance",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/romance.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/romance.gif"
+      },
+      {
+        "id": "collections.genres.thriller",
+        "title": "Thriller",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.thriller",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/thriller.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/thriller.gif"
+      },
+      {
+        "id": "collections.genres.tv",
+        "title": "TV",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.tv-movie",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/tv.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/tv.gif"
+      },
+      {
+        "id": "collections.genres.western",
+        "title": "Western",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.western",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.western",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/western.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/western.gif"
+      }
+    ]
+  },
+  {
+    "id": "collections.themes",
+    "title": "🎨 Themes",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.themes.time-travel",
+        "title": "Time Travel",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.time-travel",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.time-travel",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/time-travel.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/time-travel.gif"
+      },
+      {
+        "id": "collections.themes.revenge",
+        "title": "Revenge",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.revenge",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.revenge",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/revenge.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/revenge.gif"
+      },
+      {
+        "id": "collections.themes.spy",
+        "title": "Spy",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.spy",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.spy",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/spy.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/spy.gif"
+      },
+      {
+        "id": "collections.themes.magic",
+        "title": "Magic",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.magic",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.magic",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/magic.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/magic.gif"
+      },
+      {
+        "id": "collections.themes.treasure-hunt",
+        "title": "Treasure Hunt",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.treasure-hunt",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.treasure-hunt",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/treasure-hunt.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/treasure-hunt.gif"
+      },
+      {
+        "id": "collections.themes.romantic-comedy",
+        "title": "Romantic Comedy",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.romantic-comedy",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.romantic-comedy",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/romantic-comedy.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/romantic-comedy.gif"
+      },
+      {
+        "id": "collections.themes.coming-of-age",
+        "title": "Coming of Age",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.coming-of-age",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.coming-of-age",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/coming-of-age.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/coming-of-age.gif"
+      },
+      {
+        "id": "collections.themes.superhero",
+        "title": "Superhero",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.superhero",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.superhero",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/superhero.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/superhero.gif"
+      },
+      {
+        "id": "collections.themes.space",
+        "title": "Space",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.space",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.space",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/space.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/space.gif"
+      },
+      {
+        "id": "collections.themes.martial-arts",
+        "title": "Martial Arts",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.martial-arts",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.martial-arts",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/martial-arts.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/martial-arts.gif"
+      },
+      {
+        "id": "collections.themes.vampire",
+        "title": "Vampire",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.vampire",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.vampire",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/vampire.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/vampire.gif"
+      },
+      {
+        "id": "collections.themes.satire",
+        "title": "Satire",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.satire",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.satire",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/satire.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/satire.gif"
+      }
+    ]
+  },
+  {
+    "id": "collections.decades",
+    "title": "🎥 Decades",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.decades.2020s",
+        "title": "2020s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.2020s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.2020s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2020s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2020s.gif"
+      },
+      {
+        "id": "collections.decades.2010s",
+        "title": "2010s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.2010s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.2010s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2010s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2010s.gif"
+      },
+      {
+        "id": "collections.decades.2000s",
+        "title": "2000s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.2000s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.2000s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2000s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2000s.gif"
+      },
+      {
+        "id": "collections.decades.1990s",
+        "title": "1990s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.1990s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.1990s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1990s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1990s.gif"
+      },
+      {
+        "id": "collections.decades.1980s",
+        "title": "1980s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.1980s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.1980s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1980s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1980s.gif"
+      },
+      {
+        "id": "collections.decades.1970s",
+        "title": "1970s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.1970s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.1970s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1970s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1970s.gif"
+      },
+      {
+        "id": "collections.decades.1960s",
+        "title": "1960s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.1960s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.1960s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1960s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1960s.gif"
+      },
+      {
+        "id": "collections.decades.1950s",
+        "title": "1950s",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.decades.1950s",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.decades.1950s",
+            "type": "series"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1950s.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1950s.gif"
+      }
+    ]
+  },
+  {
+    "id": "collections.runtime",
+    "title": "🕒 Runtime",
+    "showAllTab": true,
+    "viewMode": "TABBED_GRID",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.runtime.short",
+        "title": "Short (<90 min)",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.runtime.short",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/short.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/short.gif"
+      },
+      {
+        "id": "collections.runtime.standard",
+        "title": "Standard (90-150 min)",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.runtime.standard",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/standard.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/standard.gif"
+      },
+      {
+        "id": "collections.runtime.long",
+        "title": "Long (150-180 min)",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.runtime.long",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/long.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/long.gif"
+      },
+      {
+        "id": "collections.runtime.epic",
+        "title": "Epic (180+ min)",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.runtime.epic",
+            "type": "movie"
+          }
+        ],
+        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/epic.jpg",
+        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/epic.gif"
+      }
+    ]
+  }
+]
