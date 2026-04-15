@@ -25,8 +25,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/popular.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/popular.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/popular.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/popular.gif"
       },
       {
         "id": "collections.discover.trending",
@@ -46,8 +46,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/trending.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/trending.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/trending.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/trending.gif"
       },
       {
         "id": "collections.discover.top-rated",
@@ -67,8 +67,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/cover/top-rated.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/discover/focused/top-rated.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/top-rated.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/top-rated.gif"
       }
     ]
   },
@@ -98,8 +98,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/netflix.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/netflix.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/netflix.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/netflix.gif"
       },
       {
         "id": "collections.streaming.disney-plus",
@@ -119,8 +119,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/disney-plus.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/disney-plus.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/disney-plus.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/disney-plus.gif"
       },
       {
         "id": "collections.streaming.prime-video",
@@ -140,8 +140,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/prime-video.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/prime-video.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/prime-video.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/prime-video.gif"
       },
       {
         "id": "collections.streaming.apple-tv",
@@ -161,8 +161,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/apple-tv.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/apple-tv.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/apple-tv.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/apple-tv.gif"
       },
       {
         "id": "collections.streaming.hbo-max",
@@ -182,8 +182,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/hbo-max.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/hbo-max.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/hbo-max.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/hbo-max.gif"
       },
       {
         "id": "collections.streaming.hulu",
@@ -203,8 +203,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/hulu.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/hulu.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/hulu.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/hulu.gif"
       },
       {
         "id": "collections.streaming.paramount-plus",
@@ -224,8 +224,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/paramount-plus.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/paramount-plus.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/paramount-plus.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/paramount-plus.gif"
       },
       {
         "id": "collections.streaming.peacock",
@@ -245,8 +245,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/peacock.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/peacock.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/peacock.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/peacock.gif"
       },
       {
         "id": "collections.streaming.crunchyroll",
@@ -266,8 +266,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/crunchyroll.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/crunchyroll.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/crunchyroll.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/crunchyroll.gif"
       },
       {
         "id": "collections.streaming.discovery-plus",
@@ -287,8 +287,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/discovery-plus.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/discovery-plus.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/discovery-plus.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/discovery-plus.gif"
       },
       {
         "id": "collections.streaming.curiosity-stream",
@@ -308,8 +308,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/cover/curiosity-stream.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/streaming/focused/curiosity-stream.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/curiosity-stream.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/curiosity-stream.gif"
       }
     ]
   },
@@ -344,8 +344,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/action.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/action.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/action.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/action.gif"
       },
       {
         "id": "collections.genres.animation",
@@ -365,8 +365,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/animation.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/animation.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/animation.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/animation.gif"
       },
       {
         "id": "collections.genres.anime",
@@ -456,8 +456,8 @@
             "type": "anime"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/anime.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/anime.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/anime.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/anime.gif"
       },
       {
         "id": "collections.genres.comedy",
@@ -477,8 +477,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/comedy.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/comedy.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/comedy.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/comedy.gif"
       },
       {
         "id": "collections.genres.crime",
@@ -498,8 +498,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/crime.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/crime.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/crime.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/crime.gif"
       },
       {
         "id": "collections.genres.documentary",
@@ -519,8 +519,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/documentary.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/documentary.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/documentary.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/documentary.gif"
       },
       {
         "id": "collections.genres.drama",
@@ -540,8 +540,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/drama.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/drama.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/drama.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/drama.gif"
       },
       {
         "id": "collections.genres.family",
@@ -561,8 +561,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/family.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/family.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/family.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/family.gif"
       },
       {
         "id": "collections.genres.fantasy",
@@ -587,8 +587,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/fantasy.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/fantasy.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/fantasy.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/fantasy.gif"
       },
       {
         "id": "collections.genres.history",
@@ -613,8 +613,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/history.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/history.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/history.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/history.gif"
       },
       {
         "id": "collections.genres.horror",
@@ -629,8 +629,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/horror.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/horror.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/horror.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/horror.gif"
       },
       {
         "id": "collections.genres.music",
@@ -645,8 +645,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/music.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/music.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/music.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/music.gif"
       },
       {
         "id": "collections.genres.mystery",
@@ -666,8 +666,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/mystery.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/mystery.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/mystery.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/mystery.gif"
       },
       {
         "id": "collections.genres.talk",
@@ -687,8 +687,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/talk.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/talk.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/talk.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/talk.gif"
       },
       {
         "id": "collections.genres.reality",
@@ -708,8 +708,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/reality.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/reality.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/reality.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/reality.gif"
       },
       {
         "id": "collections.genres.romance",
@@ -724,8 +724,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/romance.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/romance.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/romance.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/romance.gif"
       },
       {
         "id": "collections.genres.thriller",
@@ -740,8 +740,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/thriller.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/thriller.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/thriller.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/thriller.gif"
       },
       {
         "id": "collections.genres.tv",
@@ -756,8 +756,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/tv.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/tv.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/tv.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/tv.gif"
       },
       {
         "id": "collections.genres.western",
@@ -777,8 +777,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/cover/western.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/genres/focused/western.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/western.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/western.gif"
       }
     ]
   },
@@ -808,8 +808,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/time-travel.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/time-travel.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/time-travel.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/time-travel.gif"
       },
       {
         "id": "collections.themes.revenge",
@@ -829,8 +829,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/revenge.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/revenge.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/revenge.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/revenge.gif"
       },
       {
         "id": "collections.themes.spy",
@@ -850,8 +850,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/spy.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/spy.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/spy.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/spy.gif"
       },
       {
         "id": "collections.themes.magic",
@@ -871,8 +871,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/magic.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/magic.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/magic.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/magic.gif"
       },
       {
         "id": "collections.themes.treasure-hunt",
@@ -892,8 +892,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/treasure-hunt.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/treasure-hunt.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/treasure-hunt.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/treasure-hunt.gif"
       },
       {
         "id": "collections.themes.romantic-comedy",
@@ -913,8 +913,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/romantic-comedy.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/romantic-comedy.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/romantic-comedy.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/romantic-comedy.gif"
       },
       {
         "id": "collections.themes.coming-of-age",
@@ -934,8 +934,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/coming-of-age.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/coming-of-age.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/coming-of-age.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/coming-of-age.gif"
       },
       {
         "id": "collections.themes.superhero",
@@ -955,8 +955,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/superhero.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/superhero.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/superhero.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/superhero.gif"
       },
       {
         "id": "collections.themes.space",
@@ -976,8 +976,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/space.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/space.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/space.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/space.gif"
       },
       {
         "id": "collections.themes.martial-arts",
@@ -997,8 +997,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/martial-arts.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/martial-arts.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/martial-arts.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/martial-arts.gif"
       },
       {
         "id": "collections.themes.vampire",
@@ -1018,8 +1018,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/vampire.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/vampire.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/vampire.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/vampire.gif"
       },
       {
         "id": "collections.themes.satire",
@@ -1039,8 +1039,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/cover/satire.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/themes/focused/satire.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/satire.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/satire.gif"
       }
     ]
   },
@@ -1070,8 +1070,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2020s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2020s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2020s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2020s.gif"
       },
       {
         "id": "collections.decades.2010s",
@@ -1091,8 +1091,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2010s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2010s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2010s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2010s.gif"
       },
       {
         "id": "collections.decades.2000s",
@@ -1112,8 +1112,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/2000s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/2000s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2000s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2000s.gif"
       },
       {
         "id": "collections.decades.1990s",
@@ -1133,8 +1133,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1990s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1990s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1990s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1990s.gif"
       },
       {
         "id": "collections.decades.1980s",
@@ -1154,8 +1154,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1980s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1980s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1980s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1980s.gif"
       },
       {
         "id": "collections.decades.1970s",
@@ -1175,8 +1175,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1970s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1970s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1970s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1970s.gif"
       },
       {
         "id": "collections.decades.1960s",
@@ -1196,8 +1196,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1960s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1960s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1960s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1960s.gif"
       },
       {
         "id": "collections.decades.1950s",
@@ -1217,8 +1217,8 @@
             "type": "series"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/cover/1950s.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/decades/focused/1950s.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1950s.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1950s.gif"
       }
     ]
   },
@@ -1243,8 +1243,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/short.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/short.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/short.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/short.gif"
       },
       {
         "id": "collections.runtime.standard",
@@ -1259,8 +1259,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/standard.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/standard.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/standard.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/standard.gif"
       },
       {
         "id": "collections.runtime.long",
@@ -1275,8 +1275,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/long.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/long.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/long.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/long.gif"
       },
       {
         "id": "collections.runtime.epic",
@@ -1291,8 +1291,8 @@
             "type": "movie"
           }
         ],
-        "coverImageUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/cover/epic.jpg",
-        "focusGifUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/runtime/focused/epic.gif"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/epic.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/epic.gif"
       }
     ]
   }
