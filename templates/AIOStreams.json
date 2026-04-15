@@ -7,7 +7,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -656,23 +656,6 @@
             "stream"
           ],
           "debridioApiKey": "<template_placeholder>",
-          "mediaTypes": []
-        }
-      },
-      {
-        "__if": "inputs.httpAddons != none",
-        "category": "HTTP",
-        "type": "nuvio-streams",
-        "instanceId": "nuv",
-        "enabled": true,
-        "options": {
-          "name": "Nuvio Streams",
-          "timeout": "{{inputs.timeout}}",
-          "resources": [
-            "stream"
-          ],
-          "showBoxRegion": "USA7",
-          "providers": [],
           "mediaTypes": []
         }
       },
