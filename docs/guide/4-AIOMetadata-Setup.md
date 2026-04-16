@@ -29,7 +29,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
       * **Default**: 🎯 Trakt Recommendations, 🏆 Popular, 🔥 Trending, ⭐ Top Rated, 📚 TVDB, ...
       * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
       * **🎭 Genres**: Catalogs grouped by genre and content type.
-      * **🍥 Anime**: Anime-focused catalogs across different styles and themes.
+      * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Disabled by default).
       * **🎨 Themes**: Collections built around moods, topics, and story patterns.
       * **🎥 Decades**: Titles grouped by release decade and era.
       * **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
