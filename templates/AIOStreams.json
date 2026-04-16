@@ -444,8 +444,7 @@
           "name": "TB Search",
           "timeout": "{{inputs.timeout}}",
           "sources": [
-            "torrent",
-            "usenet"
+            "torrent"
           ],
           "mediaTypes": [],
           "userSearchEngines": true,
