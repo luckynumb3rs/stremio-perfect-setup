@@ -1023,7 +1023,7 @@
     "titleMatching": {
       "enabled": true,
       "mode": "exact",
-      "similarityThreshold": 0.95,
+      "similarityThreshold": 1,
       "requestTypes": [
         "movie",
         "series",
