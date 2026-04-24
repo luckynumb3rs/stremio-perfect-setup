@@ -51,7 +51,7 @@ The formatting templates are designed to let you evaluate a stream easily before
 
 **Technical Details**
 * ▶︎ / 🎬 → Edition (Director’s Cut, Extended, IMAX…)
-* ▣ / 🎞️ → Video Encoding (x264, x265, HEVC…)
+* ▣ / 📼 → Video Encoding (x264, x265, HEVC…)
 * ✦ / 🎥 → Visual Features (HDR, Dolby Vision, 10-bit…)
 * ♬ / 🎵 → Audio Format (DTS, Atmos, TrueHD…)
 * ☊ / 🎧 → Audio Channels (5.1, 7.1…)
@@ -91,7 +91,7 @@ If you went with the ***Flat Monochrome Icons*** for the formatter and want inst
 
 ```
 {stream.editions::exists["🎬  {stream.editions::join(' · ')} "||""]}
-{stream.encode::exists["🎞️  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}
+{stream.encode::exists["📼  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}
 {stream.audioTags::exists["🎵  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["🎧  {stream.audioChannels::join(' · ')} "||""]}
 {stream.size::>0::and::stream.seasonPack::istrue["📚  "||""]}{stream.size::>0::and::stream.seasonPack::isfalse["📦  "||""]}{stream.size::>0["{stream.size::sbytes}"||""]}{stream.bitrate::exists[" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  "||""]}{stream.message::~Download["{tools.removeLine}"||""]}{stream.age::exists["🕒 {stream.age}"||""]}
 {stream.proxied::istrue["🔐 "||"🔧 "]}{service.shortName::exists["[{service.shortName}] "||""]}{addon.name}{stream.type::replace('debrid',' ')::exists[" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}"||""]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0["  ⇋ {stream.seeders}🌱  "||""]}
