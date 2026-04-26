@@ -115,9 +115,6 @@ FOLDER_REQUEST_OVERRIDES = {
 }
 
 ACCENT_PRESETS = {
-    # These values are derived from the current `collections/<group>/cover/*` artwork.
-    # If a new folder is added later and is not listed here, the wrapper falls back
-    # to `default_accent_for_label(...)` so generation still works.
     "collections.decades.1950s": (188, 125, 77),
     "collections.decades.1960s": (236, 186, 123),
     "collections.decades.1970s": (27, 151, 187),
@@ -176,7 +173,6 @@ ACCENT_PRESETS = {
     "collections.themes.treasure-hunt": (223, 174, 82),
     "collections.themes.vampire": (155, 78, 59),
 }
-
 
 def load_json(path):
     with path.open("r", encoding="utf-8") as handle:
