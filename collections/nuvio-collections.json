@@ -9,7 +9,7 @@
     "folders": [
       {
         "id": "collections.discover.popular",
-        "title": "🏆 Popular",
+        "title": "Popular",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -33,7 +33,7 @@
       },
       {
         "id": "collections.discover.trending",
-        "title": "🔥 Trending",
+        "title": "Trending",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -57,7 +57,7 @@
       },
       {
         "id": "collections.discover.top-rated",
-        "title": "⭐ Top Rated",
+        "title": "Top Rated",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
