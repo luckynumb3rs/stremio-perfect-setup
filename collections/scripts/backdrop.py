@@ -66,15 +66,17 @@ import contextlib
 import io
 import math
 import os
+import shutil
 import sys
 import time
 from pathlib import Path
 from urllib.parse import parse_qsl
 
 import requests
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
-DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+SCRIPT_DIR = Path(__file__).resolve().parent
+DEFAULT_OUTPUT_DIR = SCRIPT_DIR / "output"
 TMDB_BASE = "https://api.themoviedb.org/3"
 TMDB_IMG_BASE = "https://image.tmdb.org/t/p"
 BACKDROP_SIZE = "w1280"
@@ -107,6 +109,11 @@ SIZE_PRESETS = {
     "4k": (3840, 2160, 3840 / 1920),
     "1080p": (1920, 1080, 1.0),
 }
+
+
+def cleanup_pycache():
+    """Remove the local __pycache__ folder if one was created."""
+    shutil.rmtree(SCRIPT_DIR / "__pycache__", ignore_errors=True)
 
 
 def normalize_media_type(value):
@@ -513,30 +520,32 @@ def apply_gradient(canvas, accent):
                     if alpha:
                         pixels[x, y] = (6, 6, 8, min(255, alpha))
 
+        elif direction == "corner_tr_color":
+            max_diag = math.hypot(grad_width, grad_height)
+            red, green, blue = accent
+            for x in range(grad_width):
+                for y in range(grad_height):
+                    distance = math.hypot(grad_width - x, y)
+                    mix = distance / max_diag
+                    base = max(0.0, 1.0 - mix / 0.72)
+                    alpha = int(118 * base ** 1.9)
+                    if alpha:
+                        pixels[x, y] = (red, green, blue, min(255, alpha))
+
         return image
 
     left_grad = make_linear_gradient(width, height, "left")
     bottom_grad = make_linear_gradient(width, height, "bottom")
     small_corner = make_linear_gradient(width // 4, height // 4, "corner_bl")
     corner_grad = small_corner.resize((width, height), Image.BILINEAR)
+    accent_small = make_linear_gradient(width // 4, height // 4, "corner_tr_color")
+    accent_grad = accent_small.resize((width, height), Image.BILINEAR)
 
     result = Image.alpha_composite(canvas, corner_grad)
     result = Image.alpha_composite(result, left_grad)
     result = Image.alpha_composite(result, bottom_grad)
-
-    red, green, blue = accent
-    accent_overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(accent_overlay)
-    for index in range(20):
-        mix = index / 20
-        radius = int(math.hypot(width, height) * (0.04 + 0.40 * mix))
-        alpha = int(12 * (1 - mix) ** 2)
-        if alpha:
-            draw.ellipse(
-                [width - radius, -radius, width + radius, radius],
-                fill=(red, green, blue, alpha),
-            )
-    return Image.alpha_composite(result, accent_overlay)
+    accent_grad = accent_grad.filter(ImageFilter.GaussianBlur(radius=max(28, width // 64)))
+    return Image.alpha_composite(result, accent_grad)
 
 
 def resolve_quality_settings(quality="compressed", jpg_quality=None):
@@ -586,7 +595,7 @@ def resolve_outputs(output=None, output_dir=None, label=None, size="both"):
     return {size: directory / f"{stem}_wallpaper_{suffix}.jpg"}
 
 
-def generate_backdrops(
+def backdrops(
     api_key,
     label,
     tmdb_requests,
@@ -735,7 +744,7 @@ def main():
         focus_x, focus_y = parse_focus_value(args.focus)
         if args.jpg_quality is not None and (args.jpg_quality < 1 or args.jpg_quality > 95):
             raise ValueError("--jpg-quality must be between 1 and 95.")
-        generate_backdrops(
+        backdrops(
             api_key=args.api_key,
             label=args.label,
             tmdb_requests=args.tmdb_request,
@@ -757,4 +766,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        cleanup_pycache()

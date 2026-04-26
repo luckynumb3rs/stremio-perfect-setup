@@ -28,25 +28,21 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pillow requests
 
-      - name: Regenerate missing accents only
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
-        run: |
-          python3 -B collections/scripts/regenerate_accents.py \
-            --missing-only \
-            --write-wrapper collections/scripts/generate_backdrops.py
-
       - name: Generate collection backdrops
         env:
           PYTHONDONTWRITEBYTECODE: "1"
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           FANART_API_KEY: ${{ secrets.FANART_API_KEY }}
         run: |
-          python3 -B collections/scripts/generate_backdrops.py \
+          python3 -B collections/scripts/backdrops.py \
             --api-key "$TMDB_API_KEY" \
             --fanart-key "$FANART_API_KEY" \
             --quality compressed \
             --parallelism 3
+
+      - name: Clean Python cache folders
+        run: |
+          find . -type d -name "__pycache__" -prune -exec rm -rf {} +
 
       - name: Commit and push updated assets
         run: |

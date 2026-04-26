@@ -7,7 +7,7 @@ Purpose:
     1. reads the folder definitions from `nuvio-collections.json`
     2. resolves the underlying TMDB catalog filters from `AIOMetadata-Catalogs.json`
     3. merges all catalogs assigned to the same folder into one backdrop job
-    4. selects a predefined accent color for each folder, with a deterministic fallback
+    4. scans the matching folder cover image to derive one accent color
     5. calls `backdrop.py` once per folder
     Fanart language preference is passed through to `backdrop.py`, which
     prioritizes preferred language first and falls back in a controlled order.
@@ -19,6 +19,9 @@ Important parameters:
         Optional Fanart.tv API key used to improve tile art quality.
     --preferred-language
         Preferred Fanart artwork language code. Default is `en`.
+    --cover-root
+        Collections root containing the `<group>/cover/<folder>.*` images used
+        to derive runtime accent colors.
     --collections-file
         Path to the `nuvio-collections.json` file to read folder definitions
         from.
@@ -47,7 +50,7 @@ Important parameters:
         Number of folders to generate at the same time. Keep this relatively
         low to avoid hitting TMDB rate limits.
     --dry-run
-        Print the resolved folder jobs, accent colors, and TMDB requests
+        Print the resolved folder jobs, cover paths, derived accents, and TMDB requests
         without generating images.
 
 Examples:
@@ -80,18 +83,25 @@ Examples:
 import argparse
 import concurrent.futures
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlencode
 
-from backdrop import default_accent_for_label, parse_focus_value
+from backdrop import parse_focus_value
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent.parent
 DEFAULT_COLLECTIONS_FILE = REPO_ROOT / "collections" / "nuvio-collections.json"
 DEFAULT_CATALOGS_FILE = REPO_ROOT / "templates" / "AIOMetadata-Catalogs.json"
 DEFAULT_OUTPUT_ROOT = SCRIPT_DIR.parent
+DEFAULT_COVER_ROOT = SCRIPT_DIR.parent
+
+
+def cleanup_pycache():
+    """Remove the local __pycache__ folder if one was created."""
+    shutil.rmtree(SCRIPT_DIR / "__pycache__", ignore_errors=True)
 
 STATIC_TMDB_REQUESTS = {
     # Some home/discover catalogs are not TMDB discover payloads in the JSON file,
@@ -112,66 +122,6 @@ FOLDER_REQUEST_OVERRIDES = {
         "movie:sort_by=popularity.desc&include_adult=false&with_genres=16&with_original_language=ja&vote_count.gte=20&with_release_type=4|5|6",
         "tv:sort_by=popularity.desc&include_adult=false&with_genres=16&with_original_language=ja&vote_count.gte=10&with_status=0|3|4|5",
     ],
-}
-
-ACCENT_PRESETS = {
-    "collections.decades.1950s": (188, 125, 77),
-    "collections.decades.1960s": (236, 186, 123),
-    "collections.decades.1970s": (27, 151, 187),
-    "collections.decades.1980s": (27, 95, 187),
-    "collections.decades.1990s": (164, 127, 50),
-    "collections.decades.2000s": (155, 155, 59),
-    "collections.decades.2010s": (27, 151, 187),
-    "collections.decades.2020s": (232, 177, 92),
-    "collections.discover.popular": (227, 187, 140),
-    "collections.discover.top-rated": (173, 96, 42),
-    "collections.discover.trending": (59, 110, 155),
-    "collections.genres.action": (233, 170, 102),
-    "collections.genres.animation": (220, 148, 99),
-    "collections.genres.anime": (226, 124, 52),
-    "collections.genres.comedy": (59, 155, 140),
-    "collections.genres.crime": (166, 102, 58),
-    "collections.genres.documentary": (59, 116, 155),
-    "collections.genres.drama": (59, 116, 155),
-    "collections.genres.family": (212, 141, 69),
-    "collections.genres.fantasy": (88, 150, 191),
-    "collections.genres.history": (201, 150, 112),
-    "collections.genres.horror": (225, 138, 68),
-    "collections.genres.music": (225, 183, 137),
-    "collections.genres.mystery": (59, 129, 155),
-    "collections.genres.reality": (210, 154, 114),
-    "collections.genres.romance": (167, 95, 47),
-    "collections.genres.talk": (27, 113, 187),
-    "collections.genres.thriller": (183, 67, 56),
-    "collections.genres.tv": (195, 146, 97),
-    "collections.genres.western": (223, 154, 96),
-    "collections.runtime.epic": (59, 103, 155),
-    "collections.runtime.long": (65, 116, 173),
-    "collections.runtime.short": (86, 59, 155),
-    "collections.runtime.standard": (235, 181, 115),
-    "collections.streaming.apple-tv": (167, 151, 216),
-    "collections.streaming.crunchyroll": (223, 104, 32),
-    "collections.streaming.curiosity-stream": (166, 122, 49),
-    "collections.streaming.discovery-plus": (199, 172, 107),
-    "collections.streaming.disney-plus": (119, 182, 203),
-    "collections.streaming.hbo-max": (177, 29, 200),
-    "collections.streaming.hulu": (38, 224, 133),
-    "collections.streaming.netflix": (213, 30, 39),
-    "collections.streaming.paramount-plus": (32, 108, 223),
-    "collections.streaming.peacock": (225, 200, 41),
-    "collections.streaming.prime-video": (38, 125, 224),
-    "collections.themes.coming-of-age": (155, 95, 59),
-    "collections.themes.magic": (176, 142, 67),
-    "collections.themes.martial-arts": (207, 99, 55),
-    "collections.themes.revenge": (204, 139, 96),
-    "collections.themes.romantic-comedy": (191, 129, 87),
-    "collections.themes.satire": (176, 112, 50),
-    "collections.themes.space": (63, 121, 165),
-    "collections.themes.spy": (59, 121, 155),
-    "collections.themes.superhero": (117, 178, 202),
-    "collections.themes.time-travel": (183, 137, 69),
-    "collections.themes.treasure-hunt": (223, 174, 82),
-    "collections.themes.vampire": (155, 78, 59),
 }
 
 def load_json(path):
@@ -235,9 +185,10 @@ def folder_tmdb_requests(folder, catalog_index):
     return requests
 
 
-def folder_accent(folder_id, folder_title):
-    """Use a cover-derived preset when available, otherwise a deterministic fallback."""
-    return ACCENT_PRESETS.get(folder_id, default_accent_for_label(folder_title))
+def find_cover_path(cover_root, group, slug):
+    """Find the cover image for a folder using the repo's existing layout."""
+    candidates = sorted((Path(cover_root) / group / "cover").glob(f"{slug}.*"))
+    return candidates[0] if candidates else None
 
 
 def should_process(folder_id, allowed_ids):
@@ -254,7 +205,7 @@ def resolve_quality_args(quality, jpg_quality):
     }
 
 
-def build_jobs(collections_data, catalog_index, output_root, allowed_ids):
+def build_jobs(collections_data, catalog_index, output_root, cover_root, allowed_ids):
     """Precompute all folder jobs before generation starts."""
     jobs = []
     for collection in collections_data:
@@ -268,21 +219,50 @@ def build_jobs(collections_data, catalog_index, output_root, allowed_ids):
                 "folder_id": folder_id,
                 "label": folder["title"],
                 "output_path": Path(output_root) / group / "backdrop" / f"{slug}.jpg",
+                "cover_path": find_cover_path(cover_root, group, slug),
                 "requests": folder_tmdb_requests(folder, catalog_index),
-                "accent": folder_accent(folder_id, folder["title"]),
             })
     return jobs
 
 
+def run_accent(job):
+    """Call accent.py to derive the accent for one folder from its cover image."""
+    command = [
+        "python3",
+        "-B",
+        str(SCRIPT_DIR / "accent.py"),
+        "--fallback-label", job["label"],
+        "--format", "csv",
+    ]
+    if job["cover_path"] is not None:
+        command.extend(["--image", str(job["cover_path"])])
+
+    result = subprocess.run(
+        command,
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise RuntimeError((result.stdout + result.stderr).strip() or f"accent.py exited with {result.returncode}")
+
+    parts = [part.strip() for part in result.stdout.strip().split(",")]
+    if len(parts) != 3:
+        raise RuntimeError(f"Unexpected accent.py output: {result.stdout!r}")
+    return tuple(int(part) for part in parts)
+
+
 def run_job(job, api_key, fanart_key, preferred_language, focus_x, focus_y, count, size, quality, jpg_quality):
     """Run one folder job in its own process so parallel logs stay isolated."""
+    accent = run_accent(job)
     command = [
         "python3",
         "-B",
         str(SCRIPT_DIR / "backdrop.py"),
         "--api-key", api_key,
         "--label", job["label"],
-        "--accent-color", ",".join(str(value) for value in job["accent"]),
+        "--accent-color", ",".join(str(value) for value in accent),
         "--output", str(job["output_path"]),
         "--size", size,
         "--quality", quality,
@@ -314,7 +294,8 @@ def print_job_preview(job):
     """Print a short one-line summary before a folder job starts."""
     print(
         f"Queued {job['folder_id']} -> {job['output_path']} "
-        f"({len(job['requests'])} request{'s' if len(job['requests']) != 1 else ''})",
+        f"({len(job['requests'])} request{'s' if len(job['requests']) != 1 else ''}, "
+        f"cover={job['cover_path'] or 'fallback-label'})",
         flush=True,
     )
 
@@ -324,6 +305,7 @@ def main():
     parser.add_argument("--api-key", required=False, help="TMDB API key")
     parser.add_argument("--fanart-key", required=False, default=None, help="Fanart.tv API key")
     parser.add_argument("--preferred-language", default="en", help="Preferred Fanart artwork language code. Default: en")
+    parser.add_argument("--cover-root", default=str(DEFAULT_COVER_ROOT), help="Collections root containing `<group>/cover/<folder>.*` images for runtime accent scanning")
     parser.add_argument("--collections-file", default=str(DEFAULT_COLLECTIONS_FILE), help="Path to nuvio-collections.json")
     parser.add_argument("--catalogs-file", default=str(DEFAULT_CATALOGS_FILE), help="Path to AIOMetadata-Catalogs.json")
     parser.add_argument("--output-root", default=str(DEFAULT_OUTPUT_ROOT), help="Root collections folder where `<group>/backdrop/<folder>.jpg` files are written")
@@ -355,7 +337,7 @@ def main():
     failures = []
     generated = 0
     skipped = 0
-    jobs = build_jobs(collections_data, catalog_index, args.output_root, selected_ids)
+    jobs = build_jobs(collections_data, catalog_index, args.output_root, args.cover_root, selected_ids)
     print(f"Resolved {len(jobs)} folder job(s) from collections config.", flush=True)
 
     for job in jobs:
@@ -367,8 +349,10 @@ def main():
 
     if args.dry_run:
         for job in jobs:
+            accent = run_accent(job)
             print(f"{job['folder_id']} -> {job['output_path']}", flush=True)
-            print(f"  accent={job['accent']}", flush=True)
+            print(f"  cover={job['cover_path'] or 'fallback-label'}", flush=True)
+            print(f"  accent={accent}", flush=True)
             for request in job["requests"]:
                 print(f"  {request}", flush=True)
         print(f"\nGenerated: 0", flush=True)
@@ -426,4 +410,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        cleanup_pycache()
