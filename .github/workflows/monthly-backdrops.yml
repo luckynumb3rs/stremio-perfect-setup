@@ -1,0 +1,61 @@
+name: Monthly Backdrops
+
+on:
+  schedule:
+    - cron: "0 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-backdrops:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pillow requests
+
+      - name: Regenerate missing accents only
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 -B collections/scripts/regenerate_accents.py \
+            --missing-only \
+            --write-wrapper collections/scripts/generate_backdrops.py
+
+      - name: Generate collection backdrops
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          FANART_API_KEY: ${{ secrets.FANART_API_KEY }}
+        run: |
+          python3 -B collections/scripts/generate_backdrops.py \
+            --api-key "$TMDB_API_KEY" \
+            --fanart-key "$FANART_API_KEY" \
+            --quality compressed \
+            --parallelism 3
+
+      - name: Commit and push updated assets
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add collections templates .github/workflows collections/scripts
+          git commit -m "chore: refresh collection backdrops"
+          git push
