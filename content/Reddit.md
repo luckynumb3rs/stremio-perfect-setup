@@ -192,11 +192,12 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
    * For **RPDB** enter "*t0-free-rpdb*".
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
    * The included catalogs, which you can enable/disable and modify as needed, are as follows:
-      * **Default**: 🎯 Trakt Recommendations, 🏆 Popular, 🔥 Trending, ⭐ Top Rated, 📚 TVDB, ...
+      * **Default**: 🎯 Trakt Recommendations, 🏆 Popular, 🔥 Trending, ⭐ Top Rated, ...
       * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
       * **🎭 Genres**: Catalogs grouped by genre and content type.
-      * **🍥 Anime**: Anime-focused catalogs across different styles and themes.
+      * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Disabled).
       * **🎨 Themes**: Collections built around moods, topics, and story patterns.
+      * **🏰 Studios**: Catalogs grouped by well-known studios or franchises (Disabled).
       * **🎥 Decades**: Titles grouped by release decade and era.
       * **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
    * *If you want some ready-to-use and well-maintained lists, while on the Trakt tab, search for the lists from user "snoak", and you will be able to import a lot of interesting lists. I have already included some of them in the catalog, but you can add more.*

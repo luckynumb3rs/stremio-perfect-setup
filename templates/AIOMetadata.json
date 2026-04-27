@@ -2,8 +2,8 @@
   "version": "1.35.2",
   "metadata": {
     "apiKeysExcluded": true,
-    "totalCatalogs": 136,
-    "enabledCatalogs": 109
+    "totalCatalogs": 155,
+    "enabledCatalogs": 128
   },
   "config": {
     "language": "en-US",
@@ -1960,6 +1960,88 @@
                 }
               ],
               "voteCountMin": 50
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.genres.popular.k-drama",
+        "type": "movie",
+        "name": "🎭 K-Drama",
+        "enabled": true,
+        "showInHome": true,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_genres": "18",
+              "with_original_language": "ko",
+              "with_origin_country": "KR",
+              "vote_count.gte": 50,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🎭 K-Drama",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "includeGenres": [
+                {
+                  "id": 18,
+                  "label": "Drama"
+                }
+              ],
+              "originalLanguage": "ko",
+              "originCountry": "KR",
+              "voteCountMin": 50
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.genres.popular.k-drama",
+        "type": "series",
+        "name": "🎭 K-Drama",
+        "enabled": true,
+        "showInHome": true,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_genres": "18",
+              "with_original_language": "ko",
+              "with_origin_country": "KR",
+              "vote_count.gte": 25,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🎭 K-Drama",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "includeGenres": [
+                {
+                  "id": 18,
+                  "label": "Drama"
+                }
+              ],
+              "originalLanguage": "ko",
+              "originCountry": "KR",
+              "voteCountMin": 25
             }
           }
         }
@@ -4307,79 +4389,79 @@
                   "id": 8201,
                   "label": "satire"
                 },
-                  {
+                {
                   "id": 252201,
                   "label": "media satire"
                 },
-                  {
+                {
                   "id": 330180,
                   "label": "public access satire"
                 },
-                  {
+                {
                   "id": 233492,
                   "label": "law enforcement satire"
                 },
-                  {
+                {
                   "id": 316143,
                   "label": "indian satire"
                 },
-                  {
+                {
                   "id": 350981,
                   "label": "biblical satire"
                 },
-                  {
+                {
                   "id": 338198,
                   "label": "satire on contemporary art"
                 },
-                  {
+                {
                   "id": 322219,
                   "label": "religious satire"
                 },
-                  {
+                {
                   "id": 169086,
                   "label": "political satire"
                 },
-                  {
+                {
                   "id": 350455,
                   "label": "politische satire"
                 },
-                  {
+                {
                   "id": 11514,
                   "label": "social satire"
                 },
-                  {
+                {
                   "id": 233623,
                   "label": "news satire"
                 },
-                  {
+                {
                   "id": 336694,
                   "label": "satire comedy"
                 },
-                  {
+                {
                   "id": 332908,
                   "label": "slasher satire"
                 },
-                  {
+                {
                   "id": 314618,
                   "label": "feminist satire"
                 },
-                  {
+                {
                   "id": 356196,
                   "label": "satire horror"
                 },
-                  {
+                {
                   "id": 365613,
                   "label": "urban satire"
                 },
-                  {
+                {
                   "id": 361592,
                   "label": "war satire"
                 },
-                  {
+                {
                   "id": 351302,
                   "label": "tabloid satire"
                 },
-                  {
+                {
                   "id": 362329,
                   "label": "news media satire"
                 }
@@ -4389,6 +4471,763 @@
                 6,
                 10
               ]
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.cartoon-network",
+        "type": "movie",
+        "name": "🏰 Cartoon Network",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "176067|7899|274991",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 Cartoon Network",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 176067,
+                  "label": "Cartoon Network Productions"
+                },
+                {
+                  "id": 7899,
+                  "label": "Cartoon Network Studios"
+                },
+                {
+                  "id": 274991,
+                  "label": "Cartoon Network Movies"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.cartoon-network",
+        "type": "series",
+        "name": "🏰 Cartoon Network",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "176067|7899|67225",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 Cartoon Network",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 176067,
+                  "label": "Cartoon Network Productions"
+                },
+                {
+                  "id": 7899,
+                  "label": "Cartoon Network Studios"
+                },
+                {
+                  "id": 67225,
+                  "label": "Cartoon Network Studios Europe"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.dc",
+        "type": "movie",
+        "name": "🏰 DC",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "184898|9993|429",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 DC",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 184898,
+                  "label": "DC Studios"
+                },
+                {
+                  "id": 9993,
+                  "label": "DC Entertainment"
+                },
+                {
+                  "id": 429,
+                  "label": "DC"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.dc",
+        "type": "series",
+        "name": "🏰 DC",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "184898|9993|429",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 DC",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 184898,
+                  "label": "DC Studios"
+                },
+                {
+                  "id": 9993,
+                  "label": "DC Entertainment"
+                },
+                {
+                  "id": 429,
+                  "label": "DC"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.dreamworks",
+        "type": "movie",
+        "name": "🏰 DreamWorks",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "521",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 DreamWorks",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 521,
+                  "label": "DreamWorks Animation"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.dreamworks",
+        "type": "series",
+        "name": "🏰 DreamWorks",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "42141",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 DreamWorks",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 42141,
+                  "label": "DreamWorks Animation Television"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.ghibli",
+        "type": "movie",
+        "name": "🏰 Ghibli",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "10342",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 Ghibli",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 10342,
+                  "label": "Studio Ghibli"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.ghibli",
+        "type": "series",
+        "name": "🏰 Ghibli",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "10342",
+              "vote_count.gte": 1,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 Ghibli",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 10342,
+                  "label": "Studio Ghibli"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 1
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.harry-potter",
+        "type": "movie",
+        "name": "🏰 Harry Potter",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "174",
+              "vote_count.gte": 1,
+              "with_release_type": "4|5|6",
+              "with_genres": "14",
+              "with_keywords": "3884|362889"
+            },
+            "formState": {
+              "catalogName": "🏰 Harry Potter",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 174,
+                  "label": "Warner Bros. Pictures"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 1,
+              "includeGenres": [
+                {
+                  "id": 14,
+                  "label": "Fantasy"
+                }
+              ],
+              "withKeywords": [
+                {
+                  "id": 3884,
+                  "label": "school of witchcraft"
+                },
+                {
+                  "id": 362889,
+                  "label": "fantastic beasts and where to find them"
+                }
+              ],
+              "keywordJoinMode": "or"
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.marvel",
+        "type": "movie",
+        "name": "🏰 Marvel",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "420|13252|7505",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 Marvel",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 420,
+                  "label": "Marvel Studios"
+                },
+                {
+                  "id": 13252,
+                  "label": "Marvel Animation"
+                },
+                {
+                  "id": 7505,
+                  "label": "Marvel Entertainment"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.marvel",
+        "type": "series",
+        "name": "🏰 Marvel",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "420|38679|13252|7505",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 Marvel",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 420,
+                  "label": "Marvel Studios"
+                },
+                {
+                  "id": 38679,
+                  "label": "Marvel Television"
+                },
+                {
+                  "id": 13252,
+                  "label": "Marvel Animation"
+                },
+                {
+                  "id": 7505,
+                  "label": "Marvel Entertainment"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.nickelodeon",
+        "type": "movie",
+        "name": "🏰 Nickelodeon",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "2348|4859|5371",
+              "vote_count.gte": 5,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 Nickelodeon",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 2348,
+                  "label": "Nickelodeon Movies"
+                },
+                {
+                  "id": 4859,
+                  "label": "Nickelodeon Animation Studio"
+                },
+                {
+                  "id": 5371,
+                  "label": "Nickelodeon Productions"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.nickelodeon",
+        "type": "series",
+        "name": "🏰 Nickelodeon",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "4859|5371|287101",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 Nickelodeon",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 4859,
+                  "label": "Nickelodeon Animation Studio"
+                },
+                {
+                  "id": 5371,
+                  "label": "Nickelodeon Productions"
+                },
+                {
+                  "id": 287101,
+                  "label": "Nickelodeon"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.pixar",
+        "type": "movie",
+        "name": "🏰 Pixar",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "3",
+              "vote_count.gte": 10,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🏰 Pixar",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 3,
+                  "label": "Pixar"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 10
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.pixar",
+        "type": "series",
+        "name": "🏰 Pixar",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "3",
+              "vote_count.gte": 5,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🏰 Pixar",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 3,
+                  "label": "Pixar"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 5
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.studios.star-wars",
+        "type": "movie",
+        "name": "🏰 Star Wars",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "1|108270",
+              "vote_count.gte": 1,
+              "with_release_type": "4|5|6",
+              "with_keywords": "161176"
+            },
+            "formState": {
+              "catalogName": "🏰 Star Wars",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 1,
+                  "label": "Lucasfilm Ltd."
+                },
+                {
+                  "id": 108270,
+                  "label": "Lucasfilm Animation"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 1,
+              "withKeywords": [
+                {
+                  "id": 161176,
+                  "label": "space opera"
+                }
+              ],
+              "keywordJoinMode": "or"
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.studios.star-wars",
+        "type": "series",
+        "name": "🏰 Star Wars",
+        "enabled": false,
+        "showInHome": false,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_companies": "1|108270",
+              "vote_count.gte": 1,
+              "with_status": "0|3|4|5",
+              "with_keywords": "161176"
+            },
+            "formState": {
+              "catalogName": "🏰 Star Wars",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "withCompanies": [
+                {
+                  "id": 1,
+                  "label": "Lucasfilm Ltd."
+                },
+                {
+                  "id": 108270,
+                  "label": "Lucasfilm Animation"
+                }
+              ],
+              "companyJoinMode": "or",
+              "voteCountMin": 1,
+              "withKeywords": [
+                {
+                  "id": 161176,
+                  "label": "space opera"
+                }
+              ],
+              "keywordJoinMode": "or"
             }
           }
         }

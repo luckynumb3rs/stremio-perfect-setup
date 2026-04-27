@@ -7,8 +7,8 @@ Purpose:
     specs. It does not inspect `nuvio-collections.json` itself. Use it when
     you already know which TMDB requests should be merged into one backdrop.
     When Fanart artwork is enabled, language selection is prioritized in this
-    order: preferred language, original title language, textless/no-language
-    artwork, TMDB backdrop fallback, and only then any other non-empty Fanart
+    order: preferred language, original title language, TMDB backdrop fallback,
+    textless/no-language artwork, and only then any other non-empty Fanart
     language if everything else fails.
 
 Important parameters:
@@ -64,6 +64,7 @@ import argparse
 import colorsys
 import contextlib
 import io
+import itertools
 import math
 import os
 import shutil
@@ -306,32 +307,37 @@ def pick_fanart_url(fanart_data, kind, preferred_language, original_language):
     preferred_language = normalize_fanart_lang(preferred_language)
     original_language = normalize_fanart_lang(original_language)
 
-    for _, candidates in fanart_candidate_groups(fanart_data, kind):
+    ranked_groups = {
+        "preferred": [],
+        "original": [],
+        "textless": [],
+        "other": [],
+    }
+
+    for group_rank, (_, candidates) in enumerate(fanart_candidate_groups(fanart_data, kind)):
         if not candidates:
             continue
 
-        ranked_groups = {
-            "preferred": [],
-            "original": [],
-            "textless": [],
-            "other": [],
-        }
         for candidate in candidates:
             lang = normalize_fanart_lang(candidate.get("lang"))
+            entry = {"candidate": candidate, "group_rank": group_rank}
             if preferred_language and lang == preferred_language:
-                ranked_groups["preferred"].append(candidate)
+                ranked_groups["preferred"].append(entry)
             elif original_language and lang == original_language:
-                ranked_groups["original"].append(candidate)
+                ranked_groups["original"].append(entry)
             elif lang is None:
-                ranked_groups["textless"].append(candidate)
+                ranked_groups["textless"].append(entry)
             elif lang:
-                ranked_groups["other"].append(candidate)
+                ranked_groups["other"].append(entry)
 
-        for bucket in ("preferred", "original", "textless", "other"):
-            if ranked_groups[bucket]:
-                best = sorted(ranked_groups[bucket], key=lambda item: int(item.get("likes", 0)), reverse=True)[0]
-                if best.get("url"):
-                    return best["url"], bucket
+    for bucket in ("preferred", "original", "textless", "other"):
+        if ranked_groups[bucket]:
+            best = sorted(
+                ranked_groups[bucket],
+                key=lambda entry: (entry["group_rank"], -int(entry["candidate"].get("likes", 0))),
+            )[0]["candidate"]
+            if best.get("url"):
+                return best["url"], bucket
 
     return None, None
 
@@ -357,6 +363,7 @@ def fetch_tile_image(kind, item, api_key, fanart_key, preferred_language):
     tmdb_id = item["id"]
     original_language = item.get("original_language")
     preferred_url = None
+    textless_url = None
     last_resort_url = None
 
     if fanart_key:
@@ -372,6 +379,8 @@ def fetch_tile_image(kind, item, api_key, fanart_key, preferred_language):
                 )
                 if bucket == "other":
                     last_resort_url = candidate_url
+                elif bucket == "textless":
+                    textless_url = candidate_url
                 else:
                     preferred_url = candidate_url
         else:
@@ -383,6 +392,8 @@ def fetch_tile_image(kind, item, api_key, fanart_key, preferred_language):
             )
             if bucket == "other":
                 last_resort_url = candidate_url
+            elif bucket == "textless":
+                textless_url = candidate_url
             else:
                 preferred_url = candidate_url
 
@@ -394,6 +405,11 @@ def fetch_tile_image(kind, item, api_key, fanart_key, preferred_language):
     tmdb_image = download_tmdb_backdrop(item["backdrop_path"])
     if tmdb_image:
         return tmdb_image, "tmdb"
+
+    if textless_url:
+        image = download_image_url(textless_url)
+        if image:
+            return image, "fanart"
 
     if last_resort_url:
         image = download_image_url(last_resort_url)
@@ -484,6 +500,19 @@ def build_tilted_grid(tiles, canvas_width, canvas_height, scale=1.0, focus_x=Non
     return canvas
 
 
+def ensure_minimum_tiles(tile_images, minimum_count):
+    """Repeat available tiles until the minimum count needed for compositing is met."""
+    if len(tile_images) >= minimum_count or not tile_images:
+        return tile_images
+
+    padded_tiles = list(tile_images)
+    for tile in itertools.cycle(tile_images):
+        if len(padded_tiles) >= minimum_count:
+            break
+        padded_tiles.append(tile.copy())
+    return padded_tiles
+
+
 def apply_gradient(canvas, accent):
     width, height = canvas.size
 
@@ -568,7 +597,7 @@ def save_output(canvas, path, quality_settings):
     )
     size_mb = os.path.getsize(path) / 1_048_576
     print(
-        f"  * Saved {path} ({final.size[0]}x{final.size[1]}, {size_mb:.1f} MB, "
+        f"  Saved {path} ({final.size[0]}x{final.size[1]}, {size_mb:.1f} MB, "
         f"q={quality_settings['jpg_quality']}, mode={quality_settings['subsampling']})"
     )
 
@@ -646,22 +675,27 @@ def backdrops(
     tmdb_fallbacks = 0
     other_language_fanart_hits = 0
     progress_output = io.StringIO()
-    with contextlib.redirect_stdout(progress_output):
-        for index, (media_type, item) in enumerate(titles, start=1):
-            title = item.get("title") or item.get("name", "?")
-            sys.stdout.write(f"  [{index:02d}/{len(titles)}] {title[:40]:<40}\r")
+    show_tty_progress = sys.stdout.isatty()
+    for index, (media_type, item) in enumerate(titles, start=1):
+        title = item.get("title") or item.get("name", "?")
+        progress_line = f"  [{index:02d}/{len(titles)}] {title[:40]:<40}"
+        if show_tty_progress:
+            sys.stdout.write(f"{progress_line}\r")
             sys.stdout.flush()
-            image, source = fetch_tile_image(media_type, item, api_key, fanart_key, preferred_language)
-            if image:
-                tile_images.append(image)
-                if source == "fanart":
-                    fanart_hits += 1
-                elif source == "fanart_other_language":
-                    other_language_fanart_hits += 1
-                else:
-                    tmdb_fallbacks += 1
-    progress_output.seek(0)
-    progress_output.truncate(0)
+        else:
+            log(progress_line)
+        image, source = fetch_tile_image(media_type, item, api_key, fanart_key, preferred_language)
+        if image:
+            tile_images.append(image)
+            if source == "fanart":
+                fanart_hits += 1
+            elif source == "fanart_other_language":
+                other_language_fanart_hits += 1
+            else:
+                tmdb_fallbacks += 1
+    if show_tty_progress and titles:
+        sys.stdout.write("\n")
+        sys.stdout.flush()
 
     if fanart_key:
         log(
@@ -673,8 +707,10 @@ def backdrops(
     else:
         log(f"  Downloaded {len(tile_images)} images.\n")
 
-    if len(tile_images) < 12:
-        raise RuntimeError("Not enough images to build a backdrop.")
+    minimum_tiles = 12
+    if len(tile_images) < minimum_tiles:
+        log(f"  Only {len(tile_images)} image(s) available; repeating tiles to reach {minimum_tiles}.\n")
+        tile_images = ensure_minimum_tiles(tile_images, minimum_tiles)
 
     saved_paths = {}
     for output_size, destination in outputs.items():
@@ -691,7 +727,7 @@ def backdrops(
         progress_output.truncate(0)
         saved_paths[output_size] = destination
 
-    log("\n* Done.\n")
+    log("\nDone.\n")
     return saved_paths
 
 

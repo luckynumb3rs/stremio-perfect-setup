@@ -8,6 +8,30 @@
     "focusGlowEnabled": true,
     "folders": [
       {
+        "id": "collections.discover.trakt",
+        "title": "Trakt",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "trakt.recommendations.movies",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "trakt.recommendations.shows",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🎯",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/trakt.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/trakt.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/trakt.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/trakt.jpg"
+      },
+      {
         "id": "collections.discover.popular",
         "title": "Popular",
         "tileShape": "LANDSCAPE",
@@ -708,6 +732,30 @@
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/horror.jpg"
       },
       {
+        "id": "collections.genres.k-drama",
+        "title": "K-Drama",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.genres.popular.k-drama",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.genres.popular.k-drama",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🎭",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/drama.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/drama.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/drama.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/drama.jpg"
+      },
+      {
         "id": "collections.genres.music",
         "title": "Music",
         "tileShape": "POSTER",
@@ -1176,6 +1224,227 @@
         "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/satire.gif",
         "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/satire.png",
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/satire.jpg"
+      }
+    ]
+  },
+  {
+    "id": "collections.studios",
+    "title": "🏰 Studios",
+    "showAllTab": true,
+    "viewMode": "FOLLOW_LAYOUT",
+    "pinToTop": true,
+    "focusGlowEnabled": true,
+    "folders": [
+      {
+        "id": "collections.studios.cartoon-network",
+        "title": "Cartoon Network",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.cartoon-network",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.cartoon-network",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/cartoon-network.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/cartoon-network.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/cartoon-network.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/cartoon-network.jpg"
+      },
+      {
+        "id": "collections.studios.dc",
+        "title": "DC",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.dc",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.dc",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/dc.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/dc.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/dc.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/dc.jpg"
+      },
+      {
+        "id": "collections.studios.dreamworks",
+        "title": "DreamWorks",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.dreamworks",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.dreamworks",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/dreamworks.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/dreamworks.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/dreamworks.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/dreamworks.jpg"
+      },
+      {
+        "id": "collections.studios.ghibli",
+        "title": "Ghibli",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.ghibli",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.ghibli",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/ghibli.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/ghibli.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/ghibli.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/ghibli.jpg"
+      },
+      {
+        "id": "collections.studios.harry-potter",
+        "title": "Harry Potter",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.harry-potter",
+            "type": "movie"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/harry-potter.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/harry-potter.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/harry-potter.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/harry-potter.jpg"
+      },
+      {
+        "id": "collections.studios.marvel",
+        "title": "Marvel",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.marvel",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.marvel",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/marvel.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/marvel.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/marvel.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/marvel.jpg"
+      },
+      {
+        "id": "collections.studios.nickelodeon",
+        "title": "Nickelodeon",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.nickelodeon",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.nickelodeon",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/nickelodeon.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/nickelodeon.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/nickelodeon.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/nickelodeon.jpg"
+      },
+      {
+        "id": "collections.studios.pixar",
+        "title": "Pixar",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.pixar",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.pixar",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/pixar.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/pixar.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/pixar.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/pixar.jpg"
+      },
+      {
+        "id": "collections.studios.star-wars",
+        "title": "Star Wars",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.studios.star-wars",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.studios.star-wars",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🏰",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/star-wars.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/star-wars.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/star-wars.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/star-wars.jpg"
       }
     ]
   },
