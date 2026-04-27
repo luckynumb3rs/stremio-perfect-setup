@@ -1299,7 +1299,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.action",
+        "id": "tmdb.discover.movie.genres.action",
         "type": "movie",
         "name": "🎭 Action",
         "enabled": true,
@@ -1336,7 +1336,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.adventure",
+        "id": "tmdb.discover.movie.genres.adventure",
         "type": "movie",
         "name": "🎭 Adventure",
         "enabled": true,
@@ -1373,7 +1373,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.action-adventure",
+        "id": "tmdb.discover.series.genres.action-adventure",
         "type": "series",
         "name": "🎭 Action & Adventure",
         "enabled": true,
@@ -1410,7 +1410,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.animation",
+        "id": "tmdb.discover.movie.genres.animation",
         "type": "movie",
         "name": "🎭 Animation",
         "enabled": true,
@@ -1447,7 +1447,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.animation",
+        "id": "tmdb.discover.series.genres.animation",
         "type": "series",
         "name": "🎭 Animation",
         "enabled": true,
@@ -1484,7 +1484,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.comedy",
+        "id": "tmdb.discover.movie.genres.comedy",
         "type": "movie",
         "name": "🎭 Comedy",
         "enabled": true,
@@ -1521,7 +1521,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.comedy",
+        "id": "tmdb.discover.series.genres.comedy",
         "type": "series",
         "name": "🎭 Comedy",
         "enabled": true,
@@ -1558,7 +1558,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.crime",
+        "id": "tmdb.discover.movie.genres.crime",
         "type": "movie",
         "name": "🎭 Crime",
         "enabled": true,
@@ -1595,7 +1595,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.crime",
+        "id": "tmdb.discover.series.genres.crime",
         "type": "series",
         "name": "🎭 Crime",
         "enabled": true,
@@ -1632,7 +1632,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.documentary",
+        "id": "tmdb.discover.movie.genres.documentary",
         "type": "movie",
         "name": "🎭 Documentary",
         "enabled": true,
@@ -1669,7 +1669,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.documentary",
+        "id": "tmdb.discover.series.genres.documentary",
         "type": "series",
         "name": "🎭 Documentary",
         "enabled": true,
@@ -1706,7 +1706,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.drama",
+        "id": "tmdb.discover.movie.genres.drama",
         "type": "movie",
         "name": "🎭 Drama",
         "enabled": true,
@@ -1743,7 +1743,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.drama",
+        "id": "tmdb.discover.series.genres.drama",
         "type": "series",
         "name": "🎭 Drama",
         "enabled": true,
@@ -1780,7 +1780,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.family",
+        "id": "tmdb.discover.movie.genres.family",
         "type": "movie",
         "name": "🎭 Family",
         "enabled": true,
@@ -1817,7 +1817,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.family",
+        "id": "tmdb.discover.series.genres.family",
         "type": "series",
         "name": "🎭 Family",
         "enabled": true,
@@ -1854,7 +1854,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.fantasy",
+        "id": "tmdb.discover.movie.genres.fantasy",
         "type": "movie",
         "name": "🎭 Fantasy",
         "enabled": true,
@@ -1891,7 +1891,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.history",
+        "id": "tmdb.discover.movie.genres.history",
         "type": "movie",
         "name": "🎭 History",
         "enabled": true,
@@ -1928,7 +1928,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.horror",
+        "id": "tmdb.discover.movie.genres.horror",
         "type": "movie",
         "name": "🎭 Horror",
         "enabled": true,
@@ -1965,89 +1965,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.k-drama",
-        "type": "movie",
-        "name": "🎭 K-Drama",
-        "enabled": true,
-        "showInHome": true,
-        "source": "tmdb",
-        "metadata": {
-          "discover": {
-            "version": 2,
-            "source": "tmdb",
-            "mediaType": "movie",
-            "params": {
-              "sort_by": "popularity.desc",
-              "include_adult": false,
-              "with_genres": "18",
-              "with_original_language": "ko",
-              "with_origin_country": "KR",
-              "vote_count.gte": 50,
-              "with_release_type": "4|5|6"
-            },
-            "formState": {
-              "catalogName": "🎭 K-Drama",
-              "discoverSource": "tmdb",
-              "sortBy": "popularity.desc",
-              "catalogType": "movie",
-              "includeAdult": false,
-              "releasedOnly": true,
-              "includeGenres": [
-                {
-                  "id": 18,
-                  "label": "Drama"
-                }
-              ],
-              "originalLanguage": "ko",
-              "originCountry": "KR",
-              "voteCountMin": 50
-            }
-          }
-        }
-      },
-      {
-        "id": "tmdb.discover.series.genres.popular.k-drama",
-        "type": "series",
-        "name": "🎭 K-Drama",
-        "enabled": true,
-        "showInHome": true,
-        "source": "tmdb",
-        "metadata": {
-          "discover": {
-            "version": 2,
-            "source": "tmdb",
-            "mediaType": "tv",
-            "params": {
-              "sort_by": "popularity.desc",
-              "include_adult": false,
-              "with_genres": "18",
-              "with_original_language": "ko",
-              "with_origin_country": "KR",
-              "vote_count.gte": 25,
-              "with_status": "0|3|4|5"
-            },
-            "formState": {
-              "catalogName": "🎭 K-Drama",
-              "discoverSource": "tmdb",
-              "sortBy": "popularity.desc",
-              "catalogType": "series",
-              "includeAdult": false,
-              "releasedOnly": true,
-              "includeGenres": [
-                {
-                  "id": 18,
-                  "label": "Drama"
-                }
-              ],
-              "originalLanguage": "ko",
-              "originCountry": "KR",
-              "voteCountMin": 25
-            }
-          }
-        }
-      },
-      {
-        "id": "tmdb.discover.series.genres.popular.kids",
+        "id": "tmdb.discover.series.genres.kids",
         "type": "series",
         "name": "🎭 Kids",
         "enabled": true,
@@ -2084,7 +2002,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.music",
+        "id": "tmdb.discover.movie.genres.music",
         "type": "movie",
         "name": "🎭 Music",
         "enabled": true,
@@ -2121,7 +2039,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.mystery",
+        "id": "tmdb.discover.movie.genres.mystery",
         "type": "movie",
         "name": "🎭 Mystery",
         "enabled": true,
@@ -2158,7 +2076,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.mystery",
+        "id": "tmdb.discover.series.genres.mystery",
         "type": "series",
         "name": "🎭 Mystery",
         "enabled": true,
@@ -2195,7 +2113,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.news",
+        "id": "tmdb.discover.series.genres.news",
         "type": "series",
         "name": "🎭 News",
         "enabled": true,
@@ -2237,7 +2155,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.reality",
+        "id": "tmdb.discover.series.genres.reality",
         "type": "series",
         "name": "🎭 Reality",
         "enabled": true,
@@ -2274,7 +2192,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.romance",
+        "id": "tmdb.discover.movie.genres.romance",
         "type": "movie",
         "name": "🎭 Romance",
         "enabled": true,
@@ -2311,7 +2229,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.science-fiction",
+        "id": "tmdb.discover.movie.genres.science-fiction",
         "type": "movie",
         "name": "🎭 Science Fiction",
         "enabled": true,
@@ -2348,7 +2266,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.sci-fi-fantasy",
+        "id": "tmdb.discover.series.genres.sci-fi-fantasy",
         "type": "series",
         "name": "🎭 Sci-Fi & Fantasy",
         "enabled": true,
@@ -2385,7 +2303,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.soap",
+        "id": "tmdb.discover.series.genres.soap",
         "type": "series",
         "name": "🎭 Soap",
         "enabled": true,
@@ -2427,7 +2345,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.talk",
+        "id": "tmdb.discover.series.genres.talk",
         "type": "series",
         "name": "🎭 Talk",
         "enabled": true,
@@ -2469,7 +2387,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.tv-movie",
+        "id": "tmdb.discover.movie.genres.tv-movie",
         "type": "movie",
         "name": "🎭 TV Movie",
         "enabled": true,
@@ -2511,7 +2429,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.thriller",
+        "id": "tmdb.discover.movie.genres.thriller",
         "type": "movie",
         "name": "🎭 Thriller",
         "enabled": true,
@@ -2548,7 +2466,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.war",
+        "id": "tmdb.discover.movie.genres.war",
         "type": "movie",
         "name": "🎭 War",
         "enabled": true,
@@ -2585,7 +2503,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.war-politics",
+        "id": "tmdb.discover.series.genres.war-politics",
         "type": "series",
         "name": "🎭 War & Politics",
         "enabled": true,
@@ -2622,7 +2540,7 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.genres.popular.western",
+        "id": "tmdb.discover.movie.genres.western",
         "type": "movie",
         "name": "🎭 Western",
         "enabled": true,
@@ -2659,7 +2577,7 @@
         }
       },
       {
-        "id": "tmdb.discover.series.genres.popular.western",
+        "id": "tmdb.discover.series.genres.western",
         "type": "series",
         "name": "🎭 Western",
         "enabled": true,
@@ -3355,6 +3273,88 @@
                 6,
                 10
               ]
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.movie.theme.k-drama",
+        "type": "movie",
+        "name": "🎨 K-Drama",
+        "enabled": true,
+        "showInHome": true,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "movie",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_genres": "18",
+              "with_original_language": "ko",
+              "with_origin_country": "KR",
+              "vote_count.gte": 50,
+              "with_release_type": "4|5|6"
+            },
+            "formState": {
+              "catalogName": "🎨 K-Drama",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "movie",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "includeGenres": [
+                {
+                  "id": 18,
+                  "label": "Drama"
+                }
+              ],
+              "originalLanguage": "ko",
+              "originCountry": "KR",
+              "voteCountMin": 50
+            }
+          }
+        }
+      },
+      {
+        "id": "tmdb.discover.series.theme.k-drama",
+        "type": "series",
+        "name": "🎨 K-Drama",
+        "enabled": true,
+        "showInHome": true,
+        "source": "tmdb",
+        "metadata": {
+          "discover": {
+            "version": 2,
+            "source": "tmdb",
+            "mediaType": "tv",
+            "params": {
+              "sort_by": "popularity.desc",
+              "include_adult": false,
+              "with_genres": "18",
+              "with_original_language": "ko",
+              "with_origin_country": "KR",
+              "vote_count.gte": 25,
+              "with_status": "0|3|4|5"
+            },
+            "formState": {
+              "catalogName": "🎨 K-Drama",
+              "discoverSource": "tmdb",
+              "sortBy": "popularity.desc",
+              "catalogType": "series",
+              "includeAdult": false,
+              "releasedOnly": true,
+              "includeGenres": [
+                {
+                  "id": 18,
+                  "label": "Drama"
+                }
+              ],
+              "originalLanguage": "ko",
+              "originCountry": "KR",
+              "voteCountMin": 25
             }
           }
         }

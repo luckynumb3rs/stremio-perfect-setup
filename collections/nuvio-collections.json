@@ -396,17 +396,17 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.action",
+            "catalogId": "tmdb.discover.movie.genres.action",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.adventure",
+            "catalogId": "tmdb.discover.movie.genres.adventure",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.action-adventure",
+            "catalogId": "tmdb.discover.series.genres.action-adventure",
             "type": "series"
           }
         ],
@@ -425,12 +425,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.animation",
+            "catalogId": "tmdb.discover.movie.genres.animation",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.animation",
+            "catalogId": "tmdb.discover.series.genres.animation",
             "type": "series"
           }
         ],
@@ -543,12 +543,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.comedy",
+            "catalogId": "tmdb.discover.movie.genres.comedy",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.comedy",
+            "catalogId": "tmdb.discover.series.genres.comedy",
             "type": "series"
           }
         ],
@@ -567,12 +567,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.crime",
+            "catalogId": "tmdb.discover.movie.genres.crime",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.crime",
+            "catalogId": "tmdb.discover.series.genres.crime",
             "type": "series"
           }
         ],
@@ -591,12 +591,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.documentary",
+            "catalogId": "tmdb.discover.movie.genres.documentary",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.documentary",
+            "catalogId": "tmdb.discover.series.genres.documentary",
             "type": "series"
           }
         ],
@@ -615,12 +615,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.drama",
+            "catalogId": "tmdb.discover.movie.genres.drama",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.drama",
+            "catalogId": "tmdb.discover.series.genres.drama",
             "type": "series"
           }
         ],
@@ -639,12 +639,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.family",
+            "catalogId": "tmdb.discover.movie.genres.family",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.kids",
+            "catalogId": "tmdb.discover.series.genres.kids",
             "type": "series"
           }
         ],
@@ -663,17 +663,17 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.fantasy",
+            "catalogId": "tmdb.discover.movie.genres.fantasy",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.science-fiction",
+            "catalogId": "tmdb.discover.movie.genres.science-fiction",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.sci-fi-fantasy",
+            "catalogId": "tmdb.discover.series.genres.sci-fi-fantasy",
             "type": "series"
           }
         ],
@@ -692,17 +692,17 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.history",
+            "catalogId": "tmdb.discover.movie.genres.history",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.war",
+            "catalogId": "tmdb.discover.movie.genres.war",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.war-politics",
+            "catalogId": "tmdb.discover.series.genres.war-politics",
             "type": "series"
           }
         ],
@@ -721,7 +721,7 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.horror",
+            "catalogId": "tmdb.discover.movie.genres.horror",
             "type": "movie"
           }
         ],
@@ -732,30 +732,6 @@
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/horror.jpg"
       },
       {
-        "id": "collections.genres.k-drama",
-        "title": "K-Drama",
-        "tileShape": "POSTER",
-        "hideTitle": false,
-        "focusGifEnabled": true,
-        "catalogSources": [
-          {
-            "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.k-drama",
-            "type": "movie"
-          },
-          {
-            "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.k-drama",
-            "type": "series"
-          }
-        ],
-        "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/drama.jpg",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/drama.gif",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/drama.png",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/drama.jpg"
-      },
-      {
         "id": "collections.genres.music",
         "title": "Music",
         "tileShape": "POSTER",
@@ -764,7 +740,7 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.music",
+            "catalogId": "tmdb.discover.movie.genres.music",
             "type": "movie"
           }
         ],
@@ -783,12 +759,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.mystery",
+            "catalogId": "tmdb.discover.movie.genres.mystery",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.mystery",
+            "catalogId": "tmdb.discover.series.genres.mystery",
             "type": "series"
           }
         ],
@@ -807,12 +783,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.news",
+            "catalogId": "tmdb.discover.series.genres.news",
             "type": "series"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.talk",
+            "catalogId": "tmdb.discover.series.genres.talk",
             "type": "series"
           }
         ],
@@ -831,12 +807,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.reality",
+            "catalogId": "tmdb.discover.series.genres.reality",
             "type": "series"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.soap",
+            "catalogId": "tmdb.discover.series.genres.soap",
             "type": "series"
           }
         ],
@@ -855,7 +831,7 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.romance",
+            "catalogId": "tmdb.discover.movie.genres.romance",
             "type": "movie"
           }
         ],
@@ -874,7 +850,7 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.thriller",
+            "catalogId": "tmdb.discover.movie.genres.thriller",
             "type": "movie"
           }
         ],
@@ -893,7 +869,7 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.tv-movie",
+            "catalogId": "tmdb.discover.movie.genres.tv-movie",
             "type": "movie"
           }
         ],
@@ -912,12 +888,12 @@
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.genres.popular.western",
+            "catalogId": "tmdb.discover.movie.genres.western",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.genres.popular.western",
+            "catalogId": "tmdb.discover.series.genres.western",
             "type": "series"
           }
         ],
@@ -1032,6 +1008,30 @@
         "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/magic.gif",
         "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/magic.png",
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/magic.jpg"
+      },
+      {
+        "id": "collections.themes.k-drama",
+        "title": "K-Drama",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "focusGifEnabled": true,
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.movie.theme.k-drama",
+            "type": "movie"
+          },
+          {
+            "addonId": "aio-metadata",
+            "catalogId": "tmdb.discover.series.theme.k-drama",
+            "type": "series"
+          }
+        ],
+        "coverEmoji": "🎨",
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/k-drama.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/k-drama.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/k-drama.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/k-drama.jpg"
       },
       {
         "id": "collections.themes.treasure-hunt",
