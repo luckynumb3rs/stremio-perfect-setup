@@ -1332,25 +1332,6 @@
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/ghibli.jpg"
       },
       {
-        "id": "collections.studios.harry-potter",
-        "title": "Harry Potter",
-        "tileShape": "LANDSCAPE",
-        "hideTitle": false,
-        "focusGifEnabled": true,
-        "catalogSources": [
-          {
-            "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.studios.harry-potter",
-            "type": "movie"
-          }
-        ],
-        "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/harry-potter.png",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/harry-potter.gif",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/harry-potter.png",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/harry-potter.jpg"
-      },
-      {
         "id": "collections.studios.marvel",
         "title": "Marvel",
         "tileShape": "LANDSCAPE",

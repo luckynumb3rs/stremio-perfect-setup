@@ -4697,63 +4697,6 @@
       }
     },
     {
-      "id": "tmdb.discover.movie.studios.harry-potter",
-      "type": "movie",
-      "name": "🏰 Harry Potter",
-      "enabled": false,
-      "showInHome": false,
-      "source": "tmdb",
-      "metadata": {
-        "discover": {
-          "version": 2,
-          "source": "tmdb",
-          "mediaType": "movie",
-          "params": {
-            "sort_by": "popularity.desc",
-            "include_adult": false,
-            "with_companies": "174",
-            "vote_count.gte": 1,
-            "with_release_type": "4|5|6",
-            "with_genres": "14",
-            "with_keywords": "3884|362889"
-          },
-          "formState": {
-            "catalogName": "🏰 Harry Potter",
-            "discoverSource": "tmdb",
-            "sortBy": "popularity.desc",
-            "catalogType": "movie",
-            "includeAdult": false,
-            "releasedOnly": true,
-            "withCompanies": [
-              {
-                "id": 174,
-                "label": "Warner Bros. Pictures"
-              }
-            ],
-            "companyJoinMode": "or",
-            "voteCountMin": 1,
-            "includeGenres": [
-              {
-                "id": 14,
-                "label": "Fantasy"
-              }
-            ],
-            "withKeywords": [
-              {
-                "id": 3884,
-                "label": "school of witchcraft"
-              },
-              {
-                "id": 362889,
-                "label": "fantastic beasts and where to find them"
-              }
-            ],
-            "keywordJoinMode": "or"
-          }
-        }
-      }
-    },
-    {
       "id": "tmdb.discover.movie.studios.marvel",
       "type": "movie",
       "name": "🏰 Marvel",
