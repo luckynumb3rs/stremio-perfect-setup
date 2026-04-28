@@ -8,8 +8,8 @@
     "focusGlowEnabled": true,
     "folders": [
       {
-        "id": "collections.discover.trakt",
-        "title": "Trakt",
+        "id": "collections.discover.recommended",
+        "title": "Recommended",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
@@ -26,10 +26,10 @@
           }
         ],
         "coverEmoji": "🎯",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/trakt.jpg",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/trakt.gif",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/trakt.png",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/trakt.jpg"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/recommended.jpg",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/recommended.gif",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/recommended.png",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/recommended.jpg"
       },
       {
         "id": "collections.discover.popular",
