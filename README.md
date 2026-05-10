@@ -43,5 +43,5 @@ So, now that you know, it's up to you, but if you're up for it, let's do it 💪
 - [❓ Configuration Q&A](docs/guide/8-Configuration-QA.md)
 - [🎛️ AIOManager [Power Users]](docs/guide/AIOManager-Setup.md)
 - [📜 Changelog](docs/guide/Changelog.md)
-- [🚀 Nuvio](docs/guide/Nuvio.md)
+- [🚀 NUVIO](docs/guide/Nuvio.md)
 - [🔔 Updates](docs/guide/Updates.md)

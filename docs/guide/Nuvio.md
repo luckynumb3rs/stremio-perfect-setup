@@ -1,9 +1,9 @@
 ---
 layout: guide
-title: "🚀 Nuvio"
+title: "🚀 NUVIO"
 ---
 
-# 🚀 Nuvio
+# 🚀 NUVIO
 
 ![Nuvio Collections](../images/collections.webp)
 
@@ -131,7 +131,7 @@ Once you have the Manifest URLs ready, go back to Nuvio in your browser:
 
 Now let's add the collections pack that organizes the installed *AIOMetadata* catalogs together into the groups described in [**🔎 AIOMetadata**](4-AIOMetadata-Setup.md):
 
-1. Go to [**this Nuvio Collections Pack**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-incl-dynamic-backdrops-2).
+1. Go to [**this**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-incl-dynamic-backdrops-2) **Nuvio Collections Pack**.
 2. Click **Add Pack**.
 3. Make sure the correct profile is selected.
    * *Again, if you have more than one profile, double-check this. Otherwise you may install the pack on the wrong profile.*
