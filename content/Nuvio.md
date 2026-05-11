@@ -1,5 +1,8 @@
 # 🚀 [NUVIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Nuvio/)
+
 **[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*WIP*)
+
+![img](xggisjsbfh0h1 "Nuvio Perfect Setup (Collections)")
 
 Since a few people asked about using my setup with **Nuvio**, and since my previous Nuvio collections post got removed by Reddit filters for whatever reason, I’m posting this again in a cleaner way.
 
@@ -17,7 +20,7 @@ The guide uses the same core addon structure as my Stremio setup, but adapted fo
 
 The main difference is that instead of clicking **Install on Stremio** at the end of each addon setup, you copy the **manifest URL** and install it manually inside your Nuvio profile.
 
-## 🍿 Nuvio Perfect Collections (incl. Dynamic Backdrops)
+# 🍿 Nuvio Perfect Collections (incl. Dynamic Backdrops)
 
 One of the things I’m most excited about is my pack.
 
@@ -39,9 +42,10 @@ This collections pack is based the *AIOMetadata* catalogs included in the guide
 
 The cool part is the **Dynamic Backdrops**: Something you would probably not notice at first glance, but what happens is that every month, the backdrops for all the catalogs included in my collections get regenerated with the most current titles the catalogs actually contain. This all happens automatically if you import my *AIOMetadata catalogs* and my *collections JSON* directly from my repo, as instructed further below, or you configure your collections to point to the image URLs from my repo, so that they get refreshed automatically. That's it!
 
-## 🔗 Resources
+# 🔗 Resources
 
 Here are the main links:
+
 * [**Full Guide**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Nuvio/)
 * [**Collections Assets**](https://github.com/luckynumb3rs/stremio-perfect-setup/tree/main/collections)
 * [**AIOMetadata Catalogs**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-Catalogs.json) (*JSON*)
