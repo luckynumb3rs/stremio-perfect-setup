@@ -26,12 +26,11 @@ One of the things I’m most excited about is my pack.
 
 This collections pack is based the *AIOMetadata* catalogs included in the guide, which I have built from the ground up myself by using the *BYOC* option made possible through *TMDB Discover* catalog building filters on *AIOMetadata*, are as follows:
 
-* **Default Catalogs**:
-   * **🎯 Trakt Recommendations**: Personalized recommendations coming directly from Trakt.
+* **🔭 Discover**:
+   * **🎯 Recommended**: Personalized recommendations coming directly from Trakt.
    * **🏆 Popular**: Most popular and recently released titles from TMDB.
    * **🔥 Trending**: Currently trending titles on TMDB.
    * **⭐ Top Rated**: Highest user-rated titles from TMDB.
-   * **📚 TVDB**, ... (Disabled initially).
 * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
 * **🎭 Genres**: Catalogs grouped by genre and content type.
 * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Disabled initially).
