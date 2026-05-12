@@ -50,7 +50,7 @@ Here are the main files and resources:
 * [**AIOMetadata Full Configuration**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (*JSON*)
    * Use this if you want the complete AIOMetadata configuration from this guide, import it in the *Configuration* tab.
    * This is the easiest option if you are starting fresh or want the closest match to the setup described here.
-* [**Nuvio Community Collections Pack**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-2)
+* [**Nuvio Community Collections Pack**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-incl-dynamic-backdrops-2)
    * This is the easiest way to add the collections pack directly through Nuvio.
    * If you already followed the setup steps above, this is usually the simplest option.
 * [**Nuvio Collections**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/nuvio-collections.json) (*JSON*)
@@ -129,7 +129,7 @@ Once you have the Manifest URLs ready, go back to Nuvio in your browser:
 
 Now let's add the collections pack that organizes the installed *AIOMetadata* catalogs together into the groups described in [**🔎 AIOMetadata**](4-AIOMetadata-Setup.md):
 
-1. Go to [**this**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-2) **Nuvio Collections Pack**.
+1. Go to [**this**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-incl-dynamic-backdrops-2) **Nuvio Collections Pack**.
 2. Click **Add Pack**.
 3. Make sure the correct profile is selected.
    * *Again, if you have more than one profile, double-check this. Otherwise you may install the pack on the wrong profile.*
