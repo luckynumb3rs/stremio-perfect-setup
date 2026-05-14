@@ -2730,8 +2730,8 @@
         "type": "anime",
         "order": "asc",
         "source": "mal",
-        "enabled": false,
-        "showInHome": false
+        "enabled": true,
+        "showInHome": true
       },
       {
         "id": "mal.top_series",
@@ -2740,8 +2740,8 @@
         "type": "anime",
         "order": "asc",
         "source": "mal",
-        "enabled": false,
-        "showInHome": false
+        "enabled": true,
+        "showInHome": true
       },
       {
         "id": "mal.most_favorites",
@@ -2750,8 +2750,8 @@
         "type": "anime",
         "order": "asc",
         "source": "mal",
-        "enabled": false,
-        "showInHome": false
+        "enabled": true,
+        "showInHome": true
       },
       {
         "id": "mal.most_popular",
@@ -2760,8 +2760,8 @@
         "type": "anime",
         "order": "asc",
         "source": "mal",
-        "enabled": false,
-        "showInHome": false
+        "enabled": true,
+        "showInHome": true
       },
       {
         "id": "mal.top_anime",
@@ -2770,8 +2770,8 @@
         "type": "anime",
         "order": "asc",
         "source": "mal",
-        "enabled": false,
-        "showInHome": false
+        "enabled": true,
+        "showInHome": true
       },
       {
         "id": "tmdb.discover.movie.theme.time-travel",
