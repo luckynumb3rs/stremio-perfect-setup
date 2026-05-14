@@ -68,9 +68,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
 7. **Installation**:
    * **🎞️ Stremio**: Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
       * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
-
          ![Install Addon](../images/4.7.png)
-
    * **🚀 Nuvio**: Copy the **Manifest URL** shown when you click *Save* and proceed to [**🧹 5. Configuration**](5-Configuration.md#-nuvio) to install them.
 
 >**📢 NOTES FOR LATER:**
