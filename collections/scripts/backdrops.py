@@ -67,44 +67,44 @@ Important parameters:
         without generating images.
 
 Examples:
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --catalog genres/k-drama \
       --size 4k
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --folder-id collections.streaming.netflix \
       --size 4k
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --preferred-language en \
       --profile compressed
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --profile high
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --missing-only
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --fanart-key YOUR_FANART_KEY \
       --grouped-logs
 
-    python3 -B generate_backdrops.py \
+    python3 -B backdrops.py \
       --api-key YOUR_TMDB_KEY \
       --dry-run
 """

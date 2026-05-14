@@ -1404,28 +1404,28 @@
         "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/pixar.webp"
       },
       {
-        "id": "collections.studios.star-wars",
-        "title": "Star Wars",
+        "id": "collections.studios.lucasfilm",
+        "title": "Lucasfilm",
         "tileShape": "LANDSCAPE",
         "hideTitle": false,
         "focusGifEnabled": true,
         "catalogSources": [
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.movie.studios.star-wars",
+            "catalogId": "tmdb.discover.movie.studios.lucasfilm",
             "type": "movie"
           },
           {
             "addonId": "aio-metadata",
-            "catalogId": "tmdb.discover.series.studios.star-wars",
+            "catalogId": "tmdb.discover.series.studios.lucasfilm",
             "type": "series"
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/star-wars.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/star-wars.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/star-wars.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/star-wars.webp"
+        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/lucasfilm.webp",
+        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/lucasfilm.webp",
+        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/lucasfilm.webp",
+        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/lucasfilm.webp"
       }
     ]
   },

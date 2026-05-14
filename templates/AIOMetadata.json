@@ -5076,9 +5076,9 @@
         }
       },
       {
-        "id": "tmdb.discover.movie.studios.star-wars",
+        "id": "tmdb.discover.movie.studios.lucasfilm",
         "type": "movie",
-        "name": "🏰 Star Wars",
+        "name": "🏰 Lucasfilm",
         "enabled": false,
         "showInHome": false,
         "source": "tmdb",
@@ -5092,11 +5092,10 @@
               "include_adult": false,
               "with_companies": "1|108270",
               "vote_count.gte": 1,
-              "with_release_type": "4|5|6",
-              "with_keywords": "161176|372735|357717|402|3386|801|11196|33728|11606|836|210090|314015|15285|9882|221246|14748"
+              "with_release_type": "4|5|6"
             },
             "formState": {
-              "catalogName": "🏰 Star Wars",
+              "catalogName": "🏰 Lucasfilm",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "movie",
@@ -5113,82 +5112,15 @@
                 }
               ],
               "companyJoinMode": "or",
-              "voteCountMin": 1,
-              "withKeywords": [
-                {
-                  "id": 161176,
-                  "label": "space opera"
-                },
-                {
-                  "id": 372735,
-                  "label": "star wars"
-                },
-                {
-                  "id": 357717,
-                  "label": "jedi"
-                },
-                {
-                  "id": 402,
-                  "label": "clone"
-                },
-                {
-                  "id": 3386,
-                  "label": "space war"
-                },
-                {
-                  "id": 801,
-                  "label": "bounty hunter"
-                },
-                {
-                  "id": 11196,
-                  "label": "rebellion"
-                },
-                {
-                  "id": 33728,
-                  "label": "force"
-                },
-                {
-                  "id": 11606,
-                  "label": "space western"
-                },
-                {
-                  "id": 836,
-                  "label": "resistance"
-                },
-                {
-                  "id": 210090,
-                  "label": "lego"
-                },
-                {
-                  "id": 314015,
-                  "label": "yoda"
-                },
-                {
-                  "id": 15285,
-                  "label": "spin off"
-                },
-                {
-                  "id": 9882,
-                  "label": "space"
-                },
-                {
-                  "id": 221246,
-                  "label": "separatists"
-                },
-                {
-                  "id": 14748,
-                  "label": "raid"
-                }
-              ],
-              "keywordJoinMode": "or"
+              "voteCountMin": 1
             }
           }
         }
       },
       {
-        "id": "tmdb.discover.series.studios.star-wars",
+        "id": "tmdb.discover.series.studios.lucasfilm",
         "type": "series",
-        "name": "🏰 Star Wars",
+        "name": "🏰 Lucasfilm",
         "enabled": false,
         "showInHome": false,
         "source": "tmdb",
@@ -5202,11 +5134,10 @@
               "include_adult": false,
               "with_companies": "1|108270",
               "vote_count.gte": 1,
-              "with_status": "0|3|4|5",
-              "with_keywords": "161176|372735|357717|402|3386|801|11196|33728|11606|836|210090|314015|15285|9882|221246|14748"
+              "with_status": "0|3|4|5"
             },
             "formState": {
-              "catalogName": "🏰 Star Wars",
+              "catalogName": "🏰 Lucasfilm",
               "discoverSource": "tmdb",
               "sortBy": "popularity.desc",
               "catalogType": "series",
@@ -5223,74 +5154,7 @@
                 }
               ],
               "companyJoinMode": "or",
-              "voteCountMin": 1,
-              "withKeywords": [
-                {
-                  "id": 161176,
-                  "label": "space opera"
-                },
-                {
-                  "id": 372735,
-                  "label": "star wars"
-                },
-                {
-                  "id": 357717,
-                  "label": "jedi"
-                },
-                {
-                  "id": 402,
-                  "label": "clone"
-                },
-                {
-                  "id": 3386,
-                  "label": "space war"
-                },
-                {
-                  "id": 801,
-                  "label": "bounty hunter"
-                },
-                {
-                  "id": 11196,
-                  "label": "rebellion"
-                },
-                {
-                  "id": 33728,
-                  "label": "force"
-                },
-                {
-                  "id": 11606,
-                  "label": "space western"
-                },
-                {
-                  "id": 836,
-                  "label": "resistance"
-                },
-                {
-                  "id": 210090,
-                  "label": "lego"
-                },
-                {
-                  "id": 314015,
-                  "label": "yoda"
-                },
-                {
-                  "id": 15285,
-                  "label": "spin off"
-                },
-                {
-                  "id": 9882,
-                  "label": "space"
-                },
-                {
-                  "id": 221246,
-                  "label": "separatists"
-                },
-                {
-                  "id": 14748,
-                  "label": "raid"
-                }
-              ],
-              "keywordJoinMode": "or"
+              "voteCountMin": 1
             }
           }
         }
