@@ -5,7 +5,7 @@ title: "🔎 4. AIOMetadata [Metadata & Catalogs]"
 
 # 🔎 4. AIOMetadata [Metadata & Catalogs]
 
-**AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio feels more complete and organized.
+**AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio/Nuvio feels more complete and organized.
 
 Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/aiometadata) or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
@@ -14,7 +14,8 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
 >* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to transfer your configuration because it's not automatically transferred.*
 >* *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
 
-1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (right-click, "*Save As*", and save it as `.json`, not `.txt`).
+1. Download my configuration file [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) for *Stremio*, or [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-All.json) for *Nuvio* (right-click, "*Save As*", and save it as `.json`, not `.txt`).
+   * *Both configurations contain the same catalogs, but on the Nuvio version, all are enabled already because Nuvio supports a higher amount per addon, whereas Stremio has a limit of around 120 catalogs, so some catalogs are initially disabled on its version, but you can enable them manually if you disable some others according to your preferences.*
 2. Go to the "**Configuration**" tab, click on "**Import Configuration**", and load my configuration file.
 
    ![Import Configuration](../images/4.2.png)
@@ -34,9 +35,9 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
          * **📚 TVDB**, ... (Disabled initially).
       * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
       * **🎭 Genres**: Catalogs grouped by genre and content type.
-      * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Partially disabled initially).
+      * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Partially disabled initially for *Stremio*).
       * **🎨 Themes**: Collections built around moods, topics, and story patterns.
-      * **🏰 Studios**: Catalogs grouped by well-known studios or franchises (Disabled initially).
+      * **🏰 Studios**: Catalogs grouped by well-known studios or franchises (Disabled initially for *Stremio*).
       * **🎥 Decades**: Titles grouped by release decade and era.
       * **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
 
@@ -62,12 +63,16 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
 5. **Optional**: At this point AIOMetadata is ready, but you can keep configuring it however you like, but otherwise the configuration I provided is ready to be used. On the "**Catalogs**" tab you can add, remove, enable, disable catalogs depending on your preferences.
 6. Go to the "**Configuration**" tab again and click on "**Save Configuration**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
-   * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOMetadata account.*
-7. Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
-   * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
    * *If you didn't want to get an API key for Gemini, go to the **Search** tab and disable **AI-Powered Search** to be able to save.*
+   * *Copy and store the **UUID** that is shown and the **Password** you set for later to access the configuration again. This is basically your AIOMetadata account.*
+7. **For Stremio:**
+   * Click "**Install**" and install the addon on **Stremio Web** (recommended, but you can also install on Stremio app if you want, but make sure you're signed in to your Stremio account wherever you install it).
+   * *If you get a "AddonsPushedToAPI Max descriptor size reached" error when installing, you probably have too many catalogs on AIOMetadata. Disable some, save the configuration, and try to install it again.*
 
    ![Install Addon](../images/4.7.png)
+
+8. **For Nuvio**:
+   * Copy the **Manifest URL** shown when you click *Save* and proceed to [**🧹 5. Configuration**](5-Configuration.md#nuvio) to install them.
 
 >**NOTES FOR LATER:**
 >* *Keep in mind for later that if you change catalog structure in AIOMetadata after you installed it on Stremio, or if you add the CouchMoney lists from Step 6 below, then go to Cinebye, authenticate again with Stremio credentials, and click the **Refresh** icon to the right of AIOMetadata in the "**Manage Addons**" section.*

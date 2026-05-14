@@ -6,19 +6,17 @@
 
 Since a few people asked about using my setup with **Nuvio**, and since my previous Nuvio collections post got removed by Reddit filters for whatever reason, I’m posting this again in a cleaner way.
 
-I have now added a full chapter for setting up Nuvio in my popular [**🎬 Stremio Perfect Setup**](https://luckynumb3rs.github.io/stremio-perfect-setup/) guide, which is linked in the title above, or directly [**here**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Nuvio/). [**READ BEFORE ASKING QUESTIONS**]
+I have now updated my popular [**🎬 Stremio/Nuvio Perfect Setup**](https://luckynumb3rs.github.io/stremio-perfect-setup/) guide with instructions for *Nuvio* too, which is linked in the title above, or directly [**here**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Nuvio/). [**READ BEFORE ASKING QUESTIONS**]
 
 **If this guide helps you, PLEASE UPVOTE this post so it remains relevant for others to find it and also benefit from it.** 😊
 
-The new **Nuvio** chapter explains how to use the same setup logic with Nuvio instead of Stremio, including how to install the addons through manifest URLs, configure the Nuvio app properly, and add the collection pack with dynamic backdrops. Nuvio is still in beta, so I marked the guide as a work in progress. Things may change, and I’ll update the page once Nuvio becomes more stable.
+The new **Nuvio** guide explains how to use the same setup logic with Nuvio instead of Stremio, including how to install the addons through manifest URLs, configure the Nuvio app properly, and add the collection pack with dynamic backdrops. Nuvio is still in beta, so I marked the guide as a work in progress. Things may change, and I’ll update the page once Nuvio becomes more stable.
 
 The guide uses the same core addon structure as my Stremio setup, but adapted for Nuvio:
 
 * **AIOStreams** for finding streams
 * **AIOMetadata** for metadata, catalogs, search, artwork, and integrations
 * **Watchly** as an optional recommendation and personalized catalogs layer
-
-The main difference is that instead of clicking **Install on Stremio** at the end of each addon setup, you copy the **manifest URL** and install it manually inside your Nuvio profile.
 
 # 🍿 Nuvio Perfect Collections (incl. Dynamic Backdrops)
 
@@ -47,8 +45,8 @@ Here are the main links:
 
 * [**Full Guide**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Nuvio/) [**READ BEFORE ASKING QUESTIONS**]
 * [**Collections Assets**](https://github.com/luckynumb3rs/stremio-perfect-setup/tree/main/collections)
-* [**AIOMetadata Catalogs**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-Catalogs.json) (*JSON*) [**Only catalogs** for existing setups, import into AIOMetadata *Catalogs* tab]
-* [**AIOMetadata Full Configuration**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json) (*JSON*) [**Full** for new setups, import into AIOMetadata *Configuration* tab]
+* [**AIOMetadata Catalogs**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-All-Catalogs.json) (*JSON*) [**Only catalogs** for existing setups, import into AIOMetadata *Catalogs* tab]
+* [**AIOMetadata Full Configuration**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-All.json) (*JSON*) [**Full** for new setups, import into AIOMetadata *Configuration* tab]
 * [**Nuvio Community Collections Pack**](https://nuvioapp.space/community-collections/nuvio-perfect-collections-incl-dynamic-backdrops-2) [**Import directly** into Nuvio account]
 * [**Nuvio Collections**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/collections/nuvio-collections.json) (*JSON*) [**Alternative** file for manual import]
 

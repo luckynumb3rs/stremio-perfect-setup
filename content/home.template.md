@@ -1,9 +1,9 @@
-# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE
+# 🎬 STREMIO/NUVIO FULL & EASY TOTAL BEGINNER'S GUIDE
 **[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*v2.0*)
 
 ![Homescreen (left) & Stream source selection (right)]({{IMAGE_PATH}}/home.jpg)
 
-**If this guide helps you, PLEASE UPVOTE the [Reddit post](https://www.reddit.com/r/StremioAddons/comments/1qvn9rk/my_stremio_perfect_setup_for_me_at_least_sharing/) so it remains relevant for others to find it and also benefit from it.** 😊
+**If this guide helps you, PLEASE UPVOTE the Reddit post for [**Stremio**](https://www.reddit.com/r/StremioAddons/comments/1stc6f6/stremio_perfect_setup_beginners_guide/)/[**Nuvio**](https://www.reddit.com/r/Nuvio/comments/1t9yub7/nuvio_perfect_setup_beginners_guide/) so it remains relevant for others to find it and also benefit from it.** 😊
 
 Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.
 

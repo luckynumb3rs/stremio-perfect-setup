@@ -9,6 +9,8 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 
 **Watchly** is a full-blown recommendations addon that provides real Netflix-like suggestions, and multiple dynamic catalogs depending on what you watch and like. Here are the steps to set it up:
 
+**Nuvio support is coming soon, so check here later for updates.**
+
 1. Go to [**this**](https://watchly.elfhosted.com/) **Watchly** instance.
 2. Click on "**Get Started**".
 3. Login with your Stremio account email and password (recommended), OR click on "**Login with Stremio**", sign in to your Stremio account, and click "**Accept**" to allow Watchly to connect to your account (the second approach may expire in the future and you may need to log in again).
@@ -26,7 +28,7 @@ At this point you are done, YAY!, so you can start enjoying it already OR you ca
 
 **Recommended**:
 
-**Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily:
+**Watch Next** is a very cool and simple addon that can show similar/related content directly on the page of the current show you're watching, similar to e.g. Netflix's "*More Like This*" feature. It doesn't need any configuration, it just works as-is once you install it very easily (Not needed for *Nuvio*):
 * Open [**this**](https://099757617587-watch-next.baby-beamup.club/) link, click on "**Install Add-On**", and install on Stremio. That's it!
 * If it doesn't work, maybe because you don't have the Stremio app installed and need to install it manually, then do this:
    1. Go directly to [**Addons in Stremio Web**](https://web.stremio.com/#/addons) or open your Stremio app and go to **Addons**.

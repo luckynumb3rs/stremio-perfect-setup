@@ -1,9 +1,9 @@
-# 🎬 STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE
+# 🎬 STREMIO/NUVIO FULL & EASY TOTAL BEGINNER'S GUIDE
 **[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*v2.0*)
 
 ![Homescreen (left) & Stream source selection (right)](docs/images/home.jpg)
 
-**If this guide helps you, PLEASE UPVOTE the [Reddit post](https://www.reddit.com/r/StremioAddons/comments/1qvn9rk/my_stremio_perfect_setup_for_me_at_least_sharing/) so it remains relevant for others to find it and also benefit from it.** 😊
+**If this guide helps you, PLEASE UPVOTE the Reddit post for [**Stremio**](https://www.reddit.com/r/StremioAddons/comments/1stc6f6/stremio_perfect_setup_beginners_guide/)/[**Nuvio**](https://www.reddit.com/r/Nuvio/comments/1t9yub7/nuvio_perfect_setup_beginners_guide/) so it remains relevant for others to find it and also benefit from it.** 😊
 
 Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.
 
@@ -27,15 +27,15 @@ In case you are wondering whether it's worth the effort, or you already have a T
 So, now that you know, it's up to you, but if you're up for it, let's do it 💪:
 
 - [🔰 Beginner Concepts](docs/guide/0-Beginner-Concepts.md)
-- [📝 1. Accounts Preparation](docs/guide/1-Accounts-Preparation.md)
-- [⚙️ 2. Stremio Account Initialization](docs/guide/2-Stremio-Initialization.md)
-- [📚 3. AIOStreams [Find Streams]](docs/guide/3-AIOStreams-Setup.md)
-- [🔎 4. AIOMetadata [Metadata & Catalogs]](docs/guide/4-AIOMetadata-Setup.md)
-- [🧹 5. Cinebye [Clean-Up]](docs/guide/5-Cinebye-Cleanup.md)
+- [📝 1. Accounts Preparation](docs/guide/1-Accounts.md)
+- [⚙️ 2. Stremio/Nuvio Account Initialization](docs/guide/2-Initialization.md)
+- [📚 3. AIOStreams [Find Streams]](docs/guide/3-AIOStreams.md)
+- [🔎 4. AIOMetadata [Metadata & Catalogs]](docs/guide/4-AIOMetadata.md)
+- [🧹 5. Configuration [Install & Clean-Up]](docs/guide/5-Configuration.md)
 - [🤖 6. Personalized & Automated Lists](docs/guide/6-Personalized-Lists.md)
 - [🛠️ Additional Stuff](docs/guide/7-Additional-Stuff.md)
 - [❓ Configuration Q&A](docs/guide/8-Configuration-QA.md)
 - [🎛️ AIOManager [Power Users]](docs/guide/AIOManager-Setup.md)
 - [📜 Changelog](docs/guide/Changelog.md)
-- [🚀 NUVIO](docs/guide/Nuvio.md)
+- [🚀 Nuvio](docs/guide/Nuvio.md)
 - [🔔 Updates](docs/guide/Updates.md)

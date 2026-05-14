@@ -2505,8 +2505,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.upcoming",
@@ -2515,8 +2515,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.schedule",
@@ -2525,8 +2525,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.seasons",
@@ -2535,8 +2535,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.80sDecades",
@@ -2545,8 +2545,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.90sDecades",
@@ -2555,8 +2555,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.00sDecades",
@@ -2565,8 +2565,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.10sDecades",
@@ -2575,8 +2575,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.20sDecades",
@@ -2585,8 +2585,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.genres",
@@ -2595,8 +2595,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.studios",
@@ -2605,8 +2605,8 @@
       "type": "anime",
       "order": "asc",
       "source": "mal",
-      "enabled": false,
-      "showInHome": false
+      "enabled": true,
+      "showInHome": true
     },
     {
       "id": "mal.top_movies",
@@ -4364,8 +4364,8 @@
       "id": "tmdb.discover.movie.studios.cartoon-network",
       "type": "movie",
       "name": "🏰 Cartoon Network",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4410,8 +4410,8 @@
       "id": "tmdb.discover.series.studios.cartoon-network",
       "type": "series",
       "name": "🏰 Cartoon Network",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4456,8 +4456,8 @@
       "id": "tmdb.discover.movie.studios.dc",
       "type": "movie",
       "name": "🏰 DC",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4502,8 +4502,8 @@
       "id": "tmdb.discover.series.studios.dc",
       "type": "series",
       "name": "🏰 DC",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4548,8 +4548,8 @@
       "id": "tmdb.discover.movie.studios.dreamworks",
       "type": "movie",
       "name": "🏰 DreamWorks",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4586,8 +4586,8 @@
       "id": "tmdb.discover.series.studios.dreamworks",
       "type": "series",
       "name": "🏰 DreamWorks",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4624,8 +4624,8 @@
       "id": "tmdb.discover.movie.studios.ghibli",
       "type": "movie",
       "name": "🏰 Ghibli",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4662,8 +4662,8 @@
       "id": "tmdb.discover.series.studios.ghibli",
       "type": "series",
       "name": "🏰 Ghibli",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4700,8 +4700,8 @@
       "id": "tmdb.discover.movie.studios.marvel",
       "type": "movie",
       "name": "🏰 Marvel",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4746,8 +4746,8 @@
       "id": "tmdb.discover.series.studios.marvel",
       "type": "series",
       "name": "🏰 Marvel",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4796,8 +4796,8 @@
       "id": "tmdb.discover.movie.studios.nickelodeon",
       "type": "movie",
       "name": "🏰 Nickelodeon",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4842,8 +4842,8 @@
       "id": "tmdb.discover.series.studios.nickelodeon",
       "type": "series",
       "name": "🏰 Nickelodeon",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4888,8 +4888,8 @@
       "id": "tmdb.discover.movie.studios.pixar",
       "type": "movie",
       "name": "🏰 Pixar",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4926,8 +4926,8 @@
       "id": "tmdb.discover.series.studios.pixar",
       "type": "series",
       "name": "🏰 Pixar",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -4964,8 +4964,8 @@
       "id": "tmdb.discover.movie.studios.lucasfilm",
       "type": "movie",
       "name": "🏰 Lucasfilm",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {
@@ -5006,8 +5006,8 @@
       "id": "tmdb.discover.series.studios.lucasfilm",
       "type": "series",
       "name": "🏰 Lucasfilm",
-      "enabled": false,
-      "showInHome": false,
+      "enabled": true,
+      "showInHome": true,
       "source": "tmdb",
       "metadata": {
         "discover": {

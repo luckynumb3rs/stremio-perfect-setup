@@ -1,0 +1,40 @@
+name: AIOMetadata Sync Auto
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+
+jobs:
+  auto-sync-aiometadata:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync AIOMetadata template outputs
+        run: bash scripts/sync-aiometadata.sh
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- \
+            templates/AIOMetadata-Catalogs.json \
+            templates/AIOMetadata-All.json \
+            templates/AIOMetadata-All-Catalogs.json; then
+            echo "No sync changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add \
+            templates/AIOMetadata-Catalogs.json \
+            templates/AIOMetadata-All.json \
+            templates/AIOMetadata-All-Catalogs.json
+          git commit -m "chore: auto-sync AIOMetadata outputs"
+          git push

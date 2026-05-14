@@ -1,0 +1,25 @@
+name: AIOMetadata Sync Check
+
+on:
+  pull_request:
+
+jobs:
+  verify-aiometadata-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync AIOMetadata template outputs
+        run: bash scripts/sync-aiometadata.sh
+      - name: Verify no diff
+        run: |
+          if ! git diff --quiet -- \
+            templates/AIOMetadata-Catalogs.json \
+            templates/AIOMetadata-All.json \
+            templates/AIOMetadata-All-Catalogs.json; then
+            echo "AIOMetadata template outputs are out of sync. Run: bash scripts/sync-aiometadata.sh"
+            git --no-pager diff -- \
+              templates/AIOMetadata-Catalogs.json \
+              templates/AIOMetadata-All.json \
+              templates/AIOMetadata-All-Catalogs.json
+            exit 1
+          fi
