@@ -90,7 +90,7 @@ Go to [**this**](https://cinebye.elfhosted.com/) **Cinebye** instance and:
    3. Go to **Settings**.
    4. Go to the **Trakt** tab and follow the steps to integrate your Trakt account.
       * *This is recommended if you want watch history, progress, and recommendations to work better across the setup. If you do not use Trakt, you can skip this, but some personalization features may be less useful.*
-   5. Go to **Layout**, **Detail Page**, and enable the **Prefer meta from external addon** toggle.
+   5. Go to **Layout** → **Detail Page**, and enable the **Prefer meta from external addon** toggle.
       * *This tells Nuvio to prefer the metadata coming from your external metadata addon, which in this setup is AIOMetadata.*
    6. Go to **Integrations**, then **TMDB**.
    7. Enable all toggles in the **TMDB** integration section.
