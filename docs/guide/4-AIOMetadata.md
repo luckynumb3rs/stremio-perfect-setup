@@ -5,7 +5,24 @@ title: "🔎 4. AIOMetadata [Metadata & Catalogs]"
 
 # 🔎 4. AIOMetadata [Metadata & Catalogs]
 
-**AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio/Nuvio feels more complete and organized.
+**AIOMetadata** is the metadata and catalogs layer. It improves discovery by powering richer catalogs, search behavior, and integrations, so browsing titles in Stremio/Nuvio feels more complete and organized. The catalogs included in this setup, which you can enable/disable and modify as needed later, are as follows:
+* **Default Catalogs**: 
+   * **🎯 Trakt Recommendations**: Personalized recommendations coming directly from Trakt.
+   * **🏆 Popular**: Most popular and recently released titles from TMDB.
+   * **🔥 Trending**: Currently trending titles on TMDB.
+   * **⭐ Top Rated**: Highest user-rated titles from TMDB.
+   * **📚 TVDB**, ... (Disabled initially).
+* **🎬 Streaming**: Titles grouped by streaming provider or platform source.
+* **🎭 Genres**: Catalogs grouped by genre and content type.
+* **🍥 Anime**: Anime-focused catalogs across different styles and themes (Partially disabled initially for *Stremio*).
+* **🎨 Themes**: Collections built around moods, topics, and story patterns.
+* **🏰 Studios**: Catalogs grouped by well-known studios or franchises (Disabled initially for *Stremio*).
+* **🎥 Decades**: Titles grouped by release decade and era.
+* **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
+* **🌍 World**: International titles grouped by country or language (Disabled initially for *Stremio*).
+
+>**📢 NOTE**:
+>If you already have an *AIOMetadata* setup and are only interested in the catalogs, you can use [**this**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-Catalogs.json) file for *Stremio*, or [**here**](https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata-All-Catalogs.json) for *Nuvio*, which are catalog-only and can be imported directly in the *Catalogs* tab, avoiding the full *AIOMetadata* configuration.
 
 Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/aiometadata) or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
@@ -26,21 +43,6 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/a
    ![API Keys](../images/4.3.png)
 
 4. Go to the "**Catalogs**" tab, and near the "Quick Add" button, you will see the **Trakt** icon. Click on it and follow the steps to connect your Trakt account.
-   * The included catalogs, which you can enable/disable and modify as needed, are as follows:
-      * **Default Catalogs**: 
-         * **🎯 Trakt Recommendations**: Personalized recommendations coming directly from Trakt.
-         * **🏆 Popular**: Most popular and recently released titles from TMDB.
-         * **🔥 Trending**: Currently trending titles on TMDB.
-         * **⭐ Top Rated**: Highest user-rated titles from TMDB.
-         * **📚 TVDB**, ... (Disabled initially).
-      * **🎬 Streaming**: Titles grouped by streaming provider or platform source.
-      * **🎭 Genres**: Catalogs grouped by genre and content type.
-      * **🍥 Anime**: Anime-focused catalogs across different styles and themes (Partially disabled initially for *Stremio*).
-      * **🎨 Themes**: Collections built around moods, topics, and story patterns.
-      * **🏰 Studios**: Catalogs grouped by well-known studios or franchises (Disabled initially for *Stremio*).
-      * **🎥 Decades**: Titles grouped by release decade and era.
-      * **🕒 Runtime**: Titles filtered by length, from short watches to longer sessions.
-      * **🌍 World**: International titles grouped by country or language.
 
    ![Trakt Integration](../images/4.4.png)
 
