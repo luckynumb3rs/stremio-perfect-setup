@@ -146,10 +146,11 @@ body {
 
 .sidebar-support-links {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.9rem;
+  justify-content: center;
+  width: fit-content;
+  gap: 0.35rem;
+  margin: 0 auto 0.9rem;
 }
 
 .sidebar-support-link {
