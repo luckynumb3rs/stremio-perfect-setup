@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { resolveTemplate, isVisible, evalExpr, switchKey } from '../src/template-engine.js';
+import { resolveTemplate, isVisible, evalExpr, switchKey } from '../core/template-engine.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, '..', '..');
