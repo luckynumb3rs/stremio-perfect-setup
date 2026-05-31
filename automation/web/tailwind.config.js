@@ -4,13 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: '#6d3af2',
-        'accent-2': '#8f68ff',
-        panel: '#f4f0ff',
+        accent:     'var(--accent)',
+        'accent-2': 'var(--accent-2)',
+        panel:      'var(--panel)',
+        'panel-2':  'var(--panel-2)',
+        muted:      'var(--muted)',
+        border:     'var(--border)',
       },
-      fontFamily: { sans: ['"Space Grotesk"', 'Avenir Next', 'Segoe UI', 'sans-serif'] },
+      fontFamily: {
+        sans: ['"Space Grotesk"', 'Avenir Next', 'Segoe UI', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', '"Cascadia Code"', 'monospace'],
+      },
       borderRadius: { wizard: '14px' },
-      boxShadow: { wizard: '0 10px 24px rgba(57,35,116,0.12)' },
+      boxShadow:    { wizard: 'var(--shadow)' },
     },
   },
 };
