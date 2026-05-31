@@ -2,12 +2,12 @@
   "metadata": {
     "id": "stremio.perfect.setup.formatter",
     "name": "Stremio Perfect Setup [Formatter]",
-    "description": "This template includes only the formatter styles from the original template in [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. Credit to Tamtaro's template which served as inspiration.",
+    "description": "This template includes only the formatter styles from the original template in [this](https://numb3rs.stream) guide. Credit to Tamtaro's template which served as inspiration.",
     "source": "external",
     "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams-Formatter.json",
     "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "category": "Formatter",
     "serviceRequired": false,
     "inputs": [
@@ -21,7 +21,7 @@
       {
         "id": "formatterChoice",
         "name": "🖋️ Formatter Style",
-        "description": "Choose the formatting of the stream information view (more details [here](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view)): \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons.",
+        "description": "Choose the formatting of the stream information view (more details [here](https://numb3rs.stream/guide/7-Additional-Stuff/#understanding-stream-information-view)): \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons.",
         "type": "select",
         "required": false,
         "default": "flat",
@@ -52,7 +52,7 @@
         "socials": [
           {
             "id": "website",
-            "url": "https://luckynumb3rs.github.io/stremio-perfect-setup"
+            "url": "https://numb3rs.stream"
           },
           {
             "id": "github",

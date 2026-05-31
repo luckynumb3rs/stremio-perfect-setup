@@ -1,4 +1,4 @@
-// Orchestrator — full Stremio + Nuvio flows.
+// Orchestrator: full Stremio + Nuvio flows.
 // Install is ATOMIC: the ordered addon collection is pushed only after all configs succeed.
 // If any config step fails, the account is left untouched.
 
@@ -24,7 +24,7 @@ function randomPassword(len = 20) {
  * @param {object} p.account           { mode: 'create'|'signin', email, password }
  * @param {object} p.aiostreamsParams  { template, inputs, services, credentials }
  * @param {object} p.aiometadataParams { baseTemplate, enabledCategories, enabledDiscoverFolderIds, apiKeys, language }
- * @param {function} p.onStep          (name, data) => void — progress callback
+ * @param {function} p.onStep          (name, data) => void; progress callback
  */
 export async function runStremioSetup({ instances, account, aiostreamsParams, aiometadataParams, onStep }) {
   const summary = { account: null, addons: {}, warnings: [] };
@@ -33,7 +33,10 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
   // 1) Account
   const stremio = createStremioAdapter();
   let auth;
-  if (account.mode === 'create') {
+  if (account.authKey) {
+    auth = { authKey: account.authKey };
+    summary.account = { service: 'stremio', email: account.email, created: account.mode === 'create', reusedSession: true };
+  } else if (account.mode === 'create') {
     auth = await stremio.register(account.email, account.password);
     summary.account = { service: 'stremio', email: account.email, password: account.password, created: true };
   } else {
@@ -69,7 +72,7 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
   for (const instanceUrl of aioMetaInstances) {
     try {
       const adapter = createAiometadataAdapter(instanceUrl);
-      // createConfig(config, password) — password is a top-level API field (not nested in config)
+      // createConfig(config, password): password is a top-level API field (not nested in config)
       aioMetaResult = await adapter.createConfig(aioMetaConfig, aioMetaPassword);
       aioMetaResult = { ...aioMetaResult, instanceUrl };
       break;
@@ -77,7 +80,7 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
       summary.warnings.push(`AIOMetadata ${instanceUrl} failed: ${err.message}`);
     }
   }
-  if (!aioMetaResult) throw new Error('All AIOMetadata instances failed — see warnings');
+  if (!aioMetaResult) throw new Error('All AIOMetadata instances failed, see warnings');
   summary.addons.aiometadata = {
     instance: aioMetaResult.instanceUrl,
     uuid: aioMetaResult.userUUID,
@@ -86,7 +89,7 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
   };
   step('aiometadata', summary.addons.aiometadata);
 
-  // 4) ATOMIC install — push only after all configs succeeded
+  // 4) ATOMIC install: push only after all configs succeeded
   const existing = await stremio.getAddons(auth.authKey);
   const collection = buildAddonCollection(existing, {
     aiometadata: summary.addons.aiometadata.manifestUrl,
@@ -115,7 +118,10 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   // 1) Nuvio account
   const nuvio = createNuvioAdapter();
   let auth;
-  if (account.mode === 'create') {
+  if (account.authToken) {
+    auth = { token: account.authToken };
+    summary.account = { service: 'nuvio', email: account.email, created: account.mode === 'create', reusedSession: true };
+  } else if (account.mode === 'create') {
     auth = await nuvio.signup(account.email, account.password);
     summary.account = { service: 'nuvio', email: account.email, password: account.password, created: true };
   } else {
@@ -124,10 +130,10 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   }
   step('account', summary.account);
 
-  // 2) Get first profile — use profile_index field (verified Task 2)
+  // 2) Get first profile; use profile_index field (verified Task 2)
   const profiles = await nuvio.getProfiles(auth.token);
   const profile = profiles[0];
-  if (!profile) throw new Error('Nuvio: no profiles found — log into the Nuvio app first to create a profile');
+  if (!profile) throw new Error('Nuvio: no profiles found. Log into the Nuvio app first to create a profile.');
   const profileIndex = profile.profile_index;
   step('profile', { profileIndex });
 
@@ -147,7 +153,7 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   }
   step('aiostreams', summary.addons.aiostreams);
 
-  // 4) AIOMetadata config (Nuvio target: showInHome=false — shown via collections instead)
+  // 4) AIOMetadata config (Nuvio target: showInHome=false, shown via collections instead)
   const { config: aioMetaConfig } = buildAioMetadataConfig(aiometadataParams.baseTemplate, {
     ...aiometadataParams,
     target: 'nuvio',
@@ -157,7 +163,7 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   let aioMetaResult = null;
   for (const instanceUrl of aioMetaInstances) {
     try {
-      // createConfig(config, password) — password is top-level (verified Task 1)
+      // createConfig(config, password): password is top-level (verified Task 1)
       aioMetaResult = await createAiometadataAdapter(instanceUrl).createConfig(aioMetaConfig, aioMetaPassword);
       aioMetaResult = { ...aioMetaResult, instanceUrl };
       break;
@@ -165,7 +171,7 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
       summary.warnings.push(`AIOMetadata ${instanceUrl} failed: ${err.message}`);
     }
   }
-  if (!aioMetaResult) throw new Error('All AIOMetadata instances failed — see warnings');
+  if (!aioMetaResult) throw new Error('All AIOMetadata instances failed, see warnings');
   summary.addons.aiometadata = {
     instance: aioMetaResult.instanceUrl,
     uuid: aioMetaResult.userUUID,
@@ -173,10 +179,10 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   };
   step('aiometadata', summary.addons.aiometadata);
 
-  // 5) ATOMIC install — push addons then collections only after all configs succeed.
+  // 5) ATOMIC install: push addons then collections only after all configs succeed.
   // Nuvio addon order: AIOMetadata first (catalog source), then AIOStreams (stream source).
   // p_addons expects {url, sort_order} objects (verified Task 2; NOT a JSON string).
-  // pushAddons signature: (token, addons) — profileIndex is not sent for addon push.
+  // pushAddons signature: (token, addons); profileIndex is not sent for addon push.
   const addons = [
     { url: summary.addons.aiometadata.manifestUrl, sort_order: 1 },
     { url: summary.addons.aiostreams.manifestUrl,  sort_order: 2 },
@@ -185,7 +191,7 @@ export async function runNuvioSetup({ instances, account, aiostreamsParams, aiom
   step('addons', { count: addons.length });
 
   // Filter collections to user's enabled categories, then push.
-  // p_collections_json is a real JSON value — NOT a JSON-encoded string (verified Task 2).
+  // p_collections_json is a real JSON value, not a JSON-encoded string (verified Task 2).
   // pushCollections signature: (token, profileId, collections)
   const catalogs = aiometadataParams.baseTemplate.config.catalogs;
   const { enabledCategories, enabledDiscoverFolderIds } = aiometadataParams;

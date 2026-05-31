@@ -1,54 +1,64 @@
-# 🤖 Perfect Setup — Automation module
+# 🤖 Perfect Setup Wizard
 
-Guided web app that automates the manual steps in the guide: create/use a **Stremio** (later
-**Nuvio**) account, build the **AIOStreams** / **AIOMetadata** / **Watchly** configs from the repo
-templates, install everything in the right order, and hand back every credential created.
+Guided web app for automating the manual steps in the Stremio/Nuvio setup guide. The wizard is
+designed to collect the values a person actually has to provide, generate addon configs from the
+templates in this repo, and guide installation in the intended order.
 
-> **Status: Phase 1 (Stremio MVP) scaffold.** The template engine + Stremio + AIOStreams paths are
-> implemented and unit-tested offline. AIOMetadata, Watchly, Nuvio, Trakt, and the Cloudflare
-> Worker proxy are stubbed/flagged for later phases. See [`../AUTOMATION-PLAN.md`](../AUTOMATION-PLAN.md)
-> and [`../API-NOTES.md`](../API-NOTES.md).
+## What It Covers
+
+- Stremio account login or creation
+- AIOStreams configuration from `templates/AIOStreams.json`
+- API key collection for services that cannot be automated end to end
+- Catalog and addon setup steps inside a guided flow
+- A final installation-oriented flow instead of manual guide hopping
+
+## What It Does Not Solve Automatically
+
+- Creating third-party accounts such as TMDB, TVDB, Gemini, Debrid, or RPDB
+- Service-specific captchas, billing, or terms acceptance
+- All Nuvio flows yet
+- Trakt device OAuth yet
+- Every addon family mentioned in the guide
 
 ## Layout
 
-```
-automation/
+```text
+wizard/
   core/                    Template engine, catalog config, nuvio-collections, adapters, orchestrator
   web/                     Vite + React wizard (npm run dev / npm run build)
-  assets/logos/            Mirrored service logos
+  web/public/assets/logos/ Canonical service logos served directly by the web app
   test/                    Node offline tests (no network needed)
-  config.example.json      Instance URLs and default preferences
+  config.json              Instance URLs and default preferences
 ```
 
-## Dev
+## Local Use
 
 ```bash
-# Core unit tests (no network)
-node automation/test/template-engine.test.mjs
-node automation/test/catalog-config.test.mjs
+# Wizard-only dev server
+cd wizard/web
+npm install
+npm run dev
+# → http://localhost:5173/stremio-perfect-setup/wizard/
 
-# Wizard dev server
-cd automation/web && npm install && npm run dev
-# → http://localhost:5173/stremio-perfect-setup/automator/
-
-# Production build
-cd automation/web && npm run build
+# Full guide + wizard site
+cd /path/to/stremio-perfect-setup
+scripts/local-serve.sh
+# → guide at http://127.0.0.1:8000/
+# → wizard at http://127.0.0.1:8000/wizard/
 ```
 
-## Why this design
+If you want the guide and the wizard together exactly like the built site, use
+`scripts/local-serve.sh`. It builds the guide, builds the wizard, copies the wizard into the site
+output, and serves both from one local static server.
 
-- **The UI is generated from the template.** `templates/AIOStreams.json` carries a self-describing
-  form schema in `metadata.inputs`. `schema-renderer.js` renders it and `template-engine.js`
-  resolves the result — so **editing the template changes the interface automatically**, no UI code
-  change needed.
-- **AIOStreams has open CORS** (`Access-Control-Allow-Origin: *`, confirmed in upstream source), so
-  the wizard can call it straight from GitHub Pages. **Stremio's `api.strem.io`** is browser-callable
-  too and a single `addonCollectionSet` does install + ordering + Cinemeta clean-up (replacing
-  Cinebye). Only **Trakt** strictly needs the Cloudflare Worker proxy (no CORS) — Phase 2.
+## Privacy and Behavior
 
-## Roadmap (see AUTOMATION-PLAN.md §8)
+- API keys and passwords are intended to be provided at runtime, not committed to the repo.
+- The wizard is built around the templates in this repo, so template changes can affect the wizard
+  flow.
+- Some integrations still depend on live third-party API behavior and are not fully implemented.
 
-- **Phase 1 (here):** Stremio account + AIOStreams create & install, dynamic form, credential summary.
-- **Phase 2:** AIOMetadata save + install, Trakt device OAuth via Worker, Watchly, Watch Next.
-- **Phase 3:** Nuvio (account/profiles/addons/collections), multi-instance Autopilot fallback.
-- **Phase 4:** Resumability, error surfacing, local CLI mode, template-version compatibility guard.
+## For Maintainers
+
+Implementation status, architecture notes, API research, and historical planning docs live in
+[docs/superpowers/wizard-maintainer-notes.md](../docs/superpowers/wizard-maintainer-notes.md).

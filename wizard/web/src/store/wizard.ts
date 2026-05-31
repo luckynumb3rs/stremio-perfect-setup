@@ -53,7 +53,6 @@ interface WizardState {
   aioStreamsInstance: string;
   aioStreamsInputs: AioStreamsInputs;
   aiometadataInstance: string;
-  aiometadataLanguage: string;
   catalogSelection: CatalogSelection;
   installResult: InstallResult;
   templates: { aiostreams: unknown; aiometadata: unknown; collections: unknown[] } | null;
@@ -72,7 +71,6 @@ interface WizardState {
   setAioStreamsInstance: (url: string) => void;
   setAioStreamsInput: (id: string, value: unknown) => void;
   setAiometadataInstance: (url: string) => void;
-  setAiometadataLanguage: (lang: string) => void;
   setCatalogSelection: (sel: Partial<CatalogSelection>) => void;
   setTemplates: (t: WizardState['templates']) => void;
   setAioSections: (sections: AioSection[]) => void;
@@ -93,7 +91,6 @@ export const useWizard = create<WizardState>((set) => ({
   aioStreamsInstance: INSTANCES.aiostreams.primary,
   aioStreamsInputs: {},
   aiometadataInstance: INSTANCES.aiometadata.primary,
-  aiometadataLanguage: 'en-US',
   catalogSelection: { enabledCategories: new Set(), enabledDiscoverFolderIds: new Set() },
   installResult: { aiostreams: null, aiometadata: null, warnings: [], error: null },
   templates: null,
@@ -134,7 +131,6 @@ export const useWizard = create<WizardState>((set) => ({
     aioStreamsInputs: { ...s.aioStreamsInputs, [id]: value },
   })),
   setAiometadataInstance: (url) => set({ aiometadataInstance: url }),
-  setAiometadataLanguage: (lang) => set({ aiometadataLanguage: lang }),
   setCatalogSelection: (sel) => set(s => ({
     catalogSelection: {
       enabledCategories: sel.enabledCategories ?? s.catalogSelection.enabledCategories,

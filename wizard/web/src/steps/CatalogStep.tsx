@@ -38,6 +38,16 @@ export function CatalogStep() {
   const enabledCount: number = countEnabledCatalogs(catalogs, enabledCategories, enabledDiscoverFolderIds);
   const overLimit = target === 'stremio' && enabledCount > STREMIO_MAX_CATALOGS;
 
+  function tileStyle(selected: boolean): React.CSSProperties {
+    return {
+      borderColor: selected ? 'var(--accent)' : 'var(--border)',
+      background: selected
+        ? 'color-mix(in srgb, var(--panel-2) 78%, var(--accent) 22%)'
+        : 'var(--panel)',
+      color: 'var(--text)',
+    };
+  }
+
   function toggleCategory(key: string) {
     const next = new Set(enabledCategories);
     if (next.has(key)) next.delete(key); else next.add(key);
@@ -65,18 +75,15 @@ export function CatalogStep() {
         </div>
       )}
 
-      {/* Discover section — folder-granular */}
+      {/* Discover section, folder-granular */}
       <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">🔭 Discover</p>
       <div className="grid grid-cols-2 gap-2 mb-5">
         {discoverFolders.map((f: DiscoverFolder) => (
           <button
             key={f.id}
             onClick={() => toggleDiscover(f.id)}
-            className={`p-2.5 border-2 rounded-xl text-left transition-all ${
-              enabledDiscoverFolderIds.has(f.id)
-                ? 'border-accent bg-purple-50'
-                : 'border-gray-200 hover:border-gray-300'
-            }`}
+            className="p-2.5 border-2 rounded-xl text-left transition-all"
+            style={tileStyle(enabledDiscoverFolderIds.has(f.id))}
           >
             <span className="text-sm font-semibold">{f.label}</span>
           </button>
@@ -90,14 +97,11 @@ export function CatalogStep() {
           <button
             key={cat.key}
             onClick={() => toggleCategory(cat.key)}
-            className={`px-4 py-3 border-2 rounded-xl flex justify-between items-center transition-all ${
-              enabledCategories.has(cat.key)
-                ? 'border-accent bg-purple-50'
-                : 'border-gray-200 hover:border-gray-300'
-            }`}
+            className="px-4 py-3 border-2 rounded-xl flex justify-between items-center transition-all"
+            style={tileStyle(enabledCategories.has(cat.key))}
           >
             <span className="font-semibold text-sm">{cat.label}</span>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs" style={{ color: 'var(--muted)' }}>
               {cat.count} catalogs {enabledCategories.has(cat.key) ? '✓' : ''}
             </span>
           </button>

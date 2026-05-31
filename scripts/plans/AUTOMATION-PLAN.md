@@ -1,5 +1,7 @@
 # 🤖 Automation Module — Comprehensive Plan
 
+> Historical planning document retained for implementation tracking. For the current state and practical run instructions, use [`../../../wizard/README.md`](../../../wizard/README.md).
+
 **"One-Click Perfect Setup"** — a guided web app that creates/uses a Stremio or Nuvio
 account, programmatically builds the AIOStreams, AIOMetadata and Watchly configurations
 from the templates in this repo, installs everything (and Nuvio collections), wires up
@@ -205,7 +207,7 @@ For each manual step, the automatable equivalent. "Proxy" = via the Cloudflare W
 ## 5. Configuration file (the "as parameterized as possible" layer)
 
 A single declarative file (committed templates + a user overlay) drives everything. Proposed
-shape (`automation/config.example.json`):
+shape (`wizard/config.example.json`):
 
 ```jsonc
 {
@@ -335,7 +337,7 @@ wizard itself.
 ## 10. Repo layout proposal
 
 ```
-automation/
+wizard/
   config.example.json          # §5 parameterized config
   schema/                      # field renderer + __if evaluator + directive engine
   adapters/                    # stremio, nuvio, aiostreams, aiometadata, watchly, trakt

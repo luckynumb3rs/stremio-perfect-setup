@@ -1,4 +1,4 @@
-// AIOMetadata adapter — creates a stored user config on an instance and returns the manifest URL.
+// AIOMetadata adapter: creates a stored user config on an instance and returns the manifest URL.
 // VERIFIED 2026-05-30 against https://aiometadata.viren070.me
 //
 // VERIFIED: endpoint = POST /api/config/save
@@ -18,7 +18,7 @@
 //   { tmdb, tvdb, fanart, rpdb, mdblist, gemini, trakt, simkl, customDescriptionBlurb,
 //     addonVersion, hasBuiltInTvdb, hasBuiltInTmdb, catalogTTL, simklTrendingPageSizeOptions,
 //     traktSearchEnabled }
-//   No maxCatalogs / maxEnabledCatalogs field found — no explicit catalog limit advertised.
+//   No maxCatalogs / maxEnabledCatalogs field found, so no explicit catalog limit is advertised.
 //
 // VERIFIED: DELETE endpoint = NOT supported. Both DELETE /api/config/save and DELETE /api/config
 //   return HTTP 404. Configs cannot be deleted via the API.
@@ -48,8 +48,8 @@ export function createAiometadataAdapter(instanceUrl = DEFAULT_INSTANCE) {
     /**
      * Save a user config on the instance and return identifiers + manifest URL.
      *
-     * @param {object} config  — AIOMetadata config object ({ language, apiKeys, catalogs, ... })
-     * @param {string} password — Required by the API; used to authenticate future updates (if any).
+     * @param {object} config AIOMetadata config object ({ language, apiKeys, catalogs, ... })
+     * @param {string} password Required by the API; used to authenticate future updates (if any).
      * @returns {Promise<{ userUUID: string, password: string, manifestUrl: string, installUrl: string }>}
      */
     async createConfig(config, password) {

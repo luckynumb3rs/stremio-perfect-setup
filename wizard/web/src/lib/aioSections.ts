@@ -3,8 +3,10 @@ export interface AioSection {
   id: string;
   /** Display title, from header.name or derived from header.id */
   title: string;
-  /** The header field object itself (for rendering the alert banner) */
+  /** The titled header field itself */
   headerField: unknown;
+  /** Untitled alert fields that should be shown within the section */
+  alertFields: unknown[];
   /** Non-header, non-socials field ids belonging to this section */
   fieldIds: string[];
   /** Section icon (extracted from header.name emoji if present) */
@@ -13,7 +15,7 @@ export interface AioSection {
 
 /**
  * Groups metadata.inputs by header.* fields into sections.
- * Pure function — called once when template loads.
+ * Pure function, called once when template loads.
  * Each header.X starts a new section; all non-header fields
  * until the next header belong to that section.
  * Fields of type 'socials' are skipped.
@@ -30,21 +32,42 @@ export function buildAioSections(template: unknown): AioSection[] {
     if (f.type === 'socials') continue; // skip credits
 
     if (f.id?.startsWith('header.')) {
+      const rawName = (f.name ?? '').trim();
+
+      if (!rawName) {
+        if (current) current.alertFields.push(field);
+        continue;
+      }
+
       // Flush previous section
       if (current) sections.push(current);
       // Start new section
-      const rawName = f.name ?? '';
       const icon = extractLeadingEmoji(rawName);
       const title = rawName.replace(/^[\p{Emoji}\s]+/u, '').trim() || prettifyHeaderId(f.id);
-      current = { id: f.id, title: title || prettifyHeaderId(f.id), headerField: field, fieldIds: [], icon };
-    } else if (f.type !== 'alert') {
-      // Regular input — add to current section (or a catch-all if no header yet)
+      current = {
+        id: f.id,
+        title: title || prettifyHeaderId(f.id),
+        headerField: field,
+        alertFields: [],
+        fieldIds: [],
+        icon,
+      };
+    } else if (f.type === 'alert') {
+      if (current) current.alertFields.push(field);
+    } else {
+      // Regular input: add to current section (or a catch-all if no header yet)
       if (!current) {
-        current = { id: 'header.__root', title: 'Settings', headerField: null, fieldIds: [], icon: '⚙️' };
+        current = {
+          id: 'header.__root',
+          title: 'Settings',
+          headerField: null,
+          alertFields: [],
+          fieldIds: [],
+          icon: '⚙️',
+        };
       }
       if (f.id) current.fieldIds.push(f.id);
     }
-    // alert fields without header.* prefix are folded into the current section implicitly
   }
 
   if (current) sections.push(current);

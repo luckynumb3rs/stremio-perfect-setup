@@ -19,17 +19,27 @@ export function InstallingStep() {
     run();
   }, []);
 
+  const STEP_MESSAGES: Record<string, string> = {
+    account: 'Account authenticated.',
+    profile: 'Nuvio profile loaded.',
+    aiostreams: 'AIOStreams configuration created.',
+    aiometadata: 'AIOMetadata configuration created.',
+    addons: 'Addons installed on Nuvio.',
+    collections: 'Collections installed on Nuvio.',
+    install: 'Addons installed on your account.',
+  };
+
   async function run() {
     const push = (msg: string) => setLog(l => [...l, msg]);
     try {
       const {
         target, stremioAccount, nuvioAccount, credentials, aioStreamsInputs,
-        catalogSelection, aiometadataLanguage, templates,
+        catalogSelection, templates,
       } = wizard;
 
       if (!templates) throw new Error('Templates not loaded. Please go back and try again.');
 
-      push('Building AIOStreams config…');
+      push('Building AIOStreams configuration…');
       const aiostreamsParams = {
         template: templates.aiostreams,
         inputs: aioStreamsInputs,
@@ -61,10 +71,10 @@ export function InstallingStep() {
           gemini: credentials.geminiApiKey,
           rpdb: credentials.rpdbApiKey,
         },
-        language: aiometadataLanguage,
+        language: aiometadataBaseTemplate.config?.language ?? 'en-US',
       };
 
-      const onStep = (name: string) => push(`✓ ${name}`);
+      const onStep = (name: string) => push(`✓ ${STEP_MESSAGES[name] ?? name}`);
 
       let result: { addons: { aiostreams?: { manifestUrl?: string; uuid?: string; password?: string }; aiometadata?: { manifestUrl?: string; uuid?: string } }; warnings: string[] };
 

@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/stremio-perfect-setup/automator/',
+  base: './',
   build: { outDir: 'dist' },
   resolve: {
     alias: {

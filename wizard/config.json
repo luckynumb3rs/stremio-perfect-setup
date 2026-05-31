@@ -1,5 +1,5 @@
 {
-  "$comment": "Parameterized config for the Perfect Setup automation. Copy to config.json and edit. API keys/passwords are NEVER stored here — they are collected at runtime in the wizard.",
+  "$comment": "Parameterized config for the Perfect Setup wizard. API keys/passwords are never stored here, they are collected at runtime in the wizard.",
   "target": "stremio",
   "account": { "mode": "create" },
 

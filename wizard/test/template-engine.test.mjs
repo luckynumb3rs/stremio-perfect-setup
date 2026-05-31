@@ -1,5 +1,5 @@
 // Offline tests for the template engine, run against the REAL templates/AIOStreams.json.
-// Run: node automation/test/template-engine.test.mjs
+// Run: node wizard/test/template-engine.test.mjs
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -74,7 +74,7 @@ console.log('\n# full template resolution: Debrid (torbox) + formatter color + f
   ok('torbox enabled', cfg.services.some((s) => s.id === 'torbox' && s.enabled === true));
   ok('formatter color chosen', cfg.formatter && cfg.formatter.id === 'custom');
   ok('requiredLanguages dropped when languagesRequired=false', cfg.requiredLanguages === undefined || cfg.requiredLanguages === null);
-  ok('formatter retain would remove — not here', cfg.formatter !== undefined);
+  ok('formatter retain would remove, not here', cfg.formatter !== undefined);
 }
 
 console.log('\n# formatter retain removes formatter');

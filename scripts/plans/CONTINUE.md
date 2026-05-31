@@ -1,11 +1,13 @@
-# 🧭 CONTINUE HERE — Automation module project state
+# 🧭 CONTINUE HERE — Wizard project state
 
-Single source of truth for resuming the **Perfect Setup automation** work later. Read this first,
+> Historical working note retained for implementation tracking. For active run/test guidance, use [`../../../wizard/README.md`](../../../wizard/README.md).
+
+Single source of truth for resuming the **Perfect Setup wizard** work later. Read this first,
 then dive into the linked docs/code. Last updated on the `dev` branch.
 
 - Full design: [`AUTOMATION-PLAN.md`](AUTOMATION-PLAN.md)
 - Confirmed API contracts: [`API-NOTES.md`](API-NOTES.md)
-- Code + how-to-run: [`automation/README.md`](automation/README.md)
+- Code + how-to-run: [`../../../wizard/README.md`](../../../wizard/README.md)
 
 ---
 
@@ -64,7 +66,7 @@ The build sandbox can only reach GitHub, so these couldn't be probed and are the
 ## 5. Next steps (roadmap)
 
 - **Phase 2:** AIOMetadata adapter (save + install) reusing the same template-injection pattern;
-  Trakt device-OAuth via a new `automation/worker/` Cloudflare Worker (holds `client_id`/`secret`);
+  Trakt device-OAuth via a new `wizard/worker/` Cloudflare Worker (holds `client_id`/`secret`);
   inject token into AIOMetadata/Watchly; Watchly adapter; Watch Next one-click.
 - **Phase 3:** Nuvio adapter (account/profiles/addons/collections pack from
   `collections/nuvio-collections.json`); multi-instance Autopilot-style fallback.
@@ -75,13 +77,14 @@ The build sandbox can only reach GitHub, so these couldn't be probed and are the
 
 ```bash
 git checkout dev
-node automation/test/template-engine.test.mjs        # expect: 31 passed, 0 failed
-python3 -m http.server 8000                           # then open /automation/ui/
+node wizard/test/template-engine.test.mjs        # expect: 31 passed, 0 failed
+node wizard/test/catalog-config.test.mjs         # expect: passing catalog helper tests
+scripts/local-serve.sh                           # guide at /, wizard at /wizard/
 ```
 
 Start from the **live-verification checklist (§4)** — those answers unblock Phase 2/3. The code is
-framework-free ES modules (no build step); add new services as adapters under
-`automation/src/adapters/` and wire them into `automation/src/orchestrator.js`.
+split between framework-free core ES modules and a Vite-built React app; add new services as
+adapters under `wizard/core/adapters/` and wire them into `wizard/core/orchestrator.js`.
 
 ## 7. Branch / commit notes
 

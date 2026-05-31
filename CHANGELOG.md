@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.7 (2026-05-31)
+
+- Added TamTaro's **Synced URL** for *Excluded Regexes*.
+
 ## 2.0.6 (2026-04-15)
 
 - Readded **WebStreamr** modified with the new forked project and its URL.

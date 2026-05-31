@@ -1,5 +1,5 @@
 // Schema-driven form renderer. Reads `template.metadata.inputs` (the AIOStreams form schema) and
-// builds the wizard controls dynamically — so editing the template changes the UI automatically.
+// builds the wizard controls dynamically, so editing the template changes the UI automatically.
 // Handles field types: alert, select, multi-select, boolean, number, socials.
 // Respects each field's `__if` visibility expression via the template engine.
 
@@ -51,7 +51,7 @@ function renderField(field, state, onChange) {
     if (field.description) wrap.appendChild(md(field.description));
     return wrap;
   }
-  if (field.type === 'socials') return null; // credits block — skip in wizard
+  if (field.type === 'socials') return null; // credits block; skip in wizard
 
   const label = h('label', {}, field.name || field.id);
   wrap.appendChild(label);

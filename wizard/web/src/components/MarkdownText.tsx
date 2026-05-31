@@ -38,7 +38,7 @@ function renderMarkdown(text: string): string {
       /\[([^\]]+)\]\((https?:[^)]+)\)/g,
       '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline">$1</a>'
     )
-    // Bullet list items — convert \n* to list items
+    // Bullet list items: convert \n* to list items
     .replace(/\n\* /g, '\n<li style="margin-left:1rem;list-style:disc">')
     // Line breaks
     .replace(/\n/g, '<br>');

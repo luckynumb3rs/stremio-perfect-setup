@@ -1,10 +1,11 @@
-// Template directive engine for the Stremio/Nuvio Perfect Setup automation.
+// Template directive engine for the Stremio/Nuvio Perfect Setup wizard.
 //
 // Ports the client-side resolution that the AIOStreams import wizard performs, so we can turn a
 // repo template (e.g. templates/AIOStreams.json) + collected `inputs` + `credentials` into a
 // final `config` object ready to POST to `POST /api/v1/user`.
 //
-// Supported directives (see API-NOTES.md §6, grammar observed from templates/AIOStreams.json):
+// Supported directives
+// (see docs/superpowers/plans/API-NOTES.md §6, grammar observed from templates/AIOStreams.json):
 //   {{inputs.X}}                          interpolation (standalone -> typed value; in arrays -> flatten)
 //   { __if: expr, __value: v }            include resolved v if expr truthy, else drop the key
 //   { __if: expr, ...obj }                keep obj (resolved) only if expr truthy, else drop it

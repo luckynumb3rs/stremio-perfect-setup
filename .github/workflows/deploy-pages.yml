@@ -53,18 +53,18 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: automation/web/package-lock.json
+          cache-dependency-path: wizard/web/package-lock.json
 
-      - name: Build automator wizard
+      - name: Build wizard
         run: |
-          cd automation/web
+          cd wizard/web
           npm ci
           npm run build
 
-      - name: Copy automator build into site
+      - name: Copy wizard build into site
         run: |
-          mkdir -p _site/automator
-          cp -r automation/web/dist/. _site/automator/
+          mkdir -p _site/wizard
+          cp -r wizard/web/dist/. _site/wizard/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

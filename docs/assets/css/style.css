@@ -550,27 +550,30 @@ pre {
   }
 }
 
-/* ── Automator sidebar CTA ──────────────────────────────────────────── */
-.nav-link--automator {
-  display: flex;
+/* ── Wizard topbar button ─────────────────────────────────────────────── */
+.topbar-wizard-btn {
+  display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.65rem 1rem;
-  margin-bottom: 0.75rem;
-  border-radius: var(--radius);
+  padding: 0.38rem 0.9rem;
+  border-radius: 10px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-  color: #fff;
+  color: #fff !important;
   font-weight: 700;
-  font-size: 0.93rem;
+  font-size: 0.87rem;
   text-decoration: none;
-  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent);
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  flex: 0 0 auto;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 30%, transparent);
   transition: opacity 0.15s, transform 0.1s;
 }
-.nav-link--automator:hover { opacity: 0.88; }
-.nav-link--automator:active { transform: scale(0.98); }
+.topbar-wizard-btn:hover { opacity: 0.88; color: #fff !important; }
+.topbar-wizard-btn:active { transform: scale(0.97); }
 
-/* ── Automator home card ─────────────────────────────────────────────── */
-.home-automator-card {
+/* ── Wizard home card ────────────────────────────────────────────────── */
+.home-wizard-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -582,9 +585,9 @@ pre {
   color: #fff;
   box-shadow: var(--shadow);
 }
-.home-automator-card__text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
-.home-automator-card__text span { font-size: 0.88rem; opacity: 0.9; }
-.home-automator-card__btn {
+.home-wizard-card__text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
+.home-wizard-card__text span { font-size: 0.88rem; opacity: 0.9; }
+.home-wizard-card__btn {
   flex-shrink: 0;
   display: inline-block;
   padding: 0.45rem 1.1rem;
@@ -597,7 +600,7 @@ pre {
   white-space: nowrap;
   transition: background 0.15s;
 }
-.home-automator-card__btn:hover { background: rgba(255,255,255,0.15); }
+.home-wizard-card__btn:hover { background: rgba(255,255,255,0.15); }
 @media (max-width: 640px) {
-  .home-automator-card { flex-direction: column; align-items: flex-start; }
+  .home-wizard-card { flex-direction: column; align-items: flex-start; }
 }

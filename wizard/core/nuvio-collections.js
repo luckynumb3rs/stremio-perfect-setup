@@ -21,7 +21,7 @@ function buildCatalogIndex(catalogs) {
  */
 function isFolderEnabled(folder, catalogIndex, enabledCategories, enabledDiscoverFolderIds) {
   const sources = folder.catalogSources || [];
-  if (sources.length === 0) return true; // no catalog sources — keep
+  if (sources.length === 0) return true; // no catalog sources; keep
 
   for (const src of sources) {
     if (!src.catalogId) continue;

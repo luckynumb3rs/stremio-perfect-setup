@@ -62,12 +62,15 @@ export function AioSectionStep({ sectionIndex }: Props) {
   };
 
   const headerField = section.headerField as TemplateField | null;
+  const alertFields = section.alertFields as TemplateField[];
 
   // Get visible fields for this section
   const sectionFields: TemplateField[] = section.fieldIds
     .map((id: string) => inputsById[id])
     .filter(Boolean)
     .filter((f: TemplateField) => isVisible(f, ctx));
+
+  const sectionAlerts: TemplateField[] = alertFields.filter((f: TemplateField) => isVisible(f, ctx));
 
   // Block continue if any required visible field is empty
   const isBlocked = sectionFields.some((f: TemplateField) => {
@@ -79,12 +82,12 @@ export function AioSectionStep({ sectionIndex }: Props) {
 
   return (
     <WizardShell>
-      {/* Section header alert banner (always shown, even for info-only sections) */}
-      {headerField && <AlertBanner field={headerField} />}
-
       <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text)', marginBottom: '1rem' }}>
         {section.icon} {section.title}
       </h2>
+
+      {headerField?.description && <AlertBanner field={headerField} />}
+      {sectionAlerts.map((field) => <AlertBanner key={field.id} field={field} />)}
 
       {sectionFields.length === 0 && (
         <p style={{ color: 'var(--muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>
@@ -113,6 +116,7 @@ interface FieldProps {
 }
 
 function FieldRenderer({ field, value, onChange }: FieldProps) {
+  const isEnabled = Boolean(value);
   const inputStyle: CSSProperties = {
     width: '100%', border: '1px solid var(--border)', borderRadius: '8px',
     padding: '0.5rem 0.75rem', fontSize: '0.875rem',
@@ -127,6 +131,78 @@ function FieldRenderer({ field, value, onChange }: FieldProps) {
     cursor: 'pointer', color: 'var(--text)', textAlign: 'left',
     transition: 'all 0.15s', width: '100%', display: 'block',
   });
+
+  if (field.type === 'boolean') {
+    return (
+      <div style={{ marginBottom: '1.25rem' }}>
+        <button
+          type="button"
+          onClick={() => onChange(!value)}
+          aria-pressed={isEnabled}
+          style={{
+            width: '100%',
+            borderRadius: '14px',
+            border: `2px solid ${isEnabled ? 'var(--accent)' : 'var(--border)'}`,
+            background: isEnabled ? 'var(--panel-2)' : 'var(--panel)',
+            color: 'var(--text)',
+            cursor: 'pointer',
+            textAlign: 'left',
+            padding: '0.95rem 1rem',
+            transition: 'all 0.15s',
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ minWidth: 0, flex: '1 1 auto' }}>
+            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>
+              {field.name || field.id}
+              {field.required && <span style={{ color: '#e53e3e', marginLeft: '0.25rem' }}>*</span>}
+            </div>
+            {field.description && (
+              <MarkdownText
+                text={field.description}
+                style={{ color: 'var(--muted)', fontSize: '0.8125rem', marginTop: '0.3rem', lineHeight: 1.55 }}
+              />
+            )}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.45rem', flex: '0 0 auto' }}>
+            <div
+              aria-hidden="true"
+              style={{
+                width: '3rem',
+                height: '1.7rem',
+                borderRadius: '999px',
+                background: isEnabled ? 'var(--accent)' : 'color-mix(in srgb, var(--border) 70%, var(--panel) 30%)',
+                border: `1px solid ${isEnabled ? 'var(--accent)' : 'var(--border)'}`,
+                padding: '0.12rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: isEnabled ? 'flex-end' : 'flex-start',
+                transition: 'all 0.15s',
+              }}
+            >
+              <span
+                style={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  borderRadius: '999px',
+                  background: '#fff',
+                  boxShadow: '0 1px 4px rgba(0, 0, 0, 0.18)',
+                  display: 'block',
+                }}
+              />
+            </div>
+            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isEnabled ? 'var(--accent)' : 'var(--muted)' }}>
+              {isEnabled ? 'Enabled' : 'Disabled'}
+            </span>
+          </div>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginBottom: '1.25rem' }}>
@@ -151,15 +227,6 @@ function FieldRenderer({ field, value, onChange }: FieldProps) {
             </button>
           ))}
         </div>
-      )}
-
-      {field.type === 'boolean' && (
-        <button style={selectedBtn(Boolean(value))} onClick={() => onChange(!value)}>
-          <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>{value ? 'Enabled' : 'Disabled'}</span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--muted)', display: 'block', marginTop: '0.1rem' }}>
-            Click to toggle
-          </span>
-        </button>
       )}
 
       {field.type === 'multi-select' && field.options && (

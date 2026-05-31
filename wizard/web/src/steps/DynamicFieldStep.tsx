@@ -2,7 +2,7 @@ import { WizardShell } from '../components/WizardShell';
 import { NextButton } from '../components/NextButton';
 import { useWizard } from '../store/wizard';
 
-// Plain JS module — TypeScript will allow this with allowJs:true in tsconfig
+// Plain JS module; TypeScript will allow this with allowJs:true in tsconfig
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { isVisible } from '@core/template-engine.js';
@@ -72,7 +72,7 @@ export function DynamicFieldStep({ fieldIndex }: Props) {
   const realFields = getRealInputFields(template).filter(f => isVisible(f, ctx));
   const field = realFields[fieldIndex] as Record<string, unknown> | undefined;
 
-  // Consumed all visible fields — advance automatically
+  // Consumed all visible fields; advance automatically
   if (!field) {
     nextStep();
     return null;

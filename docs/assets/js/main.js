@@ -182,15 +182,7 @@
     var ul = document.createElement("ul");
     renderNode(buildTree(pages), ul, 0);
 
-    var automator = document.createElement("a");
-    automator.className = "nav-link nav-link--automator";
-    automator.href = "/stremio-perfect-setup/automator/";
-    automator.target = "_blank";
-    automator.rel = "noopener";
-    automator.textContent = "🤖 Automated Setup";
-
     mount.innerHTML = "";
-    mount.appendChild(automator);
     mount.appendChild(home);
     mount.appendChild(ul);
   }

@@ -1,6 +1,8 @@
 # 📋 API Notes — Phase 0 findings
 
-Confirmed API contracts for the automation module. Sources are the upstream open-source code
+> Historical research note retained for implementation tracking. For the condensed operator-facing summary, use [`../../../wizard/README.md`](../../../wizard/README.md).
+
+Confirmed API contracts for the wizard module. Sources are the upstream open-source code
 (fetched from `raw.githubusercontent.com`) and official docs. Items that could not be live-probed
 from the build sandbox (outbound network is GitHub-only here) are marked **🔬 verify live**.
 
@@ -133,8 +135,8 @@ From `templates/AIOStreams.json` (`metadata.inputs` + `config` directives):
   quoted strings, numbers, `true`/`false`. `services` = truthy when ≥1 Debrid service selected;
   in switch/string context = `selectedServiceIds.join(',')` (`""` when none).
 
-A reference implementation + offline tests live in `automation/src/template-engine.js` and
-`automation/test/`.
+A reference implementation + offline tests live in `wizard/src/template-engine.js` and
+`wizard/test/`.
 
 ---
 

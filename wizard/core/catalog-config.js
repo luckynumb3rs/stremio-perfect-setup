@@ -2,7 +2,7 @@
 // Category keys are the leading emoji character of each catalog's name.
 // Country flag catalogs (regional indicator pairs) all map to the key 'world'.
 
-// Catalog IDs that are always disabled and never shown in the automator UI.
+// Catalog IDs that are always disabled and never shown in the wizard UI.
 // Source of truth: scripts/sync-aiometadata.sh EXCLUDED_CATALOG_IDS
 export const EXCLUDED_CATALOG_IDS = new Set([
   'tmdb.airing_today',
@@ -85,7 +85,7 @@ export function deriveDiscoverFolders(catalogs) {
 /**
  * Derive the default enabled categories + discover folder IDs for a target.
  * A category is "on by default" only when ALL of its catalogs are enabled in the
- * base template — this ensures the Stremio 120-catalog cap is respected.
+ * base template. This ensures the Stremio 120-catalog cap is respected.
  * Stremio: mirrors AIOMetadata.json enabled flags (Studios/World/Anime partial → off)
  * Nuvio: mirrors AIOMetadata-All.json enabled flags (all non-excluded → all on)
  *

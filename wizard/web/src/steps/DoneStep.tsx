@@ -1,9 +1,11 @@
 import { WizardShell } from '../components/WizardShell';
 import { useWizard } from '../store/wizard';
+import { getGuideUrl } from '../lib/site';
 
 export function DoneStep() {
   const { installResult, target } = useWizard();
   const { aiostreams, aiometadata, warnings, error } = installResult;
+  const guideUrl = getGuideUrl();
 
   return (
     <WizardShell showBack={false}>
@@ -13,7 +15,7 @@ export function DoneStep() {
           <p className="text-red-500 text-sm bg-red-50 rounded-lg p-3 mb-4">{error}</p>
           <p className="text-gray-500 text-sm">
             Check the error above and try again, or follow the{' '}
-            <a href="https://luckynumb3rs.github.io/stremio-perfect-setup/" target="_blank" rel="noopener" className="text-accent underline">
+            <a href={guideUrl} target="_blank" rel="noopener" className="text-accent underline">
               manual guide
             </a>.
           </p>

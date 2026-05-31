@@ -22,6 +22,15 @@ export function AccountStep() {
   const isValidPassword = account.password.length >= 8;
   const canAttempt      = isValidEmail && isValidPassword && !loading;
 
+  function updateAccount(next: Partial<typeof account>) {
+    setAccount({
+      ...next,
+      authKey: undefined,
+      authToken: undefined,
+      authError: undefined,
+    });
+  }
+
   async function handleContinue() {
     if (!canAttempt) return;
     setLoading(true);
@@ -92,7 +101,7 @@ export function AccountStep() {
         {(['create', 'signin'] as const).map(m => (
           <button
             key={m}
-            onClick={() => { setAccount({ mode: m }); setError(''); }}
+            onClick={() => { updateAccount({ mode: m }); setError(''); }}
             style={{
               padding: '0.4rem 1.1rem', borderRadius: '999px', fontSize: '0.875rem',
               fontWeight: 600, border: 'none', cursor: 'pointer', transition: 'all 0.15s',
@@ -110,7 +119,7 @@ export function AccountStep() {
         <input
           type="email"
           value={account.email}
-          onChange={e => { setAccount({ email: e.target.value }); setError(''); }}
+          onChange={e => { updateAccount({ email: e.target.value }); setError(''); }}
           placeholder="you@example.com"
           style={inputStyle}
         />
@@ -124,7 +133,7 @@ export function AccountStep() {
         <input
           type="password"
           value={account.password}
-          onChange={e => { setAccount({ password: e.target.value }); setError(''); }}
+          onChange={e => { updateAccount({ password: e.target.value }); setError(''); }}
           placeholder="Enter your password..."
           style={inputStyle}
         />

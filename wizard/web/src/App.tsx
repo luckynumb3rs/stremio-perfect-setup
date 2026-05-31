@@ -44,7 +44,7 @@ function StepRouter() {
     return <AioSectionStep sectionIndex={step - 7} />;
   }
 
-  // Loading guard — template not yet loaded when user is at step >= 7
+  // Loading guard: template not yet loaded when user is at step >= 7
   if (step >= 7 && n === 0) {
     return (
       <WizardShell>

@@ -15,7 +15,7 @@ const targets: { id: Target; name: string; desc: string; logoFile: string }[] = 
     id: 'nuvio',
     name: 'Nuvio',
     desc: 'Modern streaming app with beautiful dynamic collections, backdrops, and a polished interface.',
-    logoFile: 'nuvio.svg',
+    logoFile: 'nuvio.png',
   },
 ];
 

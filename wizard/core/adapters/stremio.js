@@ -1,5 +1,6 @@
-// Stremio account adapter — talks to api.strem.io (CORS-friendly, browser-callable).
-// Contract confirmed from Stremio/stremio-api-client (see API-NOTES.md §1).
+// Stremio account adapter: talks to api.strem.io (CORS-friendly, browser-callable).
+// Contract confirmed from Stremio/stremio-api-client
+// (see docs/superpowers/plans/API-NOTES.md §1).
 
 const DEFAULT_ENDPOINT = 'https://api.strem.io';
 
@@ -46,7 +47,8 @@ export function buildAddonCollection(existing, manifests, opts = {}) {
   const cinemeta = find('cinemeta') || find('com.linvo.cinemeta');
   const localFiles = find('local') || find('org.stremio.local');
 
-  // Optionally patch Cinemeta (remove search/catalogs/metadata) — see API-NOTES.md §1 (verify shape).
+  // Optionally patch Cinemeta (remove search/catalogs/metadata)
+  // See docs/superpowers/plans/API-NOTES.md §1 for the verified shape.
   const patchedCinemeta = opts.cleanCinemeta && cinemeta
     ? patchCinemeta(cinemeta, opts.cleanCinemeta)
     : cinemeta;
@@ -68,12 +70,12 @@ function toDescriptor(m) {
 // Reproduce Cinebye's three patches by trimming Cinemeta's advertised resources.
 //
 // VERIFIED 2026-05-31 against live Cinemeta v3.0.12 (com.linvo.cinemeta) from a fresh account:
-//   manifest.resources = ["catalog", "meta", "addon_catalog"]  — plain strings, no objects.
+//   manifest.resources = ["catalog", "meta", "addon_catalog"] - plain strings, no objects.
 //   Catalogs with search: movie/top and series/top each have
 //     extra: [{name:"genre",...}, {name:"search"}, {name:"skip"}]
 //     extraSupported: ["search","genre","skip"]
 //   The filter below (checking both extra[].name and extraSupported) is correct for both fields.
-//   The resources filter (string vs object guard) is correct — resources are plain strings.
+//   The resources filter (string vs object guard) is correct; resources are plain strings.
 function patchCinemeta(descriptor, { removeSearch, removeCatalogs, removeMetadata }) {
   const d = structuredClone(descriptor);
   if (!d.manifest) return d;

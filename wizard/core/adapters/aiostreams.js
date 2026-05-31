@@ -1,5 +1,6 @@
-// AIOStreams adapter — creates a stored user config on an instance and returns the manifest URL.
-// Contract confirmed from Viren070/AIOStreams (see API-NOTES.md §2). CORS is open (`*`).
+// AIOStreams adapter: creates a stored user config on an instance and returns the manifest URL.
+// Contract confirmed from Viren070/AIOStreams
+// (see docs/superpowers/plans/API-NOTES.md §2). CORS is open (`*`).
 
 import { resolveTemplate } from '../template-engine.js';
 
@@ -22,11 +23,23 @@ export function createAioStreamsAdapter(instanceUrl) {
       const headers = { 'content-type': 'application/json' };
       if (addonPassword) headers['x-aiostreams-addon-password'] = addonPassword;
 
-      const res = await fetch(`${base}/api/${API_VERSION}/user`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ config, password }),
-      });
+      let res;
+      try {
+        res = await fetch(`${base}/api/${API_VERSION}/user`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ config, password }),
+        });
+      } catch (err) {
+        const message = String(err?.message || err);
+        if (/Failed to fetch/i.test(message)) {
+          throw new Error(
+            `AIOStreams createConfig failed for ${base}: browser request blocked or instance unreachable. ` +
+            `The instance health endpoint is up, so this is likely a CORS preflight issue on POST /api/${API_VERSION}/user.`
+          );
+        }
+        throw err;
+      }
       if (res.status !== 201) {
         const text = await res.text().catch(() => '');
         throw new Error(`AIOStreams createConfig failed: HTTP ${res.status} ${text.slice(0, 200)}`);
@@ -63,6 +76,9 @@ export async function createWithFallbacks(instances, params) {
     }
   }
   const primary = results.find((r) => r.ok);
-  if (!primary) throw new Error(`All AIOStreams instances failed: ${results.map((r) => r.error).join('; ')}`);
+  if (!primary) {
+    const errors = results.map((r) => r.error).join('; ');
+    throw new Error(`All AIOStreams instances failed. ${errors}`);
+  }
   return { primary, all: results };
 }

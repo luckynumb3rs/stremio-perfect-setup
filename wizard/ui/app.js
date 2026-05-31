@@ -24,7 +24,7 @@ const selectedServices = new Set();
 async function main() {
   let config, template;
   try {
-    config = await fetchJson('./config.json').catch(() => fetchJson('./config.example.json'));
+    config = await fetchJson('./config.json');
     template = await fetchJson(config.templates?.aiostreams || `${RAW}/templates/AIOStreams.json`);
   } catch (err) {
     return fail(`Could not load config/template: ${err.message}`);
@@ -41,7 +41,7 @@ async function main() {
   app.appendChild(accountStep);
 
   // --- Step: API keys ---
-  const keysStep = section('② API keys (from the guide — paste what you have)');
+  const keysStep = section('② API keys (from the guide, paste what you have)');
   const tmdbKey = textInput('text', 'TMDB API Key');
   const tmdbTok = textInput('text', 'TMDB Read Access Token');
   const tvdbKey = textInput('text', 'TVDB API Key');
@@ -104,7 +104,7 @@ async function main() {
         account: { mode: accMode.value, email: email.input.value.trim(), password: pass.input.value },
         onStep: (name, data) => print(`✓ ${name}: ${JSON.stringify(data)}`),
       });
-      print('\n=== DONE — SAVE THESE CREDENTIALS ===');
+      print('\n=== DONE - SAVE THESE CREDENTIALS ===');
       print(JSON.stringify(summary, null, 2));
     } catch (err) {
       print(`\n❌ ${err.message}`);

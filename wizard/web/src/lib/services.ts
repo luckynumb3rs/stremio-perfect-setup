@@ -11,10 +11,27 @@ export interface Service {
   isUsenet: boolean;
 }
 
-/** Prepend the Vite base URL to a relative logo path. */
-export function resolveLogoUrl(logo: string): string {
+// In production the compiled JS lives in /wizard/assets/, so we resolve logo
+// files relative to the built bundle URL instead of relying on Vite to rewrite
+// a dynamic `new URL()` pattern.
+const builtAssetsBaseUrl = new URL(/* @vite-ignore */ './', import.meta.url);
+
+/** Prepend the correct wizard asset base URL to a relative logo path. */
+export function resolveLogoUrl(logo?: string | null): string {
   if (!logo) return '';
-  return `${import.meta.env.BASE_URL}${logo}`;
+  const normalized = logo.replace(/^\/+/, '');
+
+  // In dev, Vite serves files from /public at the site root.
+  if (import.meta.env.DEV) {
+    return `/${normalized}`;
+  }
+
+  // In production, public assets are copied into /wizard/assets/.
+  if (normalized.startsWith('assets/')) {
+    return new URL(normalized.replace(/^assets\//, ''), builtAssetsBaseUrl).toString();
+  }
+
+  return new URL(normalized, builtAssetsBaseUrl).toString();
 }
 
 export const SERVICES: Service[] = [

@@ -9,7 +9,7 @@ export const INSTANCES = {
   },
 } as const;
 
-// Raw GitHub URLs for templates (fetched at runtime, not bundled — files are too large to bundle)
+// Raw GitHub URLs for templates (fetched at runtime, not bundled because files are too large to bundle)
 export const TEMPLATE_URLS = {
   aiostreams:           'https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json',
   aiometadataStremio:   'https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOMetadata.json',
@@ -19,6 +19,6 @@ export const TEMPLATE_URLS = {
 
 export const RPDB_FREE_KEY = 't0-free-rpdb';
 
-// Stremio maximum enabled catalogs — the instance's /api/config may return a specific value,
+// Stremio maximum enabled catalogs: the instance's /api/config may return a specific value,
 // but 120 is a safe conservative default from community documentation.
 export const STREMIO_MAX_CATALOGS = 120;

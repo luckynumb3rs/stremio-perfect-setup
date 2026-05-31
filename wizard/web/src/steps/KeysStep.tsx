@@ -17,7 +17,7 @@ const KEY_SCREENS: KeyScreen[] = [
     id: 'tmdb',
     title: 'TMDB API Keys',
     description: 'The Movie Database (TMDB) powers the metadata, posters, and catalog content in AIOMetadata. Without these keys, the catalog addon cannot display movie and TV show information.\n\nYou need **two separate credentials** from your TMDB account.',
-    instruction: 'Go to [themoviedb.org](https://www.themoviedb.org) and log in. Navigate to **Settings** (profile icon top-right) then **API**. Copy both the short **API Key (v3 auth)** and the long **API Read Access Token (v4 auth)**.',
+    instruction: 'Go to [themoviedb.org](https://www.themoviedb.org) and log in. Navigate to **Settings** (profile icon top-right) then **API**. Copy both the short **API Key** and the long **API Read Access Token**.',
   },
   {
     id: 'tvdb',
@@ -77,15 +77,15 @@ export function KeysStep({ keyIndex }: Props) {
         background: 'var(--panel-2)', border: '1px solid var(--border)',
         borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '1.25rem', fontSize: '0.875rem',
       }}>
-        <span style={{ fontWeight: 600, color: 'var(--text)' }}>How to get it: </span>
-        <MarkdownText text={screen.instruction} style={{ color: 'var(--muted)', display: 'inline' }} />
+        <div style={{ fontWeight: 600, color: 'var(--text)', marginBottom: '0.35rem' }}>👉 How to get it:</div>
+        <MarkdownText text={screen.instruction} style={{ color: 'var(--muted)' }} />
       </div>
 
       {screen.id === 'tmdb' && (
         <>
           <label style={{ display: 'block', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>
-              API Key (v3 auth) <span style={{ color: '#e53e3e' }}>*</span>
+              API Key <span style={{ color: '#e53e3e' }}>*</span>
             </span>
             <input
               type="password"
@@ -97,7 +97,7 @@ export function KeysStep({ keyIndex }: Props) {
           </label>
           <label style={{ display: 'block' }}>
             <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>
-              API Read Access Token (v4 auth) <span style={{ color: '#e53e3e' }}>*</span>
+              API Read Access Token <span style={{ color: '#e53e3e' }}>*</span>
             </span>
             <input
               type="password"

@@ -1,4 +1,4 @@
-// Addon registry — describes every addon the automator knows about.
+// Addon registry: describes every addon the wizard knows about.
 // To add/retire an addon, edit this array. No flow code changes needed.
 // status: 'active' | 'coming-soon'
 // targets: array of 'stremio' and/or 'nuvio'

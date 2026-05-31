@@ -1,18 +1,18 @@
-# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://luckynumb3rs.github.io/stremio-perfect-setup/)
+# 🎬 [STREMIO FULL & EASY TOTAL BEGINNER'S GUIDE](https://numb3rs.stream/)
 **[⚡ DEBRID / 🧲 P2P / 🌐 HTTP]** (*v2.0*)
 
 
 ![img](u8edx7wlmrzg1 "Homescreen (left) & Stream Source Selection (right)")
 
-# ✨ GO [**HERE**](https://luckynumb3rs.github.io/stremio-perfect-setup/) FOR THE EXTENDED GUIDE.
+# ✨ GO [**HERE**](https://numb3rs.stream/) FOR THE EXTENDED GUIDE.
 
 **If this guide helps you, PLEASE UPVOTE this post so it remains relevant for others to find it and also benefit from it.** 😊
 
 Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.
 
 >**📢 NOTES**:
->* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide.
->* **If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
+>* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](https://numb3rs.stream/guide/Updates) on the extended guide.
+>* **If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://numb3rs.stream/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
 >* **🙏 A very explicit special THANKS** to the **Stremio** developers which goes without saying, and all the community collaborators without which we wouldn't be able to enjoy any of it: [**TamTaro**](https://ko-fi.com/tamtaro) for the template base and SEL filters, [**Vidhin**](https://ko-fi.com/vidhin) for the Regexes, and the addon developers [**Viren**](https://ko-fi.com/Viren070) for AIOStreams, [**Cedya**](https://buymeacoffee.com/cedya) for AIOMetadata, [**Sanopandit**](https://ko-fi.com/timilsinabimal) for Watchly, [**Sonic**](https://ko-fi.com/sonicx161) for AIOManager, the public addon instance hosters which make everything so much simpler for most, and anyone else I may have failed to mention. All of these people continue to develop and improve them actively together with the Stremio community, so shout out to all of them for their wonderful work, and consider buying them a coffee if you agree with me! Since a few of you have also asked about tipping me for helping, even though I did it for fun and an very happy if my guide helped you, [**here**](https://ko-fi.com/luckynumb3rs) is my coffee link :)
 
 In case you are wondering whether it's worth the effort, or you already have a Torrentio + RD setup and want to know what's better if you use this guide, here's a summary:
@@ -37,7 +37,7 @@ So, now that you know, it's up to you, but if you're up for it, let's do it 💪
 
 # 🔰 Beginner Concepts
 
-If you are a total beginner and are curious to understand the concepts around Stremio and how it works, go to [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts) on the extended guide.
+If you are a total beginner and are curious to understand the concepts around Stremio and how it works, go to [**🔰 Beginner Concepts**](https://numb3rs.stream/guide/0-Beginner-Concepts) on the extended guide.
 
 ---
 
@@ -85,7 +85,7 @@ First, let's start by creating the accounts (those who already have them can ski
    * **MDBList**: Perfect for discovering user-curated catalogs and tracking your watched content seamlessly.
    * **Simkl**: A Trakt-like experience with check-ins and watch history, plus extra flexibility.
    * You can use them alongside Trakt or as a replacement for a smoother, more personalized setup.
-   * Head to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) on the extended guide for easy setup steps.
+   * Head to [**🛠️ Additional Stuff**](https://numb3rs.stream/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) on the extended guide for easy setup steps.
 
 ---
 
@@ -111,7 +111,7 @@ Second, let's prepare the Stremio account properly:
 Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/aiostreams) or go directly to [**Midnight's**](https://aiostreamsfortheweebsstable.midnightignite.me/) or [**Yeb's/Nhyira**](https://aiostreams.fortheweak.cloud/) instance (two of the most popular ones) and:
 
 >**WARNING:**
->* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
+>* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://numb3rs.stream/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
 >* *You can choose an instance that says **Nightly**, and they work great, but they are instances that update very frequently and thus the steps described in this guide may not be up to date to match them. If you're a total beginner, you're probably better off with an instance that doesn't say **Nightly**.*
 >* ***DON'T** choose the **ElfHosted** instance because Torrentio doesn't work there.*
 >* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to transfer your configuration because it's not automatically transferred*
@@ -166,7 +166,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/ai
 
 >**📢 NOTES FOR LATER:**
 >* *If you use a Debrid service, and are in a country where you can't torrent, be careful to not open any links with the 🧲 icon. They should normally never appear if you have a Debrid configured, but just making sure you know.*
->* *If there are no streams for a show, you will see statistics instead (looking like [this](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA/#there-are-some-numbers-being-shown-on-the-streams-list-instead-of-the-usual-details-and-i-am-being-redirected-to-github-when-i-click-them)), so that you can find out why. Do not click them, they are only informational and will take you to GitHub if you do.*
+>* *If there are no streams for a show, you will see statistics instead (looking like [this](https://numb3rs.stream/guide/8-Configuration-QA/#there-are-some-numbers-being-shown-on-the-streams-list-instead-of-the-usual-details-and-i-am-being-redirected-to-github-when-i-click-them)), so that you can find out why. Do not click them, they are only informational and will take you to GitHub if you do.*
 >* *If you see that you are getting results too slowly, try changing the fetching strategy. Go to **Addons**, scroll down to **Addon Fetching Strategy**. and select **Dynamic**. There should already be an exit condition pre-filled, which you can leave as is, and save the configuration. However, keep in mind that this might leave out relevant results, so try it yourself. On the other hand, if you feel you're not getting enough good results, do the opposite and select **Default** instead.*
 >* *If you prefer results for a language other than English, and you are not happy with the results you're getting, try disabling matching. Go to **Filters**, then **Matching**, and switch off the **Enable** toggle in all three sections (Title Matching, Year Matching, Season/Episode Matching).*
 >* ***AIOStreams** is a very powerful tool offering a lot of options. Although the template provided here for it should be more than enough for all kinds of normal usage, if you are interested in tinkering with it and customizing each detail, you can check out [**this**](https://docs.aiostreams.viren070.me/) guide directly from the developer, Viren, which is also very comprehensive and documents all configuration options for AIOStreams.*
@@ -180,7 +180,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/ai
 Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#group-aiometadata) or go directly to [**Viren's**](https://aiometadata.viren070.me/) or [**Midnight's**](https://aiometadatafortheweebs.midnightignite.me/) instance (two of the most popular ones) and:
 
 >**WARNING:**
->* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
+>* *If you want to understand more what an instance means, go to* [**🔰 Beginner Concepts**](https://numb3rs.stream/guide/0-Beginner-Concepts/#what-does-an-addon-instance-mean) *on the extended guide.*
 >* *Choose one of the instances and stick with it, you will store your configuration here, and if you change to the other instance, you'll need to transfer your configuration because it's not automatically transferred.*
 >* *You can keep the monitoring links above for later to check the instance online status, if it happens that it's not working and might be temporarily down.*
 
@@ -205,7 +205,7 @@ Select an **AIOMetadata** instance from [**this**](https://uptime.ibbylabs.dev/#
    * **📢 NOTES**: 
       * *If you encounter any issues with Trakt integration on AIOMetadata, it's probably because Trakt is rate limiting the instance you're using, or the instance provider has disabled it (if it says "Instance owner has not yet set up the Trakt integration."). In that case, try to do the AIOMetadata setup with another instance.*
       * *Alternatively, you can leave Trakt integration disabled, and hide the Trakt catalogs on the list (marked with a red **Trakt** tag on the right) by clicking the green eye icon for each. I know it's not ideal since you created a Trakt account already, but there's nothing we can do about it. You can still add other catalogs from the other sources there.*
-      * *There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out in* [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) *on the extended guide.*
+      * *There are also good alternatives to Trakt if you disable it, both for watch history tracking, and curated catalogs, which you can check out in* [**🛠️ Additional Stuff**](https://numb3rs.stream/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives) *on the extended guide.*
 5. **Optional**: At this point AIOMetadata is ready, but you can keep configuring it however you like, but otherwise the configuration I provided is ready to be used. On the "**Catalogs**" tab you can add, remove, enable, disable catalogs depending on your preferences.
 6. Go to the "**Configuration**" tab again and click on "**Save Configuration**".
    * **ALWAYS SAVE IN THIS TAB EVERY TIME YOU MAKE CHANGES LATER.**
@@ -282,34 +282,34 @@ And now you're really done!
 
 If you want to:
 
-* [understand how the streams are sorted, selected, and filtered out](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#smart-stream-selection--sorting),
-* [be able to read what all the icons on the stream information view mean](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view),
-* [have more colorful icons in the stream information view](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#alternative-stream-information-icons),
-* [check out some Trakt alternatives](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives),
-* [explore Usenet because you've heard about it and want to learn about it](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#usenet),
+* [understand how the streams are sorted, selected, and filtered out](https://numb3rs.stream/guide/7-Additional-Stuff/#smart-stream-selection--sorting),
+* [be able to read what all the icons on the stream information view mean](https://numb3rs.stream/guide/7-Additional-Stuff/#understanding-stream-information-view),
+* [have more colorful icons in the stream information view](https://numb3rs.stream/guide/7-Additional-Stuff/#alternative-stream-information-icons),
+* [check out some Trakt alternatives](https://numb3rs.stream/guide/7-Additional-Stuff/#enriching-your-catalogs-trakt-alternatives),
+* [explore Usenet because you've heard about it and want to learn about it](https://numb3rs.stream/guide/7-Additional-Stuff/#usenet),
 
-then click the links directly or go to [**🛠️ Additional Stuff**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff) on the extended guide.
+then click the links directly or go to [**🛠️ Additional Stuff**](https://numb3rs.stream/guide/7-Additional-Stuff) on the extended guide.
 
 ---
 
 # ❓ Configuration Q&A
 
-If you followed this guide and are encountering issues or have configuration questions, go to [**❓ Configuration Q&A**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
+If you followed this guide and are encountering issues or have configuration questions, go to [**❓ Configuration Q&A**](https://numb3rs.stream/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
 
 ---
 
 # 🎛️ AIOManager [Power Users]
 
-**AIOManager** is fully optional and intended for power users who want to push their setup further by creating redundant, resilient configurations. If you are looking to increase reliability, add fallback layers, or manage multiple Stremio accounts in a structured way, this chapter is for you. Go to [**🎛️ AIOManager [Power Users]**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/AIOManager-Setup) on the extended guide to learn more and how to set it up.
+**AIOManager** is fully optional and intended for power users who want to push their setup further by creating redundant, resilient configurations. If you are looking to increase reliability, add fallback layers, or manage multiple Stremio accounts in a structured way, this chapter is for you. Go to [**🎛️ AIOManager [Power Users]**](https://numb3rs.stream/guide/AIOManager-Setup) on the extended guide to learn more and how to set it up.
 
 ---
 
 # 🔔 Updates
 
-Go to [**🔔 Updates**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Updates) on the extended guide to learn how to update to the latest version of this setup.
+Go to [**🔔 Updates**](https://numb3rs.stream/guide/Updates) on the extended guide to learn how to update to the latest version of this setup.
 
 ---
 
 # 📜 Changelog
 
-Go to [**📜 Changelog**](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/Changelog) on the extended guide to see the change history.
+Go to [**📜 Changelog**](https://numb3rs.stream/guide/Changelog) on the extended guide to see the change history.
