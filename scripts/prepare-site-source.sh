@@ -11,6 +11,7 @@ COPY_EXCLUDES=(
   --exclude=.git
   --exclude=_site
   --exclude=.jekyll-cache
+  --exclude=collections
   --exclude=wizard/web/node_modules
 )
 

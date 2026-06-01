@@ -41,7 +41,7 @@ This works best if you use my **AIOMetadata Catalogs** catalogs and my **Nuvio C
 
 Here are the main files and resources:
 
-* [**Collections Assets**](../collections/)
+* [**Collections Assets**](https://github.com/luckynumb3rs/stremio-perfect-setup/tree/main/collections/)
    * This contains all collection assets, title logos, cover, focused, backdrops, SVG files, and related resources.
    * Use this if you want to browse, download, modify, or reuse individual assets.
 * [**AIOMetadata Catalogs**](../templates/AIOMetadata-All-Catalogs.json) (*JSON*)
