@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
     paths:
-      - "collections/nuvio-collections.json"
+      - "templates/Nuvio-Collections.json"
       - "templates/AIOMetadata.json"
       - "templates/AIOMetadata-Catalogs.json"
       - "collections/*/cover/*"

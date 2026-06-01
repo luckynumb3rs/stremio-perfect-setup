@@ -1,2 +1,7 @@
-docs/assets/data/guide-stats.json
+.jekyll-cache/
+assets/data/guide-stats.json
+hosting/.work
 .vscode
+_site/
+wizard/web/dist/
+wizard/web/node_modules/

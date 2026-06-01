@@ -4,14 +4,13 @@ set -euo pipefail
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
-bash scripts/sync-home.sh
+bash scripts/prepare-site-source.sh --sync-readme
 bash scripts/sync-changelog.sh
 bash scripts/sync-aiometadata.sh
 
 git add \
   README.md \
-  docs/index.md \
-  docs/guide/Changelog.md \
+  templates/AIOStreams-Changelog.md \
   templates/AIOMetadata.json \
   templates/AIOMetadata-Catalogs.json \
   templates/AIOMetadata-All.json \

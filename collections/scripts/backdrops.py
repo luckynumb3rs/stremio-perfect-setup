@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Generate collection backdrops for folders defined in collections/nuvio-collections.json.
+Generate collection backdrops for folders defined in templates/Nuvio-Collections.json.
 
 Purpose:
     This is the wrapper entry point most users should run. It:
-    1. reads the folder definitions from `nuvio-collections.json`
+    1. reads the folder definitions from `Nuvio-Collections.json`
     2. resolves the underlying TMDB catalog filters from `AIOMetadata.json`
     3. merges all catalogs assigned to the same folder into one backdrop job
     4. scans the matching folder cover image to derive one accent color
@@ -23,7 +23,7 @@ Important parameters:
         Collections root containing the `<group>/cover/<folder>.*` images used
         to derive runtime accent colors.
     --collections-file
-        Path to the `nuvio-collections.json` file to read folder definitions
+        Path to the `Nuvio-Collections.json` file to read folder definitions
         from.
     --catalogs-file
         Path to the AIOMetadata catalog JSON used to resolve TMDB discover
@@ -125,7 +125,7 @@ from backdrop import parse_focus_value, resolve_outputs
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent.parent
-DEFAULT_COLLECTIONS_FILE = REPO_ROOT / "collections" / "nuvio-collections.json"
+DEFAULT_COLLECTIONS_FILE = REPO_ROOT / "templates" / "Nuvio-Collections.json"
 DEFAULT_CATALOGS_FILE = REPO_ROOT / "templates" / "AIOMetadata.json"
 DEFAULT_OUTPUT_ROOT = SCRIPT_DIR.parent
 DEFAULT_COVER_ROOT = SCRIPT_DIR.parent
@@ -468,7 +468,7 @@ def main():
     parser.add_argument("--fanart-key", required=False, default=None, help="Fanart.tv API key")
     parser.add_argument("--preferred-language", default="en", help="Preferred Fanart artwork language code. Default: en")
     parser.add_argument("--cover-root", default=str(DEFAULT_COVER_ROOT), help="Collections root containing `<group>/cover/<folder>.*` images for runtime accent scanning")
-    parser.add_argument("--collections-file", default=str(DEFAULT_COLLECTIONS_FILE), help="Path to nuvio-collections.json")
+    parser.add_argument("--collections-file", default=str(DEFAULT_COLLECTIONS_FILE), help="Path to Nuvio-Collections.json")
     parser.add_argument(
         "--catalogs-file",
         default=str(DEFAULT_CATALOGS_FILE),

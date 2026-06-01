@@ -1,0 +1,71 @@
+{
+  "$comment": "Parameterized config for the Perfect Setup Wizard. Shared service keys live here only in obfuscated form. The config block name is also used internally as the decryption passphrase. This is obfuscation for convenience, not real secret storage.",
+  "configurations": [
+    {
+      "name": "main",
+      "targets": ["stremio", "nuvio"],
+      "addonDetailsFilename": "MyPerfectSetupAddons.txt",
+      "proxyBase": "https://proxy.numb3rs.stream",
+      "keys": {
+        "tmdbApiKeys": [
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJtV1NLV1R1VURibTRPN3VKbEFJcDZBPT0iLCJuIjoiY1BCVTliQVBUcHBnWVRRcSIsImMiOiJ4STVIbTV6VDJjYjF0UkZ6dTJLL0l6M3RzVFIvRG9TZ0RXdTd0T2ZsR3IraXVxelc0WEtLOTdsVFdiZEZUdkljIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJOa0NYRHJ6LzdrOU9ZRkxyNFJ3VUtRPT0iLCJuIjoiaVhDazFjMjlFL09TZFR4RiIsImMiOiJMT0UyRStvU0RDOEREWWlEWkpEUHFvcW04THhiRzllbkpBR2d6QzVlNGkzUGhOTlJnVXphVUhCdS96VE1jOEpGIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJzQTlsZkVPbk9peW01OVVqZllnNkRnPT0iLCJuIjoic1g0dVdTYjh3RWtiTEpPNiIsImMiOiJEa1FCQWdQcWpHcVlSVGs5OUtyMjllSjZEUmFhSkQwR3IxSU44N1VZMThDQURVdXhsSi8xSHRObTZTMUVIQjdBIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJGQy82UDQ4WTdqaGpGUFhxd3BVUWtBPT0iLCJuIjoiQjBidTYrTmowVmFCSGFYQyIsImMiOiIwYU16a3kxUXUyOCt5M2F5ZUlMUXI5V3Q0c1drU2RzK2x5bVlsdWZtcXFTbEVJV216OEFQRUMwOXJYQ1JOUUthIn0="
+        ],
+        "tmdbReadAccessTokens": [
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiIxTFQ0VDN5eE5iWVpxYjhXT05uMnBRPT0iLCJuIjoiaVM0VXIxZ0JPUGE1bjQ4YiIsImMiOiJUb2U0NURpSEFDSEhocW5VSmZFRHZFMUIrdGlvYXlEQ1ZsR3M5Qk5iZnRTZExJa0tLTis4SmpZVjBNbXVCdVZhcGFGdnFwczFNWXc2dmNQcHJhQ3JiOXFGZlV4MVNHQzh2eGRkTnFXWkJNK2dJSjVJempZeUlGUjBUd2Y2M1NGTDF2d1YxY0VXK0h5WTRnZlhaZ3B3R0hrRnE5UGIxOHZKUHJKUWZoQTlPeE0ra3lGbm95eGJpdC80Y3hsYU10S3huQmlaRHRSRlh2WWtITjExNWNIak0zZytvU1NzSjlhcGRlTitoNElnTWdNV3ZmNmdkUE9VOTZqYU5IckZRRVNwOGFVRUh2SEpyWXQxVzFpS3M3dUgvOUtSNVBxakdOT1d2WkZOdkxDUTZPMzBVeHppeElVZG52UG9WVC9oeWwzRkN5cTZxcm4zSGJPZThiSXQxSnFhIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJRUzBhbGZ1dmEvMi9iM0hSU1c1RnZRPT0iLCJuIjoiUzJUY082bldpZ3crak51dSIsImMiOiJQVldTNUJmTThUL1dIMEJWZXN6T2d3VmZFNVNRLzZ0SEIzUmVzVGpoM3hrcEtPVUV5bHl1bEk4QWRvNVpLVXRiS3NjYXR2bTdXbVd5Ui8ySzNNM2JzeVRtRTBEYzUxTUxLTGtnOTdZUXdhaVNGc2EvUCtWZHl6NmxySDRoeElTQjB3bmVmOFgyZ0huaDR2QkVoZ2lwRnk3Q0RJQTdDaXVjVUx3TVlEanBhTmJTUUF6ZUkxL1crQy96Z2FVUW5MS0lacGZDOCsxQ2RCN3VRZzFnNHU0a3p5cDZoWnNHcWZQOWVjaTJnaTJnVXFwUWFLd0RleGxXU0hQcURzL3MxcWUrVVlUNGw0SmZIRjVvSDBpZFAwbHlUaUNCVzBEelpQd2YrR3JJWExHalBTb1pOQ3ZCclFZZkY5c202VEZmU2JQQnRBMnFwTnJPZENORk5pcEZqR3AvIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiIxYWFEa3ltQS8raHhZVlBSL2FLbGRRPT0iLCJuIjoiSkNvQWUrQlRPZUVyU3BYKyIsImMiOiJWMjhVM0h4cjlLWDdCSGtSa3JPMytPUlBTRk5lQzV6NHRDNkZCNFVuZXozcy9KdWRwc21zZ2NRWWdrR2FhSGt6WkVXcVZaNGFma3c3RkhwRHU4dm9sMmdmMExHVVpFMDNzWU0vR3RLQ0hHQ0pjakRQNzBlTXAzOHRkOThGUy9uM2RjN0pjbDJyNFVBOGpxb2NuMXg1aThZS1BsdHZXQlVSUWEyM0Q2enFlMGJNb3VGQlVRVHFRV2lLT1d5bTI0ZHU3eFY2aXo5WGIxQ3BJQ3hnY0RlVWNON0NDdjd5RGg4eE9paFJrRlNYdSs1aU4zZnRVUE5tQ0dOdm9zR2Q3Um5IcGY5SzhjcXN0a0FGTlRQTjEvcmVXSWFYSXd5NllZTHdrazBXNWhieWQwMWNkelJLemM2QkFuellWODRuNzV3K3g2bXZPdzBUUEFPWFdlbXlxMENlIn0=",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiI3eHlxOHVyODBTMnNvTW4rTnhHRnFBPT0iLCJuIjoiQnVzZjdSektPNGlBTkxtMyIsImMiOiJqdzlzNEVxN0ROVWp0cVFYK3ltU1RQeWtDbnZ4eHdWV2hDMWtCNEl4SkZjbE5IOGJiSVBrMzRDeDEvUEdUQisxanVqZXNSZVNmUnliVTBMcmNmMXh1aXA5WmZKSmVMS3NteThMSjVwUlpNNzJ6a3o2SG8vV1RGc3dnTFJJU29seG9HSWdFdi9Vdmc2SnNycmR4UkNMMk9rS0p2S3ZSZ0d4Y3BQTTJveXNJNnRkeVNFL0F5YlQxV1pxKzQvQ1I5QVNqM3dzVUZCemR4MWtDRzhCUDBpY0wvRGNZanlxZVJ1dWdLRFNsd2hXQS9lczdYUnZ4MU81RUJPMnZvdHdxeitDR0N4dW5BVW1FR0pubHVsL2JxdkYwSVJaeVFzZFg1V3lGdHYzcCtFcGtqbkNYc3oyQmRscHpsaE01RmJwY3BMLzNFbWhEVWJueW52UUJneVhTcUtDIn0="
+        ],
+        "tvdbApiKeys": [
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJ4NEx4M0dvbWFjeUtnSXZlSzdiZTR3PT0iLCJuIjoiWGJNMnQ4bTNJc3pnSmVMcyIsImMiOiJaQ2w0Zk50YVNsQzArVXFXVDFTa243NFpnM2ttdE1lVWZLOVkvT2VZUHV3VmtxeXNVeHkwOG56SDU3Z0U4K1NBd0lYRzFBPT0ifQ==",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJqZmZSeHRJOXBXQ1h5K05Va3JveW5BPT0iLCJuIjoid0xwVWZlR2UzcDlRaUpWZCIsImMiOiIrdnFCdzltdzNjdEIreStHcEswQk1CQmFFWWF3WFFRV2hBQUM3ZkFlZ0VWaEZ5Q0J0Z2I3NXpqUWhBVWtCRUFpcGR0cGdRPT0ifQ==",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJYcFBLOUt4UXR4djNmSWoyb2FDSHBRPT0iLCJuIjoiSXMwNXE5UDFPSkk3NFJUNiIsImMiOiI2endCUnNPazl1eXVrcHFTR3FYUm91M1I2TzZTWVdkbXZUalp3UGFuRENTYUhkc2VRUHVOUVNWVGtqSkN1eDRuTC9USU1RPT0ifQ==",
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJ1c3BGOUpBRHFpVENJM0FvRVYyTUdnPT0iLCJuIjoiMUZnRnhzZnFaaVFCa1BOQSIsImMiOiJLVXlaRWVnYjczUlJaVjd1eldOa093YnlUemlwbEhCejRjWXRSYXQ4UWx4ZjMrZHRoak5ZSWZxaDB3L0VLNWs2dkFCSTl3PT0ifQ=="
+        ],
+        "geminiApiKeys": [],
+        "rpdbApiKeys": [
+          "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJaMjRtdHUxbVBYMXNPU3RIblNyK0lnPT0iLCJuIjoieHJDNGlFbi9CY3VrNVl4YyIsImMiOiJWRkRQT3ZnaVg1TWQ3TUpBN2pXRENUb0Jhd2FiSFo2dzRGY0VNdz09In0="
+        ]
+      },
+      "limits": {
+        "stremioMaxCatalogs": 120
+      },
+      "instances": {
+        "aiostreams": [
+          "https://aiostreamsfortheweebsstable.midnightignite.me",
+          "https://aiostreams.fortheweak.cloud"
+        ],
+        "aiometadata": [
+          "https://aiometadata.viren070.me",
+          "https://aiometadatafortheweebs.midnightignite.me"
+        ],
+        "watchly": []
+      },
+      "templates": {
+        "aiostreams": "templates/AIOStreams.json",
+        "aiometadata_stremio": "templates/AIOMetadata.json",
+        "aiometadata_nuvio": "templates/AIOMetadata-All.json",
+        "nuvio_collections": "templates/Nuvio-Collections.json",
+        "nuvio_settings": "templates/Nuvio-Settings.json"
+      },
+      "doneStepNotifications": [
+        {
+          "markdown": "🤖 **Watchly** (Netflix-like recommendations) coming soon!"
+        },
+        {
+          "markdown": "🎯 **Trakt** is optional, but needs to be connected manually because it cannot be automated here.\n\n- **AIOMetadata**: click on **Customize More** above, open the **Catalogs** tab, press the **Trakt** logo, and follow the setup steps.\n- **Stremio**: open **Settings** and enable **Trakt Scrobbling** there.\n- **Nuvio**: open **Settings** and connect **Trakt** there using the QR code.",
+          "targets": ["stremio", "nuvio"],
+          "style": {
+            "background": "rgba(95, 24, 43, 0.68)",
+            "borderColor": "rgba(255, 230, 236, 0.2)",
+            "textColor": "rgba(255, 255, 255, 0.96)",
+            "boxShadow": "0 10px 24px rgba(57, 7, 21, 0.22)"
+          }
+        }
+      ]
+    }
+  ]
+}

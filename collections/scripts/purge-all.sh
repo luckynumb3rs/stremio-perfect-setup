@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-COLLECTIONS_FILE="$REPO_ROOT/collections/nuvio-collections.json"
+COLLECTIONS_FILE="$REPO_ROOT/templates/Nuvio-Collections.json"
 
 python3 -B - "$COLLECTIONS_FILE" <<'PY' | while IFS= read -r url; do
 import json

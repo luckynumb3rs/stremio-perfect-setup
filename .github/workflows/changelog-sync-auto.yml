@@ -17,18 +17,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Sync guide changelog
+      - name: Generate AIOStreams changelog output
         run: bash scripts/sync-changelog.sh
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- docs/guide/Changelog.md; then
+          if git diff --quiet -- templates/AIOStreams-Changelog.md; then
             echo "No sync changes to commit"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/guide/Changelog.md
+          git add templates/AIOStreams-Changelog.md
           git commit -m "chore: auto-sync changelog output"
           git push

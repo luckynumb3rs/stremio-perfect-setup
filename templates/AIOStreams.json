@@ -2,12 +2,12 @@
   "metadata": {
     "id": "stremio.perfect.setup",
     "name": "Stremio Perfect Setup",
-    "description": "This template is best combined with [this](https://luckynumb3rs.github.io/stremio-perfect-setup) guide. It's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering, using best practice recommendations by the Stremio community. It can be configured for the following stream types: \n* **⚡ DEBRID** - Paid, but fast, safest and most reliable. Activated by selecting a service on the next step. \n* **🧲 P2P** - Free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid service. \n* **🌐 HTTP** - Free, safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option two steps later. \n**Tamtaro's** template was used as inspiration.",
+    "description": "This template is best combined with [this](https://numb3rs.stream) guide. It's built around a full and ready-to-go clean setup with multiple reliable scrapers for redundancy and sensible sorting and filtering, using best practice recommendations by the Stremio community. It can be configured for the following stream types: \n* **⚡ DEBRID** - Paid, but fast, safest and most reliable. Activated by selecting a service on the next step. \n* **🧲 P2P** - Free, but slower and risky depending on the laws of your country. Activated automatically if you don't select a Debrid service. \n* **🌐 HTTP** - Free, safe, but slower and less reliable than Debrid. Activated if you enable the *HTTP Addons* option two steps later. \n**Tamtaro's** template was used as inspiration.",
     "source": "external",
-    "sourceUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/templates/AIOStreams.json",
-    "changelogUrl": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/CHANGELOG.md",
+    "sourceUrl": "https://numb3rs.stream/templates/AIOStreams.json",
+    "changelogUrl": "https://numb3rs.stream/templates/AIOStreams-Changelog.md",
     "author": "Lucky Numb3rs",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "category": "Full",
     "serviceRequired": false,
     "inputs": [
@@ -36,7 +36,7 @@
       {
         "id": "formatterChoice",
         "name": "🖋️ Formatter Style",
-        "description": "Choose the formatting of the stream information view (more details [here](https://luckynumb3rs.github.io/stremio-perfect-setup/guide/7-Additional-Stuff/#understanding-stream-information-view)): \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons. \n* **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
+        "description": "Choose the formatting of the stream information view (more details [here](https://numb3rs.stream/guide/7-Additional-Stuff/#understanding-stream-information-view)): \n* **Flat Monochrome Icons** has a cleaner look based on minimalistic white icons. \n* **Colorful Icons** contains a colored version with more graphical icons. \n* **None** retains your existing formatter (no changes will be made to the formatter, but other filters and settings will still be imported).",
         "type": "select",
         "required": false,
         "default": "flat",
@@ -313,7 +313,7 @@
         "intent": "info"
       },
       {
-        "id": "header.sortingInfo",
+        "id": "sortingInfo",
         "name": "",
         "description": "Here you can modify the sort order if necessary. \n The default sort order is: \n *Cached/Uncached → SeaDex (for Anime) → Resolution → Quality → Stream Expressions → Stream Expression Score → Seeders (if Uncached/P2P) → Language → Bitrate*",
         "type": "alert",
@@ -372,7 +372,7 @@
         "socials": [
           {
             "id": "website",
-            "url": "https://luckynumb3rs.github.io/stremio-perfect-setup"
+            "url": "https://numb3rs.stream"
           },
           {
             "id": "github",
@@ -388,7 +388,7 @@
   },
   "config": {
     "addonName": "AIOStreams",
-    "addonLogo": "https://raw.githubusercontent.com/luckynumb3rs/stremio-perfect-setup/refs/heads/main/docs/assets/images/sps-aiostreams.svg",
+    "addonLogo": "https://numb3rs.stream/assets/images/aiostreams.svg",
     "services": [
       {
         "id": "torbox",
@@ -731,7 +731,7 @@
             "description": {
               "__switch": "inputs.formatterFilename",
               "cases": {
-                "true": "{stream.editions::exists[\"▶︎  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[☰  {stream.uSmallSubtitleCodes::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.filename::exists[\"✎ {stream.filename}  \"||\"\"]}{stream.message::exists[\"ⓘ {stream.message::smallcaps}  \"||\"\"]}"
+                "true": "{stream.editions::exists[\"▶︎  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[☰  {stream.uSmallSubtitleCodes::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.filename::exists[\"✎ {stream.filename}  \"||\"\"]}\n{stream.message::exists[\"ⓘ {stream.message::smallcaps}  \"||\"\"]}"
               },
               "default": "{stream.editions::exists[\"▶︎  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"⧉  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"◧  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"⟳ {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"⛊ \"||\"⛉ \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}𖧧  \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[☰  {stream.uSmallSubtitleCodes::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.message::exists[\"ⓘ {stream.message::smallcaps}  \"||\"\"]}"
             }
@@ -744,7 +744,7 @@
             "description": {
               "__switch": "inputs.formatterFilename",
               "cases": {
-                "true": "{stream.editions::exists[\"🎬  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"📼  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"🎥  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"🎵  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"🎧  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"📚  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"📦  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"🕒 {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"🔐 \"||\"🔧 \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}🌱  \"||\"\"]}\n{stream.languages::exists[\"🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[💬  {stream.uSubtitleEmojis::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.filename::exists[\"✏️ {stream.filename}  \"||\"\"]}{stream.message::exists[\"ℹ️ {stream.message::smallcaps}  \"||\"\"]}"
+                "true": "{stream.editions::exists[\"🎬  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"📼  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"🎥  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"🎵  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"🎧  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"📚  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"📦  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"🕒 {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"🔐 \"||\"🔧 \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}🌱  \"||\"\"]}\n{stream.languages::exists[\"🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[💬  {stream.uSubtitleEmojis::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.filename::exists[\"✏️ {stream.filename}  \"||\"\"]}\n{stream.message::exists[\"ℹ️ {stream.message::smallcaps}  \"||\"\"]}"
               },
               "default": "{stream.editions::exists[\"🎬  {stream.editions::join(' · ')} \"||\"\"]}\n{stream.encode::exists[\"📼  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"🎥  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"🎵  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"🎧  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.size::>0::and::stream.seasonPack::istrue[\"📚  \"||\"\"]}{stream.size::>0::and::stream.seasonPack::isfalse[\"📦  \"||\"\"]}{stream.size::>0[\"{stream.size::sbytes}\"||\"\"]}{stream.bitrate::exists[\" · {stream.bitrate::sbitrate::replace('Mbps','ᴹᵇᵖˢ')::replace('Kbps','ᴷᵇᵖˢ')}  \"||\"\"]}{stream.message::~Download[\"{tools.removeLine}\"||\"\"]}{stream.age::exists[\"🕒 {stream.age}\"||\"\"]}\n{stream.proxied::istrue[\"🔐 \"||\"🔧 \"]}{service.shortName::exists[\"[{service.shortName}] \"||\"\"]}{addon.name}{stream.type::replace('debrid',' ')::exists[\" · {stream.type::replace('debrid',' ')::replace('stremio-usenet','nntp')::smallcaps}\"||\"\"]}{service.cached::isfalse::or::stream.type::=p2p::and::stream.seeders::>0[\"  ⇋ {stream.seeders}🌱  \"||\"\"]}\n{stream.languages::exists[\"🔊  {stream.languageEmojis::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴀʟ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}  \"||\"\"]}{stream.uSubtitles::exists[\"[💬  {stream.uSubtitleEmojis::join(' · ')}]  \"||\"\"]}{stream.seadex[\"»  \"||\"\"]}{stream.seadexBest::istrue[\"[ʙᴇsᴛ] \"||\"\"]}{stream.seadex::istrue::and::stream.seadexBest::isfalse[\"[ᴀʟᴛ] \"||\"\"]}\n{stream.message::exists[\"ℹ️ {stream.message::smallcaps}  \"||\"\"]}"
             }
@@ -1092,6 +1092,9 @@
     ],
     "syncedPreferredStreamExpressionUrls": [
       "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json"
+    ],
+    "syncedExcludedRegexUrls": [
+      "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-excluded-regex.json"
     ],
     "syncedRankedRegexUrls": [
       "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/regexes.json"

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>__WIZARD_HTML_TITLE__</title>
+    <link rel="icon" href="__WIZARD_FAVICON_URL__" type="image/svg+xml" />
+    <link rel="shortcut icon" href="__WIZARD_FAVICON_URL__" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="__WIZARD_FAVICON_URL__" />
+    <link rel="stylesheet" href="__WIZARD_THEME_CSS_URL__" />
+    <script>
+      (function() {
+        var t = localStorage.getItem('stremio_docs_theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

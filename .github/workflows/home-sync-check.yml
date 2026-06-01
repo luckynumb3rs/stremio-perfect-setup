@@ -9,11 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Sync homepage files
-        run: bash scripts/sync-home.sh
+        run: bash scripts/prepare-site-source.sh --sync-readme
       - name: Verify no diff
         run: |
-          if ! git diff --quiet -- README.md docs/index.md; then
-            echo "README.md and docs/index.md are out of sync. Run: bash scripts/sync-home.sh"
-            git --no-pager diff -- README.md docs/index.md
+          if ! git diff --quiet -- README.md; then
+            echo "README.md is out of sync. Run: bash scripts/prepare-site-source.sh --sync-readme"
+            git --no-pager diff -- README.md
             exit 1
           fi

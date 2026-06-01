@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Sync guide changelog
+      - name: Generate AIOStreams changelog output
         run: bash scripts/sync-changelog.sh
       - name: Verify no diff
         run: |
-          if ! git diff --quiet -- docs/guide/Changelog.md; then
-            echo "docs/guide/Changelog.md is out of sync. Run: bash scripts/sync-changelog.sh"
-            git --no-pager diff -- docs/guide/Changelog.md
+          if ! git diff --quiet -- templates/AIOStreams-Changelog.md; then
+            echo "templates/AIOStreams-Changelog.md is out of sync. Run: bash scripts/sync-changelog.sh"
+            git --no-pager diff -- templates/AIOStreams-Changelog.md
             exit 1
           fi

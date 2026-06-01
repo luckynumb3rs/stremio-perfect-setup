@@ -9,9 +9,10 @@ from pathlib import Path
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT_DIR / "docs" / "assets" / "js" / "guide-completion-config.js"
-OUTPUT_PATH = ROOT_DIR / "docs" / "assets" / "data" / "guide-stats.json"
+CONFIG_PATH = ROOT_DIR / "assets" / "js" / "guide-completion-config.js"
+OUTPUT_PATH = ROOT_DIR / "assets" / "data" / "guide-stats.json"
 GA4_EARLIEST_VALID_DATE = "2026-01-01"
+WIZARD_ACCOUNT_CREATED_EVENT = "wizard_account_created"
 
 
 def load_completion_config() -> dict:
@@ -75,6 +76,8 @@ def build_payload(config: dict) -> dict:
 
     analytics_unique_users = 0
     analytics_event_count = 0
+    wizard_analytics_unique_users = 0
+    wizard_analytics_event_count = 0
     source = "baseline_only"
     error = None
 
@@ -85,7 +88,12 @@ def build_payload(config: dict) -> dict:
                 service_account_json=service_account_json,
                 event_name=event_name,
             )
-            source = "ga4_total_users"
+            wizard_analytics_unique_users, wizard_analytics_event_count = fetch_analytics_totals(
+                property_id=property_id,
+                service_account_json=service_account_json,
+                event_name=WIZARD_ACCOUNT_CREATED_EVENT,
+            )
+            source = "ga4"
         except Exception as exc:  # pragma: no cover - best effort fallback in CI
             source = "baseline_fallback"
             error = str(exc)
@@ -100,6 +108,12 @@ def build_payload(config: dict) -> dict:
         "storageVersion": int(config.get("storageVersion", 1) or 1),
         "source": source,
         "updatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "wizard": {
+            "accountCreatedEventName": WIZARD_ACCOUNT_CREATED_EVENT,
+            "analyticsUniqueUsers": wizard_analytics_unique_users,
+            "analyticsEventCount": wizard_analytics_event_count,
+            "totalAccountsCreated": wizard_analytics_event_count,
+        },
     }
 
     if error:

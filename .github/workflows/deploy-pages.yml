@@ -39,14 +39,36 @@ jobs:
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
         run: python3 scripts/build-guide-stats.py
 
+      - name: Prepare staged site source
+        run: |
+          scripts/prepare-site-source.sh "${{ runner.temp }}/site-source"
+
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./docs
+          source: ${{ runner.temp }}/site-source
           destination: ./_site
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: wizard/web/package-lock.json
+
+      - name: Build wizard
+        run: |
+          cd wizard/web
+          npm ci
+          npm run build
+
+      - name: Copy wizard build into site
+        run: |
+          mkdir -p _site/wizard
+          cp -r wizard/web/dist/. _site/wizard/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

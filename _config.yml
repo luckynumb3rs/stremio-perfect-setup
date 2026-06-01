@@ -1,0 +1,21 @@
+title: 🎬 Stremio/Nuvio Perfect Setup
+description: Full and Easy Total Beginner's Guide
+baseurl: ""
+google_analytics: G-PWNJZLBKC0
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: pretty
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: guide
+      type: pages
+    values:
+      layout: guide

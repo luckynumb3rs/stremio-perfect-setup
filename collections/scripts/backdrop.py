@@ -4,7 +4,7 @@ Backdrop generator driven entirely by explicit TMDB request parameters.
 
 Purpose:
     This script generates one backdrop image set from explicit TMDB request
-    specs. It does not inspect `nuvio-collections.json` itself. Use it when
+    specs. It does not inspect `Nuvio-Collections.json` itself. Use it when
     you already know which TMDB requests should be merged into one backdrop.
     When Fanart artwork is enabled, language selection is prioritized in this
     order: preferred language, original title language, TMDB backdrop fallback,
