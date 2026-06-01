@@ -76,10 +76,16 @@ jobs:
           mkdir -p _site/wizard
           cp -r wizard/web/dist/. _site/wizard/
 
+      - name: Prepare Pages publish directory
+        run: |
+          rm -rf .pages-publish
+          mkdir -p .pages-publish
+          cp -R _site/. .pages-publish/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_site
+          path: ./.pages-publish
 
   deploy:
     environment:
