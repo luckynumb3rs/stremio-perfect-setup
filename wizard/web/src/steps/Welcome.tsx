@@ -46,7 +46,7 @@ export function Welcome() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.5rem' }}>
         {targets.map(t => {
-          const logoUrl = resolveLogoUrl(`assets/logos/${t.logoFile}`);
+          const logoUrl = resolveLogoUrl(`services/${t.logoFile}`);
           const isSelected = target === t.id;
           return (
             <button

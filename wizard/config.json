@@ -33,7 +33,7 @@
         "aiostreams": "templates/AIOStreams.json",
         "aiometadata_stremio": "templates/AIOMetadata.json",
         "aiometadata_nuvio": "templates/AIOMetadata-All.json",
-        "collections": "templates/Nuvio-Collections.json",
+        "nuvio_collections": "templates/Nuvio-Collections.json",
         "nuvio_settings": "templates/Nuvio-Settings.json"
       },
       "doneStepNotifications": [

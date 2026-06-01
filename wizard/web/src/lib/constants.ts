@@ -36,7 +36,7 @@ export interface WizardTemplates {
   aiostreams: string;
   aiometadata_stremio: string;
   aiometadata_nuvio: string;
-  collections: string;
+  nuvio_collections: string;
   nuvio_settings: string;
 }
 
@@ -103,11 +103,16 @@ function normalizeInstances(value: unknown): WizardInstances | null {
 
 function normalizeTemplates(value: unknown): WizardTemplates | null {
   if (!isRecord(value)) return null;
+  const nuvioCollections = typeof value.nuvio_collections === 'string'
+    ? value.nuvio_collections
+    : typeof value.collections === 'string'
+      ? value.collections
+      : null;
   if (
     typeof value.aiostreams !== 'string'
     || typeof value.aiometadata_stremio !== 'string'
     || typeof value.aiometadata_nuvio !== 'string'
-    || typeof value.collections !== 'string'
+    || typeof nuvioCollections !== 'string'
     || typeof value.nuvio_settings !== 'string'
   ) {
     return null;
@@ -117,7 +122,7 @@ function normalizeTemplates(value: unknown): WizardTemplates | null {
     aiostreams: value.aiostreams,
     aiometadata_stremio: value.aiometadata_stremio,
     aiometadata_nuvio: value.aiometadata_nuvio,
-    collections: value.collections,
+    nuvio_collections: nuvioCollections,
     nuvio_settings: value.nuvio_settings,
   };
 }

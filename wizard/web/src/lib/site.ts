@@ -1,3 +1,5 @@
+import { resolveDataUrl } from './integration';
+
 function resolveSiteRoot(): URL {
   return new URL('../', window.location.href);
 }
@@ -20,5 +22,5 @@ export function getGuideUrl(): string {
 }
 
 export function getGuideStatsUrl(): string {
-  return resolveSiteUrl('assets/data/guide-stats.json');
+  return resolveDataUrl('guide-stats.json');
 }

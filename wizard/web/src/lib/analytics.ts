@@ -7,8 +7,9 @@ import {
   getDoneStep,
   getInstallStep,
 } from './keyScreens';
+import { wizardMetadata } from './integration';
 
-const MEASUREMENT_ID = (typeof __GUIDE_GA4_ID__ === 'string' ? __GUIDE_GA4_ID__ : '').trim();
+const MEASUREMENT_ID = wizardMetadata.ga4Id.trim();
 
 const COMPLETION_EVENT = 'wizard_setup_completed';
 const ACCOUNT_CREATED_EVENT = 'wizard_account_created';
@@ -73,7 +74,7 @@ export function trackWizardStepView(
   window.gtag('event', 'page_view', {
     page_location: pageLocation,
     page_path: pagePath,
-    page_title: `🔮 Perfect Setup Wizard - ${meta.name}`,
+    page_title: `${wizardMetadata.wizardPageTitle} - ${meta.name}`,
   });
 
   window.gtag('event', 'wizard_step_view', {

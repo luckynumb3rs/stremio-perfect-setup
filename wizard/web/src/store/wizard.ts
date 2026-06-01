@@ -67,7 +67,7 @@ interface WizardState {
   aiometadataInstance: string;
   catalogSelection: CatalogSelection;
   installResult: InstallResult;
-  templates: { aiostreams: unknown; aiometadata: unknown; collections: unknown[]; nuvioSettings: unknown } | null;
+  templates: { aiostreams: unknown; aiometadata: unknown; nuvioCollections: unknown[]; nuvioSettings: unknown } | null;
   /** Computed from template when loaded; drives dynamic step count */
   aioSections: AioSection[];
   /** Runtime config loaded from config.json at startup */

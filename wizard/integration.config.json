@@ -1,0 +1,7 @@
+{
+  "repoRoot": "..",
+  "images": "../assets/images",
+  "data": "../assets/data",
+  "theme": "../assets/css",
+  "metadata": "../_config.yml"
+}

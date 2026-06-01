@@ -193,7 +193,7 @@ export function InstallingStep() {
       const setupFn = target === 'stremio' ? runStremioSetup : runNuvioSetup;
       const extraParams = target === 'nuvio'
         ? {
-            collectionsJson: templates.collections as object[],
+            collectionsJson: templates.nuvioCollections as object[],
             nuvioSettingsTemplate: templates.nuvioSettings as Record<string, unknown>,
           }
         : {};

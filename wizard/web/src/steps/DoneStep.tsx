@@ -5,6 +5,7 @@ import { WizardShell } from '../components/WizardShell';
 import { useWizard } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
 import { trackWizardCompletion } from '../lib/analytics';
+import { wizardMetadata } from '../lib/integration';
 
 function toConfigureUrl(manifestUrl: string) {
   const [baseUrl, search = ''] = manifestUrl.split('?');
@@ -176,7 +177,7 @@ export function DoneStep() {
     if (!addonDetailsFilename) return;
 
     const lines = [
-      '🎬 Stremio/Nuvio Perfect Setup - Add-on Details',
+      wizardMetadata.addonDetailsTitle,
       '',
       ...addons.flatMap(addon => [
         `${addon.name}`,

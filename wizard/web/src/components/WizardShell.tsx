@@ -4,7 +4,7 @@ import { ArrowLeft, BookOpen } from 'lucide-react';
 import { Sidebar } from './Sidebar';
 import { useWizard } from '../store/wizard';
 import { useTheme } from '../hooks/useTheme';
-import { resolveLogoUrl } from '../lib/services';
+import { resolveImageUrl, wizardMetadata } from '../lib/integration';
 import { getGuideUrl } from '../lib/site';
 
 const variants = {
@@ -23,7 +23,7 @@ export function WizardShell({ children, showBack = true }: Props) {
   const { theme, toggle } = useTheme();
   const [navOpen, setNavOpen] = useState(false);
 
-  const spsLogo = resolveLogoUrl('assets/logos/logo.svg');
+  const spsLogo = resolveImageUrl('logo.svg');
   const guideUrl = getGuideUrl();
 
   function closeNav() { setNavOpen(false); }
@@ -43,11 +43,11 @@ export function WizardShell({ children, showBack = true }: Props) {
         </button>
         <a className="topbar-brand" href={guideUrl}>
           {spsLogo && (
-            <img src={spsLogo} alt="Stremio Perfect Setup logo" className="topbar-logo" />
+            <img src={spsLogo} alt={`${wizardMetadata.title} logo`} className="topbar-logo" />
           )}
           <span className="topbar-brand-text">
-            <span className="topbar-title">Stremio/Nuvio Perfect Setup</span>
-            <span className="topbar-subtitle">Full and Easy Total Beginner's Guide</span>
+            <span className="topbar-title">{wizardMetadata.title}</span>
+            <span className="topbar-subtitle">{wizardMetadata.description}</span>
           </span>
         </a>
         <a

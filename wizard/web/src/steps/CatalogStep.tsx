@@ -12,7 +12,7 @@ interface DiscoverFolder { id: string; label: string; }
 export function CatalogStep() {
   const { target, templates, catalogSelection, setCatalogSelection, nextStep, wizardConfig } = useWizard();
   const template = templates?.aiometadata as { config?: { catalogs?: object[] } } | null;
-  const collectionsRaw = (templates?.collections ?? []) as object[];
+  const collectionsRaw = (templates?.nuvioCollections ?? []) as object[];
   const stremioMaxCatalogs = wizardConfig?.limits.stremioMaxCatalogs ?? null;
 
   if (!template?.config?.catalogs) {

@@ -1,7 +1,22 @@
 /// <reference types="vite/client" />
 
 declare global {
-  const __GUIDE_GA4_ID__: string;
+  const __WIZARD_INTEGRATION__: {
+    repoRoot: string;
+    images: string;
+    data: string;
+    repoRootDevFsBase?: string;
+    imagesDevFsBase?: string;
+    dataDevFsBase?: string;
+    metadata: {
+      path: string;
+      title: string;
+      description: string;
+      ga4Id: string;
+      wizardPageTitle: string;
+      addonDetailsTitle: string;
+    };
+  };
 
   interface Window {
     dataLayer?: unknown[];
