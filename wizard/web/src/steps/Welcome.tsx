@@ -29,8 +29,6 @@ export function Welcome() {
         </div>
         <h1 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.6rem', lineHeight: 1.3 }}>
           Welcome to the Perfect Setup Wizard
-          <br /><br />
-          DON'T USE THIS YET, CURRENTLY TESTING, CHECK BACK TOMORROW!
         </h1>
         <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '0.5rem' }}>
           <span style={{ display: 'block' }}>This wizard automatically configures your entire streaming setup:</span>
