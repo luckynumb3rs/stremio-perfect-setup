@@ -217,7 +217,7 @@ rm -f "$DEST_DIR/index.md"
   cat <<'FM'
 ---
 layout: default
-title: Home
+title: 🍿 Home
 ---
 
 FM

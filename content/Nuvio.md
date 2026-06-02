@@ -15,9 +15,9 @@ The new **Nuvio** guide explains how to use the same setup logic with Nuvio inst
 
 The guide uses the same core addon structure as my Stremio setup, but adapted for Nuvio:
 
-* **AIOStreams** for finding streams
-* **AIOMetadata** for metadata, catalogs, search, artwork, and integrations
-* **Watchly** as an optional recommendation and personalized catalogs layer
+* **📚 AIOStreams** for finding streams
+* **🔎 AIOMetadata** for metadata, catalogs, search, artwork, and integrations
+* **🤖 Watchly** as an optional recommendation and personalized catalogs layer (coming soon!)
 
 # 💎 Nuvio Perfect Collections (incl. Dynamic Backdrops)
 
@@ -45,7 +45,7 @@ The cool part is the **Dynamic Backdrops**: Something you would probably not not
 
 Here are the main links:
 
-* [**Full Guide**](https://numb3rs.stream/guide/Nuvio/) [**READ BEFORE ASKING QUESTIONS**]
+* [**Full Guide**](https://numb3rs.stream/) [**READ BEFORE ASKING QUESTIONS**]
 * [**Collections Assets**](https://github.com/luckynumb3rs/stremio-perfect-setup/tree/main/collections/)
 * [**AIOMetadata Catalogs**](https://numb3rs.stream/templates/AIOMetadata-All-Catalogs.json) (*JSON*) [**Only catalogs** for existing setups, import into AIOMetadata *Catalogs* tab]
 * [**AIOMetadata Full Configuration**](https://numb3rs.stream/templates/AIOMetadata-All.json) (*JSON*) [**Full** for new setups, import into AIOMetadata *Configuration* tab]
