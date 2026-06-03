@@ -135,7 +135,13 @@ console.log('\n# AIOStreams retries with broken internal addon disabled');
 
   ok('createWithFallbacks retries after disabling shared failed addon', requestCount === 3);
   ok('createWithFallbacks reports disabled internal addon', JSON.stringify(retried.disabledInternalAddons) === JSON.stringify(['Sootio']));
-  ok('createWithFallbacks returns retry warning', retried.retryWarnings.length === 1 && retried.retryWarnings[0].includes('Sootio'));
+  ok(
+    'createWithFallbacks returns retry warning',
+    retried.retryWarnings.length === 1
+      && retried.retryWarnings[0].includes('Sootio')
+      && retried.retryWarnings[0].includes('Your account was created successfully')
+      && retried.retryWarnings[0].includes('AIOStreams configuration')
+  );
   ok('createWithFallbacks still returns a primary result', retried.primary?.manifestUrl === 'https://instance-a.example/stremio/uuid-1/enc-1/manifest.json');
 }
 

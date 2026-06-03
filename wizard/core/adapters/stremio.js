@@ -18,6 +18,7 @@ async function rpc(endpoint, method, params, authKey) {
   if (res.status !== 200) throw new Error(`Stremio ${method} failed: HTTP ${res.status}`);
   const body = await res.json();
   if (body.error) {
+    const code = body.error.code;
     const msg = body.error.message || JSON.stringify(body.error);
     // Provide context-specific messages for common errors
     if (method === 'register' && /already/i.test(msg)) {
@@ -25,6 +26,15 @@ async function rpc(endpoint, method, params, authKey) {
     }
     if (method === 'login' && /password|credential|auth/i.test(msg)) {
       throw new Error(`Incorrect email or password. Please double-check your Stremio credentials and try again.`);
+    }
+    if (
+      method === 'addonCollectionSet'
+      && (code === 20004 || /max descriptor size reached/i.test(msg))
+    ) {
+      throw new Error(
+        `Stremio could not install AIOMetadata because its manifest is too large for Stremio (${msg}), which means there are too many catalogs enabled. ` +
+        `Go to the Catalogs page from the left sidebar, change/disable some catalogs and try again.`
+      );
     }
     throw new Error(`Stremio ${method}: ${msg}`);
   }

@@ -233,7 +233,7 @@ export async function createWithFallbacks(instances, params) {
       if (retryConfigResult.disabledAddonNames.length > 0) {
         disabledInternalAddons = retryConfigResult.disabledAddonNames;
         retryWarnings = [
-          `AIOStreams temporarily disabled ${disabledInternalAddons.join(', ')} because all configured instances reported "Failed to fetch manifest". You can try re-enabling ${disabledInternalAddons.length === 1 ? 'it' : 'them'} later from the add-on configuration page.`,
+          `AIOStreams disabled ${disabledInternalAddons.join(', ')} because ${disabledInternalAddons.length === 1 ? 'it was' : 'they were'} not reachable at the moment. Your account was created successfully and it is fine to continue using it. You can log in to the AIOStreams configuration later and try re-enabling ${disabledInternalAddons.length === 1 ? 'it' : 'them'} manually, or leave ${disabledInternalAddons.length === 1 ? 'it' : 'them'} disabled if you prefer.`,
         ];
         const retried = await tryCreateUntilSuccess(instances, (instanceUrl) => createAttempt(instanceUrl, retryConfigResult.config));
         primary = retried.primary;
