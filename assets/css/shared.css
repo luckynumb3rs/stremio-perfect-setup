@@ -362,6 +362,25 @@ code, pre { font-family: "IBM Plex Mono", "Cascadia Code", monospace; }
   font-weight: 700;
 }
 
+.sidebar-credit {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.sidebar-credit__link {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sidebar-credit__link:hover,
+.sidebar-credit__link:focus-visible {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+
 .layout {
   position: fixed;
   top: var(--header-height);

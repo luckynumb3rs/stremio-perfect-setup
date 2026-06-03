@@ -184,6 +184,9 @@ export function Sidebar({ onClose }: Props) {
             </div>
           </div>
         </section>
+        <div className="sidebar-credit">
+          Made with ❤️ by <a className="sidebar-credit__link" href="https://github.com/luckynumb3rs" target="_blank" rel="noopener noreferrer">luckynumb3rs</a>
+        </div>
       </div>
     </div>
   );
