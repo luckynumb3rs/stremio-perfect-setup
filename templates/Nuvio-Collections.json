@@ -28,10 +28,10 @@
           }
         ],
         "coverEmoji": "🎯",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/recommended.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/recommended.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/recommended.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/recommended.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/discover/cover/recommended.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/discover/focused/recommended.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/discover/title/recommended.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/discover/backdrop/recommended.webp"
       },
       {
         "id": "collections.discover.popular",
@@ -54,10 +54,10 @@
           }
         ],
         "coverEmoji": "🏆",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/popular.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/popular.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/popular.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/popular.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/discover/cover/popular.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/discover/focused/popular.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/discover/title/popular.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/discover/backdrop/popular.webp"
       },
       {
         "id": "collections.discover.trending",
@@ -80,10 +80,10 @@
           }
         ],
         "coverEmoji": "🔥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/trending.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/trending.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/trending.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/trending.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/discover/cover/trending.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/discover/focused/trending.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/discover/title/trending.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/discover/backdrop/trending.webp"
       },
       {
         "id": "collections.discover.top-rated",
@@ -106,10 +106,10 @@
           }
         ],
         "coverEmoji": "⭐",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/cover/top-rated.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/focused/top-rated.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/title/top-rated.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/discover/backdrop/top-rated.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/discover/cover/top-rated.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/discover/focused/top-rated.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/discover/title/top-rated.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/discover/backdrop/top-rated.webp"
       }
     ]
   },
@@ -142,10 +142,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/netflix.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/netflix.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/netflix.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/netflix.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/netflix.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/netflix.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/netflix.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/netflix.webp"
       },
       {
         "id": "collections.streaming.disney-plus",
@@ -168,10 +168,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/disney-plus.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/disney-plus.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/disney-plus.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/disney-plus.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/disney-plus.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/disney-plus.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/disney-plus.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/disney-plus.webp"
       },
       {
         "id": "collections.streaming.prime-video",
@@ -194,10 +194,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/prime-video.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/prime-video.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/prime-video.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/prime-video.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/prime-video.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/prime-video.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/prime-video.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/prime-video.webp"
       },
       {
         "id": "collections.streaming.apple-tv",
@@ -220,10 +220,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/apple-tv.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/apple-tv.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/apple-tv.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/apple-tv.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/apple-tv.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/apple-tv.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/apple-tv.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/apple-tv.webp"
       },
       {
         "id": "collections.streaming.hbo-max",
@@ -246,10 +246,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/hbo-max.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/hbo-max.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/hbo-max.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/hbo-max.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/hbo-max.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/hbo-max.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/hbo-max.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/hbo-max.webp"
       },
       {
         "id": "collections.streaming.hulu",
@@ -272,10 +272,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/hulu.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/hulu.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/hulu.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/hulu.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/hulu.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/hulu.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/hulu.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/hulu.webp"
       },
       {
         "id": "collections.streaming.paramount-plus",
@@ -298,10 +298,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/paramount-plus.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/paramount-plus.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/paramount-plus.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/paramount-plus.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/paramount-plus.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/paramount-plus.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/paramount-plus.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/paramount-plus.webp"
       },
       {
         "id": "collections.streaming.peacock",
@@ -324,10 +324,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/peacock.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/peacock.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/peacock.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/peacock.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/peacock.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/peacock.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/peacock.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/peacock.webp"
       },
       {
         "id": "collections.streaming.crunchyroll",
@@ -350,10 +350,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/crunchyroll.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/crunchyroll.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/crunchyroll.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/crunchyroll.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/crunchyroll.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/crunchyroll.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/crunchyroll.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/crunchyroll.webp"
       },
       {
         "id": "collections.streaming.discovery-plus",
@@ -376,10 +376,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/discovery-plus.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/discovery-plus.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/discovery-plus.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/discovery-plus.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/discovery-plus.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/discovery-plus.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/discovery-plus.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/discovery-plus.webp"
       },
       {
         "id": "collections.streaming.curiosity-stream",
@@ -402,10 +402,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/curiosity-stream.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/curiosity-stream.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/curiosity-stream.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/curiosity-stream.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/curiosity-stream.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/curiosity-stream.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/curiosity-stream.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/curiosity-stream.webp"
       },
       {
         "id": "collections.streaming.jiohotstar",
@@ -428,10 +428,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/jiohotstar.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/jiohotstar.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/jiohotstar.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/jiohotstar.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/jiohotstar.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/jiohotstar.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/jiohotstar.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/jiohotstar.webp"
       },
       {
         "id": "collections.streaming.starz",
@@ -454,10 +454,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/starz.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/starz.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/starz.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/starz.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/starz.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/starz.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/starz.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/starz.webp"
       },
       {
         "id": "collections.streaming.shudder",
@@ -480,10 +480,10 @@
           }
         ],
         "coverEmoji": "🎬",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/cover/shudder.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/focused/shudder.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/title/shudder.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/streaming/backdrop/shudder.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/streaming/cover/shudder.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/streaming/focused/shudder.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/streaming/title/shudder.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/streaming/backdrop/shudder.webp"
       }
     ]
   },
@@ -522,10 +522,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/action.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/action.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/action.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/action.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/action.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/action.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/action.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/action.webp"
       },
       {
         "id": "collections.genres.animation",
@@ -548,10 +548,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/animation.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/animation.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/animation.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/animation.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/animation.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/animation.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/animation.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/animation.webp"
       },
       {
         "id": "collections.genres.anime",
@@ -658,10 +658,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/anime.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/anime.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/anime.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/anime.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/anime.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/anime.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/anime.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/anime.webp"
       },
       {
         "id": "collections.genres.comedy",
@@ -684,10 +684,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/comedy.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/comedy.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/comedy.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/comedy.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/comedy.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/comedy.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/comedy.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/comedy.webp"
       },
       {
         "id": "collections.genres.crime",
@@ -710,10 +710,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/crime.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/crime.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/crime.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/crime.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/crime.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/crime.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/crime.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/crime.webp"
       },
       {
         "id": "collections.genres.documentary",
@@ -736,10 +736,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/documentary.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/documentary.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/documentary.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/documentary.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/documentary.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/documentary.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/documentary.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/documentary.webp"
       },
       {
         "id": "collections.genres.drama",
@@ -762,10 +762,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/drama.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/drama.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/drama.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/drama.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/drama.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/drama.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/drama.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/drama.webp"
       },
       {
         "id": "collections.genres.family",
@@ -788,10 +788,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/family.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/family.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/family.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/family.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/family.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/family.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/family.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/family.webp"
       },
       {
         "id": "collections.genres.fantasy",
@@ -820,10 +820,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/fantasy.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/fantasy.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/fantasy.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/fantasy.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/fantasy.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/fantasy.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/fantasy.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/fantasy.webp"
       },
       {
         "id": "collections.genres.history",
@@ -852,10 +852,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/history.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/history.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/history.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/history.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/history.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/history.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/history.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/history.webp"
       },
       {
         "id": "collections.genres.horror",
@@ -872,10 +872,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/horror.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/horror.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/horror.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/horror.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/horror.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/horror.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/horror.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/horror.webp"
       },
       {
         "id": "collections.genres.music",
@@ -892,10 +892,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/music.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/music.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/music.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/music.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/music.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/music.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/music.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/music.webp"
       },
       {
         "id": "collections.genres.mystery",
@@ -918,10 +918,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/mystery.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/mystery.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/mystery.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/mystery.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/mystery.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/mystery.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/mystery.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/mystery.webp"
       },
       {
         "id": "collections.genres.talk",
@@ -944,10 +944,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/talk.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/talk.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/talk.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/talk.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/talk.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/talk.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/talk.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/talk.webp"
       },
       {
         "id": "collections.genres.reality",
@@ -970,10 +970,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/reality.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/reality.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/reality.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/reality.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/reality.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/reality.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/reality.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/reality.webp"
       },
       {
         "id": "collections.genres.romance",
@@ -990,10 +990,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/romance.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/romance.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/romance.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/romance.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/romance.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/romance.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/romance.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/romance.webp"
       },
       {
         "id": "collections.genres.thriller",
@@ -1010,10 +1010,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/thriller.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/thriller.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/thriller.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/thriller.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/thriller.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/thriller.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/thriller.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/thriller.webp"
       },
       {
         "id": "collections.genres.tv",
@@ -1030,10 +1030,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/tv.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/tv.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/tv.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/tv.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/tv.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/tv.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/tv.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/tv.webp"
       },
       {
         "id": "collections.genres.western",
@@ -1056,10 +1056,10 @@
           }
         ],
         "coverEmoji": "🎭",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/cover/western.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/focused/western.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/title/western.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/genres/backdrop/western.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/genres/cover/western.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/genres/focused/western.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/genres/title/western.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/genres/backdrop/western.webp"
       }
     ]
   },
@@ -1092,10 +1092,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/time-travel.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/time-travel.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/time-travel.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/time-travel.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/time-travel.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/time-travel.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/time-travel.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/time-travel.webp"
       },
       {
         "id": "collections.themes.revenge",
@@ -1118,10 +1118,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/revenge.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/revenge.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/revenge.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/revenge.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/revenge.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/revenge.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/revenge.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/revenge.webp"
       },
       {
         "id": "collections.themes.spy",
@@ -1144,10 +1144,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/spy.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/spy.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/spy.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/spy.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/spy.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/spy.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/spy.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/spy.webp"
       },
       {
         "id": "collections.themes.magic",
@@ -1170,10 +1170,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/magic.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/magic.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/magic.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/magic.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/magic.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/magic.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/magic.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/magic.webp"
       },
       {
         "id": "collections.themes.k-drama",
@@ -1196,10 +1196,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/k-drama.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/k-drama.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/k-drama.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/k-drama.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/k-drama.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/k-drama.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/k-drama.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/k-drama.webp"
       },
       {
         "id": "collections.themes.treasure-hunt",
@@ -1222,10 +1222,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/treasure-hunt.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/treasure-hunt.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/treasure-hunt.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/treasure-hunt.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/treasure-hunt.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/treasure-hunt.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/treasure-hunt.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/treasure-hunt.webp"
       },
       {
         "id": "collections.themes.romantic-comedy",
@@ -1248,10 +1248,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/romantic-comedy.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/romantic-comedy.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/romantic-comedy.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/romantic-comedy.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/romantic-comedy.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/romantic-comedy.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/romantic-comedy.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/romantic-comedy.webp"
       },
       {
         "id": "collections.themes.coming-of-age",
@@ -1274,10 +1274,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/coming-of-age.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/coming-of-age.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/coming-of-age.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/coming-of-age.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/coming-of-age.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/coming-of-age.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/coming-of-age.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/coming-of-age.webp"
       },
       {
         "id": "collections.themes.superhero",
@@ -1300,10 +1300,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/superhero.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/superhero.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/superhero.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/superhero.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/superhero.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/superhero.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/superhero.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/superhero.webp"
       },
       {
         "id": "collections.themes.space",
@@ -1326,10 +1326,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/space.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/space.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/space.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/space.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/space.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/space.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/space.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/space.webp"
       },
       {
         "id": "collections.themes.martial-arts",
@@ -1352,10 +1352,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/martial-arts.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/martial-arts.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/martial-arts.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/martial-arts.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/martial-arts.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/martial-arts.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/martial-arts.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/martial-arts.webp"
       },
       {
         "id": "collections.themes.vampire",
@@ -1378,10 +1378,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/vampire.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/vampire.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/vampire.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/vampire.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/vampire.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/vampire.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/vampire.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/vampire.webp"
       },
       {
         "id": "collections.themes.satire",
@@ -1404,10 +1404,10 @@
           }
         ],
         "coverEmoji": "🎨",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/cover/satire.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/focused/satire.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/title/satire.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/themes/backdrop/satire.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/themes/cover/satire.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/themes/focused/satire.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/themes/title/satire.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/themes/backdrop/satire.webp"
       }
     ]
   },
@@ -1440,10 +1440,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/cartoon-network.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/cartoon-network.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/cartoon-network.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/cartoon-network.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/cartoon-network.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/cartoon-network.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/cartoon-network.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/cartoon-network.webp"
       },
       {
         "id": "collections.studios.dc",
@@ -1466,10 +1466,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/dc.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/dc.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/dc.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/dc.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/dc.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/dc.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/dc.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/dc.webp"
       },
       {
         "id": "collections.studios.dreamworks",
@@ -1492,10 +1492,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/dreamworks.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/dreamworks.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/dreamworks.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/dreamworks.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/dreamworks.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/dreamworks.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/dreamworks.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/dreamworks.webp"
       },
       {
         "id": "collections.studios.ghibli",
@@ -1518,10 +1518,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/ghibli.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/ghibli.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/ghibli.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/ghibli.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/ghibli.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/ghibli.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/ghibli.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/ghibli.webp"
       },
       {
         "id": "collections.studios.marvel",
@@ -1544,10 +1544,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/marvel.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/marvel.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/marvel.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/marvel.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/marvel.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/marvel.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/marvel.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/marvel.webp"
       },
       {
         "id": "collections.studios.nickelodeon",
@@ -1570,10 +1570,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/nickelodeon.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/nickelodeon.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/nickelodeon.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/nickelodeon.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/nickelodeon.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/nickelodeon.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/nickelodeon.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/nickelodeon.webp"
       },
       {
         "id": "collections.studios.pixar",
@@ -1596,10 +1596,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/pixar.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/pixar.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/pixar.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/pixar.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/pixar.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/pixar.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/pixar.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/pixar.webp"
       },
       {
         "id": "collections.studios.lucasfilm",
@@ -1622,10 +1622,10 @@
           }
         ],
         "coverEmoji": "🏰",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/cover/lucasfilm.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/focused/lucasfilm.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/title/lucasfilm.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/studios/backdrop/lucasfilm.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/studios/cover/lucasfilm.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/studios/focused/lucasfilm.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/studios/title/lucasfilm.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/studios/backdrop/lucasfilm.webp"
       }
     ]
   },
@@ -1658,10 +1658,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2020s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2020s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/2020s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/2020s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/2020s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/2020s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/2020s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/2020s.webp"
       },
       {
         "id": "collections.decades.2010s",
@@ -1684,10 +1684,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2010s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2010s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/2010s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/2010s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/2010s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/2010s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/2010s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/2010s.webp"
       },
       {
         "id": "collections.decades.2000s",
@@ -1710,10 +1710,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/2000s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/2000s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/2000s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/2000s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/2000s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/2000s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/2000s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/2000s.webp"
       },
       {
         "id": "collections.decades.1990s",
@@ -1736,10 +1736,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1990s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1990s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/1990s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/1990s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/1990s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/1990s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/1990s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/1990s.webp"
       },
       {
         "id": "collections.decades.1980s",
@@ -1762,10 +1762,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1980s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1980s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/1980s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/1980s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/1980s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/1980s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/1980s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/1980s.webp"
       },
       {
         "id": "collections.decades.1970s",
@@ -1788,10 +1788,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1970s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1970s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/1970s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/1970s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/1970s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/1970s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/1970s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/1970s.webp"
       },
       {
         "id": "collections.decades.1960s",
@@ -1814,10 +1814,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1960s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1960s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/1960s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/1960s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/1960s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/1960s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/1960s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/1960s.webp"
       },
       {
         "id": "collections.decades.1950s",
@@ -1840,10 +1840,10 @@
           }
         ],
         "coverEmoji": "🎥",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/cover/1950s.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/focused/1950s.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/title/1950s.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/decades/backdrop/1950s.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/decades/cover/1950s.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/decades/focused/1950s.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/decades/title/1950s.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/decades/backdrop/1950s.webp"
       }
     ]
   },
@@ -1870,10 +1870,10 @@
           }
         ],
         "coverEmoji": "🕒",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/short.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/short.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/title/short.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/backdrop/short.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/runtime/cover/short.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/runtime/focused/short.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/runtime/title/short.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/runtime/backdrop/short.webp"
       },
       {
         "id": "collections.runtime.standard",
@@ -1890,10 +1890,10 @@
           }
         ],
         "coverEmoji": "🕒",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/standard.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/standard.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/title/standard.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/backdrop/standard.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/runtime/cover/standard.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/runtime/focused/standard.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/runtime/title/standard.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/runtime/backdrop/standard.webp"
       },
       {
         "id": "collections.runtime.long",
@@ -1910,10 +1910,10 @@
           }
         ],
         "coverEmoji": "🕒",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/long.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/long.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/title/long.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/backdrop/long.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/runtime/cover/long.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/runtime/focused/long.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/runtime/title/long.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/runtime/backdrop/long.webp"
       },
       {
         "id": "collections.runtime.epic",
@@ -1930,10 +1930,10 @@
           }
         ],
         "coverEmoji": "🕒",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/cover/epic.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/focused/epic.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/title/epic.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/runtime/backdrop/epic.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/runtime/cover/epic.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/runtime/focused/epic.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/runtime/title/epic.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/runtime/backdrop/epic.webp"
       }
     ]
   },
@@ -1966,10 +1966,10 @@
           }
         ],
         "coverEmoji": "🇧🇷",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/brazilian.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/brazilian.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/brazilian.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/brazilian.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/brazilian.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/brazilian.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/brazilian.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/brazilian.webp"
       },
       {
         "id": "collections.world.chinese",
@@ -1992,10 +1992,10 @@
           }
         ],
         "coverEmoji": "🇨🇳",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/chinese.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/chinese.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/chinese.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/chinese.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/chinese.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/chinese.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/chinese.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/chinese.webp"
       },
       {
         "id": "collections.world.french",
@@ -2018,10 +2018,10 @@
           }
         ],
         "coverEmoji": "🇫🇷",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/french.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/french.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/french.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/french.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/french.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/french.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/french.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/french.webp"
       },
       {
         "id": "collections.world.german",
@@ -2044,10 +2044,10 @@
           }
         ],
         "coverEmoji": "🇩🇪",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/german.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/german.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/german.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/german.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/german.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/german.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/german.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/german.webp"
       },
       {
         "id": "collections.world.indian",
@@ -2070,10 +2070,10 @@
           }
         ],
         "coverEmoji": "🇮🇳",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/indian.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/indian.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/indian.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/indian.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/indian.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/indian.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/indian.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/indian.webp"
       },
       {
         "id": "collections.world.italian",
@@ -2096,10 +2096,10 @@
           }
         ],
         "coverEmoji": "🇮🇹",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/italian.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/italian.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/italian.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/italian.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/italian.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/italian.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/italian.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/italian.webp"
       },
       {
         "id": "collections.world.japanese",
@@ -2122,10 +2122,10 @@
           }
         ],
         "coverEmoji": "🇯🇵",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/japanese.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/japanese.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/japanese.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/japanese.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/japanese.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/japanese.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/japanese.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/japanese.webp"
       },
       {
         "id": "collections.world.korean",
@@ -2148,10 +2148,10 @@
           }
         ],
         "coverEmoji": "🇰🇷",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/korean.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/korean.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/korean.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/korean.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/korean.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/korean.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/korean.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/korean.webp"
       },
       {
         "id": "collections.world.latin-american",
@@ -2174,10 +2174,10 @@
           }
         ],
         "coverEmoji": "🇲🇽",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/latin-american.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/latin-american.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/latin-american.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/latin-american.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/latin-american.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/latin-american.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/latin-american.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/latin-american.webp"
       },
       {
         "id": "collections.world.nordic",
@@ -2200,10 +2200,10 @@
           }
         ],
         "coverEmoji": "🇸🇪",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/nordic.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/nordic.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/nordic.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/nordic.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/nordic.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/nordic.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/nordic.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/nordic.webp"
       },
       {
         "id": "collections.world.russian",
@@ -2226,10 +2226,10 @@
           }
         ],
         "coverEmoji": "🇷🇺",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/russian.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/russian.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/russian.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/russian.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/russian.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/russian.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/russian.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/russian.webp"
       },
       {
         "id": "collections.world.spanish",
@@ -2252,10 +2252,10 @@
           }
         ],
         "coverEmoji": "🇪🇸",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/spanish.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/spanish.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/spanish.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/spanish.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/spanish.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/spanish.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/spanish.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/spanish.webp"
       },
       {
         "id": "collections.world.turkish",
@@ -2278,10 +2278,10 @@
           }
         ],
         "coverEmoji": "🇹🇷",
-        "coverImageUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/cover/turkish.webp",
-        "focusGifUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/focused/turkish.webp",
-        "titleLogoUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/title/turkish.webp",
-        "heroBackdropUrl": "https://cdn.jsdelivr.net/gh/luckynumb3rs/stremio-perfect-setup/collections/world/backdrop/turkish.webp"
+        "coverImageUrl": "https://numb3rs.stream/collections/world/cover/turkish.webp",
+        "focusGifUrl": "https://numb3rs.stream/collections/world/focused/turkish.webp",
+        "titleLogoUrl": "https://numb3rs.stream/collections/world/title/turkish.webp",
+        "heroBackdropUrl": "https://numb3rs.stream/collections/world/backdrop/turkish.webp"
       }
     ]
   }
