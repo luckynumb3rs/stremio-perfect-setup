@@ -35,6 +35,52 @@ console.log('\n# expression evaluator');
   eq('switchKey formatter', switchKey('inputs.formatterChoice', c({ formatterChoice: 'color' }, [])), 'color');
 }
 
+console.log('\n# canonical operators: includes / numeric / xor');
+{
+  const c = (inputs, services = []) => ({ inputs, services, credentials: {} });
+  // includes (array + string membership)
+  ok('includes: array contains', evalExpr('inputs.coreFilter includes extended', c({ coreFilter: ['standard', 'extended'] })) === true);
+  ok('includes: array missing', evalExpr('inputs.coreFilter includes extended', c({ coreFilter: ['standard'] })) === false);
+  ok('includes: string substring', evalExpr('inputs.tag includes hdr', c({ tag: 'hdr10' })) === true);
+  ok('includes: undefined is false', evalExpr('inputs.missing includes x', c({})) === false);
+  ok('includes: negation binds outside', evalExpr('!inputs.languages includes German', c({ languages: ['English'] })) === true);
+  ok('includes: negation false case', evalExpr('!inputs.languages includes German', c({ languages: ['German'] })) === false);
+  // numeric comparisons
+  ok('numeric >', evalExpr('inputs.n > 5', c({ n: 6 })) === true);
+  ok('numeric >=', evalExpr('inputs.n >= 5', c({ n: 5 })) === true);
+  ok('numeric <', evalExpr('inputs.n < 5', c({ n: 4 })) === true);
+  ok('numeric <=', evalExpr('inputs.n <= 5', c({ n: 5 })) === true);
+  ok('numeric > false', evalExpr('inputs.n > 5', c({ n: 3 })) === false);
+  // xor (odd-count true) and precedence or < xor < and
+  ok('xor true', evalExpr('inputs.a xor inputs.b', c({ a: true, b: false })) === true);
+  ok('xor false (both)', evalExpr('inputs.a xor inputs.b', c({ a: true, b: true })) === false);
+  ok('precedence and<or', evalExpr('inputs.a and inputs.b or inputs.c', c({ a: false, b: true, c: true })) === true);
+}
+
+console.log('\n# multi-word comparison RHS');
+{
+  const c = (inputs, services = []) => ({ inputs, services, credentials: {} });
+  ok('multi-word RHS equals', evalExpr('inputs.lang == Portuguese (Brazil)', c({ lang: 'Portuguese (Brazil)' })) === true);
+  ok('multi-word RHS then and', evalExpr('inputs.lang == Portuguese (Brazil) and inputs.x', c({ lang: 'Portuguese (Brazil)', x: true })) === true);
+  ok('single-word RHS still works', evalExpr('inputs.lang != none', c({ lang: 'English' })) === true);
+}
+
+console.log('\n# nested subsection defaults + deep-merge');
+{
+  const tpl = {
+    metadata: { inputs: [
+      { id: 'bitrate', type: 'subsection', subOptions: [
+        { id: 'bitrateCap', type: 'select-with-custom', default: '150' },
+        { id: 'bitrateCapSoft', type: 'boolean', default: false },
+      ] },
+      { id: 'topField', type: 'boolean', default: true },
+    ] },
+    config: { cap: '{{inputs.bitrate.bitrateCap}}', soft: '{{inputs.bitrate.bitrateCapSoft}}', top: '{{inputs.topField}}' },
+  };
+  const out = resolveTemplate(tpl, { inputs: { bitrate: { bitrateCapSoft: true } } });
+  eq('nested default survives partial override', out, { cap: '150', soft: true, top: true });
+}
+
 console.log('\n# field visibility (UI renderer)');
 {
   const inputsSchema = template.metadata.inputs;

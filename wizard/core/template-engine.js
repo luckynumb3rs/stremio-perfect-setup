@@ -29,30 +29,38 @@ const CREDENTIAL_PLACEHOLDERS = {
 // Expression evaluation
 // ---------------------------------------------------------------------------
 
-// Tokenize an __if / __switch expression.
+// Tokenize an __if / __switch expression. Each token keeps its source span so a
+// comparison RHS can be recovered verbatim (preserving spaces/parens in values).
 function tokenize(expr) {
   const tokens = [];
-  const re = /\s*(==|!=|!|\(|\)|'[^']*'|"[^"]*"|[A-Za-z0-9_.]+)\s*/g;
+  const re = /\s*(==|!=|>=|<=|>|<|!|\(|\)|'[^']*'|"[^"]*"|[A-Za-z0-9_.]+)\s*/g;
   let m;
   let last = 0;
   while ((m = re.exec(expr)) !== null) {
     if (m.index !== last) throw new Error(`Unexpected token in expression: ${expr}`);
-    tokens.push(m[1]);
+    const start = m.index + m[0].indexOf(m[1]);
+    tokens.push({ value: m[1], start, end: start + m[1].length });
     last = re.lastIndex;
   }
   if (last !== expr.length) throw new Error(`Unparsed trailing in expression: ${expr}`);
   return tokens;
 }
 
-// Recursive-descent parser -> AST. Precedence: or < and < not < comparison < primary.
-function parseExpression(tokens) {
+// Recursive-descent parser -> AST. Precedence (canonical AIOStreams): or < xor < and
+// < not < comparison < primary. Comparison ops: == != includes > >= < <=.
+function parseExpression(tokens, expr) {
   let pos = 0;
-  const peek = () => tokens[pos];
-  const next = () => tokens[pos++];
+  const peek = () => (tokens[pos] ? tokens[pos].value : undefined);
+  const next = () => tokens[pos++].value;
 
   function parseOr() {
+    let node = parseXor();
+    while (peek() === 'or') { next(); node = { op: 'or', l: node, r: parseXor() }; }
+    return node;
+  }
+  function parseXor() {
     let node = parseAnd();
-    while (peek() === 'or') { next(); node = { op: 'or', l: node, r: parseAnd() }; }
+    while (peek() === 'xor') { next(); node = { op: 'xor', l: node, r: parseAnd() }; }
     return node;
   }
   function parseAnd() {
@@ -66,11 +74,36 @@ function parseExpression(tokens) {
   }
   function parseComparison() {
     const left = parsePrimary();
-    if (peek() === '==' || peek() === '!=') {
-      const op = next();
-      return { op, l: left, r: parsePrimary() };
+    const op = peek();
+    if (op === '==' || op === '!=' || op === 'includes' || op === '>' || op === '>=' || op === '<' || op === '<=') {
+      next();
+      return { op, l: left, r: parseComparisonRhs() };
     }
     return left;
+  }
+  // RHS of a comparison. A structured operand (inputs.*, services, quoted, number)
+  // parses normally; anything else is a bareword value that may contain spaces and
+  // parentheses (e.g. `Portuguese (Brazil)`), captured verbatim from the source up to
+  // the next top-level logical operator or closing group paren.
+  function parseComparisonRhs() {
+    const t = peek();
+    if (t !== undefined && (t.startsWith('inputs.') || t === 'services' || t.startsWith('services.')
+        || /^['"]/.test(t) || /^-?\d/.test(t))) {
+      return parsePrimary();
+    }
+    const startTok = tokens[pos];
+    let endTok = startTok;
+    let depth = 0;
+    while (pos < tokens.length) {
+      const v = peek();
+      if (depth === 0 && (v === 'and' || v === 'or' || v === 'xor' || v === ')')) break;
+      if (v === '(') depth++;
+      else if (v === ')') depth--;
+      endTok = tokens[pos];
+      pos++;
+    }
+    const raw = startTok ? expr.slice(startTok.start, endTok.end) : '';
+    return { op: 'operand', token: raw };
   }
   function parsePrimary() {
     const t = peek();
@@ -80,7 +113,7 @@ function parseExpression(tokens) {
   }
 
   const ast = parseOr();
-  if (pos !== tokens.length) throw new Error(`Trailing tokens: ${tokens.slice(pos).join(' ')}`);
+  if (pos !== tokens.length) throw new Error(`Trailing tokens: ${tokens.slice(pos).map((x) => x.value).join(' ')}`);
   return ast;
 }
 
@@ -114,9 +147,21 @@ function evalAst(ast, ctx) {
   switch (ast.op) {
     case 'or': return truthy(evalAst(ast.l, ctx)) || truthy(evalAst(ast.r, ctx));
     case 'and': return truthy(evalAst(ast.l, ctx)) && truthy(evalAst(ast.r, ctx));
+    case 'xor': return truthy(evalAst(ast.l, ctx)) !== truthy(evalAst(ast.r, ctx));
     case 'not': return !truthy(evalAst(ast.v, ctx));
     case '==': return looseEq(evalOperandNode(ast.l, ctx), evalOperandNode(ast.r, ctx));
     case '!=': return !looseEq(evalOperandNode(ast.l, ctx), evalOperandNode(ast.r, ctx));
+    case 'includes': {
+      const hay = evalOperandNode(ast.l, ctx);
+      const needle = String(evalOperandNode(ast.r, ctx));
+      if (Array.isArray(hay)) return hay.map(String).includes(needle);
+      if (typeof hay === 'string') return hay.includes(needle);
+      return false;
+    }
+    case '>':  return Number(evalOperandNode(ast.l, ctx)) >  Number(evalOperandNode(ast.r, ctx));
+    case '>=': return Number(evalOperandNode(ast.l, ctx)) >= Number(evalOperandNode(ast.r, ctx));
+    case '<':  return Number(evalOperandNode(ast.l, ctx)) <  Number(evalOperandNode(ast.r, ctx));
+    case '<=': return Number(evalOperandNode(ast.l, ctx)) <= Number(evalOperandNode(ast.r, ctx));
     case 'operand': return resolveOperand(ast.token, ctx);
     default: throw new Error(`Unknown ast op: ${ast.op}`);
   }
@@ -137,13 +182,13 @@ function looseEq(a, b) {
 }
 
 function evalExpr(expr, ctx) {
-  return truthy(evalAst(parseExpression(tokenize(expr)), ctx));
+  return truthy(evalAst(parseExpression(tokenize(expr), expr), ctx));
 }
 
 // Produce the string key used by __switch from an expression.
 function switchKey(expr, ctx) {
   // For a bare operand we want its raw value; for `services` -> joined ids.
-  const ast = parseExpression(tokenize(expr));
+  const ast = parseExpression(tokenize(expr), expr);
   const v = evalAst(ast, ctx);
   if (Array.isArray(v)) return v.join(','); // services -> "" when empty
   if (typeof v === 'boolean') return v ? 'true' : 'false';
@@ -277,6 +322,33 @@ function resolveValueWithFlatten(value, ctx, keyHint) {
 // Public API
 // ---------------------------------------------------------------------------
 
+// Recursively collect template-defined defaults. Subsection sub-option defaults are
+// nested under the subsection id; header.* entries are skipped.
+function collectDefaults(fields, target) {
+  for (const field of fields) {
+    if (!field || !field.id) continue;
+    if (field.type === 'subsection' && Array.isArray(field.subOptions)) {
+      const nested = {};
+      collectDefaults(field.subOptions, nested);
+      if (Object.keys(nested).length) target[field.id] = nested;
+    } else if (!field.id.startsWith('header.') && field.default !== undefined) {
+      target[field.id] = field.default;
+    }
+  }
+}
+
+// Deep-merge plain objects (arrays and scalars in `over` replace `base`).
+function deepMerge(base, over) {
+  const out = { ...base };
+  for (const [k, v] of Object.entries(over || {})) {
+    out[k] = (v && typeof v === 'object' && !Array.isArray(v) &&
+              base[k] && typeof base[k] === 'object' && !Array.isArray(base[k]))
+      ? deepMerge(base[k], v)
+      : v;
+  }
+  return out;
+}
+
 /**
  * Resolve a template's `config` block into a final config object.
  * @param {object} template  Parsed template JSON (has `.config` and `.metadata`).
@@ -288,18 +360,14 @@ function resolveValueWithFlatten(value, ctx, keyHint) {
  */
 function resolveTemplate(template, { inputs = {}, services = [], credentials = {}, serviceCredentials = {} } = {}) {
   // Seed defaults from metadata.inputs so that unset inputs resolve to their template-defined
-  // default value (e.g. timeout:5000) rather than the empty string fallback.
+  // default value (e.g. timeout:5000) rather than the empty string fallback. Subsection
+  // sub-option defaults nest under the subsection id (matching the canonical wizard).
   const templateDefaults = {};
   const metaInputs = template?.metadata?.inputs;
-  if (Array.isArray(metaInputs)) {
-    for (const field of metaInputs) {
-      if (field.id && !field.id.startsWith('header.') && field.default !== undefined) {
-        templateDefaults[field.id] = field.default;
-      }
-    }
-  }
-  // User-supplied inputs take precedence over template defaults.
-  const mergedInputs = { ...templateDefaults, ...inputs };
+  if (Array.isArray(metaInputs)) collectDefaults(metaInputs, templateDefaults);
+  // User-supplied inputs take precedence over template defaults; deep-merge so a partial
+  // subsection override (e.g. {bitrate:{bitrateCapSoft:true}}) keeps its sibling defaults.
+  const mergedInputs = deepMerge(templateDefaults, inputs);
 
   const ctx = { inputs: mergedInputs, services, credentials };
   const resolved = resolveNode(template.config, ctx, null);
