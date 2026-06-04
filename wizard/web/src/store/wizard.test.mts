@@ -70,7 +70,7 @@ console.log('\n# InstallResult.watchly + aiometadata.instance/config');
     },
   });
   ok('installResult.watchly.token', get().watchly?.token === 'u1');
-  ok('installResult.watchly.manifestUrl', get().watchly?.manifestUrl.includes('u1'));
+  ok('installResult.watchly.manifestUrl', !!get().watchly?.manifestUrl.includes('u1'));
   ok('installResult.aiometadata.instance', get().aiometadata?.instance === 'https://meta.example');
   eq('installResult.aiometadata.config', get().aiometadata?.config, { language: 'en-US', apiKeys: { tmdb: 'k' } });
 }

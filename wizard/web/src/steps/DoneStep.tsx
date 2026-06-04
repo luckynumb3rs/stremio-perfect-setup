@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Copy, Download, ExternalLink, Eye, EyeOff } from 'lucide-react';
+import { Check, Copy, Download, ExternalLink, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { NotificationCards } from '../components/NotificationCards';
 import { WizardShell } from '../components/WizardShell';
 import { useWizard } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
 import { buildWizardCompletionPayload, trackWizardCompletion } from '../lib/analytics';
 import { wizardMetadata } from '../lib/integration';
+// @ts-ignore
+import { createStremioAdapter } from '@core/adapters/stremio.js';
+// @ts-ignore
+import { createAiometadataAdapter } from '@core/adapters/aiometadata.js';
 
 function toConfigureUrl(manifestUrl: string) {
   const [baseUrl, search = ''] = manifestUrl.split('?');
@@ -52,6 +56,16 @@ export function DoneStep() {
   const guideUrl = getGuideUrl();
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [visiblePasswords, setVisiblePasswords] = useState<Record<string, boolean>>({});
+
+  // Trakt scrobbling (Stremio only)
+  const [scrobbleStatus, setScrobbleStatus] = useState<'idle' | 'connecting' | 'connected' | 'error'>('idle');
+  const [scrobbleError, setScrobbleError] = useState<string | null>(null);
+
+  // AIOMetadata Trakt
+  type MetaTraktStep = 'idle' | 'awaiting_token_id' | 'saving' | 'connected';
+  const [metaTraktStep, setMetaTraktStep] = useState<MetaTraktStep>('idle');
+  const [tokenIdInput, setTokenIdInput] = useState('');
+  const [metaTraktError, setMetaTraktError] = useState<string | null>(null);
   const isUsingAccountPassword = addonPasswordSource === 'account';
   const accountMode = target === 'nuvio' ? nuvioAccount.mode : stremioAccount.mode;
   const selectedNuvioProfileName = useMemo(() => {
@@ -168,8 +182,14 @@ export function DoneStep() {
             configureUrl: toConfigureUrl(aiometadata.manifestUrl),
           }
         : null,
+      installResult.watchly ? {
+        id: 'watchly', name: '🍿 Watchly',
+        uuid: installResult.watchly.token, password: '',
+        manifestUrl: installResult.watchly.manifestUrl,
+        configureUrl: toConfigureUrl(installResult.watchly.manifestUrl),
+      } : null,
     ].filter(Boolean)
-  ), [aiostreams, aiometadata]) as Array<{
+  ), [aiostreams, aiometadata, installResult.watchly]) as Array<{
     id: string;
     name: string;
     uuid: string;
@@ -193,6 +213,74 @@ export function DoneStep() {
       ...current,
       [addonId]: !current[addonId],
     }));
+  }
+
+  async function handleScrobbleConnect() {
+    setScrobbleStatus('connecting');
+    setScrobbleError(null);
+    try {
+      const userId = stremioAccount.userId;
+      const authKey = stremioAccount.authKey;
+      if (!userId || !authKey) throw new Error('Stremio account details are not available. Please restart the wizard.');
+
+      window.open(`https://www.strem.io/trakt/auth/${userId}`, '_blank');
+
+      const stremio = createStremioAdapter();
+      const deadline = Date.now() + 3 * 60 * 1000;
+      await new Promise<void>((resolve, reject) => {
+        const interval = window.setInterval(async () => {
+          if (Date.now() > deadline) {
+            clearInterval(interval);
+            reject(new Error('Timed out waiting for Trakt authorization. Please try again.'));
+            return;
+          }
+          try {
+            const user = await stremio.getUser(authKey);
+            if (user?.trakt) { clearInterval(interval); resolve(); }
+          } catch { /* ignore individual poll errors */ }
+        }, 3000);
+      });
+      setScrobbleStatus('connected');
+    } catch (err: unknown) {
+      setScrobbleStatus('error');
+      setScrobbleError(err instanceof Error ? err.message : String(err));
+    }
+  }
+
+  function handleAiometadataTraktOpen() {
+    if (!installResult.aiometadata?.instance) return;
+    window.open(`${installResult.aiometadata.instance}/api/auth/trakt/authorize`, '_blank');
+    setMetaTraktStep('awaiting_token_id');
+    setMetaTraktError(null);
+    setTokenIdInput('');
+  }
+
+  async function handleTokenIdSubmit() {
+    const trimmed = tokenIdInput.trim();
+    if (!trimmed) return;
+    const meta = installResult.aiometadata;
+    if (!meta?.instance || !meta.uuid || !meta.password) {
+      setMetaTraktError('AIOMetadata result is incomplete. Cannot connect Trakt.');
+      return;
+    }
+    setMetaTraktStep('saving');
+    setMetaTraktError(null);
+    try {
+      const adapter = createAiometadataAdapter(meta.instance);
+      await adapter.validateTokenId(trimmed);
+      const updatedConfig = {
+        ...(meta.config ?? {}),
+        apiKeys: {
+          ...((meta.config as { apiKeys?: Record<string, unknown> })?.apiKeys ?? {}),
+          traktTokenId: trimmed,
+        },
+      };
+      await adapter.updateConfig(updatedConfig, meta.password, meta.uuid);
+      setMetaTraktStep('connected');
+    } catch (err: unknown) {
+      setMetaTraktStep('awaiting_token_id');
+      setMetaTraktError(err instanceof Error ? err.message : String(err));
+    }
   }
 
   useEffect(() => {
@@ -411,6 +499,134 @@ export function DoneStep() {
                   Download all add-on details
                 </button>
               </div>
+              {/* Trakt integration card */}
+              {(target === 'stremio' || !!aiometadata) && (
+                <div
+                  style={{
+                    background: 'rgba(95, 24, 43, 0.68)',
+                    border: '1px solid rgba(255, 230, 236, 0.2)',
+                    borderRadius: '12px',
+                    padding: '0.95rem 1rem',
+                    marginBottom: '1rem',
+                    color: 'rgba(255, 255, 255, 0.96)',
+                    boxShadow: '0 10px 24px rgba(57, 7, 21, 0.22)',
+                  }}
+                >
+                  <p style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem', marginTop: 0 }}>
+                    🎯 Trakt <span style={{ fontWeight: 400, fontSize: '0.82rem', opacity: 0.8 }}>— optional, connect from here</span>
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                    {/* Scrobbling — Stremio target only */}
+                    {target === 'stremio' && (
+                      <div>
+                        <p style={{ fontSize: '0.82rem', marginBottom: '0.4rem', marginTop: 0, opacity: 0.9 }}>
+                          <strong>Scrobbling</strong> — sends watch progress to Trakt automatically.
+                        </p>
+                        {scrobbleStatus === 'connected' ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'rgba(167,243,208,1)', fontWeight: 600 }}>
+                            <Check size={14} /> Connected
+                          </div>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              onClick={handleScrobbleConnect}
+                              disabled={scrobbleStatus === 'connecting'}
+                              style={{
+                                padding: '0.45rem 0.85rem', borderRadius: '7px',
+                                border: '1px solid rgba(255,230,236,0.35)',
+                                background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.95)',
+                                fontSize: '0.82rem', fontWeight: 600,
+                                cursor: scrobbleStatus === 'connecting' ? 'default' : 'pointer',
+                                display: 'flex', alignItems: 'center', gap: '0.35rem',
+                              }}
+                            >
+                              {scrobbleStatus === 'connecting'
+                                ? <><Loader2 size={13} style={{ animation: 'spin 1s linear infinite' }} /> Connecting…</>
+                                : '🔗 Connect Trakt Scrobbling'}
+                            </button>
+                            {scrobbleError && (
+                              <p style={{ fontSize: '0.78rem', color: 'rgba(252,165,165,1)', marginTop: '0.35rem', marginBottom: 0 }}>
+                                {scrobbleError}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+
+                    {/* AIOMetadata Trakt */}
+                    {!!aiometadata && (
+                      <div>
+                        <p style={{ fontSize: '0.82rem', marginBottom: '0.4rem', marginTop: 0, opacity: 0.9 }}>
+                          <strong>AIOMetadata catalogs</strong> — enables Trakt-powered recommendations and history catalogs.
+                        </p>
+                        {metaTraktStep === 'connected' ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'rgba(167,243,208,1)', fontWeight: 600 }}>
+                            <Check size={14} /> Connected
+                          </div>
+                        ) : metaTraktStep === 'idle' ? (
+                          <button
+                            type="button"
+                            onClick={handleAiometadataTraktOpen}
+                            style={{
+                              padding: '0.45rem 0.85rem', borderRadius: '7px',
+                              border: '1px solid rgba(255,230,236,0.35)',
+                              background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.95)',
+                              fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
+                            }}
+                          >
+                            🔗 Connect Trakt to AIOMetadata
+                          </button>
+                        ) : (
+                          <div>
+                            <p style={{ fontSize: '0.82rem', marginBottom: '0.4rem', marginTop: 0, opacity: 0.85 }}>
+                              Authorize on the Trakt page that opened, then copy the <strong>Token ID</strong> shown and paste it below.
+                            </p>
+                            <div style={{ display: 'flex', gap: '0.4rem' }}>
+                              <input
+                                type="text"
+                                value={tokenIdInput}
+                                onChange={e => setTokenIdInput(e.target.value)}
+                                placeholder="Paste Token ID here"
+                                style={{
+                                  flex: 1, padding: '0.4rem 0.6rem', borderRadius: '6px',
+                                  border: '1px solid rgba(255,230,236,0.35)',
+                                  background: 'rgba(255,255,255,0.12)', color: '#fff',
+                                  fontSize: '0.82rem', outline: 'none',
+                                }}
+                              />
+                              <button
+                                type="button"
+                                onClick={handleTokenIdSubmit}
+                                disabled={!tokenIdInput.trim() || metaTraktStep === 'saving'}
+                                style={{
+                                  padding: '0.4rem 0.75rem', borderRadius: '6px',
+                                  border: '1px solid rgba(255,230,236,0.35)',
+                                  background: 'rgba(255,255,255,0.15)', color: '#fff',
+                                  fontSize: '0.82rem', fontWeight: 600,
+                                  cursor: !tokenIdInput.trim() || metaTraktStep === 'saving' ? 'default' : 'pointer',
+                                  display: 'flex', alignItems: 'center', gap: '0.3rem',
+                                }}
+                              >
+                                {metaTraktStep === 'saving'
+                                  ? <><Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> Saving…</>
+                                  : 'Confirm'}
+                              </button>
+                            </div>
+                            {metaTraktError && (
+                              <p style={{ fontSize: '0.78rem', color: 'rgba(252,165,165,1)', marginTop: '0.35rem', marginBottom: 0 }}>
+                                {metaTraktError}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
               <NotificationCards notifications={wizardConfig?.doneStepNotifications} target={target} />
             </>
           )}
@@ -424,6 +640,7 @@ export function DoneStep() {
 
         </>
       )}
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
     </WizardShell>
   );
 }
