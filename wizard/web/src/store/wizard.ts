@@ -151,9 +151,17 @@ export const useWizard = create<WizardState>((set) => ({
   })),
 
   setAioStreamsInstance: (url) => set({ aioStreamsInstance: url }),
-  setAioStreamsInput: (id, value) => set(s => ({
-    aioStreamsInputs: { ...s.aioStreamsInputs, [id]: value },
-  })),
+  setAioStreamsInput: (id, value) => set(s => {
+    // Subsection sub-options use a dotted id (`subsectionId.optionId`) and are stored
+    // nested under the subsection id, matching the canonical AIOStreams wizard.
+    if (!id.includes('.')) {
+      return { aioStreamsInputs: { ...s.aioStreamsInputs, [id]: value } };
+    }
+    const [head, ...rest] = id.split('.');
+    const branch = { ...((s.aioStreamsInputs[head] as Record<string, unknown>) || {}) };
+    branch[rest.join('.')] = value;
+    return { aioStreamsInputs: { ...s.aioStreamsInputs, [head]: branch } };
+  }),
   setAiometadataInstance: (url) => set({ aiometadataInstance: url }),
   setCatalogSelection: (sel) => set(s => ({
     catalogSelection: {
