@@ -99,7 +99,7 @@ export function AccountStep() {
         const auth = account.mode === 'create'
           ? await adapter.register(account.email, account.password)
           : await adapter.login(account.email, account.password);
-        setStremioAccount({ authKey: auth.authKey });
+        setStremioAccount({ authKey: auth.authKey, userId: (auth as { userId?: string | null }).userId ?? undefined });
       } else {
         const adapter = createNuvioAdapter();
         if (account.mode === 'create') {

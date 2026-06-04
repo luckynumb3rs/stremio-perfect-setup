@@ -46,11 +46,15 @@ export function createStremioAdapter(endpoint = DEFAULT_ENDPOINT) {
   return {
     async login(email, password) {
       const r = await rpc(endpoint, 'login', { email, password });
-      return { authKey: r.authKey, user: r.user };
+      return { authKey: r.authKey, user: r.user, userId: r.user?._id ?? null };
     },
     async register(email, password) {
       const r = await rpc(endpoint, 'register', { email, password });
-      return { authKey: r.authKey, user: r.user };
+      return { authKey: r.authKey, user: r.user, userId: r.user?._id ?? null };
+    },
+    async getUser(authKey) {
+      const r = await rpc(endpoint, 'getUser', {}, authKey);
+      return r;
     },
     async getAddons(authKey) {
       const r = await rpc(endpoint, 'addonCollectionGet', { update: true, addFromURL: [] }, authKey);
