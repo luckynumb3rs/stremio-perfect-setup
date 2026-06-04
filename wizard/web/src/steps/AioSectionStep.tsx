@@ -388,24 +388,76 @@ function FieldRenderer({ field, value, onChange }: FieldProps) {
         </div>
       )}
 
+      {field.type === 'select-with-custom' && field.options && (() => {
+        const matchesOption = field.options.some(o => o.value === String(value));
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            {field.options.map(opt => (
+              <button
+                key={opt.value}
+                type="button"
+                className={`wizard-hover-lift${String(value) === opt.value ? '' : ' wizard-hover-lift--guide'}`}
+                style={{
+                  ...selectedBtn(String(value) === opt.value),
+                  '--wizard-hover-selected-bg': 'var(--panel-2)',
+                  '--wizard-hover-selected-border': 'var(--accent)',
+                  '--wizard-hover-selected-color': 'var(--text)',
+                } as CSSProperties}
+                onClick={() => onChange(opt.value)}
+              >
+                <span style={{ fontWeight: 500, fontSize: '0.875rem' }}>{opt.label}</span>
+              </button>
+            ))}
+            <input
+              type="text"
+              placeholder="Custom value…"
+              value={matchesOption ? '' : (value as string) ?? ''}
+              onChange={e => onChange(e.target.value)}
+              style={{ ...inputStyle, marginTop: '0.15rem' }}
+            />
+          </div>
+        );
+      })()}
+
       {field.type === 'number' && (
         <input
           type="number"
           value={(value as number) ?? ''}
+          min={field.constraints?.min}
+          max={field.constraints?.max}
           onChange={e => onChange(e.target.value === '' ? undefined : Number(e.target.value))}
           placeholder={String(field.default ?? '')}
           style={inputStyle}
         />
       )}
 
-      {(field.type === 'string' || field.type === 'password') && (
+      {(field.type === 'string' || field.type === 'password' || field.type === 'url') && (
         <input
-          type={field.type === 'password' ? 'password' : 'text'}
+          type={field.type === 'password' ? 'password' : field.type === 'url' ? 'url' : 'text'}
           value={(value as string) ?? ''}
+          minLength={field.constraints?.min}
+          maxLength={field.constraints?.max}
           onChange={e => onChange(e.target.value)}
           style={inputStyle}
         />
       )}
+
+      {!KNOWN_FIELD_TYPES.has(field.type ?? '') && (
+        <p style={{
+          background: 'var(--panel-2)', border: '1px solid var(--border)', borderRadius: '8px',
+          padding: '0.6rem 0.8rem', fontSize: '0.8125rem', color: 'var(--muted)', margin: 0,
+        }}>
+          Configure <strong>{field.name || field.id}</strong> directly in AIOStreams — the
+          <code style={{ margin: '0 0.25rem' }}>{field.type || 'unknown'}</code>
+          option type isn’t supported in this wizard.
+        </p>
+      )}
     </div>
   );
 }
+
+// Field types FieldRenderer can render a control for. Anything else (e.g. oauth,
+// custom-nntp-servers) falls back to an "configure in AIOStreams" placeholder.
+const KNOWN_FIELD_TYPES = new Set([
+  'boolean', 'select', 'multi-select', 'number', 'string', 'password', 'url', 'select-with-custom',
+]);
