@@ -304,7 +304,7 @@ export function CatalogStep() {
       </p>
       {target === 'nuvio' && (
         <p className="page-description" style={{ marginBottom: '1rem' }}>
-          Genres and Anime move together in Nuvio because they share the same collections group.
+          Genres and Anime move together in Nuvio because they share the same collections group. It's recommended to keep Genres enabled if you want to use Anime.
         </p>
       )}
 
