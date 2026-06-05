@@ -713,6 +713,7 @@ fi
 
 section "Template fetch"
 "${HOSTING_ROOT}/steps/fetch-template.sh" --source "${TEMPLATE_SOURCE_VALUE}" --template-dir "${TEMPLATE_DIR_ABS}"
+"${HOSTING_ROOT}/steps/sync-bundled-apps.sh" --template-dir "${TEMPLATE_DIR_ABS}"
 
 if is_interactive; then
   show_message "Custom Modules" "The upstream template has been downloaded into ${TEMPLATE_DIR_ABS}. If you want to add any extra app folders under ${TEMPLATE_DIR_ABS}/apps now, do that before module discovery continues. Each extra module must live in its own folder and contain a compose.yaml or compose.yml file so the script can detect it."
