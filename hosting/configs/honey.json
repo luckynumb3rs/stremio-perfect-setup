@@ -700,6 +700,16 @@
         "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/HEAD/png/wallos.png"
       }
     ],
+    "watchly": [
+      {
+        "slug": "watchly",
+        "hostname_env": "WATCHLY_HOSTNAME",
+        "href_template": "https://${WATCHLY_HOSTNAME}",
+        "name": "Watchly",
+        "desc": "Stremio addon for tracking and discovering what to watch.",
+        "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/HEAD/svg/stremio.svg"
+      }
+    ],
     "webstreamr": [
       {
         "slug": "webstreamr",
