@@ -707,7 +707,7 @@
         "href_template": "https://${WATCHLY_HOSTNAME}",
         "name": "Watchly",
         "desc": "Stremio addon for tracking and discovering what to watch.",
-        "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/HEAD/svg/stremio.svg"
+        "icon": "https://raw.githubusercontent.com/TimilsinaBimal/Watchly/main/app/static/logo.png"
       }
     ],
     "webstreamr": [
