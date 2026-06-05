@@ -2,7 +2,12 @@
 
 This `hosting/` folder is a guided setup for turning a fresh VPS into a Docker-based streaming stack.
 
-If you are new to SSH, Docker, or self-hosting in general, use this guide from top to bottom once before you start clicking through the script. The goal is to make the process predictable: first you prepare SSH access, then you get the `hosting/` folder onto the VPS, then you run the main setup script and follow the visual prompts.
+You can run it two ways, and `main.sh` asks which at the very start:
+
+- **From your own computer (recommended):** `main.sh` prepares SSH, copies the `hosting/` folder up to your VPS, and runs the whole setup there for you.
+- **Directly on the VPS:** you get the files onto the server first (with `init.sh`), then run `main.sh` there; SSH is already done because you used it to log in.
+
+If you are new to SSH, Docker, or self-hosting in general, use this guide from top to bottom once before you start clicking through the script. The steps below walk through the manual VPS path; if you run from your own computer instead, `main.sh` handles the SSH and file-copy work (Steps 1 and 2) for you automatically.
 
 ## What This Setup Does
 
@@ -31,7 +36,7 @@ You should have these things ready:
 - Cloudflare nameservers already active if you plan to use `cloudflare-ddns`
 - a Supabase project ready only if you want the AIO modules to use Postgres instead of local SQLite
 
-Important: the `main.sh` script must run on the Linux machine that will host Docker. The easiest way is to SSH into the VPS first, then clone `hosting/` there, and run everything directly on the VPS.
+Important: the setup itself always runs on the Linux machine that will host Docker. You can launch it from your own computer — `main.sh` then prepares SSH, copies `hosting/` to the VPS, and runs it there — or you can SSH into the VPS first, get `hosting/` onto it, and run `main.sh` directly. Either way the work happens on the VPS.
 
 ## Step 1: Prepare an SSH Alias
 
@@ -189,7 +194,9 @@ You can still add one-off apps by hand too: when running interactively, the scri
 
 ### Phase 5: Module Selection
 
-This is the checklist UI you mentioned.
+This phase is the module checklist.
+
+On a fresh install, before the checklist the script offers a list of preset **packages** — named bundles of modules defined in `configs/presets.json`. Picking one starts its modules preselected on the checklist (you can still add or remove anything); picking "none" starts with nothing preselected. This package screen is skipped when you continue from or overwrite an existing deployment.
 
 You will see:
 
@@ -342,7 +349,7 @@ If you just want the shortest possible beginner path, this is the usual order:
 7. Confirm Docker installation if needed.
 8. Choose the deployment Docker directory.
 9. If that target already has a live setup, choose whether to overwrite it or continue from it.
-10. Select your modules.
+10. On a fresh install, pick a preset package (or "none"), then select your modules.
 11. Fill in timezone, domain, and Let's Encrypt email.
 12. Complete any module-specific prompts such as Cloudflare or Supabase.
 13. Review the staged config.
@@ -390,11 +397,17 @@ Add or remove modules on an existing deployment without prompts (`--modify` keep
   --domain example.com --cloudflare-api-token <token> -y
 ```
 
-Run the whole thing unattended from your local computer (prepares SSH, copies the folder to the VPS, runs it there):
+List the preset packages (the named module bundles from `configs/presets.json`):
+
+```bash
+./main.sh --list-presets
+```
+
+Run the whole thing unattended from your local computer (prepares SSH, copies the folder to the VPS, runs it there). Here `--preset` selects a package's modules instead of listing each one, and `--modules` adds extras on top:
 
 ```bash
 ./main.sh --local --ssh-host vps.example.com --ssh-user root \
-  --modules aiostreams,honey --domain example.com \
+  --preset recommended --modules watchly --domain example.com \
   --letsencrypt-email admin@example.com -y
 ```
 
@@ -402,7 +415,7 @@ Run the whole thing unattended from your local computer (prepares SSH, copies th
 
 ## Common Notes and Pitfalls
 
-- Run `./main.sh` on the VPS, not on your laptop, unless your laptop is the machine that will host Docker.
+- The setup always runs on the VPS. Either launch `./main.sh` from your own computer and let it connect and copy files over, or run it on the VPS directly — pick whichever the first prompt offers.
 - If Docker group membership was just added, a fresh login may be needed before Docker works without `sudo`.
 - `cloudflare-ddns` only makes sense when the domain is actually managed by Cloudflare.
 - Supabase is optional. If you do not configure it, the supported addons stay on their default SQLite setup.
@@ -414,7 +427,7 @@ Run the whole thing unattended from your local computer (prepares SSH, copies th
 - `steps/`: reusable setup steps such as SSH prep, Docker install, deploy, backup, and start
 - `modules/`: addon-specific automation hooks
 - `apps/`: bundled apps not in the upstream template; each folder with a `compose.yaml` is overlaid onto the fetched template and offered as a selectable module
-- `configs/`: shared config data used by hooks (for example the Honey dashboard catalog `honey.json`)
+- `configs/`: shared config data used by hooks (`presets.json` defines the selectable module packages; `honey.json` is the Honey dashboard catalog)
 - `db/`: Supabase-related helper scripts and SQL
 - `lib/`: shared Bash helpers for prompts, staging, and template logic
 - `defaults.env`: default values used by the scripts
@@ -426,7 +439,7 @@ Once you already understand the flow, you can pass values directly through flags
 - Where it runs: `--on-vps`, `--local`
 - SSH for `--local`: `--ssh-host`, `--ssh-user`, `--ssh-alias`, `--ssh-key-path`, `--skip-ssh`
 - Existing setup: `--modify`, `--overwrite`, `-y` / `--assume-yes`
-- Modules and target: `--modules`, `--docker-dir`, `--template-source`
+- Modules and target: `--preset`, `--modules`, `--docker-dir`, `--template-source` (`--list-presets` prints the available packages; `--preset` is unioned with `--modules` when both are given)
 - Core environment: `--timezone`, `--domain`, `--letsencrypt-email`
 - Cloudflare DDNS: `--cloudflare-api-token`, `--cloudflare-proxied`
 - Supabase: `--supabase-connection-string`, `--supabase-db-password`

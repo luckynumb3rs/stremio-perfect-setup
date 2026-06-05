@@ -42,6 +42,9 @@
 #   --backup-dir DIR              Folder where the config ZIP backup is written.
 #
 # Modules and target:
+#   --preset ID                   Preselect a preset package's modules (see --list-presets).
+#                                 Unioned with --modules when both are given. Fresh installs only.
+#   --list-presets                List the preset packages from configs/presets.json and exit.
 #   --modules LIST                Comma-separated module names.
 #   --docker-dir DIR              Final Docker Compose directory (default: /opt/docker).
 #   --template-source SOURCE      Template source: upstream or local.
@@ -105,6 +108,7 @@ CLOUDFLARE_DDNS_MODULE=cloudflare-ddns
 HOSTNAME_SYNC_MODULES=(authelia cloudflare-ddns honey)
 
 MODULES_CSV=""
+PRESET_REQUESTED=""
 TIMEZONE_VALUE=""
 DOCKER_DIR_VALUE=""
 DOMAIN_VALUE=""
@@ -174,6 +178,14 @@ while (( $# > 0 )); do
     --modules)
       MODULES_CSV="$2"
       shift 2
+      ;;
+    --preset)
+      PRESET_REQUESTED="$2"
+      shift 2
+      ;;
+    --list-presets)
+      print_preset_catalog
+      exit 0
       ;;
     --timezone)
       TIMEZONE_VALUE="$2"
@@ -315,6 +327,22 @@ if [[ -n "${BACKUP_ZIP_INPUT}" ]]; then
   BACKUP_ZIP_INPUT="$(absolute_path "${BACKUP_ZIP_INPUT}")"
 fi
 
+# Resolve --preset into the module list so unattended runs can name a package instead
+# of spelling out every module. The preset's modules are unioned with any --modules
+# list (preset first, duplicates dropped, order preserved), then the combined list
+# flows through the normal --modules handling below.
+if [[ -n "${PRESET_REQUESTED}" ]]; then
+  preset_modules="$(preset_modules_for_id "${PRESET_REQUESTED}")" \
+    || die "Unknown preset: ${PRESET_REQUESTED}. Available presets: $(preset_ids). Run with --list-presets for details."
+  if [[ -z "${MODULES_CSV}" ]]; then
+    MODULES_CSV="${preset_modules}"
+  elif [[ -n "${preset_modules}" ]]; then
+    MODULES_CSV="${preset_modules},${MODULES_CSV}"
+  fi
+  MODULES_CSV="$(printf '%s' "${MODULES_CSV}" | tr ',' '\n' \
+    | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | awk 'NF && !seen[$0]++' | paste -sd, -)"
+fi
+
 # Let confirmation prompts auto-accept when --assume-yes/-y is set (unattended).
 export HOSTING_ASSUME_YES="${ASSUME_YES}"
 
@@ -439,7 +467,7 @@ run_local_remote_deploy() {
   require_commands ssh scp tar
 
   if is_interactive; then
-    show_message "🖥️  Local-to-VPS Setup" "You are running this on your local computer, so the script will take care of the connection for you. First we prepare an SSH key and a connection alias for your VPS. Then it copies the hosting files up to your server and runs the rest of the setup there over SSH. You will still answer all the usual questions; they are just being asked by the server through your connection."
+    show_message "🖥️  Local-to-VPS Setup" "You are running this on your local computer, so the script will take care of the connection for you. First we prepare an SSH key and a connection alias for your VPS. Then it copies the hosting files up to your server and runs the rest of the setup there over SSH."
   fi
 
   section "SSH setup"
@@ -843,7 +871,12 @@ elif [[ -n "${MODULES_CSV}" ]]; then
   write_lines_file "${SELECTED_MODULES_FILE}" "${selected_modules[@]}"
   success "Selected modules: $(join_by ', ' "${selected_modules[@]}")"
 else
-  select_modules_interactively "${TEMPLATE_DIR_ABS}" "${SELECTED_MODULES_FILE}"
+  preset_defaults_csv=""
+  if is_interactive && [[ "${EXISTING_SETUP_MODE}" == "fresh" ]]; then
+    select_preset_interactively
+    preset_defaults_csv="${PRESET_MODULES_CSV}"
+  fi
+  select_modules_interactively "${TEMPLATE_DIR_ABS}" "${SELECTED_MODULES_FILE}" "${preset_defaults_csv}"
 fi
 mapfile -t selected_modules < <(read_lines_file "${SELECTED_MODULES_FILE}")
 
@@ -926,7 +959,7 @@ if is_interactive; then
   show_message "Environment Details" "Next, enter the remaining core environment values for the stack: Timezone, Domain, and the Email address used for Let's Encrypt notifications. The deployment target is already set to ${DOCKER_DIR_VALUE}. These values are written into the staged root .env and used across multiple services."
 fi
 
-TIMEZONE_VALUE="${TIMEZONE_VALUE:-$(prompt_value "Enter the server timezone using the TZ database identifier so containers log and schedule tasks correctly, for example Europe/Berlin [TZ]" "${root_tz_default}")}"
+TIMEZONE_VALUE="${TIMEZONE_VALUE:-$(prompt_value "Enter the timezone using the TZ database identifier (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) so containers log and schedule tasks correctly, for example ${root_tz_default} [TZ]" "${root_tz_default}")}"
 if (( DRY_RUN )); then
   dry_run_log "Using DOCKER_DIR ${DOCKER_DIR_VALUE}"
 fi

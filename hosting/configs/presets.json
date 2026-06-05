@@ -1,0 +1,22 @@
+{
+  "presets": [
+    {
+      "id": "essentials",
+      "name": "Essentials",
+      "description": "Just the core Stremio addons to get streaming working.",
+      "modules": ["aiostreams", "aiometadata", "aiomanager"]
+    },
+    {
+      "id": "recommended",
+      "name": "Recommended",
+      "description": "Core addons plus a dashboard and dynamic DNS.",
+      "modules": ["aiostreams", "aiometadata", "aiomanager", "honey", "cloudflare-ddns"]
+    },
+    {
+      "id": "everything",
+      "name": "Everything",
+      "description": "Enable every available optional module.",
+      "modules": ["aiostreams", "aiometadata", "aiomanager", "honey", "cloudflare-ddns", "stremthru", "watchly", "altmount", "cors-proxy"]
+    }
+  ]
+}

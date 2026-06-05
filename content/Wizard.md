@@ -2,7 +2,7 @@
 
 [⚡ DEBRID / 🧲 P2P / 🌐 HTTP]
 
-![Nuvio Perfect Setup Wizard](IMAGE_URL_HERE)
+![img](3twad9m2xh5h1 "Nuvio Perfect Wizard")
 
 Many of you are already aware of my comprehensive guide and have been using it a lot (I know because of the many support questions in my DMs 😉), so thank you for the love ❤️, I'm glad you're enjoying it! 
 
@@ -22,6 +22,7 @@ The wizard sets everything up automatically, with a bit of input from you:
 * **📚 AIOStreams**: Configure your preferences, such as language, subtitles, formatting, and other main options directly from the wizard.
 * **🔎 AIOMetadata**: Select the catalog categories you want to have enabled directly from the wizard.
 * **💎 Collections**: The matching collections configuration (and some other Nuvio settings) are also automatically configured, so the Nuvio account is ready out-of-the-box.
+* **🎯 Trakt**: You can integrate Trakt with *AIOMetadata* directly from the wizard.
 
 So, instead of manually configuring each part separately, the wizard configures everything, installs the addons for you, and gives you a **ready-to-use account**. Once it's done, you'll get the credentials used for the addons, which you can download and store it for safekeeping, in case you need to customize them further.
 

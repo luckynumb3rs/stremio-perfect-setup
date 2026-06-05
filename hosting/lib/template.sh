@@ -262,6 +262,140 @@ prune_template_to_modules() {
   done
 }
 
+# Reads hosting/configs/presets.json and emits one tab-separated record per preset:
+#   id<TAB>name<TAB>description<TAB>comma-separated-modules
+# Emits nothing if the file is missing, unreadable, or defines no presets. JSON is
+# parsed with python3 to match the rest of the repo (no jq dependency).
+read_preset_catalog() {
+  local presets_file="${HOSTING_ROOT}/configs/presets.json"
+  [[ -f "${presets_file}" ]] || return 0
+  python3 - "${presets_file}" <<'PY'
+import json
+import sys
+
+try:
+    with open(sys.argv[1], encoding="utf-8") as handle:
+        data = json.load(handle)
+except Exception:
+    sys.exit(0)
+
+for preset in data.get("presets", []):
+    if not isinstance(preset, dict):
+        continue
+    preset_id = str(preset.get("id", "")).strip()
+    if not preset_id:
+        continue
+    name = str(preset.get("name", "")).strip()
+    desc = str(preset.get("description", "")).strip()
+    modules = ",".join(
+        str(module).strip()
+        for module in preset.get("modules", [])
+        if str(module).strip()
+    )
+    print("\t".join([preset_id, name, desc, modules]))
+PY
+}
+
+# Echoes the comma-separated module list for the given preset id, or returns non-zero
+# if no preset matches (so callers can report an error). Used by the --preset flag.
+preset_modules_for_id() {
+  local wanted="$1"
+  local id="" name="" desc="" modcsv=""
+  while IFS=$'\t' read -r id name desc modcsv; do
+    if [[ "${id}" == "${wanted}" ]]; then
+      printf '%s' "${modcsv}"
+      return 0
+    fi
+  done < <(read_preset_catalog)
+  return 1
+}
+
+# Echoes the available preset ids as a comma-separated list, for help and error text.
+preset_ids() {
+  local id="" name="" desc="" modcsv="" out=""
+  while IFS=$'\t' read -r id name desc modcsv; do
+    [[ -n "${id}" ]] || continue
+    if [[ -z "${out}" ]]; then
+      out="${id}"
+    else
+      out="${out}, ${id}"
+    fi
+  done < <(read_preset_catalog)
+  printf '%s' "${out}"
+}
+
+# Prints the preset catalog in a human-readable form for `main.sh --list-presets`.
+print_preset_catalog() {
+  local id="" name="" desc="" modcsv="" any=0
+  while IFS=$'\t' read -r id name desc modcsv; do
+    [[ -n "${id}" ]] || continue
+    any=1
+    printf '%s (%s)\n    %s\n    modules: %s\n' "${id}" "${name}" "${desc}" "${modcsv:-<none>}"
+  done < <(read_preset_catalog)
+  if (( ! any )); then
+    printf 'No presets are defined in %s\n' "${HOSTING_ROOT}/configs/presets.json"
+  fi
+}
+
+# Offers preset "packages" (named bundles of modules) on a fresh install so the user
+# can start the module checklist with a sensible selection already enabled. Reads the
+# preset catalog from hosting/configs/presets.json and presents a single-select menu.
+#
+# Sets two globals consumed by the caller:
+#   PRESET_MODULES_CSV   comma-separated optional modules for the chosen package
+#                        (empty when no package is chosen)
+#   PRESET_SELECTED_NAME display name of the chosen package (empty when none)
+#
+# If presets.json is missing, unreadable, or has no presets, both globals stay empty
+# and the function returns silently so the installer continues with nothing preselected.
+PRESET_MODULES_CSV=""
+PRESET_SELECTED_NAME=""
+select_preset_interactively() {
+  PRESET_MODULES_CSV=""
+  PRESET_SELECTED_NAME=""
+
+  local ids=() names=() descs=() mods=()
+  local id="" name="" desc="" modcsv=""
+  while IFS=$'\t' read -r id name desc modcsv; do
+    [[ -n "${id}" ]] || continue
+    ids+=("${id}")
+    names+=("${name}")
+    descs+=("${desc}")
+    mods+=("${modcsv}")
+  done < <(read_preset_catalog)
+
+  (( ${#ids[@]} > 0 )) || return 0
+
+  ensure_dialog_ui "package selection"
+  section "Module package"
+
+  local options=()
+  local index=0
+  for (( index = 0; index < ${#ids[@]}; index++ )); do
+    options+=("${ids[index]}" "${names[index]} — ${descs[index]}")
+  done
+  options+=("none" "No package — continue with nothing preselected")
+
+  local choice=""
+  choice="$(prompt_choice "Module Package" "Pick a preset package of modules to start from. The next screen lets you add or remove individual modules. Choose \"none\" to start from scratch." "none" "${options[@]}")"
+
+  if [[ -z "${choice}" || "${choice}" == "none" ]]; then
+    log "No package selected; continuing with no modules preselected."
+    return 0
+  fi
+
+  for (( index = 0; index < ${#ids[@]}; index++ )); do
+    if [[ "${ids[index]}" == "${choice}" ]]; then
+      PRESET_MODULES_CSV="${mods[index]}"
+      PRESET_SELECTED_NAME="${names[index]}"
+      success "Selected package: ${names[index]}"
+      return 0
+    fi
+  done
+
+  warn "Unknown package selection: ${choice}; continuing with no modules preselected."
+}
+
 select_modules_interactively() {
   local template_dir="$1"
   local output_file="$2"

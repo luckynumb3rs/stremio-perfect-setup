@@ -71,6 +71,7 @@ So, now that you know, it’s up to you, but if you’re up for it, let’s do i
 - [🛠️ Additional Stuff](guide/7-Additional-Stuff.md)
 - [❓ Configuration Q&A](guide/8-Configuration-QA.md)
 - [🎛️ AIOManager [Power Users]](guide/AIOManager-Setup.md)
+- [🖥️ Hosting](guide/Hosting.md)
 - [🚀 Nuvio](guide/Nuvio.md)
 - [🔔 Updates](guide/Updates.md)
 - [📜 Changelog](CHANGELOG.md)
