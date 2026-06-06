@@ -28,7 +28,7 @@ Self-hosting is the next level for achieving the ultimate streaming experience. 
 > This guide and scripts are currently a work in progress. I am not responsible for anything that might happen to your data, server, configurations, or anything else. The files are openly available for anyone to study and tinker with, and I'm doing this for fun and just trying to help. Please don't come to me with any complaints or asking for support on this, I really can't help you.
 >* 🙏 This guide is based of the amazing work of [**Viren**](https://guides.viren070.me/selfhosting), and the scripts here actually fetch [**Viren's Docker Templates**](https://github.com/Viren070/docker-compose-template) from GitHub dynamically to make use of the latest configurations and modules and adds the automation layer on top. So a big thanks to **Viren** for all the effort put into the templates.
 
-## Setup Instructions
+## Instructions
 
 The main component that runs the entire automated setup is `main.sh`. The first thing it asks is **where you are running it**, and that decides the rest:
 
