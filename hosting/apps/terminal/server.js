@@ -48,7 +48,6 @@ const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { spawn } = require('child_process');
-const fetch = require('node-fetch');  // Node 20 has native fetch, but kept for clarity
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
