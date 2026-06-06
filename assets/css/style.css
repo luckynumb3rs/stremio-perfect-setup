@@ -20,7 +20,7 @@
   color: var(--text);
   text-decoration: none;
   font-size: clamp(0.84rem, 0.62rem + 0.35vw, 0.92rem);
-  padding: 0.5rem 0.6rem;
+  padding: 0.32rem 0.6rem;
   background: transparent;
   white-space: nowrap;
 }
@@ -265,7 +265,7 @@ pre {
   .nav-link,
   .nav-summary {
     font-size: 0.92rem;
-    padding: 0.46rem 0.52rem;
+    padding: 0.32rem 0.52rem;
   }
 
   body.nav-open .sidebar { transform: translateX(0); }

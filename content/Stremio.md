@@ -4,6 +4,11 @@
 
 ![img](u8edx7wlmrzg1 "Homescreen (left) & Stream Source Selection (right)")
 
+
+# 🔮 *NEW*: [**Quick Automated Wizard**](https://numb3rs.stream/wizard/) for a ready-to-use account in seconds!
+
+---
+
 **If this guide helps you, PLEASE UPVOTE this post so it remains relevant for others to find it and also benefit from it.** 😊
 
 This guide explains in detail every step to achieve a nearly perfect **Stremio** setup, using all community recommended best practices, including any accounts needed along the way. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.
