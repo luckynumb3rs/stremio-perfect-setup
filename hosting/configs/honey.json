@@ -610,6 +610,16 @@
         "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/HEAD/svg/tandoor-recipes.svg"
       }
     ],
+    "terminal": [
+      {
+        "slug": "terminal",
+        "hostname_env": "TERMINAL_HOSTNAME",
+        "href_template": "https://${TERMINAL_HOSTNAME}",
+        "name": "Setup Terminal",
+        "desc": "Browser-based terminal for running the hosting setup wizard.",
+        "icon": "https://cdn.jsdelivr.net/npm/@mdi/svg@7/svg/console.svg"
+      }
+    ],
     "tautulli": [
       {
         "slug": "tautulli",
