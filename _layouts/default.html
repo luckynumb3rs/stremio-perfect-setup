@@ -65,42 +65,7 @@
             <span>Buy me a coffee</span>
           </a>
         </div>
-        <section class="sidebar-stat-card" aria-label="Guide and wizard activity" data-sidebar-stats-card data-sidebar-stats-open="false">
-          <button
-            class="sidebar-stat-toggle"
-            type="button"
-            data-sidebar-stats-toggle
-            aria-expanded="false"
-            hidden
-          >
-            <span class="sidebar-stat-toggle__label">Setup stats</span>
-            <span class="sidebar-stat-toggle__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                <path d="M4 15 12 8l8 7" />
-              </svg>
-            </span>
-          </button>
-          <div class="sidebar-stats-panel" data-sidebar-stats-panel aria-hidden="true">
-            <div class="sidebar-stats-panel__header">
-              <strong>Wizard Setup Statistics</strong>
-              <span>Most common completion choices</span>
-            </div>
-            <div class="sidebar-stats-panel__content" data-sidebar-stats-panel-content></div>
-          </div>
-          <div class="sidebar-stat-grid">
-            <div class="sidebar-stat-item">
-              <span class="sidebar-stat-item__label">Guide completed</span>
-              <strong class="sidebar-stat-item__value"><span data-guide-completion-count>0</span></strong>
-              <span class="sidebar-stat-item__suffix">readers</span>
-            </div>
-            <div class="sidebar-stat-divider" aria-hidden="true"></div>
-            <div class="sidebar-stat-item">
-              <span class="sidebar-stat-item__label">Wizard created</span>
-              <strong class="sidebar-stat-item__value"><span data-wizard-account-count>0</span></strong>
-              <span class="sidebar-stat-item__suffix">accounts</span>
-            </div>
-          </div>
-        </section>
+        <div data-sidebar-stats-root></div>
         <div class="sidebar-credit">
           Made with ❤️ by <a class="sidebar-credit__link" href="https://github.com/luckynumb3rs" target="_blank" rel="noopener noreferrer">luckynumb3rs</a>
         </div>
@@ -152,6 +117,7 @@
     }
   </script>
   <script src="{{ '/assets/js/guide-completion-config.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/sidebar-stats-shared.js' | relative_url }}" type="module"></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
 </body>
 </html>
