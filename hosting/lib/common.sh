@@ -704,8 +704,10 @@ module_get_param() {
   local staged_fallback="${5:-}"
   local default="${6:-}"
 
+  [[ -n "${MODULE_NAME:-}" ]] || die "module_get_param: MODULE_NAME must be set in calling module"
+
   local env_var
-  env_var="$(module_param_env_var "${MODULE_NAME:-}" "${key}")"
+  env_var="$(module_param_env_var "${MODULE_NAME}" "${key}")"
   local value="${!env_var:-${staged_fallback}}"
 
   if [[ -n "${value}" ]]; then
@@ -729,7 +731,9 @@ module_get_param() {
         value="$(prompt_value "${label}" "${default}")"
         ;;
     esac
-  elif [[ -n "${default}" ]]; then
+  fi
+
+  if [[ -z "${value}" ]] && [[ -n "${default}" ]]; then
     value="${default}"
   fi
 
