@@ -34,6 +34,7 @@ AUTHELIA_MODULE=authelia
 
 if [[ "${1:-}" == "--metadata" ]]; then
   printf 'scope=module\nmodule=%s\norder=80\n' "${MODULE_NAME}"
+  printf 'param=tmdb_api_key|string|false|TMDB API key for Watchly catalogs (optional, leave blank to skip)\n'
   exit 0
 fi
 

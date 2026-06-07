@@ -28,6 +28,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "${SCRIPT_DIR}/lib/common.sh"
 ensure_dialog_ui "Supabase setup"
 
+MODULE_NAME="supabase"
 SUPPORTED_ADDONS=(aiomanager aiometadata aiostreams)
 declare -A DATABASE_URL_KEYS=(
   [aiomanager]=DATABASE_URL
@@ -39,7 +40,9 @@ declare -A EXTRA_ENV_ASSIGNMENTS=(
 )
 
 if [[ "${1:-}" == "--metadata" ]]; then
-  printf 'scope=all\ndependencies=%s\norder=110\n' "$(join_by ',' "${SUPPORTED_ADDONS[@]}")"
+  printf 'scope=all\ndependencies=aiomanager,aiometadata,aiostreams\norder=110\n'
+  printf 'param=connection_string|string|false|Supabase direct session pooler IPv4 connection string\n'
+  printf 'param=db_password|secret|false|Supabase database password\n'
   exit 0
 fi
 

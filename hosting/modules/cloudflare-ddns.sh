@@ -36,6 +36,8 @@ DEFAULT_PROXIED_WHEN_ENABLED=true
 
 if [[ "${1:-}" == "--metadata" ]]; then
   printf 'scope=module\nmodule=%s\norder=90\n' "${MODULE_NAME}"
+  printf 'param=api_token|secret|false|Cloudflare API token (leave blank to disable this module)\n'
+  printf 'param=proxied|bool|false|Create proxied (orange-cloud) Cloudflare DNS records for the selected hostnames\n'
   exit 0
 fi
 

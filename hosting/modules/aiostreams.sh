@@ -115,6 +115,7 @@ PY
 
 if [[ "${1:-}" == "--metadata" ]]; then
   printf 'scope=module\nmodule=%s\n' "${MODULE_NAME}"
+  printf 'param=auth|string|false|AIOStreams proxy users (comma-separated username:password pairs, e.g. user1:pass1,user2:pass2)\n'
   exit 0
 fi
 

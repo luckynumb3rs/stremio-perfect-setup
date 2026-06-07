@@ -38,6 +38,10 @@ USERS_YAML_REL="apps/authelia/config/users.yml"
 
 if [[ "${1:-}" == "--metadata" ]]; then
   printf 'scope=module\nmodule=%s\norder=85\n' "${MODULE_NAME}"
+  printf 'param=username|string|true|Authelia username (letters, digits, hyphens, underscores only)\n'
+  printf 'param=displayname|string|true|Authelia display name\n'
+  printf 'param=email|string|true|Authelia user email address\n'
+  printf 'param=password|secret|true|Authelia password (will be argon2-hashed via Docker)\n'
   exit 0
 fi
 
