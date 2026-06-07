@@ -28,7 +28,8 @@ export function Welcome() {
           <span aria-hidden="true">🔮</span>
         </div>
         <h1 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.6rem', lineHeight: 1.3 }}>
-          Welcome to the Perfect Setup Wizard
+          Welcome to the <br />
+          Perfect Setup Wizard
         </h1>
         <p className="page-description mb-2">
           <span style={{ display: 'block' }}>This wizard automatically configures your entire streaming setup:</span>
