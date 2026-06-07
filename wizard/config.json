@@ -83,7 +83,19 @@
           "watchly": "templates/Watchly.json"
         }
       },
-      "doneStepNotifications": []
+      "doneStepNotifications": [
+        {
+          "markdown": "If you are interested in more **🌐 HTTP** streams,**Nuvio** also supports so-called **Plugins** that can add extra HTTP sources beyond regular addons.\n\nRead more and browse providers here: [**Nuvio Plugin Library**](https://nuvio-plugin-library.vercel.app/).",
+          "targets": [
+            "nuvio"
+          ],
+          "style": {
+            "background": "rgba(28, 48, 67, 0.78)",
+            "borderColor": "rgba(181, 220, 255, 0.28)",
+            "textColor": "rgba(244, 249, 255, 0.98)"
+          }
+        }
+      ]
     }
   ]
 }

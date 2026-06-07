@@ -5,9 +5,9 @@
 # Purpose:
 #   This hook runs when any selected module is aiomanager, aiometadata, or
 #   aiostreams. Supabase is offered to the user as an alternative to each addon's
-#   upstream local SQLite default. If the user says yes, the
-#   hook creates per-addon schemas and roles, then writes generated Postgres
-#   URLs into the staged addon .env files.
+#   upstream local SQLite default. If the user provides a Supabase connection
+#   string, the hook creates per-addon schemas and roles, then writes generated
+#   Postgres URLs into the staged addon .env files.
 #
 # Manual hook contract:
 #
@@ -19,8 +19,8 @@
 #   SUPABASE_DB_PASSWORD - Supabase database password
 #
 # Skip behavior:
-#   If no connection string is supplied in unattended mode, or the interactive
-#   user declines Supabase, the hook exits without modifying database variables.
+#   If no connection string is supplied, the hook exits without modifying
+#   database variables and the addons keep their default local SQLite setup.
 
 set -Eeuo pipefail
 
@@ -39,11 +39,13 @@ declare -A DATABASE_URL_KEYS=(
 declare -A EXTRA_ENV_ASSIGNMENTS=(
   [aiomanager]="DB_TYPE=postgres"
 )
+SUPABASE_CONNECTION_STRING_LABEL="Paste the Supabase direct session pooler IPv4 connection string that has enough access to create addon schemas and roles [SUPABASE_CONNECTION_STRING]"
+SUPABASE_DB_PASSWORD_LABEL="Enter the Supabase database password so schema creation can authenticate successfully [SUPABASE_DB_PASSWORD]"
 
 if [[ "${1:-}" == "--metadata" ]]; then
   printf 'scope=all\ndependencies=aiomanager,aiometadata,aiostreams\norder=110\n'
-  printf 'param=connection_string|string|false|Supabase direct session pooler IPv4 connection string\n'
-  printf 'param=db_password|secret|false|Supabase database password\n'
+  printf 'param=connection_string|string|false|%s\n' "${SUPABASE_CONNECTION_STRING_LABEL}"
+  printf 'param=db_password|secret|false|%s\n' "${SUPABASE_DB_PASSWORD_LABEL}"
   exit 0
 fi
 
@@ -103,14 +105,11 @@ connection_string=""
 database_password=""
 connection_string_uses_placeholder=0
 
-connection_string="$(module_get_param "connection_string" "string" "false" \
-  "Supabase direct session pooler IPv4 connection string")" || true
-
-if [[ -z "${connection_string}" ]]; then
-  if is_interactive; then
-    section "Supabase option"
-    log "The selected AIO addons can use Supabase/Postgres instead of local SQLite: $(join_by ', ' "${selected_addons[@]}")"
-    show_message "Supabase Option" "The selected AIO addons can use Supabase/Postgres instead of their default local SQLite databases: $(join_by ', ' "${selected_addons[@]}").
+connection_string_env_var="$(module_param_env_var "${MODULE_NAME}" "connection_string")"
+if [[ -z "${!connection_string_env_var:-}" ]] && is_interactive; then
+  section "Supabase option"
+  log "The selected AIO addons can use Supabase/Postgres instead of local SQLite: $(join_by ', ' "${selected_addons[@]}")"
+  show_message "Supabase Option" "The selected AIO addons can use Supabase/Postgres instead of their default local SQLite databases: $(join_by ', ' "${selected_addons[@]}").
 
 Before you continue:
 1. Create or open a Supabase account.
@@ -119,35 +118,36 @@ Before you continue:
 4. Open Project Settings > Database > Connection string.
 5. Copy the direct session pooler IPv4 connection string exactly as shown.
 
-If you enable this, the script will create one schema and one login role per selected addon, then write the generated connection strings into each staged addon .env file automatically."
-    warn "Use a new database, not one already used for unrelated data."
-    if ! prompt_yes_no "Use Supabase/Postgres instead of local SQLite for $(join_by ', ' "${selected_addons[@]}") so the script can provision per-addon schemas and credentials?" yes; then
-      log "Keeping local SQLite for $(join_by ', ' "${selected_addons[@]}")"
-      exit 0
-    fi
-    connection_string="$(prompt_value "Paste the Supabase direct session pooler IPv4 connection string that has enough access to create addon schemas and roles [SUPABASE_CONNECTION_STRING]")"
-  else
-    log "No Supabase connection string supplied; keeping local SQLite for $(join_by ', ' "${selected_addons[@]}")"
-    exit 0
-  fi
+If you want to keep the default local SQLite databases, leave the next field blank and continue.
+
+If you enable Supabase, the script will create one schema and one login role per selected addon, then write the generated connection strings into each staged addon .env file automatically."
+  warn "Use a new database, not one already used for unrelated data."
+fi
+
+connection_string="$(module_get_param "connection_string" "string" "false" \
+  "${SUPABASE_CONNECTION_STRING_LABEL}")" || true
+
+if [[ -z "${connection_string}" ]]; then
+  log "No Supabase connection string supplied; keeping local SQLite for $(join_by ', ' "${selected_addons[@]}")"
+  exit 0
 fi
 
 if [[ "${connection_string}" == *"[YOUR-PASSWORD]"* ]]; then
   connection_string_uses_placeholder=1
 fi
 
-database_password="$(module_get_param "db_password" "secret" "false" \
-  "Supabase database password")" || true
+database_password_env_var="$(module_param_env_var "${MODULE_NAME}" "db_password")"
+database_password="${!database_password_env_var:-}"
 
 if [[ -z "${database_password}" ]]; then
   if (( connection_string_uses_placeholder )); then
-    if is_interactive; then
-      database_password="$(prompt_secret "Enter the database password referenced by that connection string so schema creation can authenticate successfully [SUPABASE_DB_PASSWORD]")"
-    fi
+    database_password="$(module_get_param "db_password" "secret" "false" \
+      "${SUPABASE_DB_PASSWORD_LABEL}")" || true
   else
     database_password="$(extract_connection_string_password "${connection_string}")"
-    if [[ -z "${database_password}" ]] && is_interactive; then
-      database_password="$(prompt_secret "The connection string did not include a readable password. Enter the database password so schema creation can authenticate successfully [SUPABASE_DB_PASSWORD]")"
+    if [[ -z "${database_password}" ]]; then
+      database_password="$(module_get_param "db_password" "secret" "false" \
+        "${SUPABASE_DB_PASSWORD_LABEL}")" || true
     fi
   fi
 fi

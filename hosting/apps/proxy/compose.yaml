@@ -1,9 +1,9 @@
 services:
   proxy:
-    image: node:20-alpine
+    image: gcr.io/distroless/nodejs20-debian12:nonroot
     container_name: proxy
     restart: unless-stopped
-    command: ["node", "/app/server.js"]
+    command: ["/app/server.js"]
     expose:
       - ${PORT:-8080}
     env_file:
@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.proxy.tls.certresolver=letsencrypt"
       - "traefik.http.services.proxy.loadbalancer.server.port=${PORT:-8080}"
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:' + (process.env.PORT || '8080') + '/healthz').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1))"]
+      test: ["CMD", "/nodejs/bin/node", "-e", "fetch('http://127.0.0.1:' + (process.env.PORT || '8080') + '/healthz').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1))"]
       interval: 1m
       timeout: 10s
       retries: 5

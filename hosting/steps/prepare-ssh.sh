@@ -84,6 +84,17 @@ sync_key_name_from_alias() {
   fi
 }
 
+normalize_key_path() {
+  local raw_path="$1"
+
+  [[ -n "${raw_path}" ]] || {
+    printf '%s' ""
+    return 0
+  }
+
+  absolute_path "${raw_path}"
+}
+
 prepare_generated_key_path() {
   if is_interactive && (( ! KEY_NAME_SET )) && (( ! ALIAS_SET )); then
     KEY_NAME="$(prompt_value "Choose the local SSH key file name to create under ${SSH_DIR}. This only names the key pair on this machine; the VPS host, user, and SSH alias are configured in the next step [SSH_KEY_NAME]" "${KEY_NAME}")"
@@ -132,6 +143,7 @@ select_key() {
   local key_mode=""
 
   if [[ -n "${KEY_PATH}" ]]; then
+    KEY_PATH="$(normalize_key_path "${KEY_PATH}")"
     [[ -f "${KEY_PATH}" ]] || die "SSH key does not exist: ${KEY_PATH}"
     return 0
   fi
@@ -165,6 +177,7 @@ select_key() {
           ;;
         existing-path)
           KEY_PATH="$(prompt_value "Enter the existing SSH private key path so the script can reference it in your SSH client config [SSH_KEY_PATH]")"
+          KEY_PATH="$(normalize_key_path "${KEY_PATH}")"
           [[ -f "${KEY_PATH}" ]] || die "SSH key does not exist: ${KEY_PATH}"
           return 0
           ;;
@@ -192,6 +205,7 @@ select_key() {
     case "${key_mode}" in
       existing-path)
         KEY_PATH="$(prompt_value "Enter the existing SSH private key path so the script can reference it in your SSH client config [SSH_KEY_PATH]")"
+        KEY_PATH="$(normalize_key_path "${KEY_PATH}")"
         [[ -f "${KEY_PATH}" ]] || die "SSH key does not exist: ${KEY_PATH}"
         ;;
       existing-alias)

@@ -967,7 +967,11 @@ ROOT_ENV="${CONFIG_DIR_ABS}/.env"
 root_tz_default="$(env_get "${ROOT_ENV}" TZ || true)"
 root_domain_default="$(env_get "${ROOT_ENV}" DOMAIN || true)"
 root_letsencrypt_default="$(env_get "${ROOT_ENV}" LETSENCRYPT_EMAIL || true)"
-root_tz_default="${root_tz_default:-${DEFAULT_TIMEZONE:-Europe/Berlin}}"
+if [[ -n "${BACKUP_ZIP_INPUT}" || "${EXISTING_SETUP_MODE}" == "modify" ]]; then
+  root_tz_default="${root_tz_default:-${DEFAULT_TIMEZONE:-Europe/Berlin}}"
+else
+  root_tz_default="${DEFAULT_TIMEZONE:-Europe/Berlin}"
+fi
 env_value_is_placeholder "${root_domain_default}" && root_domain_default=""
 env_value_is_placeholder "${root_letsencrypt_default}" && root_letsencrypt_default=""
 
