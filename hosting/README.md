@@ -395,7 +395,7 @@ Add or remove modules on an existing deployment without prompts (`--modify` keep
 
 ```bash
 ./main.sh --on-vps --modify --modules aiostreams,honey,cloudflare-ddns \
-  --domain example.com --cloudflare-api-token <token> -y
+  --domain example.com --module-param cloudflare-ddns.api_token=<token> -y
 ```
 
 List the preset packages (the named module bundles from `configs/presets.json`):
@@ -404,15 +404,21 @@ List the preset packages (the named module bundles from `configs/presets.json`):
 ./main.sh --list-presets
 ```
 
-Run the whole thing unattended from your local computer (prepares SSH, copies the folder to the VPS, runs it there). Here `--preset` selects a package's modules instead of listing each one, and `--modules` adds extras on top:
+Run the whole thing unattended from your local computer (prepares SSH, copies the folder to the VPS, runs it there). Here `--preset` selects a package's modules instead of listing each one, and `--modules` adds extras on top. Use `--module-param` for module-specific values:
 
 ```bash
 ./main.sh --local --ssh-host vps.example.com --ssh-user root \
   --preset recommended --modules watchly --domain example.com \
-  --letsencrypt-email admin@example.com -y
+  --letsencrypt-email admin@example.com \
+  --module-param authelia.username=admin \
+  --module-param authelia.password=S3cur3P@ss \
+  --module-param authelia.displayname="Admin User" \
+  --module-param authelia.email=admin@example.com \
+  --module-param cloudflare-ddns.api_token=<token> \
+  -y
 ```
 
-(See `./main.sh --help` for the full option list.)
+(See `./main.sh --help` for the full option list. Run `./main.sh --list-module-params` to see all available module parameters.)
 
 ## Common Notes and Pitfalls
 
@@ -442,9 +448,7 @@ Once you already understand the flow, you can pass values directly through flags
 - Existing setup: `--modify`, `--overwrite`, `-y` / `--assume-yes`
 - Modules and target: `--preset`, `--modules`, `--docker-dir`, `--template-source` (`--list-presets` prints the available packages; `--preset` is unioned with `--modules` when both are given)
 - Core environment: `--timezone`, `--domain`, `--letsencrypt-email`
-- Cloudflare DDNS: `--cloudflare-api-token`, `--cloudflare-proxied`
-- Supabase: `--supabase-connection-string`, `--supabase-db-password`
-- Authelia: `--authelia-username`, `--authelia-displayname`, `--authelia-email`, `--authelia-password`
+- Module parameters: `--module-param MODULE.KEY=VALUE` (e.g., `--module-param authelia.username=admin`; run `--list-module-params` to see all available module parameters)
 - Flow control: `--skip-review`, `--skip-backup`, `--skip-start`, `--dry-run`
 
 On a fresh install the deployed root `.env` is trimmed to only the hostnames of the modules you selected (the upstream template ships a `*_HOSTNAME` line for every possible module).
