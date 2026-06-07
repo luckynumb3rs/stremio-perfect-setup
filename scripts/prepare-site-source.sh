@@ -48,14 +48,6 @@ rewrite_index_markdown_links() {
   ' "$file"
 }
 
-rewrite_guide_markdown_links() {
-  local file="$1"
-
-  perl -0pi -e '
-    s{\]\((?![A-Za-z][A-Za-z0-9+.-]*:|/|#)([^/)#]+)\.md((?:#[^)]+)?)\)}{"](../" . $1 . $2 . ")"}ge
-  ' "$file"
-}
-
 has_leading_icon() {
   local text="$1"
   local trimmed="${text#"${text%%[![:space:]]*}"}"
@@ -241,9 +233,5 @@ FM
 } > "$DEST_DIR/index.md"
 
 rewrite_index_markdown_links "$DEST_DIR/index.md"
-
-while IFS= read -r guide_file; do
-  rewrite_guide_markdown_links "$guide_file"
-done < <(find "$DEST_DIR/guide" -maxdepth 1 -type f -name '*.md' | sort -V)
 
 echo "Prepared site source in $DEST_DIR"

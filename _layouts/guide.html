@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{{ content
+{% assign guide_content = content
   | replace: 'src="images/', 'src="../images/'
   | replace: "src='images/", "src='../images/"
   | replace: 'href="images/', 'href="../images/'
@@ -10,4 +10,18 @@ layout: default
   | replace: "href='../collections/", "href='../../collections/"
   | replace: 'href="../templates/', 'href="../../templates/'
   | replace: "href='../templates/", "href='../../templates/"
-}}
+%}
+{% for p in site.pages %}
+  {% if p.path contains 'guide/' and p.path contains '.md' %}
+    {% assign guide_name = p.path | split: '/' | last | replace: '.md', '' %}
+    {% assign href_double_from = 'href="' | append: guide_name | append: '.md' %}
+    {% assign href_double_to = 'href="../' | append: guide_name %}
+    {% assign href_single_from = "href='" | append: guide_name | append: '.md' %}
+    {% assign href_single_to = "href='../" | append: guide_name %}
+    {% assign guide_content = guide_content
+      | replace: href_double_from, href_double_to
+      | replace: href_single_from, href_single_to
+    %}
+  {% endif %}
+{% endfor %}
+{{ guide_content }}
