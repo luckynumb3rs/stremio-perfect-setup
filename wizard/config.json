@@ -85,7 +85,7 @@
       },
       "doneStepNotifications": [
         {
-          "markdown": "If you are interested in more **🌐 HTTP** streams, **Nuvio** also supports so-called **Plugins** that can add extra sources beyond regular addons.\n\nRead more and browse providers **[here](https://nuvio-plugin-library.vercel.app/)**.",
+          "markdown": "If you are interested in more **🌐 HTTP** streams, **Nuvio** also supports so-called **Plugins** that can add extra sources beyond regular addons. Read more and browse providers **[here](https://nuvio-plugin-library.vercel.app/)**.",
           "targets": [
             "nuvio"
           ],
