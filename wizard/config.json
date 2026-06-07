@@ -59,11 +59,14 @@
       "instances": {
         "aiostreams": [
           "https://aiostreamsfortheweebsstable.midnightignite.me",
-          "https://aiostreams.fortheweak.cloud"
+          "https://aiostreamsfortheweebs.midnightignite.me",
+          "https://aiostreams.fortheweak.cloud",
+          "https://aiostreams-nightly.fortheweak.cloud"
         ],
         "aiometadata": [
           "https://aiometadata.viren070.me",
-          "https://aiometadatafortheweebs.midnightignite.me"
+          "https://aiometadatafortheweebs.midnightignite.me",
+          "https://aiometadata.fortheweak.cloud"
         ],
         "watchly": [
           "https://watchly.elfhosted.com"

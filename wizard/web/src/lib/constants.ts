@@ -112,6 +112,15 @@ function normalizeOptionalStringArray(value: unknown) {
     .map((item) => item.trim());
 }
 
+function shuffleArray<T>(items: T[]): T[] {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function normalizeInstances(value: unknown): WizardInstances | null {
   if (!isRecord(value)) return null;
   const aiostreams = normalizeStringArray(value.aiostreams);
@@ -122,7 +131,11 @@ function normalizeInstances(value: unknown): WizardInstances | null {
     ? value.watchly.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
     : undefined;
 
-  return { aiostreams, aiometadata, watchly };
+  return {
+    aiostreams: shuffleArray(aiostreams),
+    aiometadata: shuffleArray(aiometadata),
+    watchly: watchly ? shuffleArray(watchly) : undefined,
+  };
 }
 
 function normalizeTargetTemplates(value: unknown): WizardTargetTemplates | null {
