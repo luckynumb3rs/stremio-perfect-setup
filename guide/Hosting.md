@@ -126,8 +126,8 @@ Then comes the checklist. Toggle modules with `Space` and confirm with `Enter`:
    * **AIOStreams**, **AIOMetadata**, **AIOManager**: the three main Stremio addons.
    * **Honey**: a visual homepage linking to all your services.
    * **Cloudflare DDNS**: keeps your DNS records updated if your server IP changes (only useful if your domain is on Cloudflare).
-   * **StremThru**: a Debrid proxy layer for advanced users.
-   * **Watchly**, **AltMount**, and any other modules from the template or bundled apps.
+   * **NZBdav** & **AltMount**: needed for streaming Usenet directly to your app.
+   * **Many more modules** from [*Viren's Docker Templates*](https://github.com/Viren070/docker-compose-template) or additionally bundled in this repo, both included in the wizard.
 
 >**📢 NOTES:**
 >* You can rerun the script anytime to add or remove modules (see *Other Modes*).
@@ -135,7 +135,7 @@ Then comes the checklist. Toggle modules with `Space` and confirm with `Enter`:
 
 ## Automatic Configuration
 
-After you pick your modules, depending on whether there's any automated script specified for them, the script runs per-module hooks so that you can avoid editing config files by hand entirely. Currently, I have prepared scripts for the following modules.
+After you pick your modules, depending on whether there's any automated script specified for them, the script runs per-module hooks so that you can avoid editing config files by hand entirely. Currently, I have prepared scripts for the following modules:
 
 * **AIOStreams**: Generates a secret key as needed, and you can set an optional proxy authentication (a username and password to restrict access to you).
 * **AIOManager**: Encryption keys and JWT secrets are generated automatically.
@@ -178,8 +178,8 @@ The scripts have been designed in a modular approach, meaning they can be extend
 * **`modules/`**: one script per addon or task (for example `aiostreams.sh` sets AIOStreams defaults, `all.supabase.sh` provisions Supabase schemas). The script discovers and runs the ones matching your selection. Add your own here to extend the setup.
 * **`lib/`**: shared helpers for logging, prompts, `.env` editing, ZIP creation, and template logic.
 * **`db/`**: SQL for creating and deleting Supabase schemas, runnable by hand if needed.
-* **`apps/`**: bundled apps that are not in Viren's upstream template (for example `watchly`, `proxy`), where ach folder with a `compose.yaml` is overlaid onto the template and offered as a selectable module.
-* **`configs/`**: shared config data used by the hooks, for example `presets.json` defines the pre-selected packages, and `honey.json` is the Honey dashboard catalog of services, icons, and URL templates that are not included in Viren's template.
+* **`apps/`**: bundled apps that are not in [*Viren's Docker Templates*](https://github.com/Viren070/docker-compose-template) (for example `watchly`, `proxy`), where ach folder with a `compose.yaml` is overlaid onto the template and offered as a selectable module.
+* **`configs/`**: shared config data used by the hooks, for example `presets.json` defines the pre-selected packages, and `honey.json` is the Honey dashboard catalog of services, icons, and URL templates that are not included in [*Viren's Docker Templates*](https://github.com/Viren070/docker-compose-template).
 * **`defaults.env`**: fallback values for every setting, used when you do not pass a flag.
 
 Each file in `modules/` is self-contained and well commented, so look there to see how a specific addon is configured.
