@@ -351,7 +351,7 @@ export function DoneStep() {
       ...(visiblePreviousAddons.length > 0 ? [
         '----------------------------------------------',
         '',
-        'Previous Addons',
+        '🗄️ Previous Addons',
         '',
         ...visiblePreviousAddons.flatMap(addon => [
           `${addon.name}`,
@@ -513,7 +513,7 @@ export function DoneStep() {
                 marginBottom: '0.4rem',
               }}
             >
-              Previous Addons (Backup)
+              🗄️ Previous Addons (Backup)
             </p>
             <p style={{ ...metaTextStyle, marginBottom: '0.75rem', fontSize: '0.82rem', lineHeight: 1.5, textAlign: 'center' }}>
               These are the addons that were on your account before the wizard replaced them. Keep this list in case you want to restore anything manually.
