@@ -5,22 +5,6 @@ title: "📜 Changelog"
 
 # 📜 Changelog
 
-## 🍿 Guide
-
-No tracked guide-specific releases yet.
-
-## 🔮 Wizard
-
-No tracked wizard-specific releases yet.
-
-## 🖥️ Hosting
-
-No tracked hosting-specific releases yet.
-
-## 💎 Collections
-
-No tracked collections-specific releases yet.
-
 ## 📚 AIOStreams
 
 ### 2.0.7 (2026-05-31)
@@ -74,3 +58,19 @@ No tracked collections-specific releases yet.
 ### 1.0.1 (2026-04-11)
 
 - Enabled **Hide Watched Trakt/MDBList** option to avoid showing already watched content on lists.
+
+## 🍿 Guide
+
+No tracked guide-specific releases yet.
+
+## 🔮 Wizard
+
+No tracked wizard-specific releases yet.
+
+## 🖥️ Hosting
+
+No tracked hosting-specific releases yet.
+
+## 💎 Collections
+
+No tracked collections-specific releases yet.
