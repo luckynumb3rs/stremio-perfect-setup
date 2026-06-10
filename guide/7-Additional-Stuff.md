@@ -134,6 +134,47 @@ The **Name Template** is the same for both, but just for reference in case you m
 ```
 
 
+## Alternative Nuvio Instant Debrid Formatter
+
+Similar to the **AIOStreams** formatting for the stream information, you can do the same for *Nuvio* if you are using the **Connected Services** / **Instant Debrid** feature. Here are equivalent formatter templates for the *Nuvio* formatter:
+
+**Name Template**:
+```
+{service.cached::istrue["⚡ "||""]}{service.cached::isfalse["⏳ "||""]}{stream.type::=p2p["🧲 "||""]}{stream.type::=http["🌐 "||""]}{stream.type::=live["📺 "||""]}{stream.type::=youtube["▶️ "||""]}{stream.type::=archive["🗄️ "||""]}{stream.type::=external["↗️ "||""]}{stream.type::=statistic["📊 "||""]}{stream.type::=info["ℹ️ "||""]}{stream.type::=error["⛔ "||""]}{stream.resolution::exists["{stream.resolution::replace('2160p','UHD⁴ᴷ')::replace('1440p','QHD²ᴷ')::replace('1080p','FHD')::replace('p','P')}    "||""]}
+{stream.quality::exists["⌜{stream.quality::title::replace('Bluray Remux','Remux')::upper}⌟    "||""]}
+{service.shortName::exists["[{service.shortName}]    "||""]}
+```
+
+**Decription Template [*Colorful Icons*]**:
+```
+{stream.edition::exists["🎬  {stream.edition::upper} "||""]}
+{stream.encode::exists["📼  {stream.encode}  "||""]}{stream.visualTags::exists["🎥  {stream.visualTags::join(' · ')}  "||""]}
+{stream.audioTags::exists["🎵  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["🎧  {stream.audioChannels::join(' · ')} "||""]}
+{stream.languages::exists["🔊  {stream.languageEmojis::join(' · ')::upper}  "||""]}
+```
+
+**Decription Template [*Flat Monochrome Icons*]**:
+```
+{stream.edition::exists["▶︎  {stream.edition::upper} "||""]}
+{stream.encode::exists["▣  {stream.encode}  "||""]}{stream.visualTags::exists["✦  {stream.visualTags::join(' · ')}  "||""]}
+{stream.audioTags::exists["♬  {stream.audioTags::join(' · ')}  "||""]}{stream.audioChannels::exists["☊  {stream.audioChannels::join(' · ')} "||""]}
+{stream.languages::exists["⚐  {stream.languages::join(' · ')::upper}  "||""]}
+```
+
+If you also want the filename to show, add this snippet: 
+
+```
+{stream.filename::exists["✎ {stream.filename}  "||""]}
+```
+
+OR
+
+```
+{stream.filename::exists["✏️ {stream.filename}  "||""]}
+```
+(depending on the icon you prefer) somewhere in the *Description Template* where you see fit.
+
+
 ## Enriching Your Catalogs (Trakt Alternatives)
 
 This guide uses **Trakt** as the default content tracker, mainly because it's also natively supported by Stremio/Nuvio. Through **Trakt Scrobbling** enabled in Stremio/Nuvio settings, it sends watch history and progress to Trakt, which you then can use to create your own lists or as a personal library manager for your preferences. However, since Trakt recently has been enforcing strict rate limits, and also limiting free accounts more and more, there are alternatives that might allow you more flexibility, and also avoid any issues with Trakt errors that have been happening increasingly often.

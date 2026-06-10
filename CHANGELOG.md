@@ -67,6 +67,7 @@ title: "📜 Changelog"
 
 ### 2.0.1 (2026-06-10)
 
+- Added the **Nuvio Formatter** section with alternatives in *Additional Stuff*.
 - Updated the **AIOStreams Formatter** to make the **~ðŸ§** symbols showing when using Zyclops Proxy for Usenet hidden.
 
 ## 🔮 Wizard
