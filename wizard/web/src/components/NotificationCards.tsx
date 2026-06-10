@@ -36,6 +36,7 @@ export function NotificationCards({ notifications = [], target }: Props) {
               background: style.background ?? themedCardStyle.background,
               border: `1px solid ${style.borderColor ?? 'transparent'}`,
               color: style.textColor ?? themedCardStyle.color,
+              boxShadow: style.boxShadow,
             }
           : themedCardStyle;
 
@@ -53,6 +54,7 @@ export function NotificationCards({ notifications = [], target }: Props) {
                 fontSize: '0.92rem',
                 color: 'inherit',
                 width: '100%',
+                textAlign: style?.textAlign ?? 'center',
               }}
             />
           </div>

@@ -191,7 +191,8 @@ above the credentials on the Done page. Each entry:
     "background": "...",
     "borderColor": "...",
     "textColor": "...",
-    "boxShadow": "..."
+    "boxShadow": "...",
+    "textAlign": "center"
   }
 }
 ```
@@ -200,13 +201,14 @@ above the credentials on the Done page. Each entry:
 |-------|----------|-------------|
 | `markdown` | ✓ | Card body, rendered as Markdown |
 | `targets` | — | `"stremio"` and/or `"nuvio"`. Omit to show on all targets. |
-| `style` | — | Override panel card colors. Omit to use the default theme card. |
+| `style` | — | Override panel card styling. Omit to use the default theme card. |
 
 `style` sub-fields all accept any CSS value string:
 - `background` — card background (supports `rgba`)
 - `borderColor` — border color (rendered as `1px solid <value>`)
 - `textColor` — text color
 - `boxShadow` — CSS `box-shadow` value
+- `textAlign` — card body text alignment, for example `left`, `center`, or `right`. Defaults to `center`
 
 The array is filtered at render time: entries whose `targets` list does not include the active target
 are hidden.

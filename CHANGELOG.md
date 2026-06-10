@@ -68,6 +68,7 @@ No tracked guide-specific releases yet.
 ### 1.0.1 (2026-06-10)
 
 - Added **Elite Badges** to Nuvio Settings template.
+- Added center text alignment to **Done Step** notifications.
 
 ## 🖥️ Hosting
 

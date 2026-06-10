@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 /** Shape of the wizard/config.json file loaded at runtime. */
 export type WizardTarget = 'stremio' | 'nuvio';
 
@@ -18,6 +20,7 @@ export interface WizardNotificationStyle {
   borderColor?: string;
   textColor?: string;
   boxShadow?: string;
+  textAlign?: CSSProperties['textAlign'];
 }
 
 export interface WizardNotification {
