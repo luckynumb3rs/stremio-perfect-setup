@@ -3,6 +3,7 @@
     "version": 1,
     "features": {
       "debrid_settings": {
+        "stream_sort_mode": { "type": "string", "value": "QUALITY_DESC" },
         "debrid_stream_name_template": { "type": "string", "value": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD⁴ᴷ')::replace('1440p','QHD²ᴷ')::replace('1080p','FHD')::replace('p','P')}    \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::upper}⌟    \"||\"\"]}\n{service.shortName::exists[\"[{service.shortName}]    \"||\"\"]}\n" },
         "debrid_stream_description_template": { "type": "string", "value": "{stream.edition::exists[\"▶︎  {stream.edition::upper} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.languages::join(' · ')::upper}  \"||\"\"]}\n" }
       },
@@ -37,6 +38,7 @@
     "version": 3,
     "features": {
       "debrid_settings": {
+        "stream_sort_mode": { "type": "string", "value": "QUALITY_DESC" },
         "debrid_stream_name_template": { "type": "string", "value": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD⁴ᴷ')::replace('1440p','QHD²ᴷ')::replace('1080p','FHD')::replace('p','P')}    \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::upper}⌟    \"||\"\"]}\n{service.shortName::exists[\"[{service.shortName}]    \"||\"\"]}\n" },
         "debrid_stream_description_template": { "type": "string", "value": "{stream.edition::exists[\"▶︎  {stream.edition::upper} \"||\"\"]}\n{stream.encode::exists[\"▣  {stream.encode}  \"||\"\"]}{stream.visualTags::exists[\"✦  {stream.visualTags::join(' · ')}  \"||\"\"]}\n{stream.audioTags::exists[\"♬  {stream.audioTags::join(' · ')}  \"||\"\"]}{stream.audioChannels::exists[\"☊  {stream.audioChannels::join(' · ')} \"||\"\"]}\n{stream.languages::exists[\"⚐  {stream.languages::join(' · ')::upper}  \"||\"\"]}\n" }
       },
