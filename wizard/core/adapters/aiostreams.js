@@ -80,38 +80,13 @@ export function disableInternalAddons(config, addonNames) {
   return { config: nextConfig, disabledAddonNames: [...new Set(disabledAddonNames)] };
 }
 
-function sharedFailedManifestAddons(results) {
-  const failures = results.filter((result) => !result.ok);
-  if (failures.length === 0) return [];
-
-  const informativeFailures = failures
-    .map((failure) => {
-      const names = extractFailedManifestAddons(failure.error);
-      return names.length > 0 ? { failure, names } : null;
-    })
-    .filter(Boolean);
-
-  if (informativeFailures.length === 0) return [];
-
-  let intersection = null;
-  for (const { names } of informativeFailures) {
-    const current = new Set(names.map(normalizeAddonName).filter(Boolean));
-    if (current.size === 0) return [];
-    intersection = intersection === null
-      ? current
-      : new Set([...intersection].filter((name) => current.has(name)));
-    if (intersection.size === 0) return [];
-  }
-
-  const canonical = new Map();
-  for (const { names } of informativeFailures) {
-    for (const name of names) {
-      const normalized = normalizeAddonName(name);
-      if (normalized && !canonical.has(normalized)) canonical.set(normalized, name);
-    }
-  }
-
-  return [...intersection].map((name) => canonical.get(name) || name);
+// How many of the addons an instance named in its failure are actually present (and still enabled)
+// in our template — i.e. how many we could disable to try to repair this instance. Opaque failures
+// (403s, generic 400s with no parseable manifest name) and names that don't map to a preset count 0.
+function repairableAddonCount(errorMessage, config) {
+  const names = extractFailedManifestAddons(errorMessage);
+  if (names.length === 0) return 0;
+  return disableInternalAddons(config, names).disabledAddonNames.length;
 }
 
 async function tryCreateUntilSuccess(instances, createAttempt) {
@@ -227,15 +202,54 @@ export function createAioStreamsAdapter(instanceUrl, { proxyBase = '' } = {}) {
 // only attempted if earlier instances fail. params may include `proxyBase` for CORS proxy
 // support and `_postResolveOverride` to patch the resolved config before POSTing
 // (useful for testing without a TMDB key).
-// One internal addon can fail per attempt (AIOStreams' fetchManifests uses Promise.all, so only
-// the first rejection surfaces). Bound how many addons we're willing to disable across retry rounds
-// so a misbehaving instance can't loop forever.
+//
+// Strategy when every instance rejects the config:
+//   1. The first attempt always sends the template with every addon enabled (the normal case).
+//   2. If all instances fail, we remember which addons each instance reported as broken. AIOStreams'
+//      fetchManifests uses Promise.all, so an instance may surface only one broken addon at a time —
+//      so we pick the instance that named the FEWEST broken-but-repairable addons (ties broken by
+//      order), disable only the addon(s) THAT instance named, and retry on THAT same instance,
+//      repeating until it accepts or there is nothing left we can disable.
+//   3. If that committed instance still can't be salvaged, we fall back to the next-fewest instance
+//      and repair it from scratch using only the addons IT named.
+//   4. If no instance can be made to work, the combined error is surfaced to the user.
+// This avoids disabling addons an instance never complained about, and avoids deploying to an
+// instance where a different addon is the real problem.
+//
+// MAX_DISABLE_ROUNDS bounds the repair loop per instance so a misbehaving instance can't loop forever.
 const MAX_DISABLE_ROUNDS = 12;
+
+// Repair a single instance: disable only the addons it reports as broken, retrying on that same
+// instance until it accepts the config or there is nothing left to disable. Returns the successful
+// result and the addons that had to be disabled, or { ok: false } if the instance can't be salvaged.
+async function repairInstance(instanceUrl, baseConfig, firstError, createAttempt) {
+  let config = baseConfig;
+  let lastError = firstError;
+  const disabled = [];
+
+  for (let round = 0; round <= MAX_DISABLE_ROUNDS; round++) {
+    const names = extractFailedManifestAddons(lastError);
+    if (names.length === 0) break; // opaque failure — nothing actionable to disable
+    const { config: nextConfig, disabledAddonNames } = disableInternalAddons(config, names);
+    if (disabledAddonNames.length === 0) break; // named addons aren't in our template / already off
+    disabled.push(...disabledAddonNames);
+    config = nextConfig;
+
+    try {
+      const success = { instanceUrl, ok: true, ...(await createAttempt(instanceUrl, config)) };
+      return { ok: true, success, disabled: [...new Set(disabled)] };
+    } catch (err) {
+      lastError = String(err.message || err);
+    }
+  }
+
+  return { ok: false, error: lastError, disabled: [...new Set(disabled)] };
+}
 
 export async function createWithFallbacks(instances, params) {
   const { proxyBase, _postResolveOverride, ...createParams } = params;
   const configOverride = _postResolveOverride || undefined;
-  let currentConfig = resolveConfigPayload({ ...createParams, configOverride });
+  const baseConfig = resolveConfigPayload({ ...createParams, configOverride });
 
   const createAttempt = async (instanceUrl, config) => {
     const adapter = createAioStreamsAdapter(instanceUrl, { proxyBase });
@@ -246,35 +260,44 @@ export async function createWithFallbacks(instances, params) {
     });
   };
 
-  const disabledInternalAddons = [];
-  const allResults = [];
+  // Step 1: normal attempt with every addon enabled. First instance to accept wins.
+  const round0 = await tryCreateUntilSuccess(instances, (instanceUrl) => createAttempt(instanceUrl, baseConfig));
+  // `all` carries the final per-instance outcome (one entry per instance, in order). It starts as
+  // the round-0 failures and is upgraded to the success entry for whichever instance we recover.
+  const all = [...round0.results];
+  if (round0.primary) {
+    return { primary: round0.primary, all, disabledInternalAddons: [], retryWarnings: [] };
+  }
+
+  // Step 2: every instance rejected the config. Rank the instances that named at least one addon we
+  // can actually disable, fewest-broken first (ties broken by original order), and try to repair
+  // each in turn — committing to one instance at a time and disabling only what it reports.
+  const candidates = round0.results
+    .map((result, index) => ({ result, index, repairable: repairableAddonCount(result.error, baseConfig) }))
+    .filter((candidate) => candidate.repairable > 0)
+    .sort((a, b) => a.repairable - b.repairable || a.index - b.index);
+
   let primary = null;
-  let results = [];
-
-  // Keep disabling the internal addon that failed on every instance and retrying, until an
-  // instance accepts the config or there is nothing left we can disable.
-  for (let round = 0; round <= MAX_DISABLE_ROUNDS; round++) {
-    const attempt = await tryCreateUntilSuccess(instances, (instanceUrl) => createAttempt(instanceUrl, currentConfig));
-    results = attempt.results;
-    allResults.push(...attempt.results);
-    if (attempt.primary) { primary = attempt.primary; break; }
-
-    const manifestAddons = sharedFailedManifestAddons(attempt.results);
-    if (manifestAddons.length === 0) break;
-    const { config: nextConfig, disabledAddonNames } = disableInternalAddons(currentConfig, manifestAddons);
-    if (disabledAddonNames.length === 0) break;
-    disabledInternalAddons.push(...disabledAddonNames);
-    currentConfig = nextConfig;
+  let disabledInternalAddons = [];
+  for (const candidate of candidates) {
+    const outcome = await repairInstance(candidate.result.instanceUrl, baseConfig, candidate.result.error, createAttempt);
+    if (outcome.ok) {
+      primary = outcome.success;
+      disabledInternalAddons = outcome.disabled;
+      all[candidate.index] = outcome.success; // reflect that this instance ultimately succeeded
+      break;
+    }
   }
 
   const uniqueDisabled = [...new Set(disabledInternalAddons)];
   const retryWarnings = uniqueDisabled.length > 0
     ? [
-        `AIOStreams disabled ${uniqueDisabled.join(', ')} because ${uniqueDisabled.length === 1 ? 'it was' : 'they were'} not reachable at the moment. Your account was created successfully and it is fine to continue using it. You can log in to the AIOStreams configuration later and try re-enabling ${uniqueDisabled.length === 1 ? 'it' : 'them'} manually, or leave ${uniqueDisabled.length === 1 ? 'it' : 'them'} disabled if you prefer.`,
+        `AIOStreams disabled ${uniqueDisabled.join(', ')} because ${uniqueDisabled.length === 1 ? 'it was' : 'they were'} not reachable at the moment. Your account was created successfully and it is fine to continue using it. You can log in to the AIOStreams configuration later (provided below) and try re-enabling ${uniqueDisabled.length === 1 ? 'it' : 'them'} manually. The configuration that was installed includes multiple redundant scrapers, so you could also leave ${uniqueDisabled.length === 1 ? 'it' : 'them'} disabled if you're happy with the results you get.`,
       ]
     : [];
 
   if (!primary) {
+    const results = round0.results;
     const allCors = results.every((r) => r.error?.includes('[CORS]'));
     const errors = results.map((r) => r.error?.replace('[CORS] ', '')).join('\n\n');
     if (allCors) {
@@ -291,5 +314,5 @@ export async function createWithFallbacks(instances, params) {
     }
     throw new Error(`All AIOStreams instances failed:\n\n${errors}`);
   }
-  return { primary, all: allResults, disabledInternalAddons: uniqueDisabled, retryWarnings };
+  return { primary, all, disabledInternalAddons: uniqueDisabled, retryWarnings };
 }
