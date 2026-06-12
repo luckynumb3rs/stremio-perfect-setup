@@ -466,7 +466,7 @@ export function KeysStep({ keyIndex }: Props) {
                 }}
               >
                 <div style={{ minWidth: 0, flex: '1 1 auto' }}>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>⚡ Instant Debrid</div>
+                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>⚡ Instant Debrid (Connected Services)</div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.45rem', flex: '0 0 auto' }}>
                   <div
@@ -494,7 +494,7 @@ export function KeysStep({ keyIndex }: Props) {
               }}>
                 <div className="wizard-notice__title" style={{ marginBottom: '0.3rem' }}>ℹ️ Note</div>
                 <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text)', lineHeight: 1.6 }}>
-                  This feature is still new. It may deliver results slightly faster, but typically returns fewer and less well-organized streams than the standard mode. Unlike the standard mode, it does not definitively exclude P2P streams.
+                  This is a Nuvio-native feature and is still new. It may deliver results slightly faster, but typically returns fewer and less well-organized streams than the standard mode. Unlike the standard mode, it may not definitively exclude P2P streams. Proceed at your own risk!
                 </p>
               </div>
             </div>

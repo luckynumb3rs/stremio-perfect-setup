@@ -198,7 +198,14 @@ export const useWizard = create<WizardState>((set) => ({
     const updated = already
       ? existing.filter(d => d.id !== id)
       : [...existing, { id, credentials: {} }];
-    return { credentials: { ...s.credentials, debridServices: updated } };
+    const QUALIFYING = ['torbox', 'premiumize'];
+    const shouldResetInstantDebrid = s.nuvioInstantDebrid
+      && !!already  // we removed a service
+      && !updated.some(d => QUALIFYING.includes(d.id));  // no qualifying services remain
+    return {
+      credentials: { ...s.credentials, debridServices: updated },
+      ...(shouldResetInstantDebrid ? { nuvioInstantDebrid: false } : {}),
+    };
   }),
   setDebridCredential: (id, fieldId, value) => set(s => ({
     credentials: {
