@@ -8,6 +8,7 @@ import { useWizard } from '../store/wizard';
 import { ACTIVE_KEY_SCREENS, type KeyScreenId } from '../lib/keyScreens';
 import { DEBRID_SERVICES, getServiceById, getServiceCredentialFields, resolveLogoUrl } from '../lib/services';
 import { hasConfiguredKeyArray, hasConfiguredTmdbFallback } from '../lib/sharedKeys';
+import { INSTANT_DEBRID_SERVICE_IDS } from '../lib/instantDebrid';
 
 interface Props { keyIndex: number; }
 
@@ -195,6 +196,9 @@ export function KeysStep({ keyIndex }: Props) {
     setDebridCredential,
     nextStep,
     wizardConfig,
+    target,
+    nuvioInstantDebrid,
+    setNuvioInstantDebrid,
   } = useWizard();
 
   if (!screen) { nextStep(); return null; }
@@ -215,6 +219,13 @@ export function KeysStep({ keyIndex }: Props) {
   const hasTvdbFallback = hasConfiguredKeyArray(wizardConfig, 'tvdbApiKeys');
   const hasGeminiFallback = hasConfiguredKeyArray(wizardConfig, 'geminiApiKeys');
   const hasRpdbFallback = hasConfiguredKeyArray(wizardConfig, 'rpdbApiKeys');
+
+  const isNuvio = target === 'nuvio';
+  const hasQualifyingService = credentials.debridServices.some(
+    (d) => (INSTANT_DEBRID_SERVICE_IDS as readonly string[]).includes(d.id)
+  );
+  const showInstantDebridToggle = isNuvio && screen.id === 'debrid' && hasQualifyingService;
+
   const fallbackAvailable = screen.id === 'debrid'
     ? false
     : getScreenFallbackAvailability(screen.id, hasTmdbFallback, hasTvdbFallback, hasGeminiFallback, hasRpdbFallback);
@@ -230,7 +241,12 @@ export function KeysStep({ keyIndex }: Props) {
   const continueState = screen.id === 'debrid'
     ? getDebridContinueState(credentials.debridServices)
     : getContinueState(screen.id, fieldValues, fallbackAvailable);
-  const continueIcon = getContinueIcon(screen.id, continueState.label, continueState.canContinue);
+
+  const effectiveContinueState = screen.id === 'debrid' && nuvioInstantDebrid && continueState.canContinue
+    ? { ...continueState, label: 'Continue with Instant Debrid' }
+    : continueState;
+
+  const continueIcon = getContinueIcon(screen.id, effectiveContinueState.label, effectiveContinueState.canContinue);
   const credentialFields = screen.id === 'debrid' ? [] : SCREEN_FIELDS[screen.id];
   const sharedInstructionParts = [
     SHARED_INSTRUCTIONS_WALKTHROUGH,
@@ -239,7 +255,7 @@ export function KeysStep({ keyIndex }: Props) {
   const instructionsText = `${screen.instruction}\n\n${sharedInstructionParts.join('\n\n')}`;
 
   return (
-    <WizardShell onSubmit={continueState.canContinue ? nextStep : undefined}>
+    <WizardShell onSubmit={effectiveContinueState.canContinue ? nextStep : undefined}>
       <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.35rem', textAlign: 'center' }}>
         {screen.label}
       </h2>
@@ -280,6 +296,7 @@ export function KeysStep({ keyIndex }: Props) {
               const selected = credentials.debridServices.some(d => d.id === service.id);
               const logoUrl = resolveLogoUrl(service.logo);
               const divider = selected ? 'var(--accent)' : 'var(--border)';
+              const isInstantDebridLocked = nuvioInstantDebrid && !(INSTANT_DEBRID_SERVICE_IDS as readonly string[]).includes(service.id);
               return (
                 <div
                   key={service.id}
@@ -292,13 +309,28 @@ export function KeysStep({ keyIndex }: Props) {
                     display: 'flex',
                     flexDirection: 'column',
                     transition: 'border-color 0.15s ease, background 0.15s ease',
+                    opacity: isInstantDebridLocked ? 0.4 : 1,
+                    pointerEvents: isInstantDebridLocked ? 'none' : undefined,
+                    cursor: isInstantDebridLocked ? 'not-allowed' : undefined,
                   } as CSSProperties}
                 >
                   <button
                     type="button"
                     className="debrid-card__select"
-                    onClick={() => toggleDebridService(service.id)}
+                    onClick={() => {
+                      const isCurrentlySelected = credentials.debridServices.some(d => d.id === service.id);
+                      if (isCurrentlySelected) {
+                        const remainingQualifying = credentials.debridServices.filter(
+                          d => (INSTANT_DEBRID_SERVICE_IDS as readonly string[]).includes(d.id) && d.id !== service.id
+                        );
+                        if (remainingQualifying.length === 0 && nuvioInstantDebrid) {
+                          setNuvioInstantDebrid(false);
+                        }
+                      }
+                      toggleDebridService(service.id);
+                    }}
                     aria-pressed={selected}
+                    disabled={isInstantDebridLocked}
                     style={{
                       border: 'none',
                       background: 'transparent',
@@ -415,6 +447,35 @@ export function KeysStep({ keyIndex }: Props) {
               )}
             </div>
           )}
+
+          {showInstantDebridToggle && (
+            <div style={{
+              border: '1px solid var(--border)',
+              borderRadius: '10px',
+              padding: '0.85rem',
+              background: 'var(--panel)',
+              marginBottom: '0.5rem',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: nuvioInstantDebrid ? '0.75rem' : 0 }}>
+                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text)' }}>
+                  ⚡ Instant Debrid
+                </span>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                  <input
+                    type="checkbox"
+                    checked={nuvioInstantDebrid}
+                    onChange={(e) => setNuvioInstantDebrid(e.target.checked)}
+                    style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                  />
+                </label>
+              </div>
+              {nuvioInstantDebrid && (
+                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.55 }}>
+                  This feature is still new. It may deliver results slightly faster, but typically returns fewer and less well-organized streams than the standard mode. Unlike the standard mode, it does not definitively exclude P2P streams.
+                </p>
+              )}
+            </div>
+          )}
         </>
       )}
 
@@ -440,8 +501,8 @@ export function KeysStep({ keyIndex }: Props) {
 
       <NextButton
         onClick={nextStep}
-        disabled={!continueState.canContinue}
-        label={continueState.label}
+        disabled={!effectiveContinueState.canContinue}
+        label={effectiveContinueState.label}
         icon={continueIcon}
       />
     </WizardShell>
