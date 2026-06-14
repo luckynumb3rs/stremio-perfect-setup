@@ -65,18 +65,6 @@ function getSidebarStatsRows(summary) {
   const rows = [];
   if (!summary) return rows;
 
-  const keys = summary.keys ?? {};
-  const keyItems = [
-    { key: 'instantDebrid', title: 'Instant Debrid', count: keys.instantDebrid ?? 0, emoji: '⚡' },
-    { key: 'tmdb', title: 'TMDB', count: keys.tmdb ?? 0, emoji: '🎥' },
-    { key: 'tvdb', title: 'TVDB', count: keys.tvdb ?? 0, emoji: '📺' },
-    { key: 'rpdb', title: 'RPDB', count: keys.rpdb ?? 0, emoji: '⭐' },
-    { key: 'gemini', title: 'Gemini', count: keys.gemini ?? 0, emoji: '✨' },
-  ];
-  if (keyItems.some((item) => item.count > 0)) {
-    rows.push({ label: 'Keys', variant: 'keys', items: keyItems });
-  }
-
   const debrid = asArray(summary.debrid);
   if (debrid.length > 0) {
     rows.push({
@@ -89,6 +77,18 @@ function getSidebarStatsRows(summary) {
         logoPath: item.logoPath,
       })),
     });
+  }
+
+  const keys = summary.keys ?? {};
+  const keyItems = [
+    { key: 'instantDebrid', title: 'Instant Debrid', count: keys.instantDebrid ?? 0, emoji: '⚡' },
+    { key: 'tmdb', title: 'TMDB', count: keys.tmdb ?? 0, emoji: '🎥' },
+    { key: 'tvdb', title: 'TVDB', count: keys.tvdb ?? 0, emoji: '📺' },
+    { key: 'rpdb', title: 'RPDB', count: keys.rpdb ?? 0, emoji: '⭐' },
+    { key: 'gemini', title: 'Gemini', count: keys.gemini ?? 0, emoji: '✨' },
+  ];
+  if (keyItems.some((item) => item.count > 0)) {
+    rows.push({ label: 'Keys', variant: 'keys', items: keyItems });
   }
 
   const audio = asArray(summary.audio);
