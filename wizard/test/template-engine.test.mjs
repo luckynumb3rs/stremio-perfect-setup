@@ -149,6 +149,33 @@ console.log('\n# full template resolution: P2P (no services)');
   ok('TB Search omitted when TorBox is not selected', !cfg.presets.some((preset) => preset.type === 'torbox-search'));
 }
 
+console.log('\n# debrid-only presets never leak into a P2P config (Instant Debrid regression)');
+{
+  // Instant Debrid resolves AIOStreams with services=[] (P2P) while the user may still have
+  // toggled the debrid-only Anime/Debridio inputs to true (e.g. enabled before switching to
+  // Instant Debrid). The seadex preset requires a usable service, so it must be excluded.
+  const cfg = resolveTemplate(template, {
+    inputs: { formatterChoice: 'flat', languages: ['English'], subtitles: ['en'], httpAddons: 'none', timeout: 5000, anime: true, debridio: true, debridioApiKey: 'DBKEY' },
+    services: [],
+    credentials: { tmdbApiKey: 'K', tmdbAccessToken: 'A', tvdbApiKey: 'V' },
+  });
+  ok('seadex preset excluded in P2P even when anime=true', !cfg.presets.some((p) => p.type === 'seadex'));
+  ok('animetosho preset excluded in P2P even when anime=true', !cfg.presets.some((p) => p.type === 'animetosho'));
+  ok('debridio preset excluded in P2P even when debridio=true', !cfg.presets.some((p) => p.type === 'debridio'));
+}
+
+console.log('\n# debrid-only presets still included when a service IS selected');
+{
+  const cfg = resolveTemplate(template, {
+    inputs: { formatterChoice: 'flat', languages: ['English'], subtitles: ['en'], httpAddons: 'none', timeout: 5000, anime: true, debridio: true, debridioApiKey: 'DBKEY' },
+    services: ['torbox'],
+    credentials: { tmdbApiKey: 'K', tmdbAccessToken: 'A', tvdbApiKey: 'V' },
+  });
+  ok('seadex preset included with service + anime', cfg.presets.some((p) => p.type === 'seadex'));
+  ok('animetosho preset included with service + anime', cfg.presets.some((p) => p.type === 'animetosho'));
+  ok('debridio preset included with service + debridio', cfg.presets.some((p) => p.type === 'debridio'));
+}
+
 console.log('\n# full template resolution: Debrid (torbox) + formatter color + filename');
 {
   const cfg = resolveTemplate(template, {

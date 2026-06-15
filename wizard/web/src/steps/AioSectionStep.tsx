@@ -63,7 +63,7 @@ function AlertBanner({ field }: { field: TemplateField }) {
 interface Props { sectionIndex: number; }
 
 export function AioSectionStep({ sectionIndex }: Props) {
-  const { templates, aioSections, aioStreamsInputs, credentials, setAioStreamsInput, nextStep } = useWizard();
+  const { templates, aioSections, aioStreamsInputs, credentials, setAioStreamsInput, nextStep, target, instantDebrid } = useWizard();
   const section = aioSections[sectionIndex];
   const template = templates?.aiostreams;
 
@@ -79,9 +79,14 @@ export function AioSectionStep({ sectionIndex }: Props) {
   const allInputs = t?.metadata?.inputs ?? [];
   const inputsById = Object.fromEntries(allInputs.map((f: TemplateField) => [f.id, f]));
 
+  // Instant Debrid configures AIOStreams as a P2P setup (the debrid is resolved at the
+  // platform layer), so visibility must use the same empty service list the install will
+  // resolve with — otherwise debrid-only fields (Anime, Debridio) would be shown here yet
+  // silently dropped at install. Keep this in sync with InstallingStep's `useInstantDebrid`.
+  const useInstantDebrid = target === 'nuvio' && instantDebrid;
   const ctx: Ctx = {
     inputs: aioStreamsInputs,
-    services: credentials.debridServices.map((d: { id: string }) => d.id),
+    services: useInstantDebrid ? [] : credentials.debridServices.map((d: { id: string }) => d.id),
   };
 
   const headerField = section.headerField as TemplateField | null;
