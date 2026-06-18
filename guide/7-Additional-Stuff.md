@@ -146,14 +146,14 @@ Similar to the **AIOStreams** formatting for the stream information, you can do 
 
 **Decription Template [*Colorful Icons*]**:
 ```
-{stream.size::>0["💾  {stream.size::sbytes}  "||""]}{stream.edition::exists["🎬  {stream.edition::upper}  "||""]}
-{stream.languages::exists["🔊  {stream.languages::join(' · ')::upper}  "||""]}
+{stream.edition::exists["🎬  {stream.edition::upper}  "||""]}
+{stream.size::>0["💾  {stream.size::sbytes}  "||""]}{stream.languages::exists["🔊  {stream.languages::join(' · ')::upper}  "||""]}
 ```
 
 **Decription Template [*Flat Monochrome Icons*]**:
 ```
-{stream.size::>0["◧  {stream.size::sbytes}  "||""]}{stream.edition::exists["▶︎  {stream.edition::upper}  "||""]}
-{stream.languages::exists["⚐  {stream.languages::join(' · ')::upper}  "||""]}
+{stream.edition::exists["▶︎  {stream.edition::upper}  "||""]}
+{stream.size::>0["◧  {stream.size::sbytes}  "||""]}{stream.languages::exists["⚐  {stream.languages::join(' · ')::upper}  "||""]}
 ```
 
 If you also want the filename to show, add this snippet: 
