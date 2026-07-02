@@ -1,20 +1,20 @@
-// Nuvio adapter: talks to the Supabase-backed Nuvio Public API.
+// Nuvio adapter: talks to the public Nuvio API.
 
-const SUPABASE_BASE = 'https://dpyhjjcoabcglfmgecug.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRweWhqamNvYWJjZ2xmbWdlY3VnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3ODYyNDcsImV4cCI6MjA4NjM2MjI0N30.U-3QSNDdpsnvRk_7ZL419AFTOtggHJJcmkodxeXjbkg';
+const NUVIO_API_BASE = 'https://api.nuvio.tv';
+const NUVIO_PUBLISHABLE_KEY = 'sb_publishable_1Clq8rlTVACkdcZuqr6_AD__xUUC_EN';
 const DEFAULT_PROFILE_COLOR = '#1E88E5';
 
 function anonHeaders() {
   return {
     'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
+    'apikey': NUVIO_PUBLISHABLE_KEY,
   };
 }
 
 function authHeaders(token) {
   return {
     'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
+    'apikey': NUVIO_PUBLISHABLE_KEY,
     'Authorization': `Bearer ${token}`,
   };
 }
@@ -207,7 +207,7 @@ function isApiKeyError(detail, code) {
 
 function formatAuthError(service, action, status, detail, code) {
   if (isApiKeyError(detail, code)) {
-    return `${service} ${action} is temporarily unavailable because the public API key configured in the wizard is invalid. Please update the Nuvio Supabase anon key and try again.`;
+    return `${service} ${action} is temporarily unavailable because the public API key configured in the wizard is invalid. Please update the Nuvio publishable key and try again.`;
   }
 
   if (/already registered|already exists|duplicate/i.test(detail)) {
@@ -230,7 +230,7 @@ function formatAuthError(service, action, status, detail, code) {
 }
 
 async function rpc(path, token, body) {
-  const res = await fetch(`${SUPABASE_BASE}${path}`, {
+  const res = await fetch(`${NUVIO_API_BASE}${path}`, {
     method: 'POST',
     headers: authHeaders(token),
     body: JSON.stringify(body),
@@ -244,7 +244,7 @@ async function rpc(path, token, body) {
 
 async function rest(path, token, options = {}) {
   const { method = 'GET', headers = {}, body } = options;
-  const res = await fetch(`${SUPABASE_BASE}${path}`, {
+  const res = await fetch(`${NUVIO_API_BASE}${path}`, {
     method,
     headers: {
       ...authHeaders(token),
@@ -275,7 +275,7 @@ export function createNuvioAdapter() {
     async signup(email, password) {
       let res;
       try {
-        res = await fetch(`${SUPABASE_BASE}/auth/v1/signup`, {
+        res = await fetch(`${NUVIO_API_BASE}/auth/v1/signup`, {
           method: 'POST',
           headers: anonHeaders(),
           body: JSON.stringify({ email, password }),
@@ -308,7 +308,7 @@ export function createNuvioAdapter() {
     async login(email, password) {
       let res;
       try {
-        res = await fetch(`${SUPABASE_BASE}/auth/v1/token?grant_type=password`, {
+        res = await fetch(`${NUVIO_API_BASE}/auth/v1/token?grant_type=password`, {
           method: 'POST',
           headers: anonHeaders(),
           body: JSON.stringify({ email, password }),
