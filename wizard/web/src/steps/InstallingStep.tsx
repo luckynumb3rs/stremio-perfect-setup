@@ -7,6 +7,8 @@ import { resolveSharedKeySelection, hasConfiguredKeyArray } from '../lib/sharedK
 
 // @ts-ignore
 import { runStremioSetup, runNuvioSetup } from '@core/orchestrator.js';
+// @ts-ignore
+import { buildWatchlyBody } from '@core/adapters/watchly.js';
 import { buildInstantDebridSettingsPatch } from '../lib/instantDebrid';
 
 interface LogEntry {
@@ -165,21 +167,33 @@ export function InstallingStep() {
       let watchlyBody: Record<string, unknown> | null = null;
       if (watchlyEnabled) {
         const watchlyDefaults = (templates.watchly ?? {}) as Record<string, unknown>;
-        const stremioAuthKey = target === 'stremio'
-          ? stremioAccount.authKey
-          : watchly.nuvioStremioLogin?.authKey;
-
-        if (!stremioAuthKey) {
-          throw new Error('Watchly is enabled but no Stremio identity is available. Go back to the Watchly page and sign in to Stremio.');
+        if (target === 'stremio') {
+          if (!stremioAccount.authKey) {
+            throw new Error('Watchly is enabled but no Stremio identity is available. Go back to the Account step and sign in again.');
+          }
+          watchlyBody = buildWatchlyBody(watchlyDefaults, {
+            target: 'stremio',
+            stremioAuthKey: stremioAccount.authKey,
+            tmdbApiKey: effectiveCredentials.tmdbApiKey,
+            geminiApiKey: effectiveCredentials.geminiApiKey,
+            rpdbApiKey: effectiveCredentials.rpdbApiKey,
+          });
+        } else {
+          if (!nuvioAccount.authToken || !nuvioAccount.profileId) {
+            throw new Error('Watchly is enabled but no Nuvio session or profile is available. Go back to the Account step and sign in again.');
+          }
+          watchlyBody = buildWatchlyBody(watchlyDefaults, {
+            target: 'nuvio',
+            nuvioAccessToken: nuvioAccount.authToken,
+            nuvioRefreshToken: nuvioAccount.authRefreshToken,
+            nuvioExpiresAt: nuvioAccount.authExpiresAt,
+            nuvioProfileId: nuvioAccount.profileId,
+            nuvioProfileName: nuvioAccount.profileName,
+            tmdbApiKey: effectiveCredentials.tmdbApiKey,
+            geminiApiKey: effectiveCredentials.geminiApiKey,
+            rpdbApiKey: effectiveCredentials.rpdbApiKey,
+          });
         }
-
-        watchlyBody = {
-          ...watchlyDefaults,
-          authKey: stremioAuthKey,
-          tmdb_api_key: effectiveCredentials.tmdbApiKey,
-          ...(effectiveCredentials.geminiApiKey ? { gemini_api_key: effectiveCredentials.geminiApiKey } : {}),
-          ...(effectiveCredentials.rpdbApiKey ? { poster_rating: { provider: 'rpdb', api_key: effectiveCredentials.rpdbApiKey } } : {}),
-        };
       }
 
       const onStep = (name: string, data: unknown) => {

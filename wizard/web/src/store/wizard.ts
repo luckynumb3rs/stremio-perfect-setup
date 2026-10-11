@@ -24,6 +24,8 @@ export interface AccountInfo {
   /** Set after successful early auth on AccountStep */
   authKey?: string;   // Stremio authKey
   authToken?: string; // Nuvio access_token
+  authRefreshToken?: string; // Nuvio refresh_token, used by Watchly's Nuvio source
+  authExpiresAt?: number; // Nuvio session expiry as epoch seconds
   authError?: string; // inline error message
   loading?: boolean;
   userId?: string;  // Stremio user _id, used for Trakt scrobble auth URL
@@ -78,14 +80,6 @@ export interface InstallResult {
 
 export interface WatchlyState {
   enabled: boolean;
-  /** Stremio login collected on the Watchly page for the Nuvio target.
-   *  Stremio target uses stremioAccount directly; this is only needed for Nuvio. */
-  nuvioStremioLogin: {
-    email: string;
-    password: string;
-    authKey: string;
-    userId: string;
-  } | null;
 }
 
 export interface LoadedTemplates {
@@ -170,7 +164,7 @@ export const useWizard = create<WizardState>((set) => ({
   templates: null,
   aioSections: [],
   wizardConfig: null,
-  watchly: { enabled: false, nuvioStremioLogin: null },
+  watchly: { enabled: false },
   instantDebrid: false,
 
   setStep: (step) => set(s => ({
@@ -185,8 +179,8 @@ export const useWizard = create<WizardState>((set) => ({
 
   setTarget: (target) => set(s => ({
     target,
-    // Watchly is enabled by default in Stremio mode; Nuvio support is still coming soon.
-    watchly: { ...s.watchly, enabled: target === 'stremio' },
+    // Watchly is enabled by default for both supported targets.
+    watchly: { ...s.watchly, enabled: target === 'stremio' || target === 'nuvio' },
   })),
   setStremioAccount: (a) => set(s => ({ stremioAccount: { ...s.stremioAccount, ...a } })),
   setNuvioAccount: (a) => set(s => ({ nuvioAccount: { ...s.nuvioAccount, ...a } })),

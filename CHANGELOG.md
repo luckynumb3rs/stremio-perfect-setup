@@ -84,6 +84,10 @@ title: "📜 Changelog"
 
 ## 🔮 Wizard
 
+### 1.0.5 (2026-10-12)
+
+- Added **Watchly** support for Nuvio using the connected Nuvio session and selected profile, without requiring a separate Stremio login.
+
 ### 1.0.4 (2026-06-18)
 
 - Removed the *Audio and Video Tags* from **Nuvio Formatter** because badges already show them.

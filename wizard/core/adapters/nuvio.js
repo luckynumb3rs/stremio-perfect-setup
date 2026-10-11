@@ -205,6 +205,25 @@ function isApiKeyError(detail, code) {
   return /api key|missing_api_key|invalid_api_key|unauthorized/i.test(`${code} ${detail}`);
 }
 
+function sessionFromPayload(payload) {
+  const accessToken = String(payload?.access_token || '').trim();
+  const refreshToken = String(payload?.refresh_token || '').trim();
+  const explicitExpiresAt = Number(payload?.expires_at);
+  const expiresIn = Number(payload?.expires_in);
+  const expiresAt = Number.isFinite(explicitExpiresAt) && explicitExpiresAt > 0
+    ? Math.trunc(explicitExpiresAt)
+    : Number.isFinite(expiresIn) && expiresIn > 0
+      ? Math.floor(Date.now() / 1000) + Math.trunc(expiresIn)
+      : null;
+
+  return {
+    token: accessToken,
+    refreshToken: refreshToken || null,
+    expiresAt,
+    userId: payload?.user?.id,
+  };
+}
+
 function formatAuthError(service, action, status, detail, code) {
   if (isApiKeyError(detail, code)) {
     return `${service} ${action} is temporarily unavailable because the public API key configured in the wizard is invalid. Please update the Nuvio publishable key and try again.`;
@@ -302,7 +321,7 @@ export function createNuvioAdapter() {
         return this.login(email, password);
       }
 
-      return { token: payload.access_token, userId: payload.user?.id };
+      return sessionFromPayload(payload);
     },
 
     async login(email, password) {
@@ -332,7 +351,7 @@ export function createNuvioAdapter() {
       if (!payload.access_token) {
         throw new Error('Nuvio sign-in succeeded but did not return an access token. Please try again.');
       }
-      return { token: payload.access_token, userId: payload.user?.id };
+      return sessionFromPayload(payload);
     },
 
     async getProfiles(token) {

@@ -22,7 +22,7 @@ The guide uses the same core addon structure as my Stremio setup, but adapted fo
 
 * **📚 AIOStreams** for finding streams
 * **🔎 AIOMetadata** for metadata, catalogs, search, artwork, and integrations
-* **🤖 Watchly** as an optional recommendation and personalized catalogs layer (coming soon!)
+* **🤖 Watchly** as an optional recommendation and personalized catalogs layer using your Nuvio watch history
 
 # 💎 Nuvio Perfect Collections (incl. Dynamic Backdrops)
 

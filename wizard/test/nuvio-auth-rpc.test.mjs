@@ -34,6 +34,8 @@ console.log('\n# Nuvio signup fallback');
     if (String(url).includes('/auth/v1/token?grant_type=password')) {
       return jsonResponse({
         access_token: 'token-123',
+        refresh_token: 'refresh-123',
+        expires_at: 2000000000,
         user: { id: 'user-123' },
       });
     }
@@ -43,6 +45,8 @@ console.log('\n# Nuvio signup fallback');
   try {
     const auth = await adapter.signup('person@example.com', 'password123');
     ok('Signup falls back to login when body is empty', auth?.token === 'token-123');
+    ok('Signup preserves the Nuvio refresh token', auth?.refreshToken === 'refresh-123');
+    ok('Signup preserves the Nuvio expiry', auth?.expiresAt === 2000000000);
     ok('Signup performs login fallback request', calls.some(url => url.includes('/auth/v1/token?grant_type=password')));
   } catch (err) {
     ok('Signup fallback does not throw', false, err instanceof Error ? err.message : String(err));

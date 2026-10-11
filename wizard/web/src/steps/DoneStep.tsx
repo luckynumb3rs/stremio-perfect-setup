@@ -52,7 +52,6 @@ export function DoneStep() {
     wizardConfig,
     aioStreamsInputs,
     catalogSelection,
-    watchly,
     instantDebrid,
   } = useWizard();
   const { aiostreams, aiometadata, addonPasswordSource, previousAddons, warnings: rawWarnings, error } = installResult;
@@ -167,7 +166,7 @@ export function DoneStep() {
 
   const watchlyEmail = target === 'stremio'
     ? stremioAccount.email
-    : watchly.nuvioStremioLogin?.email ?? '';
+    : nuvioAccount.email;
 
   const addons = useMemo(() => (
     [

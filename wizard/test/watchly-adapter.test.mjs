@@ -1,4 +1,4 @@
-import { createWatchlyAdapter } from '../core/adapters/watchly.js';
+import { buildWatchlyBody, createWatchlyAdapter } from '../core/adapters/watchly.js';
 
 let passed = 0;
 let failed = 0;
@@ -9,6 +9,37 @@ function ok(name, cond, detail = '') {
 }
 
 console.log('\n# Watchly adapter');
+
+// --- request body construction ---
+{
+  const body = buildWatchlyBody(
+    { watch_history_source: 'stremio', language: 'en-US', authKey: 'stale-key' },
+    {
+      target: 'nuvio',
+      nuvioAccessToken: 'nuvio-access',
+      nuvioRefreshToken: 'nuvio-refresh',
+      nuvioExpiresAt: 2000000000,
+      nuvioProfileId: 2,
+      nuvioProfileName: 'Kids',
+      tmdbApiKey: 'tmdb-key',
+      rpdbApiKey: 'rpdb-key',
+    },
+  );
+  ok('buildWatchlyBody switches Nuvio requests to the Nuvio history source', body.watch_history_source === 'nuvio');
+  ok('buildWatchlyBody sends Nuvio access and refresh tokens', body.nuvio_access_token === 'nuvio-access' && body.nuvio_refresh_token === 'nuvio-refresh');
+  ok('buildWatchlyBody sends the selected Nuvio profile', body.nuvio_profile_id === 2 && body.nuvio_profile_name === 'Kids');
+  ok('buildWatchlyBody removes a stale Stremio auth key for Nuvio', !('authKey' in body));
+  ok('buildWatchlyBody preserves shared Watchly options', body.language === 'en-US' && body.tmdb_api_key === 'tmdb-key' && body.poster_rating?.provider === 'rpdb');
+}
+
+{
+  const body = buildWatchlyBody(
+    { watch_history_source: '', language: 'en-US' },
+    { target: 'stremio', stremioAuthKey: 'stremio-auth', tmdbApiKey: 'tmdb-key' },
+  );
+  ok('buildWatchlyBody selects Stremio explicitly when the template source is empty', body.watch_history_source === 'stremio');
+  ok('buildWatchlyBody adds the Stremio identity explicitly', body.authKey === 'stremio-auth');
+}
 
 // --- createConfig success ---
 {

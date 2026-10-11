@@ -56,18 +56,20 @@ console.log('\n# WatchlyState');
   const get = () => useWizard.getState().watchly;
 
   ok('watchly initial enabled = false', get().enabled === false);
-  ok('watchly initial nuvioStremioLogin = null', get().nuvioStremioLogin === null);
 
   setWatchly({ enabled: true });
   ok('setWatchly enabled = true', get().enabled === true);
-  ok('setWatchly preserves nuvioStremioLogin', get().nuvioStremioLogin === null);
+}
 
-  setWatchly({ nuvioStremioLogin: { email: 'a@b.com', password: 'pw', authKey: 'ak', userId: 'uid1' } });
-  ok('setWatchly sets nuvioStremioLogin', get().nuvioStremioLogin?.authKey === 'ak');
-  ok('setWatchly preserves enabled', get().enabled === true);
-
-  setWatchly({ nuvioStremioLogin: null });
-  ok('setWatchly can clear nuvioStremioLogin', get().nuvioStremioLogin === null);
+console.log('\n# Watchly target defaults');
+{
+  const { setTarget } = useWizard.getState();
+  setWatchly({ enabled: false });
+  setTarget('nuvio');
+  ok('Nuvio enables Watchly by default', useWizard.getState().watchly.enabled === true);
+  setWatchly({ enabled: false });
+  setTarget('stremio');
+  ok('Stremio keeps Watchly enabled by default', useWizard.getState().watchly.enabled === true);
 }
 
 console.log('\n# AccountInfo.userId');

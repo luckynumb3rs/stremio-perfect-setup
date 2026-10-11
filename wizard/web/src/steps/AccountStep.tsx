@@ -82,6 +82,8 @@ export function AccountStep() {
     setNuvioAccount({
       ...next,
       authToken: undefined,
+      authRefreshToken: undefined,
+      authExpiresAt: undefined,
       authError: undefined,
       profileId: undefined,
       createNewProfile: false,
@@ -113,7 +115,10 @@ export function AccountStep() {
           }
           setNuvioAccount({
             authToken: auth.token,
+            authRefreshToken: auth.refreshToken ?? undefined,
+            authExpiresAt: auth.expiresAt ?? undefined,
             profileId: profile.profile_index,
+            profileName: profile.name,
             createNewProfile: false,
             profiles: [profile],
           });
@@ -146,6 +151,8 @@ export function AccountStep() {
 
           setNuvioAccount({
             authToken: auth.token,
+            authRefreshToken: auth.refreshToken ?? undefined,
+            authExpiresAt: auth.expiresAt ?? undefined,
             profiles,
             profileId: profiles.length ? selectedProfileId : undefined,
             profileName: selectedProfile?.name ?? account.profileName,
