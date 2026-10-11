@@ -120,12 +120,6 @@ export function WatchlyStep() {
             </div>
           </div>
 
-          <div className="wizard-notice" style={{ marginTop: '1rem' }}>
-            <div className="wizard-notice__title">🔒 Privacy note</div>
-            <div style={{ fontSize: '0.82rem', lineHeight: 1.5 }}>
-              Watchly needs the selected {appName} session to read your watch history. The wizard sends the session token(s) to the selected Watchly instance; your {appName} password is never sent to Watchly.
-            </div>
-          </div>
         </>
       )}
 
