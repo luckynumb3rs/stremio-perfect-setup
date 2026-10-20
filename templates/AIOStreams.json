@@ -275,7 +275,7 @@
         "__if": "inputs.debridio",
         "id": "debridioApiKey",
         "name": "Debridio API Key",
-        "description": "Paste your Debridio API key, found in your Debridio [account settings](https://debridio.com/account). The same key is used for both the Debridio Scraper and the Watchtower addon.",
+        "description": "Paste your Debridio API key, found in your Debridio [account settings](https://debridio.com/account).",
         "type": "password",
         "required": true
       },
@@ -627,22 +627,6 @@
           ],
           "mediaTypes": [],
           "useMultipleInstances": false
-        }
-      },
-      {
-        "__if": "inputs.httpAddons != none and inputs.debridio",
-        "category": "HTTP",
-        "type": "debridio-watchtower",
-        "instanceId": "dew",
-        "enabled": true,
-        "options": {
-          "name": "Watchtower",
-          "timeout": "{{inputs.timeout}}",
-          "resources": [
-            "stream"
-          ],
-          "debridioApiKey": "{{inputs.debridioApiKey}}",
-          "mediaTypes": []
         }
       },
       {

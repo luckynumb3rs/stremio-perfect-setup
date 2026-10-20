@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.11 (2026-10-19)
+
+- Removed *Debridio Watchtower* because it's deprecated.
+
 ## 2.0.10 (2026-09-07)
 
 - Updated **TamTaro's** synced URLs.

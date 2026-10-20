@@ -152,7 +152,7 @@ Select an **AIOStreams** instance from [**this**](https://uptime.ibbylabs.dev/ai
       1. **TorBox, Torrentio, Meteor, Comet, StremThru, MediaFusion, Knaben, PeerFlix** are the ***main scrapers*** finding the sources.
       2. **SeaDex and AnimeTosho** are ***for Anime*** and are available only when using a Debrid service.
       3. **Sootio, WebStreamr, HD Hub** are ***HTTP scrapers*** that provide direct web streams. You can use these ***if you don't/can't use Debrid and/or torrents***. They may be more limited in quality and availability, but are a good alternative. You can also disable them if you use a Debrid, you don't normally need them.
-      4. **Debridio** and **Watchtower** are additional scrapers for those of you who use the ***Debridio*** service.
+      4. **Debridio** is an additional scraper for those of you who use the ***Debridio*** service.
       5. **Library** is an addon that can search through your own Debrid library (if you e.g. download something manually in Debrid).
       6. **OpenSubtitles V3 Pro** is ***for the subtitles***, you can edit the languages and any other subtitle preferences here.
    * *If you want to fine-tune how languages shound show on the results list, go to **Filters** tab, then **Language**, and add/remove your languages to the **Preferred Languages** list, and arrange them in the **Preference Order** list. You can also add the languages in the **Required Languages** if you want to ONLY show streams in that language, but keep in mind that streams that might have no language tags at all or tagged as "multi" will be filtered out.*
