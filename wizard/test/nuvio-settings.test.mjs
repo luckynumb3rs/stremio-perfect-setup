@@ -71,7 +71,7 @@ console.log('\n# Nuvio TV settings merge');
   ok('TV merge preserves unrelated theme settings', merged.features.theme_settings.selected_theme.value === 'dark');
   ok('TV merge enables follow_addons_order', merged.features.layout_settings.follow_addons_order.value === true);
   ok('TV merge enables prefer_external_meta_addon_detail', merged.features.layout_settings.prefer_external_meta_addon_detail.value === true);
-  ok('TV merge enables stream badge file size badges', merged.features.stream_badge_settings.show_file_size_badges.value === true);
+  ok('TV merge keeps duplicate stream file size badges disabled', merged.features.stream_badge_settings.show_file_size_badges.value === false);
   ok('TV merge sets stream badge placement to bottom', merged.features.stream_badge_settings.stream_badge_placement.value === 'BOTTOM');
   ok('TV merge adds debrid stream name template', merged.features.debrid_settings.debrid_stream_name_template.value.includes('{service.cached::istrue'));
   ok('TV merge adds debrid stream description template', merged.features.debrid_settings.debrid_stream_description_template.value.includes('{stream.edition::exists'));

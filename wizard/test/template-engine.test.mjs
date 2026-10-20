@@ -184,7 +184,7 @@ console.log('\n# full template resolution: Debrid (torbox) + formatter color + f
     credentials: { tmdbApiKey: 'K', tmdbAccessToken: 'A', tvdbApiKey: 'V' },
   });
   ok('torbox enabled', cfg.services.some((s) => s.id === 'torbox' && s.enabled === true));
-  ok('TB Search included when TorBox is selected', cfg.presets.some((preset) => preset.type === 'torbox-search'));
+  ok('TB Search remains omitted after its configuration was removed', !cfg.presets.some((preset) => preset.type === 'torbox-search'));
   ok('formatter color chosen', cfg.formatter && cfg.formatter.id === 'custom');
   ok('requiredLanguages dropped when languagesRequired=false', cfg.requiredLanguages === undefined || cfg.requiredLanguages === null);
   ok('formatter retain would remove, not here', cfg.formatter !== undefined);
