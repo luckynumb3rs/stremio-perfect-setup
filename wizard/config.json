@@ -84,6 +84,15 @@
           "watchly": "templates/Watchly.json"
         }
       },
+      "bingecat": {
+        "enabled": false,
+        "baseUrl": "https://bingecat.com",
+        "clientId": "bca_fBcG1S7_p9VOD4fgaztcF6KeUmPN5-9S",
+        "templates": {
+          "standard": "templates/BingeCat.json",
+          "kids": "templates/BingeCat-Kids.json"
+        }
+      },
       "doneStepNotifications": [
         {
           "markdown": "If you are interested in more **🌐 HTTP** streams, **Nuvio** also supports so-called **Plugins** that can add extra sources beyond regular addons. Read more and browse providers **[here](https://nuvio-plugin-library.vercel.app/)**.",

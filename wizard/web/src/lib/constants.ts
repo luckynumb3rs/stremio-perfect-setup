@@ -68,6 +68,14 @@ export interface WizardAnalyticsConfig {
   denylist?: string[];
 }
 
+/** BingeCat + Kids feature. Off unless `enabled` is exactly true (or VITE_BINGECAT=1 in a local build). */
+export interface WizardBingecat {
+  enabled: boolean;
+  baseUrl: string;
+  clientId: string;
+  templates: { standard: string; kids: string };
+}
+
 export interface WizardConfig {
   name: string;
   targets: WizardTarget[];
@@ -77,6 +85,7 @@ export interface WizardConfig {
   limits: WizardLimits;
   analytics?: WizardAnalyticsConfig;
   doneStepNotifications?: WizardNotification[];
+  bingecat?: WizardBingecat;
   instances: WizardInstances;
   templates: WizardTemplates;
   proxyBase?: string;
@@ -220,6 +229,26 @@ function normalizeAnalytics(value: unknown): WizardAnalyticsConfig | undefined {
   return { denylist };
 }
 
+function normalizeBingecat(value: unknown): WizardBingecat | undefined {
+  if (!isRecord(value) || !isRecord(value.templates)) return undefined;
+  const { baseUrl, clientId } = value;
+  const { standard, kids } = value.templates;
+  if (![baseUrl, clientId, standard, kids].every((v) => typeof v === 'string' && v.trim().length > 0)) return undefined;
+  return {
+    enabled: value.enabled === true,
+    baseUrl: (baseUrl as string).trim().replace(/\/+$/, ''),
+    clientId: (clientId as string).trim(),
+    templates: { standard: (standard as string).trim(), kids: (kids as string).trim() },
+  };
+}
+
+/** True when BingeCat/Kids UI and installs are available: config flag, or VITE_BINGECAT=1 for local live tests. */
+export function isBingecatOn(config: WizardConfig | null | undefined): boolean {
+  if (!config?.bingecat) return false;
+  const env = (import.meta as { env?: Record<string, string | undefined> }).env;
+  return config.bingecat.enabled || env?.VITE_BINGECAT === '1';
+}
+
 function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
   const { target: _target, account: _account, ...rest } = block as LegacyWizardConfig & { account?: unknown };
   void _target;
@@ -235,6 +264,7 @@ function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
   const keys = normalizeKeys(block.keys);
   const limits = normalizeLimits(block.limits);
   const analytics = normalizeAnalytics(block.analytics);
+  const bingecat = normalizeBingecat(block.bingecat);
   if (
     !targets.length
     || typeof block.name !== 'string'
@@ -256,6 +286,7 @@ function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
     keys,
     limits,
     analytics,
+    bingecat,
     instances,
     templates,
     targets,
