@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Check, Copy, Download, ExternalLink, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { NotificationCards } from '../components/NotificationCards';
 import { WizardShell } from '../components/WizardShell';
-import { useWizard } from '../store/wizard';
+import { useWizard, type NuvioProfileInstallResult } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
 import { buildWizardCompletionPayload, trackWizardCompletion } from '../lib/analytics';
 import { wizardMetadata } from '../lib/integration';
@@ -54,8 +54,18 @@ export function DoneStep() {
     catalogSelection,
     instantDebrid,
   } = useWizard();
-  const { aiostreams, aiometadata, addonPasswordSource, previousAddons, warnings: rawWarnings, error } = installResult;
-  const warnings = rawWarnings.filter(w => !w.includes('tried but failed'));
+  const { aiostreams, aiometadata, addonPasswordSource, previousAddons, profiles, warnings: rawWarnings, error } = installResult;
+  // One entry per configured profile; Stremio is a single unnamed one built from the top-level result.
+  const profileResults = useMemo<NuvioProfileInstallResult[]>(() => (
+    target === 'nuvio'
+      ? profiles
+      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, watchly: installResult.watchly, previousAddons }]
+  ), [target, profiles, installResult.watchly, previousAddons]);
+  const failedProfiles = profileResults.filter((p) => p.status === 'failed');
+  const warnings = [
+    ...rawWarnings.filter(w => !w.includes('tried but failed')),
+    ...failedProfiles.map((p) => `${p.name} could not be set up (${p.error ?? 'unknown error'}). Run the wizard again with only this profile selected.`),
+  ];
   const guideUrl = getGuideUrl();
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [visiblePasswords, setVisiblePasswords] = useState<Record<string, boolean>>({});
@@ -71,12 +81,14 @@ export function DoneStep() {
   const [metaTraktError, setMetaTraktError] = useState<string | null>(null);
   const isUsingAccountPassword = addonPasswordSource === 'account';
   const accountMode = target === 'nuvio' ? nuvioAccount.mode : stremioAccount.mode;
-  const visiblePreviousAddons = accountMode === 'signin' ? previousAddons : [];
-  const selectedNuvioProfileName = useMemo(() => {
-    const selectedProfile = (nuvioAccount.profiles ?? [])
-      .find((profile) => profile.profile_index === nuvioAccount.profileId);
-    return selectedProfile?.name?.trim() || nuvioAccount.profileName?.trim() || '';
-  }, [nuvioAccount.profileId, nuvioAccount.profileName, nuvioAccount.profiles]);
+  // Backups per profile (a failed profile may be partly written, so its backup matters most).
+  const backupGroups = accountMode === 'signin'
+    ? profileResults
+      .filter((p) => p.previousAddons.length > 0)
+      .map((p) => ({ name: target === 'nuvio' ? p.name : '', addons: p.previousAddons }))
+    : [];
+  const hasBackups = backupGroups.length > 0;
+  const profileNamesSegment = profileResults.map((p) => p.name.trim()).filter(Boolean).join('+');
   const addonDetailsFilename = useMemo(() => {
     const prefix = wizardConfig?.addonDetailsFilenamePrefix?.trim() ?? '';
     if (!prefix || !target) return '';
@@ -94,14 +106,14 @@ export function DoneStep() {
     ];
 
     if (target === 'nuvio') {
-      const profileName = sanitizeFilenameSegment(selectedNuvioProfileName);
+      const profileName = sanitizeFilenameSegment(profileNamesSegment);
       if (profileName) {
         parts.push(`[${profileName}]`);
       }
     }
 
     return `${parts.join('')}.txt`;
-  }, [nuvioAccount.email, selectedNuvioProfileName, stremioAccount.email, target, wizardConfig?.addonDetailsFilenamePrefix]);
+  }, [nuvioAccount.email, profileNamesSegment, stremioAccount.email, target, wizardConfig?.addonDetailsFilenamePrefix]);
   const credentialsCardStyle = {
     background: 'var(--panel-2)',
     border: '1px solid var(--border)',
@@ -170,16 +182,15 @@ export function DoneStep() {
 
   const addons = useMemo(() => (
     [
-      installResult.watchly ? {
-        id: 'watchly', name: '🤖 Watchly',
-        uuid: watchlyEmail
-          ? `${watchlyEmail} (${installResult.watchly.token})`
-          : installResult.watchly.token,
+      ...profileResults.filter((p) => p.status === 'done' && p.watchly).map((p) => ({
+        id: `watchly-${p.profileIndex}`,
+        name: target === 'nuvio' ? `🤖 Watchly · ${p.name}` : '🤖 Watchly',
+        uuid: watchlyEmail ? `${watchlyEmail} (${p.watchly!.token})` : p.watchly!.token,
         password: '',
         passwordLabel: 'same as your account password',
-        manifestUrl: installResult.watchly.manifestUrl,
-        configureUrl: toConfigureUrl(installResult.watchly.manifestUrl),
-      } : null,
+        manifestUrl: p.watchly!.manifestUrl,
+        configureUrl: toConfigureUrl(p.watchly!.manifestUrl),
+      })),
       aiometadata
         ? {
             id: 'aiometadata',
@@ -203,7 +214,7 @@ export function DoneStep() {
           }
         : null,
     ].filter(Boolean)
-  ), [aiostreams, aiometadata, installResult.watchly, isUsingAccountPassword, watchlyEmail]) as Array<{
+  ), [aiostreams, aiometadata, profileResults, isUsingAccountPassword, target, watchlyEmail]) as Array<{
     id: string;
     name: string;
     uuid: string;
@@ -212,7 +223,7 @@ export function DoneStep() {
     manifestUrl: string;
     configureUrl: string;
   }>;
-  const hasDownloadableDetails = addons.length > 0 || visiblePreviousAddons.length > 0;
+  const hasDownloadableDetails = addons.length > 0 || hasBackups;
 
   async function handleCopy(copyKey: string, value: string) {
     try {
@@ -300,12 +311,15 @@ export function DoneStep() {
   }
 
   useEffect(() => {
-    if (error || !target) return;
+    const doneProfiles = profileResults.filter((p) => p.status === 'done');
+    if (error || !target || doneProfiles.length === 0) return;
 
     const runId = addons.map(addon => addon.uuid).filter(Boolean).join(':') || `${target}-setup`;
     const eventParams = buildWizardCompletionPayload({
       accountMode,
-      addonCount: addons.length,
+      // addon kinds (AIOMetadata, AIOStreams, Watchly), not per-profile Watchly copies
+      addonCount: Number(!!aiometadata) + Number(!!aiostreams) + Number(doneProfiles.some((p) => p.watchly)),
+      profileCount: doneProfiles.length,
       target,
       credentials,
       instantDebrid,
@@ -321,7 +335,7 @@ export function DoneStep() {
       runId,
       target,
     });
-  }, [accountMode, addons, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, target, templates, wizardConfig]);
+  }, [accountMode, addons, aiometadata, aiostreams, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, profileResults, target, templates, wizardConfig]);
 
   function handleDownload() {
     if (!addonDetailsFilename || !hasDownloadableDetails) return;
@@ -349,15 +363,18 @@ export function DoneStep() {
           '',
         ]),
       ] : []),
-      ...(visiblePreviousAddons.length > 0 ? [
+      ...(hasBackups ? [
         '----------------------------------------------',
         '',
         '🗄️ Previous Addons',
         '',
-        ...visiblePreviousAddons.flatMap(addon => [
-          `${addon.name}`,
-          `Manifest URL: ${addon.manifestUrl}`,
-          '',
+        ...backupGroups.flatMap(group => [
+          ...(group.name ? [`Profile: ${group.name}`, ''] : []),
+          ...group.addons.flatMap(addon => [
+            `${addon.name}`,
+            `Manifest URL: ${addon.manifestUrl}`,
+            '',
+          ]),
         ]),
       ] : []),
     ];
@@ -503,7 +520,7 @@ export function DoneStep() {
             </div>
           </div>
         ))}
-        {visiblePreviousAddons.length > 0 && (
+        {hasBackups && (
           <div style={{ ...addonCardStyle, fontFamily: 'system-ui, sans-serif' }}>
             <p
               style={{
@@ -519,8 +536,12 @@ export function DoneStep() {
             <p style={{ ...metaTextStyle, marginBottom: '0.75rem', fontSize: '0.82rem', lineHeight: 1.5, textAlign: 'center' }}>
               These are the addons that were on your account before the wizard replaced them. Keep this list in case you want to restore anything manually.
             </p>
-            <div style={{ display: 'grid', gap: '0.6rem' }}>
-              {visiblePreviousAddons.map((addon, index) => (
+            {backupGroups.map((group, groupIndex) => (
+            <div key={`backup-${groupIndex}`} style={{ display: 'grid', gap: '0.6rem', marginTop: groupIndex > 0 ? '1rem' : 0 }}>
+              {group.name && (
+                <p style={{ color: 'var(--text)', fontSize: '0.86rem', fontWeight: 700, margin: 0 }}>Profile: {group.name}</p>
+              )}
+              {group.addons.map((addon, index) => (
                 <div
                   key={`${addon.manifestUrl}-${index}`}
                   style={{
@@ -548,17 +569,18 @@ export function DoneStep() {
                       <ExternalLink size={12} />
                     </a>
                     <button
-                      onClick={() => handleCopy(`previous-addon-${index}`, addon.manifestUrl)}
+                      onClick={() => handleCopy(`previous-addon-${groupIndex}-${index}`, addon.manifestUrl)}
                       type="button"
                       aria-label={`Copy ${addon.name} manifest URL`}
                       style={copyActionButtonStyle}
                     >
-                      {renderCopyStatus(`previous-addon-${index}`)}
+                      {renderCopyStatus(`previous-addon-${groupIndex}-${index}`)}
                     </button>
                   </div>
                 </div>
               ))}
             </div>
+            ))}
           </div>
         )}
         <button
@@ -599,7 +621,7 @@ export function DoneStep() {
               manual guide
             </a>.
           </p>
-          {visiblePreviousAddons.length > 0 && (
+          {hasBackups && (
             <div style={{ marginTop: '1.25rem' }}>
               {renderDetailsCard()}
             </div>

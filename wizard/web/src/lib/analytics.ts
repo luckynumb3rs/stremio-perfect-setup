@@ -5,6 +5,7 @@ import {
   AIO_SECTION_START_STEP,
   KEY_SCREEN_START_STEP,
   getCatalogStep,
+  getRecommendationsStep,
   getDoneStep,
   getInstallStep,
 } from './keyScreens';
@@ -41,6 +42,8 @@ interface CompletionPayload {
 interface BuildCompletionPayloadOptions {
   accountMode: AccountMode;
   addonCount: number;
+  /** Profiles configured in this run (Stremio = 1) */
+  profileCount: number;
   target: 'stremio' | 'nuvio';
   credentials: Credentials;
   instantDebrid: boolean;
@@ -139,6 +142,7 @@ export function trackWizardCompletion(payload: CompletionPayload) {
 export function buildWizardCompletionPayload({
   accountMode,
   addonCount,
+  profileCount,
   target,
   credentials,
   instantDebrid,
@@ -154,6 +158,7 @@ export function buildWizardCompletionPayload({
   };
 
   const deniedParams = new Set(wizardConfig?.analytics?.denylist ?? []);
+  if (!deniedParams.has('profile_count')) params.profile_count = profileCount;
 
   const debridNames = credentials.debridServices
     .map((service) => DEBRID_SERVICES.find(({ id }) => id === service.id)?.name ?? service.id)
@@ -216,6 +221,9 @@ export function getStepMeta(step: number, aioSections: AioSection[]): StepMeta |
 
   if (step === getCatalogStep(aioSections.length)) {
     return { index: step, slug: 'catalogs', name: 'Catalogs' };
+  }
+  if (step === getRecommendationsStep(aioSections.length)) {
+    return { index: step, slug: 'recommendations', name: 'Recommendations' };
   }
   if (step === getInstallStep(aioSections.length)) {
     return { index: step, slug: 'install', name: 'Install' };
