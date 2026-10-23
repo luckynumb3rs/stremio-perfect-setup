@@ -59,12 +59,12 @@ export function DoneStep() {
   const profileResults = useMemo<NuvioProfileInstallResult[]>(() => (
     target === 'nuvio'
       ? profiles
-      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, watchly: installResult.watchly, previousAddons }]
+      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, backupTaken: true, watchly: installResult.watchly, previousAddons }]
   ), [target, profiles, installResult.watchly, previousAddons]);
   const failedProfiles = profileResults.filter((p) => p.status === 'failed');
   const warnings = [
     ...rawWarnings.filter(w => !w.includes('tried but failed')),
-    ...failedProfiles.map((p) => `${p.name} could not be set up (${p.error ?? 'unknown error'}). Run the wizard again with only this profile selected.`),
+    ...failedProfiles.map((p) => `${p.name} could not be set up (${p.error ?? 'unknown error'}). Its previous addons are in the backup below. You can run the wizard again for it; the first backup is kept while this page stays open.`),
   ];
   const guideUrl = getGuideUrl();
   const [copiedKey, setCopiedKey] = useState<string | null>(null);

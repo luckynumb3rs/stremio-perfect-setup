@@ -55,7 +55,7 @@ function makeNuvio(fail = new Set()) {
 }
 
 /** Mocks the three config services. `watchlyFail` is a set of Nuvio profile ids whose Watchly call returns 500. */
-function mockServices({ watchlyFail = new Set() } = {}) {
+function mockServices({ watchlyFail = new Set(), aiostreamsFail = false } = {}) {
   const posts = { aiostreams: 0, aiometadata: 0, watchly: [] };
   const original = globalThis.fetch;
   globalThis.fetch = async (url, init = {}) => {
@@ -63,6 +63,7 @@ function mockServices({ watchlyFail = new Set() } = {}) {
     const json = (status, body) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
     if (u.endsWith('/api/v1/user')) {
       posts.aiostreams++;
+      if (aiostreamsFail) return json(500, { error: { message: 'down' } });
       return json(201, { data: { uuid: 'aios-uuid', encryptedPassword: 'aios-enc' } });
     }
     if (u.endsWith('/api/config/save')) {
@@ -140,7 +141,7 @@ console.log('\n# two profiles share the configs; Watchly and backups are per pro
   ok('distinct Watchly manifests', result.profiles[0].watchly.manifestUrl !== result.profiles[1].watchly.manifestUrl);
   eq('profile 2 (uses primary addons) is backed up from profile 1\'s ORIGINAL list',
     result.profiles[1].previousAddons, [{ name: 'Old A', manifestUrl: 'https://old.example/a/manifest.json' }]);
-  ok('all backups are read before the first write', nuvio.calls.lastIndexOf('listAddons:1') < nuvio.calls.indexOf('replaceAddons:1'));
+  ok('all backups are read before the first write', nuvio.calls.includes('listAddons:1') && nuvio.calls.lastIndexOf('listAddons:1') < nuvio.calls.indexOf('replaceAddons:1'));
   ok('profile 2 is detached before its addons are replaced', nuvio.calls.indexOf('updateProfile:2') > -1 && nuvio.calls.indexOf('updateProfile:2') < nuvio.calls.indexOf('replaceAddons:2'));
   ok('profile 2 no longer uses primary addons', nuvio.profiles[1].uses_primary_addons === false);
   ok('profile 1 is written before profile 2 (sequential)', nuvio.calls.indexOf('replaceAddons:1') < nuvio.calls.indexOf('updateProfile:2'));
@@ -219,6 +220,72 @@ console.log('\n# invalid profile selections fail before any call');
     try { await runNuvioSetup(baseArgs(nuvio, { profiles })); } catch { threw = true; } finally { svc.restore(); }
     ok(`${label}: throws without touching Nuvio`, threw && nuvio.calls.length === 0);
   }
+}
+
+
+console.log('\n# retry of a primary-addons profile that failed before its detach');
+{
+  const targets = [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: false }];
+  const nuvio = makeNuvio();
+  let svc = mockServices({ watchlyFail: new Set([2]) });
+  let first;
+  try { first = await runNuvioSetup(baseArgs(nuvio, { profiles: targets })); } finally { svc.restore(); }
+  eq('profile 2 failed on Watchly, still primary', [first.profiles[1].status, nuvio.profiles[1].uses_primary_addons], ['failed', true]);
+  const live1 = nuvio.addons.get(1); // profile 1 now holds the wizard's addons
+  eq('profile 2 backup is profile 1\'s original list', first.profiles[1].previousAddons, [{ name: 'Old A', manifestUrl: 'https://old.example/a/manifest.json' }]);
+
+  nuvio.calls.length = 0;
+  svc = mockServices();
+  let second;
+  try { second = await runNuvioSetup(baseArgs(nuvio, { profiles: targets, retry: first })); } finally { svc.restore(); }
+  eq('retry: both done', second.profiles.map((p) => p.status), ['done', 'done']);
+  ok('retry detaches profile 2 and writes only profile 2', nuvio.calls.includes('updateProfile:2') && writes(nuvio, 2) === 1 && writes(nuvio, 1) === 0);
+  eq('retry keeps the first backup (not profile 1\'s new content)', second.profiles[1].previousAddons, first.profiles[1].previousAddons);
+  ok('profile 1 content was the wizard\'s own', live1.length === 3 && !nuvio.calls.some((c) => c.startsWith('listAddons')));
+}
+
+console.log('\n# retry adding a primary-addons profile after profile 1 finished');
+{
+  const nuvio = makeNuvio();
+  const svc = mockServices();
+  const original1 = [{ name: 'Old A', manifestUrl: 'https://old.example/a/manifest.json' }];
+  nuvio.addons.set(1, [{ name: 'AIOStreams', url: 'https://new.example/a/manifest.json' }]); // profile 1 already replaced
+  const earlier = {
+    account: {}, addons: { aiostreams: { manifestUrl: 'https://x/s', uuid: 'u' }, aiometadata: { manifestUrl: 'https://x/m', uuid: 'u' } },
+    addonPasswordSource: 'account', warnings: [],
+    profiles: [{ profileIndex: 1, name: 'Ben', status: 'done', error: null, backupTaken: true, previousAddons: original1, watchly: null, settings: null }],
+  };
+  let result;
+  try {
+    result = await runNuvioSetup(baseArgs(nuvio, { profiles: [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: false }], retry: earlier }));
+  } finally { svc.restore(); }
+  eq('new primary profile is backed up from profile 1\'s ORIGINAL list', result.profiles[1].previousAddons, original1);
+  ok('profile 1 is not read or written again', !nuvio.calls.includes('listAddons:1') && writes(nuvio, 1) === 0);
+}
+
+console.log('\n# carried backups of an earlier mount (no shared configs) are kept');
+{
+  const nuvio = makeNuvio();
+  const svc = mockServices();
+  const kept = [{ name: 'Original', manifestUrl: 'https://old.example/original/manifest.json' }];
+  const carried = { profiles: [{ profileIndex: 1, name: 'Ben', status: 'failed', error: null, backupTaken: true, previousAddons: kept, watchly: null }] };
+  let result;
+  try { result = await runNuvioSetup(baseArgs(nuvio, { retry: carried })); } finally { svc.restore(); }
+  eq('first backup wins over the profile\'s current addons', result.profiles[0].previousAddons, kept);
+  ok('addons were not re-read', !nuvio.calls.includes('listAddons:1'));
+  eq('shared configs are created fresh', [svc.posts.aiostreams, svc.posts.aiometadata], [1, 1]);
+  eq('profile is rewritten', [result.profiles[0].status, writes(nuvio, 1)], ['done', 1]);
+}
+
+console.log('\n# a shared-config failure writes nothing');
+{
+  const nuvio = makeNuvio();
+  const svc = mockServices({ aiostreamsFail: true });
+  let threw = false;
+  try { await runNuvioSetup(baseArgs(nuvio, { profiles: [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: false }] })); } catch { threw = true; } finally { svc.restore(); }
+  ok('throws', threw);
+  ok('no profile was detached or written', !nuvio.calls.some((c) => c.startsWith('replaceAddons') || c.startsWith('updateProfile') || c.startsWith('pushCollections')));
+  eq('Watchly was not touched', svc.posts.watchly.length, 0);
 }
 
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);

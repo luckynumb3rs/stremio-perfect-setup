@@ -19,7 +19,7 @@ interface Props {
 const GUIDE_COMPLETION_BASELINE = 15000;
 
 export function Sidebar({ onClose }: Props) {
-  const { step, maxReachedStep, aioSections, setStep } = useWizard();
+  const { step, maxReachedStep, aioSections, setStep, installRunning } = useWizard();
   const statsCardRootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,9 +39,10 @@ export function Sidebar({ onClose }: Props) {
   const RECOMMENDATIONS_STEP = getRecommendationsStep(n);
   const INSTALL_STEP = getInstallStep(n);
 
-  // The Install step is never re-entered from the sidebar: mounting it re-runs the whole install on the account.
+  // The Install step is never re-entered from the sidebar (mounting it re-runs the whole install on the account),
+  // and nothing is clickable while an install is running (a second install would race the first one).
   function canGoTo(s: number) {
-    return s <= maxReachedStep && s !== step && s !== INSTALL_STEP;
+    return s <= maxReachedStep && s !== step && s !== INSTALL_STEP && !installRunning;
   }
 
   function goTo(s: number) {

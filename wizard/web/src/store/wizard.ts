@@ -81,6 +81,8 @@ export interface NuvioProfileInstallResult {
   name: string;
   status: 'done' | 'failed';
   error: string | null;
+  /** True once the profile's original addons were read; only then is previousAddons trustworthy */
+  backupTaken: boolean;
   previousAddons: PreviousAddonBackupEntry[];
   watchly: { manifestUrl: string; token: string } | null;
 }
@@ -130,6 +132,8 @@ interface WizardState {
   aiometadataInstance: string;
   catalogSelection: CatalogSelection;
   installResult: InstallResult;
+  /** True while the install is running (the sidebar must not leave the Install step then) */
+  installRunning: boolean;
   templates: LoadedTemplates | null;
   /** Computed from template when loaded; drives dynamic step count */
   aioSections: AioSection[];
@@ -159,6 +163,7 @@ interface WizardState {
   setTemplates: (t: WizardState['templates']) => void;
   setAioSections: (sections: AioSection[]) => void;
   setInstallResult: (r: Partial<InstallResult>) => void;
+  setInstallRunning: (running: boolean) => void;
   setWizardConfig: (cfg: WizardConfig | null) => void;
 }
 
@@ -193,6 +198,7 @@ export const useWizard = create<WizardState>((set) => ({
     warnings: [],
     error: null,
   },
+  installRunning: false,
   templates: null,
   aioSections: [],
   wizardConfig: null,
@@ -282,6 +288,7 @@ export const useWizard = create<WizardState>((set) => ({
   setTemplates: (templates) => set({ templates }),
   setAioSections: (aioSections) => set({ aioSections }),
   setInstallResult: (r) => set(s => ({ installResult: { ...s.installResult, ...r } })),
+  setInstallRunning: (installRunning) => set({ installRunning }),
   setWatchly: (w) => set(s => ({ watchly: { ...s.watchly, ...w } })),
   setInstantDebrid: (enabled) => set(s => {
     if (enabled) {

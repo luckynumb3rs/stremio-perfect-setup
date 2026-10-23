@@ -25,7 +25,7 @@ export function AccountStep() {
   } as const;
   const {
     target, stremioAccount, nuvioAccount, nuvioProfiles,
-    setStremioAccount, setNuvioAccount, setNuvioProfiles, toggleNuvioProfile, nextStep,
+    setStremioAccount, setNuvioAccount, setNuvioProfiles, toggleNuvioProfile, setInstallResult, nextStep,
   } = useWizard();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -94,6 +94,8 @@ export function AccountStep() {
       authError: undefined,
       profiles: [],
     });
+    // Install results (and their backups) of an earlier run belong to the old account.
+    if (next.email !== undefined || next.mode !== undefined) setInstallResult({ profiles: [] });
     // Picks of existing profiles belong to the old account. A mode switch restarts the list
     // (create starts with one new profile, sign-in with none until the account's profiles load).
     setNuvioProfiles(next.mode
@@ -132,7 +134,18 @@ export function AccountStep() {
         const adapter = createNuvioAdapter();
         if (hasLoadedNuvioProfileStep) {
           // Signed in already (or the account was created and profile creation stopped halfway): finish creating profiles.
-          await createPendingProfiles(adapter, account.authToken as string);
+          let token = account.authToken as string;
+          const expiresSoon = !!account.authExpiresAt && account.authExpiresAt - Math.floor(Date.now() / 1000) <= 300;
+          if (newCount > 0 && expiresSoon) {
+            const auth = await adapter.login(account.email, account.password);
+            token = auth.token;
+            setNuvioAccount({
+              authToken: auth.token,
+              authRefreshToken: auth.refreshToken ?? undefined,
+              authExpiresAt: auth.expiresAt ?? undefined,
+            });
+          }
+          await createPendingProfiles(adapter, token);
         } else if (account.mode === 'create') {
           const auth = await adapter.signup(account.email, account.password);
           // Store the session first: if a profile fails below, Continue resumes instead of signing up again.
@@ -236,6 +249,8 @@ export function AccountStep() {
         </div>
       </div>
 
+      {/* Locked while a request runs, so the selection cannot change under the async handlers */}
+      <fieldset disabled={loading} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
       {/* Mode toggle */}
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
         {(['create', 'signin'] as const).map(m => (
@@ -371,6 +386,8 @@ export function AccountStep() {
           </p>
         </div>
       )}
+
+      </fieldset>
 
       {error && (
         <div style={{

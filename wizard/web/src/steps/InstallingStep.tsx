@@ -50,7 +50,7 @@ export function InstallingStep() {
   const [done, setDone] = useState(false);
   const [fatal, setFatal] = useState<string | null>(null);
   // Nuvio: profiles that failed while others finished. The run result is kept so Retry only redoes the failed ones.
-  const [partial, setPartial] = useState<{ failed: { name: string; error: string }[]; doneCount: number } | null>(null);
+  const [partial, setPartial] = useState<{ failed: { profileIndex: number; name: string; error: string }[]; doneCount: number } | null>(null);
   const lastSummary = useRef<unknown>(null);
   const shownWarnings = useRef(0);
   const ran = useRef(false);
@@ -66,7 +66,17 @@ export function InstallingStep() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // A fresh Install mount (e.g. the user went back and ran the wizard again) starts without the in-memory run result.
+  // Carry over the first backups of the earlier run, so a profile that was already replaced (or half-written) is not
+  // backed up again from its new content. Everything else is redone; the profiles are only used as backup holders.
+  function carriedBackups() {
+    const earlier = useWizard.getState().installResult.profiles.filter((p) => p.backupTaken);
+    return earlier.length ? { profiles: earlier.map((p) => ({ ...p, status: 'failed' })) } : null;
+  }
+
   async function run() {
+    wizard.setInstallRunning(true);
+    const stepAtStart = useWizard.getState().step;
     try {
       const {
         target, stremioAccount, nuvioAccount, credentials, aioStreamsInputs,
@@ -274,7 +284,7 @@ export function InstallingStep() {
         previousAddons?: Array<{ name: string; manifestUrl: string }>;
         /** Nuvio only */
         profiles?: Array<{
-          profileIndex: number; name: string; status: 'done' | 'failed'; error: string | null;
+          profileIndex: number; name: string; status: 'done' | 'failed'; error: string | null; backupTaken: boolean;
           previousAddons: Array<{ name: string; manifestUrl: string }>;
           watchly: { manifestUrl?: string; token?: string } | null;
         }>;
@@ -299,7 +309,7 @@ export function InstallingStep() {
         ? {
             profiles: nuvioProfiles,
             watchly: nuvioWatchly,
-            retry: lastSummary.current,
+            retry: lastSummary.current ?? carriedBackups(),
             collectionsJson: templates.collections as object[],
             nuvioSettingsTemplate,
           }
@@ -353,6 +363,7 @@ export function InstallingStep() {
           name: p.name,
           status: p.status,
           error: p.error,
+          backupTaken: p.backupTaken,
           previousAddons: p.previousAddons,
           watchly: p.watchly ? { manifestUrl: p.watchly.manifestUrl ?? '', token: p.watchly.token ?? '' } : null,
         })),
@@ -363,23 +374,29 @@ export function InstallingStep() {
 
       const failedProfiles = (result.profiles ?? []).filter((p) => p.status !== 'done');
       if (failedProfiles.length > 0) {
+        const doneCount = (result.profiles ?? []).length - failedProfiles.length;
         setPartial({
-          failed: failedProfiles.map((p) => ({ name: p.name, error: p.error ?? 'Unknown error' })),
-          doneCount: (result.profiles ?? []).length - failedProfiles.length,
+          failed: failedProfiles.map((p) => ({ profileIndex: p.profileIndex, name: p.name, error: p.error ?? 'Unknown error' })),
+          doneCount,
         });
+        // Nothing finished: the results page shows the failure together with the backups of what was already replaced.
+        if (doneCount === 0) wizard.setInstallResult({ error: 'None of the selected profiles could be set up.' });
         push('Some profiles could not be set up. The profiles that finished stay as they are.', 'warning');
         return;
       }
 
       push('Everything is set up and ready to go!', 'success');
       setDone(true);
-      setTimeout(() => wizard.nextStep(), 1200);
+      // only advance if the user is still on this step
+      setTimeout(() => { if (useWizard.getState().step === stepAtStart) wizard.nextStep(); }, 1200);
 
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       wizard.setInstallResult({ error: msg });
       setFatal(msg);
       push('Setup could not be completed. See the error below.', 'error');
+    } finally {
+      wizard.setInstallRunning(false);
     }
   }
 
@@ -482,7 +499,7 @@ export function InstallingStep() {
           </p>
           <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.8rem', color: 'var(--text)', lineHeight: 1.6 }}>
             {partial.failed.map((f) => (
-              <li key={f.name}><strong>{f.name}</strong>: {f.error}</li>
+              <li key={f.profileIndex}><strong>{f.name}</strong>: {f.error}</li>
             ))}
           </ul>
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
@@ -498,18 +515,16 @@ export function InstallingStep() {
               <RotateCcw size={14} />
               Retry failed profiles
             </button>
-            {partial.doneCount > 0 && (
-              <button
-                onClick={() => wizard.nextStep()}
-                style={{
-                  padding: '0.4rem 0.9rem', borderRadius: '6px', cursor: 'pointer',
-                  border: '1px solid var(--border)', background: 'var(--panel)',
-                  color: 'var(--text)', fontSize: '0.82rem', fontWeight: 600,
-                }}
-              >
-                Continue to results
-              </button>
-            )}
+            <button
+              onClick={() => wizard.nextStep()}
+              style={{
+                padding: '0.4rem 0.9rem', borderRadius: '6px', cursor: 'pointer',
+                border: '1px solid var(--border)', background: 'var(--panel)',
+                color: 'var(--text)', fontSize: '0.82rem', fontWeight: 600,
+              }}
+            >
+              Continue to results
+            </button>
           </div>
         </div>
       )}
