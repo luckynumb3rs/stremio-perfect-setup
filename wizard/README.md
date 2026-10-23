@@ -7,6 +7,8 @@ templates in this repo, and guide installation in the intended order.
 ## What It Covers
 
 - Stremio account login or creation
+- Nuvio account login or creation, with one or several profiles (up to 6) configured in one run; the
+  AIOStreams and AIOMetadata configs are shared, Watchly is created once per profile
 - AIOStreams configuration from `templates/AIOStreams.json`
 - API key collection for services that cannot be automated end to end
 - Catalog and addon setup steps inside a guided flow
@@ -69,7 +71,9 @@ current `templates/AIOStreams.json`.
 ### Stable Params
 
 - `account_mode`: `create` or `signin`
-- `addon_count`: number of addons installed by the wizard
+- `addon_count`: number of addon kinds installed by the wizard (AIOMetadata, AIOStreams, Watchly); a Nuvio run
+  with several profiles still counts Watchly once
+- `profile_count`: number of profiles configured in the run (`1` on Stremio; on Nuvio only the profiles that finished)
 - `target`: `stremio` or `nuvio`
 - `services_debrid`: comma-separated selected debrid service names, for example `TorBox,Real-Debrid`
 - `services_keys`: comma-separated own-key ids from `tmdb,tvdb,gemini,rpdb`
