@@ -507,7 +507,7 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
 
     // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
     // Addon order. Standard: Watchly (watch history), BingeCat, AIOMetadata (catalog source), AIOStreams (stream source).
-    // Kids: BingeCat, BingeCat AI Search (only when the template enables search), AIOStreams; no Watchly, AIOMetadata or collections.
+    // Kids: BingeCat, BingeCat AI Search (only when the template enables search), AIOStreams; no Watchly or AIOMetadata, and empty collections.
     for (const { result, entry, target } of pending) {
       const idx = result.profileIndex;
       const kids = !!target.kids;
@@ -548,10 +548,11 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
         await nuvio.replaceAddons(auth.token, idx, addons);
         step('addons', { count: addons.length, profileIndex: idx, profileName: entry.name });
 
-        if (!kids) {
-          await nuvio.pushCollections(auth.token, idx, filteredCollections);
-          step('collections', { groupCount: filteredCollections.length, profileIndex: idx, profileName: entry.name });
-        }
+        // The push replaces ALL collections of the profile. Standard: ours. Kids: none (our collections need AIOMetadata,
+        // and whatever the profile had before pointed at addons that were just replaced).
+        const collectionsToPush = kids ? [] : filteredCollections;
+        await nuvio.pushCollections(auth.token, idx, collectionsToPush);
+        step('collections', { groupCount: collectionsToPush.length, profileIndex: idx, profileName: entry.name });
 
         result.settings = await applyNuvioProfileSettings(nuvio, auth.token, idx, nuvioSettingsTemplate, aiometadataParams);
         step('settings', { ...result.settings, profileIndex: idx, profileName: entry.name });

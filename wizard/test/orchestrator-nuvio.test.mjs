@@ -27,6 +27,7 @@ const ORIGINAL = {
 /** In-memory Nuvio with call log. `fail` is a set of `method:profileIndex` strings that throw. */
 function makeNuvio(fail = new Set()) {
   const calls = [];
+  const pushed = new Map(); // profile index -> collections pushed
   const addons = new Map(Object.entries(ORIGINAL).map(([k, v]) => [Number(k), v]));
   const profiles = [
     { profile_index: 1, name: 'Ben', uses_primary_addons: false },
@@ -40,6 +41,7 @@ function makeNuvio(fail = new Set()) {
   };
   return {
     calls,
+    pushed,
     addons,
     profiles,
     async login() { calls.push('login'); return { token: 'fresh-token', refreshToken: 'fresh-refresh', expiresAt: Math.floor(Date.now() / 1000) + 3600 }; },
@@ -48,7 +50,7 @@ function makeNuvio(fail = new Set()) {
     async listAddons(_t, idx) { log('listAddons', idx); return addons.get(idx) ?? []; },
     async updateProfile(_t, idx, updates) { log('updateProfile', idx); Object.assign(profiles.find((p) => p.profile_index === idx), updates); },
     async replaceAddons(_t, idx, list) { log('replaceAddons', idx); addons.set(idx, list); },
-    async pushCollections(_t, idx) { log('pushCollections', idx); },
+    async pushCollections(_t, idx, collections) { log('pushCollections', idx); pushed.set(idx, collections); },
     async getProfileSettings(_t, idx, platform) { log(`getSettings-${platform}`, idx); return { settingsJson: {} }; },
     async pushProfileSettings(_t, idx, platform) { log(`pushSettings-${platform}`, idx); },
   };
@@ -331,7 +333,7 @@ console.log('\n# BingeCat: mixed Standard + Kids run');
   eq('Standard without a BingeCat target: no BingeCat addon', names(nuvio, 3), ['Watchly', 'AIOMetadata', 'AIOStreams']);
   eq('sort_order is sequential', nuvio.addons.get(2).map((a) => a.sort_order), [0, 1, 2]);
   eq('Kids get no Watchly config', svc.posts.watchly.map((b) => b.nuvio_profile_id), [1, 3]);
-  ok('Kids get no collections, Standard do', !nuvio.calls.includes('pushCollections:2') && nuvio.calls.includes('pushCollections:1') && nuvio.calls.includes('pushCollections:3'));
+  ok('Kids get an empty collection list (existing ones removed), Standard get ours', nuvio.pushed.get(2)?.length === 0 && nuvio.pushed.get(1)?.length > 0 && nuvio.pushed.get(3)?.length > 0);
   ok('settings are pushed to the Kids profile too', nuvio.calls.some((c) => c.startsWith('pushSettings-') && c.endsWith(':2')));
   eq('one shared AIOStreams, one shared AIOMetadata', [svc.posts.aiostreams, svc.posts.aiometadata], [1, 1]);
   eq('BingeCat calls: existing main for Ben, new Kids sub-profile for Benci', bc.calls, [
@@ -355,7 +357,7 @@ console.log('\n# BingeCat: Kids-only run creates no AIOMetadata');
   eq('AIOMetadata config is not created, AIOStreams is', [svc.posts.aiometadata, svc.posts.aiostreams], [0, 1]);
   eq('no Watchly even though it was requested', svc.posts.watchly.length, 0);
   eq('addons per Kids profile', [names(nuvio, 1), names(nuvio, 3)], [['BingeCat', 'BingeCat AI Search', 'AIOStreams'], ['BingeCat', 'BingeCat AI Search', 'AIOStreams']]);
-  ok('no collections pushed', !nuvio.calls.some((c) => c.startsWith('pushCollections')));
+  ok('every Kids profile has its collections cleared', nuvio.pushed.get(1)?.length === 0 && nuvio.pushed.get(3)?.length === 0);
   eq('shared addons have no AIOMetadata', Object.keys(result.addons), ['aiostreams']);
 }
 

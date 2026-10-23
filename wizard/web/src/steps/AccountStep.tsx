@@ -373,7 +373,7 @@ export function AccountStep() {
                     <span style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600 }}>{name}</span>
                     {selected && (
                       <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--muted)', lineHeight: 1.4 }}>
-                        Addons replaced, backup shown at the end
+                        Addons and collections replaced, addon backup shown at the end
                         {profile.uses_primary_addons && ' · uses the main profile\'s addons today, it gets its own'}
                       </span>
                     )}

@@ -301,7 +301,9 @@ export function InstallingStep() {
           detail = `${d?.count ?? 0} addon${(d?.count ?? 0) !== 1 ? 's' : ''} pushed to your Nuvio account${profileLabel}.`;
         } else if (name === 'collections') {
           const d = data as { groupCount?: number; profileName?: string };
-          detail = `${d?.groupCount ?? 0} collection group${(d?.groupCount ?? 0) !== 1 ? 's' : ''} configured${d?.profileName ? ` for ${d.profileName}` : ''}.`;
+          detail = (d?.groupCount ?? 0) === 0
+            ? `Existing collections removed${d?.profileName ? ` for ${d.profileName}` : ''}.`
+            : `${d?.groupCount ?? 0} collection group${(d?.groupCount ?? 0) !== 1 ? 's' : ''} configured${d?.profileName ? ` for ${d.profileName}` : ''}.`;
         } else if (name === 'bingecat') {
           const d = data as { profileName?: string; created?: boolean };
           detail = `${d?.created ? 'Created and set up' : 'Updated'}${d?.profileName ? ` for ${d.profileName}` : ''}.`;
