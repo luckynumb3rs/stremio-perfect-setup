@@ -1,18 +1,19 @@
 // Orchestrator: full Stremio + Nuvio flows.
-// Install is ATOMIC: the ordered addon collection is pushed only after all configs succeed.
-// If any config step fails, the account is left untouched.
+// Addons are pushed only after the configs they need were created. A Nuvio profile is a unit: if one of its
+// later write steps fails it is reported failed (it may be left partly written) and a retry redoes it.
 
 import { createStremioAdapter, buildAddonCollection, hydrateAddonCollection, resolveCinemetaDescriptor } from './adapters/stremio.js';
 import { createWithFallbacks } from './adapters/aiostreams.js';
 import { createAiometadataAdapter } from './adapters/aiometadata.js';
 import {
+  MAX_NUVIO_PROFILES,
   createNuvioAdapter,
   mergeNuvioSettingsBlob,
   resolveNuvioSettingsTemplate,
 } from './adapters/nuvio.js';
 import { buildAioMetadataConfig } from './catalog-config.js';
 import { filterCollections } from './nuvio-collections.js';
-import { createWatchlyAdapter } from './adapters/watchly.js';
+import { buildWatchlyBody, createWatchlyAdapter } from './adapters/watchly.js';
 
 function randomPassword(len = 20) {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
@@ -306,140 +307,186 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
   return summary;
 }
 
+// Nuvio session for the install. The token from the Account step is reused unless it is about to expire
+// (it can be much older than an hour by the time Install runs); then a fresh password sign-in replaces it.
+async function resolveNuvioAuth(nuvio, account) {
+  const now = Math.floor(Date.now() / 1000);
+  const base = { service: 'nuvio', email: account.email };
+  if (account.authToken && (!account.authExpiresAt || account.authExpiresAt - now > 300)) {
+    return {
+      auth: { token: account.authToken, refreshToken: account.authRefreshToken ?? null, expiresAt: account.authExpiresAt ?? null },
+      accountSummary: { ...base, created: account.mode === 'create', reusedSession: true },
+    };
+  }
+  if (account.authToken || account.mode !== 'create') {
+    return { auth: await nuvio.login(account.email, account.password), accountSummary: { ...base, created: account.mode === 'create' } };
+  }
+  return { auth: await nuvio.signup(account.email, account.password), accountSummary: { ...base, password: account.password, created: true } };
+}
+
+function validateNuvioTargets(profiles) {
+  if (!Array.isArray(profiles) || profiles.length === 0) {
+    throw new Error('Nuvio: select at least one profile to set up.');
+  }
+  const seen = new Set();
+  for (const p of profiles) {
+    const id = p?.nuvioProfileId;
+    if (!Number.isInteger(id) || id < 1 || id > MAX_NUVIO_PROFILES) {
+      throw new Error('Nuvio: every profile must exist before install (ids 1-6). Go back to the Account step.');
+    }
+    if (seen.has(id)) throw new Error(`Nuvio: profile ${id} is selected twice.`);
+    seen.add(id);
+  }
+}
+
 /**
- * Full Nuvio setup flow.
+ * Full Nuvio setup flow for one or more profiles of one account.
+ * Shared AIOStreams / AIOMetadata configs are created once; Watchly (if requested) once per profile.
+ * Each profile is installed as a unit: a failure marks only that profile failed and never undoes finished ones.
  * @param {object} p
  * @param {object} p.instances           { aiostreams: string[], aiometadata: string[], watchly?: string[] } – ordered list; first is primary, rest are fallbacks
- * @param {object} p.account             { mode: 'create'|'signin', email, password }
+ * @param {object} p.account             { mode: 'create'|'signin', email, password, authToken?, authRefreshToken?, authExpiresAt? }
+ * @param {object[]} p.profiles          [{ nuvioProfileId: 1..6, name, kids }] non-empty; the profiles must already exist
  * @param {object} p.aiostreamsParams    { template, inputs, services, credentials }
  * @param {object} p.aiometadataParams   { baseTemplate, enabledCategories, enabledDiscoverFolderIds, categoryOrder, discoverFolderOrder, apiKeys, language }
- * @param {object} [p.watchlyBody]       Merged Watchly TokenRequest body (null/undefined = skip Watchly)
+ * @param {object} [p.watchly]           { defaults, tmdbApiKey, geminiApiKey, rpdbApiKey } (null = no Watchly)
+ * @param {object} [p.retry]             Previous return value of this function: its shared configs, backups and finished profiles are reused
  * @param {object[]} p.collectionsJson   Nuvio-Collections.json array
  * @param {object} p.nuvioSettingsTemplate Nuvio-Settings.json platform map
  * @param {function} p.onStep
+ * @returns {Promise<{account, addons, addonPasswordSource, warnings, profiles}>} throws only for bad input, auth, profile listing or shared config creation
  */
-export async function runNuvioSetup({ instances, account, aiostreamsParams, aiometadataParams, watchlyBody, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep }) {
-  const summary = { account: null, addons: {}, previousAddons: [], settings: null, warnings: [], addonPasswordSource: 'account' };
+export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
+  validateNuvioTargets(targets);
   const step = (name, data) => { onStep?.(name, data); return data; };
 
   // 1) Nuvio account
-  const nuvio = createNuvioAdapter();
-  let auth;
-  if (account.authToken) {
-    auth = { token: account.authToken };
-    summary.account = { service: 'nuvio', email: account.email, created: account.mode === 'create', reusedSession: true };
-  } else if (account.mode === 'create') {
-    auth = await nuvio.signup(account.email, account.password);
-    summary.account = { service: 'nuvio', email: account.email, password: account.password, created: true };
-  } else {
-    auth = await nuvio.login(account.email, account.password);
-    summary.account = { service: 'nuvio', email: account.email, created: false };
-  }
-  step('account', summary.account);
+  const { auth, accountSummary } = await resolveNuvioAuth(nuvio, account);
+  step('account', accountSummary);
 
-  // 2) Resolve the chosen profile, and make sure it uses its own addons.
-  const profiles = await nuvio.getProfiles(auth.token);
-  const profile = account.profileId
-    ? profiles.find((entry) => entry.profile_index === account.profileId)
-    : profiles[0];
-  if (!profile) {
-    if (account.profileId) {
-      throw new Error(`Nuvio: selected profile ${account.profileId} was not found on this account.`);
+  // 2) Read pass (no writes): resolve every profile and back up what it has today. A profile that
+  // "uses primary addons" is backed up from profile 1. Finished profiles of a retry are kept as they are.
+  const nuvioProfiles = await nuvio.getProfiles(auth.token);
+  const previous = new Map((retry?.profiles || []).map((r) => [r.profileIndex, r]));
+  const backups = new Map(); // addons profile index -> backup entries, read at most once
+  for (const r of previous.values()) if (r.backupTaken) backups.set(r.profileIndex, r.previousAddons);
+
+  const results = new Map(); // profile index -> result
+  const pending = [];
+  for (const target of targets) {
+    const idx = target.nuvioProfileId;
+    const prior = previous.get(idx);
+    if (prior?.status === 'done') { results.set(idx, prior); continue; }
+
+    const entry = nuvioProfiles.find((e) => e.profile_index === idx);
+    const result = { profileIndex: idx, name: entry?.name || target.name, status: 'failed', error: null, backupTaken: false, previousAddons: [], watchly: null, settings: null };
+    results.set(idx, result);
+    if (!entry) { result.error = `Profile ${idx} was not found on this Nuvio account.`; continue; }
+
+    try {
+      if (prior?.backupTaken) {
+        result.previousAddons = prior.previousAddons; // the profile may be half-written: keep its first backup
+      } else {
+        const source = entry.uses_primary_addons ? 1 : idx;
+        if (!backups.has(source)) backups.set(source, buildNuvioPreviousAddons(await nuvio.listAddons(auth.token, source)));
+        result.previousAddons = backups.get(source);
+      }
+      result.backupTaken = true;
+      step('backup', { profileIndex: idx, profileName: entry.name, count: result.previousAddons.length, addons: result.previousAddons });
+      pending.push({ result, entry });
+    } catch (err) {
+      result.error = toError(err).message;
     }
-    throw new Error('Nuvio: no profiles found. Create or load a Nuvio profile first, then try again.');
   }
-  const profileIndex = profile.profile_index;
-  const addonsProfileIndex = profile.uses_primary_addons ? 1 : profileIndex;
 
-  const existingAddons = await nuvio.listAddons(auth.token, addonsProfileIndex);
-  summary.previousAddons = buildNuvioPreviousAddons(existingAddons);
-  step('backup', { count: summary.previousAddons.length, addons: summary.previousAddons });
+  const summary = {
+    account: accountSummary,
+    addons: retry?.addons ?? {},
+    addonPasswordSource: retry?.addonPasswordSource ?? 'account',
+    warnings: [...(retry?.warnings || [])],
+    profiles: [],
+  };
 
-  if (profile.uses_primary_addons) {
-    await nuvio.updateProfile(auth.token, profileIndex, { uses_primary_addons: false });
-  }
-  step('profile', { profileIndex, profileName: profile.name });
+  if (pending.length > 0) {
+    // 3) Shared configs, one shared password (own account password first, generated one if rejected).
+    if (!summary.addons.aiostreams || !summary.addons.aiometadata) {
+      const bundleArgs = { instances, aiostreamsParams, aiometadataParams, watchlyBody: null, target: 'nuvio', proxyBase };
+      let addonBundle;
+      try {
+        addonBundle = await createAddonBundle({ ...bundleArgs, password: account.password });
+      } catch (err) {
+        const firstError = toError(err);
+        if (!shouldRetryWithGeneratedPassword(firstError, account.password)) throw firstError;
 
-  // 3-4) Create both addon configs with one shared password.
-  let addonBundle;
-  try {
-    addonBundle = await createAddonBundle({
-      instances,
-      aiostreamsParams,
-      aiometadataParams,
-      watchlyBody: watchlyBody ?? null,
-      password: account.password,
-      target: 'nuvio',
-      proxyBase,
+        summary.addonPasswordSource = 'generated';
+        addonBundle = await createAddonBundle({ ...bundleArgs, password: randomPassword() });
+      }
+      summary.addons = { aiostreams: addonBundle.addons.aiostreams, aiometadata: addonBundle.addons.aiometadata };
+      summary.warnings.push(...addonBundle.warnings);
+      step('aiostreams', summary.addons.aiostreams);
+      step('aiometadata', summary.addons.aiometadata);
+    }
+
+    // Filter collections to the user's enabled categories once; p_collections_json is a real JSON value,
+    // not a JSON-encoded string (verified Task 2). pushCollections signature: (token, profileId, collections)
+    const filteredCollections = filterCollections(collectionsJson, aiometadataParams.baseTemplate.config.catalogs, {
+      enabledCategories: aiometadataParams.enabledCategories,
+      enabledDiscoverFolderIds: aiometadataParams.enabledDiscoverFolderIds,
+      categoryOrder: aiometadataParams.categoryOrder,
+      discoverFolderOrder: aiometadataParams.discoverFolderOrder,
+      categoryExceptions: aiometadataParams.categoryExceptions || [],
     });
-  } catch (err) {
-    const firstError = toError(err);
-    if (!shouldRetryWithGeneratedPassword(firstError, account.password)) throw firstError;
 
-    summary.addonPasswordSource = 'generated';
-    addonBundle = await createAddonBundle({
-      instances,
-      aiostreamsParams,
-      aiometadataParams,
-      watchlyBody: watchlyBody ?? null,
-      password: randomPassword(),
-      target: 'nuvio',
-      proxyBase,
-    });
+    // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
+    // Nuvio addon order: Watchly first (watch history), then AIOMetadata (catalog source), then AIOStreams (stream source).
+    for (const { result, entry } of pending) {
+      const idx = result.profileIndex;
+      try {
+        if (watchly) {
+          const body = buildWatchlyBody(watchly.defaults, {
+            target: 'nuvio',
+            nuvioAccessToken: auth.token,
+            nuvioRefreshToken: auth.refreshToken,
+            nuvioExpiresAt: auth.expiresAt,
+            nuvioProfileId: idx,
+            nuvioProfileName: entry.name,
+            tmdbApiKey: watchly.tmdbApiKey,
+            geminiApiKey: watchly.geminiApiKey,
+            rpdbApiKey: watchly.rpdbApiKey,
+          });
+          result.watchly = await createWatchlySummary(instances, body, summary.warnings);
+          step('watchly', { profileIndex: idx, profileName: entry.name, ...result.watchly });
+        }
+
+        if (entry.uses_primary_addons) {
+          await nuvio.updateProfile(auth.token, idx, { uses_primary_addons: false });
+        }
+        step('profile', { profileIndex: idx, profileName: entry.name });
+
+        const addons = [
+          ...(result.watchly ? [{ url: result.watchly.manifestUrl, name: 'Watchly', sort_order: 0 }] : []),
+          { url: summary.addons.aiometadata.manifestUrl, name: 'AIOMetadata', sort_order: 1 },
+          { url: summary.addons.aiostreams.manifestUrl, name: 'AIOStreams', sort_order: 2 },
+        ];
+        await nuvio.replaceAddons(auth.token, idx, addons);
+        step('addons', { count: addons.length, profileIndex: idx, profileName: entry.name });
+
+        await nuvio.pushCollections(auth.token, idx, filteredCollections);
+        step('collections', { groupCount: filteredCollections.length, profileIndex: idx, profileName: entry.name });
+
+        result.settings = await applyNuvioProfileSettings(nuvio, auth.token, idx, nuvioSettingsTemplate, aiometadataParams);
+        step('settings', { ...result.settings, profileIndex: idx, profileName: entry.name });
+
+        result.status = 'done';
+        result.error = null;
+      } catch (err) {
+        result.status = 'failed';
+        result.error = toError(err).message;
+        step('profile_failed', { profileIndex: idx, profileName: entry.name, error: result.error });
+      }
+    }
   }
 
-  summary.addons.aiostreams = addonBundle.addons.aiostreams;
-  summary.addons.aiometadata = addonBundle.addons.aiometadata;
-  if (addonBundle.addons.watchly) {
-    summary.addons.watchly = addonBundle.addons.watchly;
-  }
-  summary.warnings.push(...addonBundle.warnings);
-  step('aiostreams', summary.addons.aiostreams);
-  step('aiometadata', summary.addons.aiometadata);
-  if (summary.addons.watchly) {
-    step('watchly', summary.addons.watchly);
-  }
-
-  // 5) ATOMIC install: replace profile addons then push collections only after
-  // all configs succeed. Nuvio addon order: Watchly first (watch history), then
-  // AIOMetadata (catalog source), then AIOStreams (stream source).
-  const addons = [
-    ...(summary.addons.watchly ? [{ url: summary.addons.watchly.manifestUrl, name: 'Watchly', sort_order: 0 }] : []),
-    { url: summary.addons.aiometadata.manifestUrl, name: 'AIOMetadata', sort_order: 1 },
-    { url: summary.addons.aiostreams.manifestUrl, name: 'AIOStreams', sort_order: 2 },
-  ];
-  await nuvio.replaceAddons(auth.token, profileIndex, addons);
-  step('addons', { count: addons.length, profileIndex, profileName: profile.name });
-
-  // Filter collections to user's enabled categories, then push.
-  // p_collections_json is a real JSON value, not a JSON-encoded string (verified Task 2).
-  // pushCollections signature: (token, profileId, collections)
-  const catalogs = aiometadataParams.baseTemplate.config.catalogs;
-  const {
-    enabledCategories,
-    enabledDiscoverFolderIds,
-    categoryOrder,
-    discoverFolderOrder,
-  } = aiometadataParams;
-  const filteredCollections = filterCollections(collectionsJson, catalogs, {
-    enabledCategories,
-    enabledDiscoverFolderIds,
-    categoryOrder,
-    discoverFolderOrder,
-    categoryExceptions: aiometadataParams.categoryExceptions || [],
-  });
-  await nuvio.pushCollections(auth.token, profileIndex, filteredCollections);
-  step('collections', { groupCount: filteredCollections.length });
-
-  const appliedSettings = await applyNuvioProfileSettings(
-    nuvio,
-    auth.token,
-    profileIndex,
-    nuvioSettingsTemplate,
-    aiometadataParams
-  );
-  summary.settings = appliedSettings;
-  step('settings', appliedSettings);
-
+  summary.profiles = targets.map((t) => results.get(t.nuvioProfileId));
   return summary;
 }
