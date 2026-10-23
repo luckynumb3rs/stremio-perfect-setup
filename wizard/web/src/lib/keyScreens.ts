@@ -55,14 +55,16 @@ export function getCatalogStep(sectionCount: number) {
   return AIO_SECTION_START_STEP + sectionCount;
 }
 
-export function getRecommendationsStep(sectionCount: number) {
-  return getCatalogStep(sectionCount) + 1;
+// Without Standard profiles (Kids only) there is no Catalogs step: the later steps move up by one, so the numbering
+// stays contiguous and nextStep/prevStep (+/-1) keep working.
+export function getRecommendationsStep(sectionCount: number, hasCatalogs = true) {
+  return getCatalogStep(sectionCount) + (hasCatalogs ? 1 : 0);
 }
 
-export function getInstallStep(sectionCount: number) {
-  return getRecommendationsStep(sectionCount) + 1;
+export function getInstallStep(sectionCount: number, hasCatalogs = true) {
+  return getRecommendationsStep(sectionCount, hasCatalogs) + 1;
 }
 
-export function getDoneStep(sectionCount: number) {
-  return getInstallStep(sectionCount) + 1;
+export function getDoneStep(sectionCount: number, hasCatalogs = true) {
+  return getInstallStep(sectionCount, hasCatalogs) + 1;
 }

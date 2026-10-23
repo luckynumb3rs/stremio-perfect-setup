@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ChevronRight, Check } from 'lucide-react';
 import { mountSidebarStatsCard } from '../../../../assets/js/sidebar-stats-shared.js';
-import { useWizard } from '../store/wizard';
+import { rolesOf, useWizard } from '../store/wizard';
 import { getGuideStatsUrl, resolveSiteUrl } from '../lib/site';
 import {
   ACTIVE_KEY_SCREENS,
@@ -19,7 +19,8 @@ interface Props {
 const GUIDE_COMPLETION_BASELINE = 15000;
 
 export function Sidebar({ onClose }: Props) {
-  const { step, maxReachedStep, aioSections, setStep, installRunning } = useWizard();
+  const { step, maxReachedStep, aioSections, setStep, installRunning, target, nuvioProfiles, stremioKids } = useWizard();
+  const hasCatalogs = rolesOf({ target, nuvioProfiles, stremioKids }).hasStandard;
   const statsCardRootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,8 +37,8 @@ export function Sidebar({ onClose }: Props) {
 
   const n = aioSections.length;
   const CATALOGS_STEP = getCatalogStep(n);
-  const RECOMMENDATIONS_STEP = getRecommendationsStep(n);
-  const INSTALL_STEP = getInstallStep(n);
+  const RECOMMENDATIONS_STEP = getRecommendationsStep(n, hasCatalogs);
+  const INSTALL_STEP = getInstallStep(n, hasCatalogs);
 
   // The Install step is never re-entered from the sidebar (mounting it re-runs the whole install on the account),
   // and nothing is clickable while an install is running (a second install would race the first one).
@@ -140,10 +141,12 @@ export function Sidebar({ onClose }: Props) {
 
         {/* Catalogs + Recommendations + Install */}
         <div style={{ marginTop: '0.6rem' }}>
-          <button className={cls(CATALOGS_STEP)} onClick={() => goTo(CATALOGS_STEP)}>
-            <StepIcon s={CATALOGS_STEP} />
-            <span>🔎 Catalogs</span>
-          </button>
+          {hasCatalogs && (
+            <button className={cls(CATALOGS_STEP)} onClick={() => goTo(CATALOGS_STEP)}>
+              <StepIcon s={CATALOGS_STEP} />
+              <span>🔎 Catalogs</span>
+            </button>
+          )}
           <button className={cls(RECOMMENDATIONS_STEP)} onClick={() => goTo(RECOMMENDATIONS_STEP)}>
             <StepIcon s={RECOMMENDATIONS_STEP} />
             <span>🤖 Recommendations</span>

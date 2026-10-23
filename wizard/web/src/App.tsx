@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useWizard } from './store/wizard';
+import { rolesOf, useWizard } from './store/wizard';
 import { buildAioSections } from './lib/aioSections';
 import { Welcome } from './steps/Welcome';
 import { AccountStep } from './steps/AccountStep';
@@ -9,7 +9,7 @@ import { CatalogStep } from './steps/CatalogStep';
 import { InstallingStep } from './steps/InstallingStep';
 import { DoneStep } from './steps/DoneStep';
 import { RecommendationsStep } from './steps/RecommendationsStep';
-import { normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
+import { isBingecatOn, normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
 import {
   ACTIVE_KEY_SCREENS,
   AIO_SECTION_START_STEP,
@@ -36,7 +36,8 @@ async function fetchJson(url: string, label: string) {
 }
 
 function StepRouter() {
-  const { step, target, aioSections, wizardConfig, setTemplates, setAioSections, setWizardConfig } = useWizard();
+  const { step, target, aioSections, wizardConfig, nuvioProfiles, stremioKids, setTemplates, setAioSections, setWizardConfig } = useWizard();
+  const hasCatalogs = rolesOf({ target, nuvioProfiles, stremioKids }).hasStandard;
   const lastTrackedKeyRef = useRef('');
   const [configError, setConfigError] = useState<string | null>(null);
 
@@ -72,6 +73,7 @@ function StepRouter() {
     setAioSections([]);
 
     const watchlyTemplatePath = targetTemplates.watchly ?? null;
+    const bingecatConfig = isBingecatOn(wizardConfig) ? wizardConfig.bingecat ?? null : null;
 
     const fetches = [
       fetchJson(tplUrls.aiostreams, 'AIOStreams template'),
@@ -85,11 +87,17 @@ function StepRouter() {
       watchlyTemplatePath
         ? fetchJson(resolveRepoUrl(watchlyTemplatePath), 'Watchly template')
         : Promise.resolve(null),
+      bingecatConfig
+        ? Promise.all([
+          fetchJson(resolveRepoUrl(bingecatConfig.templates.standard), 'BingeCat template'),
+          fetchJson(resolveRepoUrl(bingecatConfig.templates.kids), 'BingeCat Kids template'),
+        ]).then(([standard, kids]) => ({ standard, kids }))
+        : Promise.resolve(undefined),
     ] as const;
 
-    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, watchly]) => {
+    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, watchly, bingecat]) => {
       if (cancelled) return;
-      setTemplates({ aiostreams, aiometadata, collections, settings, watchly: watchly ?? null });
+      setTemplates({ aiostreams, aiometadata, collections, settings, watchly: watchly ?? null, ...(bingecat ? { bingecat } : {}) });
       setAioSections(buildAioSections(aiostreams));
     }).catch((error: unknown) => {
       if (cancelled) return;
@@ -102,7 +110,7 @@ function StepRouter() {
   }, [target, wizardConfig, setAioSections, setTemplates]);
 
   useEffect(() => {
-    const meta = getStepMeta(step, aioSections);
+    const meta = getStepMeta(step, aioSections, hasCatalogs);
     if (!meta) return;
 
     const trackingKey = `${step}:${target ?? 'unknown'}:${meta.slug}`;
@@ -110,14 +118,14 @@ function StepRouter() {
 
     lastTrackedKeyRef.current = trackingKey;
     ensureAnalytics();
-    trackWizardStepView(step, target, aioSections);
-  }, [aioSections, step, target]);
+    trackWizardStepView(step, target, aioSections, hasCatalogs);
+  }, [aioSections, hasCatalogs, step, target]);
 
   const n = aioSections.length;
   const KEY_SCREEN_END_STEP = KEY_SCREEN_START_STEP + ACTIVE_KEY_SCREENS.length;
   const CATALOGS_STEP = getCatalogStep(n);
-  const RECOMMENDATIONS_STEP = getRecommendationsStep(n);
-  const INSTALL_STEP = getInstallStep(n);
+  const RECOMMENDATIONS_STEP = getRecommendationsStep(n, hasCatalogs);
+  const INSTALL_STEP = getInstallStep(n, hasCatalogs);
 
   if (step > 0 && target && configError) {
     return (
@@ -150,7 +158,7 @@ function StepRouter() {
     );
   }
 
-  if (step === CATALOGS_STEP) return <CatalogStep />;
+  if (hasCatalogs && step === CATALOGS_STEP) return <CatalogStep />;
   if (step === RECOMMENDATIONS_STEP) return <RecommendationsStep />;
   if (step === INSTALL_STEP) return <InstallingStep />;
   return <DoneStep />;

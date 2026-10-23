@@ -91,12 +91,13 @@ export function trackWizardStepView(
   step: number,
   target: 'stremio' | 'nuvio' | null,
   aioSections: AioSection[],
+  hasCatalogs = true,
 ) {
   if (!MEASUREMENT_ID) return;
 
   ensureAnalytics();
 
-  const meta = getStepMeta(step, aioSections);
+  const meta = getStepMeta(step, aioSections, hasCatalogs);
   if (!meta || typeof window.gtag !== 'function') return;
 
   const baseUrl = new URL('./', window.location.href);
@@ -200,7 +201,7 @@ export function buildWizardCompletionPayload({
   return params;
 }
 
-export function getStepMeta(step: number, aioSections: AioSection[]): StepMeta | null {
+export function getStepMeta(step: number, aioSections: AioSection[], hasCatalogs = true): StepMeta | null {
   if (step === 0) return { index: 0, slug: 'welcome', name: 'Welcome' };
   if (step === 1) return { index: 1, slug: 'account', name: 'Account Setup' };
   if (step >= KEY_SCREEN_START_STEP && step < KEY_SCREEN_START_STEP + ACTIVE_KEY_SCREENS.length) {
@@ -219,16 +220,16 @@ export function getStepMeta(step: number, aioSections: AioSection[]): StepMeta |
     };
   }
 
-  if (step === getCatalogStep(aioSections.length)) {
+  if (hasCatalogs && step === getCatalogStep(aioSections.length)) {
     return { index: step, slug: 'catalogs', name: 'Catalogs' };
   }
-  if (step === getRecommendationsStep(aioSections.length)) {
+  if (step === getRecommendationsStep(aioSections.length, hasCatalogs)) {
     return { index: step, slug: 'recommendations', name: 'Recommendations' };
   }
-  if (step === getInstallStep(aioSections.length)) {
+  if (step === getInstallStep(aioSections.length, hasCatalogs)) {
     return { index: step, slug: 'install', name: 'Install' };
   }
-  if (step === getDoneStep(aioSections.length)) {
+  if (step === getDoneStep(aioSections.length, hasCatalogs)) {
     return { index: step, slug: 'done', name: 'Done' };
   }
 
