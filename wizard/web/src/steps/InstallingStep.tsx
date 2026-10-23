@@ -34,6 +34,7 @@ const STEP_LABELS: Record<string, string> = {
   account:     'Account ready',
   backup:      'Existing addons backed up',
   profile:     'Profile loaded',
+  profile_failed: 'Profile could not be set up',
   aiostreams:  'AIOStreams configuration saved',
   aiometadata: 'AIOMetadata configuration saved',
   watchly:     'Watchly configuration saved',
@@ -48,6 +49,10 @@ export function InstallingStep() {
   const [log, setLog] = useState<LogEntry[]>([]);
   const [done, setDone] = useState(false);
   const [fatal, setFatal] = useState<string | null>(null);
+  // Nuvio: profiles that failed while others finished. The run result is kept so Retry only redoes the failed ones.
+  const [partial, setPartial] = useState<{ failed: { name: string; error: string }[]; doneCount: number } | null>(null);
+  const lastSummary = useRef<unknown>(null);
+  const shownWarnings = useRef(0);
   const ran = useRef(false);
   let nextId = useRef(0);
 
@@ -65,7 +70,7 @@ export function InstallingStep() {
     try {
       const {
         target, stremioAccount, nuvioAccount, credentials, aioStreamsInputs,
-        catalogSelection, templates, wizardConfig, watchly, instantDebrid,
+        catalogSelection, templates, wizardConfig, watchly, instantDebrid, nuvioProfiles,
       } = wizard;
 
       if (!templates) {
@@ -73,6 +78,10 @@ export function InstallingStep() {
       }
       if (!wizardConfig) {
         throw new Error(`No active config.json block is available for the selected target "${target ?? 'unknown'}".`);
+      }
+
+      if (target === 'nuvio' && (nuvioProfiles.length === 0 || nuvioProfiles.some((t) => t.nuvioProfileId === 'new'))) {
+        throw new Error('No Nuvio profile is ready to set up. Go back to the Account step and select or create at least one profile.');
       }
 
       const userTmdbApiKey = credentials.tmdbApiKey.trim();
@@ -165,6 +174,8 @@ export function InstallingStep() {
       const watchlyEnabled = watchly.enabled && effectiveWatchlyInstances.length > 0;
 
       let watchlyBody: Record<string, unknown> | null = null;
+      // Nuvio: the orchestrator builds one Watchly body per profile from these.
+      let nuvioWatchly: Record<string, unknown> | null = null;
       if (watchlyEnabled) {
         const watchlyDefaults = (templates.watchly ?? {}) as Record<string, unknown>;
         if (target === 'stremio') {
@@ -179,20 +190,12 @@ export function InstallingStep() {
             rpdbApiKey: effectiveCredentials.rpdbApiKey,
           });
         } else {
-          if (!nuvioAccount.authToken || !nuvioAccount.profileId) {
-            throw new Error('Watchly is enabled but no Nuvio session or profile is available. Go back to the Account step and sign in again.');
-          }
-          watchlyBody = buildWatchlyBody(watchlyDefaults, {
-            target: 'nuvio',
-            nuvioAccessToken: nuvioAccount.authToken,
-            nuvioRefreshToken: nuvioAccount.authRefreshToken,
-            nuvioExpiresAt: nuvioAccount.authExpiresAt,
-            nuvioProfileId: nuvioAccount.profileId,
-            nuvioProfileName: nuvioAccount.profileName,
+          nuvioWatchly = {
+            defaults: watchlyDefaults,
             tmdbApiKey: effectiveCredentials.tmdbApiKey,
             geminiApiKey: effectiveCredentials.geminiApiKey,
             rpdbApiKey: effectiveCredentials.rpdbApiKey,
-          });
+          };
         }
       }
 
@@ -213,12 +216,15 @@ export function InstallingStep() {
             ? `${d.profileName} (Profile ${d.profileIndex ?? ''}).`
             : `Profile ${d?.profileIndex ?? ''}.`;
         } else if (name === 'backup') {
-          const d = data as { count?: number; addons?: Array<{ name?: string; manifestUrl?: string }> };
-          const previousAddons = (d?.addons ?? []).filter((addon): addon is { name: string; manifestUrl: string } =>
-            !!addon?.name && !!addon?.manifestUrl
-          );
-          wizard.setInstallResult({ previousAddons });
-          detail = `${d?.count ?? 0} addon${(d?.count ?? 0) !== 1 ? 's' : ''} saved for reference.`;
+          const d = data as { count?: number; profileIndex?: number; profileName?: string; addons?: Array<{ name?: string; manifestUrl?: string }> };
+          // Stremio keeps its single backup at the top level; Nuvio backups come back per profile in the result.
+          if (d?.profileIndex === undefined) {
+            const previousAddons = (d?.addons ?? []).filter((addon): addon is { name: string; manifestUrl: string } =>
+              !!addon?.name && !!addon?.manifestUrl
+            );
+            wizard.setInstallResult({ previousAddons });
+          }
+          detail = `${d?.count ?? 0} addon${(d?.count ?? 0) !== 1 ? 's' : ''} saved for reference${d?.profileName ? ` for ${d.profileName}` : ''}.`;
         } else if (name === 'aiostreams') {
           const d = data as { instance?: string };
           detail = `Saved on ${d?.instance ?? ''}.`;
@@ -226,8 +232,8 @@ export function InstallingStep() {
           const d = data as { instance?: string };
           detail = `Saved on ${d?.instance ?? ''}.`;
         } else if (name === 'watchly') {
-          const d = data as { instance?: string };
-          detail = `Saved on ${d?.instance ?? ''}.`;
+          const d = data as { instance?: string; profileName?: string };
+          detail = `Saved on ${d?.instance ?? ''}${d?.profileName ? ` for ${d.profileName}` : ''}.`;
         } else if (name === 'install') {
           const d = data as { count?: number };
           detail = `${d?.count ?? 0} addon${(d?.count ?? 0) !== 1 ? 's' : ''} in your collection.`;
@@ -238,18 +244,21 @@ export function InstallingStep() {
             : '';
           detail = `${d?.count ?? 0} addon${(d?.count ?? 0) !== 1 ? 's' : ''} pushed to your Nuvio account${profileLabel}.`;
         } else if (name === 'collections') {
-          const d = data as { groupCount?: number };
-          detail = `${d?.groupCount ?? 0} collection group${(d?.groupCount ?? 0) !== 1 ? 's' : ''} configured.`;
+          const d = data as { groupCount?: number; profileName?: string };
+          detail = `${d?.groupCount ?? 0} collection group${(d?.groupCount ?? 0) !== 1 ? 's' : ''} configured${d?.profileName ? ` for ${d.profileName}` : ''}.`;
+        } else if (name === 'profile_failed') {
+          const d = data as { profileName?: string; error?: string };
+          detail = `${d?.profileName ?? 'A profile'}: ${d?.error ?? 'unknown error'}`;
         } else if (name === 'settings') {
-          const d = data as { appliedPlatforms?: string[]; skippedPlatforms?: string[] };
+          const d = data as { appliedPlatforms?: string[]; skippedPlatforms?: string[]; profileName?: string };
           const applied = Array.isArray(d?.appliedPlatforms) ? d.appliedPlatforms.join(', ') : '';
           const skipped = Array.isArray(d?.skippedPlatforms) && d.skippedPlatforms.length
             ? ` Skipped: ${d.skippedPlatforms.join(', ')}.`
             : '';
-          detail = applied ? `Applied to ${applied}.${skipped}` : skipped.trim();
+          detail = applied ? `Applied to ${applied}${d?.profileName ? ` for ${d.profileName}` : ''}.${skipped}` : skipped.trim();
         }
 
-        push(`${label}${detail ? ': ' + detail : ''}`, 'success');
+        push(`${label}${detail ? ': ' + detail : ''}`, name === 'profile_failed' ? 'error' : 'success');
       };
 
       type SetupResult = {
@@ -263,6 +272,12 @@ export function InstallingStep() {
         };
         addonPasswordSource?: 'account' | 'generated';
         previousAddons?: Array<{ name: string; manifestUrl: string }>;
+        /** Nuvio only */
+        profiles?: Array<{
+          profileIndex: number; name: string; status: 'done' | 'failed'; error: string | null;
+          previousAddons: Array<{ name: string; manifestUrl: string }>;
+          watchly: { manifestUrl?: string; token?: string } | null;
+        }>;
         warnings: string[];
       };
 
@@ -282,10 +297,13 @@ export function InstallingStep() {
       }
       const extraParams = target === 'nuvio'
         ? {
+            profiles: nuvioProfiles,
+            watchly: nuvioWatchly,
+            retry: lastSummary.current,
             collectionsJson: templates.collections as object[],
             nuvioSettingsTemplate,
           }
-        : {};
+        : { watchlyBody };
 
       push(`Connecting to your ${target === 'stremio' ? 'Stremio' : 'Nuvio'} account…`);
 
@@ -295,17 +313,19 @@ export function InstallingStep() {
         account,
         aiostreamsParams,
         aiometadataParams,
-        watchlyBody,
         proxyBase,
         onStep,
         ...extraParams,
       });
 
-      // Surface non-fatal warnings
-      if (result.warnings?.length) {
-        for (const w of result.warnings) {
-          push(`Note: ${w}`, 'warning');
-        }
+      // Surface non-fatal warnings (a retry result repeats the earlier ones: show only the new ones)
+      const warningsBefore = target === 'nuvio' && lastSummary.current ? shownWarnings.current : 0;
+      for (const w of (result.warnings ?? []).slice(warningsBefore)) {
+        push(`Note: ${w}`, 'warning');
+      }
+      if (target === 'nuvio') {
+        lastSummary.current = result;
+        shownWarnings.current = result.warnings?.length ?? 0;
       }
 
       const aios = result.addons.aiostreams;
@@ -328,10 +348,28 @@ export function InstallingStep() {
           ? { manifestUrl: watchlyResult.manifestUrl ?? '', token: watchlyResult.token ?? '' }
           : null,
         previousAddons: result.previousAddons ?? [],
+        profiles: (result.profiles ?? []).map((p) => ({
+          profileIndex: p.profileIndex,
+          name: p.name,
+          status: p.status,
+          error: p.error,
+          previousAddons: p.previousAddons,
+          watchly: p.watchly ? { manifestUrl: p.watchly.manifestUrl ?? '', token: p.watchly.token ?? '' } : null,
+        })),
         addonPasswordSource: result.addonPasswordSource ?? 'account',
         warnings: result.warnings,
         error: null,
       });
+
+      const failedProfiles = (result.profiles ?? []).filter((p) => p.status !== 'done');
+      if (failedProfiles.length > 0) {
+        setPartial({
+          failed: failedProfiles.map((p) => ({ name: p.name, error: p.error ?? 'Unknown error' })),
+          doneCount: (result.profiles ?? []).length - failedProfiles.length,
+        });
+        push('Some profiles could not be set up. The profiles that finished stay as they are.', 'warning');
+        return;
+      }
 
       push('Everything is set up and ready to go!', 'success');
       setDone(true);
@@ -343,6 +381,21 @@ export function InstallingStep() {
       setFatal(msg);
       push('Setup could not be completed. See the error below.', 'error');
     }
+  }
+
+  function restart(clearLog: boolean) {
+    if (clearLog) setLog([]);
+    else push('Retrying the profiles that failed…');
+    setFatal(null);
+    setPartial(null);
+    setDone(false);
+    wizard.setInstallResult({ error: null });
+    ran.current = false;
+    // Small delay to allow state to settle before re-running
+    setTimeout(() => {
+      ran.current = false;
+      run();
+    }, 100);
   }
 
   const iconFor = (type: LogEntry['type']) => {
@@ -362,11 +415,13 @@ export function InstallingStep() {
     <WizardShell showBack={false}>
       <div style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
         <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.35rem' }}>
-          {done ? 'All done! 🎉' : fatal ? 'Setup failed' : 'Setting everything up…'}
+          {done ? 'All done! 🎉' : partial ? 'Some profiles need attention' : fatal ? 'Setup failed' : 'Setting everything up…'}
         </h2>
         <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.55 }}>
           {done
             ? 'Your streaming setup has been configured and installed. Tap Continue below to see your results.'
+            : partial
+            ? 'Not every profile could be set up. The profiles that finished stay as they are, and a retry only redoes the ones that failed.'
             : fatal
             ? 'An error occurred during setup. The details are shown below.'
             : 'Please keep this window open, the wizard is creating your configurations and installing them.'}
@@ -401,7 +456,7 @@ export function InstallingStep() {
           </motion.div>
         ))}
 
-        {!done && !fatal && (
+        {!done && !fatal && !partial && (
           <motion.div
             animate={{ opacity: [0.35, 1, 0.35] }}
             transition={{ repeat: Infinity, duration: 1.4 }}
@@ -411,6 +466,53 @@ export function InstallingStep() {
           </motion.div>
         )}
       </div>
+
+      {partial && (
+        <div
+          style={{
+            marginTop: '1rem',
+            padding: '0.9rem 1rem',
+            background: 'rgba(217,119,6,0.07)',
+            border: '1px solid rgba(217,119,6,0.3)',
+            borderRadius: '8px',
+          }}
+        >
+          <p style={{ fontSize: '0.82rem', fontWeight: 600, color: '#b45309', marginBottom: '0.4rem' }}>
+            {partial.failed.length === 1 ? 'This profile' : 'These profiles'} could not be set up
+          </p>
+          <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.8rem', color: 'var(--text)', lineHeight: 1.6 }}>
+            {partial.failed.map((f) => (
+              <li key={f.name}><strong>{f.name}</strong>: {f.error}</li>
+            ))}
+          </ul>
+          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => restart(false)}
+              style={{
+                padding: '0.4rem 0.9rem', borderRadius: '6px', cursor: 'pointer',
+                border: '1px solid rgba(217,119,6,0.5)', background: 'rgba(217,119,6,0.12)',
+                color: '#b45309', fontSize: '0.82rem', fontWeight: 600,
+                display: 'flex', alignItems: 'center', gap: '0.35rem',
+              }}
+            >
+              <RotateCcw size={14} />
+              Retry failed profiles
+            </button>
+            {partial.doneCount > 0 && (
+              <button
+                onClick={() => wizard.nextStep()}
+                style={{
+                  padding: '0.4rem 0.9rem', borderRadius: '6px', cursor: 'pointer',
+                  border: '1px solid var(--border)', background: 'var(--panel)',
+                  color: 'var(--text)', fontSize: '0.82rem', fontWeight: 600,
+                }}
+              >
+                Continue to results
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {fatal && (
         <div
@@ -435,19 +537,7 @@ export function InstallingStep() {
             {fatal}
           </pre>
           <button
-            onClick={() => {
-              ran.current = false;
-              setLog([]);
-              setFatal(null);
-              setDone(false);
-              wizard.setInstallResult({ error: null });
-              ran.current = false;
-              // Small delay to allow state to settle before re-running
-              setTimeout(() => {
-                ran.current = false;
-                run();
-              }, 100);
-            }}
+            onClick={() => restart(true)}
             style={{
               marginTop: '0.75rem',
               padding: '0.4rem 0.9rem',
