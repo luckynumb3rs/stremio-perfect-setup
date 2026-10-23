@@ -13,6 +13,16 @@ export interface NuvioProfileOption {
   uses_primary_plugins?: boolean;
 }
 
+/**
+ * One Nuvio profile the wizard configures. 'new' entries are created on the Account step,
+ * so Install only ever sees real ids 1-6.
+ */
+export interface NuvioProfileTarget {
+  nuvioProfileId: number | 'new';
+  name: string;
+  kids: boolean; // ponytail: always false until the Kids option exists
+}
+
 export interface AccountInfo {
   mode: AccountMode;
   email: string;
@@ -62,6 +72,15 @@ export interface PreviousAddonBackupEntry {
   manifestUrl: string;
 }
 
+export interface NuvioProfileInstallResult {
+  profileIndex: number;
+  name: string;
+  status: 'done' | 'failed';
+  error: string | null;
+  previousAddons: PreviousAddonBackupEntry[];
+  watchly: { manifestUrl: string; token: string } | null;
+}
+
 export interface InstallResult {
   aiostreams: { manifestUrl: string; uuid: string; password: string } | null;
   aiometadata: {
@@ -73,6 +92,8 @@ export interface InstallResult {
   } | null;
   watchly: { manifestUrl: string; token: string } | null;
   previousAddons: PreviousAddonBackupEntry[];
+  /** Nuvio only: one entry per configured profile (Stremio keeps the top-level watchly/previousAddons) */
+  profiles: NuvioProfileInstallResult[];
   addonPasswordSource: 'account' | 'generated' | null;
   warnings: string[];
   error: string | null;
@@ -97,6 +118,8 @@ interface WizardState {
   target: Target | null;
   stremioAccount: AccountInfo;
   nuvioAccount: AccountInfo;
+  /** Nuvio profiles to configure (at least one) */
+  nuvioProfiles: NuvioProfileTarget[];
   credentials: Credentials;
   aioStreamsInstance: string;
   aioStreamsInputs: AioStreamsInputs;
@@ -119,6 +142,9 @@ interface WizardState {
   setTarget: (t: Target) => void;
   setStremioAccount: (a: Partial<AccountInfo>) => void;
   setNuvioAccount: (a: Partial<AccountInfo>) => void;
+  setNuvioProfiles: (profiles: NuvioProfileTarget[]) => void;
+  /** Select or deselect an existing Nuvio profile */
+  toggleNuvioProfile: (p: NuvioProfileOption) => void;
   setCredentials: (c: Partial<Credentials>) => void;
   toggleDebridService: (id: string) => void;
   setDebridCredential: (id: string, fieldId: string, value: string) => void;
@@ -138,6 +164,7 @@ export const useWizard = create<WizardState>((set) => ({
   target: null,
   stremioAccount: { mode: 'create', email: '', password: '' },
   nuvioAccount:   { mode: 'create', email: '', password: '', profileName: 'Profile 1', createNewProfile: false, profiles: [] },
+  nuvioProfiles: [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false }],
   credentials: {
     debridServices: [],
     tmdbApiKey: '', tmdbAccessToken: '', tvdbApiKey: '',
@@ -157,6 +184,7 @@ export const useWizard = create<WizardState>((set) => ({
     aiometadata: null,
     watchly: null,
     previousAddons: [],
+    profiles: [],
     addonPasswordSource: null,
     warnings: [],
     error: null,
@@ -184,6 +212,16 @@ export const useWizard = create<WizardState>((set) => ({
   })),
   setStremioAccount: (a) => set(s => ({ stremioAccount: { ...s.stremioAccount, ...a } })),
   setNuvioAccount: (a) => set(s => ({ nuvioAccount: { ...s.nuvioAccount, ...a } })),
+  setNuvioProfiles: (nuvioProfiles) => set({ nuvioProfiles }),
+  toggleNuvioProfile: (p) => set(s => {
+    const selected = s.nuvioProfiles.some(t => t.nuvioProfileId === p.profile_index);
+    const next = selected
+      ? s.nuvioProfiles.filter(t => t.nuvioProfileId !== p.profile_index)
+      : [...s.nuvioProfiles, { nuvioProfileId: p.profile_index, name: p.name, kids: false }];
+    // profile order = Nuvio order (existing profiles by index, then new ones)
+    const rank = (t: NuvioProfileTarget) => (t.nuvioProfileId === 'new' ? 99 : t.nuvioProfileId);
+    return { nuvioProfiles: next.sort((a, b) => rank(a) - rank(b)) };
+  }),
   setCredentials: (c) => set(s => ({ credentials: { ...s.credentials, ...c } })),
 
   toggleDebridService: (id) => set(s => {

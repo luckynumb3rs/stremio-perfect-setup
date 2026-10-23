@@ -105,6 +105,24 @@ console.log('\n# InstallResult.watchly + aiometadata.instance/config');
   eq('installResult.aiometadata.config', get().aiometadata?.config, { language: 'en-US', apiKeys: { tmdb: 'k' } });
 }
 
+console.log('\n# Nuvio profile selection');
+{
+  const { toggleNuvioProfile, setNuvioProfiles } = useWizard.getState();
+  const get = () => useWizard.getState().nuvioProfiles;
+
+  eq('default selection is one new profile', get(), [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false }]);
+  eq('installResult.profiles defaults to []', useWizard.getState().installResult.profiles, []);
+
+  setNuvioProfiles([{ nuvioProfileId: 'new', name: 'Extra', kids: false }]);
+  toggleNuvioProfile({ profile_index: 3, name: 'Bini' });
+  toggleNuvioProfile({ profile_index: 1, name: 'Ben' });
+  eq('toggle on adds existing profiles sorted by index, new ones last', get().map(p => p.nuvioProfileId), [1, 3, 'new']);
+  eq('toggle copies the profile name and kids=false', get()[0], { nuvioProfileId: 1, name: 'Ben', kids: false });
+
+  toggleNuvioProfile({ profile_index: 3, name: 'Bini' });
+  eq('toggle off removes only that profile', get().map(p => p.nuvioProfileId), [1, 'new']);
+}
+
 console.log('\n# LoadedTemplates.watchly');
 {
   const { setTemplates } = useWizard.getState();

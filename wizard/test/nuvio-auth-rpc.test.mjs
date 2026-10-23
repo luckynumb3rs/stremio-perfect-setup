@@ -81,5 +81,30 @@ console.log('\n# Nuvio createProfile tolerates empty RPC responses');
   }
 }
 
+console.log('\n# Nuvio createProfile refuses a 7th profile');
+{
+  const adapter = createNuvioAdapter();
+  const originalFetch = globalThis.fetch;
+  let pushed = false;
+
+  globalThis.fetch = async (url) => {
+    if (String(url).includes('/rest/v1/rpc/sync_pull_profiles')) {
+      return jsonResponse([1, 2, 3, 4, 5, 6].map((i) => ({ profile_index: i, name: `P${i}` })));
+    }
+    if (String(url).includes('/rest/v1/rpc/sync_push_profiles')) pushed = true;
+    return new Response('', { status: 200 });
+  };
+
+  try {
+    await adapter.createProfile('token-123', { name: 'Seven' });
+    ok('createProfile throws when 6 profiles exist', false, 'did not throw');
+  } catch (err) {
+    ok('createProfile throws when 6 profiles exist', /at most 6 profiles/.test(err instanceof Error ? err.message : String(err)));
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  ok('createProfile does not push profiles when full', pushed === false);
+}
+
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);
 process.exit(failed === 0 ? 0 : 1);
