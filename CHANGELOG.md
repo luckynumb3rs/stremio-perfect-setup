@@ -92,6 +92,7 @@ title: "📜 Changelog"
 
 - Added support for setting up **several Nuvio profiles** (up to 6, existing or new) in one run. **AIOStreams** and **AIOMetadata** are shared, **Watchly** is created for each profile, and the previous addons are backed up per profile.
 - Renamed the *Watchly* step to **Recommendations**.
+- Added a **Pin collections on top** option on the *Recommendations* step for Nuvio (shown when Watchly or BingeCat is on): it shows the collections above or below the recommendation catalogs by setting the pin option on every collection.
 - If a profile fails during install, the others stay as they are and only the failed ones are retried.
 - Fixed the sidebar *Finish* entry re-running the whole install.
 - Added **Profile Count** in statistics counters.

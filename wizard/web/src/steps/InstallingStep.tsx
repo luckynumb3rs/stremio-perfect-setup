@@ -364,6 +364,8 @@ export function InstallingStep() {
             profiles: nuvioProfiles,
             watchly: nuvioWatchly,
             bingecat: bingecatParam,
+            // collections above/below the Watchly/BingeCat catalogs: only when one of them is on, otherwise the template decides
+            pinCollections: hasStandard && (watchlyEnabled || (featureOn && live.bingecat.enabled)) ? live.pinCollections : null,
             retry: lastSummary.current ?? carriedBackups(),
             collectionsJson: templates.collections as object[],
             nuvioSettingsTemplate,

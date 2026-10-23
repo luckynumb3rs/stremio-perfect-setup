@@ -344,6 +344,24 @@ console.log('\n# BingeCat: mixed Standard + Kids run');
   eq('result carries kids + bingecat', [result.profiles[1].kids, result.profiles[1].bingecat?.profileId, result.profiles[1].bingecat?.created, result.profiles[0].bingecat?.created], [true, 200, true, false]);
 }
 
+console.log('\n# pinCollections sets pinToTop on every collection group');
+{
+  const groupsOf = (nuvio, idx) => nuvio.pushed.get(idx);
+  const run = async (pin, extra = {}) => {
+    const nuvio = makeNuvio();
+    const svc = mockServices();
+    try { await runNuvioSetup(baseArgs(nuvio, { pinCollections: pin, ...extra })); } finally { svc.restore(); }
+    return groupsOf(nuvio, extra.idx ?? 1);
+  };
+  const unpinned = await run(false);
+  ok('false: every group is unpinned', unpinned.length > 0 && unpinned.every((g) => g.pinToTop === false));
+  const pinned = await run(true);
+  ok('true: every group is pinned', pinned.length > 0 && pinned.every((g) => g.pinToTop === true));
+  const kept = await run(null);
+  ok('null keeps the template value (pinned today)', kept.every((g) => g.pinToTop === true));
+  ok('the shared template object is not changed by the override', collections.every((g) => g.pinToTop === true));
+}
+
 console.log('\n# BingeCat: Kids-only run creates no AIOMetadata');
 {
   const nuvio = makeNuvio();

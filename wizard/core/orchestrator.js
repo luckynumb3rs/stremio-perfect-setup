@@ -416,11 +416,13 @@ function validateNuvioTargets(profiles, bingecat) {
  * @param {object} [p.watchly]           { defaults, tmdbApiKey, geminiApiKey, rpdbApiKey } (null = no Watchly)
  * @param {object} [p.retry]             Previous return value of this function: its shared configs, backups and finished profiles are reused
  * @param {object[]} p.collectionsJson   Nuvio-Collections.json array
+ * @param {boolean|null} [p.pinCollections] true/false sets `pinToTop` on every collection group (collections above or below the Watchly/BingeCat
+ *                                       catalogs); null keeps the template's value
  * @param {object} p.nuvioSettingsTemplate Nuvio-Settings.json platform map
  * @param {function} p.onStep
  * @returns {Promise<{account, addons, addonPasswordSource, warnings, profiles}>} throws only for bad input, auth, profile listing or shared config creation
  */
-export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, bingecat = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
+export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, bingecat = null, pinCollections = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
   validateNuvioTargets(targets, bingecat);
   const step = (name, data) => { onStep?.(name, data); return data; };
 
@@ -495,7 +497,7 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
 
     // Filter collections to the user's enabled categories once; p_collections_json is a real JSON value,
     // not a JSON-encoded string (verified Task 2). pushCollections signature: (token, profileId, collections)
-    const filteredCollections = needsMeta
+    const matchingCollections = needsMeta
       ? filterCollections(collectionsJson, aiometadataParams.baseTemplate.config.catalogs, {
         enabledCategories: aiometadataParams.enabledCategories,
         enabledDiscoverFolderIds: aiometadataParams.enabledDiscoverFolderIds,
@@ -504,6 +506,10 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
         categoryExceptions: aiometadataParams.categoryExceptions || [],
       })
       : [];
+    // copies, so the shared template object is never changed
+    const filteredCollections = pinCollections === null
+      ? matchingCollections
+      : matchingCollections.map((group) => ({ ...group, pinToTop: pinCollections === true }));
 
     // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
     // Addon order. Standard: Watchly (watch history), BingeCat, AIOMetadata (catalog source), AIOStreams (stream source).

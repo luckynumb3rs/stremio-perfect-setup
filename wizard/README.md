@@ -9,6 +9,8 @@ templates in this repo, and guide installation in the intended order.
 - Stremio account login or creation
 - Nuvio account login or creation, with one or several profiles (up to 6) configured in one run; the
   AIOStreams and AIOMetadata configs are shared, Watchly is created once per profile
+- A *Pin collections on top* option (Nuvio, shown when Watchly or BingeCat is on) that sets `pinToTop` on every
+  collection group of `templates/Nuvio-Collections.json` before it is pushed
 - AIOStreams configuration from `templates/AIOStreams.json`
 - API key collection for services that cannot be automated end to end
 - Catalog and addon setup steps inside a guided flow

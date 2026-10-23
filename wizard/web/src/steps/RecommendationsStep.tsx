@@ -55,8 +55,8 @@ function ToggleRow({ label, description, checked, onClick }: { label: string; de
 
 export function RecommendationsStep() {
   const {
-    target, stremioAccount, nuvioAccount, nuvioProfiles, stremioKids, watchly, bingecat, wizardConfig,
-    setWatchly, toggleRecommendation, nextStep,
+    target, stremioAccount, nuvioAccount, nuvioProfiles, stremioKids, watchly, bingecat, wizardConfig, pinCollections,
+    setWatchly, toggleRecommendation, setPinCollections, nextStep,
   } = useWizard();
 
   const featureOn = isBingecatOn(wizardConfig);
@@ -77,6 +77,10 @@ export function RecommendationsStep() {
   // Kids profiles never get Watchly, so it only matters when there are Standard profiles.
   const watchlyActive = watchly.enabled && hasStandard;
   const canContinue = (!watchlyActive || connected) && bc.ready;
+  // Collections exist on Nuvio only, and only Standard profiles get them. The choice matters when a recommendations addon adds its own catalogs.
+  const bingecatForStandard = featureOn && hasStandard && bingecat.enabled;
+  const showPinCollections = isNuvio && hasStandard && (watchlyActive || bingecatForStandard);
+  const pinnedNames = [watchlyActive && 'Watchly', bingecatForStandard && 'BingeCat'].filter(Boolean).join(' and ');
   const logoUrl = resolveLogoUrl(`services/${isNuvio ? 'nuvio.png' : 'stremio.svg'}`);
 
   const cardStyle: CSSProperties = {
@@ -156,6 +160,17 @@ export function RecommendationsStep() {
       {bc.rows.length > 0 && (
         <div style={{ marginTop: '1rem' }}>
           <BingecatCard />
+        </div>
+      )}
+
+      {showPinCollections && (
+        <div style={{ marginTop: '1rem' }}>
+          <ToggleRow
+            label="Pin collections on top"
+            description={`Show your collections above the ${pinnedNames} catalogs on the Nuvio home screen. Turn off to show them below.`}
+            checked={pinCollections}
+            onClick={() => setPinCollections(!pinCollections)}
+          />
         </div>
       )}
 

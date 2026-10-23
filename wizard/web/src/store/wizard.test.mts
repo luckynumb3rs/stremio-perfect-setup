@@ -197,6 +197,15 @@ console.log('\n# Role flip guard and BingeCat state');
   eq('disconnect clears the token and profiles but keeps the toggle', [st().bingecat.token, st().bingecat.profiles, st().bingecat.mapping, st().bingecat.enabled], [null, [], [], true]);
 }
 
+console.log('\n# Pin collections');
+{
+  const st = () => useWizard.getState();
+  eq('collections are pinned by default (what the template does today)', st().pinCollections, true);
+  st().setPinCollections(false);
+  eq('the choice is stored', st().pinCollections, false);
+  st().setPinCollections(true);
+}
+
 console.log('\n# LoadedTemplates.watchly');
 {
   const { setTemplates } = useWizard.getState();

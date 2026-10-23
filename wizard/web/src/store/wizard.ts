@@ -202,6 +202,9 @@ interface WizardState {
   bingecat: BingecatState;
   /** True until the user turns Watchly and BingeCat on together: turning one on then turns the other off */
   recoAutoExclusive: boolean;
+  /** Nuvio: show the collections above the Watchly/BingeCat catalogs (pinToTop on every collection). Only used when one of them is on. */
+  pinCollections: boolean;
+  setPinCollections: (pin: boolean) => void;
   credentials: Credentials;
   aioStreamsInstance: string;
   aioStreamsInputs: AioStreamsInputs;
@@ -270,6 +273,7 @@ export const useWizard = create<WizardState>((set) => ({
   stremioKids: false,
   bingecat: EMPTY_BINGECAT,
   recoAutoExclusive: true,
+  pinCollections: true, // the collections template pins every collection to the top
   credentials: {
     debridServices: [],
     tmdbApiKey: '', tmdbAccessToken: '', tvdbApiKey: '',
@@ -339,6 +343,7 @@ export const useWizard = create<WizardState>((set) => ({
       mapping: s.bingecat.mapping.map((m) => (m.key === key ? { ...m, target: profile.id, reason: 'created' } : m)),
     },
   })),
+  setPinCollections: (pinCollections) => set({ pinCollections }),
   toggleRecommendation: (which) => set(s => {
     const turningOn = which === 'watchly' ? !s.watchly.enabled : !s.bingecat.enabled;
     const otherOn = which === 'watchly' ? s.bingecat.enabled : s.watchly.enabled;
