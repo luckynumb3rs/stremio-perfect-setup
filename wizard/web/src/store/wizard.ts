@@ -23,13 +23,17 @@ export interface NuvioProfileTarget {
   kids: boolean; // ponytail: always false until the Kids option exists
 }
 
+/** Nuvio order: existing profiles by index, then new ones. */
+export function sortNuvioProfiles(list: NuvioProfileTarget[]): NuvioProfileTarget[] {
+  const rank = (t: NuvioProfileTarget) => (t.nuvioProfileId === 'new' ? 99 : t.nuvioProfileId);
+  return [...list].sort((a, b) => rank(a) - rank(b));
+}
+
 export interface AccountInfo {
   mode: AccountMode;
   email: string;
   password: string;
-  profileName?: string;
-  profileId?: number;
-  createNewProfile?: boolean;
+  /** Nuvio profiles loaded from the account (the selection lives in nuvioProfiles) */
   profiles?: NuvioProfileOption[];
   /** Set after successful early auth on AccountStep */
   authKey?: string;   // Stremio authKey
@@ -163,7 +167,7 @@ export const useWizard = create<WizardState>((set) => ({
   maxReachedStep: 0,
   target: null,
   stremioAccount: { mode: 'create', email: '', password: '' },
-  nuvioAccount:   { mode: 'create', email: '', password: '', profileName: 'Profile 1', createNewProfile: false, profiles: [] },
+  nuvioAccount:   { mode: 'create', email: '', password: '', profiles: [] },
   nuvioProfiles: [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false }],
   credentials: {
     debridServices: [],
@@ -218,9 +222,7 @@ export const useWizard = create<WizardState>((set) => ({
     const next = selected
       ? s.nuvioProfiles.filter(t => t.nuvioProfileId !== p.profile_index)
       : [...s.nuvioProfiles, { nuvioProfileId: p.profile_index, name: p.name, kids: false }];
-    // profile order = Nuvio order (existing profiles by index, then new ones)
-    const rank = (t: NuvioProfileTarget) => (t.nuvioProfileId === 'new' ? 99 : t.nuvioProfileId);
-    return { nuvioProfiles: next.sort((a, b) => rank(a) - rank(b)) };
+    return { nuvioProfiles: sortNuvioProfiles(next) };
   }),
   setCredentials: (c) => set(s => ({ credentials: { ...s.credentials, ...c } })),
 
