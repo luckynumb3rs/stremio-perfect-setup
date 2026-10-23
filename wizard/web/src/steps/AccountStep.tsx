@@ -4,6 +4,7 @@ import { WizardShell } from '../components/WizardShell';
 import { MarkdownText } from '../components/MarkdownText';
 import { useWizard, sortNuvioProfiles, type NuvioProfileOption, type NuvioProfileTarget } from '../store/wizard';
 import { resolveImageUrl } from '../lib/integration';
+import { isBingecatOn } from '../lib/constants';
 
 // @ts-ignore
 import { createStremioAdapter } from '@core/adapters/stremio.js';
@@ -11,6 +12,37 @@ import { createStremioAdapter } from '@core/adapters/stremio.js';
 import { createNuvioAdapter, MAX_NUVIO_PROFILES } from '@core/adapters/nuvio.js';
 
 const DEFAULT_AVATAR_COLOR = '#1E88E5';
+
+/** Small on/off switch used for the Kids option. */
+function KidsSwitch({ checked, onChange, label }: { checked: boolean; onChange: (next: boolean) => void; label: string }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none',
+        cursor: 'pointer', color: 'var(--text)', font: 'inherit', fontSize: '0.8rem', padding: '0.15rem 0',
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: '34px', height: '18px', borderRadius: '9px', position: 'relative', flexShrink: 0,
+          background: checked ? 'var(--accent)' : 'var(--border)', transition: 'background 0.15s',
+        }}
+      >
+        <span style={{
+          position: 'absolute', top: '2px', left: checked ? '18px' : '2px', width: '14px', height: '14px',
+          borderRadius: '50%', background: '#fff', transition: 'left 0.15s',
+        }} />
+      </span>
+      <span>Kids</span>
+    </button>
+  );
+}
 
 export function AccountStep() {
   const MIN_PASSWORD_LENGTHS = {
@@ -24,9 +56,10 @@ export function AccountStep() {
     },
   } as const;
   const {
-    target, stremioAccount, nuvioAccount, nuvioProfiles,
-    setStremioAccount, setNuvioAccount, setNuvioProfiles, toggleNuvioProfile, setInstallResult, nextStep,
+    target, stremioAccount, nuvioAccount, nuvioProfiles, stremioKids, wizardConfig,
+    setStremioAccount, setNuvioAccount, setNuvioProfiles, setNuvioProfileKids, setStremioKids, toggleNuvioProfile, setInstallResult, nextStep,
   } = useWizard();
+  const kidsAvailable = isBingecatOn(wizardConfig);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -112,7 +145,7 @@ export function AccountStep() {
       const profile: NuvioProfileOption | null = await adapter.createProfile(token, { name: targets[i].name.trim() });
       if (!profile) throw new Error('Nuvio could not create the profile. Please try again.');
       profiles = [...profiles, profile].sort((a, b) => a.profile_index - b.profile_index);
-      targets = targets.map((t, j) => (j === i ? { nuvioProfileId: profile.profile_index, name: profile.name, kids: false } : t));
+      targets = targets.map((t, j) => (j === i ? { nuvioProfileId: profile.profile_index, name: profile.name, kids: t.kids } : t));
       setNuvioAccount({ profiles });
       setNuvioProfiles(sortNuvioProfiles(targets));
     }
@@ -303,6 +336,15 @@ export function AccountStep() {
         />
       </label>
 
+      {kidsAvailable && target === 'stremio' && (
+        <div style={{ marginTop: '0.75rem' }}>
+          <KidsSwitch checked={stremioKids} onChange={setStremioKids} label="This is a Kids account" />
+          <p style={{ margin: '0.2rem 0 0', color: 'var(--muted)', fontSize: '0.78rem', lineHeight: 1.45 }}>
+            A Kids account gets BingeCat with kid-safe settings instead of the standard catalogs and recommendations.
+          </p>
+        </div>
+      )}
+
       {showProfileSection && (
         <div style={{ marginTop: '0.75rem', marginBottom: '0.5rem' }}>
           <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>
@@ -312,9 +354,10 @@ export function AccountStep() {
             {existingProfiles.map((profile) => {
               const selected = nuvioProfiles.some((t) => t.nuvioProfileId === profile.profile_index);
               const name = profile.name || `Profile ${profile.profile_index}`;
+              const targetIndex = nuvioProfiles.findIndex((t) => t.nuvioProfileId === profile.profile_index);
               return (
+                <div key={profile.profile_index}>
                 <button
-                  key={profile.profile_index}
                   type="button"
                   role="checkbox"
                   aria-checked={selected}
@@ -341,6 +384,16 @@ export function AccountStep() {
                     }}
                   />
                 </button>
+                {kidsAvailable && selected && (
+                  <div style={{ padding: '0.25rem 0.75rem 0' }}>
+                    <KidsSwitch
+                      checked={nuvioProfiles[targetIndex]?.kids ?? false}
+                      onChange={(kids) => { setNuvioProfileKids(targetIndex, kids); setError(''); }}
+                      label={`${name} is a Kids profile`}
+                    />
+                  </div>
+                )}
+                </div>
               );
             })}
 
@@ -356,6 +409,13 @@ export function AccountStep() {
                   style={{ ...inputStyle, marginTop: 0, flex: 1 }}
                 />
                 <span style={{ fontSize: '0.75rem', color: 'var(--muted)', flexShrink: 0 }}>new</span>
+                {kidsAvailable && (
+                  <KidsSwitch
+                    checked={entry.kids}
+                    onChange={(kids) => { setNuvioProfileKids(index, kids); setError(''); }}
+                    label={`${entry.name || 'New profile'} is a Kids profile`}
+                  />
+                )}
                 {nuvioProfiles.length > 1 && (
                   <button
                     type="button"
