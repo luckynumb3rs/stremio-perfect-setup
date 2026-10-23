@@ -13,23 +13,30 @@ import { createNuvioAdapter, MAX_NUVIO_PROFILES } from '@core/adapters/nuvio.js'
 
 const DEFAULT_AVATAR_COLOR = '#1E88E5';
 
-/** Push button for the Kids option: highlighted when on, outlined when off. */
+/** Kids on/off toggle: one pill button with the label inside and a small switch that shows the state. */
 function KidsButton({ pressed, onChange, label }: { pressed: boolean; onChange: (next: boolean) => void; label: string }) {
   return (
     <button
       type="button"
-      aria-pressed={pressed}
+      role="switch"
+      aria-checked={pressed}
       aria-label={label}
       onClick={() => onChange(!pressed)}
       style={{
-        flexShrink: 0, padding: '0.2rem 0.75rem', borderRadius: '999px', cursor: 'pointer',
-        fontSize: '0.78rem', fontWeight: 700, lineHeight: 1.4, transition: 'all 0.15s',
+        flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.2rem 0.5rem 0.2rem 0.75rem',
+        borderRadius: '999px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700, lineHeight: 1.4, transition: 'all 0.15s',
         border: `1px solid ${pressed ? 'var(--accent)' : 'var(--border)'}`,
-        background: pressed ? 'var(--accent)' : 'transparent',
-        color: pressed ? '#fff' : 'var(--muted)',
+        background: pressed ? 'rgba(99,102,241,0.12)' : 'transparent',
+        color: pressed ? 'var(--accent)' : 'var(--muted)',
       }}
     >
       Kids
+      <span
+        aria-hidden="true"
+        style={{ width: '28px', height: '16px', borderRadius: '8px', position: 'relative', flexShrink: 0, background: pressed ? 'var(--accent)' : 'var(--border)', transition: 'background 0.15s' }}
+      >
+        <span style={{ position: 'absolute', top: '2px', left: pressed ? '14px' : '2px', width: '12px', height: '12px', borderRadius: '50%', background: '#fff', transition: 'left 0.15s' }} />
+      </span>
     </button>
   );
 }
@@ -431,7 +438,7 @@ export function AccountStep() {
               </button>
             )}
           </div>
-          <p style={{ marginTop: '0.45rem', color: 'var(--muted)', fontSize: '0.78rem', lineHeight: 1.45 }}>
+          <p style={{ marginTop: '0.45rem', color: 'var(--muted)', fontSize: '0.78rem', lineHeight: 1.45, textAlign: 'center' }}>
             {nuvioProfiles.length === 0
               ? 'Select at least one profile.'
               : `Nuvio allows up to ${MAX_NUVIO_PROFILES} profiles per account.${newCount > 0 ? ' New profiles are created when you continue.' : ''}`}

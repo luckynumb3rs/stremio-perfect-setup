@@ -171,9 +171,9 @@ export function RecommendationsStep() {
           <RecoCard
             title="BingeCat"
             badge={bingecatOn && bc.connected ? <ConnectedBadge /> : undefined}
-            description={`BingeCat is a recommendations and search addon with personalized catalogs based on what you watch${hasKids ? ', and kid-safe settings for Kids profiles' : ''}. It needs a free BingeCat account; the wizard never sees your BingeCat password.`}
+            description={`BingeCat is a recommendations and search addon with personalized catalogs based on what you watch${hasKids ? ', and kid-safe settings for Kids profiles' : ''}. It needs a free BingeCat account.`}
             notice={hasKids
-              ? `BingeCat is required for Kids profiles, so it cannot be turned off.${hasStandard ? ' Watchly will only be installed on your other profiles, not on the Kids profiles.' : ''}`
+              ? `BingeCat is required for Kids profiles, so it cannot be turned off.${watchlyActive ? ' Watchly will only be installed on your other profiles, not on the Kids profiles.' : ''}`
               : undefined}
             checked={bingecatOn}
             locked={hasKids}
