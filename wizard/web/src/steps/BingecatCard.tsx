@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { Check, Loader2, Unplug } from 'lucide-react';
+import { Loader2, Unplug } from 'lucide-react';
 import { bingecatRows, useWizard } from '../store/wizard';
 import { isBingecatOn } from '../lib/constants';
 import { bingecatRedirectUri, listenForBingecatCallback } from '../lib/bingecatAuth';
@@ -13,12 +13,12 @@ import { mergeMapping, validateMapping } from '@core/bingecat-mapper.js';
 const MIN_TOKEN_LIFE = 600;
 
 const REASON_LABEL: Record<string, string> = {
-  linked: 'linked',
-  name: 'same name',
-  'fresh-main': 'new account',
-  new: 'new',
-  created: 'created',
-  manual: 'chosen',
+  linked: 'Linked',
+  name: 'Same Name',
+  'fresh-main': 'New Account',
+  new: 'New',
+  created: 'Created',
+  manual: 'Chosen',
 };
 
 interface Issue { key: number | null; message: string }
@@ -119,35 +119,22 @@ export function BingecatCard() {
     setBingecat({ mapping: mapping.map((m) => (m.key === key ? { ...m, target: value === 'new' ? 'new' : Number(value), reason: 'manual' } : m)) });
   }
 
-  const box: CSSProperties = { borderRadius: '12px', border: `2px solid ${connected ? 'var(--accent)' : 'var(--border)'}`, background: connected ? 'var(--panel-2)' : 'var(--panel)', padding: '1rem' };
   const small: CSSProperties = { fontSize: '0.78rem', color: 'var(--muted)', lineHeight: 1.5 };
   const button: CSSProperties = { padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1px solid var(--accent)', background: 'var(--accent)', color: '#fff', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' };
   const ghost: CSSProperties = { ...button, background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' };
 
+  // The card around this (title, description, toggle, Connected badge) lives in the Recommendations step.
   return (
-    <div style={box}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-        <div>
-          <div style={{ fontWeight: 700, color: 'var(--text)' }}>🐱 BingeCat</div>
-          <div style={small}>
-            Smart recommendations{rows.some((r) => r.kids) ? ' and kid-safe search' : ''}. You need a BingeCat account; the wizard never sees your BingeCat password.
-          </div>
-        </div>
-      </div>
-
+    <div>
       {!connected && status === 'idle' && (
-        <>
-          <p style={{ ...small, margin: '0 0 0.6rem' }}>
-            {expired
-              ? 'Your BingeCat connection is about to expire. Connect again.'
-              : <>No account yet? Create a free one at <a href={cfg?.baseUrl} target="_blank" rel="noopener noreferrer" className="guide-pill-link">bingecat.com</a>, or sign up inside the window that opens.</>}
-          </p>
-          <button type="button" style={button} onClick={connect}>Connect BingeCat</button>
-        </>
+        <div style={{ textAlign: 'center' }}>
+          {expired && <p style={{ ...small, margin: '0 0 0.6rem' }}>Your BingeCat connection is about to expire. Connect again.</p>}
+          <button type="button" style={button} onClick={connect}>Connect / Create BingeCat</button>
+        </div>
       )}
 
       {status !== 'idle' && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
           <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />
           <span style={small}>{status === 'waiting' ? 'Waiting for BingeCat… finish signing in and approve access in the BingeCat window.' : 'Connecting…'}</span>
           {status === 'waiting' && <button type="button" style={ghost} onClick={cancel}>Cancel</button>}
@@ -160,14 +147,12 @@ export function BingecatCard() {
       {connected && status === 'idle' && (
         <>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent)', fontWeight: 600, fontSize: '0.85rem' }}>
-              <Check size={14} /> Connected{accountName ? ` as ${accountName}` : ''}
-            </span>
+            <span style={small}>{accountName ? `Account: ${accountName}` : 'BingeCat account connected'}</span>
             <button type="button" style={ghost} onClick={() => { disconnectBingecat(); setError(''); }}><Unplug size={13} style={{ verticalAlign: '-2px' }} /> Disconnect</button>
           </div>
 
           <p style={{ ...small, margin: '0.8rem 0 0.4rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            {target === 'nuvio' ? 'BingeCat profile for each Nuvio profile' : 'BingeCat profile'}
+            {target === 'nuvio' ? 'BingeCat Profile for Each Nuvio Profile' : 'BingeCat Profile'}
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
             {rows.map((row) => {
@@ -186,7 +171,7 @@ export function BingecatCard() {
                     onChange={(e) => pick(row.key, e.target.value)}
                     style={{ marginTop: '0.4rem', width: '100%', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.4rem 0.6rem', fontSize: '0.85rem', background: 'var(--panel)', color: 'var(--text)' }}
                   >
-                    <option value="new">Create new BingeCat profile</option>
+                    <option value="new">Create New BingeCat Profile</option>
                     {profiles.map((p: { id: number; name: string; isMain: boolean }) => (
                       <option key={p.id} value={String(p.id)}>{p.name}{p.isMain ? ' (main profile)' : ''}</option>
                     ))}

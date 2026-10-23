@@ -188,7 +188,7 @@ export function InstallingStep() {
       // Read fresh (not from the render snapshot): a Retry must see the BingeCat profiles created by the previous attempt.
       const live = useWizard.getState();
       const featureOn = isBingecatOn(wizardConfig);
-      const { hasStandard } = rolesOf({ target, nuvioProfiles: live.nuvioProfiles, stremioKids: live.stremioKids });
+      const { hasStandard, hasKids } = rolesOf({ target, nuvioProfiles: live.nuvioProfiles, stremioKids: live.stremioKids });
       const watchlyEnabled = watchly.enabled && effectiveWatchlyInstances.length > 0 && hasStandard;
 
       // BingeCat: Kids profiles always, Standard profiles when the user turned it on.
@@ -365,7 +365,7 @@ export function InstallingStep() {
             watchly: nuvioWatchly,
             bingecat: bingecatParam,
             // collections above/below the Watchly/BingeCat catalogs: only when one of them is on, otherwise the template decides
-            pinCollections: hasStandard && (watchlyEnabled || (featureOn && live.bingecat.enabled)) ? live.pinCollections : null,
+            pinCollections: hasStandard && (watchlyEnabled || (featureOn && (live.bingecat.enabled || hasKids))) ? live.pinCollections : null,
             retry: lastSummary.current ?? carriedBackups(),
             collectionsJson: templates.collections as object[],
             nuvioSettingsTemplate,
@@ -573,7 +573,7 @@ export function InstallingStep() {
               }}
             >
               <RotateCcw size={14} />
-              Retry failed profiles
+              Retry Failed Profiles
             </button>
             <button
               onClick={() => wizard.nextStep()}
@@ -583,7 +583,7 @@ export function InstallingStep() {
                 color: 'var(--text)', fontSize: '0.82rem', fontWeight: 600,
               }}
             >
-              Continue to results
+              Continue to Results
             </button>
           </div>
         </div>
@@ -599,7 +599,7 @@ export function InstallingStep() {
             borderRadius: '8px',
           }}
         >
-          <p style={{ fontSize: '0.82rem', fontWeight: 600, color: '#dc2626', marginBottom: '0.4rem' }}>Error details</p>
+          <p style={{ fontSize: '0.82rem', fontWeight: 600, color: '#dc2626', marginBottom: '0.4rem' }}>Error Details</p>
           <pre style={{
             fontSize: '0.78rem',
             color: '#b91c1c',
@@ -629,7 +629,7 @@ export function InstallingStep() {
             }}
           >
             <RotateCcw size={14} />
-            Try again
+            Try Again
           </button>
         </div>
       )}

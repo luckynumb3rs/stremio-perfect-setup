@@ -13,33 +13,23 @@ import { createNuvioAdapter, MAX_NUVIO_PROFILES } from '@core/adapters/nuvio.js'
 
 const DEFAULT_AVATAR_COLOR = '#1E88E5';
 
-/** Small on/off switch used for the Kids option. */
-function KidsSwitch({ checked, onChange, label }: { checked: boolean; onChange: (next: boolean) => void; label: string }) {
+/** Push button for the Kids option: highlighted when on, outlined when off. */
+function KidsButton({ pressed, onChange, label }: { pressed: boolean; onChange: (next: boolean) => void; label: string }) {
   return (
     <button
       type="button"
-      role="switch"
-      aria-checked={checked}
+      aria-pressed={pressed}
       aria-label={label}
-      onClick={() => onChange(!checked)}
+      onClick={() => onChange(!pressed)}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none',
-        cursor: 'pointer', color: 'var(--text)', font: 'inherit', fontSize: '0.8rem', padding: '0.15rem 0',
+        flexShrink: 0, padding: '0.2rem 0.75rem', borderRadius: '999px', cursor: 'pointer',
+        fontSize: '0.78rem', fontWeight: 700, lineHeight: 1.4, transition: 'all 0.15s',
+        border: `1px solid ${pressed ? 'var(--accent)' : 'var(--border)'}`,
+        background: pressed ? 'var(--accent)' : 'transparent',
+        color: pressed ? '#fff' : 'var(--muted)',
       }}
     >
-      <span
-        aria-hidden="true"
-        style={{
-          width: '34px', height: '18px', borderRadius: '9px', position: 'relative', flexShrink: 0,
-          background: checked ? 'var(--accent)' : 'var(--border)', transition: 'background 0.15s',
-        }}
-      >
-        <span style={{
-          position: 'absolute', top: '2px', left: checked ? '18px' : '2px', width: '14px', height: '14px',
-          borderRadius: '50%', background: '#fff', transition: 'left 0.15s',
-        }} />
-      </span>
-      <span>Kids</span>
+      Kids
     </button>
   );
 }
@@ -85,20 +75,20 @@ export function AccountStep() {
       && newEntries.every((t) => t.name.trim().length > 0)
       && totalProfiles <= MAX_NUVIO_PROFILES);
   const canAttempt = isValidEmail && isValidPassword && hasValidSelection && !loading;
-  const profileWord = (n: number) => (n === 1 ? 'profile' : 'profiles');
+  const profileWord = (n: number) => (n === 1 ? 'Profile' : 'Profiles');
   const buttonLabel = loading
     ? (
       hasLoadedNuvioProfileStep
         ? (newCount > 0 ? `Creating ${profileWord(newCount)}...` : 'Continuing...')
         : account.mode === 'create'
-        ? 'Creating account...'
+        ? 'Creating Account...'
         : isNuvio
-        ? 'Loading profiles...'
-        : 'Signing in...'
+        ? 'Loading Profiles...'
+        : 'Signing In...'
     )
     : hasLoadedNuvioProfileStep
     ? newCount > 0
-      ? `Create ${profileWord(newCount)} and continue`
+      ? `Create ${profileWord(newCount)} and Continue`
       : `Continue with ${nuvioProfiles.length} ${profileWord(nuvioProfiles.length)}`
     : 'Continue';
   const buttonLeadingIcon = loading
@@ -310,13 +300,13 @@ export function AccountStep() {
             } as CSSProperties}
           >
             {m === 'create' ? <UserPlus size={15} /> : <LogIn size={15} />}
-            {m === 'create' ? 'Create account' : 'Sign in'}
+            {m === 'create' ? 'Create Account' : 'Sign In'}
           </button>
         ))}
       </div>
 
       <label style={{ display: 'block', marginBottom: '0.75rem' }}>
-        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>Email address</span>
+        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>Email Address</span>
         <input
           type="email"
           value={account.email}
@@ -342,7 +332,10 @@ export function AccountStep() {
 
       {kidsAvailable && target === 'stremio' && (
         <div style={{ marginTop: '0.75rem' }}>
-          <KidsSwitch checked={stremioKids} onChange={setStremioKids} label="This is a Kids account" />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
+            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>Kids Account</span>
+            <KidsButton pressed={stremioKids} onChange={setStremioKids} label="This is a Kids account" />
+          </div>
           <p style={{ margin: '0.2rem 0 0', color: 'var(--muted)', fontSize: '0.78rem', lineHeight: 1.45 }}>
             A Kids account gets BingeCat with kid-safe settings instead of the standard catalogs and recommendations.
           </p>
@@ -352,7 +345,7 @@ export function AccountStep() {
       {showProfileSection && (
         <div style={{ marginTop: '0.75rem', marginBottom: '0.5rem' }}>
           <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>
-            {account.mode === 'create' ? 'Profiles' : 'Profiles to set up'}
+            {account.mode === 'create' ? 'Profiles' : 'Select Profiles'}
           </span>
           <div role="group" aria-label="Nuvio profiles" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.45rem' }}>
             {existingProfiles.map((profile) => {
@@ -360,43 +353,38 @@ export function AccountStep() {
               const name = profile.name || `Profile ${profile.profile_index}`;
               const targetIndex = nuvioProfiles.findIndex((t) => t.nuvioProfileId === profile.profile_index);
               return (
-                <div key={profile.profile_index}>
-                <button
-                  type="button"
-                  role="checkbox"
-                  aria-checked={selected}
-                  onClick={() => { toggleNuvioProfile(profile); setError(''); }}
-                  style={cardStyle(selected)}
-                >
-                  <span style={avatarStyle(profile.avatar_color_hex)} aria-hidden="true">{name.charAt(0).toUpperCase()}</span>
-                  <span style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600 }}>{name}</span>
-                    {selected && (
-                      <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--muted)', lineHeight: 1.4 }}>
-                        Addons and collections replaced, addon backup shown at the end
-                        {profile.uses_primary_addons && ' · uses the main profile\'s addons today, it gets its own'}
-                      </span>
-                    )}
-                  </span>
-                  <span
-                    aria-hidden="true"
+                // One row: the select area (circle, avatar, name) and, when selected, the Kids button on the same line.
+                // They are siblings, so there is no button inside a button.
+                <div key={profile.profile_index} style={{ ...cardStyle(selected), cursor: 'default' }}>
+                  <button
+                    type="button"
+                    role="checkbox"
+                    aria-checked={selected}
+                    onClick={() => { toggleNuvioProfile(profile); setError(''); }}
                     style={{
-                      width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0,
-                      border: `2px solid ${selected ? 'var(--accent)' : 'var(--border)'}`,
-                      background: selected ? 'var(--accent)' : 'transparent',
-                      boxShadow: selected ? 'inset 0 0 0 3px var(--panel-2)' : 'none',
+                      display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0, padding: 0,
+                      background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', color: 'var(--text)', font: 'inherit',
                     }}
-                  />
-                </button>
-                {kidsAvailable && selected && (
-                  <div style={{ padding: '0.25rem 0.75rem 0' }}>
-                    <KidsSwitch
-                      checked={nuvioProfiles[targetIndex]?.kids ?? false}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0,
+                        border: `2px solid ${selected ? 'var(--accent)' : 'var(--border)'}`,
+                        background: selected ? 'var(--accent)' : 'transparent',
+                        boxShadow: selected ? 'inset 0 0 0 3px var(--panel-2)' : 'none',
+                      }}
+                    />
+                    <span style={avatarStyle(profile.avatar_color_hex)} aria-hidden="true">{name.charAt(0).toUpperCase()}</span>
+                    <span style={{ flex: 1, minWidth: 0, fontSize: '0.875rem', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</span>
+                  </button>
+                  {kidsAvailable && selected && (
+                    <KidsButton
+                      pressed={nuvioProfiles[targetIndex]?.kids ?? false}
                       onChange={(kids) => { setNuvioProfileKids(targetIndex, kids); setError(''); }}
                       label={`${name} is a Kids profile`}
                     />
-                  </div>
-                )}
+                  )}
                 </div>
               );
             })}
@@ -414,8 +402,8 @@ export function AccountStep() {
                 />
                 <span style={{ fontSize: '0.75rem', color: 'var(--muted)', flexShrink: 0 }}>new</span>
                 {kidsAvailable && (
-                  <KidsSwitch
-                    checked={entry.kids}
+                  <KidsButton
+                    pressed={entry.kids}
                     onChange={(kids) => { setNuvioProfileKids(index, kids); setError(''); }}
                     label={`${entry.name || 'New profile'} is a Kids profile`}
                   />
@@ -439,7 +427,7 @@ export function AccountStep() {
                 onClick={addNewProfile}
                 style={{ ...cardStyle(false), borderStyle: 'dashed', color: 'var(--muted)', justifyContent: 'center', fontSize: '0.875rem', fontWeight: 600 }}
               >
-                <Plus size={15} /> Add new profile
+                <Plus size={15} /> Add New Profile
               </button>
             )}
           </div>

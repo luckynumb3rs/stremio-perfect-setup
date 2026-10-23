@@ -46,7 +46,7 @@ export interface BingecatMappingEntry {
 }
 
 export interface BingecatState {
-  /** Standard profiles use BingeCat (Kids profiles always do) */
+  /** The user's BingeCat switch. Kids profiles force BingeCat on whatever this says (see bingecatRows). */
   enabled: boolean;
   /** OAuth token, memory only. Never logged, never in URLs or analytics. */
   token: string | null;
@@ -66,18 +66,25 @@ export function rolesOf(s: { target: Target | null; nuvioProfiles: NuvioProfileT
   return { hasStandard: s.nuvioProfiles.length === 0 || s.nuvioProfiles.some((p) => !p.kids), hasKids };
 }
 
-/** The profiles that need a BingeCat profile: Kids always, Standard only when BingeCat is on for them. Stremio is key 0. */
+/**
+ * The profiles that need a BingeCat profile. BingeCat is one switch for the whole run: on, every selected profile gets it.
+ * It cannot be switched off while a Kids profile exists (Kids always need it), so then it applies to every profile too.
+ * Stremio is key 0.
+ */
 export function bingecatRows(
   s: { target: Target | null; nuvioProfiles: NuvioProfileTarget[]; stremioKids: boolean; bingecat: Pick<BingecatState, 'enabled'> },
   featureOn: boolean,
 ): { key: number; name: string; kids: boolean }[] {
   if (!featureOn) return [];
+  const on = s.bingecat.enabled || rolesOf(s).hasKids;
   if (s.target === 'stremio') {
-    return s.stremioKids || s.bingecat.enabled ? [{ key: 0, name: s.stremioKids ? 'Kids' : 'Stremio', kids: s.stremioKids }] : [];
+    return on ? [{ key: 0, name: s.stremioKids ? 'Kids' : 'Stremio', kids: s.stremioKids }] : [];
   }
-  return s.nuvioProfiles
-    .filter((p): p is NuvioProfileTarget & { nuvioProfileId: number } => typeof p.nuvioProfileId === 'number' && (p.kids || s.bingecat.enabled))
-    .map((p) => ({ key: p.nuvioProfileId, name: p.name, kids: p.kids }));
+  return on
+    ? s.nuvioProfiles
+      .filter((p): p is NuvioProfileTarget & { nuvioProfileId: number } => typeof p.nuvioProfileId === 'number')
+      .map((p) => ({ key: p.nuvioProfileId, name: p.name, kids: p.kids }))
+    : [];
 }
 
 /** Nuvio order: existing profiles by index, then new ones. */
@@ -200,8 +207,6 @@ interface WizardState {
   /** Stremio: set up a Kids account (BingeCat is then mandatory) */
   stremioKids: boolean;
   bingecat: BingecatState;
-  /** True until the user turns Watchly and BingeCat on together: turning one on then turns the other off */
-  recoAutoExclusive: boolean;
   /** Nuvio: show the collections above the Watchly/BingeCat catalogs (pinToTop on every collection). Only used when one of them is on. */
   pinCollections: boolean;
   setPinCollections: (pin: boolean) => void;
@@ -237,7 +242,6 @@ interface WizardState {
   disconnectBingecat: () => void;
   /** A BingeCat profile was just created for this row: remember it so a retry reuses it */
   bingecatProfileCreated: (key: number, profile: { id: number; name: string; kids: boolean }) => void;
-  toggleRecommendation: (which: 'watchly' | 'bingecat') => void;
   /** Select or deselect an existing Nuvio profile */
   toggleNuvioProfile: (p: NuvioProfileOption) => void;
   setCredentials: (c: Partial<Credentials>) => void;
@@ -272,7 +276,6 @@ export const useWizard = create<WizardState>((set) => ({
   nuvioProfiles: [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false }],
   stremioKids: false,
   bingecat: EMPTY_BINGECAT,
-  recoAutoExclusive: true,
   pinCollections: true, // the collections template pins every collection to the top
   credentials: {
     debridServices: [],
@@ -323,7 +326,6 @@ export const useWizard = create<WizardState>((set) => ({
     // BingeCat/Kids choices belong to one target
     stremioKids: false,
     bingecat: EMPTY_BINGECAT,
-    recoAutoExclusive: true,
     nuvioProfiles: s.nuvioProfiles.map((p) => ({ ...p, kids: false })),
   })),
   setStremioAccount: (a) => set(s => ({ stremioAccount: { ...s.stremioAccount, ...a } })),
@@ -344,16 +346,6 @@ export const useWizard = create<WizardState>((set) => ({
     },
   })),
   setPinCollections: (pinCollections) => set({ pinCollections }),
-  toggleRecommendation: (which) => set(s => {
-    const turningOn = which === 'watchly' ? !s.watchly.enabled : !s.bingecat.enabled;
-    const otherOn = which === 'watchly' ? s.bingecat.enabled : s.watchly.enabled;
-    const swap = turningOn && otherOn && s.recoAutoExclusive;
-    // After the first swap, both may be on (the user asked for it).
-    const patch: Partial<WizardState> = swap ? { recoAutoExclusive: false } : {};
-    const watchlyOn = which === 'watchly' ? turningOn : (swap ? false : s.watchly.enabled);
-    const bingecatOn = which === 'bingecat' ? turningOn : (swap ? false : s.bingecat.enabled);
-    return { ...patch, watchly: { ...s.watchly, enabled: watchlyOn }, bingecat: { ...s.bingecat, enabled: bingecatOn } };
-  }),
   toggleNuvioProfile: (p) => set(s => {
     const selected = s.nuvioProfiles.some(t => t.nuvioProfileId === p.profile_index);
     const next = selected

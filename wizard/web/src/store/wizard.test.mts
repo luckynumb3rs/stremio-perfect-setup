@@ -123,22 +123,17 @@ console.log('\n# Nuvio profile selection');
   eq('toggle off removes only that profile', get().map(p => p.nuvioProfileId), [1, 'new']);
 }
 
-console.log('\n# Recommendations: Watchly / BingeCat exclusion');
+console.log('\n# Recommendations: Watchly and BingeCat are independent');
 {
   const st = () => useWizard.getState();
-  const flags = () => [st().watchly.enabled, st().bingecat.enabled];
   st().setTarget('nuvio');
-  eq('start: Watchly on, BingeCat off', flags(), [true, false]);
-  st().toggleRecommendation('bingecat');
-  eq('turning BingeCat on turns Watchly off (once)', flags(), [false, true]);
-  st().toggleRecommendation('watchly');
-  eq('turning Watchly on afterwards keeps both (the user asked for it)', flags(), [true, true]);
-  st().toggleRecommendation('bingecat');
-  eq('either can be turned off on its own', flags(), [true, false]);
-  st().toggleRecommendation('bingecat');
-  eq('and back on without touching the other', flags(), [true, true]);
+  eq('start: Watchly on, BingeCat off', [st().watchly.enabled, st().bingecat.enabled], [true, false]);
+  st().setBingecat({ enabled: true });
+  eq('turning BingeCat on leaves Watchly on (both can be installed)', [st().watchly.enabled, st().bingecat.enabled], [true, true]);
+  st().setWatchly({ enabled: false });
+  eq('either can be turned off on its own', [st().watchly.enabled, st().bingecat.enabled], [false, true]);
   st().setTarget('nuvio');
-  eq('a new target resets the choice', [...flags(), st().recoAutoExclusive], [true, false, true]);
+  eq('a new target resets the choice', [st().watchly.enabled, st().bingecat.enabled], [true, false]);
 }
 
 console.log('\n# rolesOf and bingecatRows');
@@ -151,10 +146,9 @@ console.log('\n# rolesOf and bingecatRows');
   eq('an empty list counts as Standard (sign-in still loading)', rolesOf({ ...base, nuvioProfiles: [] }), { hasStandard: true, hasKids: false });
   eq('Stremio follows the Kids toggle', [rolesOf({ ...base, target: 'stremio', nuvioProfiles: [], stremioKids: true }).hasStandard, rolesOf({ ...base, target: 'stremio', nuvioProfiles: [] }).hasStandard], [false, true]);
   eq('feature off: no BingeCat rows at all', bingecatRows({ ...base, nuvioProfiles: [ben, tara] }, false), []);
-  eq('Kids rows always, Standard rows only when BingeCat is on', [
-    bingecatRows({ ...base, nuvioProfiles: [ben, tara] }, true).map((r) => r.key),
-    bingecatRows({ ...base, bingecat: { enabled: true }, nuvioProfiles: [ben, tara] }, true).map((r) => r.key),
-  ], [[2], [1, 2]]);
+  eq('BingeCat off and no Kids profile: no rows', bingecatRows({ ...base, nuvioProfiles: [ben] }, true), []);
+  eq('BingeCat on: every selected profile is a row', bingecatRows({ ...base, bingecat: { enabled: true }, nuvioProfiles: [ben, tara] }, true).map((r) => r.key), [1, 2]);
+  eq('a Kids profile forces BingeCat on for every profile of the run, even with the switch off', bingecatRows({ ...base, nuvioProfiles: [ben, tara] }, true).map((r) => [r.key, r.kids]), [[1, false], [2, true]]);
   eq('new (unsaved) profiles are never rows', bingecatRows({ ...base, bingecat: { enabled: true }, nuvioProfiles: [{ nuvioProfileId: 'new', name: 'x', kids: false }] }, true), []);
   eq('Stremio row is key 0, named Kids for a Kids account', bingecatRows({ ...base, target: 'stremio', stremioKids: true, nuvioProfiles: [] }, true), [{ key: 0, name: 'Kids', kids: true }]);
   eq('Stremio Standard without BingeCat has no row', bingecatRows({ ...base, target: 'stremio', nuvioProfiles: [] }, true), []);
