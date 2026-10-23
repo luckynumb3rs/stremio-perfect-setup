@@ -8,7 +8,7 @@ import {
   AIO_SECTION_START_STEP,
   KEY_SCREEN_START_STEP,
   getCatalogStep,
-  getWatchlyStep,
+  getRecommendationsStep,
   getInstallStep,
 } from '../lib/keyScreens';
 
@@ -36,17 +36,22 @@ export function Sidebar({ onClose }: Props) {
 
   const n = aioSections.length;
   const CATALOGS_STEP = getCatalogStep(n);
-  const WATCHLY_STEP = getWatchlyStep(n);
+  const RECOMMENDATIONS_STEP = getRecommendationsStep(n);
   const INSTALL_STEP = getInstallStep(n);
 
+  // The Install step is never re-entered from the sidebar: mounting it re-runs the whole install on the account.
+  function canGoTo(s: number) {
+    return s <= maxReachedStep && s !== step && s !== INSTALL_STEP;
+  }
+
   function goTo(s: number) {
-    if (s <= maxReachedStep && s !== step) { setStep(s); onClose(); }
+    if (canGoTo(s)) { setStep(s); onClose(); }
   }
 
   function cls(s: number) {
     const isDone = s < step;
     const isCurr = s === step;
-    const isClickable = s <= maxReachedStep && s !== step;
+    const isClickable = canGoTo(s);
     return [
       'nav-step',
       isCurr ? 'is-current' : '',
@@ -132,14 +137,14 @@ export function Sidebar({ onClose }: Props) {
           })
         )}
 
-        {/* Catalogs + Watchly + Install */}
+        {/* Catalogs + Recommendations + Install */}
         <div style={{ marginTop: '0.6rem' }}>
           <button className={cls(CATALOGS_STEP)} onClick={() => goTo(CATALOGS_STEP)}>
             <StepIcon s={CATALOGS_STEP} />
             <span>🔎 Catalogs</span>
           </button>
-          <button className={cls(WATCHLY_STEP)} onClick={() => goTo(WATCHLY_STEP)}>
-            <StepIcon s={WATCHLY_STEP} />
+          <button className={cls(RECOMMENDATIONS_STEP)} onClick={() => goTo(RECOMMENDATIONS_STEP)}>
+            <StepIcon s={RECOMMENDATIONS_STEP} />
             <span>🤖 Recommendations</span>
           </button>
           <button className={cls(INSTALL_STEP)} onClick={() => goTo(INSTALL_STEP)}>

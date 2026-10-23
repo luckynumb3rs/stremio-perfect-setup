@@ -5,27 +5,24 @@ import { NextButton } from '../components/NextButton';
 import { useWizard } from '../store/wizard';
 import { resolveLogoUrl } from '../lib/services';
 
-export function WatchlyStep() {
+export function RecommendationsStep() {
   const {
-    target, stremioAccount, nuvioAccount, watchly,
+    target, stremioAccount, nuvioAccount, nuvioProfiles, watchly,
     setWatchly, nextStep,
   } = useWizard();
 
   const isNuvio = target === 'nuvio';
   const appName = isNuvio ? 'Nuvio' : 'Stremio';
   const account = isNuvio ? nuvioAccount : stremioAccount;
-  const nuvioProfileId = nuvioAccount.profileId;
-  const hasValidNuvioProfile = typeof nuvioProfileId === 'number'
-    && Number.isInteger(nuvioProfileId)
-    && nuvioProfileId >= 1
-    && nuvioProfileId <= 6;
+  const hasValidNuvioProfiles = nuvioProfiles.length > 0
+    && nuvioProfiles.every((t) => typeof t.nuvioProfileId === 'number'
+      && Number.isInteger(t.nuvioProfileId) && t.nuvioProfileId >= 1 && t.nuvioProfileId <= 6);
   const connected = isNuvio
-    ? !!nuvioAccount.authToken && hasValidNuvioProfile
+    ? !!nuvioAccount.authToken && hasValidNuvioProfiles
     : !!stremioAccount.authKey;
-  const selectedProfile = isNuvio
-    ? nuvioAccount.profiles?.find((profile) => profile.profile_index === nuvioAccount.profileId)
-    : null;
-  const profileName = selectedProfile?.name?.trim() || nuvioAccount.profileName?.trim() || '';
+  const profileNames = isNuvio
+    ? nuvioProfiles.map((t) => t.name.trim()).filter(Boolean).join(', ')
+    : '';
   const canContinue = !watchly.enabled || connected;
   const logoUrl = resolveLogoUrl(`services/${isNuvio ? 'nuvio.png' : 'stremio.svg'}`);
 
@@ -43,10 +40,11 @@ export function WatchlyStep() {
     <WizardShell onSubmit={canContinue ? nextStep : undefined}>
       <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.4rem' }}>
-          🤖 Watchly
+          🤖 Recommendations
         </h2>
         <p className="page-description">
           Watchly is a full-blown recommendations addon that provides Netflix-like suggestions and dynamic catalogs based on your watch history. It's optional and free to skip.
+          {isNuvio && ' It is set up separately for each profile you selected.'}
         </p>
       </div>
 
@@ -111,7 +109,7 @@ export function WatchlyStep() {
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent)', fontWeight: 600, flexWrap: 'wrap' }}>
                     <Check size={13} />
                     {account.email}
-                    {isNuvio && profileName ? ` · ${profileName}` : ''}
+                    {profileNames ? ` · ${profileNames}` : ''}
                   </span>
                 ) : (
                   `The ${appName} account is not connected. Go back to the Account step and sign in again.`

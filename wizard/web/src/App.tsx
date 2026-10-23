@@ -8,14 +8,14 @@ import { AioSectionStep } from './steps/AioSectionStep';
 import { CatalogStep } from './steps/CatalogStep';
 import { InstallingStep } from './steps/InstallingStep';
 import { DoneStep } from './steps/DoneStep';
-import { WatchlyStep } from './steps/WatchlyStep';
+import { RecommendationsStep } from './steps/RecommendationsStep';
 import { normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
 import {
   ACTIVE_KEY_SCREENS,
   AIO_SECTION_START_STEP,
   KEY_SCREEN_START_STEP,
   getCatalogStep,
-  getWatchlyStep,
+  getRecommendationsStep,
   getInstallStep,
 } from './lib/keyScreens';
 import { WizardShell } from './components/WizardShell';
@@ -116,7 +116,7 @@ function StepRouter() {
   const n = aioSections.length;
   const KEY_SCREEN_END_STEP = KEY_SCREEN_START_STEP + ACTIVE_KEY_SCREENS.length;
   const CATALOGS_STEP = getCatalogStep(n);
-  const WATCHLY_STEP = getWatchlyStep(n);
+  const RECOMMENDATIONS_STEP = getRecommendationsStep(n);
   const INSTALL_STEP = getInstallStep(n);
 
   if (step > 0 && target && configError) {
@@ -151,7 +151,7 @@ function StepRouter() {
   }
 
   if (step === CATALOGS_STEP) return <CatalogStep />;
-  if (step === WATCHLY_STEP) return <WatchlyStep />;
+  if (step === RECOMMENDATIONS_STEP) return <RecommendationsStep />;
   if (step === INSTALL_STEP) return <InstallingStep />;
   return <DoneStep />;
 }

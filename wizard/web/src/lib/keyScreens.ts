@@ -55,12 +55,12 @@ export function getCatalogStep(sectionCount: number) {
   return AIO_SECTION_START_STEP + sectionCount;
 }
 
-export function getWatchlyStep(sectionCount: number) {
+export function getRecommendationsStep(sectionCount: number) {
   return getCatalogStep(sectionCount) + 1;
 }
 
 export function getInstallStep(sectionCount: number) {
-  return getWatchlyStep(sectionCount) + 1;
+  return getRecommendationsStep(sectionCount) + 1;
 }
 
 export function getDoneStep(sectionCount: number) {
