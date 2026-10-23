@@ -74,6 +74,8 @@ current `templates/AIOStreams.json`.
 - `addon_count`: number of addon kinds installed by the wizard (AIOMetadata, AIOStreams, Watchly); a Nuvio run
   with several profiles still counts Watchly once
 - `profile_count`: number of profiles configured in the run (`1` on Stremio; on Nuvio only the profiles that finished)
+- `bingecat`: `true` or `false`, whether BingeCat was installed for at least one profile (always `false` while the BingeCat feature is off)
+- `kids_count`: number of finished Kids profiles (Stremio: `0` or `1`)
 - `target`: `stremio` or `nuvio`
 - `services_debrid`: comma-separated selected debrid service names, for example `TorBox,Real-Debrid`
 - `services_keys`: comma-separated own-key ids from `tmdb,tvdb,gemini,rpdb`
@@ -236,6 +238,24 @@ are hidden.
 
 Note: as of the Watchly update this notification has been replaced by the interactive Trakt card in
 the Done page. It is preserved here as a style reference.
+
+## BingeCat and Kids (feature flag)
+
+BingeCat support (OAuth connect, Kids profiles, profile mapping) ships **switched off**. The
+`bingecat` block in `wizard/config.json` holds `enabled` (default `false`), `baseUrl`, the public OAuth
+`clientId` and the two settings templates (`templates/BingeCat.json`, `templates/BingeCat-Kids.json`).
+While `enabled` is not exactly `true` nothing BingeCat-related is visible and the wizard behaves as
+before. For local testing run `VITE_BINGECAT=1 npm run dev` instead of editing the config (never set
+this variable in CI or a production build).
+
+- Standard profiles opt in with the *Install BingeCat* toggle on the Recommendations step (it is
+  mutually exclusive with Watchly unless the user turns both on). Kids profiles always get BingeCat and
+  never get Watchly, AIOMetadata or collections; the Catalogs step is skipped when there are only Kids profiles.
+- Settings are applied through the BingeCat public API with the user's OAuth token (authorization code +
+  PKCE in a popup, redirect back to the wizard page, token kept in memory only). The wizard maps each
+  Nuvio profile to an existing BingeCat profile or creates a new one and never deletes anything.
+- The OAuth redirect URIs registered for the client are the wizard page URLs
+  (`https://numb3rs.stream/wizard/`, `http://127.0.0.1:8000/wizard/`, `http://localhost:5173/`).
 
 ## Per-Target Templates
 
