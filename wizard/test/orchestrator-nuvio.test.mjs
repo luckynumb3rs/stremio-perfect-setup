@@ -288,5 +288,113 @@ console.log('\n# a shared-config failure writes nothing');
   eq('Watchly was not touched', svc.posts.watchly.length, 0);
 }
 
+
+/** Fake BingeCat adapter: records calls; `failApply` makes applyTemplate throw for those profile ids. */
+function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {} } = {}) {
+  const calls = [];
+  let nextId = 200;
+  const adapter = {
+    async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); return { id: nextId++, name }; },
+    async applyTemplate(_t, id, template, { historySource, isMain }) {
+      calls.push(`apply:${id}:${template.kind}:${historySource}:${isMain ? 'main' : 'sub'}`);
+      if (failApply.has(id)) throw new Error(`apply ${id} boom`);
+      return { appliedSections: [] };
+    },
+    async getManifests(_t, id, { surface, aiSearch }) {
+      calls.push(`manifests:${id}:${surface}:${aiSearch ? 'search' : 'plain'}`);
+      return { url: `https://bc.example/${id}/${surface}/manifest.json`, ...(aiSearch ? { searchUrl: `https://bc.example/${id}/${surface}/search/manifest.json` } : {}) };
+    },
+  };
+  return { adapter, calls, token: 'bc-token', mainProfileId, templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } }, targets };
+}
+const names = (nuvio, idx) => nuvio.addons.get(idx).map((a) => a.name);
+
+console.log('\n# BingeCat: mixed Standard + Kids run');
+{
+  const nuvio = makeNuvio();
+  const bc = makeBingecat({ targets: { 1: 100, 2: 'new' } });
+  const events = [];
+  const svc = mockServices();
+  let result;
+  try {
+    result = await runNuvioSetup(baseArgs(nuvio, {
+      profiles: [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: true }, { nuvioProfileId: 3, name: 'Bini', kids: false }],
+      bingecat: bc,
+      onStep: (name, d) => events.push(`${name}:${d?.profileIndex ?? ''}`),
+    }));
+  } finally { svc.restore(); }
+  eq('all done', result.profiles.map((p) => p.status), ['done', 'done', 'done']);
+  eq('Standard with Watchly + BingeCat: Watchly, BingeCat, AIOMetadata, AIOStreams', names(nuvio, 1), ['Watchly', 'BingeCat', 'AIOMetadata', 'AIOStreams']);
+  eq('Kids: BingeCat, BingeCat AI Search directly below, AIOStreams', names(nuvio, 2), ['BingeCat', 'BingeCat AI Search', 'AIOStreams']);
+  eq('Standard without a BingeCat target: no BingeCat addon', names(nuvio, 3), ['Watchly', 'AIOMetadata', 'AIOStreams']);
+  eq('sort_order is sequential', nuvio.addons.get(2).map((a) => a.sort_order), [0, 1, 2]);
+  eq('Kids get no Watchly config', svc.posts.watchly.map((b) => b.nuvio_profile_id), [1, 3]);
+  ok('Kids get no collections, Standard do', !nuvio.calls.includes('pushCollections:2') && nuvio.calls.includes('pushCollections:1') && nuvio.calls.includes('pushCollections:3'));
+  ok('settings are pushed to the Kids profile too', nuvio.calls.some((c) => c.startsWith('pushSettings-') && c.endsWith(':2')));
+  eq('one shared AIOStreams, one shared AIOMetadata', [svc.posts.aiostreams, svc.posts.aiometadata], [1, 1]);
+  eq('BingeCat calls: existing main for Ben, new Kids sub-profile for Benci', bc.calls, [
+    'apply:100:std:nuvio:main', 'manifests:100:nuvio:plain',
+    'create:Benci:kids', 'apply:200:kids:nuvio:sub', 'manifests:200:nuvio:search',
+  ]);
+  ok('the created profile is announced before its settings are written', events.indexOf('bingecat_profile:2') > -1 && events.indexOf('bingecat_profile:2') < events.indexOf('bingecat:2'));
+  eq('result carries kids + bingecat', [result.profiles[1].kids, result.profiles[1].bingecat?.profileId, result.profiles[1].bingecat?.created, result.profiles[0].bingecat?.created], [true, 200, true, false]);
+}
+
+console.log('\n# BingeCat: Kids-only run creates no AIOMetadata');
+{
+  const nuvio = makeNuvio();
+  const bc = makeBingecat({ targets: { 1: 'new', 3: 'new' } });
+  const svc = mockServices();
+  let result;
+  try {
+    result = await runNuvioSetup(baseArgs(nuvio, { profiles: [{ nuvioProfileId: 1, name: 'Ben', kids: true }, { nuvioProfileId: 3, name: 'Bini', kids: true }], bingecat: bc, watchly: { defaults: {}, tmdbApiKey: 'x' } }));
+  } finally { svc.restore(); }
+  eq('both done', result.profiles.map((p) => p.status), ['done', 'done']);
+  eq('AIOMetadata config is not created, AIOStreams is', [svc.posts.aiometadata, svc.posts.aiostreams], [0, 1]);
+  eq('no Watchly even though it was requested', svc.posts.watchly.length, 0);
+  eq('addons per Kids profile', [names(nuvio, 1), names(nuvio, 3)], [['BingeCat', 'BingeCat AI Search', 'AIOStreams'], ['BingeCat', 'BingeCat AI Search', 'AIOStreams']]);
+  ok('no collections pushed', !nuvio.calls.some((c) => c.startsWith('pushCollections')));
+  eq('shared addons have no AIOMetadata', Object.keys(result.addons), ['aiostreams']);
+}
+
+console.log('\n# BingeCat: a failure stays with its profile and Retry reuses the created BingeCat profile');
+{
+  const nuvio = makeNuvio();
+  const bc = makeBingecat({ failApply: new Set([200]), targets: { 1: 100, 2: 'new' } });
+  const events = [];
+  let svc = mockServices();
+  const targets = [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: true }];
+  let first;
+  try { first = await runNuvioSetup(baseArgs(nuvio, { profiles: targets, bingecat: bc, onStep: (n, d) => { if (n === 'bingecat_profile') events.push(d); } })); } finally { svc.restore(); }
+  eq('[done, failed]', first.profiles.map((p) => p.status), ['done', 'failed']);
+  ok('the failed profile\'s Nuvio side is untouched', writes(nuvio, 2) === 0 && !nuvio.calls.includes('updateProfile:2'));
+  eq('the created BingeCat profile id was still reported', events.map((e) => [e.key, e.profileId]), [[2, 200]]);
+
+  // the store records the created id as the new target; the retry must not create again
+  const bc2 = makeBingecat({ targets: { 1: 100, 2: 200 } });
+  svc = mockServices();
+  let second;
+  try { second = await runNuvioSetup(baseArgs(nuvio, { profiles: targets, bingecat: bc2, retry: first })); } finally { svc.restore(); }
+  eq('after retry both done', second.profiles.map((p) => p.status), ['done', 'done']);
+  ok('no second BingeCat profile is created and profile 1 is not applied again', !bc2.calls.some((c) => c.startsWith('create:')) && !bc2.calls.some((c) => c.startsWith('apply:100')));
+  eq('the existing id is reused for the Kids profile', bc2.calls.filter((c) => c.startsWith('apply:')), ['apply:200:kids:nuvio:sub']);
+}
+
+console.log('\n# BingeCat: validation fails before any call');
+{
+  const cases = [
+    ['Kids profile without BingeCat', { profiles: [{ nuvioProfileId: 1, name: 'A', kids: true }] }],
+    ['BingeCat without a token', { profiles: [{ nuvioProfileId: 1, name: 'A', kids: false }], bingecat: { ...makeBingecat({ targets: { 1: 100 } }), token: '' } }],
+    ['Kids profile without a BingeCat target', { profiles: [{ nuvioProfileId: 1, name: 'A', kids: true }], bingecat: makeBingecat({ targets: {} }) }],
+  ];
+  for (const [label, extra] of cases) {
+    const nuvio = makeNuvio();
+    const svc = mockServices();
+    let threw = false;
+    try { await runNuvioSetup(baseArgs(nuvio, extra)); } catch { threw = true; } finally { svc.restore(); }
+    ok(`${label}: throws without touching anything`, threw && nuvio.calls.length === 0 && svc.posts.aiostreams === 0);
+  }
+}
+
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);
 process.exit(failed === 0 ? 0 : 1);

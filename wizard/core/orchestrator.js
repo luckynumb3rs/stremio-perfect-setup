@@ -179,14 +179,41 @@ async function createWatchlySummary(instances, watchlyBody, warnings) {
 async function createAddonBundle({ instances, aiostreamsParams, aiometadataParams, watchlyBody, password, target, proxyBase }) {
   const warnings = [];
   const aiostreams = await createAioStreamsSummary(instances, aiostreamsParams, password, proxyBase, warnings);
-  const aiometadata = await createAiometadataSummary(instances, aiometadataParams, password, target, warnings);
+  // Kids-only runs have no AIOMetadata (BingeCat provides the catalogs): aiometadataParams is null then.
+  const aiometadata = aiometadataParams
+    ? await createAiometadataSummary(instances, aiometadataParams, password, target, warnings)
+    : null;
 
   let watchly = null;
   if (watchlyBody) {
     watchly = await createWatchlySummary(instances, watchlyBody, warnings);
   }
 
-  return { addons: { aiostreams, aiometadata, ...(watchly ? { watchly } : {}) }, warnings };
+  return { addons: { aiostreams, ...(aiometadata ? { aiometadata } : {}), ...(watchly ? { watchly } : {}) }, warnings };
+}
+
+/**
+ * Applies the BingeCat template to one profile and returns its addon URLs. Used per Nuvio profile and for Stremio.
+ * A new BingeCat profile is announced (step 'bingecat_profile') BEFORE its settings are written, so a later failure
+ * still reports the id and a retry reuses it instead of creating another one. Nothing is ever deleted on BingeCat.
+ * @param {object} bc { adapter, token, mainProfileId, templates: { standard, kids }, targets: { [key]: profileId | 'new' } }
+ */
+async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
+  let profileId = bc.targets[key];
+  let created = false;
+  if (profileId === 'new') {
+    const profile = await bc.adapter.createProfile(bc.token, { name, kids });
+    profileId = profile.id;
+    created = true;
+    step('bingecat_profile', { key, profileId, name: profile.name });
+  }
+  const template = kids ? bc.templates.kids : bc.templates.standard;
+  await bc.adapter.applyTemplate(bc.token, profileId, template, { historySource: surface, isMain: profileId === bc.mainProfileId });
+  // The template decides whether the AI-search addon is installed (search enabled = Kids template today).
+  const aiSearch = surface === 'nuvio' && template.search?.search_enabled === true;
+  const { url, searchUrl } = await bc.adapter.getManifests(bc.token, profileId, { surface, aiSearch });
+  step('bingecat', { profileName: name, created });
+  return { profileId, created, url, searchUrl: searchUrl ?? null };
 }
 
 async function applyNuvioProfileSettings(nuvio, token, profileIndex, settingsTemplate, aiometadataParams) {
@@ -224,7 +251,9 @@ async function applyNuvioProfileSettings(nuvio, token, profileIndex, settingsTem
  * @param {object} [p.watchlyBody]     Merged Watchly TokenRequest body (null/undefined = skip Watchly)
  * @param {function} p.onStep          (name, data) => void; progress callback
  */
-export async function runStremioSetup({ instances, account, aiostreamsParams, aiometadataParams, watchlyBody, proxyBase, onStep }) {
+export async function runStremioSetup({ instances, account, aiostreamsParams, aiometadataParams, watchlyBody, proxyBase, onStep, kids = false, bingecat = null }) {
+  if (kids && !bingecat) throw new Error('A Kids setup needs BingeCat. Connect BingeCat first.');
+  if (bingecat && !bingecat.token) throw new Error('BingeCat is not connected. Connect BingeCat again.');
   const summary = { account: null, addons: {}, previousAddons: [], warnings: [], addonPasswordSource: 'account' };
   const step = (name, data) => { onStep?.(name, data); return data; };
 
@@ -256,8 +285,8 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
     addonBundle = await createAddonBundle({
       instances,
       aiostreamsParams,
-      aiometadataParams,
-      watchlyBody: watchlyBody ?? null,
+      aiometadataParams: kids ? null : aiometadataParams, // Kids: BingeCat provides the catalogs
+      watchlyBody: kids ? null : (watchlyBody ?? null),
       password: account.password,
       target: 'stremio',
       proxyBase,
@@ -270,8 +299,8 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
     addonBundle = await createAddonBundle({
       instances,
       aiostreamsParams,
-      aiometadataParams,
-      watchlyBody: watchlyBody ?? null,
+      aiometadataParams: kids ? null : aiometadataParams,
+      watchlyBody: kids ? null : (watchlyBody ?? null),
       password: randomPassword(),
       target: 'stremio',
       proxyBase,
@@ -279,23 +308,29 @@ export async function runStremioSetup({ instances, account, aiostreamsParams, ai
   }
 
   summary.addons.aiostreams = addonBundle.addons.aiostreams;
-  summary.addons.aiometadata = addonBundle.addons.aiometadata;
+  if (addonBundle.addons.aiometadata) {
+    summary.addons.aiometadata = addonBundle.addons.aiometadata;
+  }
   if (addonBundle.addons.watchly) {
     summary.addons.watchly = addonBundle.addons.watchly;
   }
   summary.warnings.push(...addonBundle.warnings);
   step('aiostreams', summary.addons.aiostreams);
-  step('aiometadata', summary.addons.aiometadata);
+  if (summary.addons.aiometadata) step('aiometadata', summary.addons.aiometadata);
   if (summary.addons.watchly) {
     step('watchly', summary.addons.watchly);
+  }
+  if (bingecat) {
+    summary.addons.bingecat = await applyBingecatProfile(bingecat, { key: 0, name: kids ? 'Kids' : 'Stremio', kids, surface: 'stremio' }, step);
   }
 
   // 4) ATOMIC install: push only after all configs succeeded
   const cinemetaDescriptor = await resolveCinemetaDescriptor(existing);
   const collection = buildAddonCollection(existing, {
-    aiometadata: summary.addons.aiometadata.manifestUrl,
+    aiometadata: summary.addons.aiometadata?.manifestUrl,
     aiostreams: summary.addons.aiostreams.manifestUrl,
     watchly: summary.addons.watchly?.manifestUrl,
+    bingecat: summary.addons.bingecat?.url,
   }, {
     cinemetaDescriptor,
     cleanCinemeta: { removeSearch: true, removeCatalogs: true, removeMetadata: true },
@@ -324,9 +359,13 @@ async function resolveNuvioAuth(nuvio, account) {
   return { auth: await nuvio.signup(account.email, account.password), accountSummary: { ...base, password: account.password, created: true } };
 }
 
-function validateNuvioTargets(profiles) {
+function validateNuvioTargets(profiles, bingecat) {
   if (!Array.isArray(profiles) || profiles.length === 0) {
     throw new Error('Nuvio: select at least one profile to set up.');
+  }
+  if (bingecat && !bingecat.token) throw new Error('BingeCat is not connected. Connect BingeCat again.');
+  if (profiles.some((p) => p?.kids) && !bingecat) {
+    throw new Error('A Kids profile needs BingeCat. Connect BingeCat first.');
   }
   const seen = new Set();
   for (const p of profiles) {
@@ -336,6 +375,9 @@ function validateNuvioTargets(profiles) {
     }
     if (seen.has(id)) throw new Error(`Nuvio: profile ${id} is selected twice.`);
     seen.add(id);
+    if (p.kids && bingecat.targets?.[id] === undefined) {
+      throw new Error(`Nuvio: Kids profile "${p.name}" has no BingeCat profile selected.`);
+    }
   }
 }
 
@@ -356,8 +398,8 @@ function validateNuvioTargets(profiles) {
  * @param {function} p.onStep
  * @returns {Promise<{account, addons, addonPasswordSource, warnings, profiles}>} throws only for bad input, auth, profile listing or shared config creation
  */
-export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
-  validateNuvioTargets(targets);
+export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, bingecat = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
+  validateNuvioTargets(targets, bingecat);
   const step = (name, data) => { onStep?.(name, data); return data; };
 
   // 1) Nuvio account
@@ -379,7 +421,7 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
     if (prior?.status === 'done') { results.set(idx, prior); continue; }
 
     const entry = nuvioProfiles.find((e) => e.profile_index === idx);
-    const result = { profileIndex: idx, name: entry?.name || target.name, status: 'failed', error: null, backupTaken: false, previousAddons: [], watchly: null, settings: null };
+    const result = { profileIndex: idx, name: entry?.name || target.name, kids: !!target.kids, status: 'failed', error: null, backupTaken: false, previousAddons: [], watchly: null, bingecat: null, settings: null };
     results.set(idx, result);
     if (!entry) { result.error = `Profile ${idx} was not found on this Nuvio account.`; continue; }
 
@@ -393,7 +435,7 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
       }
       result.backupTaken = true;
       step('backup', { profileIndex: idx, profileName: entry.name, count: result.previousAddons.length, addons: result.previousAddons });
-      pending.push({ result, entry });
+      pending.push({ result, entry, target });
     } catch (err) {
       result.error = toError(err).message;
     }
@@ -409,8 +451,10 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
 
   if (pending.length > 0) {
     // 3) Shared configs, one shared password (own account password first, generated one if rejected).
-    if (!summary.addons.aiostreams || !summary.addons.aiometadata) {
-      const bundleArgs = { instances, aiostreamsParams, aiometadataParams, watchlyBody: null, target: 'nuvio', proxyBase };
+    // AIOMetadata is only for Standard profiles: a Kids-only run does not create it (BingeCat provides the catalogs).
+    const needsMeta = pending.some((p) => !p.target.kids);
+    if (!summary.addons.aiostreams || (needsMeta && !summary.addons.aiometadata)) {
+      const bundleArgs = { instances, aiostreamsParams, aiometadataParams: needsMeta ? aiometadataParams : null, watchlyBody: null, target: 'nuvio', proxyBase };
       let addonBundle;
       try {
         addonBundle = await createAddonBundle({ ...bundleArgs, password: account.password });
@@ -421,28 +465,32 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
         summary.addonPasswordSource = 'generated';
         addonBundle = await createAddonBundle({ ...bundleArgs, password: randomPassword() });
       }
-      summary.addons = { aiostreams: addonBundle.addons.aiostreams, aiometadata: addonBundle.addons.aiometadata };
+      summary.addons = { aiostreams: addonBundle.addons.aiostreams, ...(addonBundle.addons.aiometadata ? { aiometadata: addonBundle.addons.aiometadata } : {}) };
       summary.warnings.push(...addonBundle.warnings);
       step('aiostreams', summary.addons.aiostreams);
-      step('aiometadata', summary.addons.aiometadata);
+      if (summary.addons.aiometadata) step('aiometadata', summary.addons.aiometadata);
     }
 
     // Filter collections to the user's enabled categories once; p_collections_json is a real JSON value,
     // not a JSON-encoded string (verified Task 2). pushCollections signature: (token, profileId, collections)
-    const filteredCollections = filterCollections(collectionsJson, aiometadataParams.baseTemplate.config.catalogs, {
-      enabledCategories: aiometadataParams.enabledCategories,
-      enabledDiscoverFolderIds: aiometadataParams.enabledDiscoverFolderIds,
-      categoryOrder: aiometadataParams.categoryOrder,
-      discoverFolderOrder: aiometadataParams.discoverFolderOrder,
-      categoryExceptions: aiometadataParams.categoryExceptions || [],
-    });
+    const filteredCollections = needsMeta
+      ? filterCollections(collectionsJson, aiometadataParams.baseTemplate.config.catalogs, {
+        enabledCategories: aiometadataParams.enabledCategories,
+        enabledDiscoverFolderIds: aiometadataParams.enabledDiscoverFolderIds,
+        categoryOrder: aiometadataParams.categoryOrder,
+        discoverFolderOrder: aiometadataParams.discoverFolderOrder,
+        categoryExceptions: aiometadataParams.categoryExceptions || [],
+      })
+      : [];
 
     // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
-    // Nuvio addon order: Watchly first (watch history), then AIOMetadata (catalog source), then AIOStreams (stream source).
-    for (const { result, entry } of pending) {
+    // Addon order. Standard: Watchly (watch history), BingeCat, AIOMetadata (catalog source), AIOStreams (stream source).
+    // Kids: BingeCat, BingeCat AI Search (only when the template enables search), AIOStreams; no Watchly, AIOMetadata or collections.
+    for (const { result, entry, target } of pending) {
       const idx = result.profileIndex;
+      const kids = !!target.kids;
       try {
-        if (watchly) {
+        if (watchly && !kids) {
           const body = buildWatchlyBody(watchly.defaults, {
             target: 'nuvio',
             nuvioAccessToken: auth.token,
@@ -458,21 +506,30 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
           step('watchly', { profileIndex: idx, profileName: entry.name, ...result.watchly });
         }
 
+        // BingeCat before any Nuvio write: a BingeCat failure leaves the Nuvio profile untouched.
+        if (bingecat && bingecat.targets?.[idx] !== undefined) {
+          result.bingecat = await applyBingecatProfile(bingecat, { key: idx, name: entry.name, kids, surface: 'nuvio' }, (name, data) => step(name, { ...data, profileIndex: idx }));
+        }
+
         if (entry.uses_primary_addons) {
           await nuvio.updateProfile(auth.token, idx, { uses_primary_addons: false });
         }
         step('profile', { profileIndex: idx, profileName: entry.name });
 
         const addons = [
-          ...(result.watchly ? [{ url: result.watchly.manifestUrl, name: 'Watchly', sort_order: 0 }] : []),
-          { url: summary.addons.aiometadata.manifestUrl, name: 'AIOMetadata', sort_order: 1 },
-          { url: summary.addons.aiostreams.manifestUrl, name: 'AIOStreams', sort_order: 2 },
-        ];
+          ...(result.watchly ? [{ url: result.watchly.manifestUrl, name: 'Watchly' }] : []),
+          ...(result.bingecat ? [{ url: result.bingecat.url, name: 'BingeCat' }] : []),
+          ...(result.bingecat?.searchUrl ? [{ url: result.bingecat.searchUrl, name: 'BingeCat AI Search' }] : []),
+          ...(kids ? [] : [{ url: summary.addons.aiometadata.manifestUrl, name: 'AIOMetadata' }]),
+          { url: summary.addons.aiostreams.manifestUrl, name: 'AIOStreams' },
+        ].map((addon, i) => ({ ...addon, sort_order: i }));
         await nuvio.replaceAddons(auth.token, idx, addons);
         step('addons', { count: addons.length, profileIndex: idx, profileName: entry.name });
 
-        await nuvio.pushCollections(auth.token, idx, filteredCollections);
-        step('collections', { groupCount: filteredCollections.length, profileIndex: idx, profileName: entry.name });
+        if (!kids) {
+          await nuvio.pushCollections(auth.token, idx, filteredCollections);
+          step('collections', { groupCount: filteredCollections.length, profileIndex: idx, profileName: entry.name });
+        }
 
         result.settings = await applyNuvioProfileSettings(nuvio, auth.token, idx, nuvioSettingsTemplate, aiometadataParams);
         step('settings', { ...result.settings, profileIndex: idx, profileName: entry.name });
