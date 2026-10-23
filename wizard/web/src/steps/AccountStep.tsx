@@ -57,7 +57,7 @@ export function AccountStep() {
   } as const;
   const {
     target, stremioAccount, nuvioAccount, nuvioProfiles, stremioKids, wizardConfig,
-    setStremioAccount, setNuvioAccount, setNuvioProfiles, setNuvioProfileKids, setStremioKids, toggleNuvioProfile, setInstallResult, nextStep,
+    setStremioAccount, setNuvioAccount, setNuvioProfiles, setNuvioProfileKids, setStremioKids, toggleNuvioProfile, setInstallResult, setBingecat, nextStep,
   } = useWizard();
   const kidsAvailable = isBingecatOn(wizardConfig);
   const [loading, setLoading] = useState(false);
@@ -128,7 +128,11 @@ export function AccountStep() {
       profiles: [],
     });
     // Install results (and their backups) of an earlier run belong to the old account.
-    if (next.email !== undefined || next.mode !== undefined) setInstallResult({ profiles: [] });
+    if (next.email !== undefined || next.mode !== undefined) {
+      setInstallResult({ profiles: [] });
+      // BingeCat mapping entries are per Nuvio profile of this account
+      if (useWizard.getState().bingecat.mapping.length > 0) setBingecat({ mapping: [] });
+    }
     // Picks of existing profiles belong to the old account. A mode switch restarts the list
     // (create starts with one new profile, sign-in with none until the account's profiles load).
     setNuvioProfiles(next.mode

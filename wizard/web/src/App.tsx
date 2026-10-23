@@ -91,7 +91,7 @@ function StepRouter() {
         ? Promise.all([
           fetchJson(resolveRepoUrl(bingecatConfig.templates.standard), 'BingeCat template'),
           fetchJson(resolveRepoUrl(bingecatConfig.templates.kids), 'BingeCat Kids template'),
-        ]).then(([standard, kids]) => ({ standard, kids }))
+        ]).then(([standard, kids]) => ({ standard, kids })).catch(() => undefined) // a missing BingeCat template must not break the whole wizard
         : Promise.resolve(undefined),
     ] as const;
 

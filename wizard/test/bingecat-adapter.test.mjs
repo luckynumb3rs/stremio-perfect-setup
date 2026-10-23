@@ -85,7 +85,7 @@ console.log('\n# OAuth');
   const partial = await fails([[200, { access_token: TOKEN, expires_in: 10, scope: 'settings:read profiles:read' }]], ({ bc }) => bc.exchangeCode({ code: 'c', verifier: 'v', redirectUri: 'r' }));
   ok('missing scope throws insufficient_scope', partial.error?.code === 'insufficient_scope');
   const bad = await fails([[400, { error: 'invalid_grant' }]], ({ bc }) => bc.exchangeCode({ code: 'c', verifier: 'v', redirectUri: 'r' }));
-  ok('rejected code throws oauth_failed without the code in the message', bad.error?.code === 'oauth_failed' && !bad.error.message.includes('c"'));
+  ok('rejected code throws oauth_failed without the code or verifier in the message', bad.error?.code === 'oauth_failed' && !bad.error.message.includes('invalid_grant') && !/\bv\b/.test(bad.error.message));
 }
 
 console.log('\n# requests: headers, methods, write spacing');
@@ -142,6 +142,12 @@ console.log('\n# errors never leak the token and map to friendly messages');
   ok('network error on create is not retried and is reported', net.error?.code === 'network' && net.calls.length === 1);
   const empty = await fails([[201, {}]], ({ bc }) => bc.createProfile(TOKEN, { name: 'Ben' }));
   ok('create without an id in the response is an error', empty.error?.code === 'bad_response');
+}
+
+console.log('\n# listProfiles');
+{
+  const r = await run([[200, { profiles: [{ id: 1, name: 'a', is_main: true, extra: 'x' }, { id: 2, name: 'b' }] }]], ({ bc }) => bc.listProfiles(TOKEN));
+  eq('one GET, trimmed fields', [r.calls.length, r.result], [1, [{ id: 1, name: 'a', isMain: true }, { id: 2, name: 'b', isMain: false }]]);
 }
 
 console.log('\n# createProfile, getManifests, loadProfiles');

@@ -171,6 +171,12 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
       return { token: json.access_token, expiresAt: Math.floor(now() / 1000) + (Number(json.expires_in) || 3600) };
     },
 
+    /** Just the profile list (one request). */
+    async listProfiles(token) {
+      const list = (await request('GET', '/api/v1/profiles', token))?.profiles ?? [];
+      return list.map((p) => ({ id: p.id, name: p.name, isMain: !!p.is_main }));
+    },
+
     /** The account's profiles, merged with their settings (age cap hint) and the Nuvio profiles they are linked to. */
     async loadProfiles(token, { withNuvio = false } = {}) {
       const list = (await request('GET', '/api/v1/profiles', token))?.profiles ?? [];
@@ -185,6 +191,7 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
           // ponytail: the API exposes no profile type yet; an age cap in recommendations/content filters is the best hint of a kids profile
           ageLimited: settings.recommendations?.max_age_certification_us != null || settings.content_filters?.max_age_certification_us != null,
           type: p.profile_type, // undefined until the dev exposes it
+          // n.id is BingeCat's stored Nuvio profile id; on a linked account it reads 1..3 for Nuvio profiles 1..3 (checked 2026-10-23), i.e. the Nuvio profile_index
           boundNuvio: nuvio.filter((n) => (n.bound_profile_ids ?? []).includes(p.id)).map((n) => ({ id: n.id, name: n.name })),
           settings,
         });

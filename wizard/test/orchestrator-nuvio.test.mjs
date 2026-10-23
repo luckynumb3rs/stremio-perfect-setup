@@ -290,11 +290,12 @@ console.log('\n# a shared-config failure writes nothing');
 
 
 /** Fake BingeCat adapter: records calls; `failApply` makes applyTemplate throw for those profile ids. */
-function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {} } = {}) {
+function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {}, createError = null, listed = [], known = null, createdKeys = null } = {}) {
   const calls = [];
   let nextId = 200;
   const adapter = {
-    async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); return { id: nextId++, name }; },
+    async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); if (createError) throw createError; return { id: nextId++, name }; },
+    async listProfiles() { calls.push('list'); return listed; },
     async applyTemplate(_t, id, template, { historySource, isMain }) {
       calls.push(`apply:${id}:${template.kind}:${historySource}:${isMain ? 'main' : 'sub'}`);
       if (failApply.has(id)) throw new Error(`apply ${id} boom`);
@@ -305,8 +306,9 @@ function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {}
       return { url: `https://bc.example/${id}/${surface}/manifest.json`, ...(aiSearch ? { searchUrl: `https://bc.example/${id}/${surface}/search/manifest.json` } : {}) };
     },
   };
-  return { adapter, calls, token: 'bc-token', mainProfileId, templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } }, targets };
+  return { adapter, calls, token: 'bc-token', mainProfileId, templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } }, targets, ...(known ? { known } : {}), ...(createdKeys ? { createdKeys } : {}) };
 }
+const unclear = (code, status = 0) => Object.assign(new Error('unclear create'), { code, status });
 const names = (nuvio, idx) => nuvio.addons.get(idx).map((a) => a.name);
 
 console.log('\n# BingeCat: mixed Standard + Kids run');
@@ -394,6 +396,58 @@ console.log('\n# BingeCat: validation fails before any call');
     try { await runNuvioSetup(baseArgs(nuvio, extra)); } catch { threw = true; } finally { svc.restore(); }
     ok(`${label}: throws without touching anything`, threw && nuvio.calls.length === 0 && svc.posts.aiostreams === 0);
   }
+}
+
+
+console.log('\n# BingeCat: a lost create response does not lead to a duplicate profile');
+{
+  const kidsRow = [{ nuvioProfileId: 2, name: 'Benci', kids: true }];
+  // the server created "Benci" (id 555) although the answer was lost: the profile is adopted, not created again
+  let nuvio = makeNuvio();
+  let bc = makeBingecat({ targets: { 2: 'new' }, createError: unclear('network'), listed: [{ id: 100, name: 'main' }, { id: 555, name: 'benci' }], known: new Set([100]) });
+  const events = [];
+  let svc = mockServices();
+  let result;
+  try { result = await runNuvioSetup(baseArgs(nuvio, { profiles: kidsRow, bingecat: bc, onStep: (n, d) => { if (n === 'bingecat_profile') events.push(d); } })); } finally { svc.restore(); }
+  eq('adopted: done, applied to the existing id, one create attempt only', [result.profiles[0].status, bc.calls.filter((c) => c.startsWith('create:')).length, bc.calls.includes('apply:555:kids:nuvio:sub')], ['done', 1, true]);
+  eq('the adopted id is reported (so the store remembers it) with the Kids flag and counts as created', [events.map((e) => [e.key, e.profileId, e.kids]), result.profiles[0].bingecat.created], [[[2, 555, true]], true]);
+
+  // a 5xx and a 201 without id are unclear too; an unrelated same-name profile that existed before is NOT adopted
+  for (const [label, err, listed, adopt] of [
+    ['5xx', unclear('http_error', 502), [{ id: 556, name: 'Benci' }], true],
+    ['201 without an id', unclear('bad_response', 201), [{ id: 557, name: 'Benci' }], true],
+    ['same-name profile that was already there', unclear('network'), [{ id: 100, name: 'Benci' }], false],
+    ['two candidates', unclear('network'), [{ id: 601, name: 'Benci' }, { id: 602, name: 'Benci' }], false],
+  ]) {
+    nuvio = makeNuvio();
+    bc = makeBingecat({ targets: { 2: 'new' }, createError: err, listed, known: new Set([100]) });
+    svc = mockServices();
+    try { result = await runNuvioSetup(baseArgs(nuvio, { profiles: kidsRow, bingecat: bc })); } finally { svc.restore(); }
+    eq(`${label}: ${adopt ? 'adopted' : 'profile fails, nothing is applied or written'}`, [result.profiles[0].status, writes(nuvio, 2) > 0], adopt ? ['done', true] : ['failed', false]);
+  }
+
+  // a clear rejection (limit reached) is not an unclear failure: no listing, the error is reported
+  nuvio = makeNuvio();
+  bc = makeBingecat({ targets: { 2: 'new' }, createError: unclear('profile_limit_reached', 409), listed: [{ id: 555, name: 'Benci' }], known: new Set([100]) });
+  svc = mockServices();
+  try { result = await runNuvioSetup(baseArgs(nuvio, { profiles: kidsRow, bingecat: bc })); } finally { svc.restore(); }
+  ok('409 limit reached: failed without looking for a profile to adopt', result.profiles[0].status === 'failed' && !bc.calls.includes('list'));
+}
+
+console.log('\n# BingeCat: created flag survives a retry; Kids can never be applied to the main profile');
+{
+  const nuvio = makeNuvio();
+  const bc = makeBingecat({ targets: { 2: 200 }, createdKeys: new Set([2]) });
+  const svc = mockServices();
+  let result;
+  try { result = await runNuvioSetup(baseArgs(nuvio, { profiles: [{ nuvioProfileId: 2, name: 'Benci', kids: true }], bingecat: bc })); } finally { svc.restore(); }
+  eq('a profile created by an earlier attempt is still reported as created (Done tells the user to set the Kids type)', [result.profiles[0].bingecat.created, bc.calls.some((c) => c.startsWith('create:'))], [true, false]);
+
+  const nuvio2 = makeNuvio();
+  const bad = makeBingecat({ targets: { 2: 100 }, mainProfileId: 100 });
+  const svc2 = mockServices();
+  try { result = await runNuvioSetup(baseArgs(nuvio2, { profiles: [{ nuvioProfileId: 2, name: 'Benci', kids: true }], bingecat: bad })); } finally { svc2.restore(); }
+  ok('Kids on the main profile fails before any settings are written', result.profiles[0].status === 'failed' && /main profile can never/.test(result.profiles[0].error ?? '') && !bad.calls.some((c) => c.startsWith('apply:')) && writes(nuvio2, 2) === 0);
 }
 
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);

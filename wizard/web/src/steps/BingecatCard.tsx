@@ -7,7 +7,7 @@ import { bingecatRedirectUri, listenForBingecatCallback } from '../lib/bingecatA
 // @ts-ignore
 import { createBingecatAdapter } from '@core/adapters/bingecat.js';
 // @ts-ignore
-import { autoMatch, validateMapping } from '@core/bingecat-mapper.js';
+import { mergeMapping, validateMapping } from '@core/bingecat-mapper.js';
 
 /** Seconds of token life that must remain to start an install (the install itself takes a while). */
 const MIN_TOKEN_LIFE = 600;
@@ -34,7 +34,8 @@ export function useBingecatStatus() {
     ? validateMapping(rows, mapping, profiles, { kidsCreateSupported: false })
     : { errors: [], warnings: [] };
   const mapped = rows.every((r) => mapping.some((m) => m.key === r.key));
-  return { rows, connected, expired, errors: check.errors, warnings: check.warnings, ready: rows.length === 0 || (connected && mapped && check.errors.length === 0) };
+  const templatesLoaded = !!s.templates?.bingecat;
+  return { rows, connected, expired, templatesLoaded, errors: check.errors, warnings: check.warnings, ready: rows.length === 0 || (templatesLoaded && connected && mapped && check.errors.length === 0) };
 }
 
 export function BingecatCard() {
@@ -42,7 +43,7 @@ export function BingecatCard() {
   const cfg = useWizard((s) => s.wizardConfig?.bingecat);
   const { token, accountName, profiles, mapping } = useWizard((s) => s.bingecat);
   const { setBingecat, disconnectBingecat } = useWizard.getState();
-  const { rows, connected, expired, errors, warnings } = useBingecatStatus();
+  const { rows, connected, expired, templatesLoaded, errors, warnings } = useBingecatStatus();
   const adapter = useMemo(() => (cfg ? createBingecatAdapter({ baseUrl: cfg.baseUrl, clientId: cfg.clientId }) : null), [cfg]);
   const pending = useRef<{ state: string; verifier: string; redirectUri: string } | null>(null);
   const [status, setStatus] = useState<'idle' | 'waiting' | 'loading'>('idle');
@@ -77,13 +78,15 @@ export function BingecatCard() {
     }
   }), [adapter]);
 
-  // (Re)build the automatic mapping whenever the profiles that need BingeCat change. Manual picks and created ids survive.
-  const rowKeys = rows.map((r) => r.key).join(',');
+  // Keep the mapping in step with the profiles that need BingeCat: new or changed rows are matched automatically,
+  // rows that did not change keep their entry (manual picks, created ids).
+  const sig = (list: { key: number; name: string; kids: boolean }[]) => list.map((r) => `${r.key}|${r.name}|${r.kids}`).join(';');
+  const rowSig = sig(rows);
   useEffect(() => {
     if (!connected) return;
-    if (mapping.map((m) => m.key).join(',') !== rowKeys) setBingecat({ mapping: autoMatch(rows, profiles) });
+    if (sig(mapping) !== rowSig) setBingecat({ mapping: mergeMapping(rows, mapping, profiles) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected, rowKeys, profiles]);
+  }, [connected, rowSig, profiles]);
 
   async function connect() {
     if (!adapter) return;
@@ -113,7 +116,7 @@ export function BingecatCard() {
   }
 
   function pick(key: number, value: string) {
-    setBingecat({ mapping: mapping.map((m) => (m.key === key ? { key, target: value === 'new' ? 'new' : Number(value), reason: 'manual' } : m)) });
+    setBingecat({ mapping: mapping.map((m) => (m.key === key ? { ...m, target: value === 'new' ? 'new' : Number(value), reason: 'manual' } : m)) });
   }
 
   const box: CSSProperties = { borderRadius: '12px', border: `2px solid ${connected ? 'var(--accent)' : 'var(--border)'}`, background: connected ? 'var(--panel-2)' : 'var(--panel)', padding: '1rem' };
@@ -152,6 +155,7 @@ export function BingecatCard() {
       )}
 
       {error && <p style={{ margin: '0.6rem 0 0', fontSize: '0.8rem', color: '#dc2626' }}>{error}</p>}
+      {!templatesLoaded && <p style={{ margin: '0.6rem 0 0', fontSize: '0.8rem', color: '#dc2626' }}>The BingeCat templates could not be loaded. Reload the wizard and try again.</p>}
 
       {connected && status === 'idle' && (
         <>

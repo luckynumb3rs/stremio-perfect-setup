@@ -38,6 +38,9 @@ export interface BingecatProfile {
 export interface BingecatMappingEntry {
   /** Nuvio profile id (Stremio: 0) */
   key: number;
+  /** The row this entry was made for: a changed name or Kids flag means it must be matched again */
+  name: string;
+  kids: boolean;
   target: number | 'new';
   reason: 'linked' | 'name' | 'fresh-main' | 'new' | 'created' | 'manual';
 }
@@ -230,7 +233,7 @@ interface WizardState {
   setBingecat: (b: Partial<BingecatState>) => void;
   disconnectBingecat: () => void;
   /** A BingeCat profile was just created for this row: remember it so a retry reuses it */
-  bingecatProfileCreated: (key: number, profile: { id: number; name: string }) => void;
+  bingecatProfileCreated: (key: number, profile: { id: number; name: string; kids: boolean }) => void;
   toggleRecommendation: (which: 'watchly' | 'bingecat') => void;
   /** Select or deselect an existing Nuvio profile */
   toggleNuvioProfile: (p: NuvioProfileOption) => void;
@@ -309,7 +312,7 @@ export const useWizard = create<WizardState>((set) => ({
   }),
   prevStep: () => set(s => ({ step: Math.max(0, s.step - 1) })),
 
-  setTarget: (target) => set(s => ({
+  setTarget: (target) => set(s => guardRoles(s, {
     target,
     // Watchly is enabled by default for both supported targets.
     watchly: { ...s.watchly, enabled: target === 'stremio' || target === 'nuvio' },
@@ -331,8 +334,9 @@ export const useWizard = create<WizardState>((set) => ({
   bingecatProfileCreated: (key, profile) => set(s => ({
     bingecat: {
       ...s.bingecat,
-      profiles: [...s.bingecat.profiles, { id: profile.id, name: profile.name, isMain: false, ageLimited: false, boundNuvio: [], settings: {} }],
-      mapping: s.bingecat.mapping.map((m) => (m.key === key ? { key, target: profile.id, reason: 'created' } : m)),
+      // a created Kids profile has the kids age caps, so a Standard row is not allowed to take it over later
+      profiles: [...s.bingecat.profiles, { id: profile.id, name: profile.name, isMain: false, ageLimited: profile.kids, boundNuvio: [], settings: {} }],
+      mapping: s.bingecat.mapping.map((m) => (m.key === key ? { ...m, target: profile.id, reason: 'created' } : m)),
     },
   })),
   toggleRecommendation: (which) => set(s => {

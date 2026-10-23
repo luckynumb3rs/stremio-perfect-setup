@@ -13,8 +13,12 @@ export function normalizeName(name) {
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '');
+    .replace(/[^\p{L}\p{N}]+/gu, '');
 }
+
+// Names that are all symbols/emoji normalize to '': fall back to the trimmed lowercase text, and never match an empty name.
+const nameKey = (name) => normalizeName(name) || String(name ?? '').trim().toLowerCase();
+const sameName = (a, b) => nameKey(a) !== '' && nameKey(a) === nameKey(b);
 
 // A Kids row may use any sub-profile (never the main one); when the type is known it must be a kids profile.
 const compatibleForKids = (p) => !p.isMain && (p.type ? p.type === 'kids' : true);
@@ -28,31 +32,51 @@ const compatible = (row, p) => (row.kids ? compatibleForKids(p) : compatibleForS
  *   2. same normalized name, compatible type
  *   3. fresh account (only a main profile): the first Standard row gets the main profile
  *   4. otherwise a new profile
- * @returns {{ key, target: number | 'new', reason: 'linked'|'name'|'fresh-main'|'new' }[]} one entry per row, same order
+ * @param {{ used?: Set<number>, freshMain?: boolean }} [opts] used = BingeCat profiles already taken by kept entries; freshMain=false skips rule 3
+ * @returns {{ key, name, kids, target: number | 'new', reason: 'linked'|'name'|'fresh-main'|'new' }[]} one entry per row, same order
  */
-export function autoMatch(rows, profiles) {
-  const used = new Set();
+export function autoMatch(rows, profiles, { used = new Set(), freshMain = true } = {}) {
+  used = new Set(used);
   const result = new Map();
-  const fresh = profiles.length === 1 && profiles[0].isMain;
+  const fresh = freshMain && profiles.length === 1 && profiles[0].isMain;
 
   const pass = (reason, test) => {
     for (const row of rows) {
       if (result.has(row.key)) continue;
       const hit = profiles.find((p) => !used.has(p.id) && compatible(row, p) && test(row, p));
-      if (hit) { used.add(hit.id); result.set(row.key, { key: row.key, target: hit.id, reason }); }
+      if (hit) { used.add(hit.id); result.set(row.key, { key: row.key, name: row.name, kids: row.kids, target: hit.id, reason }); }
     }
   };
 
-  pass('linked', (row, p) => (p.boundNuvio ?? []).some((b) => b.id === row.key) && normalizeName(p.name) === normalizeName(row.name));
-  pass('name', (row, p) => normalizeName(p.name) === normalizeName(row.name));
+  pass('linked', (row, p) => (p.boundNuvio ?? []).some((b) => b.id === row.key) && sameName(p.name, row.name));
+  pass('name', (row, p) => sameName(p.name, row.name));
 
   if (fresh) {
     const main = profiles[0];
     const first = rows.find((r) => !r.kids && !result.has(r.key));
-    if (first && !used.has(main.id)) { used.add(main.id); result.set(first.key, { key: first.key, target: main.id, reason: 'fresh-main' }); }
+    if (first && !used.has(main.id)) { used.add(main.id); result.set(first.key, { key: first.key, name: first.name, kids: first.kids, target: main.id, reason: 'fresh-main' }); }
   }
 
-  return rows.map((row) => result.get(row.key) ?? { key: row.key, target: 'new', reason: 'new' });
+  return rows.map((row) => result.get(row.key) ?? { key: row.key, name: row.name, kids: row.kids, target: 'new', reason: 'new' });
+}
+
+/**
+ * Updates an existing mapping when the rows change: entries whose row (key, name, kids) is unchanged are kept as they are
+ * (manual picks, created ids), only new or changed rows are matched automatically, never onto a profile a kept entry uses.
+ */
+export function mergeMapping(rows, previous, profiles) {
+  const ids = new Set(profiles.map((p) => p.id));
+  const kept = new Map();
+  for (const row of rows) {
+    const e = previous.find((m) => m.key === row.key && m.name === row.name && m.kids === row.kids);
+    if (e && (e.target === 'new' || ids.has(e.target))) kept.set(row.key, e);
+  }
+  const used = new Set([...kept.values()].map((e) => e.target).filter((t) => t !== 'new'));
+  const free = rows.filter((r) => !kept.has(r.key));
+  // fresh-main is for the first Standard row of a fresh account only: not when another Standard row already has an entry
+  const freshMain = !rows.some((r) => !r.kids && kept.has(r.key));
+  const matched = new Map(autoMatch(free, profiles, { used, freshMain }).map((e) => [e.key, e]));
+  return rows.map((row) => kept.get(row.key) ?? matched.get(row.key));
 }
 
 /**

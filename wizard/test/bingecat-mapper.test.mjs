@@ -1,4 +1,4 @@
-import { autoMatch, validateMapping, normalizeName } from '../core/bingecat-mapper.js';
+import { autoMatch, mergeMapping, validateMapping, normalizeName } from '../core/bingecat-mapper.js';
 
 let passed = 0, failed = 0;
 function ok(name, cond, detail = '') {
@@ -42,6 +42,30 @@ console.log('\n# autoMatch: known profile type');
 const typed = [main, sub(2, 'Kid', { type: 'kids' }), sub(3, 'Kid2', { type: 'normal' })];
 eq('Standard never matches a typed kids profile', m([std(1, 'Kid')], typed), ['1:new:new']);
 eq('Kids only matches typed kids profiles', m([kid(1, 'Kid2'), kid(2, 'Kid')], typed), ['1:new:new', '2:2:name']);
+
+console.log('\n# names in other scripts and emoji');
+eq('Cyrillic names keep their letters', normalizeName('Мама'), 'мама');
+eq('unrelated Cyrillic/emoji names do not match each other', m([std(1, 'Мама'), kid(2, 'Дети')], [main, sub(2, 'Папа'), sub(3, '🦄', { ageLimited: true })]), ['1:new:new', '2:new:new']);
+eq('the same Cyrillic name matches', m([std(1, 'мама')], [main, sub(2, 'Мама')]), ['1:2:name']);
+eq('identical emoji names still match (raw fallback)', m([kid(1, '🦄')], [main, sub(2, '🦄', { ageLimited: true })]), ['1:2:name']);
+eq('two different emoji names do not', m([kid(1, '🦄')], [main, sub(2, '🐱', { ageLimited: true })]), ['1:new:new']);
+eq('an empty name never matches an empty name', m([std(1, '')], [main, sub(2, '')]), ['1:new:new']);
+
+console.log('\n# mergeMapping keeps manual picks and created ids');
+{
+  const profs = [main, sub(2, 'Ben'), sub(3, 'Tara', { ageLimited: true }), sub(200, 'Mia', { ageLimited: true })];
+  const rowsA = [std(1, 'Ben'), kid(2, 'Mia')];
+  const entry = (key, name, kids, target, reason) => ({ key, name, kids, target, reason });
+  const prev = [entry(1, 'Ben', false, 'new', 'manual'), entry(2, 'Mia', true, 200, 'created')];
+  const flat = (list) => list.map((e) => `${e.key}:${e.target}:${e.reason}`);
+  eq('unchanged rows keep a manual "create new" (no silent re-match to the existing Ben) and the created id', flat(mergeMapping(rowsA, prev, profs)), ['1:new:manual', '2:200:created']);
+  eq('a new row is matched automatically, never onto a kept target', flat(mergeMapping([...rowsA, kid(3, 'Tara')], prev, profs)), ['1:new:manual', '2:200:created', '3:3:name']);
+  eq('a renamed row (e.g. another Nuvio account with the same keys) is matched again', flat(mergeMapping([std(1, 'Zoe')], prev, profs)), ['1:new:new']);
+  eq('a row whose Kids flag flipped is matched again (a Kids row may take the same-name sub-profile)', flat(mergeMapping([kid(1, 'Ben')], prev, profs)), ['1:2:name']);
+  eq('a kept target that vanished is matched again', flat(mergeMapping([kid(2, 'Mia')], [entry(2, 'Mia', true, 999, 'manual')], profs)), ['2:200:name']);
+  eq('fresh-main is skipped when another Standard row already has an entry', flat(mergeMapping([std(1, 'A'), std(2, 'B')], [entry(1, 'A', false, 'new', 'manual')], [main])), ['1:new:manual', '2:new:new']);
+  eq('without prior entries it equals autoMatch', mergeMapping([std(1, 'A')], [], [main]), autoMatch([std(1, 'A')], [main]));
+}
 
 console.log('\n# validateMapping');
 const rows = [std(1, 'Ben'), kid(2, 'Tara')];

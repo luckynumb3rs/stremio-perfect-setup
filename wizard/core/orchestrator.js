@@ -192,21 +192,43 @@ async function createAddonBundle({ instances, aiostreamsParams, aiometadataParam
   return { addons: { aiostreams, ...(aiometadata ? { aiometadata } : {}), ...(watchly ? { watchly } : {}) }, warnings };
 }
 
+/** A profile with this name that was not on the account when the user connected (and was not created earlier in this run). */
+async function findCreatedProfile(bc, name) {
+  if (!bc.known || !bc.adapter.listProfiles) return null;
+  const wanted = String(name).trim().toLowerCase();
+  const fresh = (await bc.adapter.listProfiles(bc.token)).filter((p) => !bc.known.has(p.id) && String(p.name).trim().toLowerCase() === wanted);
+  return fresh.length === 1 ? fresh[0] : null;
+}
+
 /**
  * Applies the BingeCat template to one profile and returns its addon URLs. Used per Nuvio profile and for Stremio.
  * A new BingeCat profile is announced (step 'bingecat_profile') BEFORE its settings are written, so a later failure
  * still reports the id and a retry reuses it instead of creating another one. Nothing is ever deleted on BingeCat.
- * @param {object} bc { adapter, token, mainProfileId, templates: { standard, kids }, targets: { [key]: profileId | 'new' } }
+ * @param {object} bc { adapter, token, mainProfileId, templates: { standard, kids }, targets: { [key]: profileId | 'new' },
+ *   known?: Set<number> (profile ids on the account at connect time, to recognise a profile created by a lost response),
+ *   createdKeys?: Set<number> (rows whose profile an earlier attempt created) }
  */
 async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
   let profileId = bc.targets[key];
-  let created = false;
+  // true also when an earlier attempt of this run created the profile (the store remembers that as reason 'created')
+  let created = !!bc.createdKeys?.has(key);
   if (profileId === 'new') {
-    const profile = await bc.adapter.createProfile(bc.token, { name, kids });
+    let profile;
+    try {
+      profile = await bc.adapter.createProfile(bc.token, { name, kids });
+    } catch (err) {
+      // After an unclear failure the profile may exist anyway (create is not idempotent). Adopt it instead of letting a retry create another.
+      const unclear = err?.code === 'network' || err?.code === 'bad_response' || err?.status >= 500;
+      const found = unclear ? await findCreatedProfile(bc, name) : null;
+      if (!found) throw err;
+      profile = found;
+    }
     profileId = profile.id;
     created = true;
-    step('bingecat_profile', { key, profileId, name: profile.name });
+    bc.known?.add(profileId);
+    step('bingecat_profile', { key, profileId, name: profile.name, kids });
   }
+  if (kids && profileId === bc.mainProfileId) throw new Error('The BingeCat main profile can never be a Kids profile.');
   const template = kids ? bc.templates.kids : bc.templates.standard;
   await bc.adapter.applyTemplate(bc.token, profileId, template, { historySource: surface, isMain: profileId === bc.mainProfileId });
   // The template decides whether the AI-search addon is installed (search enabled = Kids template today).

@@ -174,9 +174,25 @@ console.log('\n# Role flip guard and BingeCat state');
   st().setStremioKids(true);
   eq('Stremio Kids toggle does not touch a Nuvio run', st().maxReachedStep, 9);
 
-  st().setBingecat({ token: 't', expiresAt: 99, accountName: 'acct', enabled: true, mapping: [{ key: 1, target: 'new', reason: 'new' }, { key: 2, target: 'new', reason: 'new' }] });
-  st().bingecatProfileCreated(2, { id: 77, name: 'Tara' });
-  eq('a created BingeCat profile is stored and mapped (the other row is untouched)', [st().bingecat.profiles.map((p) => p.id), st().bingecat.mapping], [[77], [{ key: 1, target: 'new', reason: 'new' }, { key: 2, target: 77, reason: 'created' }]]);
+  st().setBingecat({ token: 't', expiresAt: 99, accountName: 'acct', enabled: true, mapping: [
+    { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
+    { key: 2, name: 'Tara', kids: true, target: 'new', reason: 'new' },
+  ] });
+  st().bingecatProfileCreated(2, { id: 77, name: 'Tara', kids: true });
+  eq('a created BingeCat profile is stored and mapped (the other row is untouched)', [st().bingecat.profiles.map((p) => p.id), st().bingecat.mapping], [[77], [
+    { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
+    { key: 2, name: 'Tara', kids: true, target: 77, reason: 'created' },
+  ]]);
+  eq('a created Kids profile counts as age-limited (a Standard row can not take it over later)', st().bingecat.profiles[0].ageLimited, true);
+  st().bingecatProfileCreated(1, { id: 78, name: 'Ben', kids: false });
+  eq('a created Standard profile is not age-limited', st().bingecat.profiles[1].ageLimited, false);
+
+  // setTarget (e.g. Welcome -> same target again) resets the Kids flags, so it must also reset the reached mark
+  st().setNuvioProfiles([{ nuvioProfileId: 1, name: 'Tara', kids: true }]);
+  useWizard.setState({ step: 0, maxReachedStep: 8 });
+  st().setTarget('nuvio');
+  eq('setTarget resets Kids flags and drops the reached mark when the numbering shifts', [st().nuvioProfiles.map((p) => p.kids), st().maxReachedStep], [[false], 0]);
+  st().setBingecat({ enabled: true, token: 't', expiresAt: 99 });
   st().disconnectBingecat();
   eq('disconnect clears the token and profiles but keeps the toggle', [st().bingecat.token, st().bingecat.profiles, st().bingecat.mapping, st().bingecat.enabled], [null, [], [], true]);
 }

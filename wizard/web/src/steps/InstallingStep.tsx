@@ -217,6 +217,9 @@ export function InstallingStep() {
           mainProfileId: main.id,
           templates: templates.bingecat,
           targets,
+          // lets the orchestrator recognise a profile created by a lost response, and remember which rows were created earlier
+          known: new Set(bc.profiles.map((p) => p.id)),
+          createdKeys: new Set(bc.mapping.filter((m) => m.reason === 'created').map((m) => m.key)),
         };
       }
 
@@ -249,8 +252,8 @@ export function InstallingStep() {
       const onStep = (name: string, data: unknown) => {
         if (name === 'bingecat_profile') {
           // Remember the new BingeCat profile right away, so a Retry reuses it instead of creating another one.
-          const d = data as { key: number; profileId: number; name: string };
-          useWizard.getState().bingecatProfileCreated(d.key, { id: d.profileId, name: d.name });
+          const d = data as { key: number; profileId: number; name: string; kids: boolean };
+          useWizard.getState().bingecatProfileCreated(d.key, { id: d.profileId, name: d.name, kids: !!d.kids });
           return;
         }
         const label = STEP_LABELS[name];
