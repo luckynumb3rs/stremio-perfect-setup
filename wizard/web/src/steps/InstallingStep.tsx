@@ -2,13 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { WizardShell } from '../components/WizardShell';
-import { useWizard } from '../store/wizard';
+import { bingecatRows, rolesOf, useWizard } from '../store/wizard';
+import { isBingecatOn } from '../lib/constants';
 import { resolveSharedKeySelection, hasConfiguredKeyArray } from '../lib/sharedKeys';
 
 // @ts-ignore
 import { runStremioSetup, runNuvioSetup } from '@core/orchestrator.js';
 // @ts-ignore
 import { buildWatchlyBody } from '@core/adapters/watchly.js';
+// @ts-ignore
+import { createBingecatAdapter } from '@core/adapters/bingecat.js';
 import { buildInstantDebridSettingsPatch } from '../lib/instantDebrid';
 
 interface LogEntry {
@@ -38,6 +41,7 @@ const STEP_LABELS: Record<string, string> = {
   aiostreams:  'AIOStreams configuration saved',
   aiometadata: 'AIOMetadata configuration saved',
   watchly:     'Watchly configuration saved',
+  bingecat:    'BingeCat profile configured',
   addons:      'Addons installed',
   collections: 'Collections installed',
   settings:    'Settings updated',
@@ -181,7 +185,40 @@ export function InstallingStep() {
 
       // Assemble Watchly body if enabled and instances are configured
       const effectiveWatchlyInstances = effectiveInstances.watchly ?? [];
-      const watchlyEnabled = watchly.enabled && effectiveWatchlyInstances.length > 0;
+      // Read fresh (not from the render snapshot): a Retry must see the BingeCat profiles created by the previous attempt.
+      const live = useWizard.getState();
+      const featureOn = isBingecatOn(wizardConfig);
+      const { hasStandard } = rolesOf({ target, nuvioProfiles: live.nuvioProfiles, stremioKids: live.stremioKids });
+      const watchlyEnabled = watchly.enabled && effectiveWatchlyInstances.length > 0 && hasStandard;
+
+      // BingeCat: Kids profiles always, Standard profiles when the user turned it on.
+      const bcRows = bingecatRows(live, featureOn);
+      let bingecatParam: Record<string, unknown> | null = null;
+      if (bcRows.length > 0) {
+        const bc = live.bingecat;
+        const config = wizardConfig.bingecat;
+        const main = bc.profiles.find((p) => p.isMain);
+        if (!config || !templates.bingecat) {
+          throw new Error('The BingeCat templates did not load. Reload the wizard and try again.');
+        }
+        if (!bc.token || !bc.expiresAt || bc.expiresAt - Math.floor(Date.now() / 1000) < 300) {
+          throw new Error('The BingeCat connection expired. Go back to the Recommendations step and connect BingeCat again.');
+        }
+        if (!main) throw new Error('Could not find your BingeCat main profile. Disconnect and connect BingeCat again.');
+        const targets: Record<number, number | 'new'> = {};
+        for (const row of bcRows) {
+          const entry = bc.mapping.find((m) => m.key === row.key);
+          if (!entry) throw new Error(`Choose a BingeCat profile for ${row.name} on the Recommendations step.`);
+          targets[row.key] = entry.target;
+        }
+        bingecatParam = {
+          adapter: createBingecatAdapter({ baseUrl: config.baseUrl, clientId: config.clientId }),
+          token: bc.token,
+          mainProfileId: main.id,
+          templates: templates.bingecat,
+          targets,
+        };
+      }
 
       let watchlyBody: Record<string, unknown> | null = null;
       // Nuvio: the orchestrator builds one Watchly body per profile from these.
@@ -210,6 +247,12 @@ export function InstallingStep() {
       }
 
       const onStep = (name: string, data: unknown) => {
+        if (name === 'bingecat_profile') {
+          // Remember the new BingeCat profile right away, so a Retry reuses it instead of creating another one.
+          const d = data as { key: number; profileId: number; name: string };
+          useWizard.getState().bingecatProfileCreated(d.key, { id: d.profileId, name: d.name });
+          return;
+        }
         const label = STEP_LABELS[name];
         if (!label) return;
 
@@ -256,6 +299,9 @@ export function InstallingStep() {
         } else if (name === 'collections') {
           const d = data as { groupCount?: number; profileName?: string };
           detail = `${d?.groupCount ?? 0} collection group${(d?.groupCount ?? 0) !== 1 ? 's' : ''} configured${d?.profileName ? ` for ${d.profileName}` : ''}.`;
+        } else if (name === 'bingecat') {
+          const d = data as { profileName?: string; created?: boolean };
+          detail = `${d?.created ? 'Created and set up' : 'Updated'}${d?.profileName ? ` for ${d.profileName}` : ''}.`;
         } else if (name === 'profile_failed') {
           const d = data as { profileName?: string; error?: string };
           detail = `${d?.profileName ?? 'A profile'}: ${d?.error ?? 'unknown error'}`;
@@ -273,6 +319,7 @@ export function InstallingStep() {
 
       type SetupResult = {
         addons: {
+          bingecat?: { profileId: number; created: boolean; url: string; searchUrl: string | null };
           aiostreams?: { manifestUrl?: string; uuid?: string; password?: string };
           aiometadata?: {
             manifestUrl?: string; uuid?: string; password?: string;
@@ -285,6 +332,8 @@ export function InstallingStep() {
         /** Nuvio only */
         profiles?: Array<{
           profileIndex: number; name: string; status: 'done' | 'failed'; error: string | null; backupTaken: boolean;
+          kids: boolean;
+          bingecat: { profileId: number; created: boolean; url: string; searchUrl: string | null } | null;
           previousAddons: Array<{ name: string; manifestUrl: string }>;
           watchly: { manifestUrl?: string; token?: string } | null;
         }>;
@@ -309,11 +358,12 @@ export function InstallingStep() {
         ? {
             profiles: nuvioProfiles,
             watchly: nuvioWatchly,
+            bingecat: bingecatParam,
             retry: lastSummary.current ?? carriedBackups(),
             collectionsJson: templates.collections as object[],
             nuvioSettingsTemplate,
           }
-        : { watchlyBody };
+        : { watchlyBody, kids: live.stremioKids && featureOn, bingecat: bingecatParam };
 
       push(`Connecting to your ${target === 'stremio' ? 'Stremio' : 'Nuvio'} account…`);
 
@@ -364,9 +414,12 @@ export function InstallingStep() {
           status: p.status,
           error: p.error,
           backupTaken: p.backupTaken,
+          kids: p.kids,
+          bingecat: p.bingecat,
           previousAddons: p.previousAddons,
           watchly: p.watchly ? { manifestUrl: p.watchly.manifestUrl ?? '', token: p.watchly.token ?? '' } : null,
         })),
+        bingecat: result.addons.bingecat ?? null,
         addonPasswordSource: result.addonPasswordSource ?? 'account',
         warnings: result.warnings,
         error: null,

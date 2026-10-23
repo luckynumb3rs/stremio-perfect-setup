@@ -130,9 +130,19 @@ export interface PreviousAddonBackupEntry {
   manifestUrl: string;
 }
 
+/** What the BingeCat part of an install produced for one profile. The URLs contain a secret: never log them. */
+export interface BingecatInstallResult {
+  profileId: number;
+  created: boolean;
+  url: string;
+  searchUrl: string | null;
+}
+
 export interface NuvioProfileInstallResult {
   profileIndex: number;
   name: string;
+  kids: boolean;
+  bingecat: BingecatInstallResult | null;
   status: 'done' | 'failed';
   error: string | null;
   /** True once the profile's original addons were read; only then is previousAddons trustworthy */
@@ -154,6 +164,8 @@ export interface InstallResult {
   previousAddons: PreviousAddonBackupEntry[];
   /** Nuvio only: one entry per configured profile (Stremio keeps the top-level watchly/previousAddons) */
   profiles: NuvioProfileInstallResult[];
+  /** Stremio only (Nuvio keeps it per profile) */
+  bingecat: BingecatInstallResult | null;
   addonPasswordSource: 'account' | 'generated' | null;
   warnings: string[];
   error: string | null;
@@ -275,6 +287,7 @@ export const useWizard = create<WizardState>((set) => ({
     watchly: null,
     previousAddons: [],
     profiles: [],
+    bingecat: null,
     addonPasswordSource: null,
     warnings: [],
     error: null,

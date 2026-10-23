@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Check, Copy, Download, ExternalLink, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { NotificationCards } from '../components/NotificationCards';
+import { MarkdownText } from '../components/MarkdownText';
 import { WizardShell } from '../components/WizardShell';
 import { useWizard, type NuvioProfileInstallResult } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
@@ -53,13 +54,15 @@ export function DoneStep() {
     aioStreamsInputs,
     catalogSelection,
     instantDebrid,
+    stremioKids,
+    bingecat: bingecatState,
   } = useWizard();
   const { aiostreams, aiometadata, addonPasswordSource, previousAddons, profiles, warnings: rawWarnings, error } = installResult;
   // One entry per configured profile; Stremio is a single unnamed one built from the top-level result.
   const profileResults = useMemo<NuvioProfileInstallResult[]>(() => (
     target === 'nuvio'
       ? profiles
-      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, backupTaken: true, watchly: installResult.watchly, previousAddons }]
+      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, backupTaken: true, kids: stremioKids, bingecat: installResult.bingecat, watchly: installResult.watchly, previousAddons }]
   ), [target, profiles, installResult.watchly, previousAddons]);
   const failedProfiles = profileResults.filter((p) => p.status === 'failed');
   const warnings = [
@@ -180,6 +183,23 @@ export function DoneStep() {
     ? stremioAccount.email
     : nuvioAccount.email;
 
+  const bingecatBaseUrl = wizardConfig?.bingecat?.baseUrl ?? 'https://bingecat.com';
+  const bingecatDone = profileResults.filter((p) => p.status === 'done' && p.bingecat);
+  // Settings of the BingeCat profiles that were overwritten, as read when the user connected (a backup for the download).
+  const previousBingecat = bingecatDone
+    .filter((p) => !p.bingecat!.created)
+    .map((p) => ({ label: p.name || 'Stremio', profile: bingecatState.profiles.find((b) => b.id === p.bingecat!.profileId) }))
+    .filter((x): x is { label: string; profile: NonNullable<typeof x.profile> } => !!x.profile);
+  const kidsCreated = bingecatDone.filter((p) => p.kids && p.bingecat!.created).map((p) => p.name || 'Kids');
+  // What the BingeCat API cannot do yet (pending from the BingeCat developer): shown as a checklist for the user.
+  const bingecatChecklist = bingecatDone.length === 0 ? [] : [
+    ...(kidsCreated.length > 0
+      ? [`Set the profile type of **${kidsCreated.join(', ')}** to **Kids** on bingecat.com. The wizard created ${kidsCreated.length === 1 ? 'it' : 'them'} as normal BingeCat profiles with the kids settings.`]
+      : []),
+    'Skip BingeCat\'s onboarding instead of completing it. Completing it would overwrite the settings the wizard just applied.',
+    `Connect your ${target === 'stremio' ? 'Stremio' : 'Nuvio'} account to BingeCat on bingecat.com so it can read your watch history. Before you do, turn **off** "force to top" and set Cinemeta control to **observe** in BingeCat's addon settings, otherwise BingeCat may reorder your addons or change Cinemeta.`,
+  ];
+
   const addons = useMemo(() => (
     [
       ...profileResults.filter((p) => p.status === 'done' && p.watchly).map((p) => ({
@@ -191,6 +211,16 @@ export function DoneStep() {
         manifestUrl: p.watchly!.manifestUrl,
         configureUrl: toConfigureUrl(p.watchly!.manifestUrl),
       })),
+      ...profileResults.filter((p) => p.status === 'done' && p.bingecat).flatMap((p) => {
+        const suffix = target === 'nuvio' ? ` · ${p.name}` : '';
+        const entry = (id: string, name: string, manifestUrl: string) => ({
+          id, name: `${name}${suffix}`, uuid: '', password: '', passwordLabel: null as string | null, manifestUrl, configureUrl: bingecatBaseUrl,
+        });
+        return [
+          entry(`bingecat-${p.profileIndex}`, '🐱 BingeCat', p.bingecat!.url),
+          ...(p.bingecat!.searchUrl ? [entry(`bingecat-search-${p.profileIndex}`, '🐱 BingeCat AI Search', p.bingecat!.searchUrl)] : []),
+        ];
+      }),
       aiometadata
         ? {
             id: 'aiometadata',
@@ -214,7 +244,7 @@ export function DoneStep() {
           }
         : null,
     ].filter(Boolean)
-  ), [aiostreams, aiometadata, profileResults, isUsingAccountPassword, target, watchlyEmail]) as Array<{
+  ), [aiostreams, aiometadata, bingecatBaseUrl, profileResults, isUsingAccountPassword, target, watchlyEmail]) as Array<{
     id: string;
     name: string;
     uuid: string;
@@ -318,8 +348,10 @@ export function DoneStep() {
     const eventParams = buildWizardCompletionPayload({
       accountMode,
       // addon kinds (AIOMetadata, AIOStreams, Watchly), not per-profile Watchly copies
-      addonCount: Number(!!aiometadata) + Number(!!aiostreams) + Number(doneProfiles.some((p) => p.watchly)),
+      addonCount: Number(!!aiometadata) + Number(!!aiostreams) + Number(doneProfiles.some((p) => p.watchly)) + Number(doneProfiles.some((p) => p.bingecat)),
       profileCount: doneProfiles.length,
+      bingecat: doneProfiles.some((p) => p.bingecat),
+      kidsCount: doneProfiles.filter((p) => p.kids).length,
       target,
       credentials,
       instantDebrid,
@@ -350,7 +382,7 @@ export function DoneStep() {
         '',
         ...addons.flatMap(addon => [
           `${addon.name}`,
-          `UUID: ${addon.uuid}`,
+          ...(addon.uuid ? [`UUID: ${addon.uuid}`] : []),
           ...(addon.passwordLabel || addon.password
             ? [
                 addon.passwordLabel
@@ -360,6 +392,17 @@ export function DoneStep() {
             : []),
           `Manifest URL: ${addon.manifestUrl}`,
           `Configure URL: ${addon.configureUrl}`,
+          '',
+        ]),
+      ] : []),
+      ...(previousBingecat.length > 0 ? [
+        '----------------------------------------------',
+        '',
+        '🐱 Previous BingeCat settings (overwritten by the wizard)',
+        '',
+        ...previousBingecat.flatMap(({ label, profile }) => [
+          `Profile: ${label} -> BingeCat profile "${profile.name}"`,
+          JSON.stringify(profile.settings, null, 2),
           '',
         ]),
       ] : []),
@@ -442,6 +485,7 @@ export function DoneStep() {
                 </a>
               </div>
             </div>
+            {addon.uuid && (
             <div style={copyableValueRowStyle}>
               <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>UUID:</span>
               <span
@@ -464,6 +508,7 @@ export function DoneStep() {
                 {renderCopyStatus(`${addon.id}-uuid`)}
               </button>
             </div>
+            )}
             {(addon.passwordLabel || addon.password) && (
               <div style={copyableValueRowStyle}>
                 <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>Password:</span>
@@ -646,6 +691,17 @@ export function DoneStep() {
                 </div>
               )}
               {renderDetailsCard()}
+              {bingecatChecklist.length > 0 && (
+                <div style={{ ...credentialsCardStyle, fontFamily: 'system-ui, sans-serif' }}>
+                  <p style={{ color: 'var(--text)', fontSize: '0.95rem', fontWeight: 600, marginTop: 0, marginBottom: '0.5rem' }}>🐱 Finish on bingecat.com</p>
+                  <p style={{ ...metaTextStyle, fontSize: '0.82rem', marginBottom: '0.5rem' }}>A few BingeCat settings cannot be set by the wizard yet:</p>
+                  <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.85rem', lineHeight: 1.55, color: 'var(--text)' }}>
+                    {bingecatChecklist.map((item, i) => (
+                      <li key={i} style={{ marginBottom: '0.4rem' }}><MarkdownText text={item} /></li>
+                    ))}
+                  </ol>
+                </div>
+              )}
               {/* Trakt integration card */}
               {((target === 'stremio' || target === 'nuvio') || !!aiometadata) && (() => {
                 const traktLogo = resolveLogoUrl('services/trakt.png');

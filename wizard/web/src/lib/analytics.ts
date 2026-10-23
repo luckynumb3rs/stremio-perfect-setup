@@ -44,6 +44,10 @@ interface BuildCompletionPayloadOptions {
   addonCount: number;
   /** Profiles configured in this run (Stremio = 1) */
   profileCount: number;
+  /** BingeCat was installed for at least one profile */
+  bingecat: boolean;
+  /** Finished Kids profiles (Stremio: 0 or 1) */
+  kidsCount: number;
   target: 'stremio' | 'nuvio';
   credentials: Credentials;
   instantDebrid: boolean;
@@ -144,6 +148,8 @@ export function buildWizardCompletionPayload({
   accountMode,
   addonCount,
   profileCount,
+  bingecat,
+  kidsCount,
   target,
   credentials,
   instantDebrid,
@@ -160,6 +166,8 @@ export function buildWizardCompletionPayload({
 
   const deniedParams = new Set(wizardConfig?.analytics?.denylist ?? []);
   if (!deniedParams.has('profile_count')) params.profile_count = profileCount;
+  if (!deniedParams.has('bingecat')) params.bingecat = bingecat ? 'true' : 'false';
+  if (!deniedParams.has('kids_count')) params.kids_count = kidsCount;
 
   const debridNames = credentials.debridServices
     .map((service) => DEBRID_SERVICES.find(({ id }) => id === service.id)?.name ?? service.id)
