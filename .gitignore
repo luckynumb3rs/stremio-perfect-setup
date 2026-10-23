@@ -2,7 +2,6 @@
 .pages-source/
 assets/data/guide-stats.json
 hosting/.work
-.vscode
 .codex
 .claude
 .agents
