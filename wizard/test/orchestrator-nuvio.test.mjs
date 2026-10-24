@@ -291,12 +291,14 @@ console.log('\n# a shared-config failure writes nothing');
 }
 
 
-/** Fake BingeCat adapter: records calls; `failApply` makes applyTemplate throw for those profile ids. */
-function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {}, createError = null, listed = [], known = null, createdKeys = null } = {}) {
+/** Fake BingeCat adapter: records calls; `failApply` / `failType` make applyTemplate / setProfileType throw for those profile ids.
+ *  `createdType`: 'echo' answers the type that was asked for, 'omit' answers none, anything else is answered as is. */
+function makeBingecat({ failApply = new Set(), failType = new Set(), createdType = 'echo', kidsProfileIds = null, mainProfileId = 100, targets = {}, createError = null, listed = [], known = null, createdKeys = null } = {}) {
   const calls = [];
   let nextId = 200;
   const adapter = {
-    async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); if (createError) throw createError; return { id: nextId++, name }; },
+    async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); if (createError) throw createError; return { id: nextId++, name, type: createdType === 'echo' ? (kids ? 'kids' : 'normal') : createdType === 'omit' ? undefined : createdType }; },
+    async setProfileType(_t, id, type) { calls.push(`type:${id}:${type}`); if (failType.has(id)) throw new Error(`type ${id} boom`); },
     async listProfiles() { calls.push('list'); return listed; },
     async applyTemplate(_t, id, template, { historySource, isMain }) {
       calls.push(`apply:${id}:${template.kind}:${historySource}:${isMain ? 'main' : 'sub'}`);
@@ -308,7 +310,7 @@ function makeBingecat({ failApply = new Set(), mainProfileId = 100, targets = {}
       return { url: `https://bc.example/${id}/${surface}/manifest.json`, ...(aiSearch ? { searchUrl: `https://bc.example/${id}/${surface}/search/manifest.json` } : {}) };
     },
   };
-  return { adapter, calls, token: 'bc-token', mainProfileId, templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } }, targets, ...(known ? { known } : {}), ...(createdKeys ? { createdKeys } : {}) };
+  return { adapter, calls, token: 'bc-token', mainProfileId, templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } }, targets, ...(known ? { known } : {}), ...(createdKeys ? { createdKeys } : {}), ...(kidsProfileIds ? { kidsProfileIds } : {}) };
 }
 const unclear = (code, status = 0) => Object.assign(new Error('unclear create'), { code, status });
 const names = (nuvio, idx) => nuvio.addons.get(idx).map((a) => a.name);
@@ -461,13 +463,51 @@ console.log('\n# BingeCat: created flag survives a retry; Kids can never be appl
   const svc = mockServices();
   let result;
   try { result = await runNuvioSetup(baseArgs(nuvio, { profiles: [{ nuvioProfileId: 2, name: 'Benci', kids: true }], bingecat: bc })); } finally { svc.restore(); }
-  eq('a profile created by an earlier attempt is still reported as created (Done tells the user to set the Kids type)', [result.profiles[0].bingecat.created, bc.calls.some((c) => c.startsWith('create:'))], [true, false]);
+  eq('a profile created by an earlier attempt is still reported as created', [result.profiles[0].bingecat.created, bc.calls.some((c) => c.startsWith('create:'))], [true, false]);
 
   const nuvio2 = makeNuvio();
   const bad = makeBingecat({ targets: { 2: 100 }, mainProfileId: 100 });
   const svc2 = mockServices();
   try { result = await runNuvioSetup(baseArgs(nuvio2, { profiles: [{ nuvioProfileId: 2, name: 'Benci', kids: true }], bingecat: bad })); } finally { svc2.restore(); }
-  ok('Kids on the main profile fails before any settings are written', result.profiles[0].status === 'failed' && /main profile can never/.test(result.profiles[0].error ?? '') && !bad.calls.some((c) => c.startsWith('apply:')) && writes(nuvio2, 2) === 0);
+  ok('Kids on the main profile fails before any settings are written', result.profiles[0].status === 'failed' && /main profile can never/.test(result.profiles[0].error ?? '') && !bad.calls.some((c) => c.startsWith('apply:') || c.startsWith('type:')) && writes(nuvio2, 2) === 0);
+}
+
+console.log('\n# BingeCat: Kids type switch');
+{
+  const kidsRow = [{ nuvioProfileId: 2, name: 'Benci', kids: true }];
+  const go = async (opts, profiles = kidsRow) => {
+    const nuvio = makeNuvio();
+    const bc = makeBingecat(opts);
+    const events = [];
+    const svc = mockServices();
+    let result;
+    try { result = await runNuvioSetup(baseArgs(nuvio, { profiles, bingecat: bc, onStep: (name, d) => events.push([name, d])})); } finally { svc.restore(); }
+    return { result, bc, nuvio, events };
+  };
+
+  let r = await go({ targets: { 2: 300 } });
+  eq('an existing normal sub-profile is switched to Kids BEFORE the template, and the store hears about it', [r.bc.calls.slice(0, 2), r.result.profiles[0].status, r.result.profiles[0].bingecat.created], [['type:300:kids', 'apply:300:kids:nuvio:sub'], 'done', false]);
+  eq('the switch is announced as a step', r.events.filter(([n]) => n === 'bingecat_profile_type').map(([, d]) => d), [{ key: 2, profileId: 300, type: 'kids', profileIndex: 2 }]);
+
+  r = await go({ targets: { 2: 300 }, kidsProfileIds: new Set([300]) });
+  ok('a profile that is already a Kids one is not switched again (Retry, or a kids-type pick)', !r.bc.calls.some((c) => c.startsWith('type:')) && r.result.profiles[0].status === 'done');
+
+  for (const createdType of ['normal', 'omit']) {
+    r = await go({ targets: { 2: 'new' }, createdType });
+    eq(`a create answered as ${createdType === 'omit' ? 'untyped' : createdType} is switched to Kids before the template`, r.bc.calls.slice(0, 3), ['create:Benci:kids', 'type:200:kids', 'apply:200:kids:nuvio:sub']);
+  }
+
+  r = await go({ targets: { 2: 'new' }, createdType: 'normal', failType: new Set([200]) });
+  const p = r.result.profiles[0];
+  ok('a failed switch fails only that profile, keeps the id and writes nothing', p.status === 'failed' && /switch the BingeCat profile for Benci to a Kids profile/.test(p.error ?? '') && /nothing was deleted/.test(p.error ?? '') && !r.bc.calls.some((c) => c.startsWith('apply:')) && writes(r.nuvio, 2) === 0);
+  ok('the new profile was announced before the failing switch', r.events.some(([n, d]) => n === 'bingecat_profile' && d.profileId === 200));
+
+  // Retry as the store would build it: the id is known, the row counts as created, nothing is created twice
+  r = await go({ targets: { 2: 200 }, createdKeys: new Set([2]), known: new Set([100, 200]) });
+  eq('Retry reuses the profile: one switch, no create, still reported as created', [r.bc.calls.filter((c) => c.startsWith('type:')), r.bc.calls.some((c) => c.startsWith('create:')), r.result.profiles[0].bingecat.created], [['type:200:kids'], false, true]);
+
+  r = await go({ targets: { 1: 'new' } }, [{ nuvioProfileId: 1, name: 'Ben', kids: false }]);
+  ok('a Standard row is never switched', !r.bc.calls.some((c) => c.startsWith('type:')));
 }
 
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);

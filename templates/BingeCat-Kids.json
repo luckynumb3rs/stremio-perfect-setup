@@ -1,5 +1,5 @@
 {
-  "$comment": "BingeCat public API (PATCH /api/v1/profiles/{id}/settings) settings in the API registry format, extracted via OAuth from a kids reference profile. Placeholder: {{HISTORY_SOURCE}} (stremio|nuvio) in recommendations.history_sources. English-only languages (secondary_query_language omitted). Sections not included: search_tuning (defaults), sharing, simkl_sync, email, timezone. Not exposed by the BingeCat API yet: addon force-top, cinemeta mode, history sync toggles, Gemini key, kids profile type. No metadata section (child profiles inherit). Excluded genres are BingeCat's child defaults.",
+  "$comment": "BingeCat public API (PATCH /api/v1/profiles/{id}/settings) settings in the API registry format, extracted via OAuth from a kids reference profile. Placeholder: {{HISTORY_SOURCE}} (stremio|nuvio) in recommendations.history_sources. English-only languages (secondary_query_language omitted). Sections not included: search_tuning (defaults), sharing, simkl_sync, email, timezone. Not exposed by the BingeCat API yet: addon force-top, cinemeta mode, history sync toggles, Gemini key. No metadata section (child profiles inherit). Excluded genres are BingeCat's child defaults.",
   "language": {
     "multilang_enabled": false,
     "search_result_languages": [

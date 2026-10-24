@@ -47,7 +47,8 @@ function makeBingecat({ fail = false } = {}) {
     targets: { 0: 'new' },
     templates: { standard: { kind: 'std', search: { search_enabled: false } }, kids: { kind: 'kids', search: { search_enabled: true } } },
     adapter: {
-      async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); return { id: 300, name }; },
+      async createProfile(_t, { name, kids }) { calls.push(`create:${name}:${kids ? 'kids' : 'std'}`); return { id: 300, name, type: kids ? 'kids' : 'normal' }; },
+      async setProfileType(_t, id, type) { calls.push(`type:${id}:${type}`); },
       async applyTemplate(_t, id, template, { historySource, isMain }) { calls.push(`apply:${id}:${template.kind}:${historySource}:${isMain ? 'main' : 'sub'}`); if (fail) throw new Error('apply boom'); return {}; },
       async getManifests(_t, id, { surface, aiSearch }) { calls.push(`manifests:${id}:${surface}:${aiSearch ? 'search' : 'plain'}`); return { url: `https://bc.example/${id}/manifest.json` }; },
     },

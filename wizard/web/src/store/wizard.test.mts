@@ -172,12 +172,12 @@ console.log('\n# Role flip guard and BingeCat state');
     { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
     { key: 2, name: 'Tara', kids: true, target: 'new', reason: 'new' },
   ] });
-  st().bingecatProfileCreated(2, { id: 77, name: 'Tara', kids: true });
+  st().bingecatProfileCreated(2, { id: 77, name: 'Tara', kids: true, type: 'kids' });
   eq('a created BingeCat profile is stored and mapped (the other row is untouched)', [st().bingecat.profiles.map((p) => p.id), st().bingecat.mapping], [[77], [
     { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
     { key: 2, name: 'Tara', kids: true, target: 77, reason: 'created' },
   ]]);
-  eq('a created Kids profile counts as age-limited (a Standard row can not take it over later)', st().bingecat.profiles[0].ageLimited, true);
+  eq('a created Kids profile counts as age-limited and keeps its type (a Standard row can not take it over later)', [st().bingecat.profiles[0].ageLimited, st().bingecat.profiles[0].type], [true, 'kids']);
   st().bingecatProfileCreated(1, { id: 78, name: 'Ben', kids: false });
   eq('a created Standard profile is not age-limited', st().bingecat.profiles[1].ageLimited, false);
 

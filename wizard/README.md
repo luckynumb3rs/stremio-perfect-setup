@@ -250,9 +250,12 @@ While `enabled` is not exactly `true` nothing BingeCat-related is visible and th
 before. For local testing run `VITE_BINGECAT=1 npm run dev` instead of editing the config (never set
 this variable in CI or a production build).
 
-- Standard profiles opt in with the *Install BingeCat* toggle on the Recommendations step (it is
-  mutually exclusive with Watchly unless the user turns both on). Kids profiles always get BingeCat and
-  never get Watchly, AIOMetadata or collections; the Catalogs step is skipped when there are only Kids profiles.
+- Standard profiles opt in with the *Install BingeCat* toggle on the Recommendations step (independent
+  of Watchly; both can be on). Kids profiles always get BingeCat and never get Watchly, AIOMetadata or
+  collections; the Catalogs step is skipped when there are only Kids profiles.
+- A Kids profile is a BingeCat profile of the Kids type: new ones are created as Kids, and a Kids profile
+  the user maps onto an existing normal BingeCat sub-profile switches it to Kids before its settings are
+  written (the card warns about it). The main profile is never switched; BingeCat ignores that anyway.
 - Settings are applied through the BingeCat public API with the user's OAuth token (authorization code +
   PKCE in a popup, redirect back to the wizard page, token kept in memory only). The wizard maps each
   Nuvio profile to an existing BingeCat profile or creates a new one and never deletes anything.

@@ -206,12 +206,14 @@ async function findCreatedProfile(bc, name) {
  * still reports the id and a retry reuses it instead of creating another one. Nothing is ever deleted on BingeCat.
  * @param {object} bc { adapter, token, mainProfileId, templates: { standard, kids }, targets: { [key]: profileId | 'new' },
  *   known?: Set<number> (profile ids on the account at connect time, to recognise a profile created by a lost response),
- *   createdKeys?: Set<number> (rows whose profile an earlier attempt created) }
+ *   createdKeys?: Set<number> (rows whose profile an earlier attempt created),
+ *   kidsProfileIds?: Set<number> (BingeCat profiles already of the kids type; every other profile of a Kids row is switched first) }
  */
 async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
   let profileId = bc.targets[key];
   // true also when an earlier attempt of this run created the profile (the store remembers that as reason 'created')
   let created = !!bc.createdKeys?.has(key);
+  let kidsType = !!bc.kidsProfileIds?.has(profileId);
   if (profileId === 'new') {
     let profile;
     try {
@@ -225,10 +227,21 @@ async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
     }
     profileId = profile.id;
     created = true;
+    kidsType = profile.type === 'kids';
     bc.known?.add(profileId);
-    step('bingecat_profile', { key, profileId, name: profile.name, kids });
+    step('bingecat_profile', { key, profileId, name: profile.name, kids, type: profile.type });
   }
   if (kids && profileId === bc.mainProfileId) throw new Error('The BingeCat main profile can never be a Kids profile.');
+  // The kids type applies its own defaults on save, so switch BEFORE the template overwrites them. Covers a manually chosen
+  // normal profile, a create BingeCat did not answer as kids and an adopted profile. A repeat is harmless; nothing is deleted.
+  if (kids && !kidsType) {
+    try {
+      await bc.adapter.setProfileType(bc.token, profileId, 'kids');
+    } catch (err) {
+      throw new Error(`Could not switch the BingeCat profile for ${name} to a Kids profile: ${toError(err).message} The profile was kept and nothing was deleted. Press Retry to try again.`);
+    }
+    step('bingecat_profile_type', { key, profileId, type: 'kids' });
+  }
   const template = kids ? bc.templates.kids : bc.templates.standard;
   await bc.adapter.applyTemplate(bc.token, profileId, template, { historySource: surface, isMain: profileId === bc.mainProfileId });
   // The template decides whether the AI-search addon is installed (search enabled = Kids template today).

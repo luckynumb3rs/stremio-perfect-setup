@@ -31,7 +31,7 @@ export function useBingecatStatus() {
   const expired = !!token && !!expiresAt && expiresAt - Math.floor(Date.now() / 1000) < MIN_TOKEN_LIFE;
   const connected = !!token && !expired;
   const check: { errors: Issue[]; warnings: Issue[] } = rows.length > 0 && connected
-    ? validateMapping(rows, mapping, profiles, { kidsCreateSupported: false })
+    ? validateMapping(rows, mapping, profiles)
     : { errors: [], warnings: [] };
   const mapped = rows.every((r) => mapping.some((m) => m.key === r.key));
   const templatesLoaded = !!s.templates?.bingecat;

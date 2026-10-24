@@ -7,8 +7,10 @@
 //     `metadata` (sending it gives 409), so it is only sent for the main profile.
 //   - POST /profiles creates a normal sub-profile and is NOT idempotent: a failed create is never retried here.
 //   - The wizard never deletes anything on BingeCat (this adapter has no DELETE).
-// Pending from the BingeCat dev (kids profile type, addon settings, API keys, connect Stremio/Nuvio, onboarding skip,
-// official AI-search URL): see the drop-in points marked `ponytail:` below.
+//   - Kids profile type (shipped 2026-10-24): POST/PATCH /profiles take `profile_type`; `kids` applies PG caps and the adult filter on
+//     save, so the type is set BEFORE the settings template. On the main profile a PATCH answers 200 but ignores the type.
+// Pending from the BingeCat dev (addon settings, API keys, connect Stremio/Nuvio, onboarding skip, official AI-search URL):
+// see the drop-in points marked `ponytail:` below.
 
 export const BINGECAT_SCOPES = ['settings:read', 'settings:write', 'profiles:read', 'profiles:write', 'catalogs:read'];
 const WRITE_GAP_MS = 3500;
@@ -188,9 +190,9 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
           id: p.id,
           name: p.name,
           isMain: !!p.is_main,
-          // ponytail: the API exposes no profile type yet; an age cap in recommendations/content filters is the best hint of a kids profile
+          // fallback for when `profile_type` is missing: an age cap in recommendations/content filters hints at a kids profile
           ageLimited: settings.recommendations?.max_age_certification_us != null || settings.content_filters?.max_age_certification_us != null,
-          type: p.profile_type, // undefined until the dev exposes it
+          type: p.profile_type, // 'normal' | 'kids' (API since 2026-10-24)
           // n.id is BingeCat's stored Nuvio profile id; on a linked account it reads 1..3 for Nuvio profiles 1..3 (checked 2026-10-23), i.e. the Nuvio profile_index
           boundNuvio: nuvio.filter((n) => (n.bound_profile_ids ?? []).includes(p.id)).map((n) => ({ id: n.id, name: n.name })),
           settings,
@@ -199,12 +201,17 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
       return profiles;
     },
 
-    /** Creates a NORMAL sub-profile (the API rejects profile_type/kids until the dev ships it). Never retried. */
-    async createProfile(token, { name }) {
-      // ponytail: send `kids`/`profile_type` here once the API accepts it
-      const created = await request('POST', '/api/v1/profiles', token, { name });
+    /** Creates a sub-profile (a Kids one with `kids`). Never retried. `type` is what BingeCat answered (undefined if it did not say). */
+    async createProfile(token, { name, kids = false }) {
+      const created = await request('POST', '/api/v1/profiles', token, kids ? { name, profile_type: 'kids' } : { name });
       if (!created?.id) throw new BingecatError('bad_response', 'BingeCat did not return the new profile.');
-      return { id: created.id, name: created.name ?? name };
+      return { id: created.id, name: created.name ?? name, type: created.profile_type };
+    },
+
+    /** Switches a profile's type. BingeCat answers 200 but ignores it on the main profile, so the echoed type is checked. */
+    async setProfileType(token, profileId, type) {
+      const res = await request('PATCH', `/api/v1/profiles/${profileId}`, token, { profile_type: type });
+      if (res?.profile_type !== type) throw new BingecatError('type_not_applied', `BingeCat did not switch the profile to the ${type} type.`);
     },
 
     /** Applies a template to a profile with ONE settings PATCH. */

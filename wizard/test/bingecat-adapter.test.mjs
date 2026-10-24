@@ -152,8 +152,22 @@ console.log('\n# listProfiles');
 
 console.log('\n# createProfile, getManifests, loadProfiles');
 {
-  const r = await run([[201, { id: 77, name: 'Ben' }]], ({ bc }) => bc.createProfile(TOKEN, { name: 'Ben', kids: true }));
-  eq('createProfile sends only the name (kids is not accepted by the API yet)', [r.calls[0].body, r.result], [{ name: 'Ben' }, { id: 77, name: 'Ben' }]);
+  const r = await run([[201, { id: 77, name: 'Ben', profile_type: 'kids' }], [201, { id: 78, name: 'Bini', profile_type: 'normal' }]], async ({ bc }) => [
+    await bc.createProfile(TOKEN, { name: 'Ben', kids: true }),
+    await bc.createProfile(TOKEN, { name: 'Bini' }),
+  ]);
+  eq('Kids create sends profile_type kids, Standard only the name; the answered type is returned', [r.calls.map((c) => c.body), r.result], [
+    [{ name: 'Ben', profile_type: 'kids' }, { name: 'Bini' }],
+    [{ id: 77, name: 'Ben', type: 'kids' }, { id: 78, name: 'Bini', type: 'normal' }],
+  ]);
+  const noType = await run([[201, { id: 79, name: 'Mia' }]], ({ bc }) => bc.createProfile(TOKEN, { name: 'Mia', kids: true }));
+  eq('an answer without a type gives type undefined (the orchestrator then switches it)', noType.result.type, undefined);
+}
+{
+  const r = await run([[200, { id: 2, profile_type: 'kids' }]], ({ bc }) => bc.setProfileType(TOKEN, 2, 'kids'));
+  eq('setProfileType PATCHes the profile with only profile_type', [r.calls[0].method, r.calls[0].url, r.calls[0].body], ['PATCH', 'https://bingecat.com/api/v1/profiles/2', { profile_type: 'kids' }]);
+  const ignored = await fails([[200, { id: 1, is_main: true, profile_type: 'normal' }]], ({ bc }) => bc.setProfileType(TOKEN, 1, 'kids'));
+  ok('a 200 that ignores the type (main profile) is type_not_applied', ignored.error?.code === 'type_not_applied');
 }
 {
   const url = 'https://bingecat.com/stremio/u/9/nuvio/manifest.json';
@@ -168,12 +182,12 @@ console.log('\n# createProfile, getManifests, loadProfiles');
 }
 {
   const r = await run([
-    [200, { profiles: [{ id: 1, name: 'main', is_main: true }, { id: 2, name: 'Tara', is_main: false }] }],
+    [200, { profiles: [{ id: 1, name: 'main', is_main: true, profile_type: 'normal' }, { id: 2, name: 'Tara', is_main: false, profile_type: 'kids' }] }],
     [200, { profiles: [{ id: 'n1', name: 'Tara', bound_profile_ids: [2] }] }],
     [200, { settings: { recommendations: { max_age_certification_us: null }, content_filters: { max_age_certification_us: null } } }],
     [200, { settings: { recommendations: { max_age_certification_us: 'PG' }, content_filters: {} } }],
   ], ({ bc }) => bc.loadProfiles(TOKEN, { withNuvio: true }));
-  eq('profiles are merged with age hint and Nuvio links', r.result.map((p) => [p.id, p.isMain, p.ageLimited, p.boundNuvio]), [[1, true, false, []], [2, false, true, [{ id: 'n1', name: 'Tara' }]]]);
+  eq('profiles are merged with type, age hint and Nuvio links', r.result.map((p) => [p.id, p.isMain, p.type, p.ageLimited, p.boundNuvio]), [[1, true, 'normal', false, []], [2, false, 'kids', true, [{ id: 'n1', name: 'Tara' }]]]);
 }
 
 console.log(`\n${failed === 0 ? '✅' : '❌'} ${passed} passed, ${failed} failed\n`);

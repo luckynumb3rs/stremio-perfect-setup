@@ -3,8 +3,8 @@
 //
 // row     = { key, name, kids }   key = Nuvio profile id (Stremio: 0)
 // profile = { id, name, isMain, ageLimited?, type?, boundNuvio?: [{ id, name }] }
-//   `type` ('normal' | 'kids') is used once the API exposes it; until then `ageLimited` (an age cap in the recommendation
-//   or content filter settings, not the search cap) is the best available hint that a profile is a kids profile.
+//   `type` ('normal' | 'kids') comes from the API; `ageLimited` (an age cap in the recommendation or content filter
+//   settings, not the search cap) is only the fallback hint for a profile without a type.
 
 export const MAX_BINGECAT_PROFILES = 10;
 
@@ -81,10 +81,9 @@ export function mergeMapping(rows, previous, profiles) {
 
 /**
  * Checks a (possibly user-edited) mapping. Errors block Continue; warnings are shown next to the row.
- * @param {{ kidsCreateSupported?: boolean }} [opts] set once the API can create a Kids profile
  * @returns {{ errors: {key, message}[], warnings: {key, message}[] }}
  */
-export function validateMapping(rows, mapping, profiles, { kidsCreateSupported = false } = {}) {
+export function validateMapping(rows, mapping, profiles) {
   const errors = [];
   const warnings = [];
   const byId = new Map(profiles.map((p) => [p.id, p]));
@@ -96,12 +95,7 @@ export function validateMapping(rows, mapping, profiles, { kidsCreateSupported =
     const warn = (message) => warnings.push({ key: row.key, message });
     if (!entry) { err(`${row.name}: choose a BingeCat profile.`); continue; }
 
-    if (entry.target === 'new') {
-      if (row.kids && !kidsCreateSupported) {
-        warn(`${row.name}: will be created as a normal BingeCat profile with the kids settings. Set its type to Kids on bingecat.com afterwards.`);
-      }
-      continue;
-    }
+    if (entry.target === 'new') continue;
 
     const profile = byId.get(entry.target);
     if (!profile) { err(`${row.name}: the selected BingeCat profile no longer exists. Pick another one.`); continue; }
@@ -116,8 +110,9 @@ export function validateMapping(rows, mapping, profiles, { kidsCreateSupported =
     warn(profile.isMain
       ? `${row.name}: the settings of your BingeCat main profile "${profile.name}" will be overwritten.`
       : `${row.name}: the settings of the BingeCat profile "${profile.name}" will be overwritten.`);
-    if (row.kids && !profile.isMain && !profile.type) {
-      warn(`${row.name}: BingeCat does not tell us whether "${profile.name}" is a Kids profile. Make sure it is.`);
+    // the orchestrator switches every Kids row whose profile is not (known to be) kids-type
+    if (row.kids && !profile.isMain && profile.type !== 'kids') {
+      warn(`${row.name}: "${profile.name}" will be switched to a BingeCat Kids profile.`);
     }
     const others = (profile.boundNuvio ?? []).filter((b) => b.id !== row.key);
     if (others.length > 0 && !(profile.boundNuvio ?? []).some((b) => b.id === row.key)) {

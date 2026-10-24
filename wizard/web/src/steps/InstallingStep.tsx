@@ -220,6 +220,8 @@ export function InstallingStep() {
           // lets the orchestrator recognise a profile created by a lost response, and remember which rows were created earlier
           known: new Set(bc.profiles.map((p) => p.id)),
           createdKeys: new Set(bc.mapping.filter((m) => m.reason === 'created').map((m) => m.key)),
+          // profiles that are already Kids ones; every other profile of a Kids row is switched before its settings are written
+          kidsProfileIds: new Set(bc.profiles.filter((p) => p.type === 'kids').map((p) => p.id)),
         };
       }
 
@@ -252,8 +254,15 @@ export function InstallingStep() {
       const onStep = (name: string, data: unknown) => {
         if (name === 'bingecat_profile') {
           // Remember the new BingeCat profile right away, so a Retry reuses it instead of creating another one.
-          const d = data as { key: number; profileId: number; name: string; kids: boolean };
-          useWizard.getState().bingecatProfileCreated(d.key, { id: d.profileId, name: d.name, kids: !!d.kids });
+          const d = data as { key: number; profileId: number; name: string; kids: boolean; type?: string };
+          useWizard.getState().bingecatProfileCreated(d.key, { id: d.profileId, name: d.name, kids: !!d.kids, type: d.type });
+          return;
+        }
+        if (name === 'bingecat_profile_type') {
+          // A profile was switched to Kids: remember it, so a Retry does not switch it again and Standard rows can't take it over.
+          const d = data as { profileId: number; type: string };
+          const bingecat = useWizard.getState().bingecat;
+          useWizard.getState().setBingecat({ profiles: bingecat.profiles.map((p) => (p.id === d.profileId ? { ...p, type: d.type } : p)) });
           return;
         }
         const label = STEP_LABELS[name];

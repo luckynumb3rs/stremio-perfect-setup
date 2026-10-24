@@ -190,12 +190,8 @@ export function DoneStep() {
     .filter((p) => !p.bingecat!.created)
     .map((p) => ({ label: p.name || 'Stremio', profile: bingecatState.profiles.find((b) => b.id === p.bingecat!.profileId) }))
     .filter((x): x is { label: string; profile: NonNullable<typeof x.profile> } => !!x.profile);
-  const kidsCreated = bingecatDone.filter((p) => p.kids && p.bingecat!.created).map((p) => p.name || 'Kids');
   // What the BingeCat API cannot do yet (pending from the BingeCat developer): shown as a checklist for the user.
   const bingecatChecklist = bingecatDone.length === 0 ? [] : [
-    ...(kidsCreated.length > 0
-      ? [`Set the profile type of **${kidsCreated.join(', ')}** to **Kids** on bingecat.com. The wizard created ${kidsCreated.length === 1 ? 'it' : 'them'} as normal BingeCat profiles with the kids settings.`]
-      : []),
     'Skip BingeCat\'s onboarding instead of completing it. Completing it would overwrite the settings the wizard just applied.',
     `Connect your ${target === 'stremio' ? 'Stremio' : 'Nuvio'} account to BingeCat on bingecat.com so it can read your watch history. Before you do, turn **off** "force to top" and set Cinemeta control to **observe** in BingeCat's addon settings, otherwise BingeCat may reorder your addons or change Cinemeta.`,
   ];

@@ -28,8 +28,9 @@ export interface BingecatProfile {
   id: number;
   name: string;
   isMain: boolean;
-  /** Age cap in the recommendation/content-filter settings: the best hint of a kids profile until the API exposes a type */
+  /** Age cap in the recommendation/content-filter settings: only the fallback hint of a kids profile when `type` is missing */
   ageLimited: boolean;
+  /** 'normal' | 'kids' (BingeCat API) */
   type?: string;
   boundNuvio: { id: string | number; name: string }[];
   settings: Record<string, unknown>;
@@ -241,7 +242,7 @@ interface WizardState {
   setBingecat: (b: Partial<BingecatState>) => void;
   disconnectBingecat: () => void;
   /** A BingeCat profile was just created for this row: remember it so a retry reuses it */
-  bingecatProfileCreated: (key: number, profile: { id: number; name: string; kids: boolean }) => void;
+  bingecatProfileCreated: (key: number, profile: { id: number; name: string; kids: boolean; type?: string }) => void;
   /** Select or deselect an existing Nuvio profile */
   toggleNuvioProfile: (p: NuvioProfileOption) => void;
   setCredentials: (c: Partial<Credentials>) => void;
@@ -341,7 +342,7 @@ export const useWizard = create<WizardState>((set) => ({
     bingecat: {
       ...s.bingecat,
       // a created Kids profile has the kids age caps, so a Standard row is not allowed to take it over later
-      profiles: [...s.bingecat.profiles, { id: profile.id, name: profile.name, isMain: false, ageLimited: profile.kids, boundNuvio: [], settings: {} }],
+      profiles: [...s.bingecat.profiles, { id: profile.id, name: profile.name, isMain: false, ageLimited: profile.kids, type: profile.type, boundNuvio: [], settings: {} }],
       mapping: s.bingecat.mapping.map((m) => (m.key === key ? { ...m, target: profile.id, reason: 'created' } : m)),
     },
   })),
