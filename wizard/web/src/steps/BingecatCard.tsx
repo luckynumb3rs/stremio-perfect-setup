@@ -63,6 +63,11 @@ export function BingecatCard() {
     try {
       const session = await adapter.exchangeCode({ code: message.code, verifier: p.verifier, redirectUri: p.redirectUri });
       const loaded = await adapter.loadProfiles(session.token, { withNuvio: useWizard.getState().target === 'nuvio' });
+      if (!loaded.some((x: { isMain: boolean }) => x.isMain)) {
+        // every BingeCat account has a main profile; if it is missing the account setup on bingecat.com is not finished
+        setError('This BingeCat account has no profile yet. Finish (or skip) the setup on bingecat.com, then click Connect again.');
+        return;
+      }
       useWizard.getState().setBingecat({
         token: session.token,
         expiresAt: session.expiresAt,
@@ -129,6 +134,14 @@ export function BingecatCard() {
       {!connected && status === 'idle' && (
         <div style={{ textAlign: 'center' }}>
           {expired && <p style={{ ...small, margin: '0 0 0.6rem' }}>Your BingeCat connection is about to expire. Connect again.</p>}
+          <div style={{ ...small, maxWidth: '34rem', margin: '0 auto 0.8rem' }}>
+            <p style={{ margin: '0 0 0.3rem', fontWeight: 600, color: 'var(--text)' }}>When you click the button, a BingeCat window opens:</p>
+            <ul style={{ margin: 0, paddingLeft: '1.2rem', textAlign: 'left' }}>
+              <li>If you already have a BingeCat account, sign in with it.</li>
+              <li>If you don&apos;t, press <strong>Create a new account</strong> on the sign-in page. Another window opens: fill in your details and create the account, and it closes when you are done.</li>
+              <li>Then sign in, skip BingeCat&apos;s own setup wizard, and authorize access for this wizard.</li>
+            </ul>
+          </div>
           <button type="button" style={button} onClick={connect}>Connect / Create BingeCat</button>
         </div>
       )}
