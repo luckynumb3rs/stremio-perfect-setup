@@ -88,6 +88,13 @@ title: "📜 Changelog"
 
 ## 🔮 Wizard
 
+### 1.2.0 (2026-11-13)
+
+- Added support for **BingeCat**, a powerful AI-powered recommendations engine that provides you with personalized results.
+- **Kids profiles** can now be created by using BingeCat for a dedicated kid-friendly setup.
+- Added a **Full Nuvio Settings** option to apply a recommended Nuvio settings configuration alongside the addons.
+- Added support for setting up **multiple Nuvio profiles**, including create new ones, directly in one wizard pass.
+
 ### 1.1.0 (2026-10-23)
 
 - Added support for setting up **several Nuvio profiles** (up to 6, existing or new) in one run. **AIOStreams** and **AIOMetadata** are shared, **Watchly** is created for each profile, and the previous addons are backed up per profile.

@@ -35,6 +35,10 @@ Important parameters:
         Output size: `4k`, `1080p`, or `both`.
     --profile
         Named output profile: `compressed` or `high`.
+    --render-style
+        Rendering style: `flat` keeps the existing flat tilted grid, while
+        `perspective` adds Prism-style perspective, depth blur, focal opacity,
+        and layout effects. `perspective` is the default.
     --quality
         Advanced manual output quality override used for both JPG and WEBP.
     --focus
@@ -47,6 +51,10 @@ Request format:
     tv:key=value&key=value
     movie:/movie/popular?language=en-US
     tv:/trending/tv/week?language=en-US
+
+Runtime note:
+    `perspective` mode uses NumPy for its radial depth-of-field blur. The
+    legacy `flat` mode remains Pillow-only.
 
 Examples:
     python3 -B backdrop.py \
@@ -67,6 +75,7 @@ import io
 import itertools
 import math
 import os
+import random
 import shutil
 import sys
 import time
@@ -103,12 +112,34 @@ FOCUS_PRESETS = {
     "top-right": (0.72, 0.28),
     "center-right": (0.65, 0.45),
     "top-center": (0.52, 0.30),
+    "perspective": (0.70, 0.20),
 }
 
 SIZE_PRESETS = {
     "4k": (3840, 2160, 3840 / 1920),
     "1080p": (1920, 1080, 1.0),
 }
+
+RENDER_STYLES = ("perspective", "flat")
+
+# Perspective rendering defaults. These affect only compositing; source
+# requests, artwork selection, output sizes, and output encoding remain local
+# to this repository.
+PERSPECTIVE_LANDSCAPE_W = 400
+PERSPECTIVE_GAP = 8
+PERSPECTIVE_CARD_RADIUS = 8
+PERSPECTIVE_FADE_LEFT = 0.30
+PERSPECTIVE_FADE_RIGHT = 1.00
+PERSPECTIVE_FOCUS_X = 0.70
+PERSPECTIVE_FOCUS_Y = 0.20
+PERSPECTIVE_FOCUS_RADIUS = 0.35
+PERSPECTIVE_POV_X = 1.0
+PERSPECTIVE_POV_Y = -1.0
+PERSPECTIVE_WARP_STRENGTH = 0.37
+PERSPECTIVE_DOF_BLUR_MAX = 10.0
+PERSPECTIVE_DOF_FOCUS_X = 0.75
+PERSPECTIVE_DOF_FOCUS_Y = 0.25
+PERSPECTIVE_DOF_FALLOFF = 1.5
 
 
 def cleanup_pycache():
@@ -425,7 +456,16 @@ def rounded_rect_mask(width, height, radius=CARD_RADIUS):
     return mask
 
 
-def make_tile(image, tile_width, tile_height):
+def make_tile(
+    image,
+    tile_width,
+    tile_height,
+    *,
+    card_radius=CARD_RADIUS,
+    base_tile_width=TILE_W,
+    min_radius=8,
+    opacity=1.0,
+):
     source_width, source_height = image.size
     target_ratio = tile_width / tile_height
     current_ratio = source_width / source_height
@@ -438,10 +478,14 @@ def make_tile(image, tile_width, tile_height):
         top = (source_height - new_height) // 2
         image = image.crop((0, top, source_width, top + new_height))
     image = image.resize((tile_width, tile_height), Image.LANCZOS)
-    scaled_radius = max(8, int(CARD_RADIUS * tile_width / TILE_W))
+    scaled_radius = max(min_radius, int(card_radius * tile_width / base_tile_width))
     mask = rounded_rect_mask(tile_width, tile_height, radius=scaled_radius)
     result = Image.new("RGBA", (tile_width, tile_height), (0, 0, 0, 0))
     result.paste(image, mask=mask)
+    if opacity < 1.0:
+        alpha = result.getchannel("A")
+        alpha = alpha.point(lambda value: int(value * opacity))
+        result.putalpha(alpha)
     return result
 
 
@@ -497,6 +541,249 @@ def build_tilted_grid(tiles, canvas_width, canvas_height, scale=1.0, focus_x=Non
     canvas = Image.new("RGBA", (canvas_width, canvas_height), (10, 10, 12, 255))
     canvas.paste(rotated, (paste_x, paste_y), rotated)
     return canvas
+
+
+def build_perspective_layout(tiles, canvas_width, canvas_height, scale=1.0, focus_x=None, focus_y=None):
+    """Build the oversized landscape grid used by the perspective style."""
+    if not tiles:
+        raise ValueError("Cannot build a perspective layout without tile images.")
+
+    fx = PERSPECTIVE_FOCUS_X if focus_x is None else focus_x
+    fy = PERSPECTIVE_FOCUS_Y if focus_y is None else focus_y
+    tile_width = int(PERSPECTIVE_LANDSCAPE_W * scale)
+    tile_height = int(round(tile_width * 9 / 16))
+    gap = int(PERSPECTIVE_GAP * scale)
+
+    # Oversize the layout so the perspective transform has image data at every
+    # edge, matching the source generator's edge-to-edge composition.
+    bleed_x = (tile_width + gap) * 3
+    bleed_y = tile_height * 2 + gap * 4
+    over_width = canvas_width + bleed_x * 2
+    over_height = canvas_height + bleed_y * 2
+    ox = bleed_x
+    oy = bleed_y
+    canvas = Image.new("RGBA", (over_width, over_height), (10, 12, 16, 255))
+
+    # Keep the repository's existing title order, but use the perspective
+    # style's focal-area selection behavior: the first 35% of sources are
+    # reserved for the focal region, and repeat fills are deterministic.
+    priority_cutoff = max(1, int(len(tiles) * 0.35))
+    priority_tiles = tiles[:priority_cutoff]
+    remaining_tiles = tiles[priority_cutoff:] or priority_tiles
+    repeat_priority = list(priority_tiles)
+    repeat_remaining = list(remaining_tiles)
+    rng = random.Random(42)
+    rng.shuffle(repeat_priority)
+    rng.shuffle(repeat_remaining)
+
+    tiles_to_place = []
+    y = -bleed_y + oy
+    row_index = 0
+    while y < over_height:
+        row_shift = (tile_width + gap) // 2 if row_index % 2 else 0
+        x = -bleed_x + row_shift + ox
+        while x < over_width:
+            screen_x = x - ox + tile_width * 0.5
+            screen_y = y - oy + tile_height * 0.5
+            normalized_x = screen_x / canvas_width
+            normalized_y = screen_y / canvas_height
+            depth = max(0.0, min(1.0, normalized_x))
+            opacity = PERSPECTIVE_FADE_LEFT + (
+                PERSPECTIVE_FADE_RIGHT - PERSPECTIVE_FADE_LEFT
+            ) * depth
+            focal_distance = math.hypot(normalized_x - fx, normalized_y - fy)
+            tiles_to_place.append({
+                "x": x,
+                "y": y,
+                "w": tile_width,
+                "h": tile_height,
+                "opacity": opacity,
+                "is_focal": focal_distance <= PERSPECTIVE_FOCUS_RADIUS,
+                "is_on_screen": (
+                    0.0 <= normalized_x <= 1.0
+                    and 0.0 <= normalized_y <= 1.0
+                ),
+            })
+            x += tile_width + gap
+        y += tile_height + gap
+        row_index += 1
+
+    tiles_to_place.sort(key=lambda tile: (not tile["is_on_screen"], not tile["is_focal"]))
+    unique_priority = list(reversed(priority_tiles))
+    unique_remaining = list(reversed(remaining_tiles))
+    priority_index = 0
+    remaining_index = 0
+
+    for placement in tiles_to_place:
+        if placement["is_focal"]:
+            if unique_priority:
+                source = unique_priority.pop()
+            else:
+                source = repeat_priority[priority_index % len(repeat_priority)]
+                priority_index += 1
+        else:
+            if unique_remaining:
+                source = unique_remaining.pop()
+            else:
+                source = repeat_remaining[remaining_index % len(repeat_remaining)]
+                remaining_index += 1
+
+        tile = make_tile(
+            source,
+            placement["w"],
+            placement["h"],
+            card_radius=PERSPECTIVE_CARD_RADIUS,
+            base_tile_width=PERSPECTIVE_LANDSCAPE_W,
+            min_radius=2,
+            opacity=placement["opacity"],
+        )
+        canvas.paste(tile, (int(placement["x"]), int(placement["y"])), tile)
+
+    return canvas, ox, oy
+
+
+def solve_linear_system(matrix, vector):
+    """Solve the small linear systems needed for a Pillow perspective warp."""
+    augmented = [list(row) + [value] for row, value in zip(matrix, vector)]
+    size = len(augmented)
+
+    for column in range(size):
+        pivot = max(range(column, size), key=lambda row: abs(augmented[row][column]))
+        if abs(augmented[pivot][column]) < 1e-12:
+            raise ValueError("Perspective transform is singular.")
+        augmented[column], augmented[pivot] = augmented[pivot], augmented[column]
+
+        divisor = augmented[column][column]
+        augmented[column] = [value / divisor for value in augmented[column]]
+        for row in range(size):
+            if row == column:
+                continue
+            factor = augmented[row][column]
+            if factor == 0:
+                continue
+            augmented[row] = [
+                current - factor * pivot_value
+                for current, pivot_value in zip(augmented[row], augmented[column])
+            ]
+
+    return [augmented[row][-1] for row in range(size)]
+
+
+def perspective_warp(oversized, ox, oy, output_width, output_height, pov_x, pov_y, warp_strength):
+    """Map the oversized grid into a camera-like trapezoidal perspective."""
+    top_left = [0.0, 0.0]
+    top_right = [float(output_width), 0.0]
+    bottom_right = [float(output_width), float(output_height)]
+    bottom_left = [0.0, float(output_height)]
+
+    if pov_x > 0:
+        inset_y = (output_height * warp_strength * abs(pov_x)) / 2
+        top_left[1] += inset_y
+        bottom_left[1] -= inset_y
+    elif pov_x < 0:
+        inset_y = (output_height * warp_strength * abs(pov_x)) / 2
+        top_right[1] += inset_y
+        bottom_right[1] -= inset_y
+
+    if pov_y > 0:
+        inset_x = (output_width * warp_strength * abs(pov_y)) / 2
+        top_left[0] += inset_x
+        top_right[0] -= inset_x
+    elif pov_y < 0:
+        inset_x = (output_width * warp_strength * abs(pov_y)) / 2
+        bottom_left[0] += inset_x
+        bottom_right[0] -= inset_x
+
+    source_points = [
+        (ox, oy),
+        (ox + output_width, oy),
+        (ox + output_width, oy + output_height),
+        (ox, oy + output_height),
+    ]
+    destination_points = [top_left, top_right, bottom_right, bottom_left]
+    matrix = []
+    vector = []
+    for (source_x, source_y), (destination_x, destination_y) in zip(
+        source_points, destination_points
+    ):
+        matrix.append([
+            destination_x,
+            destination_y,
+            1,
+            0,
+            0,
+            0,
+            -source_x * destination_x,
+            -source_x * destination_y,
+        ])
+        vector.append(source_x)
+        matrix.append([
+            0,
+            0,
+            0,
+            destination_x,
+            destination_y,
+            1,
+            -source_y * destination_x,
+            -source_y * destination_y,
+        ])
+        vector.append(source_y)
+
+    try:
+        coefficients = solve_linear_system(matrix, vector)
+        return oversized.transform(
+            (output_width, output_height),
+            Image.PERSPECTIVE,
+            tuple(coefficients),
+            resample=Image.BICUBIC,
+        )
+    except Exception:
+        return oversized.crop((ox, oy, ox + output_width, oy + output_height))
+
+
+def apply_perspective_dof(image, scale=1.0):
+    """Apply a radial depth-of-field blur without changing output size."""
+    try:
+        import numpy as np
+    except ImportError as exc:
+        raise RuntimeError(
+            "The perspective render style requires numpy to apply depth blur."
+        ) from exc
+
+    width, height = image.size
+    focus_x = PERSPECTIVE_DOF_FOCUS_X * width
+    focus_y = PERSPECTIVE_DOF_FOCUS_Y * height
+    diagonal = math.hypot(width, height)
+    xs = np.linspace(0, width - 1, width, dtype=np.float32)
+    ys = np.linspace(0, height - 1, height, dtype=np.float32)
+    x_grid, y_grid = np.meshgrid(xs, ys)
+    distance_map = np.sqrt((x_grid - focus_x) ** 2 + (y_grid - focus_y) ** 2) / diagonal
+    blur_map = np.clip(distance_map ** PERSPECTIVE_DOF_FALLOFF, 0.0, 1.0)
+
+    layer_count = 5
+    max_radius = PERSPECTIVE_DOF_BLUR_MAX * scale
+    layers = [
+        image if (index / layer_count) * max_radius < 0.5
+        else image.filter(ImageFilter.GaussianBlur(radius=(index / layer_count) * max_radius))
+        for index in range(layer_count + 1)
+    ]
+    arrays = [np.array(layer, dtype=np.float32) for layer in layers]
+    output = np.zeros_like(arrays[0])
+
+    for index in range(layer_count):
+        lower = index / layer_count
+        upper = (index + 1) / layer_count
+        region = (blur_map >= lower) & (blur_map < upper)
+        blend = ((blur_map - lower) / (upper - lower + 1e-9))[region]
+        output[region] = (
+            arrays[index][region] * (1 - blend[:, None])
+            + arrays[index + 1][region] * blend[:, None]
+        )
+
+    output[blur_map >= (layer_count - 1) / layer_count] = arrays[layer_count][
+        blur_map >= (layer_count - 1) / layer_count
+    ]
+    return Image.fromarray(output.clip(0, 255).astype("uint8"), image.mode)
 
 
 def ensure_minimum_tiles(tile_images, minimum_count):
@@ -576,6 +863,54 @@ def apply_gradient(canvas, accent):
     return Image.alpha_composite(result, accent_grad)
 
 
+def apply_perspective_gradient(canvas, accent):
+    """Apply the perspective style's darker cinematic edge and accent glow."""
+    width, height = canvas.size
+    red, green, blue = accent
+
+    def left_gradient(gradient_width, gradient_height):
+        image = Image.new("RGBA", (gradient_width, gradient_height), (0, 0, 0, 0))
+        pixels = image.load()
+        for x in range(int(gradient_width * 0.65)):
+            mix = 1.0 - x / (gradient_width * 0.65)
+            alpha = int(240 * mix ** 1.4)
+            if alpha:
+                for y in range(gradient_height):
+                    pixels[x, y] = (6, 8, 12, alpha)
+        return image
+
+    def bottom_gradient(gradient_width, gradient_height):
+        image = Image.new("RGBA", (gradient_width, gradient_height), (0, 0, 0, 0))
+        pixels = image.load()
+        for y in range(gradient_height):
+            mix = max(0.0, (y - gradient_height * 0.55) / (gradient_height * 0.45))
+            alpha = int(215 * mix ** 1.3)
+            if alpha:
+                for x in range(gradient_width):
+                    pixels[x, y] = (6, 8, 12, alpha)
+        return image
+
+    def accent_glow():
+        image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(image)
+        for index in range(18):
+            mix = index / 18
+            radius = int(math.hypot(width, height) * (0.05 + 0.38 * mix))
+            alpha = int(14 * (1 - mix) ** 2.2)
+            if alpha:
+                draw.ellipse(
+                    [width - radius, -radius, width + radius, radius],
+                    fill=(red, green, blue, alpha),
+                )
+        return image
+
+    left_side = left_gradient(width // 4, height // 4).resize((width, height), Image.BILINEAR)
+    bottom_side = bottom_gradient(width // 4, height // 4).resize((width, height), Image.BILINEAR)
+    result = Image.alpha_composite(canvas, left_side)
+    result = Image.alpha_composite(result, bottom_side)
+    return Image.alpha_composite(result, accent_glow())
+
+
 def resolve_quality_settings(profile="compressed", quality=None):
     settings = dict(QUALITY_PRESETS[profile])
     if quality is not None:
@@ -647,15 +982,26 @@ def backdrops(
     quality=None,
     preferred_language="en",
     logger=None,
+    render_style="perspective",
 ):
     """Fetch titles for the supplied TMDB requests and render one or more backdrop images."""
     log = logger or print
+    if render_style not in RENDER_STYLES:
+        raise ValueError(
+            f"Unsupported render style '{render_style}'. Use one of: {', '.join(RENDER_STYLES)}."
+        )
     request_specs = [parse_request_spec(spec) for spec in tmdb_requests]
     if not request_specs:
         raise ValueError("No TMDB request specs were supplied.")
 
-    fx = FOCUS_X if focus_x is None else focus_x
-    fy = FOCUS_Y if focus_y is None else focus_y
+    if focus_x is None:
+        fx = PERSPECTIVE_FOCUS_X if render_style == "perspective" else FOCUS_X
+    else:
+        fx = focus_x
+    if focus_y is None:
+        fy = PERSPECTIVE_FOCUS_Y if render_style == "perspective" else FOCUS_Y
+    else:
+        fy = focus_y
     accent = accent_color or default_accent_for_label(label)
     outputs = resolve_outputs(output=output, output_dir=output_dir, label=label, size=size)
     quality_settings = resolve_quality_settings(profile=profile, quality=quality)
@@ -666,6 +1012,7 @@ def backdrops(
     log(f"  Images  : {fanart_note}")
     log(f"  Lang    : preferred={preferred_language}")
     log(f"  Focus   : x={fx:.2f}, y={fy:.2f}")
+    log(f"  Render  : {render_style}")
     log(f"  Sizes   : {', '.join(outputs)}")
     log(f"  Profile : {profile} (q={quality_settings['quality']})")
     log(f"{'-' * 50}\n")
@@ -723,8 +1070,37 @@ def backdrops(
     for output_size, destination in outputs.items():
         width, height, scale = SIZE_PRESETS[output_size]
         log(f"Compositing {output_size} ({width}x{height})...")
-        canvas = build_tilted_grid(tile_images, width, height, scale=scale, focus_x=fx, focus_y=fy)
-        canvas = apply_gradient(canvas, accent)
+        if render_style == "perspective":
+            layout, ox, oy = build_perspective_layout(
+                tile_images,
+                width,
+                height,
+                scale=scale,
+                focus_x=fx,
+                focus_y=fy,
+            )
+            canvas = perspective_warp(
+                layout,
+                ox,
+                oy,
+                width,
+                height,
+                PERSPECTIVE_POV_X,
+                PERSPECTIVE_POV_Y,
+                PERSPECTIVE_WARP_STRENGTH,
+            )
+            canvas = apply_perspective_dof(canvas, scale=scale)
+            canvas = apply_perspective_gradient(canvas, accent)
+        else:
+            canvas = build_tilted_grid(
+                tile_images,
+                width,
+                height,
+                scale=scale,
+                focus_x=fx,
+                focus_y=fy,
+            )
+            canvas = apply_gradient(canvas, accent)
         with contextlib.redirect_stdout(progress_output):
             save_output(canvas, destination, quality_settings=quality_settings)
         for line in progress_output.getvalue().splitlines():
@@ -769,6 +1145,7 @@ def main():
     parser.add_argument("--output", default=None, help="Exact output file path. Use this when another script has already decided the final filename.")
     parser.add_argument("--size", choices=("4k", "1080p", "both"), default="both", help="Which size(s) to render")
     parser.add_argument("--profile", choices=tuple(QUALITY_PRESETS), default="compressed", help="Named output profile. 'compressed' is smaller, 'high' keeps more detail.")
+    parser.add_argument("--render-style", choices=RENDER_STYLES, default="perspective", help="Rendering style. Default: perspective.")
     parser.add_argument("--quality", type=int, default=None, help="Advanced override for output quality from 1-95. If set, it overrides the selected profile for both JPG and WEBP.")
     parser.add_argument(
         "--focus",
@@ -784,7 +1161,8 @@ def main():
 
     try:
         accent = parse_accent_color(args.accent_color) if args.accent_color else None
-        focus_x, focus_y = parse_focus_value(args.focus)
+        default_focus = "perspective" if args.render_style == "perspective" else None
+        focus_x, focus_y = parse_focus_value(args.focus or default_focus)
         if args.quality is not None and (args.quality < 1 or args.quality > 95):
             raise ValueError("--quality must be between 1 and 95.")
         backdrops(
@@ -802,6 +1180,7 @@ def main():
             profile=args.profile,
             quality=args.quality,
             preferred_language=args.preferred_language,
+            render_style=args.render_style,
         )
     except Exception as exc:
         print(f"Error: {exc}")

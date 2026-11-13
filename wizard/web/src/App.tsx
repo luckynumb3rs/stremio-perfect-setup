@@ -9,7 +9,7 @@ import { CatalogStep } from './steps/CatalogStep';
 import { InstallingStep } from './steps/InstallingStep';
 import { DoneStep } from './steps/DoneStep';
 import { RecommendationsStep } from './steps/RecommendationsStep';
-import { isBingecatOn, normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
+import { isBingecatConfigured, normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
 import {
   ACTIVE_KEY_SCREENS,
   AIO_SECTION_START_STEP,
@@ -62,6 +62,7 @@ function StepRouter() {
       ? wizardConfig.templates.nuvio
       : wizardConfig.templates.stremio;
     const collectionsTemplatePath = targetTemplates.collections ?? wizardConfig.templates.nuvio.collections ?? null;
+    const fullNuvioSettingsTemplatePath = target === 'nuvio' ? wizardConfig.templates.nuvio.settingsAll ?? null : null;
     const tplUrls = {
       aiostreams: resolveRepoUrl(targetTemplates.aiostreams),
       aiometadata: resolveRepoUrl(targetTemplates.aiometadata),
@@ -73,7 +74,8 @@ function StepRouter() {
     setAioSections([]);
 
     const watchlyTemplatePath = targetTemplates.watchly ?? null;
-    const bingecatConfig = isBingecatOn(wizardConfig) ? wizardConfig.bingecat ?? null : null;
+    const bingecatTemplatePath = isBingecatConfigured(wizardConfig) ? targetTemplates.bingecat ?? null : null;
+    const bingecatKidsTemplatePath = isBingecatConfigured(wizardConfig) ? targetTemplates.bingecatKids ?? null : null;
 
     const fetches = [
       fetchJson(tplUrls.aiostreams, 'AIOStreams template'),
@@ -84,20 +86,23 @@ function StepRouter() {
       target === 'nuvio'
         ? fetchJson(resolveRepoUrl(wizardConfig.templates.nuvio.settings), 'Nuvio settings template')
         : Promise.resolve(null),
+      fullNuvioSettingsTemplatePath
+        ? fetchJson(resolveRepoUrl(fullNuvioSettingsTemplatePath), 'Nuvio full settings template')
+        : Promise.resolve(null),
       watchlyTemplatePath
         ? fetchJson(resolveRepoUrl(watchlyTemplatePath), 'Watchly template')
         : Promise.resolve(null),
-      bingecatConfig
+      bingecatTemplatePath && bingecatKidsTemplatePath
         ? Promise.all([
-          fetchJson(resolveRepoUrl(bingecatConfig.templates.standard), 'BingeCat template'),
-          fetchJson(resolveRepoUrl(bingecatConfig.templates.kids), 'BingeCat Kids template'),
+          fetchJson(resolveRepoUrl(bingecatTemplatePath), 'BingeCat template'),
+          fetchJson(resolveRepoUrl(bingecatKidsTemplatePath), 'BingeCat Kids template'),
         ]).then(([standard, kids]) => ({ standard, kids })).catch(() => undefined) // a missing BingeCat template must not break the whole wizard
         : Promise.resolve(undefined),
     ] as const;
 
-    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, watchly, bingecat]) => {
+    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, settingsAll, watchly, bingecat]) => {
       if (cancelled) return;
-      setTemplates({ aiostreams, aiometadata, collections, settings, watchly: watchly ?? null, ...(bingecat ? { bingecat } : {}) });
+      setTemplates({ aiostreams, aiometadata, collections, settings, settingsAll, watchly: watchly ?? null, ...(bingecat ? { bingecat } : {}) });
       setAioSections(buildAioSections(aiostreams));
     }).catch((error: unknown) => {
       if (cancelled) return;

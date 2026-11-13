@@ -1,5 +1,5 @@
 {
-  "window.title": "PERFECT SETUP  •  ${rootName}",
+  "window.title": "STREAMING  •  ${rootName}",
   "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#ab307e",

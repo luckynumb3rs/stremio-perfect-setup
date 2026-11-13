@@ -33,6 +33,7 @@ export interface WizardInstances {
   aiostreams: string[];
   aiometadata: string[];
   watchly?: string[];
+  bingecat?: string[];
 }
 
 export interface WizardTargetTemplates {
@@ -40,11 +41,15 @@ export interface WizardTargetTemplates {
   aiometadata: string;
   collections?: string;
   watchly?: string;
+  bingecat?: string;
+  bingecatKids?: string;
 }
 
 export interface WizardNuvioTemplates extends WizardTargetTemplates {
   collections: string;
   settings: string;
+  /** Optional full settings template; when present, Nuvio profiles can opt into it individually. */
+  settingsAll?: string;
 }
 
 export interface WizardTemplates {
@@ -58,6 +63,7 @@ export interface WizardKeys {
   tvdbApiKeys: WizardObfuscatedKey[];
   geminiApiKeys: WizardObfuscatedKey[];
   rpdbApiKeys: WizardObfuscatedKey[];
+  bingecatClientId?: string;
 }
 
 export interface WizardLimits {
@@ -66,14 +72,6 @@ export interface WizardLimits {
 
 export interface WizardAnalyticsConfig {
   denylist?: string[];
-}
-
-/** BingeCat + Kids feature. Off unless `enabled` is exactly true (or VITE_BINGECAT=1 in a local build). */
-export interface WizardBingecat {
-  enabled: boolean;
-  baseUrl: string;
-  clientId: string;
-  templates: { standard: string; kids: string };
 }
 
 export interface WizardConfig {
@@ -85,7 +83,6 @@ export interface WizardConfig {
   limits: WizardLimits;
   analytics?: WizardAnalyticsConfig;
   doneStepNotifications?: WizardNotification[];
-  bingecat?: WizardBingecat;
   instances: WizardInstances;
   templates: WizardTemplates;
   proxyBase?: string;
@@ -142,11 +139,15 @@ function normalizeInstances(value: unknown): WizardInstances | null {
   const watchly = Array.isArray(value.watchly)
     ? value.watchly.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
     : undefined;
+  const bingecat = Array.isArray(value.bingecat)
+    ? value.bingecat.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+    : undefined;
 
   return {
     aiostreams: shuffleArray(aiostreams),
     aiometadata: shuffleArray(aiometadata),
     watchly: watchly ? shuffleArray(watchly) : undefined,
+    bingecat: bingecat ? shuffleArray(bingecat) : undefined,
   };
 }
 
@@ -161,6 +162,8 @@ function normalizeTargetTemplates(value: unknown): WizardTargetTemplates | null 
     aiometadata: value.aiometadata,
     collections: typeof value.collections === 'string' ? value.collections : undefined,
     watchly: typeof value.watchly === 'string' ? value.watchly : undefined,
+    bingecat: typeof value.bingecat === 'string' ? value.bingecat : undefined,
+    bingecatKids: typeof value.bingecatKids === 'string' ? value.bingecatKids : undefined,
   };
 }
 
@@ -174,6 +177,7 @@ function normalizeNuvioTemplates(value: unknown): WizardNuvioTemplates | null {
     ...base,
     collections: value.collections,
     settings: value.settings,
+    ...(typeof value.settingsAll === 'string' ? { settingsAll: value.settingsAll } : {}),
   };
 }
 
@@ -209,7 +213,11 @@ function normalizeKeys(value: unknown): WizardKeys | null {
     return null;
   }
 
-  return { tmdbApiKeys, tmdbReadAccessTokens, tvdbApiKeys, geminiApiKeys, rpdbApiKeys };
+  const bingecatClientId = typeof value.bingecatClientId === 'string' && value.bingecatClientId.trim().length > 0
+    ? value.bingecatClientId.trim()
+    : undefined;
+
+  return { tmdbApiKeys, tmdbReadAccessTokens, tvdbApiKeys, geminiApiKeys, rpdbApiKeys, bingecatClientId };
 }
 
 function normalizeLimits(value: unknown): WizardLimits | null {
@@ -229,30 +237,23 @@ function normalizeAnalytics(value: unknown): WizardAnalyticsConfig | undefined {
   return { denylist };
 }
 
-function normalizeBingecat(value: unknown): WizardBingecat | undefined {
-  if (!isRecord(value) || !isRecord(value.templates)) return undefined;
-  const { baseUrl, clientId } = value;
-  const { standard, kids } = value.templates;
-  if (![baseUrl, clientId, standard, kids].every((v) => typeof v === 'string' && v.trim().length > 0)) return undefined;
-  return {
-    enabled: value.enabled === true,
-    baseUrl: (baseUrl as string).trim().replace(/\/+$/, ''),
-    clientId: (clientId as string).trim(),
-    templates: { standard: (standard as string).trim(), kids: (kids as string).trim() },
-  };
-}
-
-/** True when BingeCat/Kids UI and installs are available: config flag, or VITE_BINGECAT=1 for local live tests. */
-export function isBingecatOn(config: WizardConfig | null | undefined): boolean {
-  if (!config?.bingecat) return false;
-  const env = (import.meta as { env?: Record<string, string | undefined> }).env;
-  return config.bingecat.enabled || env?.VITE_BINGECAT === '1';
+/** True when the config supplies the BingeCat instance, OAuth client id, and both target templates. */
+export function isBingecatConfigured(config: WizardConfig | null | undefined): boolean {
+  return Boolean(
+    config?.instances.bingecat?.length
+    && config.keys.bingecatClientId
+    && config.templates.stremio.bingecat
+    && config.templates.stremio.bingecatKids
+    && config.templates.nuvio.bingecat
+    && config.templates.nuvio.bingecatKids,
+  );
 }
 
 function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
-  const { target: _target, account: _account, ...rest } = block as LegacyWizardConfig & { account?: unknown };
+  const { target: _target, account: _account, bingecat: _legacyBingecat, ...rest } = block as LegacyWizardConfig & { account?: unknown; bingecat?: unknown };
   void _target;
   void _account;
+  void _legacyBingecat;
   const targets = normalizeTargets(block.targets ?? (block.target ? [block.target] : []));
   const addonDetailsFilenamePrefix = typeof block.addonDetailsFilenamePrefix === 'string'
     ? block.addonDetailsFilenamePrefix.trim()
@@ -264,7 +265,6 @@ function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
   const keys = normalizeKeys(block.keys);
   const limits = normalizeLimits(block.limits);
   const analytics = normalizeAnalytics(block.analytics);
-  const bingecat = normalizeBingecat(block.bingecat);
   if (
     !targets.length
     || typeof block.name !== 'string'
@@ -286,7 +286,6 @@ function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
     keys,
     limits,
     analytics,
-    bingecat,
     instances,
     templates,
     targets,

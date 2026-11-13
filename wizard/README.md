@@ -42,7 +42,7 @@ wizard/
 cd wizard/web
 npm install
 npm run dev
-# → http://localhost:5173/
+# → http://localhost:8000/
 
 # Full guide + wizard site
 cd /path/to/stremio-perfect-setup
@@ -241,14 +241,13 @@ are hidden.
 Note: as of the Watchly update this notification has been replaced by the interactive Trakt card in
 the Done page. It is preserved here as a style reference.
 
-## BingeCat and Kids (feature flag)
+## BingeCat and Kids
 
-BingeCat support (OAuth connect, Kids profiles, profile mapping) ships **switched off**. The
-`bingecat` block in `wizard/config.json` holds `enabled` (default `false`), `baseUrl`, the public OAuth
-`clientId` and the two settings templates (`templates/BingeCat.json`, `templates/BingeCat-Kids.json`).
-While `enabled` is not exactly `true` nothing BingeCat-related is visible and the wizard behaves as
-before. For local testing run `VITE_BINGECAT=1 npm run dev` instead of editing the config (never set
-this variable in CI or a production build).
+BingeCat support (OAuth connect, Kids profiles, profile mapping) is configured the same way as the
+other services. Add its URL to `instances.bingecat`, its public OAuth client id to
+`keys.bingecatClientId`, and add `bingecat` plus `bingecatKids` template paths under both
+`templates.stremio` and `templates.nuvio`. When those entries are present, BingeCat is available in
+the wizard; there is no separate configuration feature flag.
 
 - Standard profiles opt in with the *Install BingeCat* toggle on the Recommendations step (independent
   of Watchly; both can be on). Kids profiles always get BingeCat and never get Watchly, AIOMetadata or
@@ -256,11 +255,14 @@ this variable in CI or a production build).
 - A Kids profile is a BingeCat profile of the Kids type: new ones are created as Kids, and a Kids profile
   the user maps onto an existing normal BingeCat sub-profile switches it to Kids before its settings are
   written (the card warns about it). The main profile is never switched; BingeCat ignores that anyway.
-- Settings are applied through the BingeCat public API with the user's OAuth token (authorization code +
-  PKCE in a popup, redirect back to the wizard page, token kept in memory only). The wizard maps each
-  Nuvio profile to an existing BingeCat profile or creates a new one and never deletes anything.
+- Settings and provider connections are applied through the BingeCat public API with the user's OAuth token
+  (authorization code + PKCE in a popup, redirect back to the wizard page, access and refresh tokens kept in
+  memory only). The OAuth grant requests `connections:write`; the install connects the signed-in Stremio or
+  Nuvio account, links Nuvio profiles, stores the supplied Gemini key when present, and applies safe addon
+  settings (`force_top: false`, Cinemeta `observe`). The wizard maps each Nuvio profile to an existing
+  BingeCat profile or creates a new one and never deletes anything.
 - The OAuth redirect URIs registered for the client are the wizard page URLs
-  (`https://numb3rs.stream/wizard/`, `http://127.0.0.1:8000/wizard/`, `http://localhost:5173/`).
+  (`https://numb3rs.stream/wizard/`).
 
 ## Per-Target Templates
 
@@ -274,6 +276,7 @@ template path:
 | `watchly` | ✓ | Watchly default `TokenRequest` body fields |
 | `collections` | Nuvio only | Nuvio collection groups |
 | `settings` | Nuvio only | Nuvio platform settings |
+| `settingsAll` | Nuvio only | Optional complete Nuvio settings; selectable per profile |
 
 ## For Maintainers
 

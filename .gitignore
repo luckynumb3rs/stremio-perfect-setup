@@ -11,3 +11,4 @@ wizard/web/node_modules/
 node_modules/
 .env*
 *__pycache__/
+docs/_internal/

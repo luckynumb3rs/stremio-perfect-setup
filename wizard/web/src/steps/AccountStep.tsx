@@ -4,7 +4,7 @@ import { WizardShell } from '../components/WizardShell';
 import { MarkdownText } from '../components/MarkdownText';
 import { useWizard, sortNuvioProfiles, type NuvioProfileOption, type NuvioProfileTarget } from '../store/wizard';
 import { resolveImageUrl } from '../lib/integration';
-import { isBingecatOn } from '../lib/constants';
+import { isBingecatConfigured } from '../lib/constants';
 
 // @ts-ignore
 import { createStremioAdapter } from '@core/adapters/stremio.js';
@@ -23,14 +23,44 @@ function KidsButton({ pressed, onChange, label }: { pressed: boolean; onChange: 
       aria-label={label}
       onClick={() => onChange(!pressed)}
       style={{
-        flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.2rem 0.5rem 0.2rem 0.75rem',
+        flexShrink: 0, minWidth: 'max-content', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.2rem 0.5rem 0.2rem 0.75rem',
         borderRadius: '999px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700, lineHeight: 1.4, transition: 'all 0.15s',
+        whiteSpace: 'nowrap',
         border: `1px solid ${pressed ? 'var(--accent)' : 'var(--border)'}`,
         background: pressed ? 'rgba(99,102,241,0.12)' : 'transparent',
         color: pressed ? 'var(--accent)' : 'var(--muted)',
       }}
     >
       Kids
+      <span
+        aria-hidden="true"
+        style={{ width: '28px', height: '16px', borderRadius: '8px', position: 'relative', flexShrink: 0, background: pressed ? 'var(--accent)' : 'var(--border)', transition: 'background 0.15s' }}
+      >
+        <span style={{ position: 'absolute', top: '2px', left: pressed ? '14px' : '2px', width: '12px', height: '12px', borderRadius: '50%', background: '#fff', transition: 'left 0.15s' }} />
+      </span>
+    </button>
+  );
+}
+
+/** Per-profile switch for applying the complete Nuvio settings template. */
+function FullSettingsButton({ pressed, onChange, label }: { pressed: boolean; onChange: (next: boolean) => void; label: string }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={pressed}
+      aria-label={label}
+      onClick={() => onChange(!pressed)}
+      style={{
+        flexShrink: 0, minWidth: 'max-content', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.2rem 0.5rem 0.2rem 0.75rem',
+        borderRadius: '999px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700, lineHeight: 1.4, transition: 'all 0.15s',
+        whiteSpace: 'nowrap',
+        border: `1px solid ${pressed ? 'var(--accent)' : 'var(--border)'}`,
+        background: pressed ? 'rgba(99,102,241,0.12)' : 'transparent',
+        color: pressed ? 'var(--accent)' : 'var(--muted)',
+      }}
+    >
+      Settings
       <span
         aria-hidden="true"
         style={{ width: '28px', height: '16px', borderRadius: '8px', position: 'relative', flexShrink: 0, background: pressed ? 'var(--accent)' : 'var(--border)', transition: 'background 0.15s' }}
@@ -54,15 +84,16 @@ export function AccountStep() {
   } as const;
   const {
     target, stremioAccount, nuvioAccount, nuvioProfiles, stremioKids, wizardConfig,
-    setStremioAccount, setNuvioAccount, setNuvioProfiles, setNuvioProfileKids, setStremioKids, toggleNuvioProfile, setInstallResult, setBingecat, nextStep,
+    setStremioAccount, setNuvioAccount, setNuvioProfiles, setNuvioProfileKids, setNuvioProfileFullSettings, setStremioKids, toggleNuvioProfile, setInstallResult, setBingecat, nextStep,
   } = useWizard();
-  const kidsAvailable = isBingecatOn(wizardConfig);
+  const kidsAvailable = isBingecatConfigured(wizardConfig);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const account = target === 'stremio' ? stremioAccount : nuvioAccount;
   const appName = target === 'stremio' ? 'Stremio' : 'Nuvio';
   const isNuvio = target === 'nuvio';
+  const fullSettingsAvailable = isNuvio && typeof wizardConfig?.templates.nuvio.settingsAll === 'string';
   const existingProfiles: NuvioProfileOption[] = isNuvio ? (account.profiles ?? []) : [];
   // Signed in (or account already created): the profiles are loaded and can be picked.
   const hasLoadedNuvioProfileStep = isNuvio
@@ -146,7 +177,7 @@ export function AccountStep() {
       const profile: NuvioProfileOption | null = await adapter.createProfile(token, { name: targets[i].name.trim() });
       if (!profile) throw new Error('Nuvio could not create the profile. Please try again.');
       profiles = [...profiles, profile].sort((a, b) => a.profile_index - b.profile_index);
-      targets = targets.map((t, j) => (j === i ? { nuvioProfileId: profile.profile_index, name: profile.name, kids: t.kids } : t));
+      targets = targets.map((t, j) => (j === i ? { nuvioProfileId: profile.profile_index, name: profile.name, kids: t.kids, fullSettings: t.fullSettings } : t));
       setNuvioAccount({ profiles });
       setNuvioProfiles(sortNuvioProfiles(targets));
     }
@@ -360,7 +391,7 @@ export function AccountStep() {
               const name = profile.name || `Profile ${profile.profile_index}`;
               const targetIndex = nuvioProfiles.findIndex((t) => t.nuvioProfileId === profile.profile_index);
               return (
-                // One row: the select area (circle, avatar, name) and, when selected, the Kids button on the same line.
+                // One row: the select area (circle, avatar, name) and, when selected, the profile options on the same line.
                 // They are siblings, so there is no button inside a button.
                 <div key={profile.profile_index} style={{ ...cardStyle(selected), cursor: 'default' }}>
                   <button
@@ -385,12 +416,23 @@ export function AccountStep() {
                     <span style={avatarStyle(profile.avatar_color_hex)} aria-hidden="true">{name.charAt(0).toUpperCase()}</span>
                     <span style={{ flex: 1, minWidth: 0, fontSize: '0.875rem', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</span>
                   </button>
-                  {kidsAvailable && selected && (
-                    <KidsButton
-                      pressed={nuvioProfiles[targetIndex]?.kids ?? false}
-                      onChange={(kids) => { setNuvioProfileKids(targetIndex, kids); setError(''); }}
-                      label={`${name} is a Kids profile`}
-                    />
+                  {selected && (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.35rem', flexWrap: 'wrap' }}>
+                      {kidsAvailable && (
+                        <KidsButton
+                          pressed={nuvioProfiles[targetIndex]?.kids ?? false}
+                          onChange={(kids) => { setNuvioProfileKids(targetIndex, kids); setError(''); }}
+                          label={`${name} is a Kids profile`}
+                        />
+                      )}
+                      {fullSettingsAvailable && (
+                        <FullSettingsButton
+                          pressed={nuvioProfiles[targetIndex]?.fullSettings ?? false}
+                          onChange={(fullSettings) => { setNuvioProfileFullSettings(targetIndex, fullSettings); setError(''); }}
+                          label={`Apply Nuvio Perfect Settings to ${name}`}
+                        />
+                      )}
+                    </div>
                   )}
                 </div>
               );
@@ -413,6 +455,13 @@ export function AccountStep() {
                     pressed={entry.kids}
                     onChange={(kids) => { setNuvioProfileKids(index, kids); setError(''); }}
                     label={`${entry.name || 'New profile'} is a Kids profile`}
+                  />
+                )}
+                {fullSettingsAvailable && (
+                  <FullSettingsButton
+                    pressed={entry.fullSettings ?? false}
+                    onChange={(fullSettings) => { setNuvioProfileFullSettings(index, fullSettings); setError(''); }}
+                    label={`Apply Nuvio Perfect Settings to ${entry.name || 'New profile'}`}
                   />
                 )}
                 {nuvioProfiles.length > 1 && (
@@ -441,7 +490,7 @@ export function AccountStep() {
           <p style={{ marginTop: '0.45rem', color: 'var(--muted)', fontSize: '0.78rem', lineHeight: 1.45, textAlign: 'center' }}>
             {nuvioProfiles.length === 0
               ? 'Select at least one profile.'
-              : `Nuvio allows up to ${MAX_NUVIO_PROFILES} profiles per account.${newCount > 0 ? ' New profiles are created when you continue.' : ''}`}
+              : `Nuvio allows up to ${MAX_NUVIO_PROFILES} profiles per account.${newCount > 0 ? ' New profiles are created when you continue.' : ''} Enable \"Settings\" to apply a pre-defined set of recommended settings for a fully configured profile, overwriting any current settings.`}
           </p>
         </div>
       )}

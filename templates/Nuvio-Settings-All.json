@@ -1,0 +1,692 @@
+{
+  "tv": {
+    "version": 1,
+    "features": {
+      "tmdb_settings": {
+        "tmdb_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_language": {
+          "type": "string",
+          "value": "en"
+        },
+        "tmdb_use_artwork": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_credits": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_details": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_episodes": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_networks": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_trailers": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_basic_info": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_collections": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_productions": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_use_more_like_this": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_modern_home_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "tmdb_enrich_continue_watching": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "theme_settings": {
+        "amoled_mode": {
+          "type": "boolean",
+          "value": true
+        },
+        "selected_font": {
+          "type": "string",
+          "value": "INTER"
+        },
+        "selected_theme": {
+          "type": "string",
+          "value": "OCEAN"
+        },
+        "settings_ui_style": {
+          "type": "string",
+          "value": "CLASSIC"
+        },
+        "custom_theme_colors": {
+          "type": "string",
+          "value": "#B75AFF,#EC70A9,#FFB37A"
+        },
+        "amoled_surfaces_mode": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "trakt_settings": {
+        "show_meta_comments": {
+          "type": "boolean",
+          "value": true
+        },
+        "library_source_mode": {
+          "type": "string",
+          "value": "LOCAL"
+        },
+        "more_like_this_source": {
+          "type": "string",
+          "value": "TMDB"
+        },
+        "watch_progress_source": {
+          "type": "string",
+          "value": "NUVIO_SYNC"
+        },
+        "simkl_anime_id_preference": {
+          "type": "string",
+          "value": "IMDB"
+        },
+        "continue_watching_days_cap": {
+          "type": "int",
+          "value": 60
+        }
+      },
+      "debrid_settings": {
+        "debrid_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_sort_mode": {
+          "type": "string",
+          "value": "DEFAULT"
+        },
+        "stream_hdr_filter": {
+          "type": "string",
+          "value": "ANY"
+        },
+        "stream_max_results": {
+          "type": "int",
+          "value": 0
+        },
+        "stream_preferences": {
+          "type": "string",
+          "value": "{\"maxResults\":0,\"maxPerResolution\":0,\"maxPerQuality\":0,\"sizeMinGb\":0,\"sizeMaxGb\":0,\"preferredResolutions\":[\"P2160\",\"P1440\",\"P1080\",\"P720\",\"P576\",\"P480\",\"P360\",\"UNKNOWN\"],\"requiredResolutions\":[\"P2160\",\"P1440\",\"P1080\",\"P720\",\"P576\",\"P480\",\"P360\"],\"excludedResolutions\":[],\"preferredQualities\":[\"BLURAY_REMUX\",\"BLURAY\",\"WEB_DL\",\"WEBRIP\",\"HDRIP\",\"HD_RIP\",\"DVDRIP\",\"HDTV\",\"CAM\",\"TS\",\"TC\",\"SCR\",\"UNKNOWN\"],\"requiredQualities\":[],\"excludedQualities\":[],\"preferredVisualTags\":[\"HDR_DV\",\"DV_ONLY\",\"HDR_ONLY\",\"HDR10_PLUS\",\"HDR10\",\"DV\",\"HDR\",\"HLG\",\"TEN_BIT\",\"THREE_D\",\"IMAX\",\"AI\",\"SDR\",\"H_OU\",\"H_SBS\",\"UNKNOWN\"],\"requiredVisualTags\":[],\"excludedVisualTags\":[],\"preferredAudioTags\":[\"ATMOS\",\"DD_PLUS\",\"DD\",\"DTS_X\",\"DTS_HD_MA\",\"DTS_HD\",\"DTS_ES\",\"DTS\",\"TRUEHD\",\"OPUS\",\"FLAC\",\"AAC\",\"UNKNOWN\"],\"requiredAudioTags\":[],\"excludedAudioTags\":[],\"preferredAudioChannels\":[\"CH_7_1\",\"CH_6_1\",\"CH_5_1\",\"CH_2_0\",\"UNKNOWN\"],\"requiredAudioChannels\":[],\"excludedAudioChannels\":[],\"preferredEncodes\":[\"AV1\",\"HEVC\",\"AVC\",\"XVID\",\"DIVX\",\"UNKNOWN\"],\"requiredEncodes\":[],\"excludedEncodes\":[],\"preferredLanguages\":[],\"requiredLanguages\":[],\"excludedLanguages\":[],\"requiredReleaseGroups\":[],\"excludedReleaseGroups\":[],\"sortCriteria\":[]}"
+        },
+        "stream_codec_filter": {
+          "type": "string",
+          "value": "ANY"
+        },
+        "cloud_library_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_minimum_quality": {
+          "type": "string",
+          "value": "ANY"
+        },
+        "stream_dolby_vision_filter": {
+          "type": "string",
+          "value": "ANY"
+        },
+        "debrid_stream_name_template": {
+          "type": "string",
+          "value": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD⁴ᴷ')::replace('1440p','QHD²ᴷ')::replace('1080p','FHD')::replace('p','P')}    \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::upper}⌟    \"||\"\"]}{service.shortName::exists[\"[{service.shortName}]    \"||\"\"]}"
+        },
+        "preferred_resolver_provider_id": {
+          "type": "string",
+          "value": "torbox"
+        },
+        "debrid_stream_description_template": {
+          "type": "string",
+          "value": "{stream.edition::exists[\"🎬  {stream.edition::upper}  \"||\"\"]}\n{stream.size::>0[\"💾  {stream.size::bytes}  \"||\"\"]}{stream.languages::exists[\"🔊  {stream.languages::join(' · ')::upper}  \"||\"\"]}"
+        },
+        "instant_playback_preparation_limit": {
+          "type": "int",
+          "value": 0
+        }
+      },
+      "layout_settings": {
+        "selected_layout": {
+          "type": "string",
+          "value": "MODERN"
+        },
+        "discover_location": {
+          "type": "string",
+          "value": "IN_SEARCH"
+        },
+        "has_chosen_layout": {
+          "type": "boolean",
+          "value": true
+        },
+        "hero_catalog_keys": {
+          "type": "string",
+          "value": "[]"
+        },
+        "card_depth_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "follow_addons_order": {
+          "type": "boolean",
+          "value": true
+        },
+        "hero_section_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "poster_card_width_dp": {
+          "type": "int",
+          "value": 126
+        },
+        "show_unaired_next_up": {
+          "type": "boolean",
+          "value": true
+        },
+        "poster_card_height_dp": {
+          "type": "int",
+          "value": 189
+        },
+        "poster_labels_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "modern_sidebar_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "random_episode_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "show_full_release_date": {
+          "type": "boolean",
+          "value": true
+        },
+        "blur_unwatched_episodes": {
+          "type": "boolean",
+          "value": false
+        },
+        "card_depth_cast_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "hide_unreleased_content": {
+          "type": "boolean",
+          "value": false
+        },
+        "card_depth_edge_coverage": {
+          "type": "int",
+          "value": 0
+        },
+        "card_depth_edge_strength": {
+          "type": "int",
+          "value": 28
+        },
+        "card_depth_sheen_strength": {
+          "type": "int",
+          "value": 10
+        },
+        "card_depth_posters_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "catalog_addon_name_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "card_depth_trailers_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "catalog_type_suffix_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "continue_watching_sort_mode": {
+          "type": "string",
+          "value": "DEFAULT"
+        },
+        "modern_sidebar_blur_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "continue_watching_card_style": {
+          "type": "string",
+          "value": "CARD"
+        },
+        "home_imdb_ratings_visibility": {
+          "type": "string",
+          "value": "SHOW_ALL"
+        },
+        "poster_card_corner_radius_dp": {
+          "type": "int",
+          "value": 12
+        },
+        "sidebar_collapsed_by_default": {
+          "type": "boolean",
+          "value": true
+        },
+        "use_episode_thumbnails_in_cw": {
+          "type": "boolean",
+          "value": true
+        },
+        "next_up_from_furthest_episode": {
+          "type": "boolean",
+          "value": true
+        },
+        "blur_continue_watching_next_up": {
+          "type": "boolean",
+          "value": false
+        },
+        "classic_focus_gradient_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "detail_imdb_ratings_visibility": {
+          "type": "string",
+          "value": "SHOW_ALL"
+        },
+        "card_depth_episode_cards_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "modern_hero_full_screen_backdrop": {
+          "type": "boolean",
+          "value": false
+        },
+        "modern_landscape_posters_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "prefer_external_meta_addon_detail": {
+          "type": "boolean",
+          "value": true
+        },
+        "detail_page_trailer_button_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "fast_horizontal_navigation_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "card_depth_continue_watching_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "focused_poster_backdrop_trailer_muted": {
+          "type": "boolean",
+          "value": true
+        },
+        "focused_poster_backdrop_expand_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "focused_poster_backdrop_trailer_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "focused_poster_backdrop_expand_delay_seconds": {
+          "type": "int",
+          "value": 3
+        },
+        "focused_poster_backdrop_trailer_playback_target": {
+          "type": "string",
+          "value": "HERO_MEDIA"
+        }
+      },
+      "player_settings": {
+        "subtitle_bold": {
+          "type": "boolean",
+          "value": false
+        },
+        "subtitle_size": {
+          "type": "int",
+          "value": 100
+        },
+        "osd_clock_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "skip_intro_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "subtitle_text_color": {
+          "type": "int",
+          "value": -1
+        },
+        "pause_overlay_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_auto_play_mode": {
+          "type": "string",
+          "value": "FIRST_STREAM"
+        },
+        "parental_guide_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "still_watching_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "subtitle_outline_color": {
+          "type": "int",
+          "value": -16777216
+        },
+        "auto_skip_segment_types": {
+          "type": "string_set",
+          "value": [
+            "intro",
+            "outro",
+            "recap"
+          ]
+        },
+        "loading_overlay_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_auto_play_source": {
+          "type": "string",
+          "value": "ALL_SOURCES"
+        },
+        "preferred_audio_language": {
+          "type": "string",
+          "value": "device"
+        },
+        "subtitle_outline_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "subtitle_vertical_offset": {
+          "type": "int",
+          "value": 5
+        },
+        "subtitle_background_color": {
+          "type": "int",
+          "value": 0
+        },
+        "show_player_loading_status": {
+          "type": "boolean",
+          "value": true
+        },
+        "addon_subtitle_startup_mode": {
+          "type": "string",
+          "value": "PREFERRED_ONLY"
+        },
+        "next_episode_threshold_mode": {
+          "type": "string",
+          "value": "PERCENTAGE"
+        },
+        "subtitle_preferred_language": {
+          "type": "string",
+          "value": "device"
+        },
+        "subtitle_secondary_language": {
+          "type": "string",
+          "value": "none"
+        },
+        "subtitle_use_forced_subtitles": {
+          "type": "boolean",
+          "value": false
+        },
+        "stream_reuse_last_link_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "still_watching_episode_threshold": {
+          "type": "int",
+          "value": 3
+        },
+        "stream_auto_play_timeout_seconds": {
+          "type": "int",
+          "value": 3
+        },
+        "next_episode_threshold_percent_v2": {
+          "type": "float",
+          "value": 99
+        },
+        "post_play_movie_threshold_percent": {
+          "type": "int",
+          "value": 97
+        },
+        "stream_auto_play_reuse_binge_group": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_reuse_last_link_cache_hours": {
+          "type": "int",
+          "value": 168
+        },
+        "stream_auto_play_next_episode_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "subtitle_show_only_preferred_languages": {
+          "type": "boolean",
+          "value": false
+        },
+        "next_episode_threshold_minutes_before_end_v2": {
+          "type": "float",
+          "value": 2
+        },
+        "stream_auto_play_prefer_bingegroup_next_episode": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "mdblist_settings": {
+        "mdblist_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_mal": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_imdb": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_tmdb": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_trakt": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_rating_order": {
+          "type": "string",
+          "value": "imdb,trakt,tmdb,tomatoes,audience,letterboxd,metacritic,mal"
+        },
+        "mdblist_show_on_hero": {
+          "type": "boolean",
+          "value": false
+        },
+        "mdblist_show_audience": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_tomatoes": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_letterboxd": {
+          "type": "boolean",
+          "value": true
+        },
+        "mdblist_show_metacritic": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "trailer_settings": {
+        "trailer_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "trailer_delay_seconds": {
+          "type": "int",
+          "value": 10
+        }
+      },
+      "animeskip_settings": {
+        "animeskip_enabled": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "experience_settings": {
+        "mode": {
+          "type": "string",
+          "value": "ADVANCED"
+        },
+        "addon_setup_skipped": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "stream_badge_settings": {
+        "show_addon_logo": {
+          "type": "boolean",
+          "value": false
+        },
+        "stream_badge_rules": {
+          "type": "string",
+          "value": "{\"imports\":[{\"sourceUrl\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/badges.json\",\"filters\":[{\"id\":\"remux\",\"groupId\":\"source\",\"name\":\"REMUX\",\"pattern\":\"(?i)\\\\bremux\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/remux.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"blu-ray-disc\",\"groupId\":\"source\",\"name\":\"Blu-ray Disc\",\"pattern\":\"(?i)\\\\b(blu[\\\\s._-]?ray|bluray|bdrip|bdremux)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/blu_ray_disc.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"webdl\",\"groupId\":\"source\",\"name\":\"WEB-DL\",\"pattern\":\"(?i)\\\\b(web[\\\\s._-]?dl|webdl)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/WEBDL_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"webrip\",\"groupId\":\"source\",\"name\":\"WEBRip\",\"pattern\":\"(?i)\\\\b(web[\\\\s._-]?rip|webrip)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/WEBRip_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"hdtv\",\"groupId\":\"source\",\"name\":\"HDTV\",\"pattern\":\"(?i)\\\\bhdtv\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/HDTV_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dvd-rip\",\"groupId\":\"source\",\"name\":\"DVD RIP\",\"pattern\":\"(?i)\\\\b(dvd[\\\\s._-]?rip|dvdrip)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/DVD_RIP_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"4k-ultra-hd\",\"groupId\":\"resolution\",\"name\":\"4K Ultra HD\",\"pattern\":\"(?i)\\\\b(4k|2160p|uhd|ultra\\\\s*hd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/4k_ultra_hd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"1080p-full-hd\",\"groupId\":\"resolution\",\"name\":\"1080p Full HD\",\"pattern\":\"(?i)\\\\b(1080p|fhd|full\\\\s*hd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/1080p_full_hd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"720p-hd\",\"groupId\":\"resolution\",\"name\":\"720p HD\",\"pattern\":\"(?i)\\\\b720p\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/720p_hd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"480p-sd\",\"groupId\":\"resolution\",\"name\":\"480p SD\",\"pattern\":\"(?i)\\\\b480p\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/480p_sd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dolby-vision\",\"groupId\":\"video-tech\",\"name\":\"Dolby Vision\",\"pattern\":\"(?i)\\\\b(dolby\\\\s*vision|dovi|dv)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_vision.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"hdr10-plus\",\"groupId\":\"video-tech\",\"name\":\"HDR10+\",\"pattern\":\"(?i)\\\\b(hdr10\\\\+|hdr10\\\\s*plus\\\\b|hdr\\\\s*10\\\\s*\\\\+)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr10_plus.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"hdr10\",\"groupId\":\"video-tech\",\"name\":\"HDR10\",\"pattern\":\"(?i)\\\\b(hdr10|hdr\\\\s*10)\\\\b(?!\\\\s*\\\\+|\\\\s*plus)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr10.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"hdr\",\"groupId\":\"video-tech\",\"name\":\"HDR\",\"pattern\":\"(?i)\\\\bhdr\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"sdr\",\"groupId\":\"video-tech\",\"name\":\"SDR\",\"pattern\":\"(?i)\\\\bsdr\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/SDR_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"imax-enhanced\",\"groupId\":\"video-tech\",\"name\":\"IMAX Enhanced\",\"pattern\":\"(?i)\\\\b(imax[\\\\s._-]*enhanced)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/imax_enhanced.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"imax\",\"groupId\":\"video-tech\",\"name\":\"IMAX\",\"pattern\":\"(?i)\\\\b(imax)\\\\b(?![\\\\s._-]*enhanced)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/imax.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"hevc\",\"groupId\":\"video-codec\",\"name\":\"HEVC\",\"pattern\":\"(?i)\\\\b(hevc|h[\\\\s._-]?265|x265)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/HEVC_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"avc\",\"groupId\":\"video-codec\",\"name\":\"AVC\",\"pattern\":\"(?i)\\\\b(avc|h[\\\\s._-]?264|x264)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/AVC_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"10bit\",\"groupId\":\"bit-depth\",\"name\":\"10Bit\",\"pattern\":\"(?i)\\\\b(10[\\\\s._-]?bit|10b|hi10p)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/10Bit_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"8bit\",\"groupId\":\"bit-depth\",\"name\":\"8Bit\",\"pattern\":\"(?i)\\\\b(8[\\\\s._-]?bit|8b)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/8Bit_transparent_4x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dolby-atmos\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Atmos\",\"pattern\":\"(?i)\\\\b(dolby\\\\s*atmos|atmos)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_atmos.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"truehd\",\"groupId\":\"audio-tech\",\"name\":\"TrueHD\",\"pattern\":\"(?i)\\\\b(truehd|true\\\\s*hd|dolby\\\\s*truehd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/truehd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dolby-digital-plus\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Digital Plus\",\"pattern\":\"(?i)\\\\b(ddp[\\\\s._-]*[0-9][\\\\s._-]*[0-9]|ddp|dd\\\\+|dolby[\\\\s._-]*digital[\\\\s._-]*plus|e-?ac-?3)(?![a-z])\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_digital_plus.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dolby-digital\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Digital\",\"pattern\":\"(?i)\\\\b(dd[\\\\s._-]*[0-9][\\\\s._-]*[0-9]|dd|dolby[\\\\s._-]*digital|ac-?3)(?![\\\\s._-]*plus|\\\\+|p|[a-z])\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_digital.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dts-x\",\"groupId\":\"audio-tech\",\"name\":\"DTS:X\",\"pattern\":\"(?i)\\\\b(dts[:\\\\s._-]*x)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_x.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dts-hd-master-audio\",\"groupId\":\"audio-tech\",\"name\":\"DTS-HD Master Audio\",\"pattern\":\"(?i)\\\\b(dts[\\\\s._-]*hd[\\\\s._-]*ma|dtshd\\\\s*ma|dts[\\\\s._-]*hd[\\\\s._-]*master)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_hd_master_audio.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dts-hd\",\"groupId\":\"audio-tech\",\"name\":\"DTS-HD\",\"pattern\":\"(?i)\\\\b(dts[\\\\s._-]*hd|dtshd)(?![\\\\s._-]*(ma|master)|ma)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_hd.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"dts\",\"groupId\":\"audio-tech\",\"name\":\"DTS\",\"pattern\":\"(?i)\\\\bdts\\\\b(?![\\\\s._:-]*(x|hd))\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"71-audio\",\"groupId\":\"audio-channels\",\"name\":\"7.1 Audio\",\"pattern\":\"(?i)\\\\b(7\\\\.1|7-1|8ch|8\\\\s*channel)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/7_1_audio.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"},{\"id\":\"51-audio\",\"groupId\":\"audio-channels\",\"name\":\"5.1 Audio\",\"pattern\":\"(?i)\\\\b(5\\\\.1|5-1|6ch|6\\\\s*channel)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/5_1_audio.png\",\"isEnabled\":true,\"tagColor\":\"transparent\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"transparent\",\"borderColor\":\"transparent\"}],\"groups\":[{\"id\":\"source\",\"name\":\"Source\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"resolution\",\"name\":\"Resolution\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"video-tech\",\"name\":\"Video Tech\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"video-codec\",\"name\":\"Video Codec\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"bit-depth\",\"name\":\"Bit Depth\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"audio-tech\",\"name\":\"Audio Tech\",\"color\":\"transparent\",\"isExpanded\":true},{\"id\":\"audio-channels\",\"name\":\"Audio Channels\",\"color\":\"transparent\",\"isExpanded\":true}],\"isActive\":true}]}"
+        },
+        "show_file_size_badges": {
+          "type": "boolean",
+          "value": false
+        },
+        "stream_badge_placement": {
+          "type": "string",
+          "value": "BOTTOM"
+        }
+      }
+    }
+  },
+  "mobile": {
+    "version": 4,
+    "features": {
+      "tmdb_settings": {
+        "tmdb_api_key": {
+          "type": "string",
+          "value": "{{TMDB_API_KEY}}"
+        },
+        "tmdb_enabled": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "theme_settings": {
+        "amoled_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "selected_theme": {
+          "type": "string",
+          "value": "OCEAN"
+        },
+        "liquid_glass_native_tab_bar_enabled": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "debrid_settings": {
+        "debrid_enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "debrid_stream_name_template": {
+          "type": "string",
+          "value": "{service.cached::istrue[\"⚡ \"||\"\"]}{service.cached::isfalse[\"⏳ \"||\"\"]}{stream.type::=p2p[\"🧲 \"||\"\"]}{stream.type::=http[\"🌐 \"||\"\"]}{stream.type::=live[\"📺 \"||\"\"]}{stream.type::=youtube[\"▶️ \"||\"\"]}{stream.type::=archive[\"🗄️ \"||\"\"]}{stream.type::=external[\"↗️ \"||\"\"]}{stream.type::=statistic[\"📊 \"||\"\"]}{stream.type::=info[\"ℹ️ \"||\"\"]}{stream.type::=error[\"⛔ \"||\"\"]}{stream.resolution::exists[\"{stream.resolution::replace('2160p','UHD⁴ᴷ')::replace('1440p','QHD²ᴷ')::replace('1080p','FHD')::replace('p','P')}    \"||\"\"]}\n{stream.quality::exists[\"⌜{stream.quality::title::replace('Bluray Remux','Remux')::upper}⌟    \"||\"\"]}{service.shortName::exists[\"[{service.shortName}]    \"||\"\"]}"
+        },
+        "debrid_stream_description_template": {
+          "type": "string",
+          "value": "{stream.edition::exists[\"🎬  {stream.edition::upper}  \"||\"\"]}\n{stream.size::>0[\"💾  {stream.size::bytes}  \"||\"\"]}{stream.languages::exists[\"🔊  {stream.languages::join(' · ')::upper}  \"||\"\"]}"
+        },
+        "debrid_preferred_resolver_provider_id": {
+          "type": "string",
+          "value": "torbox"
+        }
+      },
+      "player_settings": {
+        "auto_skip_segment_types": {
+          "type": "string_set",
+          "value": [
+            "intro",
+            "outro",
+            "recap"
+          ]
+        },
+        "preload_next_episode_sources": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_reuse_last_link_enabled": {
+          "type": "boolean",
+          "value": false
+        },
+        "stream_auto_play_reuse_binge_group": {
+          "type": "boolean",
+          "value": true
+        },
+        "stream_reuse_last_link_cache_hours": {
+          "type": "int",
+          "value": 168
+        },
+        "stream_auto_play_next_episode_enabled": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "mdblist_settings": {
+        "mdblist_enabled": {
+          "type": "boolean",
+          "value": true
+        }
+      },
+      "stream_badge_settings": {
+        "stream_badge_rules": {
+          "type": "string",
+          "value": "{\"imports\":[{\"sourceUrl\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/badges.json\",\"filters\":[{\"id\":\"remux\",\"groupId\":\"source\",\"name\":\"REMUX\",\"pattern\":\"(?i)\\\\bremux\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/remux.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"blu-ray-disc\",\"groupId\":\"source\",\"name\":\"Blu-ray Disc\",\"pattern\":\"(?i)\\\\b(blu[\\\\s._-]?ray|bluray|bdrip|bdremux)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/blu_ray_disc.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"webdl\",\"groupId\":\"source\",\"name\":\"WEB-DL\",\"pattern\":\"(?i)\\\\b(web[\\\\s._-]?dl|webdl)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/WEBDL_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"webrip\",\"groupId\":\"source\",\"name\":\"WEBRip\",\"pattern\":\"(?i)\\\\b(web[\\\\s._-]?rip|webrip)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/WEBRip_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"hdtv\",\"groupId\":\"source\",\"name\":\"HDTV\",\"pattern\":\"(?i)\\\\bhdtv\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/HDTV_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dvd-rip\",\"groupId\":\"source\",\"name\":\"DVD RIP\",\"pattern\":\"(?i)\\\\b(dvd[\\\\s._-]?rip|dvdrip)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/DVD_RIP_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"4k-ultra-hd\",\"groupId\":\"resolution\",\"name\":\"4K Ultra HD\",\"pattern\":\"(?i)\\\\b(4k|2160p|uhd|ultra\\\\s*hd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/4k_ultra_hd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"1080p-full-hd\",\"groupId\":\"resolution\",\"name\":\"1080p Full HD\",\"pattern\":\"(?i)\\\\b(1080p|fhd|full\\\\s*hd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/1080p_full_hd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"720p-hd\",\"groupId\":\"resolution\",\"name\":\"720p HD\",\"pattern\":\"(?i)\\\\b720p\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/720p_hd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"480p-sd\",\"groupId\":\"resolution\",\"name\":\"480p SD\",\"pattern\":\"(?i)\\\\b480p\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/480p_sd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dolby-vision\",\"groupId\":\"video-tech\",\"name\":\"Dolby Vision\",\"pattern\":\"(?i)\\\\b(dolby\\\\s*vision|dovi|dv)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_vision.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"hdr10-plus\",\"groupId\":\"video-tech\",\"name\":\"HDR10+\",\"pattern\":\"(?i)\\\\b(hdr10\\\\+|hdr10\\\\s*plus\\\\b|hdr\\\\s*10\\\\s*\\\\+)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr10_plus.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"hdr10\",\"groupId\":\"video-tech\",\"name\":\"HDR10\",\"pattern\":\"(?i)\\\\b(hdr10|hdr\\\\s*10)\\\\b(?!\\\\s*\\\\+|\\\\s*plus)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr10.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"hdr\",\"groupId\":\"video-tech\",\"name\":\"HDR\",\"pattern\":\"(?i)\\\\bhdr\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/hdr.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"sdr\",\"groupId\":\"video-tech\",\"name\":\"SDR\",\"pattern\":\"(?i)\\\\bsdr\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/SDR_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"imax-enhanced\",\"groupId\":\"video-tech\",\"name\":\"IMAX Enhanced\",\"pattern\":\"(?i)\\\\b(imax[\\\\s._-]*enhanced)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/imax_enhanced.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"imax\",\"groupId\":\"video-tech\",\"name\":\"IMAX\",\"pattern\":\"(?i)\\\\b(imax)\\\\b(?![\\\\s._-]*enhanced)\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/imax.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"hevc\",\"groupId\":\"video-codec\",\"name\":\"HEVC\",\"pattern\":\"(?i)\\\\b(hevc|h[\\\\s._-]?265|x265)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/HEVC_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"avc\",\"groupId\":\"video-codec\",\"name\":\"AVC\",\"pattern\":\"(?i)\\\\b(avc|h[\\\\s._-]?264|x264)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/AVC_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"10bit\",\"groupId\":\"bit-depth\",\"name\":\"10Bit\",\"pattern\":\"(?i)\\\\b(10[\\\\s._-]?bit|10b|hi10p)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/10Bit_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"8bit\",\"groupId\":\"bit-depth\",\"name\":\"8Bit\",\"pattern\":\"(?i)\\\\b(8[\\\\s._-]?bit|8b)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/8Bit_transparent_4x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dolby-atmos\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Atmos\",\"pattern\":\"(?i)\\\\b(dolby\\\\s*atmos|atmos)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_atmos.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"truehd\",\"groupId\":\"audio-tech\",\"name\":\"TrueHD\",\"pattern\":\"(?i)\\\\b(truehd|true\\\\s*hd|dolby\\\\s*truehd)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/truehd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dolby-digital-plus\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Digital Plus\",\"pattern\":\"(?i)\\\\b(ddp[\\\\s._-]*[0-9][\\\\s._-]*[0-9]|ddp|dd\\\\+|dolby[\\\\s._-]*digital[\\\\s._-]*plus|e-?ac-?3)(?![a-z])\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_digital_plus.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dolby-digital\",\"groupId\":\"audio-tech\",\"name\":\"Dolby Digital\",\"pattern\":\"(?i)\\\\b(dd[\\\\s._-]*[0-9][\\\\s._-]*[0-9]|dd|dolby[\\\\s._-]*digital|ac-?3)(?![\\\\s._-]*plus|\\\\+|p|[a-z])\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dolby_digital.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dts-x\",\"groupId\":\"audio-tech\",\"name\":\"DTS:X\",\"pattern\":\"(?i)\\\\b(dts[:\\\\s._-]*x)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_x.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dts-hd-master-audio\",\"groupId\":\"audio-tech\",\"name\":\"DTS-HD Master Audio\",\"pattern\":\"(?i)\\\\b(dts[\\\\s._-]*hd[\\\\s._-]*ma|dtshd\\\\s*ma|dts[\\\\s._-]*hd[\\\\s._-]*master)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_hd_master_audio.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dts-hd\",\"groupId\":\"audio-tech\",\"name\":\"DTS-HD\",\"pattern\":\"(?i)\\\\b(dts[\\\\s._-]*hd|dtshd)(?![\\\\s._-]*(ma|master)|ma)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts_hd.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"dts\",\"groupId\":\"audio-tech\",\"name\":\"DTS\",\"pattern\":\"(?i)\\\\bdts\\\\b(?![\\\\s._:-]*(x|hd))\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/dts.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"71-audio\",\"groupId\":\"audio-channels\",\"name\":\"7.1 Audio\",\"pattern\":\"(?i)\\\\b(7\\\\.1|7-1|8ch|8\\\\s*channel)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/7_1_audio.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"},{\"id\":\"51-audio\",\"groupId\":\"audio-channels\",\"name\":\"5.1 Audio\",\"pattern\":\"(?i)\\\\b(5\\\\.1|5-1|6ch|6\\\\s*channel)\\\\b\",\"imageURL\":\"https://raw.githubusercontent.com/leonevz/Elite-Badges/main/Badges/5_1_audio.png\",\"tagColor\":\"#00000000\",\"tagStyle\":\"filled and bordered\",\"textColor\":\"#00000000\",\"borderColor\":\"#00000000\"}],\"groups\":[{\"id\":\"source\",\"name\":\"Source\",\"color\":\"#00000000\"},{\"id\":\"resolution\",\"name\":\"Resolution\",\"color\":\"#00000000\"},{\"id\":\"video-tech\",\"name\":\"Video Tech\",\"color\":\"#00000000\"},{\"id\":\"video-codec\",\"name\":\"Video Codec\",\"color\":\"#00000000\"},{\"id\":\"bit-depth\",\"name\":\"Bit Depth\",\"color\":\"#00000000\"},{\"id\":\"audio-tech\",\"name\":\"Audio Tech\",\"color\":\"#00000000\"},{\"id\":\"audio-channels\",\"name\":\"Audio Channels\",\"color\":\"#00000000\"}]}]}"
+        },
+        "show_file_size_badges": {
+          "type": "boolean",
+          "value": false
+        }
+      },
+      "notifications_settings": {
+        "episode_release_alerts_enabled": false
+      },
+      "trakt_settings_payload": "{\"watchProgressSource\":\"NUVIO_SYNC\",\"continueWatchingDaysCap\":60,\"librarySourceMode\":\"LOCAL\",\"moreLikeThisSource\":\"TMDB\",\"simklAnimeIdPreference\":\"IMDB\"}",
+      "meta_screen_settings_payload": "{\"items\":[{\"key\":\"ACTIONS\",\"enabled\":true,\"order\":0,\"tabGroup\":null},{\"key\":\"OVERVIEW\",\"enabled\":true,\"order\":1,\"tabGroup\":null},{\"key\":\"PRODUCTION\",\"enabled\":true,\"order\":2,\"tabGroup\":null},{\"key\":\"CAST\",\"enabled\":true,\"order\":3,\"tabGroup\":null},{\"key\":\"COMMENTS\",\"enabled\":true,\"order\":4,\"tabGroup\":null},{\"key\":\"TRAILERS\",\"enabled\":true,\"order\":5,\"tabGroup\":null},{\"key\":\"EPISODES\",\"enabled\":true,\"order\":6,\"tabGroup\":null},{\"key\":\"DETAILS\",\"enabled\":true,\"order\":7,\"tabGroup\":null},{\"key\":\"COLLECTION\",\"enabled\":true,\"order\":8,\"tabGroup\":null},{\"key\":\"MORE_LIKE_THIS\",\"enabled\":true,\"order\":9,\"tabGroup\":null}],\"background_mode\":\"normal\",\"cinematicBackground\":false,\"hero_trailer_playback\":true,\"tvStyleLayout\":true,\"episodeCardStyle\":\"horizontal\",\"blur_unwatched_episodes\":false,\"poster_transition_enabled\":true,\"show_overall_ratings\":true,\"episode_ratings_visibility\":\"SHOW_ALL\"}",
+      "card_depth_style_settings_payload": "{\"enabled\":false,\"edgeStrength\":28,\"sheenStrength\":10,\"edgeCoverage\":0,\"postersEnabled\":true,\"continueWatchingEnabled\":true,\"episodeCardsEnabled\":true,\"castEnabled\":true,\"trailersEnabled\":true}"
+    }
+  }
+}

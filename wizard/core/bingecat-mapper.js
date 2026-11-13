@@ -28,7 +28,7 @@ const compatible = (row, p) => (row.kids ? compatibleForKids(p) : compatibleForS
 
 /**
  * Deterministic automatic matching, in row order, each BingeCat profile used at most once:
- *   1. linked: the profile is bound to this Nuvio profile (same id) and has the same normalized name
+ *   1. linked: the profile is bound to this Nuvio profile (the API's profile id is authoritative; names may differ)
  *   2. same normalized name, compatible type
  *   3. fresh account (only a main profile): the first Standard row gets the main profile
  *   4. otherwise a new profile
@@ -48,7 +48,7 @@ export function autoMatch(rows, profiles, { used = new Set(), freshMain = true }
     }
   };
 
-  pass('linked', (row, p) => (p.boundNuvio ?? []).some((b) => b.id === row.key) && sameName(p.name, row.name));
+  pass('linked', (row, p) => (p.boundNuvio ?? []).some((b) => b.id === row.key));
   pass('name', (row, p) => sameName(p.name, row.name));
 
   if (fresh) {
@@ -80,7 +80,7 @@ export function mergeMapping(rows, previous, profiles) {
 }
 
 /**
- * Checks a (possibly user-edited) mapping. Errors block Continue; warnings are shown next to the row.
+ * Checks a (possibly user-edited) mapping. Errors block Continue; warnings are informational.
  * @returns {{ errors: {key, message}[], warnings: {key, message}[] }}
  */
 export function validateMapping(rows, mapping, profiles) {
@@ -110,10 +110,6 @@ export function validateMapping(rows, mapping, profiles) {
     warn(profile.isMain
       ? `${row.name}: the settings of your BingeCat main profile "${profile.name}" will be overwritten.`
       : `${row.name}: the settings of the BingeCat profile "${profile.name}" will be overwritten.`);
-    // the orchestrator switches every Kids row whose profile is not (known to be) kids-type
-    if (row.kids && !profile.isMain && profile.type !== 'kids') {
-      warn(`${row.name}: "${profile.name}" will be switched to a BingeCat Kids profile.`);
-    }
     const others = (profile.boundNuvio ?? []).filter((b) => b.id !== row.key);
     if (others.length > 0 && !(profile.boundNuvio ?? []).some((b) => b.id === row.key)) {
       warn(`${row.name}: "${profile.name}" is linked to another Nuvio profile on bingecat.com.`);

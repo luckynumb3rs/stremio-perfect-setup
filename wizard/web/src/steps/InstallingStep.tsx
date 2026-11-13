@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { WizardShell } from '../components/WizardShell';
 import { bingecatRows, rolesOf, useWizard } from '../store/wizard';
-import { isBingecatOn } from '../lib/constants';
+import { isBingecatConfigured } from '../lib/constants';
 import { resolveSharedKeySelection, hasConfiguredKeyArray } from '../lib/sharedKeys';
 
 // @ts-ignore
@@ -42,6 +42,8 @@ const STEP_LABELS: Record<string, string> = {
   aiometadata: 'AIOMetadata configuration saved',
   watchly:     'Watchly configuration saved',
   bingecat:    'BingeCat profile configured',
+  bingecat_connection: 'BingeCat watch-history connection saved',
+  bingecat_ai_key: 'BingeCat AI key saved',
   addons:      'Addons installed',
   collections: 'Collections installed',
   settings:    'Settings updated',
@@ -187,7 +189,7 @@ export function InstallingStep() {
       const effectiveWatchlyInstances = effectiveInstances.watchly ?? [];
       // Read fresh (not from the render snapshot): a Retry must see the BingeCat profiles created by the previous attempt.
       const live = useWizard.getState();
-      const featureOn = isBingecatOn(wizardConfig);
+      const featureOn = isBingecatConfigured(wizardConfig);
       const { hasStandard, hasKids } = rolesOf({ target, nuvioProfiles: live.nuvioProfiles, stremioKids: live.stremioKids });
       const watchlyEnabled = watchly.enabled && effectiveWatchlyInstances.length > 0 && hasStandard;
 
@@ -196,9 +198,10 @@ export function InstallingStep() {
       let bingecatParam: Record<string, unknown> | null = null;
       if (bcRows.length > 0) {
         const bc = live.bingecat;
-        const config = wizardConfig.bingecat;
+        const bingecatBaseUrl = effectiveInstances.bingecat?.[0];
+        const bingecatClientId = wizardConfig.keys.bingecatClientId;
         const main = bc.profiles.find((p) => p.isMain);
-        if (!config || !templates.bingecat) {
+        if (!bingecatBaseUrl || !bingecatClientId || !templates.bingecat) {
           throw new Error('The BingeCat templates did not load. Reload the wizard and try again.');
         }
         if (!bc.token || !bc.expiresAt || bc.expiresAt - Math.floor(Date.now() / 1000) < 300) {
@@ -212,8 +215,12 @@ export function InstallingStep() {
           targets[row.key] = entry.target;
         }
         bingecatParam = {
-          adapter: createBingecatAdapter({ baseUrl: config.baseUrl, clientId: config.clientId }),
+          adapter: createBingecatAdapter({ baseUrl: bingecatBaseUrl, clientId: bingecatClientId }),
           token: bc.token,
+          providerAuthKey: target === 'stremio' ? stremioAccount.authKey : undefined,
+          geminiApiKey: effectiveCredentials.geminiApiKey || undefined,
+          stremioConnected: bc.stremioConnected,
+          nuvioConnected: bc.nuvioConnected,
           mainProfileId: main.id,
           templates: templates.bingecat,
           targets,
@@ -264,6 +271,11 @@ export function InstallingStep() {
           const bingecat = useWizard.getState().bingecat;
           useWizard.getState().setBingecat({ profiles: bingecat.profiles.map((p) => (p.id === d.profileId ? { ...p, type: d.type } : p)) });
           return;
+        }
+        if (name === 'bingecat_connection') {
+          const d = data as { provider?: 'stremio' | 'nuvio' };
+          if (d.provider === 'stremio') useWizard.getState().setBingecat({ stremioConnected: true });
+          if (d.provider === 'nuvio') useWizard.getState().setBingecat({ nuvioConnected: true });
         }
         const label = STEP_LABELS[name];
         if (!label) return;
@@ -361,11 +373,20 @@ export function InstallingStep() {
       if (target === 'nuvio' && !templates.settings) {
         throw new Error('The Nuvio settings template is missing from the active config. Check wizard/config.json and try again.');
       }
-      let nuvioSettingsTemplate = templates.settings as Record<string, unknown>;
-      if (useInstantDebrid) {
-        const patch = buildInstantDebridSettingsPatch(credentials.debridServices);
-        if (patch) {
-          nuvioSettingsTemplate = deepMerge(nuvioSettingsTemplate, patch);
+      let nuvioSettingsTemplates: { standard: Record<string, unknown>; full: Record<string, unknown> } | undefined;
+      if (target === 'nuvio') {
+        nuvioSettingsTemplates = {
+          standard: templates.settings as Record<string, unknown>,
+          full: (templates.settingsAll ?? templates.settings) as Record<string, unknown>,
+        };
+        if (useInstantDebrid) {
+          const patch = buildInstantDebridSettingsPatch(credentials.debridServices);
+          if (patch) {
+            nuvioSettingsTemplates = {
+              standard: deepMerge(nuvioSettingsTemplates.standard, patch),
+              full: deepMerge(nuvioSettingsTemplates.full, patch),
+            };
+          }
         }
       }
       const extraParams = target === 'nuvio'
@@ -377,7 +398,7 @@ export function InstallingStep() {
             pinCollections: hasStandard && (watchlyEnabled || (featureOn && (live.bingecat.enabled || hasKids))) ? live.pinCollections : null,
             retry: lastSummary.current ?? carriedBackups(),
             collectionsJson: templates.collections as object[],
-            nuvioSettingsTemplate,
+            nuvioSettingsTemplates,
           }
         : { watchlyBody, kids: live.stremioKids && featureOn, bingecat: bingecatParam };
 

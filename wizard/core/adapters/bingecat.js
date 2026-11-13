@@ -1,18 +1,18 @@
 // BingeCat adapter: talks to the public BingeCat API (https://bingecat.com/openapi.json) with an OAuth token.
-// VERIFIED 2026-10-23 (docs/_internal spec section 3):
+// VERIFIED 2026-11-13 against the live OpenAPI:
 //   - OAuth: authorization code + PKCE S256, public client (no secret), token valid 7 days, CORS allows the wizard origins.
 //   - Headers on every API call: Authorization: Bearer, bingecat-api-key (= client id), bingecat-api-version: 1.
 //   - Writes are limited to about 1 per 3 s (429 + Retry-After, which can be 0): space them, retry on 429.
 //   - PATCH /profiles/{id}/settings validates the whole body: send all sections in ONE call. Sub-profiles inherit
-//     `metadata` (sending it gives 409), so it is only sent for the main profile.
+//     `metadata` (sending it gives 409), so it is only sent for the main profile. Templates carry the
+//     `stremio_addon` section; it is omitted for Nuvio profiles because it is only valid for Stremio.
 //   - POST /profiles creates a normal sub-profile and is NOT idempotent: a failed create is never retried here.
 //   - The wizard never deletes anything on BingeCat (this adapter has no DELETE).
 //   - Kids profile type (shipped 2026-10-24): POST/PATCH /profiles take `profile_type`; `kids` applies PG caps and the adult filter on
 //     save, so the type is set BEFORE the settings template. On the main profile a PATCH answers 200 but ignores the type.
-// Pending from the BingeCat dev (addon settings, API keys, connect Stremio/Nuvio, onboarding skip, official AI-search URL):
-// see the drop-in points marked `ponytail:` below.
+// The account-connection and AI-key endpoints are owner-granted and are called by the wizard during install.
 
-export const BINGECAT_SCOPES = ['settings:read', 'settings:write', 'profiles:read', 'profiles:write', 'catalogs:read'];
+export const BINGECAT_SCOPES = ['settings:read', 'settings:write', 'profiles:read', 'profiles:write', 'catalogs:read', 'connections:write'];
 const WRITE_GAP_MS = 3500;
 const MAX_RETRIES = 4;
 const HISTORY_SOURCES = ['stremio', 'nuvio'];
@@ -54,15 +54,6 @@ export function resolveBingecatTemplate(template, { historySource, isMain }) {
   return body;
 }
 
-/** The Nuvio AI-search addon lives next to the main one: .../nuvio/manifest.json -> .../nuvio/search/manifest.json (verified). */
-export function deriveSearchManifestUrl(url) {
-  // ponytail: derived, not official; read the official field instead once the BingeCat dev exposes it
-  if (typeof url !== 'string' || !/\/nuvio\/manifest\.json$/.test(url)) {
-    throw new Error('Unexpected BingeCat Nuvio manifest URL, cannot derive the AI search addon.');
-  }
-  return url.replace(/\/nuvio\/manifest\.json$/, '/nuvio/search/manifest.json');
-}
-
 function describeError(status, body) {
   const code = body?.error ?? '';
   const detail = body?.message ? ` (${String(body.message).slice(0, 200)})` : '';
@@ -88,7 +79,7 @@ function describeError(status, body) {
 export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', clientId, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), now = () => Date.now() } = {}) {
   if (!clientId) throw new Error('createBingecatAdapter: clientId is required');
   const base = baseUrl.replace(/\/+$/, '');
-  let lastWriteAt = -Infinity; // ponytail: writes are awaited one after another by the caller; a real queue is needed if they ever run in parallel
+  let lastWriteAt = -Infinity; // Writes are awaited one after another by the caller.
 
   async function request(method, path, token, body) {
     const isWrite = method !== 'GET';
@@ -134,7 +125,7 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
     base,
 
     /** PKCE authorize URL. Keep {state, verifier} in memory and check state on the way back. */
-    async buildAuthorizeUrl({ redirectUri, scopes = BINGECAT_SCOPES }) {
+    async buildAuthorizeUrl({ redirectUri, scopes = BINGECAT_SCOPES, prompt = 'create' }) {
       const verifier = base64url(randomBytes(32));
       const challenge = base64url(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))));
       const state = `bingecat-${base64url(randomBytes(16))}`;
@@ -147,10 +138,11 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
         code_challenge_method: 'S256',
         state,
       });
+      if (prompt) params.set('prompt', prompt);
       return { url: `${base}/oauth/authorize?${params}`, state, verifier };
     },
 
-    /** Exchanges the code for a token. No client secret (public client); the refresh token is discarded (refresh needs a secret). */
+    /** Exchanges the code for a token. No client secret: the wizard is a public PKCE client. */
     async exchangeCode({ code, verifier, redirectUri, scopes = BINGECAT_SCOPES }) {
       let res;
       try {
@@ -170,7 +162,38 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
       if (!scopes.every((s) => granted.includes(s))) {
         throw new BingecatError('insufficient_scope', 'BingeCat access was not fully approved. Connect again and approve all permissions.');
       }
-      return { token: json.access_token, expiresAt: Math.floor(now() / 1000) + (Number(json.expires_in) || 3600) };
+      return {
+        token: json.access_token,
+        refreshToken: json.refresh_token ?? null,
+        expiresAt: Math.floor(now() / 1000) + (Number(json.expires_in) || 3600),
+      };
+    },
+
+    /** Refreshes a BingeCat session. The redirect URI is bound to the original PKCE grant. */
+    async refreshAccessToken({ refreshToken, redirectUri, scopes = BINGECAT_SCOPES }) {
+      let res;
+      try {
+        res = await fetch(`${base}/oauth/token`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'bingecat-api-key': clientId, 'bingecat-api-version': '1' },
+          body: JSON.stringify({ grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId, redirect_uri: redirectUri }),
+        });
+      } catch {
+        throw new BingecatError('network', 'BingeCat could not be reached. Check your connection and try again.');
+      }
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.access_token) {
+        throw new BingecatError('oauth_failed', 'BingeCat did not accept the session refresh. Connect again.', res.status);
+      }
+      const granted = String(Array.isArray(json.scope) ? json.scope.join(' ') : json.scope ?? '').split(/\s+/);
+      if (granted.length > 1 && !scopes.every((s) => granted.includes(s))) {
+        throw new BingecatError('insufficient_scope', 'BingeCat access was not fully approved. Connect again and approve all permissions.');
+      }
+      return {
+        token: json.access_token,
+        refreshToken: json.refresh_token ?? refreshToken,
+        expiresAt: Math.floor(now() / 1000) + (Number(json.expires_in) || 3600),
+      };
     },
 
     /** Just the profile list (one request). */
@@ -214,10 +237,47 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
       if (res?.profile_type !== type) throw new BingecatError('type_not_applied', `BingeCat did not switch the profile to the ${type} type.`);
     },
 
+    /** Stores an owner-approved provider connection on a BingeCat profile. Secrets are never returned by the API. */
+    async connectStremio(token, profileId, authKey) {
+      const res = await request('POST', `/api/v1/profiles/${profileId}/connections/stremio`, token, { auth_key: authKey });
+      if (res?.connected !== true) throw new BingecatError('bad_response', 'BingeCat did not confirm the Stremio connection.');
+      return res;
+    },
+
+    /** Stores the Nuvio refresh grant on the BingeCat main profile. BingeCat consumes/rotates this grant. */
+    async connectNuvio(token, profileId, refreshToken) {
+      const res = await request('POST', `/api/v1/profiles/${profileId}/connections/nuvio`, token, { refresh_token: refreshToken });
+      if (res?.connected !== true) throw new BingecatError('bad_response', 'BingeCat did not confirm the Nuvio connection.');
+      return res;
+    },
+
+    /** Associates one BingeCat profile with a Nuvio profile index after the account connection is made. */
+    async linkNuvioProfile(token, profileId, nuvioProfileId) {
+      return request('PATCH', `/api/v1/profiles/${profileId}`, token, { nuvio_profile_id: nuvioProfileId });
+    },
+
+    /** Stores provider API keys on the BingeCat account. Empty keys are not sent. */
+    async setAiKeys(token, profileId, { geminiApiKey, groqApiKey, clearGemini = false, clearGroq = false } = {}) {
+      const body = {};
+      if (geminiApiKey) body.gemini_api_key = geminiApiKey;
+      if (groqApiKey) body.groq_api_key = groqApiKey;
+      if (clearGemini) body.clear_gemini = true;
+      if (clearGroq) body.clear_groq = true;
+      if (Object.keys(body).length === 0) return null;
+      const res = await request('PUT', `/api/v1/profiles/${profileId}/ai-keys`, token, body);
+      if (geminiApiKey && res?.gemini?.valid === false) {
+        throw new BingecatError('invalid_ai_key', 'BingeCat could not validate the Gemini API key. Check it and try again.');
+      }
+      if (groqApiKey && res?.groq?.valid === false) {
+        throw new BingecatError('invalid_ai_key', 'BingeCat could not validate the Groq API key. Check it and try again.');
+      }
+      return res;
+    },
+
     /** Applies a template to a profile with ONE settings PATCH. */
     async applyTemplate(token, profileId, template, { historySource, isMain }) {
       const body = resolveBingecatTemplate(template, { historySource, isMain });
-      // ponytail: add force-top false, cinemeta observe, history sync and the Gemini key to the templates once the dev exposes those settings
+      if (historySource === 'nuvio') delete body.stremio_addon;
       const res = await request('PATCH', `/api/v1/profiles/${profileId}/settings`, token, body);
       return { appliedSections: res?.applied_sections ?? Object.keys(body) };
     },
@@ -225,9 +285,13 @@ export function createBingecatAdapter({ baseUrl = 'https://bingecat.com', client
     /** Addon manifest URL(s) of a profile; they contain a secret, never log them. */
     async getManifests(token, profileId, { surface, aiSearch = false }) {
       const res = await request('GET', `/api/v1/profiles/${profileId}/catalogs?surface=${surface}`, token);
-      const url = res?.manifest?.url;
+      const manifest = res?.manifest;
+      const url = manifest?.url;
       if (!url) throw new BingecatError('bad_response', 'BingeCat did not return an addon URL for this profile.');
-      return { url, ...(aiSearch && surface === 'nuvio' ? { searchUrl: deriveSearchManifestUrl(url) } : {}) };
+      if (aiSearch && surface === 'nuvio' && !manifest.search_url) {
+        throw new BingecatError('bad_response', 'BingeCat did not return an AI search addon URL for this profile.');
+      }
+      return { url, ...(aiSearch && surface === 'nuvio' ? { searchUrl: manifest.search_url } : {}) };
     },
   };
 }

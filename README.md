@@ -19,6 +19,10 @@
   <div class="home-wizard-card__text">
     <strong>🔮 New! Quick Automated Setup</strong>
     <span>Skip the manual steps, let the wizard configure everything for you in seconds.</span>
+    <span class="home-wizard-card__feature">
+      <img src="assets/images/services/bingecat.svg" alt="BingeCat logo">
+      <span>Kids profiles are now supported thanks to BingeCat!</span>
+    </span>
   </div>
   <a class="home-wizard-card__btn" href="/wizard/">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4V2"/><path d="M15 10V8"/><path d="M19 6h2"/><path d="M9 6H7"/><path d="m18 3 1 1"/><path d="m11 10 1 1"/><path d="m18 9 1-1"/><path d="m11 2 1 1"/><path d="m14 7-9 9 2 2 9-9-2-2Z"/></svg>

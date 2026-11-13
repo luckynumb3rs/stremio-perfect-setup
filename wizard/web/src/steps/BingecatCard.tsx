@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { Loader2, Unplug } from 'lucide-react';
 import { bingecatRows, useWizard } from '../store/wizard';
-import { isBingecatOn } from '../lib/constants';
+import { isBingecatConfigured } from '../lib/constants';
 import { bingecatRedirectUri, listenForBingecatCallback } from '../lib/bingecatAuth';
 
 // @ts-ignore
@@ -15,7 +15,7 @@ const MIN_TOKEN_LIFE = 600;
 const REASON_LABEL: Record<string, string> = {
   linked: 'Linked',
   name: 'Same Name',
-  'fresh-main': 'New Account',
+  'fresh-main': 'Main Profile',
   new: 'New',
   created: 'Created',
   manual: 'Chosen',
@@ -26,7 +26,7 @@ interface Issue { key: number | null; message: string }
 /** Connection + mapping status, shared by the card and the Continue button of the Recommendations step. */
 export function useBingecatStatus() {
   const s = useWizard();
-  const rows = bingecatRows(s, isBingecatOn(s.wizardConfig));
+  const rows = bingecatRows(s, isBingecatConfigured(s.wizardConfig));
   const { token, expiresAt, profiles, mapping } = s.bingecat;
   const expired = !!token && !!expiresAt && expiresAt - Math.floor(Date.now() / 1000) < MIN_TOKEN_LIFE;
   const connected = !!token && !expired;
@@ -40,11 +40,17 @@ export function useBingecatStatus() {
 
 export function BingecatCard() {
   const target = useWizard((s) => s.target);
-  const cfg = useWizard((s) => s.wizardConfig?.bingecat);
+  const bingecatBaseUrl = useWizard((s) => s.wizardConfig?.instances.bingecat?.[0]);
+  const bingecatClientId = useWizard((s) => s.wizardConfig?.keys.bingecatClientId);
   const { token, accountName, profiles, mapping } = useWizard((s) => s.bingecat);
   const { setBingecat, disconnectBingecat } = useWizard.getState();
   const { rows, connected, expired, templatesLoaded, errors, warnings } = useBingecatStatus();
-  const adapter = useMemo(() => (cfg ? createBingecatAdapter({ baseUrl: cfg.baseUrl, clientId: cfg.clientId }) : null), [cfg]);
+  const adapter = useMemo(
+    () => (bingecatBaseUrl && bingecatClientId
+      ? createBingecatAdapter({ baseUrl: bingecatBaseUrl, clientId: bingecatClientId })
+      : null),
+    [bingecatBaseUrl, bingecatClientId],
+  );
   const pending = useRef<{ state: string; verifier: string; redirectUri: string } | null>(null);
   const [status, setStatus] = useState<'idle' | 'waiting' | 'loading'>('idle');
   const [error, setError] = useState('');
@@ -70,10 +76,14 @@ export function BingecatCard() {
       }
       useWizard.getState().setBingecat({
         token: session.token,
+        refreshToken: session.refreshToken,
+        redirectUri: p.redirectUri,
         expiresAt: session.expiresAt,
         accountName: loaded.find((x: { isMain: boolean }) => x.isMain)?.name ?? '',
         profiles: loaded,
         mapping: [],
+        stremioConnected: false,
+        nuvioConnected: false,
       });
       setError('');
     } catch (err) {
@@ -125,7 +135,12 @@ export function BingecatCard() {
   }
 
   const small: CSSProperties = { fontSize: '0.78rem', color: 'var(--muted)', lineHeight: 1.5 };
-  const button: CSSProperties = { padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1px solid var(--accent)', background: 'var(--accent)', color: '#fff', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' };
+  const button: CSSProperties = {
+    padding: '0.45rem 0.9rem', borderRadius: '8px', border: '1px solid var(--accent)',
+    background: 'var(--accent)', color: '#fff', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer',
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.3rem',
+    flexShrink: 0, whiteSpace: 'nowrap',
+  };
   const ghost: CSSProperties = { ...button, background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' };
 
   // The card around this (title, description, toggle, Connected badge) lives in the Recommendations step.
@@ -136,10 +151,10 @@ export function BingecatCard() {
           {expired && <p style={{ ...small, margin: '0 0 0.6rem' }}>Your BingeCat connection is about to expire. Connect again.</p>}
           <div style={{ ...small, maxWidth: '34rem', margin: '0 auto 0.8rem' }}>
             <p style={{ margin: '0 0 0.3rem', fontWeight: 600, color: 'var(--text)' }}>When you click the button, a BingeCat window opens:</p>
-            <ul style={{ margin: 0, paddingLeft: '1.2rem', textAlign: 'left' }}>
+            <ul style={{ margin: 0, paddingLeft: '1.2rem', textAlign: 'left', listStyleType: 'disc' }}>
               <li>If you already have a BingeCat account, sign in with it.</li>
-              <li>If you don&apos;t, press <strong>Create a new account</strong> on the sign-in page. Another window opens: fill in your details and create the account, and it closes when you are done.</li>
-              <li>Then sign in, skip BingeCat&apos;s own setup wizard, and authorize access for this wizard.</li>
+              <li>If you don&apos;t, BingeCat will guide you through creating the account and its short setup step.</li>
+              <li>Approve access for this wizard. The install step configures the BingeCat connection and settings automatically.</li>
             </ul>
           </div>
           <button type="button" style={button} onClick={connect}>Connect / Create BingeCat</button>
@@ -149,7 +164,7 @@ export function BingecatCard() {
       {status !== 'idle' && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
           <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />
-          <span style={small}>{status === 'waiting' ? 'Waiting for BingeCat… finish signing in and approve access in the BingeCat window.' : 'Connecting…'}</span>
+          <span style={{ ...small, minWidth: 0 }}>{status === 'waiting' ? 'Waiting for BingeCat… finish signing in and approve access in the BingeCat window.' : 'Connecting…'}</span>
           {status === 'waiting' && <button type="button" style={ghost} onClick={cancel}>Cancel</button>}
         </div>
       )}
@@ -161,16 +176,16 @@ export function BingecatCard() {
         <>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', flexWrap: 'wrap' }}>
             <span style={small}>{accountName ? `Account: ${accountName}` : 'BingeCat account connected'}</span>
-            <button type="button" style={ghost} onClick={() => { disconnectBingecat(); setError(''); }}><Unplug size={13} style={{ verticalAlign: '-2px' }} /> Disconnect</button>
+            <button type="button" style={ghost} onClick={() => { disconnectBingecat(); setError(''); }}><Unplug size={13} aria-hidden="true" /> <span>Disconnect</span></button>
           </div>
 
           <p style={{ ...small, margin: '0.8rem 0 0.4rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            {target === 'nuvio' ? 'BingeCat Profile for Each Nuvio Profile' : 'BingeCat Profile'}
+            {target === 'nuvio' ? 'BingeCat Profile Mapping' : 'BingeCat Profile'}
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
             {rows.map((row) => {
               const entry = mapping.find((m) => m.key === row.key);
-              const own = [...errors.map((e) => ({ ...e, level: 'error' as const })), ...warnings.map((w) => ({ ...w, level: 'warn' as const }))].filter((i) => i.key === row.key);
+              const own = errors.filter((i) => i.key === row.key);
               return (
                 <div key={row.key} style={{ border: '1px solid var(--border)', borderRadius: '10px', padding: '0.6rem 0.7rem', background: 'var(--panel)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -190,8 +205,8 @@ export function BingecatCard() {
                     ))}
                   </select>
                   {own.map((i, idx) => (
-                    <p key={idx} style={{ margin: '0.35rem 0 0', fontSize: '0.76rem', lineHeight: 1.45, color: i.level === 'error' ? '#dc2626' : '#b45309' }}>
-                      {i.level === 'error' ? '✕ ' : '⚠ '}{i.message}
+                    <p key={idx} style={{ margin: '0.35rem 0 0', fontSize: '0.76rem', lineHeight: 1.45, color: '#dc2626' }}>
+                      ✕ {i.message}
                     </p>
                   ))}
                 </div>
@@ -201,8 +216,9 @@ export function BingecatCard() {
               <p key={i} style={{ margin: 0, fontSize: '0.78rem', color: '#dc2626' }}>✕ {e.message}</p>
             ))}
           </div>
-          <p style={{ ...small, margin: '0.6rem 0 0' }}>
+          <p style={{ ...small, maxWidth: '34rem', margin: '0.6rem auto 0', textAlign: 'center' }}>
             The wizard only creates or updates BingeCat profiles. It never deletes anything on BingeCat.
+            {warnings.some((w) => /settings .* overwritten/.test(w.message)) && ' Settings on existing BingeCat profiles you map here will be overwritten.'}
           </p>
         </>
       )}

@@ -12,9 +12,13 @@
 #       shell history.
 #   --source PROFILE
 #       Source profile index, such as 1, or exact profile name.
+#       Required only when copying live settings; omit it with --template.
 #   --targets LIST
 #       Comma-separated target profile indexes or exact profile names.
 #       May be replaced or combined with repeated --target options.
+#   --template PATH
+#       Optional platform-map JSON template to merge into each target instead
+#       of copying the source profile's live settings.
 #
 # Target-account parameters:
 #   --target-email EMAIL
@@ -36,8 +40,10 @@
 #
 # Execution options:
 #   --interactive
-#       Ask questions for missing values. Running copy-nuvio-settings.sh with no arguments in
-#       an interactive terminal also starts this mode.
+#       Ask questions for missing values, including whether settings should
+#       come from the live source profile or a JSON template. Running
+#       copy-nuvio-settings.sh with no arguments in an interactive terminal
+#       also starts this mode.
 #   --dry-run
 #       Authenticate, resolve profiles, and read source settings without
 #       changing any target profile. With --copy-credentials, also reads the
@@ -54,6 +60,9 @@
 # Examples:
 #   scripts/copy-nuvio-settings.sh --email source@example.com --password 'secret' \
 #     --source 1 --targets 2,3 --platform both
+#
+#   scripts/copy-nuvio-settings.sh --email source@example.com --password 'secret' \
+#     --targets Loina,Tara --template templates/nuvio2.json --yes
 #
 #   scripts/copy-nuvio-settings.sh --email source@example.com --password 'secret' \
 #     --source 1 --target-email target@example.com --target-password 'secret2' \
@@ -73,6 +82,7 @@ TARGET_EMAIL="${NUVIO_TARGET_EMAIL:-}"
 TARGET_PASSWORD="${NUVIO_TARGET_PASSWORD:-}"
 SOURCE_VALUE=""
 TARGET_VALUES=()
+TEMPLATE_PATH=""
 PLATFORM_VALUE=""
 PASSWORD_FROM_STDIN=0
 TARGET_PASSWORD_FROM_STDIN=0
@@ -127,9 +137,10 @@ Options:
   --target-email EMAIL      Optional separate account for all target profiles
   --target-password VALUE   Target password
   --target-password-stdin   Read the target-account password from stdin
-  --source PROFILE          Source profile index or exact name
+  --source PROFILE          Source profile index or exact name (required without --template)
   --targets LIST            Comma-separated target indexes or exact names
   --target PROFILE          Add one target; may be repeated
+  --template PATH           Merge a platform-map JSON template into targets instead of copying live source settings
   --platform VALUE          tv, mobile, or both (default: both)
   --copy-credentials        Also copy connected-service credentials/API keys (default: off)
   --interactive             Ask for missing values step by step
@@ -349,6 +360,32 @@ prepare_settings_for_copy() {
   ' <<<"$source_settings"
 }
 
+merge_template_into_target() {
+  local template_settings="$1"
+  local target_settings="$2"
+  local target_json="$target_settings"
+
+  [[ -n "$target_json" ]] || target_json='{}'
+
+  jq -cn \
+    --argjson template "$template_settings" \
+    --argjson target "$target_json" \
+    '
+      def deep_merge($base; $patch):
+        if (($base | type) == "object" and ($patch | type) == "object") then
+          reduce ($patch | to_entries[]) as $entry
+            ($base;
+              .[$entry.key] = if ((.[$entry.key] | type) == "object" and ($entry.value | type) == "object")
+                then deep_merge(.[$entry.key]; $entry.value)
+                else $entry.value
+                end)
+        else
+          $patch
+        end;
+      deep_merge($target; $template)
+    '
+}
+
 get_provider_credentials() {
   local token="$1"
   local profile_index="$2"
@@ -459,7 +496,7 @@ parse_args() {
       --copy-credentials) COPY_CREDENTIALS=1; shift ;;
       --password-stdin) PASSWORD_FROM_STDIN=1; shift ;;
       --target-password-stdin) TARGET_PASSWORD_FROM_STDIN=1; shift ;;
-      --email|--password|--target-email|--target-password|--source|--targets|--target|--platform)
+      --email|--password|--target-email|--target-password|--source|--targets|--target|--template|--platform)
         require_value "$1" "${2:-}"
         case "$1" in
           --email) EMAIL="$2" ;;
@@ -468,11 +505,12 @@ parse_args() {
           --target-password) TARGET_PASSWORD="$2" ;;
           --source) SOURCE_VALUE="$2" ;;
           --targets|--target) TARGET_VALUES+=("$2") ;;
+          --template) TEMPLATE_PATH="$2" ;;
           --platform) PLATFORM_VALUE="$2" ;;
         esac
         shift 2
         ;;
-      --email=*|--password=*|--target-email=*|--target-password=*|--source=*|--targets=*|--target=*|--platform=*)
+      --email=*|--password=*|--target-email=*|--target-password=*|--source=*|--targets=*|--target=*|--template=*|--platform=*)
         key="${1%%=*}"
         value="${1#*=}"
         [[ -n "$value" ]] || die "Missing value for ${key}"
@@ -483,6 +521,7 @@ parse_args() {
           --target-password) TARGET_PASSWORD="$value" ;;
           --source) SOURCE_VALUE="$value" ;;
           --targets|--target) TARGET_VALUES+=("$value") ;;
+          --template) TEMPLATE_PATH="$value" ;;
           --platform) PLATFORM_VALUE="$value" ;;
         esac
         shift
@@ -520,12 +559,29 @@ login "$EMAIL" "$PASSWORD"
 SOURCE_TOKEN="$LOGIN_TOKEN"
 load_profiles "$SOURCE_TOKEN"
 
-if [[ -z "$SOURCE_VALUE" && $INTERACTIVE -eq 1 ]]; then
-  SOURCE_VALUE="$(prompt_text "Source profile (index or exact name; available: $(profiles_label))")"
+if [[ $INTERACTIVE -eq 1 && -z "$TEMPLATE_PATH" ]]; then
+  settings_source_mode="$(prompt_text 'Settings source (live or template)' 'live')"
+  case "${settings_source_mode,,}" in
+    live|source|profile)
+      ;;
+    template|file)
+      TEMPLATE_PATH="$(prompt_text 'Template JSON path' 'templates/nuvio2.json')"
+      ;;
+    *)
+      die 'Choose "live" for the source profile or "template" for a JSON template.'
+      ;;
+  esac
 fi
-resolve_profile "$SOURCE_VALUE" '--source'
-SOURCE_INDEX="$RESOLVED_INDEX"
-SOURCE_NAME="$RESOLVED_NAME"
+
+if [[ -z "$TEMPLATE_PATH" ]]; then
+  if [[ -z "$SOURCE_VALUE" && $INTERACTIVE -eq 1 ]]; then
+    SOURCE_VALUE="$(prompt_text "Source profile (index or exact name; available: $(profiles_label))")"
+  fi
+  [[ -n "$SOURCE_VALUE" ]] || die 'Missing source profile. Use --source when copying live settings, or use --template for template mode.'
+  resolve_profile "$SOURCE_VALUE" '--source'
+  SOURCE_INDEX="$RESOLVED_INDEX"
+  SOURCE_NAME="$RESOLVED_NAME"
+fi
 
 if [[ -z "$TARGET_EMAIL" && $INTERACTIVE -eq 1 ]]; then
   TARGET_EMAIL="$(prompt_text 'Target account email (leave blank for the source account)')"
@@ -565,7 +621,16 @@ if [[ -z "$PLATFORM_VALUE" ]]; then
 fi
 normalize_platforms "$PLATFORM_VALUE"
 
-if [[ $COPY_CREDENTIALS -eq 0 && $INTERACTIVE -eq 1 ]]; then
+if [[ -n "$TEMPLATE_PATH" ]]; then
+  [[ -f "$TEMPLATE_PATH" ]] || die "Template file was not found: $TEMPLATE_PATH"
+  jq -e 'type == "object"' "$TEMPLATE_PATH" >/dev/null || die "Template must be a JSON object: $TEMPLATE_PATH"
+fi
+
+if [[ -n "$TEMPLATE_PATH" && $COPY_CREDENTIALS -eq 1 ]]; then
+  die '--copy-credentials requires a live source profile; omit it in template mode.'
+fi
+
+if [[ -z "$TEMPLATE_PATH" && $COPY_CREDENTIALS -eq 0 && $INTERACTIVE -eq 1 ]]; then
   copy_credentials_answer="$(prompt_text 'Copy connected-service credentials/API keys?' 'no')"
   case "${copy_credentials_answer,,}" in
     y|yes) COPY_CREDENTIALS=1 ;;
@@ -583,7 +648,11 @@ if [[ $SAME_ACCOUNT -eq 1 ]]; then
 fi
 
 echo "Source account: ${EMAIL}"
-echo "Source: ${SOURCE_NAME} (profile ${SOURCE_INDEX})"
+if [[ -n "$TEMPLATE_PATH" ]]; then
+  echo 'Source profile: none (template mode)'
+else
+  echo "Source: ${SOURCE_NAME} (profile ${SOURCE_INDEX})"
+fi
 if [[ $SAME_ACCOUNT -eq 1 ]]; then
   echo "Target account: ${TARGET_EMAIL} (same account)"
 else
@@ -595,10 +664,18 @@ for ((index = 0; index < ${#TARGET_INDEXES[@]}; index += 1)); do
   [[ $index -eq $((${#TARGET_INDEXES[@]} - 1)) ]] || printf ','
 done
 printf '\nPlatforms: %s\n' "${PLATFORM_LIST[*]}"
+if [[ -n "$TEMPLATE_PATH" ]]; then
+  printf 'Settings source: template %s (merged into each target)\n' "$TEMPLATE_PATH"
+fi
 
 for platform in "${PLATFORM_LIST[@]}"; do
-  get_profile_settings "$SOURCE_TOKEN" "$SOURCE_INDEX" "$platform"
-  SOURCE_SETTINGS["$platform"]="$SETTINGS_JSON"
+  if [[ -n "$TEMPLATE_PATH" ]]; then
+    SOURCE_SETTINGS["$platform"]="$(jq -ce --arg platform "$platform" '.[$platform] // empty' "$TEMPLATE_PATH")" \
+      || die "Template does not contain a valid ${platform} settings object: $TEMPLATE_PATH"
+  else
+    get_profile_settings "$SOURCE_TOKEN" "$SOURCE_INDEX" "$platform"
+    SOURCE_SETTINGS["$platform"]="$SETTINGS_JSON"
+  fi
 done
 source_provider_credential_count=0
 if [[ $COPY_CREDENTIALS -eq 1 ]]; then
@@ -622,7 +699,11 @@ for ((target_index = 0; target_index < ${#TARGET_INDEXES[@]}; target_index += 1)
   for platform in "${PLATFORM_LIST[@]}"; do
     if [[ $DRY_RUN -eq 0 ]]; then
       settings_to_push="${SOURCE_SETTINGS[$platform]}"
-      if [[ $COPY_CREDENTIALS -eq 0 ]]; then
+      if [[ -n "$TEMPLATE_PATH" ]]; then
+        get_profile_settings "$TARGET_TOKEN" "$target_profile_index" "$platform"
+        target_current_settings="$SETTINGS_JSON"
+        settings_to_push="$(merge_template_into_target "${SOURCE_SETTINGS[$platform]}" "$target_current_settings")"
+      elif [[ $COPY_CREDENTIALS -eq 0 ]]; then
         get_profile_settings "$TARGET_TOKEN" "$target_profile_index" "$platform"
         target_current_settings="$SETTINGS_JSON"
         settings_to_push="$(prepare_settings_for_copy "${SOURCE_SETTINGS[$platform]}" "$target_current_settings")"

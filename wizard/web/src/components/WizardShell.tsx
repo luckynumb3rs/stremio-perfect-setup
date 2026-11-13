@@ -17,9 +17,10 @@ interface Props {
   children: React.ReactNode;
   showBack?: boolean;
   onSubmit?: () => void;
+  belowContent?: React.ReactNode;
 }
 
-export function WizardShell({ children, showBack = true, onSubmit }: Props) {
+export function WizardShell({ children, showBack = true, onSubmit, belowContent }: Props) {
   const { step, prevStep } = useWizard();
 
   useEffect(() => {
@@ -140,6 +141,7 @@ export function WizardShell({ children, showBack = true, onSubmit }: Props) {
               </button>
             )}
           </article>
+          {belowContent}
         </main>
       </div>
     </>

@@ -3,7 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { WizardShell } from '../components/WizardShell';
 import { NextButton } from '../components/NextButton';
 import { rolesOf, useWizard } from '../store/wizard';
-import { isBingecatOn } from '../lib/constants';
+import { isBingecatConfigured } from '../lib/constants';
 import { resolveLogoUrl } from '../lib/services';
 import { BingecatCard, useBingecatStatus } from './BingecatCard';
 
@@ -72,7 +72,7 @@ export function RecommendationsStep() {
     setWatchly, setBingecat, setPinCollections, nextStep,
   } = useWizard();
 
-  const featureOn = isBingecatOn(wizardConfig);
+  const featureOn = isBingecatConfigured(wizardConfig);
   const { hasStandard, hasKids } = rolesOf({ target, nuvioProfiles, stremioKids });
   const bc = useBingecatStatus();
   const isNuvio = target === 'nuvio';

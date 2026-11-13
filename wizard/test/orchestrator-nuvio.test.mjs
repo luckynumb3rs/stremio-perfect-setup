@@ -9,6 +9,7 @@ const readJson = (name) => JSON.parse(readFileSync(join(root, 'templates', name)
 const metaTemplate = readJson('AIOMetadata-All.json');
 const collections = readJson('Nuvio-Collections.json');
 const settingsTemplate = readJson('Nuvio-Settings.json');
+const settingsAllTemplate = readJson('Nuvio-Settings-All.json');
 const watchlyDefaults = readJson('Watchly.json');
 
 let passed = 0, failed = 0;
@@ -27,7 +28,9 @@ const ORIGINAL = {
 /** In-memory Nuvio with call log. `fail` is a set of `method:profileIndex` strings that throw. */
 function makeNuvio(fail = new Set()) {
   const calls = [];
+  let loginCount = 0;
   const pushed = new Map(); // profile index -> collections pushed
+  const settings = new Map(); // `${profile index}:${platform}` -> settings blob pushed
   const addons = new Map(Object.entries(ORIGINAL).map(([k, v]) => [Number(k), v]));
   const profiles = [
     { profile_index: 1, name: 'Ben', uses_primary_addons: false },
@@ -42,9 +45,15 @@ function makeNuvio(fail = new Set()) {
   return {
     calls,
     pushed,
+    settings,
     addons,
     profiles,
-    async login() { calls.push('login'); return { token: 'fresh-token', refreshToken: 'fresh-refresh', expiresAt: Math.floor(Date.now() / 1000) + 3600 }; },
+    async login() {
+      loginCount++;
+      calls.push('login');
+      const prefix = loginCount === 1 ? 'fresh' : 'watchly';
+      return { token: `${prefix}-token`, refreshToken: `${prefix}-refresh`, expiresAt: Math.floor(Date.now() / 1000) + 3600 };
+    },
     async signup() { calls.push('signup'); throw new Error('signup must not be called'); },
     async getProfiles() { calls.push('getProfiles'); return profiles.map((p) => ({ ...p })); },
     async listAddons(_t, idx) { log('listAddons', idx); return addons.get(idx) ?? []; },
@@ -52,7 +61,7 @@ function makeNuvio(fail = new Set()) {
     async replaceAddons(_t, idx, list) { log('replaceAddons', idx); addons.set(idx, list); },
     async pushCollections(_t, idx, collections) { log('pushCollections', idx); pushed.set(idx, collections); },
     async getProfileSettings(_t, idx, platform) { log(`getSettings-${platform}`, idx); return { settingsJson: {} }; },
-    async pushProfileSettings(_t, idx, platform) { log(`pushSettings-${platform}`, idx); },
+    async pushProfileSettings(_t, idx, platform, settingsJson) { log(`pushSettings-${platform}`, idx); settings.set(`${idx}:${platform}`, settingsJson); },
   };
 }
 
@@ -125,7 +134,7 @@ console.log('\n# single profile keeps the old behaviour');
   ok('collections and both settings platforms pushed', nuvio.calls.includes('pushCollections:1') && nuvio.calls.some((c) => c.startsWith('pushSettings-')));
   const w = svc.posts.watchly[0];
   eq('Watchly body carries profile id, name and session', [w.nuvio_profile_id, w.nuvio_profile_name, w.nuvio_access_token, w.watch_history_source], [1, 'Ben', 'session-token', 'nuvio']);
-  ok('fresh session token is reused (no login)', !nuvio.calls.includes('login'));
+  ok('Watchly-only setup reuses the primary session', !nuvio.calls.includes('login'));
   eq('shared configs created once', [svc.posts.aiostreams, svc.posts.aiometadata], [1, 1]);
 }
 
@@ -149,6 +158,20 @@ console.log('\n# two profiles share the configs; Watchly and backups are per pro
   ok('profile 1 is written before profile 2 (sequential)', nuvio.calls.indexOf('replaceAddons:1') < nuvio.calls.indexOf('updateProfile:2'));
 }
 
+console.log('\n# Nuvio settings template can be selected per profile');
+{
+  const nuvio = makeNuvio();
+  const svc = mockServices();
+  try {
+    await runNuvioSetup(baseArgs(nuvio, {
+      profiles: [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: false, fullSettings: true }],
+      nuvioSettingsTemplates: { standard: settingsTemplate, full: settingsAllTemplate },
+    }));
+  } finally { svc.restore(); }
+  eq('standard profile receives the standard mobile version', nuvio.settings.get('1:mobile')?.version, 3);
+  eq('full-settings profile receives the complete mobile version', nuvio.settings.get('2:mobile')?.version, 4);
+}
+
 console.log('\n# a write failure on profile 2 does not undo profile 1; Retry redoes only profile 2');
 {
   const targets = [{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Benci', kids: false }];
@@ -169,7 +192,7 @@ console.log('\n# a write failure on profile 2 does not undo profile 1; Retry red
   try { second = await runNuvioSetup(baseArgs(nuvio2, { profiles: targets, retry: first })); } finally { svc.restore(); }
   eq('after retry both done', second.profiles.map((p) => p.status), ['done', 'done']);
   eq('no new shared configs on retry', [svc.posts.aiostreams, svc.posts.aiometadata], [0, 0]);
-  eq('only profile 2 gets a new Watchly config', svc.posts.watchly.map((b) => b.nuvio_profile_id), [2]);
+  eq('the existing Watchly config is reused after BingeCat consumes the Nuvio refresh grant', svc.posts.watchly.map((b) => b.nuvio_profile_id), []);
   eq('only profile 2 is written', [writes(nuvio2, 1), writes(nuvio2, 2)], [0, 1]);
   ok('no addon list is re-read (first backups are kept)', !nuvio2.calls.some((c) => c.startsWith('listAddons')));
   eq('profile 2 keeps the backup from the first run', second.profiles[1].previousAddons, first.profiles[1].previousAddons);
@@ -210,7 +233,7 @@ console.log('\n# a stale session is replaced by a fresh sign-in');
     await runNuvioSetup(baseArgs(nuvio, { account: { mode: 'signin', email: 'a@b.c', password: 'pass-word-123', authToken: 'old-token', authExpiresAt: Math.floor(Date.now() / 1000) + 60 } }));
   } finally { svc.restore(); }
   ok('login was called', nuvio.calls.includes('login'));
-  eq('Watchly got the fresh token', svc.posts.watchly[0].nuvio_access_token, 'fresh-token');
+  eq('Watchly got the fresh primary session token', svc.posts.watchly[0].nuvio_access_token, 'fresh-token');
 }
 
 console.log('\n# invalid profile selections fail before any call');
@@ -335,6 +358,7 @@ console.log('\n# BingeCat: mixed Standard + Kids run');
   eq('Standard without a BingeCat target: no BingeCat addon', names(nuvio, 3), ['Watchly', 'AIOMetadata', 'AIOStreams']);
   eq('sort_order is sequential', nuvio.addons.get(2).map((a) => a.sort_order), [0, 1, 2]);
   eq('Kids get no Watchly config', svc.posts.watchly.map((b) => b.nuvio_profile_id), [1, 3]);
+  ok('BingeCat run gives Watchly a separate Nuvio session', svc.posts.watchly[0].nuvio_access_token === 'fresh-token' && nuvio.calls.filter((c) => c === 'login').length === 1);
   ok('Kids get an empty collection list (existing ones removed), Standard get ours', nuvio.pushed.get(2)?.length === 0 && nuvio.pushed.get(1)?.length > 0 && nuvio.pushed.get(3)?.length > 0);
   ok('settings are pushed to the Kids profile too', nuvio.calls.some((c) => c.startsWith('pushSettings-') && c.endsWith(':2')));
   eq('one shared AIOStreams, one shared AIOMetadata', [svc.posts.aiostreams, svc.posts.aiometadata], [1, 1]);

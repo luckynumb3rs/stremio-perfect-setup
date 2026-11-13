@@ -1,5 +1,5 @@
 // Run: node --experimental-strip-types wizard/web/src/lib/constants.test.mts
-import { isBingecatOn, normalizeWizardConfig, resolveWizardConfig } from './constants.ts';
+import { isBingecatConfigured, normalizeWizardConfig, resolveWizardConfig } from './constants.ts';
 
 let passed = 0;
 let failed = 0;
@@ -36,6 +36,7 @@ withMockedRandom([0, 0, 0, 0, 0, 0], () => {
           tvdbApiKeys: [],
           geminiApiKeys: [],
           rpdbApiKeys: [],
+          bingecatClientId: ' bca_test ',
         },
         limits: {
           stremioMaxCatalogs: 10,
@@ -44,17 +45,22 @@ withMockedRandom([0, 0, 0, 0, 0, 0], () => {
           aiostreams: ['https://aio-1.example', 'https://aio-2.example', 'https://aio-3.example'],
           aiometadata: ['https://meta-1.example', 'https://meta-2.example'],
           watchly: ['https://watch-1.example', 'https://watch-2.example'],
+          bingecat: ['https://bingecat.example'],
         },
         templates: {
           stremio: {
             aiostreams: 'templates/AIOStreams.json',
             aiometadata: 'templates/AIOMetadata.json',
+            bingecat: 'templates/BingeCat.json',
+            bingecatKids: 'templates/BingeCat-Kids.json',
           },
           nuvio: {
             aiostreams: 'templates/AIOStreams.json',
             aiometadata: 'templates/AIOMetadata.json',
             collections: 'templates/Nuvio-Collections.json',
             settings: 'templates/Nuvio-Settings.json',
+            bingecat: 'templates/BingeCat.json',
+            bingecatKids: 'templates/BingeCat-Kids.json',
           },
         },
       },
@@ -78,29 +84,32 @@ withMockedRandom([0, 0, 0, 0, 0, 0], () => {
   ]);
 });
 
-console.log('\n# BingeCat config block');
+console.log('\n# BingeCat config entries');
 {
-  const block = (bingecat?: unknown) => ({
+  const block = (patch: Record<string, unknown> = {}) => ({
     configurations: [{
       name: 'B', targets: ['nuvio'], addonDetailsFilenamePrefix: 'addons',
-      keys: { tmdbApiKeys: [], tmdbReadAccessTokens: [], tvdbApiKeys: [], geminiApiKeys: [], rpdbApiKeys: [] },
+      keys: { tmdbApiKeys: [], tmdbReadAccessTokens: [], tvdbApiKeys: [], geminiApiKeys: [], rpdbApiKeys: [], bingecatClientId: ' bca_x ' },
       limits: { stremioMaxCatalogs: 10 },
-      instances: { aiostreams: ['a'], aiometadata: ['b'] },
-      templates: { stremio: { aiostreams: 'x', aiometadata: 'y' }, nuvio: { aiostreams: 'x', aiometadata: 'y', collections: 'c', settings: 's' } },
-      ...(bingecat === undefined ? {} : { bingecat }),
+      instances: { aiostreams: ['a'], aiometadata: ['b'], bingecat: ['https://bingecat.example'] },
+      templates: {
+        stremio: { aiostreams: 'x', aiometadata: 'y', bingecat: 'standard', bingecatKids: 'kids' },
+        nuvio: { aiostreams: 'x', aiometadata: 'y', collections: 'c', settings: 's', bingecat: 'standard', bingecatKids: 'kids' },
+      },
+      ...patch,
     }],
   });
-  const valid = { enabled: true, baseUrl: 'https://bingecat.com/', clientId: 'bca_x', templates: { standard: 'templates/BingeCat.json', kids: 'templates/BingeCat-Kids.json' } };
-  const resolve = (b?: unknown) => resolveWizardConfig(block(b), 'nuvio');
+  const resolve = (patch: Record<string, unknown> = {}) => resolveWizardConfig(block(patch), 'nuvio');
 
-  eq('no block -> feature off', isBingecatOn(resolve()), false);
-  eq('valid block, enabled true -> on', isBingecatOn(resolve(valid)), true);
-  eq('valid block, enabled false -> off', isBingecatOn(resolve({ ...valid, enabled: false })), false);
-  eq('enabled "true" (string) counts as off', isBingecatOn(resolve({ ...valid, enabled: 'true' })), false);
-  eq('invalid block (no clientId) is dropped, config still resolves', [!!resolve({ ...valid, clientId: '' }), resolve({ ...valid, clientId: '' })?.bingecat], [true, undefined]);
-  eq('invalid block (no kids template) is dropped', resolve({ ...valid, templates: { standard: 'a' } })?.bingecat, undefined);
-  eq('trailing slash is trimmed from baseUrl', resolve(valid)?.bingecat?.baseUrl, 'https://bingecat.com');
-  eq('isBingecatOn(null) is false', isBingecatOn(null), false);
+  eq('BingeCat config entries enable the feature', isBingecatConfigured(resolve()), true);
+  eq('BingeCat instance list is normalized', resolve()?.instances.bingecat, ['https://bingecat.example']);
+  eq('BingeCat client id is normalized', resolve()?.keys.bingecatClientId, 'bca_x');
+  eq('target templates keep standard and Kids paths', [resolve()?.templates.stremio.bingecat, resolve()?.templates.stremio.bingecatKids, resolve()?.templates.nuvio.bingecat, resolve()?.templates.nuvio.bingecatKids], ['standard', 'kids', 'standard', 'kids']);
+  eq('missing BingeCat instance disables the feature', isBingecatConfigured(resolve({ instances: { aiostreams: ['a'], aiometadata: ['b'] } })), false);
+  eq('missing BingeCat client id disables the feature', isBingecatConfigured(resolve({ keys: { tmdbApiKeys: [], tmdbReadAccessTokens: [], tvdbApiKeys: [], geminiApiKeys: [], rpdbApiKeys: [] } })), false);
+  eq('incomplete target templates disable the feature', isBingecatConfigured(resolve({ templates: { stremio: { aiostreams: 'x', aiometadata: 'y' }, nuvio: { aiostreams: 'x', aiometadata: 'y', collections: 'c', settings: 's' } } })), false);
+  eq('legacy BingeCat block is not retained', 'bingecat' in (resolve({ bingecat: { baseUrl: 'https://bingecat.example' } }) ?? {}), false);
+  eq('isBingecatConfigured(null) is false', isBingecatConfigured(null), false);
 }
 
 console.log('\n# normalizeWizardConfig: preserves instance membership');

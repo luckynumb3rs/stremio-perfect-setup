@@ -20,7 +20,9 @@ export interface NuvioProfileOption {
 export interface NuvioProfileTarget {
   nuvioProfileId: number | 'new';
   name: string;
-  kids: boolean; // ponytail: always false until the Kids option exists
+  kids: boolean;
+  /** Apply the complete Nuvio settings template instead of the standard template. */
+  fullSettings?: boolean;
 }
 
 /** A BingeCat profile of the connected account (see core/adapters/bingecat.js loadProfiles). */
@@ -51,14 +53,32 @@ export interface BingecatState {
   enabled: boolean;
   /** OAuth token, memory only. Never logged, never in URLs or analytics. */
   token: string | null;
+  /** OAuth refresh token, memory only. It is used only to refresh this wizard session. */
+  refreshToken: string | null;
+  /** Redirect URI bound to the OAuth grant, also memory only. */
+  redirectUri: string | null;
   /** Token expiry, epoch seconds */
   expiresAt: number | null;
   accountName: string;
   profiles: BingecatProfile[];
   mapping: BingecatMappingEntry[];
+  /** Provider connections are completed during install and retained only for safe retries in this wizard session. */
+  stremioConnected: boolean;
+  nuvioConnected: boolean;
 }
 
-export const EMPTY_BINGECAT: BingecatState = { enabled: false, token: null, expiresAt: null, accountName: '', profiles: [], mapping: [] };
+export const EMPTY_BINGECAT: BingecatState = {
+  enabled: false,
+  token: null,
+  refreshToken: null,
+  redirectUri: null,
+  expiresAt: null,
+  accountName: '',
+  profiles: [],
+  mapping: [],
+  stremioConnected: false,
+  nuvioConnected: false,
+};
 
 /** Which profile kinds this run has. An empty Nuvio list counts as Standard (sign-in is still loading). */
 export function rolesOf(s: { target: Target | null; nuvioProfiles: NuvioProfileTarget[]; stremioKids: boolean }) {
@@ -191,6 +211,8 @@ export interface LoadedTemplates {
   aiometadata: unknown;
   collections: unknown[];
   settings: unknown | null;
+  /** Nuvio-only complete settings template. */
+  settingsAll?: unknown | null;
   watchly: unknown | null;
   /** Only when the BingeCat feature is on */
   bingecat?: { standard: unknown; kids: unknown };
@@ -238,6 +260,8 @@ interface WizardState {
   setNuvioProfiles: (profiles: NuvioProfileTarget[]) => void;
   /** Kids switch of the profile at this position in nuvioProfiles */
   setNuvioProfileKids: (index: number, kids: boolean) => void;
+  /** Full Nuvio settings switch of the profile at this position in nuvioProfiles */
+  setNuvioProfileFullSettings: (index: number, fullSettings: boolean) => void;
   setStremioKids: (kids: boolean) => void;
   setBingecat: (b: Partial<BingecatState>) => void;
   disconnectBingecat: () => void;
@@ -327,13 +351,16 @@ export const useWizard = create<WizardState>((set) => ({
     // BingeCat/Kids choices belong to one target
     stremioKids: false,
     bingecat: EMPTY_BINGECAT,
-    nuvioProfiles: s.nuvioProfiles.map((p) => ({ ...p, kids: false })),
+    nuvioProfiles: s.nuvioProfiles.map((p) => ({ ...p, kids: false, fullSettings: false })),
   })),
   setStremioAccount: (a) => set(s => ({ stremioAccount: { ...s.stremioAccount, ...a } })),
   setNuvioAccount: (a) => set(s => ({ nuvioAccount: { ...s.nuvioAccount, ...a } })),
   setNuvioProfiles: (nuvioProfiles) => set(s => guardRoles(s, { nuvioProfiles })),
   setNuvioProfileKids: (index, kids) => set(s => guardRoles(s, {
     nuvioProfiles: s.nuvioProfiles.map((p, i) => (i === index ? { ...p, kids } : p)),
+  })),
+  setNuvioProfileFullSettings: (index, fullSettings) => set(s => ({
+    nuvioProfiles: s.nuvioProfiles.map((p, i) => (i === index ? { ...p, fullSettings } : p)),
   })),
   setStremioKids: (stremioKids) => set(s => guardRoles(s, { stremioKids })),
   setBingecat: (b) => set(s => ({ bingecat: { ...s.bingecat, ...b } })),
@@ -351,7 +378,7 @@ export const useWizard = create<WizardState>((set) => ({
     const selected = s.nuvioProfiles.some(t => t.nuvioProfileId === p.profile_index);
     const next = selected
       ? s.nuvioProfiles.filter(t => t.nuvioProfileId !== p.profile_index)
-      : [...s.nuvioProfiles, { nuvioProfileId: p.profile_index, name: p.name, kids: false }];
+      : [...s.nuvioProfiles, { nuvioProfileId: p.profile_index, name: p.name, kids: false, fullSettings: false }];
     return guardRoles(s, { nuvioProfiles: sortNuvioProfiles(next) });
   }),
   setCredentials: (c) => set(s => ({ credentials: { ...s.credentials, ...c } })),

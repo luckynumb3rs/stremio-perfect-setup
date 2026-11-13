@@ -205,6 +205,8 @@ async function findCreatedProfile(bc, name) {
  * A new BingeCat profile is announced (step 'bingecat_profile') BEFORE its settings are written, so a later failure
  * still reports the id and a retry reuses it instead of creating another one. Nothing is ever deleted on BingeCat.
  * @param {object} bc { adapter, token, mainProfileId, templates: { standard, kids }, targets: { [key]: profileId | 'new' },
+ *   providerAuthKey?: string, providerRefreshToken?: string, geminiApiKey?: string,
+ *   stremioConnected?: boolean, nuvioConnected?: boolean,
  *   known?: Set<number> (profile ids on the account at connect time, to recognise a profile created by a lost response),
  *   createdKeys?: Set<number> (rows whose profile an earlier attempt created),
  *   kidsProfileIds?: Set<number> (BingeCat profiles already of the kids type; every other profile of a Kids row is switched first) }
@@ -242,6 +244,20 @@ async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
     }
     step('bingecat_profile_type', { key, profileId, type: 'kids' });
   }
+
+  // Stremio history sync is writable and must be connected before the settings PATCH.
+  // Nuvio history sync is enabled by BingeCat after its final connection step below.
+  if (surface === 'stremio' && !bc.stremioConnected && bc.adapter.connectStremio) {
+    if (!bc.providerAuthKey) throw new Error('BingeCat needs the signed-in Stremio session to connect watch history. Go back to the Account step and sign in again.');
+    await bc.adapter.connectStremio(bc.token, profileId, bc.providerAuthKey);
+    bc.stremioConnected = true;
+    step('bingecat_connection', { provider: 'stremio' });
+  }
+  if (bc.geminiApiKey && !bc.aiKeysConfigured && bc.adapter.setAiKeys) {
+    await bc.adapter.setAiKeys(bc.token, bc.mainProfileId, { geminiApiKey: bc.geminiApiKey });
+    bc.aiKeysConfigured = true;
+    step('bingecat_ai_key', { provider: 'gemini' });
+  }
   const template = kids ? bc.templates.kids : bc.templates.standard;
   await bc.adapter.applyTemplate(bc.token, profileId, template, { historySource: surface, isMain: profileId === bc.mainProfileId });
   // The template decides whether the AI-search addon is installed (search enabled = Kids template today).
@@ -249,6 +265,33 @@ async function applyBingecatProfile(bc, { key, name, kids, surface }, step) {
   const { url, searchUrl } = await bc.adapter.getManifests(bc.token, profileId, { surface, aiSearch });
   step('bingecat', { profileName: name, created });
   return { profileId, created, url, searchUrl: searchUrl ?? null };
+}
+
+/**
+ * BingeCat consumes/rotates the Nuvio refresh grant. This must run after every direct Nuvio write,
+ * and no Nuvio token may be used after it. Profiles are linked only after the account connection succeeds.
+ */
+async function finalizeBingecatNuvio(bc, pending, step) {
+  const ready = pending.filter(({ result }) => result.status === 'written' && result.bingecat);
+  if (ready.length === 0 || !bc.adapter.connectNuvio) return;
+
+  if (!bc.nuvioConnected) {
+    if (!bc.providerRefreshToken) throw new Error('BingeCat needs the Nuvio refresh session to connect watch history. Go back to the Account step and sign in again.');
+    await bc.adapter.connectNuvio(bc.token, bc.mainProfileId, bc.providerRefreshToken);
+    bc.nuvioConnected = true;
+    step('bingecat_connection', { provider: 'nuvio' });
+  }
+
+  if (!bc.adapter.linkNuvioProfile) return;
+  for (const { result } of ready) {
+    try {
+      await bc.adapter.linkNuvioProfile(bc.token, result.bingecat.profileId, result.profileIndex);
+    } catch (err) {
+      result.status = 'failed';
+      result.error = `BingeCat could not link Nuvio profile ${result.profileIndex}: ${toError(err).message}`;
+      step('profile_failed', { profileIndex: result.profileIndex, profileName: result.name, error: result.error });
+    }
+  }
 }
 
 async function applyNuvioProfileSettings(nuvio, token, profileIndex, settingsTemplate, aiometadataParams) {
@@ -279,7 +322,7 @@ async function applyNuvioProfileSettings(nuvio, token, profileIndex, settingsTem
 /**
  * Full Stremio setup flow.
  * @param {object} p
- * @param {object} p.instances         { aiostreams: string[], aiometadata: string[], watchly?: string[] } – ordered list; first is primary, rest are fallbacks
+ * @param {object} p.instances         { aiostreams: string[], aiometadata: string[], watchly?: string[], bingecat?: string[] } – ordered service instances; first is primary where applicable
  * @param {object} p.account           { mode: 'create'|'signin', email, password }
  * @param {object} p.aiostreamsParams  { template, inputs, services, credentials }
  * @param {object} p.aiometadataParams { baseTemplate, enabledCategories, enabledDiscoverFolderIds, categoryOrder, discoverFolderOrder, apiKeys, language }
@@ -421,7 +464,7 @@ function validateNuvioTargets(profiles, bingecat) {
  * Shared AIOStreams / AIOMetadata configs are created once; Watchly (if requested) once per profile.
  * Each profile is installed as a unit: a failure marks only that profile failed and never undoes finished ones.
  * @param {object} p
- * @param {object} p.instances           { aiostreams: string[], aiometadata: string[], watchly?: string[] } – ordered list; first is primary, rest are fallbacks
+ * @param {object} p.instances           { aiostreams: string[], aiometadata: string[], watchly?: string[], bingecat?: string[] } – ordered service instances; first is primary where applicable
  * @param {object} p.account             { mode: 'create'|'signin', email, password, authToken?, authRefreshToken?, authExpiresAt? }
  * @param {object[]} p.profiles          [{ nuvioProfileId: 1..6, name, kids }] non-empty; the profiles must already exist
  * @param {object} p.aiostreamsParams    { template, inputs, services, credentials }
@@ -431,16 +474,17 @@ function validateNuvioTargets(profiles, bingecat) {
  * @param {object[]} p.collectionsJson   Nuvio-Collections.json array
  * @param {boolean|null} [p.pinCollections] true/false sets `pinToTop` on every collection group (collections above or below the Watchly/BingeCat
  *                                       catalogs); null keeps the template's value
- * @param {object} p.nuvioSettingsTemplate Nuvio-Settings.json platform map
+ * @param {{standard: object, full: object}} p.nuvioSettingsTemplates Nuvio settings platform maps
  * @param {function} p.onStep
  * @returns {Promise<{account, addons, addonPasswordSource, warnings, profiles}>} throws only for bad input, auth, profile listing or shared config creation
  */
-export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, bingecat = null, pinCollections = null, retry = null, collectionsJson, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
+export async function runNuvioSetup({ instances, account, profiles: targets, aiostreamsParams, aiometadataParams, watchly = null, bingecat = null, pinCollections = null, retry = null, collectionsJson, nuvioSettingsTemplates, nuvioSettingsTemplate, proxyBase, onStep, nuvio = createNuvioAdapter() }) {
   validateNuvioTargets(targets, bingecat);
   const step = (name, data) => { onStep?.(name, data); return data; };
 
   // 1) Nuvio account
   const { auth, accountSummary } = await resolveNuvioAuth(nuvio, account);
+  if (bingecat && !bingecat.nuvioConnected) bingecat.providerRefreshToken = auth.refreshToken;
   step('account', accountSummary);
 
   // 2) Read pass (no writes): resolve every profile and back up what it has today. A profile that
@@ -458,9 +502,9 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
     if (prior?.status === 'done') { results.set(idx, prior); continue; }
 
     const entry = nuvioProfiles.find((e) => e.profile_index === idx);
-    const result = { profileIndex: idx, name: entry?.name || target.name, kids: !!target.kids, status: 'failed', error: null, backupTaken: false, previousAddons: [], watchly: null, bingecat: null, settings: null };
+    const result = { profileIndex: idx, name: entry?.name || target.name, kids: !!target.kids, status: 'pending', error: null, backupTaken: false, previousAddons: [], watchly: prior?.watchly ?? null, bingecat: null, settings: null };
     results.set(idx, result);
-    if (!entry) { result.error = `Profile ${idx} was not found on this Nuvio account.`; continue; }
+    if (!entry) { result.status = 'failed'; result.error = `Profile ${idx} was not found on this Nuvio account.`; continue; }
 
     try {
       if (prior?.backupTaken) {
@@ -474,6 +518,7 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
       step('backup', { profileIndex: idx, profileName: entry.name, count: result.previousAddons.length, addons: result.previousAddons });
       pending.push({ result, entry, target });
     } catch (err) {
+      result.status = 'failed';
       result.error = toError(err).message;
     }
   }
@@ -524,30 +569,51 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
       ? matchingCollections
       : matchingCollections.map((group) => ({ ...group, pinToTop: pinCollections === true }));
 
-    // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
-    // Addon order. Standard: Watchly (watch history), BingeCat, AIOMetadata (catalog source), AIOStreams (stream source).
-    // Kids: BingeCat, BingeCat AI Search (only when the template enables search), AIOStreams; no Watchly or AIOMetadata, and empty collections.
-    for (const { result, entry, target } of pending) {
-      const idx = result.profileIndex;
-      const kids = !!target.kids;
-      try {
-        if (watchly && !kids) {
+    // Watchly stores a Nuvio refresh grant, while BingeCat takes over and rotates the
+    // grant that is posted to its partner endpoint. Use a separate Nuvio session for
+    // Watchly so the grant handed to BingeCat is never reused by Watchly afterward.
+    const needsWatchlySession = !!bingecat && !!watchly && pending.some(({ result, target }) => (
+      result.status !== 'failed' && !result.watchly && !target.kids
+    ));
+    const watchlyAuth = needsWatchlySession
+      ? await nuvio.login(account.email, account.password)
+      : auth;
+
+    if (watchly) {
+      for (const { result, entry, target } of pending) {
+        if (result.status === 'failed' || result.watchly || target.kids) continue;
+        try {
           const body = buildWatchlyBody(watchly.defaults, {
             target: 'nuvio',
-            nuvioAccessToken: auth.token,
-            nuvioRefreshToken: auth.refreshToken,
-            nuvioExpiresAt: auth.expiresAt,
-            nuvioProfileId: idx,
+            nuvioAccessToken: watchlyAuth.token,
+            nuvioRefreshToken: watchlyAuth.refreshToken,
+            nuvioExpiresAt: watchlyAuth.expiresAt,
+            nuvioProfileId: result.profileIndex,
             nuvioProfileName: entry.name,
             tmdbApiKey: watchly.tmdbApiKey,
             geminiApiKey: watchly.geminiApiKey,
             rpdbApiKey: watchly.rpdbApiKey,
           });
           result.watchly = await createWatchlySummary(instances, body, summary.warnings);
-          step('watchly', { profileIndex: idx, profileName: entry.name, ...result.watchly });
+          step('watchly', { profileIndex: result.profileIndex, profileName: entry.name, ...result.watchly });
+        } catch (err) {
+          result.status = 'failed';
+          result.error = toError(err).message;
+          step('profile_failed', { profileIndex: result.profileIndex, profileName: entry.name, error: result.error });
         }
+      }
+    }
 
-        // BingeCat before any Nuvio write: a BingeCat failure leaves the Nuvio profile untouched.
+    // 4) Write pass, strictly sequential: updateProfile pushes the whole profile list (read-modify-write).
+    // Addon order. Standard: Watchly (watch history), BingeCat, AIOMetadata (catalog source), AIOStreams (stream source).
+    // Kids: BingeCat, BingeCat AI Search (only when the template enables search), AIOStreams; no Watchly or AIOMetadata, and empty collections.
+    for (const { result, entry, target } of pending) {
+      const idx = result.profileIndex;
+      const kids = !!target.kids;
+      if (result.status === 'failed') continue;
+      try {
+        // Prepare the BingeCat addon before the Nuvio write; the Nuvio account connection itself happens
+        // only after every direct Nuvio write has completed.
         if (bingecat && bingecat.targets?.[idx] !== undefined) {
           result.bingecat = await applyBingecatProfile(bingecat, { key: idx, name: entry.name, kids, surface: 'nuvio' }, (name, data) => step(name, { ...data, profileIndex: idx }));
         }
@@ -573,16 +639,41 @@ export async function runNuvioSetup({ instances, account, profiles: targets, aio
         await nuvio.pushCollections(auth.token, idx, collectionsToPush);
         step('collections', { groupCount: collectionsToPush.length, profileIndex: idx, profileName: entry.name });
 
-        result.settings = await applyNuvioProfileSettings(nuvio, auth.token, idx, nuvioSettingsTemplate, aiometadataParams);
+        const settingsTemplate = target.fullSettings
+          ? (nuvioSettingsTemplates?.full ?? nuvioSettingsTemplates?.standard ?? nuvioSettingsTemplate)
+          : (nuvioSettingsTemplates?.standard ?? nuvioSettingsTemplate);
+        if (!settingsTemplate) throw new Error('The Nuvio settings template is missing.');
+        result.settings = await applyNuvioProfileSettings(nuvio, auth.token, idx, settingsTemplate, aiometadataParams);
         step('settings', { ...result.settings, profileIndex: idx, profileName: entry.name });
 
-        result.status = 'done';
+        result.status = 'written';
         result.error = null;
       } catch (err) {
         result.status = 'failed';
         result.error = toError(err).message;
         step('profile_failed', { profileIndex: idx, profileName: entry.name, error: result.error });
       }
+    }
+
+    // The Nuvio partner connection rotates the refresh grant and ends the safe window for using Nuvio tokens.
+    // Keep this as the final Nuvio-related operation in the run.
+    if (bingecat) {
+      try {
+        await finalizeBingecatNuvio(bingecat, pending, step);
+      } catch (err) {
+        const message = `BingeCat could not connect Nuvio after the Nuvio setup completed: ${toError(err).message}`;
+        for (const { result } of pending) {
+          if (result.status === 'written' && result.bingecat) {
+            result.status = 'failed';
+            result.error = message;
+            step('profile_failed', { profileIndex: result.profileIndex, profileName: result.name, error: message });
+          }
+        }
+      }
+    }
+
+    for (const { result } of pending) {
+      if (result.status === 'written') result.status = 'done';
     }
   }
 

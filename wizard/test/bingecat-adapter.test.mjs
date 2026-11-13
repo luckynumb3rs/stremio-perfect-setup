@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { createBingecatAdapter, resolveBingecatTemplate, deriveSearchManifestUrl, BingecatError, BINGECAT_SCOPES } from '../core/adapters/bingecat.js';
+import { createBingecatAdapter, resolveBingecatTemplate, BingecatError, BINGECAT_SCOPES } from '../core/adapters/bingecat.js';
 
 let passed = 0, failed = 0;
 function ok(name, cond, detail = '') {
@@ -13,6 +13,7 @@ const TEMPLATE = {
   $comment: 'strip me',
   language: { multilang_enabled: false },
   recommendations: { history_sources: ['{{HISTORY_SOURCE}}'], excluded_genres_hard: ['adult'] },
+  stremio_addon: { force_top: false, cinemeta_control_mode: 'observe' },
   metadata: { language: 'en' },
 };
 
@@ -49,18 +50,13 @@ console.log('\n# resolveBingecatTemplate');
   const main = resolveBingecatTemplate(TEMPLATE, { historySource: 'nuvio', isMain: true });
   eq('placeholder filled, $comment stripped, metadata kept for main', [main.recommendations.history_sources, '$comment' in main, !!main.metadata], [['nuvio'], false, true]);
   const sub = resolveBingecatTemplate(TEMPLATE, { historySource: 'stremio', isMain: false });
-  eq('metadata dropped for sub-profiles (they inherit it)', ['metadata' in sub, sub.recommendations.history_sources], [false, ['stremio']]);
+  eq('metadata dropped for sub-profiles (they inherit it), Stremio settings retained', ['metadata' in sub, sub.recommendations.history_sources, sub.stremio_addon], [false, ['stremio'], TEMPLATE.stremio_addon]);
   ok('template object is not mutated', TEMPLATE.recommendations.history_sources[0] === '{{HISTORY_SOURCE}}' && '$comment' in TEMPLATE);
   let msg = ''; try { resolveBingecatTemplate(TEMPLATE, { historySource: 'trakt', isMain: true }); } catch (e) { msg = e.message; }
   ok('unknown history source throws', /history source/.test(msg));
   msg = ''; try { resolveBingecatTemplate({ a: { b: '{{OTHER}}' } }, { historySource: 'nuvio', isMain: true }); } catch (e) { msg = e.message; }
   ok('unresolved placeholder throws', /unresolved placeholder/.test(msg));
 }
-
-console.log('\n# deriveSearchManifestUrl');
-eq('inserts /search', deriveSearchManifestUrl('https://bingecat.com/stremio/u/12/nuvio/manifest.json'), 'https://bingecat.com/stremio/u/12/nuvio/search/manifest.json');
-ok('a Stremio URL is rejected', (() => { try { deriveSearchManifestUrl('https://bingecat.com/stremio/u/12/manifest.json'); return false; } catch { return true; } })());
-ok('null is rejected', (() => { try { deriveSearchManifestUrl(null); return false; } catch { return true; } })());
 
 console.log('\n# OAuth');
 {
@@ -69,8 +65,8 @@ console.log('\n# OAuth');
   const b = await bc.buildAuthorizeUrl({ redirectUri: 'https://numb3rs.stream/wizard/' });
   restore();
   const u = new URL(a.url);
-  eq('authorize endpoint and fixed params', [u.origin + u.pathname, u.searchParams.get('response_type'), u.searchParams.get('client_id'), u.searchParams.get('code_challenge_method'), u.searchParams.get('redirect_uri')], ['https://bingecat.com/oauth/authorize', 'code', 'bca_client', 'S256', 'https://numb3rs.stream/wizard/']);
-  eq('requests all five scopes', u.searchParams.get('scope').split(' '), BINGECAT_SCOPES);
+  eq('authorize endpoint and fixed params', [u.origin + u.pathname, u.searchParams.get('response_type'), u.searchParams.get('client_id'), u.searchParams.get('code_challenge_method'), u.searchParams.get('redirect_uri'), u.searchParams.get('prompt')], ['https://bingecat.com/oauth/authorize', 'code', 'bca_client', 'S256', 'https://numb3rs.stream/wizard/', 'create']);
+  eq('requests all required scopes', u.searchParams.get('scope').split(' '), BINGECAT_SCOPES);
   eq('challenge = base64url(sha256(verifier))', u.searchParams.get('code_challenge'), createHash('sha256').update(a.verifier).digest('base64url'));
   ok('state is namespaced and in the URL', a.state.startsWith('bingecat-') && u.searchParams.get('state') === a.state);
   ok('state and verifier are fresh per call', a.state !== b.state && a.verifier !== b.verifier);
@@ -80,7 +76,7 @@ console.log('\n# OAuth');
   const granted = BINGECAT_SCOPES.join(' ');
   const r = await run([[200, { access_token: TOKEN, refresh_token: 'r', expires_in: 604800, scope: granted }]], ({ bc }) => bc.exchangeCode({ code: 'c', verifier: 'v', redirectUri: 'r' }));
   eq('exchange body has no client_secret', r.calls[0].body, { grant_type: 'authorization_code', code: 'c', client_id: 'bca_client', redirect_uri: 'r', code_verifier: 'v' });
-  eq('token and expiry (seconds) returned, refresh token dropped', r.result, { token: TOKEN, expiresAt: Math.floor(1_000_000 / 1000) + 604800 });
+  eq('access token, refresh token and expiry (seconds) returned', r.result, { token: TOKEN, refreshToken: 'r', expiresAt: Math.floor(1_000_000 / 1000) + 604800 });
   eq('posts to /oauth/token', r.calls[0].url, 'https://bingecat.com/oauth/token');
   const partial = await fails([[200, { access_token: TOKEN, expires_in: 10, scope: 'settings:read profiles:read' }]], ({ bc }) => bc.exchangeCode({ code: 'c', verifier: 'v', redirectUri: 'r' }));
   ok('missing scope throws insufficient_scope', partial.error?.code === 'insufficient_scope');
@@ -97,13 +93,15 @@ console.log('\n# requests: headers, methods, write spacing');
   ], async ({ bc }) => {
     await bc.loadProfiles(TOKEN);
     await bc.applyTemplate(TOKEN, 5, TEMPLATE, { historySource: 'nuvio', isMain: false });
-    await bc.applyTemplate(TOKEN, 6, TEMPLATE, { historySource: 'nuvio', isMain: false });
+    await bc.applyTemplate(TOKEN, 6, TEMPLATE, { historySource: 'stremio', isMain: false });
   });
   ok('every call sends the BingeCat headers', r.calls.every((c) => c.headers.Authorization === `Bearer ${TOKEN}` && c.headers['bingecat-api-key'] === 'bca_client' && c.headers['bingecat-api-version'] === '1'));
   ok('only GET, POST and PATCH are ever used (no DELETE)', r.calls.every((c) => ['GET', 'POST', 'PATCH'].includes(c.method)));
   eq('first write does not wait, the second waits 3.5 s', r.clock.sleeps, [3500]);
   eq('one PATCH per applyTemplate, to the settings endpoint', r.calls.slice(1).map((c) => `${c.method} ${c.url.replace('https://bingecat.com', '')}`), ['PATCH /api/v1/profiles/5/settings', 'PATCH /api/v1/profiles/6/settings']);
-  eq('PATCH body for a sub-profile has no $comment and no metadata', Object.keys(r.calls[1].body), ['language', 'recommendations']);
+  eq('Nuvio PATCH body for a sub-profile has no $comment, metadata or Stremio-only settings', Object.keys(r.calls[1].body), ['language', 'recommendations']);
+  eq('Nuvio history source remains Nuvio', r.calls[1].body.recommendations.history_sources, ['nuvio']);
+  eq('Stremio PATCH includes safe addon settings without history sync', r.calls[2].body.stremio_addon, { force_top: false, cinemeta_control_mode: 'observe' });
 }
 {
   const r = await run([[200, {}], [200, {}]], async ({ bc, clock }) => {
@@ -112,6 +110,32 @@ console.log('\n# requests: headers, methods, write spacing');
     await bc.applyTemplate(TOKEN, 2, TEMPLATE, { historySource: 'nuvio', isMain: true });
   });
   eq('no sleep when the last write was more than 3.5 s ago', r.clock.sleeps, []);
+}
+
+console.log('\n# provider connections, links and AI keys');
+{
+  const r = await run([
+    [200, { connected: true, provider: 'stremio' }],
+    [200, { connected: true, provider: 'nuvio', profiles: [] }],
+    [200, { profile_type: 'normal' }],
+    [200, { gemini: { configured: true, valid: true } }],
+  ], async ({ bc }) => [
+    await bc.connectStremio(TOKEN, 1, 'stremio-auth-key'),
+    await bc.connectNuvio(TOKEN, 1, 'nuvio-refresh-token'),
+    await bc.linkNuvioProfile(TOKEN, 2, 3),
+    await bc.setAiKeys(TOKEN, 1, { geminiApiKey: 'gemini-secret' }),
+  ]);
+  eq('provider connection and key endpoints use the live paths and bodies', r.calls.map((c) => [c.method, c.url.replace('https://bingecat.com', ''), c.body]), [
+    ['POST', '/api/v1/profiles/1/connections/stremio', { auth_key: 'stremio-auth-key' }],
+    ['POST', '/api/v1/profiles/1/connections/nuvio', { refresh_token: 'nuvio-refresh-token' }],
+    ['PATCH', '/api/v1/profiles/2', { nuvio_profile_id: 3 }],
+    ['PUT', '/api/v1/profiles/1/ai-keys', { gemini_api_key: 'gemini-secret' }],
+  ]);
+  const empty = await run([[200, {}]], ({ bc }) => bc.setAiKeys(TOKEN, 1, {}));
+  eq('empty AI-key update does not make a request', empty.result, null);
+  eq('empty AI-key update leaves the request list empty', empty.calls.length, 0);
+  const invalid = await fails([[200, { gemini: { configured: true, valid: false }, groq: { configured: false, valid: null } }]], ({ bc }) => bc.setAiKeys(TOKEN, 1, { geminiApiKey: 'bad' }));
+  ok('invalid provider key is reported without echoing it', invalid.error?.code === 'invalid_ai_key' && !invalid.error.message.includes('bad'));
 }
 
 console.log('\n# 429 handling');
@@ -171,14 +195,17 @@ console.log('\n# createProfile, getManifests, loadProfiles');
 }
 {
   const url = 'https://bingecat.com/stremio/u/9/nuvio/manifest.json';
-  const r = await run([[200, { manifest: { url } }], [200, { manifest: { url } }]], async ({ bc }) => [
+  const searchUrl = 'https://bingecat.com/official-ai-search-manifest.json';
+  const r = await run([[200, { manifest: { url, search_url: searchUrl } }], [200, { manifest: { url, search_url: searchUrl } }]], async ({ bc }) => [
     await bc.getManifests(TOKEN, 9, { surface: 'nuvio', aiSearch: true }),
     await bc.getManifests(TOKEN, 9, { surface: 'nuvio' }),
   ]);
-  eq('AI search URL only when asked', r.result, [{ url, searchUrl: 'https://bingecat.com/stremio/u/9/nuvio/search/manifest.json' }, { url }]);
+  eq('uses the official AI search URL only when asked', r.result, [{ url, searchUrl }, { url }]);
   eq('surface goes in the query', r.calls[0].url, 'https://bingecat.com/api/v1/profiles/9/catalogs?surface=nuvio');
   const none = await fails([[200, { manifest: {} }]], ({ bc }) => bc.getManifests(TOKEN, 9, { surface: 'stremio' }));
   ok('missing manifest url is an error', none.error?.code === 'bad_response');
+  const missingSearch = await fails([[200, { manifest: { url } }]], ({ bc }) => bc.getManifests(TOKEN, 9, { surface: 'nuvio', aiSearch: true }));
+  ok('missing requested AI search url is an error', missingSearch.error?.code === 'bad_response');
 }
 {
   const r = await run([

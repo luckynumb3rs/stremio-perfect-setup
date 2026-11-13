@@ -36,7 +36,7 @@ eq('rows are processed in order', m([std(2, 'Loina'), std(1, 'Loina')], acct), [
 console.log('\n# autoMatch: linked');
 const linked = [main, sub(2, 'Ben', { boundNuvio: [{ id: 2, name: 'Ben' }] }), sub(3, 'Ben')];
 eq('linked wins over an earlier same-name row', m([std(1, 'Ben'), std(2, 'Ben')], linked), ['1:3:name', '2:2:linked']);
-eq('a binding with a different name is not trusted as a link', m([std(1, 'Zed')], [main, sub(2, 'Ben', { boundNuvio: [{ id: 1, name: 'Zed' }] })]), ['1:new:new']);
+eq('a bound Nuvio id wins even when the BingeCat display name differs', m([std(1, 'Zed')], [main, sub(2, 'Ben', { boundNuvio: [{ id: 1, name: 'Zed' }] })]), ['1:2:linked']);
 
 console.log('\n# autoMatch: known profile type');
 const typed = [main, sub(2, 'Kid', { type: 'kids' }), sub(3, 'Kid2', { type: 'normal' })];
@@ -77,9 +77,8 @@ ok('same target twice is an error', v(mp(2, 2)).errors.some((e) => /already used
 ok('Standard row on an age-limited profile is an error', v(mp(3, 'new')).errors.some((e) => e.key === 1 && /Kids profile/.test(e.message)));
 ok('Standard row on main is only a warning', v(mp(1, 'new')).errors.length === 0 && v(mp(1, 'new')).warnings.some((w) => /main profile/.test(w.message)));
 ok('overwrite warning for an existing sub-profile', v(mp(2, 'new')).warnings.some((w) => /will be overwritten/.test(w.message)));
-ok('Kids row on an untyped existing profile warns about the switch', v(mp('new', 3)).warnings.some((w) => /switched to a BingeCat Kids profile/.test(w.message)));
-ok('Kids row on a normal sub-profile warns about the switch, no error', v(mp('new', 2)).errors.length === 0 && v(mp('new', 2), [main, sub(2, 'Loina', { type: 'normal' })]).warnings.some((w) => /switched to a BingeCat Kids profile/.test(w.message)));
-ok('Kids row on a kids-type profile has no switch warning', !v(mp('new', 3), [main, sub(3, 'Tara', { type: 'kids', ageLimited: true })]).warnings.some((w) => /switched/.test(w.message)));
+ok('Kids row on an existing profile has no obsolete type warning', !v(mp('new', 3)).warnings.some((w) => /switched to a BingeCat Kids profile|Set its type to Kids/.test(w.message)));
+ok('Kids row on a normal sub-profile remains valid without a type warning', v(mp('new', 2), [main, sub(2, 'Loina', { type: 'normal' })]).errors.length === 0 && !v(mp('new', 2), [main, sub(2, 'Loina', { type: 'normal' })]).warnings.some((w) => /switched to a BingeCat Kids profile|Set its type to Kids/.test(w.message)));
 ok('linked to another Nuvio profile warns', v(mp(2, 'new'), [main, sub(2, 'Loina', { boundNuvio: [{ id: 5, name: 'X' }] })]).warnings.some((w) => /linked to another Nuvio profile/.test(w.message)));
 ok('a missing row is an error', validateMapping(rows, [], acct).errors.length === 2);
 ok('a vanished target is an error', v(mp(99, 'new')).errors.some((e) => /no longer exists/.test(e.message)));
