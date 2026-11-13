@@ -86,7 +86,6 @@ export function DoneStep() {
     catalogSelection,
     instantDebrid,
     stremioKids,
-    bingecat: bingecatState,
   } = useWizard();
   const { aiostreams, aiometadata, addonPasswordSource, previousAddons, profiles, warnings: rawWarnings, error } = installResult;
   // One entry per configured profile; Stremio is a single unnamed one built from the top-level result.
@@ -222,12 +221,6 @@ export function DoneStep() {
     : nuvioAccount.email;
 
   const bingecatBaseUrl = wizardConfig?.instances.bingecat?.[0] ?? 'https://bingecat.com';
-  const bingecatDone = profileResults.filter((p) => p.status === 'done' && p.bingecat);
-  // Settings of the BingeCat profiles that were overwritten, as read when the user connected (a backup for the download).
-  const previousBingecat = bingecatDone
-    .filter((p) => !p.bingecat!.created)
-    .map((p) => ({ label: p.name || 'Stremio', profile: bingecatState.profiles.find((b) => b.id === p.bingecat!.profileId) }))
-    .filter((x): x is { label: string; profile: NonNullable<typeof x.profile> } => !!x.profile);
   const addons = useMemo(() => (
     [
       ...profileResults.filter((p) => p.status === 'done' && p.watchly).map((p) => ({
@@ -494,17 +487,6 @@ export function DoneStep() {
         'Configured Addons',
         '',
         ...addonLines,
-      ] : []),
-      ...(previousBingecat.length > 0 ? [
-        '----------------------------------------------',
-        '',
-        '🐱 Previous BingeCat settings (overwritten by the wizard)',
-        '',
-        ...previousBingecat.flatMap(({ label, profile }) => [
-          `Profile: ${label} -> BingeCat profile "${profile.name}"`,
-          JSON.stringify(profile.settings, null, 2),
-          '',
-        ]),
       ] : []),
       ...(hasBackups ? [
         '----------------------------------------------',
