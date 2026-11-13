@@ -33,6 +33,7 @@ export interface WizardInstances {
   aiostreams: string[];
   aiometadata: string[];
   watchly?: string[];
+  bingecat?: string[];
 }
 
 export interface WizardTargetTemplates {
@@ -40,11 +41,15 @@ export interface WizardTargetTemplates {
   aiometadata: string;
   collections?: string;
   watchly?: string;
+  bingecat?: string;
+  bingecatKids?: string;
 }
 
 export interface WizardNuvioTemplates extends WizardTargetTemplates {
   collections: string;
   settings: string;
+  /** Optional full settings template; when present, Nuvio profiles can opt into it individually. */
+  settingsAll?: string;
 }
 
 export interface WizardTemplates {
@@ -58,6 +63,7 @@ export interface WizardKeys {
   tvdbApiKeys: WizardObfuscatedKey[];
   geminiApiKeys: WizardObfuscatedKey[];
   rpdbApiKeys: WizardObfuscatedKey[];
+  bingecatClientId?: string;
 }
 
 export interface WizardLimits {
@@ -133,11 +139,15 @@ function normalizeInstances(value: unknown): WizardInstances | null {
   const watchly = Array.isArray(value.watchly)
     ? value.watchly.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
     : undefined;
+  const bingecat = Array.isArray(value.bingecat)
+    ? value.bingecat.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+    : undefined;
 
   return {
     aiostreams: shuffleArray(aiostreams),
     aiometadata: shuffleArray(aiometadata),
     watchly: watchly ? shuffleArray(watchly) : undefined,
+    bingecat: bingecat ? shuffleArray(bingecat) : undefined,
   };
 }
 
@@ -152,6 +162,8 @@ function normalizeTargetTemplates(value: unknown): WizardTargetTemplates | null 
     aiometadata: value.aiometadata,
     collections: typeof value.collections === 'string' ? value.collections : undefined,
     watchly: typeof value.watchly === 'string' ? value.watchly : undefined,
+    bingecat: typeof value.bingecat === 'string' ? value.bingecat : undefined,
+    bingecatKids: typeof value.bingecatKids === 'string' ? value.bingecatKids : undefined,
   };
 }
 
@@ -165,6 +177,7 @@ function normalizeNuvioTemplates(value: unknown): WizardNuvioTemplates | null {
     ...base,
     collections: value.collections,
     settings: value.settings,
+    ...(typeof value.settingsAll === 'string' ? { settingsAll: value.settingsAll } : {}),
   };
 }
 
@@ -200,7 +213,11 @@ function normalizeKeys(value: unknown): WizardKeys | null {
     return null;
   }
 
-  return { tmdbApiKeys, tmdbReadAccessTokens, tvdbApiKeys, geminiApiKeys, rpdbApiKeys };
+  const bingecatClientId = typeof value.bingecatClientId === 'string' && value.bingecatClientId.trim().length > 0
+    ? value.bingecatClientId.trim()
+    : undefined;
+
+  return { tmdbApiKeys, tmdbReadAccessTokens, tvdbApiKeys, geminiApiKeys, rpdbApiKeys, bingecatClientId };
 }
 
 function normalizeLimits(value: unknown): WizardLimits | null {
@@ -220,10 +237,23 @@ function normalizeAnalytics(value: unknown): WizardAnalyticsConfig | undefined {
   return { denylist };
 }
 
+/** True when the config supplies the BingeCat instance, OAuth client id, and both target templates. */
+export function isBingecatConfigured(config: WizardConfig | null | undefined): boolean {
+  return Boolean(
+    config?.instances.bingecat?.length
+    && config.keys.bingecatClientId
+    && config.templates.stremio.bingecat
+    && config.templates.stremio.bingecatKids
+    && config.templates.nuvio.bingecat
+    && config.templates.nuvio.bingecatKids,
+  );
+}
+
 function normalizeConfigBlock(block: LegacyWizardConfig): WizardConfig | null {
-  const { target: _target, account: _account, ...rest } = block as LegacyWizardConfig & { account?: unknown };
+  const { target: _target, account: _account, bingecat: _legacyBingecat, ...rest } = block as LegacyWizardConfig & { account?: unknown; bingecat?: unknown };
   void _target;
   void _account;
+  void _legacyBingecat;
   const targets = normalizeTargets(block.targets ?? (block.target ? [block.target] : []));
   const addonDetailsFilenamePrefix = typeof block.addonDetailsFilenamePrefix === 'string'
     ? block.addonDetailsFilenamePrefix.trim()

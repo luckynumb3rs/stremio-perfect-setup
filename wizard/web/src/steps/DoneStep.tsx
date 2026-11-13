@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Check, Copy, Download, ExternalLink, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { NotificationCards } from '../components/NotificationCards';
 import { WizardShell } from '../components/WizardShell';
-import { useWizard } from '../store/wizard';
+import { useWizard, type NuvioProfileInstallResult } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
 import { buildWizardCompletionPayload, trackWizardCompletion } from '../lib/analytics';
 import { wizardMetadata } from '../lib/integration';
@@ -41,6 +41,38 @@ function sanitizeFilenameSegment(value: string) {
   return value.replace(/[<>:"/\\|?*\u0000-\u001F]/g, '_').trim();
 }
 
+type AddonDetails = {
+  id: string;
+  name: string;
+  uuid: string;
+  password: string;
+  passwordLabel: string | null;
+  manifestUrl: string;
+  configureUrl: string;
+  group: 'watchly' | 'bingecat' | null;
+  profileKey: string | null;
+  profileName: string;
+};
+
+type AddonCardProfile = {
+  key: string;
+  name: string;
+  entries: AddonDetails[];
+};
+
+type AddonCard = {
+  id: string;
+  name: string;
+  profiles: AddonCardProfile[];
+};
+
+function getManifestLabel(profile: AddonCardProfile, addon: AddonDetails) {
+  const profileLabel = profile.name || 'Manifest';
+  return addon.name === '🐱 BingeCat AI Search'
+    ? `${profileLabel} (Search)`
+    : profileLabel;
+}
+
 export function DoneStep() {
   const {
     credentials,
@@ -53,9 +85,21 @@ export function DoneStep() {
     aioStreamsInputs,
     catalogSelection,
     instantDebrid,
+    stremioKids,
+    bingecat: bingecatState,
   } = useWizard();
-  const { aiostreams, aiometadata, addonPasswordSource, previousAddons, warnings: rawWarnings, error } = installResult;
-  const warnings = rawWarnings.filter(w => !w.includes('tried but failed'));
+  const { aiostreams, aiometadata, addonPasswordSource, previousAddons, profiles, warnings: rawWarnings, error } = installResult;
+  // One entry per configured profile; Stremio is a single unnamed one built from the top-level result.
+  const profileResults = useMemo<NuvioProfileInstallResult[]>(() => (
+    target === 'nuvio'
+      ? profiles
+      : [{ profileIndex: 0, name: '', status: 'done' as const, error: null, backupTaken: true, kids: stremioKids, bingecat: installResult.bingecat, watchly: installResult.watchly, previousAddons }]
+  ), [target, profiles, installResult.watchly, previousAddons]);
+  const failedProfiles = profileResults.filter((p) => p.status === 'failed');
+  const warnings = [
+    ...rawWarnings.filter(w => !w.includes('tried but failed')),
+    ...failedProfiles.map((p) => `${p.name} could not be set up (${p.error ?? 'unknown error'}). Its previous addons are in the backup below. You can run the wizard again for it; the first backup is kept while this page stays open.`),
+  ];
   const guideUrl = getGuideUrl();
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [visiblePasswords, setVisiblePasswords] = useState<Record<string, boolean>>({});
@@ -71,12 +115,14 @@ export function DoneStep() {
   const [metaTraktError, setMetaTraktError] = useState<string | null>(null);
   const isUsingAccountPassword = addonPasswordSource === 'account';
   const accountMode = target === 'nuvio' ? nuvioAccount.mode : stremioAccount.mode;
-  const visiblePreviousAddons = accountMode === 'signin' ? previousAddons : [];
-  const selectedNuvioProfileName = useMemo(() => {
-    const selectedProfile = (nuvioAccount.profiles ?? [])
-      .find((profile) => profile.profile_index === nuvioAccount.profileId);
-    return selectedProfile?.name?.trim() || nuvioAccount.profileName?.trim() || '';
-  }, [nuvioAccount.profileId, nuvioAccount.profileName, nuvioAccount.profiles]);
+  // Backups per profile (a failed profile may be partly written, so its backup matters most).
+  const backupGroups = accountMode === 'signin'
+    ? profileResults
+      .filter((p) => p.previousAddons.length > 0)
+      .map((p) => ({ name: target === 'nuvio' ? p.name : '', addons: p.previousAddons }))
+    : [];
+  const hasBackups = backupGroups.length > 0;
+  const profileNamesSegment = profileResults.map((p) => p.name.trim()).filter(Boolean).join('+');
   const addonDetailsFilename = useMemo(() => {
     const prefix = wizardConfig?.addonDetailsFilenamePrefix?.trim() ?? '';
     if (!prefix || !target) return '';
@@ -94,14 +140,14 @@ export function DoneStep() {
     ];
 
     if (target === 'nuvio') {
-      const profileName = sanitizeFilenameSegment(selectedNuvioProfileName);
+      const profileName = sanitizeFilenameSegment(profileNamesSegment);
       if (profileName) {
         parts.push(`[${profileName}]`);
       }
     }
 
     return `${parts.join('')}.txt`;
-  }, [nuvioAccount.email, selectedNuvioProfileName, stremioAccount.email, target, wizardConfig?.addonDetailsFilenamePrefix]);
+  }, [nuvioAccount.email, profileNamesSegment, stremioAccount.email, target, wizardConfig?.addonDetailsFilenamePrefix]);
   const credentialsCardStyle = {
     background: 'var(--panel-2)',
     border: '1px solid var(--border)',
@@ -114,6 +160,13 @@ export function DoneStep() {
     border: '1px solid var(--border)',
     borderRadius: '10px',
     padding: '0.9rem',
+  } as const;
+  const addonSectionStyle = {
+    background: 'var(--panel-2)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    padding: '0.75rem',
+    marginTop: '0.65rem',
   } as const;
   const addonTitleStyle = {
     marginBottom: '0.5rem',
@@ -168,18 +221,45 @@ export function DoneStep() {
     ? stremioAccount.email
     : nuvioAccount.email;
 
+  const bingecatBaseUrl = wizardConfig?.instances.bingecat?.[0] ?? 'https://bingecat.com';
+  const bingecatDone = profileResults.filter((p) => p.status === 'done' && p.bingecat);
+  // Settings of the BingeCat profiles that were overwritten, as read when the user connected (a backup for the download).
+  const previousBingecat = bingecatDone
+    .filter((p) => !p.bingecat!.created)
+    .map((p) => ({ label: p.name || 'Stremio', profile: bingecatState.profiles.find((b) => b.id === p.bingecat!.profileId) }))
+    .filter((x): x is { label: string; profile: NonNullable<typeof x.profile> } => !!x.profile);
   const addons = useMemo(() => (
     [
-      installResult.watchly ? {
-        id: 'watchly', name: '🤖 Watchly',
-        uuid: watchlyEmail
-          ? `${watchlyEmail} (${installResult.watchly.token})`
-          : installResult.watchly.token,
+      ...profileResults.filter((p) => p.status === 'done' && p.watchly).map((p) => ({
+        id: `watchly-${p.profileIndex}`,
+        name: '🤖 Watchly',
+        uuid: watchlyEmail,
         password: '',
         passwordLabel: 'same as your account password',
-        manifestUrl: installResult.watchly.manifestUrl,
-        configureUrl: toConfigureUrl(installResult.watchly.manifestUrl),
-      } : null,
+        manifestUrl: p.watchly!.manifestUrl,
+        configureUrl: toConfigureUrl(p.watchly!.manifestUrl),
+        group: 'watchly' as const,
+        profileKey: String(p.profileIndex),
+        profileName: target === 'nuvio' ? p.name : '',
+      })),
+      ...profileResults.filter((p) => p.status === 'done' && p.bingecat).flatMap((p) => {
+        const entry = (id: string, name: string, manifestUrl: string) => ({
+          id,
+          name,
+          uuid: '',
+          password: '',
+          passwordLabel: null as string | null,
+          manifestUrl,
+          configureUrl: bingecatBaseUrl,
+          group: 'bingecat' as const,
+          profileKey: String(p.profileIndex),
+          profileName: target === 'nuvio' ? p.name : '',
+        });
+        return [
+          entry(`bingecat-${p.profileIndex}`, '🐱 BingeCat', p.bingecat!.url),
+          ...(p.bingecat!.searchUrl ? [entry(`bingecat-search-${p.profileIndex}`, '🐱 BingeCat AI Search', p.bingecat!.searchUrl)] : []),
+        ];
+      }),
       aiometadata
         ? {
             id: 'aiometadata',
@@ -189,6 +269,9 @@ export function DoneStep() {
             passwordLabel: isUsingAccountPassword ? 'same as your account password' : null,
             manifestUrl: aiometadata.manifestUrl,
             configureUrl: toConfigureUrl(aiometadata.manifestUrl),
+            group: null,
+            profileKey: null,
+            profileName: '',
           }
         : null,
       aiostreams
@@ -200,19 +283,42 @@ export function DoneStep() {
             passwordLabel: isUsingAccountPassword ? 'same as your account password' : null,
             manifestUrl: aiostreams.manifestUrl,
             configureUrl: toConfigureUrl(aiostreams.manifestUrl),
+            group: null,
+            profileKey: null,
+            profileName: '',
           }
         : null,
     ].filter(Boolean)
-  ), [aiostreams, aiometadata, installResult.watchly, isUsingAccountPassword, watchlyEmail]) as Array<{
-    id: string;
-    name: string;
-    uuid: string;
-    password: string;
-    passwordLabel: string | null;
-    manifestUrl: string;
-    configureUrl: string;
-  }>;
-  const hasDownloadableDetails = addons.length > 0 || visiblePreviousAddons.length > 0;
+  ), [aiostreams, aiometadata, bingecatBaseUrl, profileResults, isUsingAccountPassword, target, watchlyEmail]) as AddonDetails[];
+  const addonCards = useMemo<AddonCard[]>(() => {
+    const cards: AddonCard[] = [];
+
+    for (const [group, name] of [['watchly', '🤖 Watchly'], ['bingecat', '🐱 BingeCat']] as const) {
+      const entries = addons.filter((addon) => addon.group === group);
+      if (!entries.length) continue;
+
+      const profiles = new Map<string, AddonCardProfile>();
+      for (const entry of entries) {
+        const key = entry.profileKey ?? entry.id;
+        const profile = profiles.get(key) ?? { key, name: entry.profileName, entries: [] };
+        profile.entries.push(entry);
+        profiles.set(key, profile);
+      }
+
+      cards.push({ id: group, name, profiles: [...profiles.values()] });
+    }
+
+    for (const addon of addons.filter((entry) => entry.group === null)) {
+      cards.push({
+        id: addon.id,
+        name: addon.name,
+        profiles: [{ key: addon.id, name: '', entries: [addon] }],
+      });
+    }
+
+    return cards;
+  }, [addons]);
+  const hasDownloadableDetails = addons.length > 0 || hasBackups;
 
   async function handleCopy(copyKey: string, value: string) {
     try {
@@ -300,12 +406,17 @@ export function DoneStep() {
   }
 
   useEffect(() => {
-    if (error || !target) return;
+    const doneProfiles = profileResults.filter((p) => p.status === 'done');
+    if (error || !target || doneProfiles.length === 0) return;
 
     const runId = addons.map(addon => addon.uuid).filter(Boolean).join(':') || `${target}-setup`;
     const eventParams = buildWizardCompletionPayload({
       accountMode,
-      addonCount: addons.length,
+      // addon kinds (AIOMetadata, AIOStreams, Watchly), not per-profile Watchly copies
+      addonCount: Number(!!aiometadata) + Number(!!aiostreams) + Number(doneProfiles.some((p) => p.watchly)) + Number(doneProfiles.some((p) => p.bingecat)),
+      profileCount: doneProfiles.length,
+      bingecat: doneProfiles.some((p) => p.bingecat),
+      kidsCount: doneProfiles.filter((p) => p.kids).length,
       target,
       credentials,
       instantDebrid,
@@ -321,10 +432,58 @@ export function DoneStep() {
       runId,
       target,
     });
-  }, [accountMode, addons, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, target, templates, wizardConfig]);
+  }, [accountMode, addons, aiometadata, aiostreams, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, profileResults, target, templates, wizardConfig]);
 
   function handleDownload() {
     if (!addonDetailsFilename || !hasDownloadableDetails) return;
+
+    const addonLines = addonCards.flatMap((card) => {
+      if (card.id === 'watchly') {
+        const firstAddon = card.profiles[0]?.entries[0];
+        return [
+          card.name,
+          '',
+          ...(firstAddon?.uuid ? [`UUID: ${firstAddon.uuid}`] : []),
+          ...(firstAddon?.passwordLabel || firstAddon?.password
+            ? [`Password: ${firstAddon.passwordLabel ?? firstAddon.password}`]
+            : []),
+          ...(firstAddon?.configureUrl ? [`Configure URL: ${firstAddon.configureUrl}`] : []),
+          'Manifests',
+          ...card.profiles.flatMap((profile) => profile.entries.map((addon) => (
+            `${getManifestLabel(profile, addon)}: ${addon.manifestUrl}`
+          ))),
+          '',
+        ];
+      }
+
+      if (card.id === 'bingecat') {
+        const firstAddon = card.profiles[0]?.entries[0];
+        return [
+          card.name,
+          '',
+          ...(firstAddon?.configureUrl ? [`Configure URL: ${firstAddon.configureUrl}`] : []),
+          'Manifests',
+          ...card.profiles.flatMap((profile) => profile.entries.map((addon) => (
+            `${getManifestLabel(profile, addon)}: ${addon.manifestUrl}`
+          ))),
+          '',
+        ];
+      }
+
+      return [
+        card.name,
+        '',
+        ...card.profiles.flatMap((profile) => profile.entries.flatMap((addon) => [
+          ...(addon.uuid ? [`UUID: ${addon.uuid}`] : []),
+          ...(addon.passwordLabel || addon.password
+            ? [`Password: ${addon.passwordLabel ?? addon.password}`]
+            : []),
+          `Manifest URL: ${addon.manifestUrl}`,
+          `Configure URL: ${addon.configureUrl}`,
+          '',
+        ])),
+      ];
+    });
 
     const lines = [
       wizardMetadata.addonDetailsTitle,
@@ -334,30 +493,31 @@ export function DoneStep() {
       ...(addons.length > 0 ? [
         'Configured Addons',
         '',
-        ...addons.flatMap(addon => [
-          `${addon.name}`,
-          `UUID: ${addon.uuid}`,
-          ...(addon.passwordLabel || addon.password
-            ? [
-                addon.passwordLabel
-                  ? `Password: ${addon.passwordLabel}`
-                  : `Password: ${addon.password}`,
-              ]
-            : []),
-          `Manifest URL: ${addon.manifestUrl}`,
-          `Configure URL: ${addon.configureUrl}`,
+        ...addonLines,
+      ] : []),
+      ...(previousBingecat.length > 0 ? [
+        '----------------------------------------------',
+        '',
+        '🐱 Previous BingeCat settings (overwritten by the wizard)',
+        '',
+        ...previousBingecat.flatMap(({ label, profile }) => [
+          `Profile: ${label} -> BingeCat profile "${profile.name}"`,
+          JSON.stringify(profile.settings, null, 2),
           '',
         ]),
       ] : []),
-      ...(visiblePreviousAddons.length > 0 ? [
+      ...(hasBackups ? [
         '----------------------------------------------',
         '',
         '🗄️ Previous Addons',
         '',
-        ...visiblePreviousAddons.flatMap(addon => [
-          `${addon.name}`,
-          `Manifest URL: ${addon.manifestUrl}`,
-          '',
+        ...backupGroups.flatMap(group => [
+          ...(group.name ? [`Profile: ${group.name}`, ''] : []),
+          ...group.addons.flatMap(addon => [
+            `${addon.name}`,
+            `Manifest URL: ${addon.manifestUrl}`,
+            '',
+          ]),
         ]),
       ] : []),
     ];
@@ -375,6 +535,155 @@ export function DoneStep() {
 
   function renderCopyStatus(copyKey: string) {
     return copiedKey === copyKey ? <span>Copied</span> : <Copy size={12} />;
+  }
+
+  function renderCustomizeLink(addon: AddonDetails) {
+    return (
+      <a
+        href={addon.configureUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="guide-pill-link"
+        aria-label={`Open ${addon.name} configuration`}
+      >
+        <span>Customize More</span>
+        <ExternalLink size={12} />
+      </a>
+    );
+  }
+
+  function renderManifestRow(profile: AddonCardProfile, addon: AddonDetails) {
+    const label = getManifestLabel(profile, addon);
+    return (
+      <div style={copyableValueRowStyle}>
+        <span style={{ color: 'var(--muted)', flex: '0 0 auto', whiteSpace: 'nowrap' }}>{label}:</span>
+        <span style={{ flex: '1 1 auto', minWidth: 0, wordBreak: 'break-all' }}>
+          {addon.manifestUrl}
+        </span>
+        <button
+          onClick={() => handleCopy(`${addon.id}-manifest`, addon.manifestUrl)}
+          type="button"
+          aria-label={`Copy ${label} manifest URL`}
+          style={copyActionButtonStyle}
+        >
+          {renderCopyStatus(`${addon.id}-manifest`)}
+        </button>
+      </div>
+    );
+  }
+
+  function renderGroupedAddonCard(card: AddonCard) {
+    const firstAddon = card.profiles[0]?.entries[0];
+    const isWatchly = card.id === 'watchly';
+
+    return (
+      <div key={card.id} style={addonCardStyle}>
+        <div style={addonTitleStyle}>
+          <div style={addonTitleRowStyle}>
+            <span>{card.name}</span>
+            {firstAddon && renderCustomizeLink(firstAddon)}
+          </div>
+        </div>
+        {isWatchly && firstAddon && renderAddonFields(firstAddon, false)}
+        <div style={addonSectionStyle}>
+          <p style={{ ...metaTextStyle, margin: 0, fontWeight: 600 }}>Manifests</p>
+          {card.profiles.flatMap((profile) => profile.entries.map((addon) => (
+            <div key={addon.id}>
+              {renderManifestRow(profile, addon)}
+            </div>
+          )))}
+        </div>
+      </div>
+    );
+  }
+
+  function renderAddonFields(addon: AddonDetails, includeManifest = true) {
+    const manifestLabel = addon.name === '🐱 BingeCat AI Search' ? 'AI Search:' : 'Manifest:';
+
+    return (
+      <>
+        {addon.uuid && (
+          <div style={copyableValueRowStyle}>
+            <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>UUID:</span>
+            <span
+              style={{
+                ...metaValueStyle,
+                flex: '1 1 auto',
+                minWidth: 0,
+                wordBreak: 'break-all',
+                textAlign: 'left',
+              }}
+            >
+              {addon.uuid}
+            </span>
+            <button
+              onClick={() => handleCopy(`${addon.id}-uuid`, addon.uuid)}
+              type="button"
+              aria-label={`Copy ${addon.name} UUID`}
+              style={copyActionButtonStyle}
+            >
+              {renderCopyStatus(`${addon.id}-uuid`)}
+            </button>
+          </div>
+        )}
+        {(addon.passwordLabel || addon.password) && (
+          <div style={copyableValueRowStyle}>
+            <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>Password:</span>
+            <span
+              style={{
+                ...metaValueStyle,
+                flex: '1 1 auto',
+                minWidth: 0,
+                wordBreak: 'break-all',
+                textAlign: 'left',
+              }}
+            >
+              {addon.passwordLabel
+                ? addon.passwordLabel
+                : visiblePasswords[addon.id]
+                ? addon.password
+                : '•'.repeat(Math.max(addon.password.length, 8))}
+            </span>
+            {!addon.passwordLabel && (
+              <>
+                <button
+                  onClick={() => togglePasswordVisibility(addon.id)}
+                  type="button"
+                  aria-label={`${visiblePasswords[addon.id] ? 'Hide' : 'Show'} ${addon.name} password`}
+                  style={copyActionButtonStyle}
+                >
+                  {visiblePasswords[addon.id] ? <EyeOff size={12} /> : <Eye size={12} />}
+                </button>
+                <button
+                  onClick={() => handleCopy(`${addon.id}-password`, addon.password)}
+                  type="button"
+                  aria-label={`Copy ${addon.name} password`}
+                  style={copyActionButtonStyle}
+                >
+                  {renderCopyStatus(`${addon.id}-password`)}
+                </button>
+              </>
+            )}
+          </div>
+        )}
+        {includeManifest && (
+          <div style={copyableValueRowStyle}>
+            <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>{manifestLabel}</span>
+            <span style={{ flex: '1 1 auto', minWidth: 0, wordBreak: 'break-all' }}>
+              {addon.manifestUrl}
+            </span>
+            <button
+              onClick={() => handleCopy(`${addon.id}-manifest`, addon.manifestUrl)}
+              type="button"
+              aria-label={`Copy ${addon.name} manifest URL`}
+              style={copyActionButtonStyle}
+            >
+              {renderCopyStatus(`${addon.id}-manifest`)}
+            </button>
+          </div>
+        )}
+      </>
+    );
   }
 
   function renderDetailsCard() {
@@ -408,102 +717,41 @@ export function DoneStep() {
               : `Your ${target === 'stremio' ? 'Stremio' : 'Nuvio'} account password was not accepted by the addon configurations, so a stronger shared addon password was generated and used for all addons below.`}
           </div>
         )}
-        {addons.map((addon) => (
-          <div key={addon.id} style={addonCardStyle}>
-            <div style={addonTitleStyle}>
-              <div style={addonTitleRowStyle}>
-                <span>{addon.name}</span>
-                <a
-                  href={addon.configureUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="guide-pill-link"
-                  aria-label={`Open ${addon.name} configuration`}
-                >
-                  <span>Customize More</span>
-                  <ExternalLink size={12} />
-                </a>
+        {addonCards.map((card) => {
+          if (card.id === 'watchly' || card.id === 'bingecat') {
+            return renderGroupedAddonCard(card);
+          }
+
+          const firstAddon = card.profiles[0]?.entries[0];
+
+          return (
+            <div key={card.id} style={addonCardStyle}>
+              <div style={addonTitleStyle}>
+                <div style={addonTitleRowStyle}>
+                  <span>{card.name}</span>
+                  {firstAddon && renderCustomizeLink(firstAddon)}
+                </div>
               </div>
-            </div>
-            <div style={copyableValueRowStyle}>
-              <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>UUID:</span>
-              <span
-                style={{
-                  ...metaValueStyle,
-                  flex: '1 1 auto',
-                  minWidth: 0,
-                  wordBreak: 'break-all',
-                  textAlign: 'left',
-                }}
-              >
-                {addon.uuid}
-              </span>
-              <button
-                onClick={() => handleCopy(`${addon.id}-uuid`, addon.uuid)}
-                type="button"
-                aria-label={`Copy ${addon.name} UUID`}
-                style={copyActionButtonStyle}
-              >
-                {renderCopyStatus(`${addon.id}-uuid`)}
-              </button>
-            </div>
-            {(addon.passwordLabel || addon.password) && (
-              <div style={copyableValueRowStyle}>
-                <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>Password:</span>
-                <span
-                  style={{
-                    ...metaValueStyle,
-                    flex: '1 1 auto',
-                    minWidth: 0,
-                    wordBreak: 'break-all',
-                    textAlign: 'left',
-                  }}
+              {card.profiles.map((profile, profileIndex) => (
+                <div
+                  key={profile.key}
+                  style={profileIndex > 0 ? {
+                    marginTop: '0.85rem',
+                    paddingTop: '0.85rem',
+                    borderTop: '1px solid var(--border)',
+                  } : undefined}
                 >
-                  {addon.passwordLabel
-                    ? addon.passwordLabel
-                    : visiblePasswords[addon.id]
-                    ? addon.password
-                    : '•'.repeat(Math.max(addon.password.length, 8))}
-                </span>
-                {!addon.passwordLabel && (
-                  <>
-                    <button
-                      onClick={() => togglePasswordVisibility(addon.id)}
-                      type="button"
-                      aria-label={`${visiblePasswords[addon.id] ? 'Hide' : 'Show'} ${addon.name} password`}
-                      style={copyActionButtonStyle}
-                    >
-                      {visiblePasswords[addon.id] ? <EyeOff size={12} /> : <Eye size={12} />}
-                    </button>
-                    <button
-                      onClick={() => handleCopy(`${addon.id}-password`, addon.password)}
-                      type="button"
-                      aria-label={`Copy ${addon.name} password`}
-                      style={copyActionButtonStyle}
-                    >
-                      {renderCopyStatus(`${addon.id}-password`)}
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-            <div style={copyableValueRowStyle}>
-              <span style={{ color: 'var(--muted)', flex: '0 0 auto' }}>Manifest:</span>
-              <span style={{ flex: '1 1 auto', minWidth: 0, wordBreak: 'break-all' }}>
-                {addon.manifestUrl}
-              </span>
-              <button
-                onClick={() => handleCopy(`${addon.id}-manifest`, addon.manifestUrl)}
-                type="button"
-                aria-label={`Copy ${addon.name} manifest URL`}
-                style={copyActionButtonStyle}
-              >
-                {renderCopyStatus(`${addon.id}-manifest`)}
-              </button>
+                  {profile.entries.map((addon) => (
+                    <div key={addon.id}>
+                      {renderAddonFields(addon)}
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
-        {visiblePreviousAddons.length > 0 && (
+          );
+        })}
+        {hasBackups && (
           <div style={{ ...addonCardStyle, fontFamily: 'system-ui, sans-serif' }}>
             <p
               style={{
@@ -519,8 +767,12 @@ export function DoneStep() {
             <p style={{ ...metaTextStyle, marginBottom: '0.75rem', fontSize: '0.82rem', lineHeight: 1.5, textAlign: 'center' }}>
               These are the addons that were on your account before the wizard replaced them. Keep this list in case you want to restore anything manually.
             </p>
-            <div style={{ display: 'grid', gap: '0.6rem' }}>
-              {visiblePreviousAddons.map((addon, index) => (
+            {backupGroups.map((group, groupIndex) => (
+            <div key={`backup-${groupIndex}`} style={{ display: 'grid', gap: '0.6rem', marginTop: groupIndex > 0 ? '1rem' : 0 }}>
+              {group.name && (
+                <p style={{ color: 'var(--text)', fontSize: '0.86rem', fontWeight: 700, margin: 0 }}>Profile: {group.name}</p>
+              )}
+              {group.addons.map((addon, index) => (
                 <div
                   key={`${addon.manifestUrl}-${index}`}
                   style={{
@@ -548,17 +800,18 @@ export function DoneStep() {
                       <ExternalLink size={12} />
                     </a>
                     <button
-                      onClick={() => handleCopy(`previous-addon-${index}`, addon.manifestUrl)}
+                      onClick={() => handleCopy(`previous-addon-${groupIndex}-${index}`, addon.manifestUrl)}
                       type="button"
                       aria-label={`Copy ${addon.name} manifest URL`}
                       style={copyActionButtonStyle}
                     >
-                      {renderCopyStatus(`previous-addon-${index}`)}
+                      {renderCopyStatus(`previous-addon-${groupIndex}-${index}`)}
                     </button>
                   </div>
                 </div>
               ))}
             </div>
+            ))}
           </div>
         )}
         <button
@@ -599,7 +852,7 @@ export function DoneStep() {
               manual guide
             </a>.
           </p>
-          {visiblePreviousAddons.length > 0 && (
+          {hasBackups && (
             <div style={{ marginTop: '1.25rem' }}>
               {renderDetailsCard()}
             </div>

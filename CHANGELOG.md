@@ -88,6 +88,22 @@ title: "📜 Changelog"
 
 ## 🔮 Wizard
 
+### 1.2.0 (2026-11-13)
+
+- Added support for **BingeCat**, a powerful AI-powered recommendations engine that provides you with personalized results.
+- **Kids profiles** can now be created by using BingeCat for a dedicated kid-friendly setup.
+- Added a **Full Nuvio Settings** option to apply a recommended Nuvio settings configuration alongside the addons.
+- Added support for setting up **multiple Nuvio profiles**, including create new ones, directly in one wizard pass.
+
+### 1.1.0 (2026-10-23)
+
+- Added support for setting up **several Nuvio profiles** (up to 6, existing or new) in one run. **AIOStreams** and **AIOMetadata** are shared, **Watchly** is created for each profile, and the previous addons are backed up per profile.
+- Renamed the *Watchly* step to **Recommendations**.
+- Added a **Pin collections on top** option on the *Recommendations* step for Nuvio (shown when Watchly or BingeCat is on): it shows the collections above or below the recommendation catalogs by setting the pin option on every collection.
+- If a profile fails during install, the others stay as they are and only the failed ones are retried.
+- Fixed the sidebar *Finish* entry re-running the whole install.
+- Added **Profile Count** in statistics counters.
+
 ### 1.0.5 (2026-10-12)
 
 - Added **Watchly** support for Nuvio using the connected Nuvio session and selected profile, without requiring a separate Stremio login.

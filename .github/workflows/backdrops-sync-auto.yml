@@ -33,7 +33,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pillow requests
+          python -m pip install pillow requests numpy
 
       - name: Generate missing backdrops
         env:
@@ -44,6 +44,7 @@ jobs:
             --api-key "$TMDB_API_KEY" \
             --fanart-key "$FANART_API_KEY" \
             --profile compressed \
+            --render-style perspective \
             --parallelism 3 \
             --missing-only
 

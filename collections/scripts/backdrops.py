@@ -55,6 +55,10 @@ Important parameters:
         Output size: `4k`, `1080p`, or `both`.
     --profile
         Named output profile: `compressed` or `high`. Default is `compressed`.
+    --render-style
+        Rendering style: `perspective` (the default) or `flat`. This changes
+        compositing only; TMDB/Fanart source requests and output artifacts stay
+        unchanged.
     --quality
         Advanced manual output quality override used for both JPG and WEBP.
     --parallelism
@@ -391,7 +395,7 @@ def run_accent(job):
     return tuple(int(part) for part in parts)
 
 
-def run_job(job, api_key, fanart_key, preferred_language, focus_x, focus_y, count, size, profile, quality, stream_output):
+def run_job(job, api_key, fanart_key, preferred_language, focus_x, focus_y, render_style, count, size, profile, quality, stream_output):
     """Run one folder job and optionally stream child output while still capturing it."""
     accent = run_accent(job)
     command = [
@@ -405,6 +409,7 @@ def run_job(job, api_key, fanart_key, preferred_language, focus_x, focus_y, coun
         "--output", str(job["output_path"]),
         "--size", size,
         "--profile", profile,
+        "--render-style", render_style,
         "--focus", f"{focus_x:.4f},{focus_y:.4f}",
         "--count", str(count),
     ]
@@ -478,10 +483,11 @@ def main():
     parser.add_argument("--catalog", action="append", default=[], help="Only generate for the matching folder shorthand(s), like `genres/k-drama` or `discover/popular`. Repeat this flag to target multiple folders.")
     parser.add_argument("--folder-id", action="append", default=[], help="Only generate for the matching folder id(s). Repeat this flag to target multiple folders.")
     parser.add_argument("--missing-only", action="store_true", help="Only generate missing backdrop output file(s). For `--size both`, existing sizes are skipped and only missing ones are rendered.")
-    parser.add_argument("--focus", default="center-right", help="Focus preset or x,y values passed to backdrop.py")
+    parser.add_argument("--focus", default=None, help="Focus preset or x,y values passed to backdrop.py. Defaults to perspective focus for --render-style perspective, otherwise center-right.")
     parser.add_argument("--count", type=int, default=60, help="Max source titles to use per backdrop after the folder's catalogs are merged")
     parser.add_argument("--size", choices=("4k", "1080p", "both"), default="4k", help="Rendered output size(s)")
     parser.add_argument("--profile", choices=("compressed", "high"), default="compressed", help="Named output profile. Default is compressed.")
+    parser.add_argument("--render-style", choices=("perspective", "flat"), default="perspective", help="Rendering style. Default is perspective.")
     parser.add_argument("--quality", type=int, default=None, help="Advanced override for output quality from 1-95. If set, it overrides --profile for both JPG and WEBP.")
     parser.add_argument("--parallelism", type=int, default=3, help="How many folders to generate at once. Keep this low to avoid TMDB rate limits.")
     parser.add_argument("--grouped-logs", action="store_true", help="Buffer each folder job log and print it after completion instead of streaming live output.")
@@ -500,7 +506,8 @@ def main():
     except ValueError as exc:
         print(f"Error: {exc}")
         sys.exit(1)
-    focus_x, focus_y = parse_focus_value(args.focus)
+    default_focus = "perspective" if args.render_style == "perspective" else "center-right"
+    focus_x, focus_y = parse_focus_value(args.focus or default_focus)
     if args.quality is not None and (args.quality < 1 or args.quality > 95):
         print("Error: --quality must be between 1 and 95.")
         sys.exit(1)
@@ -567,7 +574,7 @@ def main():
     quality_args = resolve_quality_args(args.profile, args.quality)
     print_overall_line(
         f"Starting generation for {len(jobs)} folder(s) "
-        f"with parallelism={args.parallelism}, profile={quality_args['profile']}, size={args.size}, "
+        f"with parallelism={args.parallelism}, profile={quality_args['profile']}, render_style={args.render_style}, size={args.size}, "
         f"preferred_language={args.preferred_language}."
     )
     for job in jobs:
@@ -584,6 +591,7 @@ def main():
                 args.preferred_language,
                 focus_x,
                 focus_y,
+                args.render_style,
                 args.count,
                 job["requested_size"],
                 quality_args["profile"],

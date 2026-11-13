@@ -7,6 +7,10 @@ templates in this repo, and guide installation in the intended order.
 ## What It Covers
 
 - Stremio account login or creation
+- Nuvio account login or creation, with one or several profiles (up to 6) configured in one run; the
+  AIOStreams and AIOMetadata configs are shared, Watchly is created once per profile
+- A *Pin collections on top* option (Nuvio, shown when Watchly or BingeCat is on) that sets `pinToTop` on every
+  collection group of `templates/Nuvio-Collections.json` before it is pushed
 - AIOStreams configuration from `templates/AIOStreams.json`
 - API key collection for services that cannot be automated end to end
 - Catalog and addon setup steps inside a guided flow
@@ -38,7 +42,7 @@ wizard/
 cd wizard/web
 npm install
 npm run dev
-# → http://localhost:5173/
+# → http://localhost:8000/
 
 # Full guide + wizard site
 cd /path/to/stremio-perfect-setup
@@ -69,7 +73,11 @@ current `templates/AIOStreams.json`.
 ### Stable Params
 
 - `account_mode`: `create` or `signin`
-- `addon_count`: number of addons installed by the wizard
+- `addon_count`: number of addon kinds installed by the wizard (AIOMetadata, AIOStreams, Watchly); a Nuvio run
+  with several profiles still counts Watchly once
+- `profile_count`: number of profiles configured in the run (`1` on Stremio; on Nuvio only the profiles that finished)
+- `bingecat`: `true` or `false`, whether BingeCat was installed for at least one profile (always `false` while the BingeCat feature is off)
+- `kids_count`: number of finished Kids profiles (Stremio: `0` or `1`)
 - `target`: `stremio` or `nuvio`
 - `services_debrid`: comma-separated selected debrid service names, for example `TorBox,Real-Debrid`
 - `services_keys`: comma-separated own-key ids from `tmdb,tvdb,gemini,rpdb`
@@ -233,6 +241,29 @@ are hidden.
 Note: as of the Watchly update this notification has been replaced by the interactive Trakt card in
 the Done page. It is preserved here as a style reference.
 
+## BingeCat and Kids
+
+BingeCat support (OAuth connect, Kids profiles, profile mapping) is configured the same way as the
+other services. Add its URL to `instances.bingecat`, its public OAuth client id to
+`keys.bingecatClientId`, and add `bingecat` plus `bingecatKids` template paths under both
+`templates.stremio` and `templates.nuvio`. When those entries are present, BingeCat is available in
+the wizard; there is no separate configuration feature flag.
+
+- Standard profiles opt in with the *Install BingeCat* toggle on the Recommendations step (independent
+  of Watchly; both can be on). Kids profiles always get BingeCat and never get Watchly, AIOMetadata or
+  collections; the Catalogs step is skipped when there are only Kids profiles.
+- A Kids profile is a BingeCat profile of the Kids type: new ones are created as Kids, and a Kids profile
+  the user maps onto an existing normal BingeCat sub-profile switches it to Kids before its settings are
+  written (the card warns about it). The main profile is never switched; BingeCat ignores that anyway.
+- Settings and provider connections are applied through the BingeCat public API with the user's OAuth token
+  (authorization code + PKCE in a popup, redirect back to the wizard page, access and refresh tokens kept in
+  memory only). The OAuth grant requests `connections:write`; the install connects the signed-in Stremio or
+  Nuvio account, links Nuvio profiles, stores the supplied Gemini key when present, and applies safe addon
+  settings (`force_top: false`, Cinemeta `observe`). The wizard maps each Nuvio profile to an existing
+  BingeCat profile or creates a new one and never deletes anything.
+- The OAuth redirect URIs registered for the client are the wizard page URLs
+  (`https://numb3rs.stream/wizard/`).
+
 ## Per-Target Templates
 
 `wizard/config.json` `templates.stremio` and `templates.nuvio` each map a key to a repository-relative
@@ -245,6 +276,7 @@ template path:
 | `watchly` | ✓ | Watchly default `TokenRequest` body fields |
 | `collections` | Nuvio only | Nuvio collection groups |
 | `settings` | Nuvio only | Nuvio platform settings |
+| `settingsAll` | Nuvio only | Optional complete Nuvio settings; selectable per profile |
 
 ## For Maintainers
 

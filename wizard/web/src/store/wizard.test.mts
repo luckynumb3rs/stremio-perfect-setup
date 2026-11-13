@@ -1,5 +1,5 @@
 // Run: node --experimental-strip-types wizard/web/src/store/wizard.test.mts
-import { useWizard } from './wizard.ts';
+import { bingecatRows, rolesOf, useWizard } from './wizard.ts';
 
 let passed = 0;
 let failed = 0;
@@ -103,6 +103,104 @@ console.log('\n# InstallResult.watchly + aiometadata.instance/config');
   ok('installResult.watchly.manifestUrl', !!get().watchly?.manifestUrl.includes('u1'));
   ok('installResult.aiometadata.instance', get().aiometadata?.instance === 'https://meta.example');
   eq('installResult.aiometadata.config', get().aiometadata?.config, { language: 'en-US', apiKeys: { tmdb: 'k' } });
+}
+
+console.log('\n# Nuvio profile selection');
+{
+  const { toggleNuvioProfile, setNuvioProfiles } = useWizard.getState();
+  const get = () => useWizard.getState().nuvioProfiles;
+
+  eq('default selection is one new profile', get(), [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false, fullSettings: false }]);
+  eq('installResult.profiles defaults to []', useWizard.getState().installResult.profiles, []);
+
+  setNuvioProfiles([{ nuvioProfileId: 'new', name: 'Extra', kids: false }]);
+  toggleNuvioProfile({ profile_index: 3, name: 'Bini' });
+  toggleNuvioProfile({ profile_index: 1, name: 'Ben' });
+  eq('toggle on adds existing profiles sorted by index, new ones last', get().map(p => p.nuvioProfileId), [1, 3, 'new']);
+  eq('toggle copies the profile name and defaults full settings off', get()[0], { nuvioProfileId: 1, name: 'Ben', kids: false, fullSettings: false });
+
+  useWizard.getState().setNuvioProfileFullSettings(0, true);
+  eq('full settings switch applies only to the chosen profile', get()[0].fullSettings, true);
+
+  toggleNuvioProfile({ profile_index: 3, name: 'Bini' });
+  eq('toggle off removes only that profile', get().map(p => p.nuvioProfileId), [1, 'new']);
+}
+
+console.log('\n# Recommendations: Watchly and BingeCat are independent');
+{
+  const st = () => useWizard.getState();
+  st().setTarget('nuvio');
+  eq('start: Watchly on, BingeCat off', [st().watchly.enabled, st().bingecat.enabled], [true, false]);
+  st().setBingecat({ enabled: true });
+  eq('turning BingeCat on leaves Watchly on (both can be installed)', [st().watchly.enabled, st().bingecat.enabled], [true, true]);
+  st().setWatchly({ enabled: false });
+  eq('either can be turned off on its own', [st().watchly.enabled, st().bingecat.enabled], [false, true]);
+  st().setTarget('nuvio');
+  eq('a new target resets the choice', [st().watchly.enabled, st().bingecat.enabled], [true, false]);
+}
+
+console.log('\n# rolesOf and bingecatRows');
+{
+  const base = { target: 'nuvio' as const, stremioKids: false, bingecat: { enabled: false } };
+  const ben = { nuvioProfileId: 1 as const, name: 'Ben', kids: false };
+  const tara = { nuvioProfileId: 2 as const, name: 'Tara', kids: true };
+  eq('mixed run has both kinds', rolesOf({ ...base, nuvioProfiles: [ben, tara] }), { hasStandard: true, hasKids: true });
+  eq('Kids only has no Standard', rolesOf({ ...base, nuvioProfiles: [tara] }), { hasStandard: false, hasKids: true });
+  eq('an empty list counts as Standard (sign-in still loading)', rolesOf({ ...base, nuvioProfiles: [] }), { hasStandard: true, hasKids: false });
+  eq('Stremio follows the Kids toggle', [rolesOf({ ...base, target: 'stremio', nuvioProfiles: [], stremioKids: true }).hasStandard, rolesOf({ ...base, target: 'stremio', nuvioProfiles: [] }).hasStandard], [false, true]);
+  eq('feature off: no BingeCat rows at all', bingecatRows({ ...base, nuvioProfiles: [ben, tara] }, false), []);
+  eq('BingeCat off and no Kids profile: no rows', bingecatRows({ ...base, nuvioProfiles: [ben] }, true), []);
+  eq('BingeCat on: every selected profile is a row', bingecatRows({ ...base, bingecat: { enabled: true }, nuvioProfiles: [ben, tara] }, true).map((r) => r.key), [1, 2]);
+  eq('a Kids profile forces BingeCat on for every profile of the run, even with the switch off', bingecatRows({ ...base, nuvioProfiles: [ben, tara] }, true).map((r) => [r.key, r.kids]), [[1, false], [2, true]]);
+  eq('new (unsaved) profiles are never rows', bingecatRows({ ...base, bingecat: { enabled: true }, nuvioProfiles: [{ nuvioProfileId: 'new', name: 'x', kids: false }] }, true), []);
+  eq('Stremio row is key 0, named Kids for a Kids account', bingecatRows({ ...base, target: 'stremio', stremioKids: true, nuvioProfiles: [] }, true), [{ key: 0, name: 'Kids', kids: true }]);
+  eq('Stremio Standard without BingeCat has no row', bingecatRows({ ...base, target: 'stremio', nuvioProfiles: [] }, true), []);
+}
+
+console.log('\n# Role flip guard and BingeCat state');
+{
+  const st = () => useWizard.getState();
+  st().setTarget('nuvio');
+  st().setNuvioProfiles([{ nuvioProfileId: 1, name: 'Ben', kids: false }, { nuvioProfileId: 2, name: 'Tara', kids: false }]);
+  useWizard.setState({ step: 5, maxReachedStep: 9 });
+  st().setNuvioProfileKids(1, true);
+  eq('Kids switch on one of two Standard profiles keeps the numbering (no clamp)', st().maxReachedStep, 9);
+  st().setNuvioProfileKids(0, true);
+  eq('losing the last Standard profile drops the reached mark to the current step', [st().maxReachedStep, st().nuvioProfiles.map((p) => p.kids)], [5, [true, true]]);
+  useWizard.setState({ step: 5, maxReachedStep: 9 });
+  st().setStremioKids(true);
+  eq('Stremio Kids toggle does not touch a Nuvio run', st().maxReachedStep, 9);
+
+  st().setBingecat({ token: 't', expiresAt: 99, accountName: 'acct', enabled: true, mapping: [
+    { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
+    { key: 2, name: 'Tara', kids: true, target: 'new', reason: 'new' },
+  ] });
+  st().bingecatProfileCreated(2, { id: 77, name: 'Tara', kids: true, type: 'kids' });
+  eq('a created BingeCat profile is stored and mapped (the other row is untouched)', [st().bingecat.profiles.map((p) => p.id), st().bingecat.mapping], [[77], [
+    { key: 1, name: 'Ben', kids: false, target: 'new', reason: 'new' },
+    { key: 2, name: 'Tara', kids: true, target: 77, reason: 'created' },
+  ]]);
+  eq('a created Kids profile counts as age-limited and keeps its type (a Standard row can not take it over later)', [st().bingecat.profiles[0].ageLimited, st().bingecat.profiles[0].type], [true, 'kids']);
+  st().bingecatProfileCreated(1, { id: 78, name: 'Ben', kids: false });
+  eq('a created Standard profile is not age-limited', st().bingecat.profiles[1].ageLimited, false);
+
+  // setTarget (e.g. Welcome -> same target again) resets the Kids flags, so it must also reset the reached mark
+  st().setNuvioProfiles([{ nuvioProfileId: 1, name: 'Tara', kids: true }]);
+  useWizard.setState({ step: 0, maxReachedStep: 8 });
+  st().setTarget('nuvio');
+  eq('setTarget resets Kids flags and drops the reached mark when the numbering shifts', [st().nuvioProfiles.map((p) => p.kids), st().maxReachedStep], [[false], 0]);
+  st().setBingecat({ enabled: true, token: 't', expiresAt: 99 });
+  st().disconnectBingecat();
+  eq('disconnect clears the token and profiles but keeps the toggle', [st().bingecat.token, st().bingecat.profiles, st().bingecat.mapping, st().bingecat.enabled], [null, [], [], true]);
+}
+
+console.log('\n# Pin collections');
+{
+  const st = () => useWizard.getState();
+  eq('collections are pinned by default (what the template does today)', st().pinCollections, true);
+  st().setPinCollections(false);
+  eq('the choice is stored', st().pinCollections, false);
+  st().setPinCollections(true);
 }
 
 console.log('\n# LoadedTemplates.watchly');

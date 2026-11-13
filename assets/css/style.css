@@ -233,6 +233,22 @@ pre {
 
 .home-wizard-card__text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
 .home-wizard-card__text span { font-size: 0.88rem; opacity: 0.9; }
+.home-wizard-card__feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+  font-weight: 700;
+}
+
+.home-wizard-card__feature img {
+  width: 1.45rem;
+  height: 1.45rem;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 0.4rem;
+  box-shadow: none;
+}
 
 .home-wizard-card__btn {
   flex-shrink: 0;

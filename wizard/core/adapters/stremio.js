@@ -90,7 +90,8 @@ function findLocalFilesAddon(existing) {
 
 // Build an ordered addon descriptor list for the Perfect Setup.
 // `existing` is the current collection (to preserve Cinemeta/Local Files manifests + apply patches).
-// `manifests` = { aiometadata, aiostreams, watchly? } -> resolved manifest objects or URLs.
+// `manifests` = { aiometadata?, aiostreams, watchly?, bingecat? } -> resolved manifest objects or URLs.
+// Order: Cinemeta, Watchly, BingeCat, AIOMetadata, AIOStreams, Local Files.
 export function buildAddonCollection(existing, manifests, opts = {}) {
   const cinemeta = opts.cinemetaDescriptor || findCinemetaAddon(existing);
   const localFiles = findLocalFilesAddon(existing);
@@ -104,6 +105,7 @@ export function buildAddonCollection(existing, manifests, opts = {}) {
   const order = [];
   if (patchedCinemeta) order.push(patchedCinemeta);
   if (manifests.watchly) order.push(toDescriptor(manifests.watchly));
+  if (manifests.bingecat) order.push(toDescriptor(manifests.bingecat));
   if (manifests.aiometadata) order.push(toDescriptor(manifests.aiometadata));
   if (manifests.aiostreams) order.push(toDescriptor(manifests.aiostreams));
   if (localFiles) order.push(localFiles);

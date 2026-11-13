@@ -20,9 +20,51 @@ const targets: { id: Target; name: string; desc: string; logoFile: string }[] = 
 
 export function Welcome() {
   const { target, setTarget, nextStep } = useWizard();
+  const bingecatLogoUrl = resolveLogoUrl('services/bingecat.svg');
+  const announcementsNotice = (
+    <div
+      className="wizard-notice"
+      role="note"
+      style={{ marginTop: '1rem', alignItems: 'stretch', textAlign: 'center' }}
+    >
+      <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--text)', fontSize: '0.9rem' }}>
+        <span>📣 ANNOUNCEMENTS</span>
+      </div>
+      <ul
+        style={{
+          width: 'calc(90% + 1.7rem)',
+          boxSizing: 'border-box',
+          margin: '0.35rem auto 0',
+          paddingLeft: '1.35rem',
+          color: 'var(--text)',
+          textAlign: 'left',
+          lineHeight: 1.55,
+          listStyle: 'disc',
+          display: 'grid',
+          gap: '0.55rem',
+        }}
+      >
+        <li>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', verticalAlign: 'middle' }}>
+            {bingecatLogoUrl && (
+              <img
+                src={bingecatLogoUrl}
+                alt=""
+                aria-hidden="true"
+                style={{ width: '20px', height: '20px', objectFit: 'contain', flexShrink: 0, border: 0, borderRadius: '4px', boxShadow: 'none' }}
+              />
+            )}
+            <span><strong>Kids profiles thanks to BingeCat:</strong> give younger viewers their own kid-friendly streaming space.</span>
+          </span>
+        </li>
+        <li><strong>Full Nuvio settings option:</strong> beside the addons, a recommended configuration for the settings can be applied easily.</li>
+        <li><strong>Multiple Nuvio profiles supported:</strong> set up multiple profiles directly in one go.</li>
+      </ul>
+    </div>
+  );
 
   return (
-    <WizardShell showBack={false}>
+    <WizardShell showBack={false} belowContent={announcementsNotice}>
       <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
         <div style={{ margin: '0 auto 1rem', fontSize: '3.1rem', lineHeight: 1 }}>
           <span aria-hidden="true">🔮</span>

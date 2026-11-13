@@ -13,13 +13,112 @@ export interface NuvioProfileOption {
   uses_primary_plugins?: boolean;
 }
 
+/**
+ * One Nuvio profile the wizard configures. 'new' entries are created on the Account step,
+ * so Install only ever sees real ids 1-6.
+ */
+export interface NuvioProfileTarget {
+  nuvioProfileId: number | 'new';
+  name: string;
+  kids: boolean;
+  /** Apply the complete Nuvio settings template instead of the standard template. */
+  fullSettings?: boolean;
+}
+
+/** A BingeCat profile of the connected account (see core/adapters/bingecat.js loadProfiles). */
+export interface BingecatProfile {
+  id: number;
+  name: string;
+  isMain: boolean;
+  /** Age cap in the recommendation/content-filter settings: only the fallback hint of a kids profile when `type` is missing */
+  ageLimited: boolean;
+  /** 'normal' | 'kids' (BingeCat API) */
+  type?: string;
+  boundNuvio: { id: string | number; name: string }[];
+  settings: Record<string, unknown>;
+}
+
+export interface BingecatMappingEntry {
+  /** Nuvio profile id (Stremio: 0) */
+  key: number;
+  /** The row this entry was made for: a changed name or Kids flag means it must be matched again */
+  name: string;
+  kids: boolean;
+  target: number | 'new';
+  reason: 'linked' | 'name' | 'fresh-main' | 'new' | 'created' | 'manual';
+}
+
+export interface BingecatState {
+  /** The user's BingeCat switch. Kids profiles force BingeCat on whatever this says (see bingecatRows). */
+  enabled: boolean;
+  /** OAuth token, memory only. Never logged, never in URLs or analytics. */
+  token: string | null;
+  /** OAuth refresh token, memory only. It is used only to refresh this wizard session. */
+  refreshToken: string | null;
+  /** Redirect URI bound to the OAuth grant, also memory only. */
+  redirectUri: string | null;
+  /** Token expiry, epoch seconds */
+  expiresAt: number | null;
+  accountName: string;
+  profiles: BingecatProfile[];
+  mapping: BingecatMappingEntry[];
+  /** Provider connections are completed during install and retained only for safe retries in this wizard session. */
+  stremioConnected: boolean;
+  nuvioConnected: boolean;
+}
+
+export const EMPTY_BINGECAT: BingecatState = {
+  enabled: false,
+  token: null,
+  refreshToken: null,
+  redirectUri: null,
+  expiresAt: null,
+  accountName: '',
+  profiles: [],
+  mapping: [],
+  stremioConnected: false,
+  nuvioConnected: false,
+};
+
+/** Which profile kinds this run has. An empty Nuvio list counts as Standard (sign-in is still loading). */
+export function rolesOf(s: { target: Target | null; nuvioProfiles: NuvioProfileTarget[]; stremioKids: boolean }) {
+  if (s.target === 'stremio') return { hasStandard: !s.stremioKids, hasKids: s.stremioKids };
+  const hasKids = s.nuvioProfiles.some((p) => p.kids);
+  return { hasStandard: s.nuvioProfiles.length === 0 || s.nuvioProfiles.some((p) => !p.kids), hasKids };
+}
+
+/**
+ * The profiles that need a BingeCat profile. BingeCat is one switch for the whole run: on, every selected profile gets it.
+ * It cannot be switched off while a Kids profile exists (Kids always need it), so then it applies to every profile too.
+ * Stremio is key 0.
+ */
+export function bingecatRows(
+  s: { target: Target | null; nuvioProfiles: NuvioProfileTarget[]; stremioKids: boolean; bingecat: Pick<BingecatState, 'enabled'> },
+  featureOn: boolean,
+): { key: number; name: string; kids: boolean }[] {
+  if (!featureOn) return [];
+  const on = s.bingecat.enabled || rolesOf(s).hasKids;
+  if (s.target === 'stremio') {
+    return on ? [{ key: 0, name: s.stremioKids ? 'Kids' : 'Stremio', kids: s.stremioKids }] : [];
+  }
+  return on
+    ? s.nuvioProfiles
+      .filter((p): p is NuvioProfileTarget & { nuvioProfileId: number } => typeof p.nuvioProfileId === 'number')
+      .map((p) => ({ key: p.nuvioProfileId, name: p.name, kids: p.kids }))
+    : [];
+}
+
+/** Nuvio order: existing profiles by index, then new ones. */
+export function sortNuvioProfiles(list: NuvioProfileTarget[]): NuvioProfileTarget[] {
+  const rank = (t: NuvioProfileTarget) => (t.nuvioProfileId === 'new' ? 99 : t.nuvioProfileId);
+  return [...list].sort((a, b) => rank(a) - rank(b));
+}
+
 export interface AccountInfo {
   mode: AccountMode;
   email: string;
   password: string;
-  profileName?: string;
-  profileId?: number;
-  createNewProfile?: boolean;
+  /** Nuvio profiles loaded from the account (the selection lives in nuvioProfiles) */
   profiles?: NuvioProfileOption[];
   /** Set after successful early auth on AccountStep */
   authKey?: string;   // Stremio authKey
@@ -62,6 +161,27 @@ export interface PreviousAddonBackupEntry {
   manifestUrl: string;
 }
 
+/** What the BingeCat part of an install produced for one profile. The URLs contain a secret: never log them. */
+export interface BingecatInstallResult {
+  profileId: number;
+  created: boolean;
+  url: string;
+  searchUrl: string | null;
+}
+
+export interface NuvioProfileInstallResult {
+  profileIndex: number;
+  name: string;
+  kids: boolean;
+  bingecat: BingecatInstallResult | null;
+  status: 'done' | 'failed';
+  error: string | null;
+  /** True once the profile's original addons were read; only then is previousAddons trustworthy */
+  backupTaken: boolean;
+  previousAddons: PreviousAddonBackupEntry[];
+  watchly: { manifestUrl: string; token: string } | null;
+}
+
 export interface InstallResult {
   aiostreams: { manifestUrl: string; uuid: string; password: string } | null;
   aiometadata: {
@@ -73,6 +193,10 @@ export interface InstallResult {
   } | null;
   watchly: { manifestUrl: string; token: string } | null;
   previousAddons: PreviousAddonBackupEntry[];
+  /** Nuvio only: one entry per configured profile (Stremio keeps the top-level watchly/previousAddons) */
+  profiles: NuvioProfileInstallResult[];
+  /** Stremio only (Nuvio keeps it per profile) */
+  bingecat: BingecatInstallResult | null;
   addonPasswordSource: 'account' | 'generated' | null;
   warnings: string[];
   error: string | null;
@@ -87,7 +211,11 @@ export interface LoadedTemplates {
   aiometadata: unknown;
   collections: unknown[];
   settings: unknown | null;
+  /** Nuvio-only complete settings template. */
+  settingsAll?: unknown | null;
   watchly: unknown | null;
+  /** Only when the BingeCat feature is on */
+  bingecat?: { standard: unknown; kids: unknown };
 }
 
 interface WizardState {
@@ -97,12 +225,22 @@ interface WizardState {
   target: Target | null;
   stremioAccount: AccountInfo;
   nuvioAccount: AccountInfo;
+  /** Nuvio profiles to configure (at least one) */
+  nuvioProfiles: NuvioProfileTarget[];
+  /** Stremio: set up a Kids account (BingeCat is then mandatory) */
+  stremioKids: boolean;
+  bingecat: BingecatState;
+  /** Nuvio: show the collections above the Watchly/BingeCat catalogs (pinToTop on every collection). Only used when one of them is on. */
+  pinCollections: boolean;
+  setPinCollections: (pin: boolean) => void;
   credentials: Credentials;
   aioStreamsInstance: string;
   aioStreamsInputs: AioStreamsInputs;
   aiometadataInstance: string;
   catalogSelection: CatalogSelection;
   installResult: InstallResult;
+  /** True while the install is running (the sidebar must not leave the Install step then) */
+  installRunning: boolean;
   templates: LoadedTemplates | null;
   /** Computed from template when loaded; drives dynamic step count */
   aioSections: AioSection[];
@@ -119,6 +257,18 @@ interface WizardState {
   setTarget: (t: Target) => void;
   setStremioAccount: (a: Partial<AccountInfo>) => void;
   setNuvioAccount: (a: Partial<AccountInfo>) => void;
+  setNuvioProfiles: (profiles: NuvioProfileTarget[]) => void;
+  /** Kids switch of the profile at this position in nuvioProfiles */
+  setNuvioProfileKids: (index: number, kids: boolean) => void;
+  /** Full Nuvio settings switch of the profile at this position in nuvioProfiles */
+  setNuvioProfileFullSettings: (index: number, fullSettings: boolean) => void;
+  setStremioKids: (kids: boolean) => void;
+  setBingecat: (b: Partial<BingecatState>) => void;
+  disconnectBingecat: () => void;
+  /** A BingeCat profile was just created for this row: remember it so a retry reuses it */
+  bingecatProfileCreated: (key: number, profile: { id: number; name: string; kids: boolean; type?: string }) => void;
+  /** Select or deselect an existing Nuvio profile */
+  toggleNuvioProfile: (p: NuvioProfileOption) => void;
   setCredentials: (c: Partial<Credentials>) => void;
   toggleDebridService: (id: string) => void;
   setDebridCredential: (id: string, fieldId: string, value: string) => void;
@@ -129,7 +279,17 @@ interface WizardState {
   setTemplates: (t: WizardState['templates']) => void;
   setAioSections: (sections: AioSection[]) => void;
   setInstallResult: (r: Partial<InstallResult>) => void;
+  setInstallRunning: (running: boolean) => void;
   setWizardConfig: (cfg: WizardConfig | null) => void;
+}
+
+/**
+ * When a change flips whether the run has Standard profiles, the Catalogs step appears or disappears and every later
+ * step number shifts: the user has to walk forward again, so the "reached" mark drops back to the current step.
+ */
+function guardRoles(s: WizardState, patch: Partial<WizardState>): Partial<WizardState> {
+  const next = { ...s, ...patch };
+  return rolesOf(s).hasStandard !== rolesOf(next).hasStandard ? { ...patch, maxReachedStep: s.step } : patch;
 }
 
 export const useWizard = create<WizardState>((set) => ({
@@ -137,7 +297,11 @@ export const useWizard = create<WizardState>((set) => ({
   maxReachedStep: 0,
   target: null,
   stremioAccount: { mode: 'create', email: '', password: '' },
-  nuvioAccount:   { mode: 'create', email: '', password: '', profileName: 'Profile 1', createNewProfile: false, profiles: [] },
+  nuvioAccount:   { mode: 'create', email: '', password: '', profiles: [] },
+  nuvioProfiles: [{ nuvioProfileId: 'new', name: 'Profile 1', kids: false }],
+  stremioKids: false,
+  bingecat: EMPTY_BINGECAT,
+  pinCollections: true, // the collections template pins every collection to the top
   credentials: {
     debridServices: [],
     tmdbApiKey: '', tmdbAccessToken: '', tvdbApiKey: '',
@@ -157,10 +321,13 @@ export const useWizard = create<WizardState>((set) => ({
     aiometadata: null,
     watchly: null,
     previousAddons: [],
+    profiles: [],
+    bingecat: null,
     addonPasswordSource: null,
     warnings: [],
     error: null,
   },
+  installRunning: false,
   templates: null,
   aioSections: [],
   wizardConfig: null,
@@ -177,13 +344,43 @@ export const useWizard = create<WizardState>((set) => ({
   }),
   prevStep: () => set(s => ({ step: Math.max(0, s.step - 1) })),
 
-  setTarget: (target) => set(s => ({
+  setTarget: (target) => set(s => guardRoles(s, {
     target,
     // Watchly is enabled by default for both supported targets.
     watchly: { ...s.watchly, enabled: target === 'stremio' || target === 'nuvio' },
+    // BingeCat/Kids choices belong to one target
+    stremioKids: false,
+    bingecat: EMPTY_BINGECAT,
+    nuvioProfiles: s.nuvioProfiles.map((p) => ({ ...p, kids: false, fullSettings: false })),
   })),
   setStremioAccount: (a) => set(s => ({ stremioAccount: { ...s.stremioAccount, ...a } })),
   setNuvioAccount: (a) => set(s => ({ nuvioAccount: { ...s.nuvioAccount, ...a } })),
+  setNuvioProfiles: (nuvioProfiles) => set(s => guardRoles(s, { nuvioProfiles })),
+  setNuvioProfileKids: (index, kids) => set(s => guardRoles(s, {
+    nuvioProfiles: s.nuvioProfiles.map((p, i) => (i === index ? { ...p, kids } : p)),
+  })),
+  setNuvioProfileFullSettings: (index, fullSettings) => set(s => ({
+    nuvioProfiles: s.nuvioProfiles.map((p, i) => (i === index ? { ...p, fullSettings } : p)),
+  })),
+  setStremioKids: (stremioKids) => set(s => guardRoles(s, { stremioKids })),
+  setBingecat: (b) => set(s => ({ bingecat: { ...s.bingecat, ...b } })),
+  disconnectBingecat: () => set(s => ({ bingecat: { ...EMPTY_BINGECAT, enabled: s.bingecat.enabled } })),
+  bingecatProfileCreated: (key, profile) => set(s => ({
+    bingecat: {
+      ...s.bingecat,
+      // a created Kids profile has the kids age caps, so a Standard row is not allowed to take it over later
+      profiles: [...s.bingecat.profiles, { id: profile.id, name: profile.name, isMain: false, ageLimited: profile.kids, type: profile.type, boundNuvio: [], settings: {} }],
+      mapping: s.bingecat.mapping.map((m) => (m.key === key ? { ...m, target: profile.id, reason: 'created' } : m)),
+    },
+  })),
+  setPinCollections: (pinCollections) => set({ pinCollections }),
+  toggleNuvioProfile: (p) => set(s => {
+    const selected = s.nuvioProfiles.some(t => t.nuvioProfileId === p.profile_index);
+    const next = selected
+      ? s.nuvioProfiles.filter(t => t.nuvioProfileId !== p.profile_index)
+      : [...s.nuvioProfiles, { nuvioProfileId: p.profile_index, name: p.name, kids: false, fullSettings: false }];
+    return guardRoles(s, { nuvioProfiles: sortNuvioProfiles(next) });
+  }),
   setCredentials: (c) => set(s => ({ credentials: { ...s.credentials, ...c } })),
 
   toggleDebridService: (id) => set(s => {
@@ -242,6 +439,7 @@ export const useWizard = create<WizardState>((set) => ({
   setTemplates: (templates) => set({ templates }),
   setAioSections: (aioSections) => set({ aioSections }),
   setInstallResult: (r) => set(s => ({ installResult: { ...s.installResult, ...r } })),
+  setInstallRunning: (installRunning) => set({ installRunning }),
   setWatchly: (w) => set(s => ({ watchly: { ...s.watchly, ...w } })),
   setInstantDebrid: (enabled) => set(s => {
     if (enabled) {

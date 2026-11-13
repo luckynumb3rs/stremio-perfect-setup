@@ -5,6 +5,7 @@ import {
   AIO_SECTION_START_STEP,
   KEY_SCREEN_START_STEP,
   getCatalogStep,
+  getRecommendationsStep,
   getDoneStep,
   getInstallStep,
 } from './keyScreens';
@@ -41,6 +42,12 @@ interface CompletionPayload {
 interface BuildCompletionPayloadOptions {
   accountMode: AccountMode;
   addonCount: number;
+  /** Profiles configured in this run (Stremio = 1) */
+  profileCount: number;
+  /** BingeCat was installed for at least one profile */
+  bingecat: boolean;
+  /** Finished Kids profiles (Stremio: 0 or 1) */
+  kidsCount: number;
   target: 'stremio' | 'nuvio';
   credentials: Credentials;
   instantDebrid: boolean;
@@ -88,12 +95,13 @@ export function trackWizardStepView(
   step: number,
   target: 'stremio' | 'nuvio' | null,
   aioSections: AioSection[],
+  hasCatalogs = true,
 ) {
   if (!MEASUREMENT_ID) return;
 
   ensureAnalytics();
 
-  const meta = getStepMeta(step, aioSections);
+  const meta = getStepMeta(step, aioSections, hasCatalogs);
   if (!meta || typeof window.gtag !== 'function') return;
 
   const baseUrl = new URL('./', window.location.href);
@@ -139,6 +147,9 @@ export function trackWizardCompletion(payload: CompletionPayload) {
 export function buildWizardCompletionPayload({
   accountMode,
   addonCount,
+  profileCount,
+  bingecat,
+  kidsCount,
   target,
   credentials,
   instantDebrid,
@@ -154,6 +165,9 @@ export function buildWizardCompletionPayload({
   };
 
   const deniedParams = new Set(wizardConfig?.analytics?.denylist ?? []);
+  if (!deniedParams.has('profile_count')) params.profile_count = profileCount;
+  if (!deniedParams.has('bingecat')) params.bingecat = bingecat ? 'true' : 'false';
+  if (!deniedParams.has('kids_count')) params.kids_count = kidsCount;
 
   const debridNames = credentials.debridServices
     .map((service) => DEBRID_SERVICES.find(({ id }) => id === service.id)?.name ?? service.id)
@@ -195,7 +209,7 @@ export function buildWizardCompletionPayload({
   return params;
 }
 
-export function getStepMeta(step: number, aioSections: AioSection[]): StepMeta | null {
+export function getStepMeta(step: number, aioSections: AioSection[], hasCatalogs = true): StepMeta | null {
   if (step === 0) return { index: 0, slug: 'welcome', name: 'Welcome' };
   if (step === 1) return { index: 1, slug: 'account', name: 'Account Setup' };
   if (step >= KEY_SCREEN_START_STEP && step < KEY_SCREEN_START_STEP + ACTIVE_KEY_SCREENS.length) {
@@ -214,13 +228,16 @@ export function getStepMeta(step: number, aioSections: AioSection[]): StepMeta |
     };
   }
 
-  if (step === getCatalogStep(aioSections.length)) {
+  if (hasCatalogs && step === getCatalogStep(aioSections.length)) {
     return { index: step, slug: 'catalogs', name: 'Catalogs' };
   }
-  if (step === getInstallStep(aioSections.length)) {
+  if (step === getRecommendationsStep(aioSections.length, hasCatalogs)) {
+    return { index: step, slug: 'recommendations', name: 'Recommendations' };
+  }
+  if (step === getInstallStep(aioSections.length, hasCatalogs)) {
     return { index: step, slug: 'install', name: 'Install' };
   }
-  if (step === getDoneStep(aioSections.length)) {
+  if (step === getDoneStep(aioSections.length, hasCatalogs)) {
     return { index: step, slug: 'done', name: 'Done' };
   }
 

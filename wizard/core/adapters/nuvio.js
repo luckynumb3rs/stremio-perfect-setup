@@ -3,6 +3,7 @@
 const NUVIO_API_BASE = 'https://api.nuvio.tv';
 const NUVIO_PUBLISHABLE_KEY = 'sb_publishable_1Clq8rlTVACkdcZuqr6_AD__xUUC_EN';
 const DEFAULT_PROFILE_COLOR = '#1E88E5';
+export const MAX_NUVIO_PROFILES = 6;
 
 function anonHeaders() {
   return {
@@ -372,6 +373,9 @@ export function createNuvioAdapter() {
 
       while (usedIndexes.has(profileIndex)) {
         profileIndex += 1;
+      }
+      if (profileIndex > MAX_NUVIO_PROFILES) {
+        throw new Error(`Nuvio allows at most ${MAX_NUVIO_PROFILES} profiles per account.`);
       }
 
       const profile = normalizeProfile({

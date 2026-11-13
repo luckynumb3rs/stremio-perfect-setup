@@ -1,0 +1,72 @@
+{
+  "$comment": "BingeCat public API (PATCH /api/v1/profiles/{id}/settings) settings in the API registry format, extracted via OAuth from a kids reference profile. Placeholder: {{HISTORY_SOURCE}} (stremio|nuvio) in recommendations.history_sources. English-only languages (secondary_query_language omitted). The stremio_addon section is retained for Stremio and removed by the adapter for Nuvio; provider connections and AI keys use their dedicated endpoints. No metadata section (child profiles inherit). Excluded genres are BingeCat's child defaults.",
+  "language": {
+    "multilang_enabled": false,
+    "search_result_languages": [
+      "en"
+    ],
+    "search_result_languages_ai_enabled": true,
+    "search_result_languages_exact_enabled": false
+  },
+  "search": {
+    "downrank_bollywood_movies": true,
+    "exact_layout": "split",
+    "exclude_anime": false,
+    "exclude_high_niche_content": false,
+    "excluded_genres_hard": [],
+    "excluded_genres_soft": [],
+    "excluded_imdb_interests": [],
+    "excluded_origin_countries": [],
+    "max_age_certification_us": "PG",
+    "origin_country_allow_coproductions": true,
+    "search_enabled": true,
+    "show_exact_group": true
+  },
+  "recommendations": {
+    "because_movies_enabled": true,
+    "because_series_enabled": true,
+    "excluded_genres_hard": [
+      "talk show",
+      "short",
+      "news",
+      "adult",
+      "horror",
+      "reality tv"
+    ],
+    "excluded_genres_soft": [],
+    "excluded_imdb_interests": [],
+    "explore_ratio": 0.1,
+    "fame_min_level": "niche",
+    "history_sources": [
+      "{{HISTORY_SOURCE}}"
+    ],
+    "latest_movies_enabled": true,
+    "latest_series_enabled": true,
+    "latest_series_new_episodes_enabled": true,
+    "list_for_you_slot_count": 2,
+    "list_for_you_v2_enabled": true,
+    "max_age_certification_us": "PG",
+    "min_imdb_rating": 6.3,
+    "movies_enabled": true,
+    "newness_bias": 0.5,
+    "penalize_low_vote_titles": true,
+    "prioritized_genres": [],
+    "quality_bias": null,
+    "random_public_exclude_watched": true,
+    "random_public_movies_enabled": true,
+    "random_public_series_enabled": true,
+    "series_enabled": true,
+    "use_liked_loved_only": false
+  },
+  "stremio_addon": {
+    "force_top": false,
+    "cinemeta_control_mode": "observe"
+  },
+  "content_filters": {
+    "age_filter_apply_in_web_gui": false,
+    "excluded_signal_terms": [],
+    "filter_xxx_content": true,
+    "max_age_certification_us": "PG",
+    "signal_filter_apply_in_web_gui": false
+  }
+}

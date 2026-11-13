@@ -1,5 +1,5 @@
 {
-  "$comment": "Parameterized config for the Perfect Setup Wizard. Shared service keys live here only in obfuscated form. The config block name is also used internally as the decryption passphrase. This is obfuscation for convenience, not real secret storage.",
+  "$comment": "Parameterized config for the Perfect Setup Wizard. Shared service keys live here only in obfuscated form; public client identifiers may remain plain. The config block name is also used internally as the decryption passphrase. This is obfuscation for convenience, not real secret storage.",
   "configurations": [
     {
       "name": "main",
@@ -48,7 +48,8 @@
         "geminiApiKeys": [],
         "rpdbApiKeys": [
           "eyJ2IjoxLCJpIjoyNTAwMDAsInMiOiJaMjRtdHUxbVBYMXNPU3RIblNyK0lnPT0iLCJuIjoieHJDNGlFbi9CY3VrNVl4YyIsImMiOiJWRkRQT3ZnaVg1TWQ3TUpBN2pXRENUb0Jhd2FiSFo2dzRGY0VNdz09In0="
-        ]
+        ],
+        "bingecatClientId": "bca_fBcG1S7_p9VOD4fgaztcF6KeUmPN5-9S"
       },
       "limits": {
         "stremioMaxCatalogs": 120
@@ -68,20 +69,28 @@
         ],
         "watchly": [
           "https://watchly.elfhosted.com"
+        ],
+        "bingecat": [
+          "https://bingecat.com"
         ]
       },
       "templates": {
         "stremio": {
           "aiostreams": "templates/AIOStreams.json",
           "aiometadata": "templates/AIOMetadata.json",
-          "watchly": "templates/Watchly.json"
+          "watchly": "templates/Watchly.json",
+          "bingecat": "templates/BingeCat.json",
+          "bingecatKids": "templates/BingeCat-Kids.json"
         },
         "nuvio": {
           "aiostreams": "templates/AIOStreams.json",
           "aiometadata": "templates/AIOMetadata-All.json",
           "collections": "templates/Nuvio-Collections.json",
           "settings": "templates/Nuvio-Settings.json",
-          "watchly": "templates/Watchly.json"
+          "settingsAll": "templates/Nuvio-Settings-All.json",
+          "watchly": "templates/Watchly.json",
+          "bingecat": "templates/BingeCat.json",
+          "bingecatKids": "templates/BingeCat-Kids.json"
         }
       },
       "doneStepNotifications": [

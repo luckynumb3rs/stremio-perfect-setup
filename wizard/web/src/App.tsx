@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useWizard } from './store/wizard';
+import { rolesOf, useWizard } from './store/wizard';
 import { buildAioSections } from './lib/aioSections';
 import { Welcome } from './steps/Welcome';
 import { AccountStep } from './steps/AccountStep';
@@ -8,14 +8,14 @@ import { AioSectionStep } from './steps/AioSectionStep';
 import { CatalogStep } from './steps/CatalogStep';
 import { InstallingStep } from './steps/InstallingStep';
 import { DoneStep } from './steps/DoneStep';
-import { WatchlyStep } from './steps/WatchlyStep';
-import { normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
+import { RecommendationsStep } from './steps/RecommendationsStep';
+import { isBingecatConfigured, normalizeWizardConfig, resolveWizardConfig } from './lib/constants';
 import {
   ACTIVE_KEY_SCREENS,
   AIO_SECTION_START_STEP,
   KEY_SCREEN_START_STEP,
   getCatalogStep,
-  getWatchlyStep,
+  getRecommendationsStep,
   getInstallStep,
 } from './lib/keyScreens';
 import { WizardShell } from './components/WizardShell';
@@ -36,7 +36,8 @@ async function fetchJson(url: string, label: string) {
 }
 
 function StepRouter() {
-  const { step, target, aioSections, wizardConfig, setTemplates, setAioSections, setWizardConfig } = useWizard();
+  const { step, target, aioSections, wizardConfig, nuvioProfiles, stremioKids, setTemplates, setAioSections, setWizardConfig } = useWizard();
+  const hasCatalogs = rolesOf({ target, nuvioProfiles, stremioKids }).hasStandard;
   const lastTrackedKeyRef = useRef('');
   const [configError, setConfigError] = useState<string | null>(null);
 
@@ -61,6 +62,7 @@ function StepRouter() {
       ? wizardConfig.templates.nuvio
       : wizardConfig.templates.stremio;
     const collectionsTemplatePath = targetTemplates.collections ?? wizardConfig.templates.nuvio.collections ?? null;
+    const fullNuvioSettingsTemplatePath = target === 'nuvio' ? wizardConfig.templates.nuvio.settingsAll ?? null : null;
     const tplUrls = {
       aiostreams: resolveRepoUrl(targetTemplates.aiostreams),
       aiometadata: resolveRepoUrl(targetTemplates.aiometadata),
@@ -72,6 +74,8 @@ function StepRouter() {
     setAioSections([]);
 
     const watchlyTemplatePath = targetTemplates.watchly ?? null;
+    const bingecatTemplatePath = isBingecatConfigured(wizardConfig) ? targetTemplates.bingecat ?? null : null;
+    const bingecatKidsTemplatePath = isBingecatConfigured(wizardConfig) ? targetTemplates.bingecatKids ?? null : null;
 
     const fetches = [
       fetchJson(tplUrls.aiostreams, 'AIOStreams template'),
@@ -82,14 +86,23 @@ function StepRouter() {
       target === 'nuvio'
         ? fetchJson(resolveRepoUrl(wizardConfig.templates.nuvio.settings), 'Nuvio settings template')
         : Promise.resolve(null),
+      fullNuvioSettingsTemplatePath
+        ? fetchJson(resolveRepoUrl(fullNuvioSettingsTemplatePath), 'Nuvio full settings template')
+        : Promise.resolve(null),
       watchlyTemplatePath
         ? fetchJson(resolveRepoUrl(watchlyTemplatePath), 'Watchly template')
         : Promise.resolve(null),
+      bingecatTemplatePath && bingecatKidsTemplatePath
+        ? Promise.all([
+          fetchJson(resolveRepoUrl(bingecatTemplatePath), 'BingeCat template'),
+          fetchJson(resolveRepoUrl(bingecatKidsTemplatePath), 'BingeCat Kids template'),
+        ]).then(([standard, kids]) => ({ standard, kids })).catch(() => undefined) // a missing BingeCat template must not break the whole wizard
+        : Promise.resolve(undefined),
     ] as const;
 
-    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, watchly]) => {
+    Promise.all(fetches).then(([aiostreams, aiometadata, collections, settings, settingsAll, watchly, bingecat]) => {
       if (cancelled) return;
-      setTemplates({ aiostreams, aiometadata, collections, settings, watchly: watchly ?? null });
+      setTemplates({ aiostreams, aiometadata, collections, settings, settingsAll, watchly: watchly ?? null, ...(bingecat ? { bingecat } : {}) });
       setAioSections(buildAioSections(aiostreams));
     }).catch((error: unknown) => {
       if (cancelled) return;
@@ -102,7 +115,7 @@ function StepRouter() {
   }, [target, wizardConfig, setAioSections, setTemplates]);
 
   useEffect(() => {
-    const meta = getStepMeta(step, aioSections);
+    const meta = getStepMeta(step, aioSections, hasCatalogs);
     if (!meta) return;
 
     const trackingKey = `${step}:${target ?? 'unknown'}:${meta.slug}`;
@@ -110,14 +123,14 @@ function StepRouter() {
 
     lastTrackedKeyRef.current = trackingKey;
     ensureAnalytics();
-    trackWizardStepView(step, target, aioSections);
-  }, [aioSections, step, target]);
+    trackWizardStepView(step, target, aioSections, hasCatalogs);
+  }, [aioSections, hasCatalogs, step, target]);
 
   const n = aioSections.length;
   const KEY_SCREEN_END_STEP = KEY_SCREEN_START_STEP + ACTIVE_KEY_SCREENS.length;
   const CATALOGS_STEP = getCatalogStep(n);
-  const WATCHLY_STEP = getWatchlyStep(n);
-  const INSTALL_STEP = getInstallStep(n);
+  const RECOMMENDATIONS_STEP = getRecommendationsStep(n, hasCatalogs);
+  const INSTALL_STEP = getInstallStep(n, hasCatalogs);
 
   if (step > 0 && target && configError) {
     return (
@@ -150,8 +163,8 @@ function StepRouter() {
     );
   }
 
-  if (step === CATALOGS_STEP) return <CatalogStep />;
-  if (step === WATCHLY_STEP) return <WatchlyStep />;
+  if (hasCatalogs && step === CATALOGS_STEP) return <CatalogStep />;
+  if (step === RECOMMENDATIONS_STEP) return <RecommendationsStep />;
   if (step === INSTALL_STEP) return <InstallingStep />;
   return <DoneStep />;
 }
