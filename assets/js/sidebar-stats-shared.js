@@ -122,6 +122,7 @@ function getSidebarStatsRows(summary) {
     })),
     { key: 'fullSettings', title: 'Full Settings', count: settings.fullSettings ?? 0, emoji: '⚙️' },
     { key: 'pinCollections', title: 'Pinned Collections', count: settings.pinCollections ?? 0, emoji: '📌' },
+    { key: 'profiles', title: 'Profiles', count: settings.profiles ?? 0, emoji: '👥' },
   ];
   if (settingsItems.some((item) => item.count > 0)) {
     rows.push({ label: 'Settings', variant: 'settings', items: settingsItems });

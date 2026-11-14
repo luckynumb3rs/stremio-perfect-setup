@@ -28,7 +28,7 @@
         "new",
         "-A",
         "-s",
-        "perfect-setup"
+        "streaming"
       ],
       "icon": "terminal-tmux"
     },

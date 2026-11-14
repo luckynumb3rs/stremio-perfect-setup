@@ -204,7 +204,12 @@ def main():
         path = OUT_DIR / f"{y}-{m:02d}.json"
         stored = json.loads(path.read_text())["days"] if path.exists() else {}
         for d in [(first + timedelta(n)).isoformat() for n in range((last - first).days + 1)]:
-            stored.pop(d, None)  # a re-pulled day replaces the old one (also drops days that became empty)
+            old = stored.pop(d, [])  # a re-pulled day replaces the old one (also drops days that became empty)
+            fresh = {tuple(r[:2]) for r in new.get(d, [])}
+            # keep stats GA4 no longer returns (e.g. Setup/Addon Count, backfilled once from the BigQuery export)
+            kept = [r for r in old if tuple(r[:2]) not in fresh]
+            if kept:
+                new.setdefault(d, []).extend(kept)
         stored.update(new)
         path.write_text(json.dumps({"days": dict(sorted(stored.items()))}, separators=(",", ":")) + "\n")
         y, m = (y + 1, 1) if m == 12 else (y, m + 1)

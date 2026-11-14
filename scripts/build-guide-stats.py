@@ -41,6 +41,10 @@ DEBRID_LOGO_PATHS = {
     "Debrid-Link": "assets/images/services/debridlink.svg",
     "Debrider": "assets/images/services/debrider.svg",
     "EasyDebrid": "assets/images/services/easydebrid.png",
+    "Offcloud": "assets/images/services/offcloud.png",
+    "PikPak": "assets/images/services/pikpak.png",
+    "Seedr": "assets/images/services/seedr.png",
+    "Put.io": "assets/images/services/putio.svg",
 }
 
 
@@ -260,7 +264,7 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             "formatter": [],
             "addons": {"anime": 0, "debridio": 0, "httpInstall": 0, "httpOnly": 0, "p2p": 0},
             "recommendations": {"watchly": 0, "bingecat": 0, "traktScrobble": 0, "traktAiometadata": 0},
-            "settings": {"fullSettings": 0, "pinCollections": 0},
+            "settings": {"fullSettings": 0, "pinCollections": 0, "profiles": 0},
             "keys": {"tmdb": 0, "tvdb": 0, "rpdb": 0, "gemini": 0, "instantDebrid": 0},
             "rowCount": 0,
         }
@@ -392,6 +396,8 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             # full_settings is the number of profiles per run; count the runs that used it at all
             "fullSettings": sum(int(r["trueCount"]) for r in index.get(("Settings", "Full Settings"), []) if r["value"] != "0"),
             "pinCollections": get_boolean_total(index, "Settings", "Pin Collections"),
+            # profile_count is per run: total profiles = sum of value * runs
+            "profiles": sum(int(r["value"]) * int(r["trueCount"]) for r in index.get(("Setup", "Profiles"), []) if r["value"].isdigit()),
         },
         "rowCount": len(rows),
     }
