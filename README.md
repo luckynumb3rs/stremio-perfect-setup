@@ -18,7 +18,6 @@
 <div class="home-wizard-card">
   <div class="home-wizard-card__text">
     <strong>🔮 New! Quick Automated Setup</strong>
-    <br>
     <span>Skip the manual steps, let the wizard configure everything for you in seconds.</span>
     <br>
     <span class="home-wizard-card__feature">
