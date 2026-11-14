@@ -233,7 +233,6 @@ pre {
 
 .home-wizard-card__text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
 .home-wizard-card__text span { font-size: 0.88rem; opacity: 0.9; }
-.home-wizard-card__text .github-only-break { display: none; }
 .home-wizard-card__feature {
   display: inline-flex;
   align-items: center;
