@@ -4,7 +4,7 @@ import { NotificationCards } from '../components/NotificationCards';
 import { WizardShell } from '../components/WizardShell';
 import { useWizard, type NuvioProfileInstallResult } from '../store/wizard';
 import { getGuideUrl } from '../lib/site';
-import { buildWizardCompletionPayload, trackWizardCompletion } from '../lib/analytics';
+import { buildWizardCompletionPayload, trackTraktConnected, trackWizardCompletion } from '../lib/analytics';
 import { wizardMetadata } from '../lib/integration';
 import { resolveLogoUrl } from '../lib/services';
 // @ts-ignore
@@ -86,6 +86,8 @@ export function DoneStep() {
     catalogSelection,
     instantDebrid,
     stremioKids,
+    pinCollections,
+    nuvioProfiles,
   } = useWizard();
   const { aiostreams, aiometadata, addonPasswordSource, previousAddons, profiles, warnings: rawWarnings, error } = installResult;
   // One entry per configured profile; Stremio is a single unnamed one built from the top-level result.
@@ -356,6 +358,7 @@ export function DoneStep() {
         }, 3000);
       });
       setScrobbleStatus('connected');
+      if (target) trackTraktConnected('scrobble', target);
     } catch (err: unknown) {
       setScrobbleStatus('error');
       setScrobbleError(err instanceof Error ? err.message : String(err));
@@ -392,6 +395,7 @@ export function DoneStep() {
       };
       await adapter.updateConfig(updatedConfig, meta.password, meta.uuid);
       setMetaTraktStep('connected');
+      if (target) trackTraktConnected('aiometadata', target);
     } catch (err: unknown) {
       setMetaTraktStep('awaiting_token_id');
       setMetaTraktError(err instanceof Error ? err.message : String(err));
@@ -409,6 +413,10 @@ export function DoneStep() {
       addonCount: Number(!!aiometadata) + Number(!!aiostreams) + Number(doneProfiles.some((p) => p.watchly)) + Number(doneProfiles.some((p) => p.bingecat)),
       profileCount: doneProfiles.length,
       bingecat: doneProfiles.some((p) => p.bingecat),
+      watchly: doneProfiles.some((p) => p.watchly),
+      // same rule as InstallingStep: only Nuvio, only with a Standard profile and Watchly/BingeCat on
+      pinCollections: target === 'nuvio' && doneProfiles.some((p) => !p.kids) && doneProfiles.some((p) => p.watchly || p.bingecat) ? pinCollections : null,
+      fullSettingsCount: target === 'nuvio' ? doneProfiles.filter((p) => nuvioProfiles[p.profileIndex]?.fullSettings).length : null,
       kidsCount: doneProfiles.filter((p) => p.kids).length,
       target,
       credentials,
@@ -425,7 +433,7 @@ export function DoneStep() {
       runId,
       target,
     });
-  }, [accountMode, addons, aiometadata, aiostreams, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, profileResults, target, templates, wizardConfig]);
+  }, [accountMode, addons, aiometadata, aiostreams, aioStreamsInputs, catalogSelection, credentials, error, instantDebrid, nuvioProfiles, pinCollections, profileResults, target, templates, wizardConfig]);
 
   function handleDownload() {
     if (!addonDetailsFilename || !hasDownloadableDetails) return;

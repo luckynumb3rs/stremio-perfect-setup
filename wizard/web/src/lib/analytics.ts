@@ -23,6 +23,7 @@ const MEASUREMENT_ID = wizardMetadata.ga4Id.trim();
 
 const COMPLETION_EVENT = 'wizard_completed';
 const ACCOUNT_CREATED_EVENT = 'wizard_account_created';
+const TRAKT_CONNECTED_EVENT = 'wizard_trakt_connected';
 
 let analyticsReady = false;
 
@@ -46,6 +47,12 @@ interface BuildCompletionPayloadOptions {
   profileCount: number;
   /** BingeCat was installed for at least one profile */
   bingecat: boolean;
+  /** Watchly was installed for at least one profile */
+  watchly: boolean;
+  /** Nuvio "Pin Collections on Top" as applied; null when it did not apply (Stremio, or no Watchly/BingeCat) */
+  pinCollections: boolean | null;
+  /** Nuvio profiles that got "Apply Nuvio Perfect Settings"; null on Stremio */
+  fullSettingsCount: number | null;
   /** Finished Kids profiles (Stremio: 0 or 1) */
   kidsCount: number;
   target: 'stremio' | 'nuvio';
@@ -144,11 +151,22 @@ export function trackWizardCompletion(payload: CompletionPayload) {
   writeSessionFlag(createdStorageKey);
 }
 
+/** Trakt is connected on the Done step, after wizard_completed has fired, so it is its own event. */
+export function trackTraktConnected(kind: 'scrobble' | 'aiometadata', target: 'stremio' | 'nuvio') {
+  if (!MEASUREMENT_ID) return;
+  ensureAnalytics();
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', TRAKT_CONNECTED_EVENT, { trakt: kind, target });
+}
+
 export function buildWizardCompletionPayload({
   accountMode,
   addonCount,
   profileCount,
   bingecat,
+  watchly,
+  pinCollections,
+  fullSettingsCount,
   kidsCount,
   target,
   credentials,
@@ -167,6 +185,9 @@ export function buildWizardCompletionPayload({
   const deniedParams = new Set(wizardConfig?.analytics?.denylist ?? []);
   if (!deniedParams.has('profile_count')) params.profile_count = profileCount;
   if (!deniedParams.has('bingecat')) params.bingecat = bingecat ? 'true' : 'false';
+  if (!deniedParams.has('watchly')) params.watchly = watchly ? 'true' : 'false';
+  if (pinCollections !== null && !deniedParams.has('pin_collections')) params.pin_collections = pinCollections ? 'true' : 'false';
+  if (fullSettingsCount !== null && !deniedParams.has('full_settings')) params.full_settings = fullSettingsCount;
   if (!deniedParams.has('kids_count')) params.kids_count = kidsCount;
 
   const debridNames = credentials.debridServices
