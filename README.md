@@ -19,7 +19,7 @@
   <div class="home-wizard-card__text">
     <strong>🔮 New! Quick Automated Setup</strong>
     <span>Skip the manual steps, let the wizard configure everything for you in seconds.</span>
-    <br>
+    <br class="github-only-break">
     <span class="home-wizard-card__feature">
       <img src="assets/images/services/bingecat.svg" alt="BingeCat logo" width="15" height="15">
       <span>Kids profiles are now supported thanks to BingeCat!</span>
