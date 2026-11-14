@@ -579,8 +579,12 @@ code, pre { font-family: "IBM Plex Mono", "Cascadia Code", monospace; }
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.sidebar-stats-icon-row--formatter {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.sidebar-stats-icon-row--settings {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sidebar-stats-icon-row--recommendations {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .sidebar-stats-icon-row--addons {
@@ -588,7 +592,8 @@ code, pre { font-family: "IBM Plex Mono", "Cascadia Code", monospace; }
 }
 
 /* HTTP carries two values, so it spans two columns. */
-.sidebar-stats-icon-row--addons .sidebar-stats-icon-item--wide {
+.sidebar-stats-icon-row--addons .sidebar-stats-icon-item--wide,
+.sidebar-stats-icon-row--recommendations .sidebar-stats-icon-item--wide {
   grid-column: span 2;
 }
 

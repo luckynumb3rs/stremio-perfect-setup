@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # commits the pulled wizard stats back to main
     steps:
       - uses: actions/checkout@v4
 
@@ -39,13 +41,30 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install google-analytics-data google-auth google-cloud-bigquery
+          python -m pip install google-analytics-data google-auth requests cryptography
+
+      - name: Pull wizard stats from GA4
+        continue-on-error: true # keep deploying with the stats already in the repo
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
+        run: python3 scripts/pull-ga4-daily.py
 
       - name: Build guide completion stats
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
         run: python3 scripts/build-guide-stats.py
+
+      - name: Commit wizard stats
+        run: |
+          git add assets/data/wizard-stats
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update wizard stats"
+          # pushes made with GITHUB_TOKEN do not start another workflow run
+          git pull --rebase origin main && git push || echo "::warning::stats push failed; the next run re-pulls these days"
 
       - name: Prepare staged site source
         run: |

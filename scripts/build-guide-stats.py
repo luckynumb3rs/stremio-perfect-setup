@@ -15,7 +15,7 @@ OUTPUT_PATH = ROOT_DIR / "assets" / "data" / "guide-stats.json"
 TEMPLATE_PATH = ROOT_DIR / "templates" / "AIOStreams.json"
 GA4_EARLIEST_VALID_DATE = "2026-01-01"
 WIZARD_COUNTER_EVENT = "wizard_completed"
-BIGQUERY_STATS_VIEW = "stremio-perfect-setup.public_reports.vw_wizard_completed_github_stats"
+STATS_DIR = ROOT_DIR / "assets" / "data" / "wizard-stats"  # written by scripts/pull-ga4-daily.py
 
 ACCOUNT_PLATFORM_LABELS = {
     "nuvio": {"label": "Nuvio"},
@@ -97,41 +97,29 @@ def fetch_analytics_totals(property_id: str, service_account_json: str, event_na
     return total_users, event_count
 
 
-def fetch_bigquery_rows(service_account_json: str) -> list[dict[str, Any]]:
-    from google.cloud import bigquery
-    from google.oauth2 import service_account
+def load_stats_rows() -> list[dict[str, Any]]:
+    """Sum the per-day rows of every month file into all-time rows."""
+    totals: dict[tuple[str, str, str], list[int]] = {}
+    for path in sorted(STATS_DIR.glob("*.json")):
+        for day_rows in json.loads(path.read_text(encoding="utf-8"))["days"].values():
+            for category, name, value, true_count, false_count in day_rows:
+                t = totals.setdefault((category, name, value), [0, 0])
+                t[0] += true_count
+                t[1] += false_count
 
-    service_account_info = json.loads(service_account_json)
-    credentials = service_account.Credentials.from_service_account_info(service_account_info)
-    client = bigquery.Client(
-        project=service_account_info.get("project_id") or "stremio-perfect-setup",
-        credentials=credentials,
-    )
+    def sort_order(category: str, name: str) -> int:
+        if category == "Total":
+            return 0
+        if category == "Account":
+            return {"Platform": 1, "Mode": 2, "Mode (Nuvio)": 3, "Mode (Stremio)": 4}.get(name, 5)
+        return 5
 
-    query = f"""
-        SELECT
-          sort_order,
-          category,
-          name,
-          value,
-          true_count,
-          false_count
-        FROM `{BIGQUERY_STATS_VIEW}`
-        ORDER BY sort_order, category, name, true_count DESC, value
-    """
-
-    rows = client.query(query).result()
-    return [
-        {
-            "sortOrder": int(row["sort_order"]),
-            "category": str(row["category"]),
-            "name": str(row["name"]),
-            "value": str(row["value"]),
-            "trueCount": int(row["true_count"]),
-            "falseCount": int(row["false_count"]),
-        }
-        for row in rows
+    rows = [
+        {"sortOrder": sort_order(c, n), "category": c, "name": n, "value": v, "trueCount": t, "falseCount": f}
+        for (c, n, v), (t, f) in totals.items()
     ]
+    rows.sort(key=lambda r: (r["sortOrder"], r["category"], r["name"], -r["trueCount"], r["value"]))
+    return rows
 
 
 def load_template_option_maps() -> dict[str, dict[str, dict[str, str]]]:
@@ -271,6 +259,8 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             "catalogs": {"discover": [], "categories": []},
             "formatter": [],
             "addons": {"anime": 0, "debridio": 0, "httpInstall": 0, "httpOnly": 0, "p2p": 0},
+            "recommendations": {"watchly": 0, "bingecat": 0, "traktScrobble": 0, "traktAiometadata": 0},
+            "settings": {"fullSettings": 0, "pinCollections": 0},
             "keys": {"tmdb": 0, "tvdb": 0, "rpdb": 0, "gemini": 0, "instantDebrid": 0},
             "rowCount": 0,
         }
@@ -392,6 +382,17 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             "gemini": get_row_total(index, "Services", "Keys", "gemini"),
             "instantDebrid": get_boolean_total(index, "Services", "Instant Debrid"),
         },
+        "recommendations": {
+            "watchly": get_boolean_total(index, "Recommendations", "Watchly"),
+            "bingecat": get_boolean_total(index, "Recommendations", "BingeCat"),
+            "traktScrobble": get_row_total(index, "Recommendations", "Trakt", "scrobble"),
+            "traktAiometadata": get_row_total(index, "Recommendations", "Trakt", "aiometadata"),
+        },
+        "settings": {
+            # full_settings is the number of profiles per run; count the runs that used it at all
+            "fullSettings": sum(int(r["trueCount"]) for r in index.get(("Settings", "Full Settings"), []) if r["value"] != "0"),
+            "pinCollections": get_boolean_total(index, "Settings", "Pin Collections"),
+        },
         "rowCount": len(rows),
     }
 
@@ -408,9 +409,7 @@ def build_payload(config: dict) -> dict:
     wizard_counter_event_count = 0
     source = "baseline_only"
     error = None
-    bigquery_rows: list[dict[str, Any]] = []
-    bigquery_source = "unavailable"
-    bigquery_error = None
+    stats_rows = load_stats_rows()
 
     if property_id and service_account_json:
         try:
@@ -429,14 +428,7 @@ def build_payload(config: dict) -> dict:
             source = "baseline_fallback"
             error = str(exc)
 
-        try:
-            bigquery_rows = fetch_bigquery_rows(service_account_json)
-            bigquery_source = "bigquery"
-        except Exception as exc:  # pragma: no cover - best effort fallback in CI
-            bigquery_source = "bigquery_fallback"
-            bigquery_error = str(exc)
-
-    wizard_analytics_summary = build_wizard_analytics_summary(bigquery_rows)
+    wizard_analytics_summary = build_wizard_analytics_summary(stats_rows)
 
     payload = {
         "eventName": event_name,
@@ -454,9 +446,8 @@ def build_payload(config: dict) -> dict:
             "analyticsEventCount": wizard_counter_event_count,
             "totalAccountsCreated": wizard_counter_event_count,
             "analytics": {
-                "source": bigquery_source,
-                "view": BIGQUERY_STATS_VIEW,
-                "rows": bigquery_rows,
+                "source": "repo",
+                "rows": stats_rows,
                 "summary": wizard_analytics_summary,
             },
         },
@@ -464,8 +455,6 @@ def build_payload(config: dict) -> dict:
 
     if error:
         payload["error"] = error
-    if bigquery_error:
-        payload["wizard"]["analyticsError"] = bigquery_error
 
     return payload
 

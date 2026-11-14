@@ -112,17 +112,19 @@ function getSidebarStatsRows(summary) {
   }
 
   const formatter = asArray(summary.formatter);
-  if (formatter.length > 0) {
-    rows.push({
-      label: 'Formatter',
-      variant: 'formatter',
-      items: formatter.map((item) => ({
-        key: item.id,
-        title: item.title ?? item.label,
-        count: item.count,
-        emoji: item.emoji,
-      })),
-    });
+  const settings = summary.settings ?? {};
+  const settingsItems = [
+    ...formatter.map((item) => ({
+      key: item.id,
+      title: item.title ?? item.label,
+      count: item.count,
+      emoji: item.emoji,
+    })),
+    { key: 'fullSettings', title: 'Full Settings', count: settings.fullSettings ?? 0, emoji: '⚙️' },
+    { key: 'pinCollections', title: 'Pinned Collections', count: settings.pinCollections ?? 0, emoji: '📌' },
+  ];
+  if (settingsItems.some((item) => item.count > 0)) {
+    rows.push({ label: 'Settings', variant: 'settings', items: settingsItems });
   }
 
   rows.push({
@@ -147,6 +149,28 @@ function getSidebarStatsRows(summary) {
       { key: 'debridio', title: 'Debridio', count: summary.addons?.debridio ?? 0, emoji: '🧊' },
     ],
   });
+
+  const reco = summary.recommendations ?? {};
+  const recoItems = [
+    { key: 'watchly', title: 'Watchly', count: reco.watchly ?? 0, emoji: '👁️' },
+    { key: 'bingecat', title: 'BingeCat', count: reco.bingecat ?? 0, emoji: '🐱' },
+    {
+      key: 'trakt',
+      title: 'Trakt',
+      countParts: [
+        { text: '✅', small: true },
+        { text: formatNumber(reco.traktScrobble ?? 0) },
+        { text: '/' },
+        { text: '🔎', small: true },
+        { text: formatNumber(reco.traktAiometadata ?? 0) },
+      ],
+      emoji: '🎯',
+      wide: true,
+    },
+  ];
+  if (recoItems.some((item) => item.count > 0 || item.countParts?.some((part) => /[1-9]/.test(part.text)))) {
+    rows.push({ label: 'Recommendations', variant: 'recommendations', items: recoItems });
+  }
 
   return rows;
 }
