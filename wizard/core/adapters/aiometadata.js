@@ -6,6 +6,16 @@
 //   Response (HTTP 200): { success: true, userUUID: string, installUrl: string, message: string }
 //   Note: "password" is a top-level field, NOT nested inside "config".
 //   Note: without "password" field the API returns HTTP 400 { error: "Password is required" }.
+//   Note: since AIOMetadata v3.5.0 this endpoint only creates configs. A body that contains
+//   "userUUID" returns HTTP 400 ("Saving creates a new configuration; change an existing one
+//   through /api/config/update/:userUUID").
+//
+// VERIFIED: update endpoint = PUT /api/config/update/:userUUID
+//   Tested 2026-11-15 against AIOMetadata 2.14.0 and 3.9.0 (official Docker images).
+//   Request body: { password: string, config: { ... } }
+//   Response (HTTP 200): { success: true, userUUID: string, installUrl: string, message: string }
+//   A wrong password returns HTTP 401 { error: "Invalid UUID or password" }. The UUID and the
+//   manifest URL do not change. CORS preflight allows PUT.
 //
 // VERIFIED: manifest URL = https://<instance>/stremio/<userUUID>/manifest.json
 //   Confirmed HTTP 200 on the live instance.
@@ -87,9 +97,9 @@ export function createAiometadataAdapter(instanceUrl) {
     },
 
     /**
-     * Update an existing config in-place by including the userUUID in the POST body.
-     * The server treats a POST with userUUID as an update (returns same UUID).
-     * Used by the Done page to attach a Trakt tokenId after install.
+     * Update an existing config in place via PUT /api/config/update/:userUUID.
+     * The server checks the password and keeps the same UUID, so the installed manifest URL
+     * stays valid. Used by the Done page to attach a Trakt tokenId after install.
      *
      * @param {object} config  Full config with traktTokenId merged into apiKeys.
      * @param {string} password  The addon password set during initial save.
@@ -100,10 +110,10 @@ export function createAiometadataAdapter(instanceUrl) {
       if (!userUUID) throw new Error('AIOMetadata updateConfig: userUUID is required');
       let res;
       try {
-        res = await fetch(`${base}/api/config/save`, {
-          method: 'POST',
+        res = await fetch(`${base}/api/config/update/${encodeURIComponent(userUUID)}`, {
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password, userUUID, config }),
+          body: JSON.stringify({ password, config }),
         });
       } catch (err) {
         throw new Error(`AIOMetadata at ${base} is unreachable: ${err?.message || err}. Check your internet connection or try again shortly.`);
