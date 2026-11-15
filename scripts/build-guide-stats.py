@@ -263,7 +263,7 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             "catalogs": {"discover": [], "categories": []},
             "formatter": [],
             "addons": {"anime": 0, "debridio": 0, "httpInstall": 0, "httpOnly": 0, "p2p": 0},
-            "recommendations": {"watchly": 0, "bingecat": 0, "traktScrobble": 0, "traktAiometadata": 0},
+            "recommendations": {"watchly": 0, "bingecat": 0, "traktScrobble": 0, "traktAiometadata": 0, "kids": 0},
             "settings": {"fullSettings": 0, "pinCollections": 0, "profiles": 0},
             "keys": {"tmdb": 0, "tvdb": 0, "rpdb": 0, "gemini": 0, "instantDebrid": 0},
             "rowCount": 0,
@@ -391,6 +391,8 @@ def build_wizard_analytics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]
             "bingecat": get_boolean_total(index, "Recommendations", "BingeCat"),
             "traktScrobble": get_row_total(index, "Recommendations", "Trakt", "scrobble"),
             "traktAiometadata": get_row_total(index, "Recommendations", "Trakt", "aiometadata"),
+            # kids_count is per run: total Kids profiles = sum of selected Kids profiles * runs
+            "kids": sum(int(r["value"]) * int(r["trueCount"]) for r in index.get(("Setup", "Kids Profiles"), []) if r["value"].isdigit()),
         },
         "settings": {
             # full_settings is the number of profiles per run; count the runs that used it at all

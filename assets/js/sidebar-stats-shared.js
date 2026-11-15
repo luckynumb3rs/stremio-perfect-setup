@@ -168,9 +168,10 @@ function getSidebarStatsRows(summary) {
       emoji: '🎯',
       wide: true,
     },
+    { key: 'kids', title: 'Kids', count: reco.kids ?? 0, emoji: '🧒' },
   ];
   if (recoItems.some((item) => item.count > 0 || item.countParts?.some((part) => /[1-9]/.test(part.text)))) {
-    rows.push({ label: 'Recommendations', variant: 'recommendations', items: recoItems });
+    rows.push({ label: 'Picks', variant: 'picks', items: recoItems });
   }
 
   return rows;

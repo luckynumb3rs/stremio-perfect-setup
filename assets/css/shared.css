@@ -583,17 +583,17 @@ code, pre { font-family: "IBM Plex Mono", "Cascadia Code", monospace; }
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.sidebar-stats-icon-row--recommendations {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.sidebar-stats-icon-row--picks {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .sidebar-stats-icon-row--addons {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-/* HTTP carries two values, so it spans two columns. */
+/* HTTP and Trakt carry two values, so they span two columns. */
 .sidebar-stats-icon-row--addons .sidebar-stats-icon-item--wide,
-.sidebar-stats-icon-row--recommendations .sidebar-stats-icon-item--wide {
+.sidebar-stats-icon-row--picks .sidebar-stats-icon-item--wide {
   grid-column: span 2;
 }
 
