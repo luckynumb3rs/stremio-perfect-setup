@@ -217,6 +217,7 @@ In practice, most setups have three moving parts:
    * [**EasyNews**](https://www.easynews.com/) one of the most famous ones.
    * [**NewsHosting**](https://www.newshosting.com/) also very popular, in the same backbone as EasyNews.
    * [**Eweka**](https://www.eweka.nl/) is mainly popular in Europe.
+   * [**HighWay**](https://high-way.me/) combines Usenet access over 5 independent backbones with a torrent cache (supported by Torrentio) in one account. Unlike TorBox, it gives you a regular NNTP login (shown in the [Download Center](https://cloud.high-way.me/) under *Zugänge*), so it works with the **Stremio NNTP** approach below.
    * [**TorBox**](https://torbox.app/subscription?referral=f7feee59-8c0d-4842-b53a-07738c37f7f1) has a **Pro** plan that includes Usenet access, but it's not a traditional Usenet provider, as you will read further down.
    * ***👉 Quick Tip**: Watch out for **Black Friday** deals, that's when you can get the best deals.*
 
