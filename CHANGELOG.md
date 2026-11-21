@@ -88,6 +88,10 @@ title: "📜 Changelog"
 
 ## 🔮 Wizard
 
+### 1.2.1 (2026-11-15)
+
+- Fixed the **Trakt Integration** for **AIOMetadata** on the *Finish* page failing with *HTTP 400* on AIOMetadata 3.5.0 and newer. The existing configuration is now updated in place, so the installed addon URL stays the same.
+
 ### 1.2.0 (2026-11-13)
 
 - Added support for **BingeCat**, a powerful AI-powered recommendations engine that provides you with personalized results.

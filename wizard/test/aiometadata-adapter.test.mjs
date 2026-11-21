@@ -10,22 +10,81 @@ function ok(name, cond, detail = '') {
 
 console.log('\n# AIOMetadata adapter — updateConfig');
 
-// updateConfig POSTs with userUUID in body (in-place update)
+// In-memory AIOMetadata (v3.5.0+): save only creates configs, update needs the UUID and its password.
+function createFakeAiometadata() {
+  const configs = new Map();
+  let nextId = 1;
+  const reply = (status, body) => ({
+    ok: status >= 200 && status < 300,
+    status,
+    async json() { return body; },
+    async text() { return JSON.stringify(body); },
+  });
+  const installUrl = (userUUID) => `https://aiometadata.example/stremio/${userUUID}/manifest.json`;
+  async function fetch(url, opts = {}) {
+    const { pathname } = new URL(url);
+    const method = (opts.method || 'GET').toUpperCase();
+    const body = opts.body ? JSON.parse(opts.body) : {};
+    if (method === 'POST' && pathname === '/api/config/save') {
+      if (!body.password) return reply(400, { error: 'Password is required' });
+      if (body.userUUID) return reply(400, { error: 'Saving creates a new configuration; change an existing one through /api/config/update/:userUUID' });
+      const userUUID = `uuid-${nextId++}`;
+      configs.set(userUUID, { password: body.password, config: body.config });
+      return reply(200, { success: true, userUUID, installUrl: installUrl(userUUID), message: 'Configuration saved successfully' });
+    }
+    const update = pathname.match(/^\/api\/config\/update\/([^/]+)$/);
+    if (method === 'PUT' && update) {
+      const userUUID = decodeURIComponent(update[1]);
+      if (!body.password) return reply(400, { error: 'Password is required' });
+      if (!body.config) return reply(400, { error: 'Configuration data is required' });
+      const stored = configs.get(userUUID);
+      if (!stored || stored.password !== body.password) return reply(401, { error: 'Invalid UUID or password' });
+      stored.config = body.config;
+      return reply(200, { success: true, userUUID, installUrl: installUrl(userUUID), message: 'Configuration updated successfully' });
+    }
+    return reply(404, { error: 'Not found' });
+  }
+  return { configs, fetch };
+}
+
+// Attaching a Trakt token on the Done page updates the installed config in place.
 {
   const originalFetch = globalThis.fetch;
-  let capturedBody = null;
-  globalThis.fetch = async (url, opts) => {
-    capturedBody = JSON.parse(opts.body);
-    return { ok: true, status: 200, async json() { return { userUUID: 'uuid-abc', installUrl: 'https://instance/stremio/uuid-abc/manifest.json', message: 'Configuration updated successfully' }; } };
-  };
+  const server = createFakeAiometadata();
+  globalThis.fetch = server.fetch;
   try {
     const adapter = createAiometadataAdapter('https://aiometadata.example');
-    const result = await adapter.updateConfig({ language: 'en-US', apiKeys: { tmdb: 'k' } }, 'pass123', 'uuid-abc');
-    ok('updateConfig POSTs to /api/config/save', true);
-    ok('updateConfig includes userUUID in request body', capturedBody?.userUUID === 'uuid-abc');
-    ok('updateConfig includes password in request body', capturedBody?.password === 'pass123');
-    ok('updateConfig includes config in request body', capturedBody?.config?.language === 'en-US');
-    ok('updateConfig returns userUUID from response', result.userUUID === 'uuid-abc');
+    const config = { language: 'en-US', apiKeys: { tmdb: 'k' } };
+    const created = await adapter.createConfig(config, 'pass123');
+    let result = null;
+    let error = null;
+    try {
+      result = await adapter.updateConfig({ ...config, apiKeys: { ...config.apiKeys, traktTokenId: 'tok-1' } }, 'pass123', created.userUUID);
+    } catch (err) { error = err; }
+    ok('updateConfig succeeds on an instance where save only creates configs', error === null, error?.message);
+    ok('updateConfig keeps the UUID so the installed manifest URL stays valid', result?.userUUID === created.userUUID, JSON.stringify(result));
+    ok('the existing config now holds the Trakt token', server.configs.get(created.userUUID)?.config?.apiKeys?.traktTokenId === 'tok-1');
+    ok('no second config is created on the instance', server.configs.size === 1, `configs: ${server.configs.size}`);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+// A wrong password is reported to the caller and the stored config stays unchanged.
+{
+  const originalFetch = globalThis.fetch;
+  const server = createFakeAiometadata();
+  globalThis.fetch = server.fetch;
+  try {
+    const adapter = createAiometadataAdapter('https://aiometadata.example');
+    const created = await adapter.createConfig({ language: 'en-US', apiKeys: { tmdb: 'k' } }, 'pass123');
+    let thrown = null;
+    try {
+      await adapter.updateConfig({ language: 'en-US', apiKeys: { tmdb: 'k', traktTokenId: 'tok-1' } }, 'wrong-pass', created.userUUID);
+    } catch (err) { thrown = err; }
+    ok('updateConfig fails when the password does not match', thrown instanceof Error);
+    ok('a rejected update leaves the stored config unchanged', server.configs.get(created.userUUID)?.config?.apiKeys?.traktTokenId === undefined);
+    ok('a rejected update does not create a new config', server.configs.size === 1, `configs: ${server.configs.size}`);
   } finally {
     globalThis.fetch = originalFetch;
   }
