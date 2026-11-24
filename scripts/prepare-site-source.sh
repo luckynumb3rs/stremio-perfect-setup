@@ -94,24 +94,12 @@ build_chapters_list() {
   local title
   local rel
   local changelog="$ROOT_DIR/CHANGELOG.md"
-  local ordered=()
-  local updates=()
 
   while IFS= read -r file; do
-    if [[ "$(basename "$file")" == "Updates.md" ]]; then
-      updates+=("$file")
-    else
-      ordered+=("$file")
-    fi
-  done < <(find "$GUIDE_DIR" -maxdepth 1 -type f -name '*.md' | sort -V)
-
-  ordered+=("${updates[@]}")
-
-  for file in "${ordered[@]}"; do
     title="$(extract_title "$file")"
     rel="$(basename "$file")"
     printf -- '- [%s](guide/%s)\n' "$title" "$rel"
-  done
+  done < <(find "$GUIDE_DIR" -maxdepth 1 -type f -name '*.md' | sort -V)
 
   if [[ -f "$changelog" ]]; then
     title="$(extract_title "$changelog")"

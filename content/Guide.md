@@ -11,7 +11,7 @@
 Don't be scared. Although it may look like a very long guide, it's actually just a few simple steps and very easy. I just wanted to be thorough and describe everything totally step-by-step so you understand what you're doing.
 
 >**📢 NOTES**:
->* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](https://numb3rs.stream/guide/Updates) on the extended guide.
+>* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updating**](https://numb3rs.stream/guide/9-Updating) on the extended guide.
 >* **If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](https://numb3rs.stream/guide/8-Configuration-QA) on the extended guide. If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
 >* **🙏 A very explicit special THANKS** to the **Stremio** developers which goes without saying, and all the community collaborators without which we wouldn't be able to enjoy any of it: [**TamTaro**](https://ko-fi.com/tamtaro) for the template base and SEL filters, [**Vidhin**](https://ko-fi.com/vidhin) for the Regexes, and the addon developers [**Viren**](https://ko-fi.com/Viren070) for AIOStreams, [**Cedya**](https://buymeacoffee.com/cedya) for AIOMetadata, [**Sanopandit**](https://ko-fi.com/timilsinabimal) for Watchly, [**Sonic**](https://ko-fi.com/sonicx161) for AIOManager, the public addon instance hosters which make everything so much simpler for most, and anyone else I may have failed to mention. All of these people continue to develop and improve them actively together with the Stremio community, so shout out to all of them for their wonderful work, and consider buying them a coffee if you agree with me! Since a few of you have also asked about tipping me for helping, even though I did it for fun and an very happy if my guide helped you, [**here**](https://ko-fi.com/luckynumb3rs) is my coffee link :)
 
@@ -303,9 +303,9 @@ If you followed this guide and are encountering issues or have configuration que
 
 ---
 
-# 🔔 Updates
+# 🔔 Updating
 
-Go to [**🔔 Updates**](https://numb3rs.stream/guide/Updates) on the extended guide to learn how to update to the latest version of this setup.
+Go to [**🔔 Updating**](https://numb3rs.stream/guide/9-Updating) on the extended guide to learn how to update to the latest version of this setup.
 
 ---
 

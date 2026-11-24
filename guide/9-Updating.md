@@ -1,9 +1,9 @@
 ---
 layout: guide
-title: "🔔 Updates"
+title: "🔔 Updating"
 ---
 
-# 🔔 Updates
+# 🔔 Updating
 
 ## 📚 AIOStreams
 

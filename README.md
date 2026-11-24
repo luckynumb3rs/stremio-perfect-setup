@@ -58,7 +58,7 @@ So, now that you know, it’s up to you, but if you’re up for it, let’s do i
 
 >**📢 NOTES:**
 >* If you are a **total beginner** and are curious to **understand the concepts around Stremio/Nuvio** and how it works, go to [**🔰 Beginner Concepts**](guide/0-Beginner-Concepts.md).
->* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updates**](guide/Updates.md).
+>* If you already followed this guide and would like to **update to the latest template** (check out the version number on the title), go to [**🔔 Updating**](guide/9-Updating.md).
 >* **If you followed this guide and are encountering issues or have configuration questions**, go to [**❓ Configuration Q&A**](guide/8-Configuration-QA.md). If you're just starting, remember this for later in case you need it. **PLEASE avoid asking questions that are already answered there**.
 >* If you alredy followed this guide for **Stremio** and you would like to migrate to **Nuvio**, you can reuse the configurations you already have for **Watchly, AIOStreams, and AIOMetadata** withut having to configure them from scratch. You just install the *Manifest URL* you get from each addon on *Nuvio*. The only difference is that *Stremio* doesn't support as many catalogs on *AIOMetadata* as *Nuvio*, so you can enable all catalogs provided if you like, but then you can't keep using it on *Stremio*. Either do a separate *AIOMetadata* (only this, not *AIOStreams*) configuration with more catalogs enabled, or keep some disabled and install the same *Manifest URL* on both apps.
 >* **🙏 A very explicit special THANKS** to the **Stremio/Nuvio** developers which goes without saying, and all the community collaborators without which we wouldn't be able to enjoy any of it: [**TamTaro**](https://ko-fi.com/tamtaro) for the template base and SEL filters, [**Vidhin**](https://ko-fi.com/vidhin) for the Regexes, and the addon developers [**Viren**](https://ko-fi.com/Viren070) for AIOStreams, [**Cedya**](https://buymeacoffee.com/cedya) for AIOMetadata, [**Sanopandit**](https://ko-fi.com/timilsinabimal) for Watchly, [**Sonic**](https://ko-fi.com/sonicx161) for AIOManager, the public addon instance hosters which make everything so much simpler for most, and anyone else I may have failed to mention. All of these people continue to develop and improve them actively together with the Stremio community, so shout out to all of them for their wonderful work, and consider buying them a coffee if you agree with me! Since a few of you have also asked about tipping me for helping, even though I did it for fun and an very happy if my guide helped you, [**here**](https://ko-fi.com/luckynumb3rs) is my coffee link :)
@@ -75,8 +75,9 @@ So, now that you know, it’s up to you, but if you’re up for it, let’s do i
 - [🤖 6. Personalized & Automated Lists](guide/6-Personalized-Lists.md)
 - [🛠️ Additional Stuff](guide/7-Additional-Stuff.md)
 - [❓ Configuration Q&A](guide/8-Configuration-QA.md)
+- [🔔 Updating](guide/9-Updating.md)
 - [🎛️ AIOManager [Power Users]](guide/AIOManager-Setup.md)
 - [🖥️ Hosting](guide/Hosting.md)
 - [🚀 Nuvio](guide/Nuvio.md)
-- [🔔 Updates](guide/Updates.md)
+- [🗄️ Usenet](guide/Usenet.md)
 - [📜 Changelog](CHANGELOG.md)
